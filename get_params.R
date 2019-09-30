@@ -201,8 +201,8 @@ iterate_min_max_vals("shape1", all_params, fam, cur_val=0, step_sizes = c(1, 0.5
 ### Main function for generating the info for each of the params ------------------------------------------------------
 
 get_param_ranges <- function(all_params, fam) {
-  lower <- upper <- rep(0, length(all_params))
-  names(lower) <- names(upper) <- names(all_params)
+  lower <- upper <- accepts_float <- rep(0, length(all_params))
+  names(lower) <- names(upper) <- names(accepts_float) <- names(all_params)
   
   for (param in names(all_params)){
     
@@ -236,11 +236,29 @@ get_param_ranges <- function(all_params, fam) {
     upper[param] <- max_val
     
     ### TODO:
-    # 2) Try to check if float or integer
-    
+    n <- 10
+    testsequence <- runif(n, min_val, max_val)
+    testsequence <- unique(c(testsequence, trunc(testsequence)))
+    num_tests <- length(testsequence)
+
+    is_integer <- is.integer(testsequence)
+    num_integer <- sum(is_integer)
+
+    testoutcome <- check_values_for_param(param, all_params, fam, testsequence)
+    accepted_int <- sum(is_integer & testoutcome)
+    accepted_int_rate <- accepted_int/num_integer
+    accepted_float <- sum(!is_integer & testoutcome)
+    accepted_float_rate <- accepted_float/(num_tests - num_integer)
+
+    if(accepted_float_rate > (1/num_tests - num_integer)) accepts_float_param = TRUE
+    else if(accepted_int_rate == 0) error("distribution does not seem to accept any values")
+    else accepts_float_param = FALSE
+
+    accepts_float[param] <- accepts_float_param
   }
   return(list(lower=lower,
-              upper=upper))
+              upper=upper,
+	      accepts_float=accepts_float))
 }
 
 
