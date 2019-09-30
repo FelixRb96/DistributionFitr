@@ -46,18 +46,39 @@ res
 #      If a valid value is returned take the current set of default values, otherwise try a different combination of default values
 # 3) For each of the params test some values (non-integer, negative, not in [0,1]) while keeping the others at their defaults
 
-## additional TODO:
+## optional TODO:
 # check whether param name contains prob or sth like that -> range should be [0,1]
 
 families <- res$family
-fam <- "binom" # "beta
+fam <- "beta" # "gamma"
 
-# idea: all params need to be present in the r... method for generating random samples from the distribution
-all_params <- as.list(args(paste0("r", fam)))
-all_params <- all_params[! names(all_params) %in% c("", "n", "nn")]    # remove empty and the n_samples argument
+get_all_params <- function(fam) {
+  # idea: all params need to be present in the r... method for generating random samples from the distribution
+  all_params <- as.list(args(paste0("r", fam)))
+  
+  # if "nn" is contained then "n" is probably a real param , c.f. rhyper
+  to_remove <- if("nn" %in% names(all_params)) c("", "nn") else c("", "n", "nn")
+  
+  all_params <- all_params[! names(all_params) %in% to_remove]    # remove empty and the n_samples argument
+  
+  # in cases like gamma distribution we have multiple parameters describing the same (e.g. rate and scale)
+  # -> we need to drop those as we can't optimize them independently
+  for (i in 1:length(names(all_params))) {
+    param <- names(all_params[i])
+    if (typeof(all_params[[param]]) == "language") {          # TRUE if default val is function of another param, e.g. scale = 1/rate
+     function_parts <- as.character(all_params[[param]])      # divide the function into its components
+     
+     # check if one function part is the name of one of the earlier parameters, and remove if thats true
+     if (i > 1 && any(function_parts %in% names(all_params)[1:(i-1)]))
+       cat(param, "depends on another earlier parameter and is thus removed\n")
+       all_params[[param]] <- NULL
+    }
+  }
+  return(all_params)
+}
 
+all_params <- get_all_params(fam)
 
-# TODO: in cases like gamma distribution we have multiple parameters describing the same (e.g. rate and scale) -> drop one of them
 
 
 ## Find default values ----------------------------------------------------------------------------------------------------
@@ -67,36 +88,46 @@ all_params <- all_params[! names(all_params) %in% c("", "n", "nn")]    # remove 
 get_default_values <- function(all_params, fam) {
   missing_defaults <- sapply(all_params, function(x) typeof(x) == "symbol")   # missing values seem to have type "symbol"
   
-  if (sum(missing_defaults) > 0) {
-    with_defaults <- all_params[!missing_defaults]
-    non_defaults <- all_params[missing_defaults]
+  if (sum(missing_defaults) == 0) return(all_params)
+  
+  with_defaults <- all_params[!missing_defaults]
+  non_defaults <- all_params[missing_defaults]
+  
+  # both floats and integers and both positive and negative as well as 0 so that at least one of those hopefully is valid
+  default_guesses <- c(1, 0.5, 0, -0.5, -1)
+  
+  # create a dataframe with all combinations of default guesses
+  combs <- expand.grid(lapply(non_defaults, function(x) default_guesses))
+  combs_list <- split(combs, seq(nrow(combs)))   # convert to list for iteration
+  valid_params <- NULL
+  
+  # parameter that describes the number of random numbers to take, usually "n", but in cases like hyper "nn"
+  n_or_nn <- if (! "nn" %in% names(as.list(args(paste0("r", fam))))) list(n=1) else list(nn=1)
+  
+  errors <- c()
+  for (i in 1:length(combs_list)) {
     
-    # both floats and integers and both positive and negative as well as 0 so that at least one of those hopefully is valid
-    default_guesses <- c(1, 0.5, 0, -0.5, -1)
+    # combine fixed with guessed default values and try to generate a random number
+    curr_params <- c(with_defaults, combs_list[[i]])
+    res <- suppressWarnings(tryCatch(do.call(paste0("r", fam), c(n_or_nn, curr_params)), 
+                                     error=function(e) {
+                                       errors <<- union(errors, strsplit(as.character(e), ":", fixed=TRUE)[[1]][2]);
+                                       return(NA)}
+                                     ))
     
-    # create a dataframe with all combinations of default guesses
-    combs <- expand.grid(lapply(non_defaults, function(x) default_guesses))
-    combs_list <- split(combs, seq(nrow(combs)))   # convert to list for iteration
-    valid_params <- NULL
-    for (i in 1:length(combs_list)) {
-      
-      # combine fixed with guessed default values and try to generate a random number
-      curr_params <- c(with_defaults, combs_list[[i]])
-      res <- suppressWarnings(do.call(paste0("r", fam), c(list(n=1), curr_params)))
-      
-      # break if we've found a set of valid values
-      if (!is.na(res)){
-        valid_params <- curr_params
-        cat("Found the following set of valid default values for family", fam, ":", 
-            paste(names(valid_params), valid_params , sep=": ", collapse=", "), "\n")
-        break
-      } 
-    }
-    if (is.null(valid_params)) {
-      cat("Could not find a set of valid default values for family", fam, "\n")
-    }
-    return(valid_params)
+    # break if we've found a set of valid values
+    if (!is.na(res)){
+      valid_params <- curr_params
+      cat("Found the following set of valid default values for family", fam, ":", 
+          paste(names(valid_params), valid_params , sep=": ", collapse=", "), "\n")
+      break
+    } 
   }
+  if (is.null(valid_params)) {
+    message("Could not find a set of valid default values for family ", fam)
+    message("Errors:", errors)
+  }
+  return(valid_params)
 }
 
 all_params <- get_default_values(all_params, fam)
@@ -109,13 +140,20 @@ all_params <- get_default_values(all_params, fam)
 
 # function that checks if all "values" are valid for "param". "all_params" contains the values of the other params of the family "fam"
 check_values_for_param <- function(param, all_params, fam, values) {
+  
+  # parameter that describes the number of random numbers to take, usually "n", but in cases like hyper "nn"
+  n_or_nn <- if (! "nn" %in% names(as.list(args(paste0("r", fam))))) list(n=1) else list(nn=1)
+  
   res <- suppressWarnings(
     sapply(values, function(x) {
-      all_params[[param]] <- x;    # set the value of "param" to each of the "values" that should be tested
-      do.call(paste0("r", fam), c(list(n=1), all_params))
+      # set the value of "param" to each of the "values" that should be tested
+      all_params[[param]] <- x;
+      # try to generate a random number from the distribution
+      tryCatch(do.call(paste0("r", fam), c(n_or_nn, all_params)), 
+               error=function(e) return(NA))
     })
   )
-  return(!is.na(res))      # TRUE if value was valid, FALSE if not
+  return(is.finite(res))      # TRUE if value was valid, FALSE if not
 }
 
 #  example (for beta family)
@@ -141,15 +179,18 @@ iterate_min_max_vals <- function(param, all_params, fam, cur_val, step_sizes, is
       vals <- seq(cur_val, border, by=step_sizes[i+1])
     }
     # test values and adjust the current estimate
-    cat(param, "-> Currently checking values in the interval [", min(vals), ",", max(vals), "]\n")
+    # cat(param, "-> Currently checking values in the interval [", min(vals), ",", max(vals), "]\n")
     check_res <- check_values_for_param(param, all_params, fam, vals)
     cur_val <- ifelse(is_min, min(vals[check_res]), max(vals[check_res]))
     
     # if the smallest (or highest) of the tested values was valid we can break
     # however this should not happen when the method is used as below
-    if (cur_val == border) return(cur_val)
+    if (cur_val == border) {
+      # cat("Abbruchbedingung")
+      return(cur_val)
+    }
   }
-  cat(param, "-> Final value:", cur_val, "\n")
+  # cat(param, "-> Final value:", cur_val, "\n")
   return(cur_val)
 }
 
@@ -157,46 +198,84 @@ iterate_min_max_vals <- function(param, all_params, fam, cur_val, step_sizes, is
 iterate_min_max_vals("shape1", all_params, fam, cur_val=0, step_sizes = c(1, 0.5, 0.1, 0.05))
 
 
-### Main loop for generating the info for each of the params ------------------------------------------------------
+### Main function for generating the info for each of the params ------------------------------------------------------
 
-lower <- upper <- rep(0, length(all_params))
-names(lower) <- names(upper) <- names(all_params)
-
-for (param in names(all_params)){
+get_param_ranges <- function(all_params, fam) {
+  lower <- upper <- rep(0, length(all_params))
+  names(lower) <- names(upper) <- names(all_params)
   
-  # 1) Try to find upper and lower bounds (if there are some)
-  initial_min_val <- -1e6
-  initial_max_val <- 1e6
-  step_sizes <- c(1e5, 50, 10, 1, 0.1, 0.01)
-  vals <- seq(initial_min_val, initial_max_val, by = step_sizes[1])
-  cat("current step size:", step_sizes[1], "\n")
-  check_res <- check_values_for_param(param, all_params, fam, vals)
-  
-  # if lowest or highest value was valid in the first check we already have an min_val or max_val
-  # otherwise we iterate with the above method
-  if (check_res[1]) {
-    min_val <- initial_min_val
-  } else {
-    min_val <- iterate_min_max_vals(param=param, all_params = all_params, fam=fam,
-                                    cur_val = min(vals[check_res]), step_sizes = step_sizes, is_min = TRUE)
+  for (param in names(all_params)){
+    
+    # 1) Try to find upper and lower bounds (if there are some)
+    initial_min_val <- -1e6
+    initial_max_val <- 1e6
+    step_sizes <- c(1e5, 50, 10, 1, 0.1, 0.01)
+    
+    # add the default value to have at least one valid entry
+    vals <- seq(initial_min_val, initial_max_val, by = step_sizes[1]) + all_params[[param]]  
+    # cat("current step size:", step_sizes[1], "\n")
+    check_res <- check_values_for_param(param, all_params, fam, vals)
+    
+    # if lowest or highest value was valid in the first check we already have an min_val or max_val
+    # otherwise we iterate with the above method
+    if (check_res[1]) {
+      min_val <- initial_min_val
+    } else {
+      min_val <- iterate_min_max_vals(param=param, all_params = all_params, fam=fam,
+                                      cur_val = min(vals[check_res]), step_sizes = step_sizes, is_min = TRUE)
+    }
+    
+    if (check_res[length(check_res)]) {
+      max_val <- initial_max_val
+    } else {
+      max_val <- iterate_min_max_vals(param=param, all_params = all_params, fam=fam,
+                                      cur_val = max(vals[check_res]), step_sizes = step_sizes, is_min = FALSE)
+    }
+    # set the estimated values in the named vactor that will be returned
+    lower[param] <- min_val
+    upper[param] <- max_val
+    
+    ### TODO:
+    # 2) Try to check if float or integer
+    
   }
-  
-  if (check_res[length(check_res)]) {
-    max_val <- initial_max_val
-  } else {
-    max_val <- iterate_min_max_vals(param=param, all_params = all_params, fam=fam,
-                                    cur_val = max(vals[check_res]), step_sizes = step_sizes, is_min = FALSE)
-  }
-  # set the estimated values in the named vactor that will be returned
-  lower[param] <- min_val
-  upper[param] <- max_val
-  
-  # 2) Try to check if float or integer
-  
+  return(list(lower=lower,
+              upper=upper))
 }
 
-lower
-upper
+
+
+### Final function -------------------------------------------------------------------------------------------------------
+# Input:
+  # family: list-> package: package_name, family: name of distribution family inside package
+get_params <- function(fam){
+  # fam <- family$family
+  
+  # 1) Get list of all parameters:
+  all_params <- get_all_params(fam)
+  
+  # 2) Add default values to all params that don#t have any
+  all_params <- get_default_values(all_params, fam)
+  
+  # 3) Get valid parameter ranges:
+  ranges <- get_param_ranges(all_params, fam)
+  lower <- ranges$lower
+  upper <- ranges$upper
+  return(ranges)
+}
+
+for (fam in families) {
+  cat("Current Family:", fam, "\n")
+  ranges <- get_params(fam)
+  cat("Lower bounds:\n")
+  print(ranges$lower)
+  cat("Upper bounds:\n")
+  print(ranges$upper)
+}
+
+### TODO:
+
+# 3) Check if log is working
 
 
 
