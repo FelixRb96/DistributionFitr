@@ -278,6 +278,13 @@ for (fam in families) {
 # 3) Check if log is working
 
 
+### Open problems:
+# 1) Distributions like nbinom where 2 params ("prob" and "mu") describe the same but only one may be set and 
+#    none of them has a default value derived from the other
+# 2) Distributions like "unif" where the parameters interact -> ranges can be represented as [lower, upper] but rather as min <= max
+
+### Possible solutions -> setting correct values manually
+
 
 
 
