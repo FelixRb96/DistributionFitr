@@ -304,6 +304,11 @@ for (fam in families) {
 ### Possible solutions -> setting correct values manually
 
 
+## TODO: 
+# definitionsbereich der Verteilung zurück geben 
+#1 rechteschranke --> inf, oder vom parameter abh oder fix 
+#2 linkeschrank --> inf oder vom parameter abh oder fix (O bei expvert)
+# um zu lösen Probl von stetiger gleichvert. 
 
 
 
