@@ -1,34 +1,86 @@
-log_likelihood <- function(family, data, param_name, x) {
-  arguments <- list(mean=0, q=data, log=T)
-  arguments[[param_name]] <- x
-  sum(do.call(paste('p', family, sep=''), args=arguments))
+loglik <- function(param_values, family, data, fixed=list(), log=T) {
+  arguments <- list(x=data)
+  if(log==T)
+    arguments$log <- T
+  if(length(param_values)>0) {
+    for(i in 1:length(param_values)) {
+      arguments[[names(param_values)[i]]] <- param_values[i]
+    }
+  }
+  if(length(fixed)>0) {
+    for(i in 1:length(fixed)) {
+      arguments[[names(fixed)[i]]] <- fixed[i]
+    }
+  }
+  summands <- do.call(paste('d', family, sep=''), args=arguments)
+  if(any(is.na(summands)))
+    stop('In Log-Likelihood-Function NA occured.')
+  
+  if(log==F) {
+    summands <- log(summands)
+    warning('Could be numerically instable.')
+  }  
+  ll <- sum(summands)
+  
+  result <- list(loglik = ll)
+  return(result$loglik)
 }
 
-optimParam <- function(data, family, lower, upper, method = 'MLE', fixed, log)  {
-  if(length(lower)!=length(upper))
+optimParam <- function(data, family, lower, upper, start_parameters, method = 'MLE', fixed=list(), log) {
+  if(method!='MLE')
+    stop('Not implemented.')
+  if(length(lower)!=length(upper) | length(start_parameters)!= length(upper))
     stop('Length of lower and upper bounds vector do not coincide.')
   if(length(lower)==0) {
     warning('No bounds deliverd.')
     return(NA)
   }
-  lower <- ifelse(lower==-Inf, -1e5, lower)
-  upper <- ifelse(upper==Inf, 1e5, upper)
-  # TODO:
-  #ifelse(lower>upper, rep(stop('Lower bound is larger than upper bound.'), length(lower)), NA)
-  do.call(paste('p', family, sep=''), args=list(0, 1))
-  if(length(lower)==1) {
-    #optimize(do.call(paste('p', family, sep=''), args=list(q=data, mean=0)), lower = lower, upper = 10)
-    optimize(log_likelihood, lower = lower, upper=upper, maximum= TRUE, family = family, data = data, param_name = names(lower))
+  if(any(names(lower)!=names(upper))) {
+    stop('Parameter names of lower and upper bounds differ. ')
+  }
+
+  if(length(lower)>0) {
+    optim_result <- optim(start_parameters, loglik, family = family, data = data, fixed=fixed, lower=lower, upper=upper,
+                          log=log, control = list(fnscale=-1, trace=0), method='L-BFGS-B')
+    if(optim_result$convergence!=0)
+      warning('Did not converge!')
+    optim_result <- optim(optim_result$par, loglik, family = family, data = data, fixed=fixed, lower=lower, upper=upper,
+                          log=log, control = list(fnscale=-1, trace=0), method='L-BFGS-B')
+    if(optim_result$convergence!=0)
+      warning('Did not converge!')
+    # Information criteria,
+    k = length(upper)
+    n = length(data)
+    aic = 2*k - 2 *  optim_result$value
+    bic = log(n) * k - 2 *  optim_result$value
+    aicc = aic + (2*k^2+2*k)/(n-k-1)
+    return(list(
+      par = optim_result$par,
+      value = optim_result$value,
+      convergence = optim_result$convergence,
+      AIC = aic, 
+      BIC = bic,
+      AICc =aicc
+    ))
   }
 }
 
 
-data <- c(0, 0.3, 0.1, 3, 7)
-family = 'norm'
-lower = c('mean' = - Inf, 'sd' = 0)
-upper = c('mean' = Inf, 'sd' = Inf)
-lower = c('sd' = 0)
-upper = c('sd' = Inf)
-fixed <- list('lower.tail' = T, 'mean'=0)
 
-optimParam(data, family, lower, upper, fixed, log = F)
+# Examples
+
+data <- rnorm(n=100, mean=70, sd= 4)
+family = 'norm'
+lower = c('mean' = - Inf)
+upper = c('mean' = Inf)
+fixed <- c('sd'=2)
+start_parameters <- c('mean' = 0)
+optimParam(data = data, family=family, lower=lower, upper=upper, start_parameters = start_parameters, fixed=fixed, log = T)
+
+data <- rbeta(n=100, shape=10, shape2=2)
+family = 'beta'
+lower = c('shape1' = 0, 'shape2' = 0)
+upper = c('shape1' = Inf, 'shape2' = Inf)
+start_parameters = c('shape1' = 1, 'shape2' = 1)
+fixed <- list()
+optimParam(data =data, family = family, lower = lower, upper = upper, start_parameters = start_parameters, log = T)
