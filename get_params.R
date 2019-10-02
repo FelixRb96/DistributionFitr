@@ -295,10 +295,15 @@ for (fam in families) {
   print(ranges$accepts_float)
 }
 
-### TODO:
 
 # 3) Check if log is working
-
+get_log <- function(fam) {
+  if('log' %in% names(formals(paste0('d', fam)))) {
+    return(T)
+  } else {
+    return(F)
+  }
+}
 
 ### Open problems:
 # 1) Distributions like nbinom where 2 params ("prob" and "mu") describe the same but only one may be set and 
@@ -309,13 +314,75 @@ for (fam in families) {
 
 
 ## TODO: 
-# definitionsbereich der Verteilung zurück geben 
+# support (träger) der Verteilung zurück geben 
 #1 rechteschranke --> inf, oder vom parameter abh oder fix 
 #2 linkeschrank --> inf oder vom parameter abh oder fix (O bei expvert)
 # um zu lösen Probl von stetiger gleichvert. 
 
+# Depends compact support on parameters and is there a compact support?
+# TODO: fehlerhafte Implementierung, muss noch ausgebessert werden
+# funktioniert noch nicht reibungsfrei, siehe beispiele
+# Erkennt, ob Parameter einen Einfluss haben schon gut
+# untere und obere grenze des supports sind noch fehleranfällig
+get_support <- function(fam, n=10000, integer=F) {
+  params <- get_params(fam)
+  params$mean <- params$upper - params$lower
+  params$depend <- NA
+  params$low <- NA
+  params$upp <- NA
+  supp_max <- -Inf
+  supp_min <- Inf
+  d_max <- 0
+  d_min <- 0
+  print(supp_min)
+  exponent <- -2:20
+  x <- c(0,rep(10^(exponent/10), 2))
+  x <- x* c(rep(1, length(x)), rep(-1, length(x)))
+  x_crit_max <- 70
+  x_crit_min <- -70
+  if(integer == T) {
+    x <- round(x)
+  }
+  testmatrix <- matrix(NA, ncol=length(x), nrow=n)
+  for(i in 1:length(params$accepts_float)) {
+    params$low[i] <- ifelse(params$lower[i]<0, ifelse(params$upper[i]>=0, -10, params$lower[i]),
+                                           ifelse(params$upper[i]>0.1, 0.1, params$lower[i]))
+    params$upp[i] <- ifelse(params$upper[i]<0, ifelse(params$lower[i]<=0.1, -0.1, params$upp[i]),
+                            ifelse(params$upper[i]>10, 10, params$upper[i]))
+  }
+  names(params$low) <- names(params$mean)
+  names(params$upp) <- names(params$mean)
+  for(i in 1:length(params$accepts_float)) {
+    pp <- pmax(pmin(rnorm(n=n, mean=params$low[i] + (params$upp[i]-params$low[i])/2, sd = 1/4*sqrt(params$upp[i]-params$low[i])), rep(params$upp[i],n)), rep(params$low[i]))
+    if(params$accepts_float[i]==F) {
+      pp <- round(pp)
+    }
+    params_chosen <- as.list( params$low + (params$upp-params$low )/2)
+    params_chosen <- ifelse(params$accepts_float, params_chosen, lapply(params_chosen, round))
+    params_chosen[['x']] <- x
+    for(j in 1:n) {
+      params_chosen[[names(params$lower)[i]]] <- pp[j]
+      density <- do.call(paste0('d', fam), args=params_chosen)
+      supp_max <- max(supp_max, x[density>0], na.rm=T)
+      supp_min <- min(supp_min, x[density>0], na.rm=T)
+      testmatrix[j,] <- density>0
+    }
+    params$depend[i] <- any(apply(testmatrix, 1, function(x) {(sum(x)>0 & sum(x)<n)}))
+  }
+  names(params$depend) <- names(params$mean)
+  if(supp_min==x_crit_min)
+    supp_min <- -Inf
+  else if(supp_max==x_crit_max)
+    supp_max <- Inf
+  params_chosen$x <- 1e3
+  params_initial <- params_chosen
+  params_chosen$x <- NULL
+  # TODO:
+  # ... hier könnte man jetzt kontrollieren, ob die dichte wirklich gegen 0 geht
+  return(list(params_depend=params$depend, supp_min=supp_min, supp_max=supp_max))
+}
 
-
-
-
-
+get_support('gamma')
+get_support('beta')
+get_support('unif')
+get_support('binom', integer= T)
