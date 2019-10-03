@@ -353,7 +353,7 @@ get_support <- function(fam, n=10000, integer=F) {
   names(params$low) <- names(params$mean)
   names(params$upp) <- names(params$mean)
   for(i in 1:length(params$accepts_float)) {
-    pp <- pmax(pmin(rnorm(n=n, mean=params$low[i] + (params$upp[i]-params$low[i])/2, sd = 1/4*sqrt(params$upp[i]-params$low[i])), rep(params$upp[i],n)), rep(params$low[i]))
+    pp <- pmax(pmin(rnorm(n=n, mean=params$low[i] + (params$upp[i]-params$low[i])/2, sd = 0.7*sqrt(params$upp[i]-params$low[i])), rep(params$upp[i],n)), rep(params$low[i]))
     if(params$accepts_float[i]==F) {
       pp <- round(pp)
     }
@@ -370,15 +370,16 @@ get_support <- function(fam, n=10000, integer=F) {
     params$depend[i] <- any(apply(testmatrix, 1, function(x) {(sum(x)>0 & sum(x)<n)}))
   }
   names(params$depend) <- names(params$mean)
-  if(supp_min==x_crit_min)
+  if(supp_min<=x_crit_min)
     supp_min <- -Inf
-  else if(supp_max==x_crit_max)
+  if(supp_max>=x_crit_max)
     supp_max <- Inf
-  params_chosen$x <- 1e3
-  params_initial <- params_chosen
-  params_chosen$x <- NULL
-  # TODO:
-  # ... hier könnte man jetzt kontrollieren, ob die dichte wirklich gegen 0 geht
+  for(i in 1:length(params$depend)) {
+    if(params$depend[i]==TRUE & supp_max==params$upp[i])
+      supp_max <- Inf
+    if(params$depend[i]==TRUE & supp_min==params$low[i])
+      supp_min <- -Inf
+  }
   return(list(params_depend=params$depend, supp_min=supp_min, supp_max=supp_max))
 }
 
