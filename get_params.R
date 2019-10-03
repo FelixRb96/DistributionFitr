@@ -318,14 +318,15 @@ get_log <- function(fam) {
 #1 rechteschranke --> inf, oder vom parameter abh oder fix 
 #2 linkeschrank --> inf oder vom parameter abh oder fix (O bei expvert)
 # um zu lösen Probl von stetiger gleichvert. 
+# -> Problem geloest??? Falls JA: TODO: deleete this comment
 
-# Depends compact support on parameters and is there a compact support?
-# TODO: fehlerhafte Implementierung, muss noch ausgebessert werden
-# funktioniert noch nicht reibungsfrei, siehe beispiele
-# Erkennt, ob Parameter einen Einfluss haben schon gut
-# untere und obere grenze des supports sind noch fehleranfällig
+# Tries to answer to questions
+# Has distribution compact support?
+# Does compact support depend on parameters and is there a compact support?
 get_support <- function(fam, n=10000, integer=F) {
+  # use get_params to obtain further parameters
   params <- get_params(fam)
+  # initialize values 
   params$mean <- params$upper - params$lower
   params$depend <- NA
   params$low <- NA
@@ -334,17 +335,26 @@ get_support <- function(fam, n=10000, integer=F) {
   supp_min <- Inf
   d_max <- 0
   d_min <- 0
-  print(supp_min)
+  
+  # define test points of distribution function
   exponent <- -2:20
   x <- c(0,rep(10^(exponent/10), 2))
   x <- x* c(rep(1, length(x)), rep(-1, length(x)))
+  
+  # define test points, if function not positive just in the defined intervall, it is assumed to be supported 
+  # as x tends to inf or -inf
   x_crit_max <- 70
   x_crit_min <- -70
+  # if function is  discrete measure use integers
   if(integer == T) {
     x <- round(x)
   }
+  # define matrix for testpoints of the density 
   testmatrix <- matrix(NA, ncol=length(x), nrow=n)
+  # prepere dependence test for each parameter
   for(i in 1:length(params$accepts_float)) {
+    # define good typical lower and upper bound for fixed parameter
+    # tries to avoid weird things like 10e6 as typical value for normal mean
     params$low[i] <- ifelse(params$lower[i]<0, ifelse(params$upper[i]>=0, -10, params$lower[i]),
                                            ifelse(params$upper[i]>0.1, 0.1, params$lower[i]))
     params$upp[i] <- ifelse(params$upper[i]<0, ifelse(params$lower[i]<=0.1, -0.1, params$upp[i]),
@@ -352,17 +362,25 @@ get_support <- function(fam, n=10000, integer=F) {
   }
   names(params$low) <- names(params$mean)
   names(params$upp) <- names(params$mean)
+  # # execut dependence test for each parameter
   for(i in 1:length(params$accepts_float)) {
+    # use random values on good intervall for test
     pp <- pmax(pmin(rnorm(n=n, mean=params$low[i] + (params$upp[i]-params$low[i])/2, sd = 0.7*sqrt(params$upp[i]-params$low[i])), rep(params$upp[i],n)), rep(params$low[i]))
+    # round, if parameter need to be a integer
     if(params$accepts_float[i]==F) {
       pp <- round(pp)
     }
+    # choose mean of typical parameters values for other parameters
     params_chosen <- as.list( params$low + (params$upp-params$low )/2)
     params_chosen <- ifelse(params$accepts_float, params_chosen, lapply(params_chosen, round))
+    # set test points of the distribution function
     params_chosen[['x']] <- x
     for(j in 1:n) {
       params_chosen[[names(params$lower)[i]]] <- pp[j]
+      # evaulate density function
       density <- do.call(paste0('d', fam), args=params_chosen)
+      # check for lowest and highest density evaluation point with positive density
+      # > parameter dependence
       supp_max <- max(supp_max, x[density>0], na.rm=T)
       supp_min <- min(supp_min, x[density>0], na.rm=T)
       testmatrix[j,] <- density>0
@@ -370,10 +388,13 @@ get_support <- function(fam, n=10000, integer=F) {
     params$depend[i] <- any(apply(testmatrix, 1, function(x) {(sum(x)>0 & sum(x)<n)}))
   }
   names(params$depend) <- names(params$mean)
+  # evaulate support of function
   if(supp_min<=x_crit_min)
     supp_min <- -Inf
   if(supp_max>=x_crit_max)
     supp_max <- Inf
+  # if parameter dependence given, estimate whether the value grows/shrinks with parameter
+  # e.g. unif
   for(i in 1:length(params$depend)) {
     if(params$depend[i]==TRUE & supp_max==params$upp[i])
       supp_max <- Inf
