@@ -1,35 +1,31 @@
+source("C:/Users/Tim/Documents/DistributionFitR/get_params.R")
 
 
-# pseudo
-get_family <-  function(package) {
+#iterate over packages and extract families and params
+iterate_packages <- function(packages) {
   
-  return(list(list("package" = "stats", "family"= "uni"),list("package" = "stats", "family"= "uni"),list("package" = "stats", "family"= "uni")))
+  df <- data.frame("family"= c(), package = c(), params = c())
   
-}
-
-# pseudo
-get_params <- function(package.familiy) {
-  
-  return(list("hi"=3,"hdsafi"=3,"hadfi"=3,"hasdfi"=3))
-}
-
-search <- function(all.packages) {
-  
-  for (i in 1:len(all.packages)) {
+  #iterate over packages
+  for (i in 1:length(packages)) {
+    package_content <- get_family(packages[i])
     
-    package.families <- get_family(all.packages[i])  
-    
-    for (j in 1:len(package.families)) {
+    #iterate over all families withing package
+    for (j in 1:length(package_content[j])) {
+      #
+      stopifnot(package_content[j]["package"] == packages[i])
       
-      get_params
       
+      #fetch params for each family and add to df
+      params <- get_params(package_content[j])
+      
+      df <- rbind(df, c(package_content[j]["family"], 
+                        package_content[j]["package"],
+                        params))
     }
-    
-      
-    
-    
-    
   }
+  
+  return(df) 
   
 }
 
