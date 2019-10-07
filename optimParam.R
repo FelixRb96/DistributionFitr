@@ -6,17 +6,13 @@ loglik <- function(param_values, family, data, fixed=list(), log=T) {
     arguments$log <- T
   # add variable parameter values of distribution to list
   if(length(param_values)>0) {
-    for(i in 1:length(param_values)) {
-      arguments[[names(param_values)[i]]] <- param_values[i]
-    }
+    arguments <- c(arguments, param_values)
   }
   # add fixed parameter values of distribution to list
   if(length(fixed)>0) {
-    for(i in 1:length(fixed)) {
-      arguments[[names(fixed)[i]]] <- fixed[i]
-    }
+    arguments <- c(arguments, fixed)
   }
-  # calculate vectore of (log)-densities
+  # calculate vector of (log)-densities
   summands <- do.call(paste('d', family, sep=''), args=arguments)
   if(any(is.na(summands)))
     stop('In Log-Likelihood-Function NA occured.')
@@ -35,13 +31,13 @@ optimParam <- function(data, family, lower, upper, start_parameters, method = 'M
   # Input parameter validation
   if(method!='MLE')
     stop('Not implemented.')
-  if(length(lower)!=length(upper) | length(start_parameters)!= length(upper))
+  if(length(lower)!=length(upper) || length(start_parameters)!= length(upper))
     stop('Length of lower and upper bounds vector do not coincide.')
   if(length(lower)==0) {
     warning('No bounds deliverd.')
     return(NA)
   }
-  if(any(names(lower)!=names(upper)) | any(names(lower)!=names(start_parameters)) ) {
+  if(any(names(lower)!=names(upper)) || any(names(lower)!=names(start_parameters)) ) {
     stop('Parameter names of lower and upper bounds and start parameters must coincide. ')
   }
   # Check whether there are free parameters to optimize

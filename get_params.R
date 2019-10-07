@@ -14,7 +14,7 @@ for (i in 1:length(start_chars)) {
   first_arg <- first_args[i]
   subset <- grep(paste0("^", char), possible_dists, value=TRUE)                     # all functions starting with char
   valid_idx <- sapply(subset, function(x) names(as.list(args(x)))[1] == first_arg)  # check if all functions have the correct first arg
-  print(valid_idx)
+  # print(valid_idx)
   l[[char]] <- subset[valid_idx]
 }
 
@@ -41,7 +41,7 @@ res
 ## Main ideas:
 # 1) extract all possible params from r... function as the r function should need all params
 # 2) check if all of them have default values set
-# 2.1) If yes got to 3)
+# 2.1) If yes go to 3)
 # 2.2) If not for each param with missing default value guess such a value and test if r..(1, params) returns a value or NA
 #      If a valid value is returned take the current set of default values, otherwise try a different combination of default values
 # 3) For each of the params test some values (non-integer, negative, not in [0,1]) while keeping the others at their defaults
@@ -54,10 +54,10 @@ fam <- "beta" # "gamma"
 
 get_all_params <- function(fam) {
   # idea: all params need to be present in the r... method for generating random samples from the distribution
-  all_params <- as.list(args(paste0("r", fam)))
+  all_params <- formals(paste0("r", fam))
   
   # if "nn" is contained then "n" is probably a real param , c.f. rhyper
-  to_remove <- if("nn" %in% names(all_params)) c("", "nn") else c("", "n", "nn")
+  to_remove <- if("nn" %in% names(all_params)) c("", "nn") else c("", "n")
   
   all_params <- all_params[! names(all_params) %in% to_remove]    # remove empty and the n_samples argument
   
@@ -108,6 +108,8 @@ get_default_values <- function(all_params, fam) {
   for (i in 1:length(combs_list)) {
     
     # combine fixed with guessed default values and try to generate a random number
+    # in most cases invalid parameter choices will just generate a warning and return NA, but sometimes also an error is thrown
+    # so we need to handle both
     curr_params <- c(with_defaults, combs_list[[i]])
     res <- suppressWarnings(tryCatch(do.call(paste0("r", fam), c(n_or_nn, curr_params)), 
                                      error=function(e) {
@@ -142,11 +144,11 @@ all_params <- get_default_values(all_params, fam)
 check_values_for_param <- function(param, all_params, fam, values) {
   
   # parameter that describes the number of random numbers to take, usually "n", but in cases like hyper "nn"
-  n_or_nn <- if (! "nn" %in% names(as.list(args(paste0("r", fam))))) list(n=1) else list(nn=1)
+  n_or_nn <- if (! "nn" %in% names(formals(paste0("r", fam)))) list(n=1) else list(nn=1)
   
   res <- suppressWarnings(
     sapply(values, function(x) {
-      # set the value of "param" to each of the "values" that should be tested
+      # overwrite the value of "param" to each of the "values" that should be tested
       all_params[[param]] <- x;
       # try to generate a random number from the distribution
       tryCatch(do.call(paste0("r", fam), c(n_or_nn, all_params)), 
@@ -166,11 +168,11 @@ check_values_for_param("shape1", all_params, fam, values=c(-100, -10, -1, 1))
   # now the lower limit can be anywhere between -5 and 0
   # so we test with next step size=1 the values [-5, -4, -3, -2, -1, 0]
   # from those values we again search the minimum valid value and continue in the same way with always smaller steps
-  # for the upper bound the procedure is the same, just that we search for valid values in the raneg higher than the current upper limit
+  # for the upper bound the procedure is the same, just that we search for valid values in the range higher than the current upper limit
 iterate_min_max_vals <- function(param, all_params, fam, cur_val, step_sizes, is_min=TRUE) {
   for (i in 1:(length(step_sizes)-1)) {
     
-    # first get the interval that should be tested
+    # first get the interval that should be tested (lower than cur_val when searching lower limit and higher then cur_val when searchin upper limit)
     if (is_min) {
       border <- cur_val-step_sizes[i]
       vals <- seq(border, cur_val, by=step_sizes[i+1])
@@ -179,12 +181,12 @@ iterate_min_max_vals <- function(param, all_params, fam, cur_val, step_sizes, is
       vals <- seq(cur_val, border, by=step_sizes[i+1])
     }
     # test values and adjust the current estimate
-    # cat(param, "-> Currently checking values in the interval [", min(vals), ",", max(vals), "]\n")
+    # cat(param, "-> Currently checking values in the interval [", min(vals), ",", max(vals), "] with step size", step_sizes[i+1], "\n")
     check_res <- check_values_for_param(param, all_params, fam, vals)
     cur_val <- ifelse(is_min, min(vals[check_res]), max(vals[check_res]))
     
     # if the smallest (or highest) of the tested values was valid we can break
-    # however this should not happen when the method is used as below
+    # however this should usually not happen when the method is used as below (but happens due to float imprecisions...)
     if (cur_val == border) {
       # cat("Abbruchbedingung")
       return(cur_val)
@@ -201,6 +203,8 @@ iterate_min_max_vals("shape1", all_params, fam, cur_val=0, step_sizes = c(1, 0.5
 ### Main function for generating the info for each of the params ------------------------------------------------------
 
 get_param_ranges <- function(all_params, fam) {
+  
+  # create empty result vectors
   lower <- upper <- accepts_float <- rep(NA, length(all_params))
   names(lower) <- names(upper) <- names(accepts_float) <- names(all_params)
   
@@ -250,11 +254,9 @@ get_param_ranges <- function(all_params, fam) {
     accepted_float <- sum(!is_integer & testoutcome)
     accepted_float_rate <- accepted_float/(num_tests - num_integer)
 
-    if(accepted_float_rate > 1/(num_tests - num_integer)) accepts_float_param <- TRUE
-    else if(accepted_int_rate == 0) error("distribution does not seem to accept any values")
-    else accepts_float_param <- FALSE
-
-    accepts_float[param] <- accepts_float_param
+    if(accepted_float_rate > 1/(num_tests - num_integer)) accepts_float[param] <- TRUE
+    else if(accepted_int_rate == 0) stop("distribution does not seem to accept any values")
+    else accepts_float[param] <- FALSE
   }
   return(list(lower=lower,
               upper=upper,
@@ -263,6 +265,26 @@ get_param_ranges <- function(all_params, fam) {
 
 # example:
 get_param_ranges(all_params, fam)
+
+
+### Function that checks if log is working -------------------------------------------------------
+check_log <- function(fam) {
+  if('log' %in% names(formals(paste0('d', fam)))) {
+    return(T)
+  } else {
+    return(F)
+  }
+}
+
+
+### Function that checks whether a family is a discrete distribution, that is it only takes integers as values ----------
+check_integer <- function(fam, all_params) {
+  n_test <- 10
+  n_or_nn <- if (! "nn" %in% names(formals(paste0("r", fam)))) list(n=n_test) else list(nn=n_test)
+  args_ <- c(all_params, n_or_nn)
+  res <- do.call(paste0("r", fam), args = args_)
+  return(all(abs(res%%1) < sqrt(.Machine$double.eps)))
+}
 
 
 ### Final function -------------------------------------------------------------------------------------------------------
@@ -277,33 +299,35 @@ get_params <- function(fam){
   # 2) Add default values to all params that don#t have any
   all_params <- get_default_values(all_params, fam)
   
+  if (is.null(all_params)) return(NULL)
+  
   # 3) Get valid parameter ranges:
-  ranges <- get_param_ranges(all_params, fam)
-  lower <- ranges$lower
-  upper <- ranges$upper
-  return(ranges)
+  result <- get_param_ranges(all_params, fam)
+  
+  # 4) Add log argument
+  result$log <- check_log(fam)
+  
+  # 5) Add discrete argument
+  result$discrete <- check_integer(fam, all_params)
+  
+  # TODO: add support 
+  
+  return(result)
 }
 
 for (fam in families) {
-  cat("Current Family:", fam, "\n")
-  ranges <- get_params(fam)
+  cat("\nCurrent Family:", fam, "\n")
+  result <- get_params(fam)
   cat("Lower bounds:\n")
-  print(ranges$lower)
+  print(result$lower)
   cat("Upper bounds:\n")
-  print(ranges$upper)
+  print(result$upper)
   cat("Accepts floats:\n")
-  print(ranges$accepts_float)
+  print(result$accepts_float)
+  cat("Is discrete:\n")
+  print(result$discrete)
 }
 
-
-# 3) Check if log is working
-get_log <- function(fam) {
-  if('log' %in% names(formals(paste0('d', fam)))) {
-    return(T)
-  } else {
-    return(F)
-  }
-}
 
 ### Open problems:
 # 1) Distributions like nbinom where 2 params ("prob" and "mu") describe the same but only one may be set and 
@@ -319,6 +343,8 @@ get_log <- function(fam) {
 #2 linkeschrank --> inf oder vom parameter abh oder fix (O bei expvert)
 # um zu lösen Probl von stetiger gleichvert. 
 # -> Problem geloest??? Falls JA: TODO: deleete this comment
+
+# TODO: We do not (yet) know whether function is discret -> integer argument can`t be used
 
 # Tries to answer to questions
 # Has distribution compact support?
@@ -338,8 +364,7 @@ get_support <- function(fam, n=10000, integer=F) {
   
   # define test points of distribution function
   exponent <- -2:20
-  x <- c(0,rep(10^(exponent/10), 2))
-  x <- x* c(rep(1, length(x)), rep(-1, length(x)))
+  x <- c(0, 10^(exponent/10), -10^(exponent/10))
   
   # define test points, if function not positive just in the defined intervall, it is assumed to be supported 
   # as x tends to inf or -inf
@@ -365,13 +390,15 @@ get_support <- function(fam, n=10000, integer=F) {
   # # execut dependence test for each parameter
   for(i in 1:length(params$accepts_float)) {
     # use random values on good intervall for test
-    pp <- pmax(pmin(rnorm(n=n, mean=params$low[i] + (params$upp[i]-params$low[i])/2, sd = 0.7*sqrt(params$upp[i]-params$low[i])), rep(params$upp[i],n)), rep(params$low[i]))
+    pp <- pmax(pmin(rnorm(n=n, mean=(params$upp[i]+params$low[i])/2, sd = 0.7*sqrt(params$upp[i]-params$low[i])), 
+                    rep(params$upp[i],n)), 
+               rep(params$low[i]))
     # round, if parameter need to be a integer
     if(params$accepts_float[i]==F) {
       pp <- round(pp)
     }
     # choose mean of typical parameters values for other parameters
-    params_chosen <- as.list( params$low + (params$upp-params$low )/2)
+    params_chosen <- as.list((params$upp+params$low )/2 )
     params_chosen <- ifelse(params$accepts_float, params_chosen, lapply(params_chosen, round))
     # set test points of the distribution function
     params_chosen[['x']] <- x
@@ -385,7 +412,7 @@ get_support <- function(fam, n=10000, integer=F) {
       supp_min <- min(supp_min, x[density>0], na.rm=T)
       testmatrix[j,] <- density>0
     }
-    params$depend[i] <- any(apply(testmatrix, 1, function(x) {(sum(x)>0 & sum(x)<n)}))
+    params$depend[i] <- any(apply(testmatrix, 2, function(x) {(sum(x)>0 & sum(x)<n)}))
   }
   names(params$depend) <- names(params$mean)
   # evaulate support of function
@@ -396,9 +423,9 @@ get_support <- function(fam, n=10000, integer=F) {
   # if parameter dependence given, estimate whether the value grows/shrinks with parameter
   # e.g. unif
   for(i in 1:length(params$depend)) {
-    if(params$depend[i]==TRUE & supp_max==params$upp[i])
+    if(params$depend[i]==TRUE && supp_max==params$upp[i])
       supp_max <- Inf
-    if(params$depend[i]==TRUE & supp_min==params$low[i])
+    if(params$depend[i]==TRUE && supp_min==params$low[i])
       supp_min <- -Inf
   }
   return(list(params_depend=params$depend, supp_min=supp_min, supp_max=supp_max))
