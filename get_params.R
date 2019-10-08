@@ -267,7 +267,7 @@ get_param_ranges <- function(all_params, fam) {
 get_param_ranges(all_params, fam)
 
 
-### Function that checks if log is working -------------------------------------------------------
+### Function that checks if log is working ---------------------------------------------------------------------------
 check_log <- function(fam) {
   if('log' %in% names(formals(paste0('d', fam)))) {
     return(T)
@@ -287,6 +287,124 @@ check_integer <- function(fam, all_params) {
 }
 
 
+### Determining the support of a distribution ---------------------------------------------------------------------------
+
+# Function for determining the support of a given distribution family and whether the limits of the support are determined by one
+# of the distributions parameters
+# params should be a list containing named vectors lower, upper, accepts_float with one entry for each of the distributions parameters
+# additionally params$discrete specifies whether fam is a discrete distribution
+get_support <- function(fam, params) {
+  
+  # in case the parameter is unbounded we cap it to avoid extreme values
+  low_capped <- pmax(params$lower, -10)
+  upp_capped <- pmin(params$upper, 10)
+  
+  # we additionally ignore the 10% highest and lowest parameter values (e.g. for "binom" we only consider prop in [0.1, 0.9])
+  low <- ifelse(params$lower == low_capped, low_capped + 0.1 * (upp_capped-low_capped), low_capped)
+  upp <- ifelse(params$upper == upp_capped, upp_capped - 0.1 * (upp_capped-low_capped), upp_capped)
+  
+  # initialize named vector that stores whether each parameter determines the bounds of a distribution
+  supp_depends_on <- rep(FALSE, length(params$lower))
+  names(supp_depends_on) <- names(params$lower)
+  
+  # define the base choices for all parameters that are chosen when only varying one parameter and keeping the others constant
+  base_choices <- (low + upp)/2
+  base_choices <- as.list(ifelse(params$accepts_float, base_choices, round(base_choices)))
+  
+  # define the sequence of test points
+  precision <- 0.01
+  x <- seq(-100, 100, precision)
+  if (params$discrete) x <- unique(round(x))
+  
+  # and add the points to the list of parameter choices
+  base_choices$x <- x
+  
+  # define the number of values to test for each parameter
+  n_test <- 11
+  
+  # initialize limits of support to maximum / minimum possible value each
+  support_min <- Inf
+  support_max <- -Inf
+  
+  for (param in names(low)) {
+    # define n_test equally distributed values for the current param dependend on its adapted range from above
+    param_choices <- seq(low[param], upp[param], length.out = n_test)
+    if (!params$accepts_float[param]) param_choices <- trunc(param_choices)
+    
+    # copy base choices to args_ so that we can change the value for the current param below
+    args_ <- base_choices
+    
+    get_result_mat <- function(param_choices){
+      
+      # row i of the result matrix will be the density values at x when taking the i-th choice for the current param
+      result_mat <- matrix(NA, nrow=length(param_choices), ncol=length(x))
+      i <- 1
+      for (choice in param_choices) {
+        # calulate density value and add to result matrix
+        args_[[param]] <- choice
+        res <- suppressWarnings(do.call(paste0("d", fam), args = args_))
+        result_mat[i, ] <- res
+        i <- i+1
+      }
+      return(result_mat)
+    }
+    
+    result_mat <- get_result_mat(param_choices)
+    
+    # TODO: it would be better to catch such cases by getting the right values for accepts_float
+    if (all(rowSums(is.na(result_mat)) > 0)){
+      warning("The choices ", paste(param_choices, collapse = " "), " for parameter ", param, " of family ", fam, 
+              " all produced invalid valueswhen applying ", paste0("d", fam), ". Now trying to use integers for all parameters.")
+      param_choices <- unique(round(param_choices))
+      args_[names(params$lower)] <- lapply(args_[names(params$lower)], round)
+      result_mat <- get_result_mat(param_choices)
+    }
+    
+    if (all(rowSums(is.na(result_mat)) > 0)) {
+      message("The choices ", paste(param_choices, collapse = " "), " for parameter ", param, " of family ", fam, 
+              " all produced invalid valueswhen applying ", paste0("d", fam))
+      return(NULL)
+    }
+    
+    # for each row caluclate the minimum and maximum evaluation point with positive density
+    row_support_min <- apply(result_mat, 1, function(row) {x[min(which(row>0))]})
+    row_support_max <- apply(result_mat, 1, function(row) {x[max(which(row>0))]})
+    
+    # check if the lower or upper bound is always the same as the current parameter value (up to the chosen precision + some small machine error)
+    # then the support depends on the current parameter and the support is at least as big as the possible ranges of this parameter
+    if(max(abs( param_choices-row_support_min )) <= precision + 1e-10) {
+      supp_depends_on[param] <- TRUE
+      support_min <- min(params$lower[param], support_min)
+      support_max <- max(max(row_support_max), support_max)
+    }
+    if(max(abs( param_choices-row_support_max )) <= precision + 1e-10) {
+      supp_depends_on[param] <- TRUE
+      support_max <- max(params$upper[param], support_max)
+      support_min <- min(min(row_support_min), support_min)
+    }
+    
+    # else we just adapt the current maximum and minimum support values with the minimum or maximum row support
+    if (!supp_depends_on[param]) {
+      support_min <- min(min(row_support_min), support_min)
+      support_max <- max(max(row_support_max), support_max)
+    }
+    
+    # cat("After param", param, "--> \tsupport_min:", support_min, "\tsupport_max", support_max, "\n")
+  }
+  # if minimum / maximum support is small / high enough we assume that the support is the whole real line
+  if (support_min <= -50) support_min <- -Inf
+  if (support_max >= 50) support_max <- Inf
+  
+  return(list(support_min = support_min, support_max = support_max, supp_depends_on=supp_depends_on))
+}
+
+# examples:
+get_support('gamma')
+get_support('beta')
+get_support('unif')
+get_support('binom')
+
+
 ### Final function -------------------------------------------------------------------------------------------------------
 # Input:
   # family: list-> package: package_name, family: name of distribution family inside package
@@ -296,7 +414,7 @@ get_params <- function(fam){
   # 1) Get list of all parameters:
   all_params <- get_all_params(fam)
   
-  # 2) Add default values to all params that don#t have any
+  # 2) Add default values to all params that don't have any
   all_params <- get_default_values(all_params, fam)
   
   if (is.null(all_params)) return(NULL)
@@ -310,7 +428,9 @@ get_params <- function(fam){
   # 5) Add discrete argument
   result$discrete <- check_integer(fam, all_params)
   
-  # TODO: add support 
+  # 6) Add support informations
+  res <- get_support(fam , result)
+  result <- c(result, res)
   
   return(result)
 }
@@ -318,14 +438,7 @@ get_params <- function(fam){
 for (fam in families) {
   cat("\nCurrent Family:", fam, "\n")
   result <- get_params(fam)
-  cat("Lower bounds:\n")
-  print(result$lower)
-  cat("Upper bounds:\n")
-  print(result$upper)
-  cat("Accepts floats:\n")
-  print(result$accepts_float)
-  cat("Is discrete:\n")
-  print(result$discrete)
+  print(result)
 }
 
 
@@ -333,99 +446,7 @@ for (fam in families) {
 # 1) Distributions like nbinom where 2 params ("prob" and "mu") describe the same but only one may be set and 
 #    none of them has a default value derived from the other
 # 2) Distributions like "unif" where the parameters interact -> ranges can be represented as [lower, upper] but rather as min <= max
+# 3) Distribution hyper: here rhyper also works with floats for m,n,k but hyper not, maybe also check d function in check_values_for_param
+#    Current errors have to be catched in get_support but it would be better if they didn't occur at all
 
 ### Possible solutions -> setting correct values manually
-
-# Function for determining the support of a given distribution family and whether the limits of the support are determined by one
-# of the distributions parameters
-get_support <- function(fam, isinteger=FALSE) {
-  
-  params <- get_params(fam)
-  
-  # in case the parameter is unbounded we cap it to avoid extreme values
-  low_capped <- pmax(params$lower, -10)
-  upp_capped <- pmin(params$upper, 10)
-  
-  # we additionally ignore the 10% highest and lowest parameter values (e.g. for "binom" we only consider prop in [0.1, 0.9])
-  params$low <- ifelse(params$lower == low_capped, low_capped + 0.1 * (upp_capped-low_capped), low_capped)
-  params$upp <- ifelse(params$upper == upp_capped, upp_capped - 0.1 * (upp_capped-low_capped), upp_capped)
-  
-  # initialize named vector that stores whether each parameter determines the bounds of a distribution
-  params$supp_depends_on <- rep(FALSE, length(params$lower))
-  names(params$supp_depends_on) <- names(params$lower)
-  
-  # define the base choices for all parameters that are chosen when only varying one parameter and keeping the others constant
-  base_choices <- (params$low + params$upp)/2
-  base_choices <- as.list(ifelse(params$accepts_float, base_choices, round(base_choices)))
-  
-  # define the sequence of test points
-  precision <- 0.01
-  x <- seq(-100, 100, precision)
-  if (isinteger) x <- unique(round(x))
-  
-  # and add the points to the list of parameter choices
-  base_choices$x <- x
-  
-  # define the number of values to test for each parameter
-  n_test <- 11
-  
-  # initialize limits of support to maximum / minimum possible value each
-  support_min <- Inf
-  support_max <- -Inf
-  
-  for (param in names(params$low)) {
-    # define n_test equally distributed values for the current param dependend on its adapted range from above
-    param_choices <- seq(params$low[param], params$upp[param], length.out = n_test)
-    if (!params$accepts_float[param]) param_choices <- trunc(param_choices)
-    
-    # copy base choices to args_ so that we can change the value for the current param below
-    args_ <- base_choices
-    
-    # row i of the result matrix will be the density values at x when taking the i-th choice for the current param
-    result_mat <- matrix(NA, nrow=n_test, ncol=length(x))
-    
-    i <- 1
-    for (choice in param_choices) {
-      # calulate density value and add to result matrix
-      args_[[param]] <- choice
-      res <- do.call(paste0("d", fam), args = args_)
-      result_mat[i, ] <- res
-      i <- i+1
-    }
-    
-    # for each row caluclate the minimum and maximum evaluation point with positive density
-    row_support_min <- apply(result_mat, 1, function(row) {x[min(which(row>0))]})
-    row_support_max <- apply(result_mat, 1, function(row) {x[max(which(row>0))]})
-    
-    # check if the lower or upper bound is always the same as the current parameter value (up to the chosen precision + some small machine error)
-    # then the support depends on the current parameter and the support is at least as big as the possible ranges of this parameter
-    if(max(abs( param_choices-row_support_min )) <= precision + 1e-10) {
-      params$supp_depends_on[param] <- TRUE
-      support_min <- min(params$lower[param], support_min)
-      support_max <- max(max(row_support_max), support_max)
-    }
-    if(max(abs( param_choices-row_support_max )) <= precision + 1e-10) {
-      params$supp_depends_on[param] <- TRUE
-      support_max <- max(params$upper[param], support_max)
-      support_min <- min(min(row_support_min), support_min)
-    }
-    
-    # else we just adapt the current maximum and minimum support values with the minimum or maximum row support
-    if (!params$supp_depends_on[param]) {
-      support_min <- min(min(row_support_min), support_min)
-      support_max <- max(max(row_support_max), support_max)
-    }
-    
-    cat("After param", param, "--> \tsupport_min:", support_min, "\tsupport_max", support_max, "\n")
-  }
-  # if minimum / maximum support is small / high enough we assume that the support is the whole real line
-  if (support_min <= -50) support_min <- -Inf
-  if (support_max >= 50) support_max <- Inf
-  
-  return(list(support_min = support_min, support_max = support_max, supp_depends_on=params$supp_depends_on))
-}
-
-get_support('gamma')
-get_support('beta')
-get_support('unif')
-get_support('binom', integer= T)
