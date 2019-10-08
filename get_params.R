@@ -336,99 +336,93 @@ for (fam in families) {
 
 ### Possible solutions -> setting correct values manually
 
-
-## TODO: 
-# support (träger) der Verteilung zurück geben 
-#1 rechteschranke --> inf, oder vom parameter abh oder fix 
-#2 linkeschrank --> inf oder vom parameter abh oder fix (O bei expvert)
-# um zu lösen Probl von stetiger gleichvert. 
-# -> Problem geloest??? Falls JA: TODO: deleete this comment
-
-# TODO: We do not (yet) know whether function is discret -> integer argument can`t be used
-
-# Tries to answer to questions
-# Has distribution compact support?
-# Does compact support depend on parameters and is there a compact support?
-get_support <- function(fam, n=10000, integer=F) {
-  # use get_params to obtain further parameters
+# Function for determining the support of a given distribution family and whether the limits of the support are determined by one
+# of the distributions parameters
+get_support <- function(fam, isinteger=FALSE) {
+  
   params <- get_params(fam)
-  # initialize values 
-  params$mean <- params$upper - params$lower
-  params$depend <- NA
-  params$low <- NA
-  params$upp <- NA
-  supp_max <- -Inf
-  supp_min <- Inf
-  d_max <- 0
-  d_min <- 0
   
-  # define test points of distribution function
-  exponent <- -2:20
-  x <- c(0, 10^(exponent/10), -10^(exponent/10))
+  # in case the parameter is unbounded we cap it to avoid extreme values
+  low_capped <- pmax(params$lower, -10)
+  upp_capped <- pmin(params$upper, 10)
   
-  # define test points, if function not positive just in the defined intervall, it is assumed to be supported 
-  # as x tends to inf or -inf
-  x_crit_max <- 70
-  x_crit_min <- -70
-  # if function is  discrete measure use integers
-  if(integer == T) {
-    x <- round(x)
-  }
-  # define matrix for testpoints of the density 
-  testmatrix <- matrix(NA, ncol=length(x), nrow=n)
-  # prepere dependence test for each parameter
-  for(i in 1:length(params$accepts_float)) {
-    # define good typical lower and upper bound for fixed parameter
-    # tries to avoid weird things like 10e6 as typical value for normal mean
-    params$low[i] <- ifelse(params$lower[i]<0, ifelse(params$upper[i]>=0, -10, params$lower[i]),
-                                           ifelse(params$upper[i]>0.1, 0.1, params$lower[i]))
-    params$upp[i] <- ifelse(params$upper[i]<0, ifelse(params$lower[i]<=0.1, -0.1, params$upp[i]),
-                            ifelse(params$upper[i]>10, 10, params$upper[i]))
-  }
-  names(params$low) <- names(params$mean)
-  names(params$upp) <- names(params$mean)
-  # # execut dependence test for each parameter
-  for(i in 1:length(params$accepts_float)) {
-    # use random values on good intervall for test
-    pp <- pmax(pmin(rnorm(n=n, mean=(params$upp[i]+params$low[i])/2, sd = 0.7*sqrt(params$upp[i]-params$low[i])), 
-                    rep(params$upp[i],n)), 
-               rep(params$low[i]))
-    # round, if parameter need to be a integer
-    if(params$accepts_float[i]==F) {
-      pp <- round(pp)
+  # we additionally ignore the 10% highest and lowest parameter values (e.g. for "binom" we only consider prop in [0.1, 0.9])
+  params$low <- ifelse(params$lower == low_capped, low_capped + 0.1 * (upp_capped-low_capped), low_capped)
+  params$upp <- ifelse(params$upper == upp_capped, upp_capped - 0.1 * (upp_capped-low_capped), upp_capped)
+  
+  # initialize named vector that stores whether each parameter determines the bounds of a distribution
+  params$supp_depends_on <- rep(FALSE, length(params$lower))
+  names(params$supp_depends_on) <- names(params$lower)
+  
+  # define the base choices for all parameters that are chosen when only varying one parameter and keeping the others constant
+  base_choices <- (params$low + params$upp)/2
+  base_choices <- as.list(ifelse(params$accepts_float, base_choices, round(base_choices)))
+  
+  # define the sequence of test points
+  precision <- 0.01
+  x <- seq(-100, 100, precision)
+  if (isinteger) x <- unique(round(x))
+  
+  # and add the points to the list of parameter choices
+  base_choices$x <- x
+  
+  # define the number of values to test for each parameter
+  n_test <- 11
+  
+  # initialize limits of support to maximum / minimum possible value each
+  support_min <- Inf
+  support_max <- -Inf
+  
+  for (param in names(params$low)) {
+    # define n_test equally distributed values for the current param dependend on its adapted range from above
+    param_choices <- seq(params$low[param], params$upp[param], length.out = n_test)
+    if (!params$accepts_float[param]) param_choices <- trunc(param_choices)
+    
+    # copy base choices to args_ so that we can change the value for the current param below
+    args_ <- base_choices
+    
+    # row i of the result matrix will be the density values at x when taking the i-th choice for the current param
+    result_mat <- matrix(NA, nrow=n_test, ncol=length(x))
+    
+    i <- 1
+    for (choice in param_choices) {
+      # calulate density value and add to result matrix
+      args_[[param]] <- choice
+      res <- do.call(paste0("d", fam), args = args_)
+      result_mat[i, ] <- res
+      i <- i+1
     }
-    # choose mean of typical parameters values for other parameters
-    params_chosen <- as.list((params$upp+params$low )/2 )
-    params_chosen <- ifelse(params$accepts_float, params_chosen, lapply(params_chosen, round))
-    # set test points of the distribution function
-    params_chosen[['x']] <- x
-    for(j in 1:n) {
-      params_chosen[[names(params$lower)[i]]] <- pp[j]
-      # evaulate density function
-      density <- do.call(paste0('d', fam), args=params_chosen)
-      # check for lowest and highest density evaluation point with positive density
-      # > parameter dependence
-      supp_max <- max(supp_max, x[density>0], na.rm=T)
-      supp_min <- min(supp_min, x[density>0], na.rm=T)
-      testmatrix[j,] <- density>0
+    
+    # for each row caluclate the minimum and maximum evaluation point with positive density
+    row_support_min <- apply(result_mat, 1, function(row) {x[min(which(row>0))]})
+    row_support_max <- apply(result_mat, 1, function(row) {x[max(which(row>0))]})
+    
+    # check if the lower or upper bound is always the same as the current parameter value (up to the chosen precision + some small machine error)
+    # then the support depends on the current parameter and the support is at least as big as the possible ranges of this parameter
+    if(max(abs( param_choices-row_support_min )) <= precision + 1e-10) {
+      params$supp_depends_on[param] <- TRUE
+      support_min <- min(params$lower[param], support_min)
+      support_max <- max(max(row_support_max), support_max)
     }
-    params$depend[i] <- any(apply(testmatrix, 2, function(x) {(sum(x)>0 & sum(x)<n)}))
+    if(max(abs( param_choices-row_support_max )) <= precision + 1e-10) {
+      params$supp_depends_on[param] <- TRUE
+      support_max <- max(params$upper[param], support_max)
+      support_min <- min(min(row_support_min), support_min)
+    }
+    
+    # else we just adapt the current maximum and minimum support values with the minimum or maximum row support
+    if (!params$supp_depends_on[param]) {
+      support_min <- min(min(row_support_min), support_min)
+      support_max <- max(max(row_support_max), support_max)
+    }
+    
+    cat("After param", param, "--> \tsupport_min:", support_min, "\tsupport_max", support_max, "\n")
   }
-  names(params$depend) <- names(params$mean)
-  # evaulate support of function
-  if(supp_min<=x_crit_min)
-    supp_min <- -Inf
-  if(supp_max>=x_crit_max)
-    supp_max <- Inf
-  # if parameter dependence given, estimate whether the value grows/shrinks with parameter
-  # e.g. unif
-  for(i in 1:length(params$depend)) {
-    if(params$depend[i]==TRUE && supp_max==params$upp[i])
-      supp_max <- Inf
-    if(params$depend[i]==TRUE && supp_min==params$low[i])
-      supp_min <- -Inf
-  }
-  return(list(params_depend=params$depend, supp_min=supp_min, supp_max=supp_max))
+  # if minimum / maximum support is small / high enough we assume that the support is the whole real line
+  if (support_min <= -50) support_min <- -Inf
+  if (support_max >= 50) support_max <- Inf
+  
+  return(list(support_min = support_min, support_max = support_max, supp_depends_on=params$supp_depends_on))
 }
 
 get_support('gamma')
