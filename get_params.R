@@ -35,6 +35,9 @@ freq
 res <- list(package = package, family=names(freq))
 res
 
+to_drop <- c("multinom")
+res$family <- res$family[! (res$family %in% to_drop)]
+
 
 ### 2) Try to get the parameters (+ infos) from a distribution ----------------------------------------------------------------
 
@@ -183,7 +186,12 @@ iterate_min_max_vals <- function(param, all_params, fam, cur_val, step_sizes, is
     # test values and adjust the current estimate
     # cat(param, "-> Currently checking values in the interval [", min(vals), ",", max(vals), "] with step size", step_sizes[i+1], "\n")
     check_res <- check_values_for_param(param, all_params, fam, vals)
-    cur_val <- ifelse(is_min, min(vals[check_res]), max(vals[check_res]))
+    
+    # usually at least the first (when is_min=FALSE) or the last (when is_min=TRUE) should be valid
+    # but due to overflow it can happen that none is TRUE then we break with the currrent value
+    if (any(check_res)) {
+      cur_val <- ifelse(is_min, min(vals[check_res]), max(vals[check_res]))
+    }
     
     # if the smallest (or highest) of the tested values was valid we can break
     # however this should usually not happen when the method is used as below (but happens due to float imprecisions...)
@@ -260,7 +268,8 @@ get_param_ranges <- function(all_params, fam) {
   }
   return(list(lower=lower,
               upper=upper,
-              accepts_float=accepts_float))
+              accepts_float=accepts_float, 
+              defaults=unlist(all_params)))
 }
 
 # example:
@@ -308,8 +317,9 @@ get_support <- function(fam, params) {
   names(supp_depends_on) <- names(params$lower)
   
   # define the base choices for all parameters that are chosen when only varying one parameter and keeping the others constant
-  base_choices <- (low + upp)/2
-  base_choices <- as.list(ifelse(params$accepts_float, base_choices, round(base_choices)))
+  # base_choices <- (low + upp)/2
+  #base_choices <- as.list(ifelse(params$accepts_float, base_choices, round(base_choices)))
+  base_choices <- as.list(ifelse(params$accepts_float, params$defaults, round(params$defaults)))
   
   # define the sequence of test points
   precision <- 0.01
@@ -354,7 +364,7 @@ get_support <- function(fam, params) {
     # TODO: it would be better to catch such cases by getting the right values for accepts_float
     if (all(rowSums(is.na(result_mat)) > 0)){
       warning("The choices ", paste(param_choices, collapse = " "), " for parameter ", param, " of family ", fam, 
-              " all produced invalid valueswhen applying ", paste0("d", fam), ". Now trying to use integers for all parameters.")
+              " all produced invalid values when applying ", paste0("d", fam), ". Now trying to use integers for all parameters.")
       param_choices <- unique(round(param_choices))
       args_[names(params$lower)] <- lapply(args_[names(params$lower)], round)
       result_mat <- get_result_mat(param_choices)
@@ -367,8 +377,8 @@ get_support <- function(fam, params) {
     }
     
     # for each row caluclate the minimum and maximum evaluation point with positive density
-    row_support_min <- apply(result_mat, 1, function(row) {x[min(which(row>0))]})
-    row_support_max <- apply(result_mat, 1, function(row) {x[max(which(row>0))]})
+    row_support_min <- apply(result_mat, 1, function(row) {if (length(which(row>0)) > 0) x[min(which(row>0))] else Inf})
+    row_support_max <- apply(result_mat, 1, function(row) {if (length(which(row>0)) > 0) x[max(which(row>0))] else -Inf})
     
     # check if the lower or upper bound is always the same as the current parameter value (up to the chosen precision + some small machine error)
     # then the support depends on the current parameter and the support is at least as big as the possible ranges of this parameter
@@ -397,12 +407,6 @@ get_support <- function(fam, params) {
   
   return(list(support_min = support_min, support_max = support_max, supp_depends_on=supp_depends_on))
 }
-
-# examples:
-get_support('gamma')
-get_support('beta')
-get_support('unif')
-get_support('binom')
 
 
 ### Final function -------------------------------------------------------------------------------------------------------
