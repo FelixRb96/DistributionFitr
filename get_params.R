@@ -1,5 +1,6 @@
 if (! "stringr" %in% installed.packages()) install.packages("stringr")
 library(stringr)
+source("utils.R")
 
 ### 1) Get all distributions within a package: ---------------------------------------------------------------------
 
@@ -29,7 +30,7 @@ for (char in start_chars[-1]) {
 }
 
 freq <- table(unlist(l_endings))     # get a frequency table of the endings
-freq <- freq[freq>=2]                # only take thos distributions that have at least 2 functions implemented
+freq <- freq[freq>=2]                # only take those distributions that have at least 2 functions implemented
 freq
 
 res <- list(package = package, family=names(freq))
@@ -53,7 +54,7 @@ res$family <- res$family[! (res$family %in% to_drop)]
 # check whether param name contains prob or sth like that -> range should be [0,1]
 
 families <- res$family
-fam <- "beta" # "gamma"
+fam <- "hyper" # "gamma"
 
 get_all_params <- function(fam) {
   # idea: all params need to be present in the r... method for generating random samples from the distribution
@@ -86,6 +87,22 @@ all_params <- get_all_params(fam)
 
 ## Find default values ----------------------------------------------------------------------------------------------------
 
+# small helping function for validating whether a parameetr combination is valid
+.validate_values <- function(fam, n_or_nn, params, x_test) {
+  # try to generate a random number from the distribution
+  r <- do.call(paste0("r", fam), c(n_or_nn, params))
+  # additionally check whether values are valid for density function
+  # as this sometimes takes a while we use a timeout to stop the execution after a while
+  # however we consider a timeout as a valid parameter value as no error occurs (it just takes to lang)
+  if (is.finite(r)) {
+    r_ <- eval_with_timeout(do.call(paste0("d", fam), c(x_test, params)), timeout = 1, return_value_on_timeout = "TIMEOUT")
+    if (r_ == "TIMEOUT") message(fam, " produced timeout for params ", paste(names(params), params, sep=": ", collapse=","), " on ", x_test)
+    any(!is.na(r_))
+  } else {
+    FALSE
+  }
+}
+
 # first we need to find one set of values for each of the params that actually works before we can check for valid values for each
 # of the single params individually
 get_default_values <- function(all_params, fam) {
@@ -106,6 +123,7 @@ get_default_values <- function(all_params, fam) {
   
   # parameter that describes the number of random numbers to take, usually "n", but in cases like hyper "nn"
   n_or_nn <- if (! "nn" %in% names(as.list(args(paste0("r", fam))))) list(n=1) else list(nn=1)
+  x_test <- list(x=seq(-10, 10, 1))
   
   errors <- c()
   for (i in 1:length(combs_list)) {
@@ -114,14 +132,16 @@ get_default_values <- function(all_params, fam) {
     # in most cases invalid parameter choices will just generate a warning and return NA, but sometimes also an error is thrown
     # so we need to handle both
     curr_params <- c(with_defaults, combs_list[[i]])
-    res <- suppressWarnings(tryCatch(do.call(paste0("r", fam), c(n_or_nn, curr_params)), 
-                                     error=function(e) {
-                                       errors <<- union(errors, strsplit(as.character(e), ":", fixed=TRUE)[[1]][2]);
-                                       return(NA)}
-                                     ))
+    res <- suppressWarnings(tryCatch({
+      .validate_values(fam, n_or_nn, curr_params, x_test)
+    },
+    error = function(e) {
+      errors <<- union(errors, strsplit(as.character(e), ":", fixed = TRUE)[[1]][2])
+      return(FALSE)
+    }))
     
     # break if we've found a set of valid values
-    if (!is.na(res)){
+    if (res){
       valid_params <- curr_params
       cat("Found the following set of valid default values for family", fam, ":", 
           paste(names(valid_params), valid_params , sep=": ", collapse=", "), "\n")
@@ -148,17 +168,18 @@ check_values_for_param <- function(param, all_params, fam, values) {
   
   # parameter that describes the number of random numbers to take, usually "n", but in cases like hyper "nn"
   n_or_nn <- if (! "nn" %in% names(formals(paste0("r", fam)))) list(n=1) else list(nn=1)
+  x_test <- list(x=seq(-10, 10, 1))
   
   res <- suppressWarnings(
     sapply(values, function(x) {
       # overwrite the value of "param" to each of the "values" that should be tested
       all_params[[param]] <- x;
-      # try to generate a random number from the distribution
-      tryCatch(do.call(paste0("r", fam), c(n_or_nn, all_params)), 
-               error=function(e) return(NA))
+      tryCatch(
+        .validate_values(fam, n_or_nn, all_params, x_test),
+      error=function(e) return(FALSE))
     })
   )
-  return(is.finite(res))      # TRUE if value was valid, FALSE if not
+  return(res)      # TRUE if value was valid, FALSE if not
 }
 
 #  example (for beta family)
@@ -212,6 +233,19 @@ iterate_min_max_vals("shape1", all_params, fam, cur_val=0, step_sizes = c(1, 0.5
 
 get_param_ranges <- function(all_params, fam) {
   
+  # SPECIAL CASE: uniform distribution
+  if (fam == "unif") {
+    lower <- rep(-Inf, length(all_params))
+    upper <- rep(Inf, length(all_params))
+    accepts_float <- rep(TRUE, length(all_params))
+    names(lower) <- names(upper) <- names(accepts_float) <- names(all_params)
+    
+    return(list(lower=lower,
+                upper=upper,
+                accepts_float=accepts_float, 
+                defaults=unlist(all_params)))
+  }
+  
   # create empty result vectors
   lower <- upper <- accepts_float <- rep(NA, length(all_params))
   names(lower) <- names(upper) <- names(accepts_float) <- names(all_params)
@@ -219,9 +253,9 @@ get_param_ranges <- function(all_params, fam) {
   for (param in names(all_params)){
     
     # 1) Try to find upper and lower bounds (if there are some)
-    initial_min_val <- -1e6
-    initial_max_val <- 1e6
-    step_sizes <- c(1e5, 50, 10, 1, 0.1, 0.01)
+    initial_min_val <- -1e4
+    initial_max_val <- 1e4
+    step_sizes <- c(1e3, 50, 10, 1, 0.1, 0.01)
     
     # add the default value to have at least one valid entry
     vals <- seq(initial_min_val, initial_max_val, by = step_sizes[1]) + all_params[[param]]  
@@ -231,14 +265,14 @@ get_param_ranges <- function(all_params, fam) {
     # if lowest or highest value was valid in the first check we already have an min_val or max_val
     # otherwise we iterate with the above method
     if (check_res[1]) {
-      min_val <- initial_min_val
+      min_val <- - Inf
     } else {
       min_val <- iterate_min_max_vals(param=param, all_params = all_params, fam=fam,
                                       cur_val = min(vals[check_res]), step_sizes = step_sizes, is_min = TRUE)
     }
     
     if (check_res[length(check_res)]) {
-      max_val <- initial_max_val
+      max_val <- Inf
     } else {
       max_val <- iterate_min_max_vals(param=param, all_params = all_params, fam=fam,
                                       cur_val = max(vals[check_res]), step_sizes = step_sizes, is_min = FALSE)
@@ -249,7 +283,7 @@ get_param_ranges <- function(all_params, fam) {
     
     # 2) Check if the parameter accepts floats or only integers
     n <- 10
-    testsequence <- runif(n, min_val, max_val)
+    testsequence <- runif(n, max(min_val, -1e4), min(max_val, 1e4))
     testsequence <- unique(c(testsequence, trunc(testsequence)))
     num_tests <- length(testsequence)
 
@@ -362,32 +396,35 @@ get_support <- function(fam, params) {
     result_mat <- get_result_mat(param_choices)
     
     # TODO: it would be better to catch such cases by getting the right values for accepts_float
-    if (all(rowSums(is.na(result_mat)) > 0)){
-      warning("The choices ", paste(param_choices, collapse = " "), " for parameter ", param, " of family ", fam, 
-              " all produced invalid values when applying ", paste0("d", fam), ". Now trying to use integers for all parameters.")
-      param_choices <- unique(round(param_choices))
-      args_[names(params$lower)] <- lapply(args_[names(params$lower)], round)
-      result_mat <- get_result_mat(param_choices)
-    }
+    # if (all(rowSums(is.na(result_mat)) > 0)){
+    #   warning("The choices ", paste(param_choices, collapse = " "), " for parameter ", param, " of family ", fam, 
+    #           " all produced invalid values when applying ", paste0("d", fam), ". Now trying to use integers for all parameters.")
+    #   param_choices <- unique(round(param_choices))
+    #   args_[names(params$lower)] <- lapply(args_[names(params$lower)], round)
+    #   result_mat <- get_result_mat(param_choices)
+    # }
+    # 
+    # if (all(rowSums(is.na(result_mat)) > 0)) {
+    #   message("The choices ", paste(param_choices, collapse = " "), " for parameter ", param, " of family ", fam, 
+    #           " all produced invalid values when applying ", paste0("d", fam))
+    #   return(NULL)
+    # }
     
-    if (all(rowSums(is.na(result_mat)) > 0)) {
-      message("The choices ", paste(param_choices, collapse = " "), " for parameter ", param, " of family ", fam, 
-              " all produced invalid valueswhen applying ", paste0("d", fam))
-      return(NULL)
-    }
-    
-    # for each row caluclate the minimum and maximum evaluation point with positive density
+    # for each row calculate the minimum and maximum evaluation point with positive density
     row_support_min <- apply(result_mat, 1, function(row) {if (length(which(row>0)) > 0) x[min(which(row>0))] else Inf})
     row_support_max <- apply(result_mat, 1, function(row) {if (length(which(row>0)) > 0) x[max(which(row>0))] else -Inf})
     
     # check if the lower or upper bound is always the same as the current parameter value (up to the chosen precision + some small machine error)
     # then the support depends on the current parameter and the support is at least as big as the possible ranges of this parameter
-    if(max(abs( param_choices-row_support_min )) <= precision + 1e-10) {
+    # notice that we need to ignore rows where the min or max support value was +/- Inf
+    min_criterium <- abs( param_choices-row_support_min )
+    max_criterium <- abs( param_choices-row_support_max )
+    if(max(min_criterium[is.finite(row_support_min)]) <= precision + 1e-10) {
       supp_depends_on[param] <- TRUE
       support_min <- min(params$lower[param], support_min)
       support_max <- max(max(row_support_max), support_max)
     }
-    if(max(abs( param_choices-row_support_max )) <= precision + 1e-10) {
+    if(max(max_criterium[is.finite(row_support_min)]) <= precision + 1e-10) {
       supp_depends_on[param] <- TRUE
       support_max <- max(params$upper[param], support_max)
       support_min <- min(min(row_support_min), support_min)
@@ -433,8 +470,8 @@ get_params <- function(fam){
   result$discrete <- check_integer(fam, all_params)
   
   # 6) Add support informations
-  res <- get_support(fam , result)
-  result <- c(result, res)
+  supp <- get_support(fam , result)
+  result <- c(result, supp)
   
   return(result)
 }

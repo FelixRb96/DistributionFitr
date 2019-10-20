@@ -1,4 +1,4 @@
-source("C:/Users/Tim/Documents/DistributionFitR/get_params.R")
+source("get_params.R")
 
 
 #iterate over packages and extract families and params
