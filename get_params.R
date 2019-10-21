@@ -1,8 +1,11 @@
 if (! "stringr" %in% installed.packages()) install.packages("stringr")
 library(stringr)
+library(parallel)
 source("utils.R")
 
-### 1) Get all distributions within a package: ---------------------------------------------------------------------
+# ----------------------------------------------------------------------  
+# 1) Get all distributions within a package:
+# ----------------------------------------------------------------------
 
 package <- "stats"
 possible_dists <- lsf.str(paste0("package:", package), pattern="^[rdpq]")   # all functions starting with r, d, p or q
@@ -39,8 +42,9 @@ res
 to_drop <- c("multinom")
 res$family <- res$family[! (res$family %in% to_drop)]
 
-
-### 2) Try to get the parameters (+ infos) from a distribution ----------------------------------------------------------------
+# ----------------------------------------------------------------------
+# 2) Try to get the parameters (+ infos) from a distribution
+# ----------------------------------------------------------------------
 
 ## Main ideas:
 # 1) extract all possible params from r... function as the r function should need all params
@@ -54,7 +58,11 @@ res$family <- res$family[! (res$family %in% to_drop)]
 # check whether param name contains prob or sth like that -> range should be [0,1]
 
 families <- res$family
-fam <- "hyper" # "gamma"
+fam <- "gamma"
+
+# ----------------------------------------------------------------------
+# (2.1) Given distribution family, return list of parameters
+# ----------------------------------------------------------------------
 
 get_all_params <- function(fam) {
   # idea: all params need to be present in the r... method for generating random samples from the distribution
@@ -83,11 +91,15 @@ get_all_params <- function(fam) {
 
 all_params <- get_all_params(fam)
 
+# data structure "all_params"
+# list, for given distribution family;
+# list elements name: name of parameter
+# list elements field: default value, NULL if not set
 
+# ------------------------------------------------------------------------------------------
+# (2.2) Given distribution family, parameters, some x-values: test if combination is valid
+# ------------------------------------------------------------------------------------------
 
-## Find default values ----------------------------------------------------------------------------------------------------
-
-# small helping function for validating whether a parameetr combination is valid
 .validate_values <- function(fam, n_or_nn, params, x_test) {
   # try to generate a random number from the distribution
   r <- do.call(paste0("r", fam), c(n_or_nn, params))
@@ -103,8 +115,16 @@ all_params <- get_all_params(fam)
   }
 }
 
+# return value: boolean
+# does parameter combination in input yield a valid value?
+
+# -----------------------------------------------------------------------------------------------------------
+# (2.3) Given updated list of parameters, and a specific family, find one parameter combination that works
+# -----------------------------------------------------------------------------------------------------------
+
 # first we need to find one set of values for each of the params that actually works before we can check for valid values for each
 # of the single params individually
+
 get_default_values <- function(all_params, fam) {
   missing_defaults <- sapply(all_params, function(x) typeof(x) == "symbol")   # missing values seem to have type "symbol"
   
@@ -155,15 +175,24 @@ get_default_values <- function(all_params, fam) {
   return(valid_params)
 }
 
-all_params <- get_default_values(all_params, fam)
+all_params_defaulted <- get_default_values(all_params, fam)
 
+# data structure "all_params", now updated by function "get default values"
+# list, for given distribution family;
+# list elements name: name of parameter
+# list elements field: default value, NULL if not set
 
-## Get parameter ranges -----------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------------ 
+# (2.4) Get parameter ranges
+# -----------------------------------------------------------------------------------------------------
 
-## Now we can iterate over the parameters while keeping fixed all others in order to guess some valid ranges
+# Now we can iterate over the parameters while keeping fixed all others in order to guess some valid ranges
 # Note that all_params will now always contain some default values for each of the params (as long as one has been found)
 
+# -------------------------------------------------------------------------------- 
 # function that checks if all "values" are valid for "param". "all_params" contains the values of the other params of the family "fam"
+# -------------------------------------------------------------------------------- 
+
 check_values_for_param <- function(param, all_params, fam, values) {
   
   # parameter that describes the number of random numbers to take, usually "n", but in cases like hyper "nn"
@@ -179,13 +208,17 @@ check_values_for_param <- function(param, all_params, fam, values) {
       error=function(e) return(FALSE))
     })
   )
-  return(res)      # TRUE if value was valid, FALSE if not
+  return(res)
 }
+# return value: TRUE if value was valid, FALSE if not
 
 #  example (for beta family)
 check_values_for_param("shape1", all_params, fam, values=c(-100, -10, -1, 1))
 
+# --------------------------------------------------------------------------- 
 # function that iterates over descending step sizes to find the minimal and maximal valid value of a parameter
+# --------------------------------------------------------------------------- 
+
 # Explanation:
   # in previous iteration we tested the values [-10, -5, 0, 5, 10], that is step_size was 5
   # valid values: [FALSE, FALSE, TRUE, TRUE, TRUE]
@@ -193,25 +226,28 @@ check_values_for_param("shape1", all_params, fam, values=c(-100, -10, -1, 1))
   # so we test with next step size=1 the values [-5, -4, -3, -2, -1, 0]
   # from those values we again search the minimum valid value and continue in the same way with always smaller steps
   # for the upper bound the procedure is the same, just that we search for valid values in the range higher than the current upper limit
+
 iterate_min_max_vals <- function(param, all_params, fam, cur_val, step_sizes, is_min=TRUE) {
   for (i in 1:(length(step_sizes)-1)) {
     
-    # first get the interval that should be tested (lower than cur_val when searching lower limit and higher then cur_val when searchin upper limit)
+    # first get the interval that should be tested (lower than cur_val when searching lower limit and higher than cur_val when searchin upper limit)
     if (is_min) {
-      border <- cur_val-step_sizes[i]
-      vals <- seq(border, cur_val, by=step_sizes[i+1])
+      border <- cur_val - step_sizes[i]
+      vals <- seq(border, cur_val, by = step_sizes[i+1])
     } else{
-      border <- cur_val+step_sizes[i]
-      vals <- seq(cur_val, border, by=step_sizes[i+1])
+      border <- cur_val + step_sizes[i]
+      vals <- seq(cur_val, border, by = step_sizes[i+1])
     }
     # test values and adjust the current estimate
     # cat(param, "-> Currently checking values in the interval [", min(vals), ",", max(vals), "] with step size", step_sizes[i+1], "\n")
     check_res <- check_values_for_param(param, all_params, fam, vals)
     
-    # usually at least the first (when is_min=FALSE) or the last (when is_min=TRUE) should be valid
-    # but due to overflow it can happen that none is TRUE then we break with the currrent value
+    # usually at least the first (when is_min = FALSE) or the last (when is_min = TRUE) should be valid
+    # but due to overflow it can happen that none is TRUE then we break with the current value
     if (any(check_res)) {
       cur_val <- ifelse(is_min, min(vals[check_res]), max(vals[check_res]))
+    } else {
+      return(cur_val)
     }
     
     # if the smallest (or highest) of the tested values was valid we can break
@@ -228,8 +264,9 @@ iterate_min_max_vals <- function(param, all_params, fam, cur_val, step_sizes, is
 # example (for beta family)
 iterate_min_max_vals("shape1", all_params, fam, cur_val=0, step_sizes = c(1, 0.5, 0.1, 0.05))
 
-
-### Main function for generating the info for each of the params ------------------------------------------------------
+# --------------------------------------------------------------------------- 
+# (2.5) Main function for generating the info for each of the params
+# ---------------------------------------------------------------------------
 
 get_param_ranges <- function(all_params, fam) {
   
@@ -287,7 +324,7 @@ get_param_ranges <- function(all_params, fam) {
     testsequence <- unique(c(testsequence, trunc(testsequence)))
     num_tests <- length(testsequence)
 
-    is_integer <- testsequence%%1 == 0
+    is_integer <- testsequence %% 1 == 0
     num_integer <- sum(is_integer)
 
     testoutcome <- check_values_for_param(param, all_params, fam, testsequence)
@@ -305,6 +342,10 @@ get_param_ranges <- function(all_params, fam) {
               accepts_float=accepts_float, 
               defaults=unlist(all_params)))
 }
+
+# return value: 4 component list
+# each list entry: vector with length = number of parameters
+#                  each list entry saves either lower, upper, or etc.
 
 # example:
 get_param_ranges(all_params, fam)
@@ -326,11 +367,12 @@ check_integer <- function(fam, all_params) {
   n_or_nn <- if (! "nn" %in% names(formals(paste0("r", fam)))) list(n=n_test) else list(nn=n_test)
   args_ <- c(all_params, n_or_nn)
   res <- do.call(paste0("r", fam), args = args_)
-  return(all(abs(res%%1) < sqrt(.Machine$double.eps)))
+  return(all(abs(res %% 1) < sqrt(.Machine$double.eps)))
 }
 
-
-### Determining the support of a distribution ---------------------------------------------------------------------------
+# -------------------------------------------------------------------------------- 
+# (3) Determining the support of a distribution
+# --------------------------------------------------------------------------------
 
 # Function for determining the support of a given distribution family and whether the limits of the support are determined by one
 # of the distributions parameters
@@ -343,6 +385,7 @@ get_support <- function(fam, params) {
   upp_capped <- pmin(params$upper, 10)
   
   # we additionally ignore the 10% highest and lowest parameter values (e.g. for "binom" we only consider prop in [0.1, 0.9])
+  # remark: what happens with values x: lox_capped < x < low_capped + 0.1 * (upp_capped - low_capped), i.e. 0.05?
   low <- ifelse(params$lower == low_capped, low_capped + 0.1 * (upp_capped-low_capped), low_capped)
   upp <- ifelse(params$upper == upp_capped, upp_capped - 0.1 * (upp_capped-low_capped), upp_capped)
   
@@ -445,8 +488,10 @@ get_support <- function(fam, params) {
   return(list(support_min = support_min, support_max = support_max, supp_depends_on=supp_depends_on))
 }
 
+# -------------------------------------------------------------------------------- 
+# (5) Final function
+# --------------------------------------------------------------------------------
 
-### Final function -------------------------------------------------------------------------------------------------------
 # Input:
   # family: list-> package: package_name, family: name of distribution family inside package
 get_params <- function(fam){
@@ -491,3 +536,44 @@ for (fam in families) {
 #    Current errors have to be catched in get_support but it would be better if they didn't occur at all
 
 ### Possible solutions -> setting correct values manually
+
+
+
+# -------------------------------------------------------------------------------- 
+# (6) Testing function
+# -------------------------------------------------------------------------------- 
+
+# refer to line 280 to see what result looks like
+# NONE OF THE FOLLOWING HAS BEEN TESTED
+# all due to the premeditated and most malicious exclusion of one of our beloved team members
+# by the vicious and cold-hearted BENEDIKT GEIER
+
+source("optimParam.R")
+gandalf <- function(n) {
+	for(fam in families) {
+		result <- get_params(fam)
+		npar <- length(result$lower)
+		pars <- numeric(npar)
+		names(pars) <- names(result$lower)
+		for(i in 1:npar) {
+			again <- FALSE
+			par_candidate <- numeric(1)
+			while(again) {
+				par_candidate <- runif(result$lower[i], result$upper[i])
+				if(result$accepts_floats == FALSE && par_candidate %% 1 != 0) again <- TRUE
+			}
+			pars[i] <- par_candidate
+		}
+		args <- list(n = n, pars)
+		testing_data <- do.call(paste0("d", fam), args)
+
+		# we do it this way for now since we want to evaluate optim_param
+		lower <- result$lower
+		upper <- result$upper
+		log <- result$log
+		optimum <- optimParam(data = testing_data, family = fam, lower = lower, upper = upper, start_parameters = result$default, log = log)
+		error_percent <- (optimum$par - pars)/pars
+		cat("(Log-)Likelihood for optimal parameters", names(pars), ": ", optimum$value)
+
+	}
+}
