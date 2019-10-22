@@ -556,16 +556,22 @@ gandalf <- function(n) {
 		pars <- numeric(npar)
 		names(pars) <- names(result$lower)
 		for(i in 1:npar) {
-			again <- FALSE
+			again <- TRUE
 			par_candidate <- numeric(1)
 			while(again) {
 				par_candidate <- runif(result$lower[i], result$upper[i])
-				if(result$accepts_floats == FALSE && par_candidate %% 1 != 0) again <- TRUE
+				if(result$accepts_floats == FALSE && result$upper[i] - result$lower[i] < 1) error("Impossible Sir!")
+				if(result$accepts_floats == FALSE && par_candidate %% 1 != 0) {
+					par_candidate <- round(par_candidate)
+					if(par_candidate >= result$lower[i] && par_candidate <= result$upper[i]) again <- FALSE
+				} else {
+					again <- FALSE
+				}
 			}
 			pars[i] <- par_candidate
 		}
 		args <- list(n = n, pars)
-		testing_data <- do.call(paste0("d", fam), args)
+		testing_data <- do.call(paste0("r", fam), args)
 
 		# we do it this way for now since we want to evaluate optim_param
 		lower <- result$lower
