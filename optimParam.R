@@ -101,6 +101,7 @@ optimParam(data =data, family = family, lower = lower, upper = upper, start_para
 
 # Example 3 for optimParam
 # TODO: Dos not work, since optimParam doesnt work for integers (discrete parameterspace)
+if (FALSE) {
 data <- rbinom(n=100, size=10, prob=0.5)
 family = 'binom'
 lower = c('size' = 0, 'prob' = 0)
@@ -108,3 +109,4 @@ upper = c('size' = Inf, 'prob' = 1)
 start_parameters = c('size' = 1, 'prob' = 0.2)
 fixed <- list()
 optimParam(data =data, family = family, lower = lower, upper = upper, start_parameters = start_parameters, log = T)
+}

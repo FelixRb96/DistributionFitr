@@ -58,7 +58,7 @@ res$family <- res$family[! (res$family %in% to_drop)]
 # check whether param name contains prob or sth like that -> range should be [0,1]
 
 families <- res$family
-fam <- "gamma"
+fam <- "beta"   # gamma
 
 # ----------------------------------------------------------------------
 # (2.1) Given distribution family, return list of parameters
@@ -348,7 +348,7 @@ get_param_ranges <- function(all_params, fam) {
 #                  each list entry saves either lower, upper, or etc.
 
 # example:
-get_param_ranges(all_params, fam)
+get_param_ranges(all_params_defaulted, fam)
 
 
 ### Function that checks if log is working ---------------------------------------------------------------------------
@@ -521,10 +521,13 @@ get_params <- function(fam){
   return(result)
 }
 
-for (fam in families) {
-  cat("\nCurrent Family:", fam, "\n")
-  result <- get_params(fam)
-  print(result)
+# do not execute when sourced from a different file, like if __name__ == "__main__" in Python
+if (sys.nframe()==0) {
+  for (fam in families) {
+    cat("\nCurrent Family:", fam, "\n")
+    result <- get_params(fam)
+    print(result)
+  }
 }
 
 
@@ -532,54 +535,7 @@ for (fam in families) {
 # 1) Distributions like nbinom where 2 params ("prob" and "mu") describe the same but only one may be set and 
 #    none of them has a default value derived from the other
 # 2) Distributions like "unif" where the parameters interact -> ranges can be represented as [lower, upper] but rather as min <= max
+#  -> SOLVED
 # 3) Distribution hyper: here rhyper also works with floats for m,n,k but hyper not, maybe also check d function in check_values_for_param
 #    Current errors have to be catched in get_support but it would be better if they didn't occur at all
-
-### Possible solutions -> setting correct values manually
-
-
-
-# -------------------------------------------------------------------------------- 
-# (6) Testing function
-# -------------------------------------------------------------------------------- 
-
-# refer to line 280 to see what result looks like
-# NONE OF THE FOLLOWING HAS BEEN TESTED
-# all due to the premeditated and most malicious exclusion of one of our beloved team members
-# by the vicious and cold-hearted BENEDIKT GEIER
-
-source("optimParam.R")
-gandalf <- function(n) {
-	for(fam in families) {
-		result <- get_params(fam)
-		npar <- length(result$lower)
-		pars <- numeric(npar)
-		names(pars) <- names(result$lower)
-		for(i in 1:npar) {
-			again <- TRUE
-			par_candidate <- numeric(1)
-			while(again) {
-				par_candidate <- runif(result$lower[i], result$upper[i])
-				if(result$accepts_floats == FALSE && result$upper[i] - result$lower[i] < 1) error("Impossible Sir!")
-				if(result$accepts_floats == FALSE && par_candidate %% 1 != 0) {
-					par_candidate <- round(par_candidate)
-					if(par_candidate >= result$lower[i] && par_candidate <= result$upper[i]) again <- FALSE
-				} else {
-					again <- FALSE
-				}
-			}
-			pars[i] <- par_candidate
-		}
-		args <- list(n = n, pars)
-		testing_data <- do.call(paste0("r", fam), args)
-
-		# we do it this way for now since we want to evaluate optim_param
-		lower <- result$lower
-		upper <- result$upper
-		log <- result$log
-		optimum <- optimParam(data = testing_data, family = fam, lower = lower, upper = upper, start_parameters = result$default, log = log)
-		error_percent <- (optimum$par - pars)/pars
-		cat("(Log-)Likelihood for optimal parameters", names(pars), ": ", optimum$value)
-
-	}
-}
+#  -> SOLVED
