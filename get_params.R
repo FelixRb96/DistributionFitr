@@ -290,9 +290,9 @@ get_param_ranges <- function(all_params, fam) {
   for (param in names(all_params)){
     
     # 1) Try to find upper and lower bounds (if there are some)
-    initial_min_val <- -1e4
-    initial_max_val <- 1e4
-    step_sizes <- c(1e3, 50, 10, 1, 0.1, 0.01)
+    initial_min_val <- -1e3
+    initial_max_val <- 1e3
+    step_sizes <- c(1e2, 50, 10, 1, 0.1, 0.01)
     
     # add the default value to have at least one valid entry
     vals <- seq(initial_min_val, initial_max_val, by = step_sizes[1]) + all_params[[param]]  
@@ -320,7 +320,7 @@ get_param_ranges <- function(all_params, fam) {
     
     # 2) Check if the parameter accepts floats or only integers
     n <- 10
-    testsequence <- runif(n, max(min_val, -1e4), min(max_val, 1e4))
+    testsequence <- runif(n, max(min_val, -1e3), min(max_val, 1e3))
     testsequence <- unique(c(testsequence, trunc(testsequence)))
     num_tests <- length(testsequence)
 

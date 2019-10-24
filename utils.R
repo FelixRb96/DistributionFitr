@@ -4,6 +4,11 @@ eval_with_timeout <- function(expr, envir = parent.frame(), timeout, return_valu
   # substitute expression so it is not executed as soon it is used
   expr <- substitute(expr)
   
+  # for Borui
+  if (.Platform$OS.type != "unix") {
+    return(eval(expr, envir = envir))
+  }
+  
   # execute expr in separate fork
   myfork <- parallel::mcparallel({
     eval(expr, envir = envir)
