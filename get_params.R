@@ -134,7 +134,8 @@ get_default_values <- function(all_params, fam) {
   non_defaults <- all_params[missing_defaults]
   
   # both floats and integers and both positive and negative as well as 0 so that at least one of those hopefully is valid
-  default_guesses <- c(1, 0.5, 0, -0.5, -1)
+  # start with 0.5 to avoid extreme values in case of probabilities
+  default_guesses <- c(0.5, 1, 0, -0.5, -1)
   
   # create a dataframe with all combinations of default guesses
   combs <- expand.grid(lapply(non_defaults, function(x) default_guesses))
@@ -163,8 +164,8 @@ get_default_values <- function(all_params, fam) {
     # break if we've found a set of valid values
     if (res){
       valid_params <- curr_params
-      cat("Found the following set of valid default values for family", fam, ":", 
-          paste(names(valid_params), valid_params , sep=": ", collapse=", "), "\n")
+      #cat("Found the following set of valid default values for family", fam, ":", 
+      #    paste(names(valid_params), valid_params , sep=": ", collapse=", "), "\n")
       break
     } 
   }
