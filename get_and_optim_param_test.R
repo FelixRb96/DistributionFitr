@@ -22,19 +22,19 @@ test_families <- function(n, families) {
     names(pars) <- names(result$lower)
     
     # bound possible values to reasonable range
-    result$upper <- pmin(result$upper, 100)
-    result$lower <- pmax(result$lower, -100)
+    upper <- pmin(result$upper, 100)
+    lower <- pmax(result$lower, -100)
     
     # simulate some "true" parameter values
     cat("Sampling some 'true' parameter values and simulating sample data\n")
     for(param in names(pars)) {
       
       if (result$accepts_float[param]) {
-        pars[param] <- runif(1, result$lower[param], result$upper[param])
+        pars[param] <- runif(1, lower[param], upper[param])
         
         # check if range contains an integer and if yes sample intergers from this range
       } else if (floor(result$upper[param]) - ceiling(result$lower[param]) >= 0) {
-        pars[param] <- sample(ceiling(result$lower[param]) : floor(result$upper[param]), 1)
+        pars[param] <- sample(ceiling(lower[param]) : floor(upper[param]), 1)
       } else {
         stop("Param", param, "does not accept floats and its range does not include any integers")
       }
