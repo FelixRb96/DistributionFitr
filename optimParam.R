@@ -42,7 +42,10 @@ loglik <- function(param_values, family, data, fixed=list(), log=T) {
   return(ll)
 }
 
-optimParam <- function(data, family, lower, upper, start_parameters, method = 'MLE', fixed=list(), log=TRUE, return_optim_progress=FALSE) {
+# debug_error: show optimization progress when an error occured
+# show_optim_progress: always show optimization progress
+optimParam <- function(data, family, lower, upper, start_parameters, method = 'MLE', fixed=list(), log=TRUE,
+                       debug_error=TRUE, show_optim_progress=FALSE) {
   # Input parameter validation
   if(method!='MLE')
     stop('Not implemented.')
@@ -56,10 +59,16 @@ optimParam <- function(data, family, lower, upper, start_parameters, method = 'M
     stop('Parameter names of lower and upper bounds and start parameters must coincide. ')
   }
   
-  # create environemnt where to save the optimization progress
-  if (return_optim_progress) {
-    .optim_progress <- data.frame()
-  }
+  # create dataframe where to save the optimization progress
+  .optim_progress <- data.frame()
+  optim_successful <- FALSE
+  
+  on.exit({
+    if (exists(".optim_progress") && (show_optim_progress || (debug_error && !optim_successful))) {
+      cat("Optimization progress:\n")
+      print(.optim_progress)
+    }
+  })
   
   # Check whether there are free parameters to optimize
   if(length(lower)>0) {
@@ -75,6 +84,9 @@ optimParam <- function(data, family, lower, upper, start_parameters, method = 'M
     # therefore 2 steps with right selection need to be implemented
     optim_result <- optim(optim_result$par, loglik, family = family, data = data, fixed=fixed, lower=lower, upper=upper,
                           log=log, control = list(fnscale=-1, trace=0), method='L-BFGS-B')
+    
+    optim_successful <- TRUE
+    
     if(optim_result$convergence!=0)
       warning('Did not converge!')
   } else {
@@ -90,24 +102,16 @@ optimParam <- function(data, family, lower, upper, start_parameters, method = 'M
   bic = log(n) * k - 2 *  optim_result$value
   aicc = aic + (2*k^2+2*k)/(n-k-1)
   
-  result <- list(
+  return(list(
     par = optim_result$par,
     value = optim_result$value,
     convergence = optim_result$convergence,
     AIC = aic, 
     BIC = bic,
     AICc = aicc
+    )
   )
-  
-  # optionally add optimisation progress to returned result
-  if (!return_optim_progress) {
-    return(result)
-  } else {
-    colnames(.optim_progress) <- c(names(lower), names(fixed), "loglik")
-    return(c(result, list(optim_progress=.optim_progress)))
-  }
 }
-
 
 
 # Example 1 for optimParam
@@ -117,7 +121,7 @@ lower = c('mean' = - Inf)
 upper = c('mean' = Inf)
 fixed <- c('sd'=2)
 start_parameters <- c('mean' = 0)
-optimParam(data = data, family=family, lower=lower, upper=upper, start_parameters = start_parameters, fixed=fixed, log = T, return_optim_progress = TRUE)
+optimParam(data = data, family=family, lower=lower, upper=upper, start_parameters = start_parameters, fixed=fixed, log = T, show_optim_progress = TRUE)
 
 # Example 2 for optimParam
 data <- rbeta(n=100, shape=10, shape2=2)
@@ -126,7 +130,7 @@ lower = c('shape1' = 0, 'shape2' = 0)
 upper = c('shape1' = Inf, 'shape2' = Inf)
 start_parameters = c('shape1' = 1, 'shape2' = 1)
 fixed <- list()
-optimParam(data =data, family = family, lower = lower, upper = upper, start_parameters = start_parameters, log = T, return_optim_progress = TRUE)
+optimParam(data =data, family = family, lower = lower, upper = upper, start_parameters = start_parameters, log = T, show_optim_progress = TRUE)
 
 
 # Example 3 for optimParam

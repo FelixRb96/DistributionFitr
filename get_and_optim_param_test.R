@@ -39,19 +39,28 @@ test_families <- function(n, families) {
         stop("Param", param, "does not accept floats and its range does not include any integers")
       }
     }
+    
+    # make sure that sampled values make sense for uniform distribution
+    if (fam == "unif") {
+      h <- pars
+      pars["min"] <- min(h)
+      pars["max"] <- max(h)
+    }
     cat("Sampled params:", paste(names(pars), pars, sep=": ", collapse=", "), "\n")
     
-    n_or_nn <- if (! "nn" %in% names(as.list(args(paste0("r", fam))))) list(n=n) else list(nn=n)
+    n_or_nn <- if (! "nn" %in% names(formals(paste0("r", fam)))) list(n=n) else list(nn=n)
     args <- c(n_or_nn, pars)
     testing_data <- do.call(paste0("r", fam), args)
     
     # we do it this way for now since we want to evaluate optim_param
     optimum <- tryCatch(optimParam(data = testing_data, family = fam, lower = result$lower, upper = result$upper, 
-                                   start_parameters = result$default, log = result$log),
+                                   start_parameters = result$default, log = result$log, debug_error = TRUE),
                         error = function(e) {
                           message(e);
                           NULL}
     )
+    
+    optimum$optim_progress
     
     if (! is.null(optimum)) {
       cat("Optimized params:", paste(names(pars), optimum$par, sep=": ", collapse=", "), "\n")
