@@ -31,6 +31,7 @@ loglik <- function(param_values, family, data, fixed=list(), log=T) {
       break
     }
   }
+  
   # if we've found one, then we can update the progress
   if (return_optim_progress) {
     # cat("Found optimization progress in parent frame", i, "\n")
@@ -144,3 +145,5 @@ start_parameters = c('size' = 1, 'prob' = 0.2)
 fixed <- list()
 optimParam(data =data, family = family, lower = lower, upper = upper, start_parameters = start_parameters, log = T)
 }
+
+# TODO: set fnscale and parscale appropriately

@@ -11,7 +11,7 @@ test_families <- function(n, families) {
   for(fam in families) {
     cat("\n\nCurrent Family:", fam, "\n")
     
-    cat("Getting infos about the distribution\n")
+    # cat("Getting infos about the distribution\n")
     result <- get_params(fam)
     
     # if we couldn't find infos on the distribution
@@ -26,7 +26,7 @@ test_families <- function(n, families) {
     lower <- pmax(result$lower, -100)
     
     # simulate some "true" parameter values
-    cat("Sampling some 'true' parameter values and simulating sample data\n")
+    # cat("Sampling some 'true' parameter values and simulating sample data\n")
     for(param in names(pars)) {
       
       if (result$accepts_float[param]) {
@@ -60,8 +60,6 @@ test_families <- function(n, families) {
                           NULL}
     )
     
-    optimum$optim_progress
-    
     if (! is.null(optimum)) {
       cat("Optimized params:", paste(names(pars), optimum$par, sep=": ", collapse=", "), "\n")
       error_percent <- 100 * (pars - optimum$par) / pars
@@ -77,3 +75,6 @@ test_families(1000, families)
 # TODOs:
 # optimisation with L-BFGS-B still sometimes a bit unstable, to often "L-BFGS-B benötigt endliche Werte von 'fn'", that is loglik seems to 
 # return Inf to often
+
+# maybe try different optimisation procedures
+# for each procedure compare optimisation results across all families (sth like mean percentage deviation)
