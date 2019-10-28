@@ -392,7 +392,7 @@ get_support <- function(fam, params) {
   
   # initialize named vector that stores whether each parameter determines the bounds of a distribution
   supp_min_depends_on <- supp_max_depends_on<- rep(FALSE, length(params$lower))
-  names(supp_depends_on) <- names(params$lower)
+  names(supp_max_depends_on) <- names(supp_min_depends_on) <- names(params$lower)
   
   # define the base choices for all parameters that are chosen when only varying one parameter and keeping the others constant
   # base_choices <- (low + upp)/2
@@ -460,7 +460,7 @@ get_support <- function(fam, params) {
     }
     
     # else we just adapt the current maximum and minimum support values with the minimum or maximum row support
-    if (!supp_depends_on[param]) {
+    if (!supp_min_depends_on[param] && ! supp_max_depends_on[param]) {
       support_min <- min(min(row_support_min), support_min)
       support_max <- max(max(row_support_max), support_max)
     }
@@ -518,7 +518,7 @@ if (sys.nframe()==0) {
 }
 
 
-### Open problems:
+### Open problems & TODO:
 # 1) Distributions like nbinom where 2 params ("prob" and "mu") describe the same but only one may be set and 
 #    none of them has a default value derived from the other
 # 2) Distributions like "unif" where the parameters interact -> ranges can be represented as [lower, upper] but rather as min <= max
@@ -526,5 +526,8 @@ if (sys.nframe()==0) {
 # 3) Distribution hyper: here rhyper also works with floats for m,n,k but hyper not, maybe also check d function in check_values_for_param
 #    Current errors have to be catched in get_support but it would be better if they didn't occur at all
 #  -> SOLVED
-# 4) TODO: if support_min/support_max depends on parameter (as given by the respective output), introduce NA.
-#          Also: specify on which parameter(s) a certain support bound depends (or the other way 'round? What makes more sense?)
+
+
+# 4) when scaling needs to consider whether support_max or support_min depends on certain parameters, then it needs to adapt the upper and
+#    lower bounds of those parameters using the data, i.e. for unif set upper["min"] <- min(data) before giving to optim_param
+# 5) extend to and test with other packages

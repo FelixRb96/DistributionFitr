@@ -53,10 +53,9 @@ optimParam <- function(data, family, lower, upper, start_parameters, method = 'M
   if(length(lower)!=length(upper) || length(start_parameters)!= length(upper))
     stop('Length of lower and upper bounds vector do not coincide.')
   if(length(lower)==0) {
-    warning('No bounds delivered.')
-    return(NA)
+    stop('No parameters to optimize as no bounds delivered.')
   }
-  if(any(names(lower)!=names(upper)) || any(names(lower)!=names(start_parameters)) ) {
+  if(any(names(lower) != names(upper)) || any(names(lower) != names(start_parameters)) ) {
     stop('Parameter names of lower and upper bounds and start parameters must coincide. ')
   }
   
@@ -71,31 +70,24 @@ optimParam <- function(data, family, lower, upper, start_parameters, method = 'M
     }
   })
   
-  # Check whether there are free parameters to optimize
-  if(length(lower)>0) {
-    # Optimize first time
-    # TODO:
-    # Optimize works so far just for continuous parameters, not for discrete (integers)
-    optim_result <- optim(start_parameters, loglik, family = family, data = data, fixed=fixed, lower=lower, upper=upper,
-                          log=log, control = list(fnscale=-1, trace=0), method='L-BFGS-B')
-    if(optim_result$convergence!=0)
-      warning('Did not converge!')
-    # TODO: 
-    # Problems with convergence can occur, if parscale and fscale not well selected
-    # therefore 2 steps with right selection need to be implemented
-    optim_result <- optim(optim_result$par, loglik, family = family, data = data, fixed=fixed, lower=lower, upper=upper,
-                          log=log, control = list(fnscale=-1, trace=0), method='L-BFGS-B')
-    
-    optim_successful <- TRUE
-    
-    if(optim_result$convergence!=0)
-      warning('Did not converge!')
-  } else {
-    
-    # TODO: What's the purpose of that? ////////////////////////////////////////////////////////////////////
-    loglik(family = family, data = data, fixed=fixed, log=log)
-    
-  }
+  
+  # Optimize first time
+  # TODO: in second optimization set fnscale and parscale accordingly (check if it is set correctly below)
+  optim_result <- optim(start_parameters, loglik, family = family, data = data, fixed=fixed, lower=lower, upper=upper,
+                        log=log, control = list(fnscale=-1, trace=0), method='L-BFGS-B')
+  if(optim_result$convergence!=0)
+    warning('Did not converge!')
+  # TODO: 
+  # Problems with convergence can occur, if parscale and fscale not well selected
+  # therefore 2 steps with right selection need to be implemented
+  optim_result <- optim(optim_result$par, loglik, family = family, data = data, fixed=fixed, lower=lower, upper=upper,
+                        log=log, control = list(fnscale=-1 / abs(optim_result$value), trace=0, parscale = 1/optim_result$par), method='L-BFGS-B')
+  
+  optim_successful <- TRUE
+  
+  if(optim_result$convergence!=0)
+    warning('Did not converge!')
+
   # Information criteria calculation
   k = length(upper)
   n = length(data)
@@ -147,3 +139,5 @@ optimParam(data =data, family = family, lower = lower, upper = upper, start_para
 }
 
 # TODO: set fnscale and parscale appropriately
+
+# TODO: on error try to return best value from optimization progress up to now

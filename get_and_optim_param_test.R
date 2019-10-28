@@ -78,3 +78,5 @@ test_families(1000, families)
 
 # maybe try different optimisation procedures
 # for each procedure compare optimisation results across all families (sth like mean percentage deviation)
+
+# maybe try to find the best optimisation procedure for each family independently already in get_params with sampled data
