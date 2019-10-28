@@ -540,3 +540,5 @@ if (sys.nframe()==0) {
 # 3) Distribution hyper: here rhyper also works with floats for m,n,k but hyper not, maybe also check d function in check_values_for_param
 #    Current errors have to be catched in get_support but it would be better if they didn't occur at all
 #  -> SOLVED
+# 4) TODO: if support_min/support_max depends on parameter (as given by the respective output), introduce NA.
+#          Also: specify on which parameter(s) a certain support bound depends (or the other way 'round? What makes more sense?)
