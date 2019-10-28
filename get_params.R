@@ -391,7 +391,7 @@ get_support <- function(fam, params) {
   upp <- ifelse(params$upper == upp_capped, upp_capped - 0.1 * (upp_capped-low_capped), upp_capped)
   
   # initialize named vector that stores whether each parameter determines the bounds of a distribution
-  supp_depends_on <- rep(FALSE, length(params$lower))
+  supp_min_depends_on <- supp_max_depends_on<- rep(FALSE, length(params$lower))
   names(supp_depends_on) <- names(params$lower)
   
   # define the base choices for all parameters that are chosen when only varying one parameter and keeping the others constant
@@ -439,21 +439,6 @@ get_support <- function(fam, params) {
     
     result_mat <- get_result_mat(param_choices)
     
-    # TODO: it would be better to catch such cases by getting the right values for accepts_float
-    # if (all(rowSums(is.na(result_mat)) > 0)){
-    #   warning("The choices ", paste(param_choices, collapse = " "), " for parameter ", param, " of family ", fam, 
-    #           " all produced invalid values when applying ", paste0("d", fam), ". Now trying to use integers for all parameters.")
-    #   param_choices <- unique(round(param_choices))
-    #   args_[names(params$lower)] <- lapply(args_[names(params$lower)], round)
-    #   result_mat <- get_result_mat(param_choices)
-    # }
-    # 
-    # if (all(rowSums(is.na(result_mat)) > 0)) {
-    #   message("The choices ", paste(param_choices, collapse = " "), " for parameter ", param, " of family ", fam, 
-    #           " all produced invalid values when applying ", paste0("d", fam))
-    #   return(NULL)
-    # }
-    
     # for each row calculate the minimum and maximum evaluation point with positive density
     row_support_min <- apply(result_mat, 1, function(row) {if (length(which(row>0)) > 0) x[min(which(row>0))] else Inf})
     row_support_max <- apply(result_mat, 1, function(row) {if (length(which(row>0)) > 0) x[max(which(row>0))] else -Inf})
@@ -464,12 +449,12 @@ get_support <- function(fam, params) {
     min_criterium <- abs( param_choices-row_support_min )
     max_criterium <- abs( param_choices-row_support_max )
     if(max(min_criterium[is.finite(row_support_min)]) <= precision + 1e-10) {
-      supp_depends_on[param] <- TRUE
+      supp_min_depends_on[param] <- TRUE
       support_min <- min(params$lower[param], support_min)
       support_max <- max(max(row_support_max), support_max)
     }
     if(max(max_criterium[is.finite(row_support_min)]) <= precision + 1e-10) {
-      supp_depends_on[param] <- TRUE
+      supp_max_depends_on[param] <- TRUE
       support_max <- max(params$upper[param], support_max)
       support_min <- min(min(row_support_min), support_min)
     }
@@ -486,7 +471,8 @@ get_support <- function(fam, params) {
   if (support_min <= -50) support_min <- -Inf
   if (support_max >= 50) support_max <- Inf
   
-  return(list(support_min = support_min, support_max = support_max, supp_depends_on=supp_depends_on))
+  return(list(support_min = support_min, support_max = support_max, 
+              supp_max_depends_on=supp_max_depends_on, supp_min_depends_on=supp_min_depends_on))
 }
 
 # -------------------------------------------------------------------------------- 
