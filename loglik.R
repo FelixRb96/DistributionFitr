@@ -1,5 +1,5 @@
 
-# rm(list=ls())
+rm(list=ls())
 
 # args: benamte Liste
 # fixed: benamte Liste
@@ -35,14 +35,19 @@ loglik <- function(param_values, family, data, fixed, log) {
 }
 
 
+# Testbeispiele 
 
 likelihood <- loglik(param_values = list(), family = "unif", data = 1:10, fixed=list(min=1, max=10), log=T)
+likelihood(params = list())
 
 likelihood <- loglik(param_values = list(), family = "unif", data = 1:10, fixed=list(min=1, max=10), log=F)
+likelihood(params = list())
 
 likelihood <- loglik(param_values = list(), family = "exp", data = 1:10, fixed=list(), log=T)
+likelihood(params = list(2))
 
 likelihood <- loglik(param_values = list(), family = "norm", data = 1:10, fixed=list(), log=T)
+likelihood(params = list(0,1))
 
 
 
