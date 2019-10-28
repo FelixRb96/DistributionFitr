@@ -44,3 +44,6 @@ loglik <- function(param_values, family, data, fixed=list(), log=T) {
   
   return(ll)
 }
+
+
+HAllo
