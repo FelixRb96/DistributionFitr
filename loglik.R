@@ -34,6 +34,8 @@ loglik <- function(param_values, family, data, fixed, log) {
   return(likelihood)
 }
 
+# To Do:
+
 
 # Testbeispiele 
 
