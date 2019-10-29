@@ -36,11 +36,14 @@ freq <- table(unlist(l_endings))     # get a frequency table of the endings
 freq <- freq[freq>=2]                # only take those distributions that have at least 2 functions implemented
 freq
 
-res <- list(package = package, family=names(freq))
-res
-
+# drop some not fitting distributions
 to_drop <- c("multinom")
-res$family <- res$family[! (res$family %in% to_drop)]
+familes <- names(freq)[! (names(freq) %in% to_drop)]
+
+# list of lists, where each sublist has the form list(package=some_pkg, family=some_family)
+families <- lapply(familes, function(x) list(package="stats", family=x))
+families
+
 
 # ----------------------------------------------------------------------
 # 2) Try to get the parameters (+ infos) from a distribution
@@ -57,8 +60,8 @@ res$family <- res$family[! (res$family %in% to_drop)]
 ## optional TODO:
 # check whether param name contains prob or sth like that -> range should be [0,1]
 
-families <- res$family
-fam <- "beta"   # gamma
+
+fam <- list(package="stats", family="beta")   # gamma
 
 # ----------------------------------------------------------------------
 # (2.1) Given distribution family, return list of parameters
@@ -66,7 +69,9 @@ fam <- "beta"   # gamma
 
 get_all_params <- function(fam) {
   # idea: all params need to be present in the r... method for generating random samples from the distribution
-  all_params <- formals(paste0("r", fam))
+  
+  fun <- get_fun_from_package(fam = fam$family, package = fam$package, type="r")
+  all_params <- formals(fun)
   
   # if "nn" is contained then "n" is probably a real param , c.f. rhyper
   to_remove <- if("nn" %in% names(all_params)) c("", "nn") else c("", "n")
@@ -102,12 +107,15 @@ all_params <- get_all_params(fam)
 
 .validate_values <- function(fam, n_or_nn, params, x_test) {
   # try to generate a random number from the distribution
-  r <- do.call(paste0("r", fam), c(n_or_nn, params))
+  rfun <- get_fun_from_package(fam = fam$family, package = fam$package, type="r")
+  dfun <- get_fun_from_package(fam = fam$family, package = fam$package, type="d")
+  
+  r <- do.call(rfun, c(n_or_nn, params))
   # additionally check whether values are valid for density function
   # as this sometimes takes a while we use a timeout to stop the execution after a while
   # however we consider a timeout as a valid parameter value as no error occurs (it just takes to lang)
   if (is.finite(r)) {
-    r_ <- eval_with_timeout(do.call(paste0("d", fam), c(x_test, params)), timeout = 1, return_value_on_timeout = "TIMEOUT")
+    r_ <- eval_with_timeout(do.call(dfun, c(x_test, params)), timeout = 1, return_value_on_timeout = "TIMEOUT")
     if (r_ == "TIMEOUT") message(fam, " produced timeout for params ", paste(names(params), params, sep=": ", collapse=","), " on ", x_test)
     any(!is.na(r_))
   } else {
@@ -143,7 +151,8 @@ get_default_values <- function(all_params, fam) {
   valid_params <- NULL
   
   # parameter that describes the number of random numbers to take, usually "n", but in cases like hyper "nn"
-  n_or_nn <- if (! "nn" %in% names(as.list(args(paste0("r", fam))))) list(n=1) else list(nn=1)
+  rfun <- get_fun_from_package(fam = fam$family, package = fam$package, type="r")
+  n_or_nn <- if (! "nn" %in% names(formals(rfun))) list(n=1) else list(nn=1)
   x_test <- list(x=seq(-10, 10, 1))
   
   errors <- c()
@@ -164,7 +173,7 @@ get_default_values <- function(all_params, fam) {
     # break if we've found a set of valid values
     if (res){
       valid_params <- curr_params
-      #cat("Found the following set of valid default values for family", fam, ":", 
+      #cat("Found the following set of valid default values for family", fam$family, ":", 
       #    paste(names(valid_params), valid_params , sep=": ", collapse=", "), "\n")
       break
     } 
@@ -175,13 +184,10 @@ get_default_values <- function(all_params, fam) {
   }
   return(valid_params)
 }
+# return value: list with names corresponding to the parameter names and values to their default values
 
 all_params_defaulted <- get_default_values(all_params, fam)
 
-# data structure "all_params", now updated by function "get default values"
-# list, for given distribution family;
-# list elements name: name of parameter
-# list elements field: default value, NULL if not set
 
 #------------------------------------------------------------------------------------------------------ 
 # (2.4) Get parameter ranges
@@ -197,7 +203,8 @@ all_params_defaulted <- get_default_values(all_params, fam)
 check_values_for_param <- function(param, all_params, fam, values) {
   
   # parameter that describes the number of random numbers to take, usually "n", but in cases like hyper "nn"
-  n_or_nn <- if (! "nn" %in% names(formals(paste0("r", fam)))) list(n=1) else list(nn=1)
+  rfun <- get_fun_from_package(fam = fam$family, package = fam$package, type="r")
+  n_or_nn <- if (! "nn" %in% names(formals(rfun))) list(n=1) else list(nn=1)
   x_test <- list(x=seq(-10, 10, 1))
   
   res <- suppressWarnings(
@@ -214,7 +221,7 @@ check_values_for_param <- function(param, all_params, fam, values) {
 # return value: TRUE if value was valid, FALSE if not
 
 #  example (for beta family)
-check_values_for_param("shape1", all_params, fam, values=c(-100, -10, -1, 1))
+check_values_for_param("shape1", all_params_defaulted, fam, values=c(-100, -10, -1, 1))
 
 # --------------------------------------------------------------------------- 
 # function that iterates over descending step sizes to find the minimal and maximal valid value of a parameter
@@ -272,7 +279,7 @@ iterate_min_max_vals("shape1", all_params, fam, cur_val=0, step_sizes = c(1, 0.5
 get_param_ranges <- function(all_params, fam) {
   
   # SPECIAL CASE: uniform distribution
-  if (fam == "unif") {
+  if (fam$family == "unif") {
     lower <- rep(-Inf, length(all_params))
     upper <- rep(Inf, length(all_params))
     accepts_float <- rep(TRUE, length(all_params))
@@ -354,7 +361,8 @@ get_param_ranges(all_params_defaulted, fam)
 
 ### Function that checks if log is working ---------------------------------------------------------------------------
 check_log <- function(fam) {
-  if('log' %in% names(formals(paste0('d', fam)))) {
+  dfun <- get_fun_from_package(fam = fam$family, package = fam$package, type="d")
+  if('log' %in% names(formals(dfun))) {
     return(T)
   } else {
     return(F)
@@ -364,10 +372,11 @@ check_log <- function(fam) {
 
 ### Function that checks whether a family is a discrete distribution, that is it only takes integers as values ----------
 check_integer <- function(fam, all_params) {
+  rfun <- get_fun_from_package(fam = fam$family, package = fam$package, type="r")
   n_test <- 10
-  n_or_nn <- if (! "nn" %in% names(formals(paste0("r", fam)))) list(n=n_test) else list(nn=n_test)
+  n_or_nn <- if (! "nn" %in% names(formals(rfun))) list(n=n_test) else list(nn=n_test)
   args_ <- c(all_params, n_or_nn)
-  res <- do.call(paste0("r", fam), args = args_)
+  res <- do.call(rfun, args = args_)
   return(all(abs(res %% 1) < sqrt(.Machine$double.eps)))
 }
 
@@ -414,6 +423,8 @@ get_support <- function(fam, params) {
   support_min <- Inf
   support_max <- -Inf
   
+  dfun <- get_fun_from_package(fam = fam$family, package = fam$package, type="d")
+  
   for (param in names(low)) {
     # define n_test equally distributed values for the current param dependend on its adapted range from above
     param_choices <- seq(low[param], upp[param], length.out = n_test)
@@ -430,7 +441,7 @@ get_support <- function(fam, params) {
       for (choice in param_choices) {
         # calulate density value and add to result matrix
         args_[[param]] <- choice
-        res <- suppressWarnings(do.call(paste0("d", fam), args = args_))
+        res <- suppressWarnings(do.call(dfun, args = args_))
         result_mat[i, ] <- res
         i <- i+1
       }
@@ -511,7 +522,7 @@ get_params <- function(fam){
 # do not execute when sourced from a different file, like if __name__ == "__main__" in Python
 if (sys.nframe()==0) {
   for (fam in families) {
-    cat("\nCurrent Family:", fam, "\n")
+    cat("\nCurrent Family:", fam$family, "\n")
     result <- get_params(fam)
     print(result)
   }
@@ -528,6 +539,7 @@ if (sys.nframe()==0) {
 #  -> SOLVED
 
 
-# 4) when scaling needs to consider whether support_max or support_min depends on certain parameters, then it needs to adapt the upper and
+# 4) when scaling GLOBALFIT needs to consider whether support_max or support_min depends on certain parameters, then it needs to adapt the upper and
 #    lower bounds of those parameters using the data, i.e. for unif set upper["min"] <- min(data) before giving to optim_param
+#   -> not our problem
 # 5) extend to and test with other packages

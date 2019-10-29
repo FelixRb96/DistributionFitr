@@ -25,7 +25,7 @@ optimParam(data, family, lower, upper, start_parameters, fixed)
      named vector of upper bounds of free parameters, if no upper bound \code{Inf}, names must coincide with \code{lower}
 }
   \item{start_parameters}{
-     named vector of starting parameters for optimisation, names must coincide with \code{lower} and \code{upper}
+     named vector of starting parameters for optimisation, names must coincide with \code{lower} and \code{upper}
 }
   \item{method}{
      so far just Maximum-Likelihood implemented

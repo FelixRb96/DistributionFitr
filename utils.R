@@ -43,3 +43,17 @@ eval_with_timeout <- function(expr, envir = parent.frame(), timeout, return_valu
 # res <- eval_with_timeout(dsignrank(1, 2000), timeout=0.01, return_value_on_timeout = "TIMEOUT")
 # print(res)
 # print(Sys.time() -t)
+
+# given a family name (e.g. "beta"), a package name (e.g. "stats") and the type ("r" for "rbeta", "d" for "dbeta") gets the function
+# from the desired package and returns it
+# this is needed as we cant use "stats::rbeta" directly in formals or do.call -> error, that it cannot find the function
+get_fun_from_package <- function(fam, package, type="r") {
+  return( get(paste0(type, fam), envir = asNamespace(package)) )
+}
+
+# get_fun_from_package("beta", "stats", "r")
+
+# # show an example where a function exists in two packages and it loads the right one
+# get_fun_from_package("filter", "stats", "")
+# get_fun_from_package("filter", "dplyr", "")
+

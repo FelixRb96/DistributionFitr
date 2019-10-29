@@ -1,4 +1,7 @@
+source("utils.R")
+
 # Loglik-Function
+# important: family should be list with elements "package" and "family"
 loglik <- function(param_values, family, data, fixed=list(), log=T) {
   arguments <- list(x=data)
   # check wheter log-distribution function is directly available for distribution
@@ -13,7 +16,8 @@ loglik <- function(param_values, family, data, fixed=list(), log=T) {
     arguments <- c(arguments, fixed)
   }
   # calculate vector of (log)-densities
-  summands <- do.call(paste('d', family, sep=''), args=arguments)
+  dfun <- get_fun_from_package(fam = family$family, package = family$package, type="d")
+  summands <- do.call(dfun, args=arguments)
   if(any(is.na(summands)))
     stop('In Log-Likelihood-Function NA occured.')
   # log values if not log so far
@@ -43,9 +47,11 @@ loglik <- function(param_values, family, data, fixed=list(), log=T) {
   return(ll)
 }
 
+# Parameters of optimParam:
+# family: list with two elements "family" and "package"
 # debug_error: show optimization progress when an error occured
 # show_optim_progress: always show optimization progress
-optimParam <- function(data, family, lower, upper, start_parameters, method = 'MLE', fixed=list(), log=TRUE,
+optimParam <- function(data, family, package, lower, upper, start_parameters, method = 'MLE', fixed=list(), log=TRUE,
                        debug_error=TRUE, show_optim_progress=FALSE) {
   # Input parameter validation
   if(method!='MLE')
@@ -66,6 +72,7 @@ optimParam <- function(data, family, lower, upper, start_parameters, method = 'M
   on.exit({
     if (exists(".optim_progress") && (show_optim_progress || (debug_error && !optim_successful))) {
       cat("Optimization progress:\n")
+      colnames(.optim_progress) <- c(names(lower), names(fixed), "log_lik")
       print(.optim_progress)
     }
   })
@@ -109,19 +116,19 @@ optimParam <- function(data, family, lower, upper, start_parameters, method = 'M
 
 # Example 1 for optimParam
 data <- rnorm(n=100, mean=70, sd= 4)
-family = 'norm'
-lower = c('mean' = - Inf)
-upper = c('mean' = Inf)
+family <- list(family='norm', package="stats")
+lower <- c('mean' = - Inf)
+upper <- c('mean' = Inf)
 fixed <- c('sd'=2)
 start_parameters <- c('mean' = 0)
 optimParam(data = data, family=family, lower=lower, upper=upper, start_parameters = start_parameters, fixed=fixed, log = T, show_optim_progress = TRUE)
 
 # Example 2 for optimParam
 data <- rbeta(n=100, shape=10, shape2=2)
-family = 'beta'
-lower = c('shape1' = 0, 'shape2' = 0)
-upper = c('shape1' = Inf, 'shape2' = Inf)
-start_parameters = c('shape1' = 1, 'shape2' = 1)
+family <- list(family='beta', package="stats")
+lower <- c('shape1' = 0, 'shape2' = 0)
+upper <- c('shape1' = Inf, 'shape2' = Inf)
+start_parameters <- c('shape1' = 1, 'shape2' = 1)
 fixed <- list()
 optimParam(data =data, family = family, lower = lower, upper = upper, start_parameters = start_parameters, log = T, show_optim_progress = TRUE)
 
@@ -130,10 +137,10 @@ optimParam(data =data, family = family, lower = lower, upper = upper, start_para
 # TODO: Dos not work, since optimParam doesnt work for integers (discrete parameterspace)
 if (FALSE) {
 data <- rbinom(n=100, size=10, prob=0.5)
-family = 'binom'
-lower = c('size' = 0, 'prob' = 0)
-upper = c('size' = Inf, 'prob' = 1)
-start_parameters = c('size' = 1, 'prob' = 0.2)
+family <- list(family='binom', package="stats")
+lower <- c('size' = 0, 'prob' = 0)
+upper <- c('size' = Inf, 'prob' = 1)
+start_parameters <- c('size' = 1, 'prob' = 0.2)
 fixed <- list()
 optimParam(data =data, family = family, lower = lower, upper = upper, start_parameters = start_parameters, log = T)
 }
@@ -141,3 +148,5 @@ optimParam(data =data, family = family, lower = lower, upper = upper, start_para
 # TODO: set fnscale and parscale appropriately
 
 # TODO: on error try to return best value from optimization progress up to now
+
+

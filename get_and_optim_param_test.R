@@ -5,11 +5,12 @@
 rm(list=ls())
 source("optimParam.R")
 source("get_params.R")
+source("utils.R")
 
 test_families <- function(n, families) {
   
   for(fam in families) {
-    cat("\n\nCurrent Family:", fam, "\n")
+    cat("\n\nCurrent Family:", fam$family, "\n")
     
     # cat("Getting infos about the distribution\n")
     result <- get_params(fam)
@@ -41,16 +42,17 @@ test_families <- function(n, families) {
     }
     
     # make sure that sampled values make sense for uniform distribution
-    if (fam == "unif") {
+    if (fam$family == "unif") {
       h <- pars
       pars["min"] <- min(h)
       pars["max"] <- max(h)
     }
     cat("Sampled params:", paste(names(pars), pars, sep=": ", collapse=", "), "\n")
     
-    n_or_nn <- if (! "nn" %in% names(formals(paste0("r", fam)))) list(n=n) else list(nn=n)
+    rfun <- get_fun_from_package(fam=fam$family, package=fam$package, type="r")
+    n_or_nn <- if (! "nn" %in% names(formals(rfun))) list(n=n) else list(nn=n)
     args <- c(n_or_nn, pars)
-    testing_data <- do.call(paste0("r", fam), args)
+    testing_data <- do.call(rfun, args)
     
     # we do it this way for now since we want to evaluate optim_param
     optimum <- tryCatch(optimParam(data = testing_data, family = fam, lower = result$lower, upper = result$upper, 
@@ -70,6 +72,7 @@ test_families <- function(n, families) {
   }
 }
 
+# families is loaded from get_params
 test_families(1000, families)
 
 # TODOs:
