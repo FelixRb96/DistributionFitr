@@ -14,48 +14,53 @@ optimParam(data, family, lower, upper, start_parameters, fixed)
 \arguments{
   \item{data}{
      vector of data points
-}
+  }
   \item{family}{
-     distribution family callable in the \code{package}, e.g. 'norm'
-}
+     list of two elements. family: distribution family callable in the \code{package}, e.g. 'norm'; package: name of the R package, which contains the distribution family.
+  }
   \item{lower}{
      named vector of lower bounds of free parameters, if no lower bound \code{-Inf} 
-}
+  }
   \item{upper}{
      named vector of upper bounds of free parameters, if no upper bound \code{Inf}, names must coincide with \code{lower}
-}
+  }
   \item{start_parameters}{
      named vector of starting parameters for optimisation, names must coincide with \code{lower} and \code{upper}
-}
+  }
   \item{method}{
-     so far just Maximum-Likelihood implemented
-}
+     so far just Maximum-Likelihood implemented, must be \code{MLE}.
+  }
   \item{fixed}{
-     named vector of fixed parameters, over which not to optimize  
+     named vector of fixed parameters, which are not taken into account while optimization process  
+  }
+  \item{log}{
+     logical; if TRUE (default) optimization is run over log-likelihood, requires log-likelihood as parameter in selected distribution family
+  }
+  \item{debug_error}{
+     logical; if TRUE (default) shows optimization 
+  }
+    \item{show_optim_progress}{
+     logical; if TRUE, always show optimization progress
+  }
 }
-####### TODO ab hier #####
-\item{lower}{
-     named vector of lower bounds of free parameters, if no lower bound \code{Inf} 
 
-  \item{y}{
-     **Describe \code{y} here**
-}
-}
 \details{
   ** If necessary, more details than the description above **
 }
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
- ...
+  For \code{optimParam} a list with components:
+  \item{par}{Optimal parameters as named vector, over which it was optimized.}
+  \item{value}{(Log-)Likelihood of optimal parameters}
+  \item{convergence}{An integer code. 0 indicates sucessful completion. Refer to \code{optim} in \code{stats} for further details}
+  \item{AIC}{Akaike Information Criterion of optimal parameters}
+  \item{BIC}{Bayes Information Criterion of optimal parameters}
+  \item{AIC}{Corrected Akaike Information Criterion of optimal parameters}
 }
 \references{
  ~put references to the literature/web site here ~
 }
 \author{
-  **who you are**
+  Benedikt Geier, Moritz Kern
 }
 \note{
   **further notes**
@@ -71,10 +76,25 @@ optimParam(data, family, lower, upper, start_parameters, fixed)
 ##-- ==>  Define data, use random,
 ##--	or do  help(data=index)  for the standard data sets.
 
-## The function is currently defined as
-plus(6,7)
+# Example 1 for optimParam
+data <- rnorm(n=100, mean=70, sd= 4)
+family <- list(family='norm', package="stats")
+lower <- c('mean' = - Inf)
+upper <- c('mean' = Inf)
+fixed <- c('sd'=2)
+start_parameters <- c('mean' = 0)
+optimParam(data = data, family=family, lower=lower, upper=upper, start_parameters = start_parameters, fixed=fixed, log = T, show_optim_progress = TRUE)
+
+# Example 2 for optimParam
+data <- rbeta(n=100, shape=10, shape2=2)
+family <- list(family='beta', package="stats")
+lower <- c('shape1' = 0, 'shape2' = 0)
+upper <- c('shape1' = Inf, 'shape2' = Inf)
+start_parameters <- c('shape1' = 1, 'shape2' = 1)
+fixed <- list()
+optimParam(data =data, family = family, lower = lower, upper = upper, start_parameters = start_parameters, log = T, show_optim_progress = TRUE)
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{distribution }
