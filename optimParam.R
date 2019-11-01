@@ -58,7 +58,8 @@ loglik <- function(param_values, family, data, fixed=list(), log=T) {
 # show_optim_progress: always show optimization progress
 # on_error_use_best_result: if TRUE and an error occured during optimization the best result achieved prior to the error will be taken
 optimParam <- function(data, family, lower, upper, start_parameters, method = 'MLE', fixed=list(), log=TRUE,
-                       debug_error=TRUE, show_optim_progress=FALSE, on_error_use_best_result=TRUE) {
+                       optim_method = 'L-BFGS-B',
+                       debug_error=TRUE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, ...) {
   # Input parameter validation
   if(method!='MLE')
     stop('Not implemented.')
@@ -80,7 +81,7 @@ optimParam <- function(data, family, lower, upper, start_parameters, method = 'M
   on.exit({
     if (exists("optim_progress") && (show_optim_progress || (debug_error && !optim_successful))) {
       cat("Optimization progress:\n")
-      print(optim_progress)
+      print(tail(optim_progress, 2))
     }
   })
   
@@ -89,20 +90,32 @@ optimParam <- function(data, family, lower, upper, start_parameters, method = 'M
       # Optimize first time
       # TODO: in second optimization set fnscale and parscale accordingly (check if it is set correctly below)
       optim_result <- optim(start_parameters, loglik, family = family, data = data, fixed=fixed, lower=lower, upper=upper,
-                            log=log, control = list(fnscale=-1, trace=0), method='L-BFGS-B')
+                            log=log, control = list(fnscale=-1, trace=0), method=optim_method)
       if(optim_result$convergence!=0)
         warning('No convergence in first optimization!')
       # TODO: 
       # Problems with convergence can occur, if parscale and fscale not well selected
       # therefore 2 steps with right selection need to be implemented
+      #optim_result <- optim(optim_result$par, loglik, family = family, data = data, fixed=fixed, lower=lower, upper=upper,
+      #                      log=log, control = list(fnscale=-1 / abs(optim_result$value), trace=0, parscale = 1/optim_result$par), method='L-BFGS-B')
+      
+      args <- list(...)
+      fnscale <- if (hasArg("fnscale") && args$fnscale) -1 / abs(optim_result$value) else -1
+      parscale <- if (hasArg("parscale") && args$parscale) 1/optim_result$par else 1
+      
+      cat("fnscale:", fnscale, "\n")
+      cat("parscale:")
+      print(parscale)
+      
       optim_result <- optim(optim_result$par, loglik, family = family, data = data, fixed=fixed, lower=lower, upper=upper,
-                            log=log, control = list(fnscale=-1 / abs(optim_result$value), trace=0, parscale = 1/optim_result$par), method='L-BFGS-B')
+                            log=log, control = list(fnscale=fnscale, trace=0, parscale = parscale), method=optim_method)
       
       optim_successful <- TRUE
       
       if(optim_result$convergence!=0)
         warning('No convergence in second optimization!')
       
+      # so that it is returned and saved to optim_result
       optim_result
     },
     
@@ -111,7 +124,8 @@ optimParam <- function(data, family, lower, upper, start_parameters, method = 'M
       if (!on_error_use_best_result) stop(e)
       
       message("Error occured during optimization, trying to take best result achieved up to now")
-      if (nrow(optim_progress) == 0) stop( e, "occured during first optimization, so no valid result can be used instead")
+      if (nrow(optim_progress) == 0 || max(optim_progress$log_lik) == -Inf) 
+        stop( e, "occured during first optimization, so no valid result can be used instead")
       
       # getting best result from optimization progress up to now
       best_idx <- which.max(optim_progress$log_lik)
@@ -124,9 +138,9 @@ optimParam <- function(data, family, lower, upper, start_parameters, method = 'M
     }
   )
   
-  if (optim_result$value < max(optim_progress$log_lik) - 1e-10) {
+  if (optim_result$value < max(optim_progress$log_lik) - 1e-8) {
+    message("Final Optimization result is worse than the best result achieved during optimization")
     cat("Diff to best:", abs(optim_result$value - max(optim_progress$log_lik)), "\n")
-    warning("Final Optimization result is worse than the best result achieved during optimization")
   }
   
 
@@ -148,40 +162,45 @@ optimParam <- function(data, family, lower, upper, start_parameters, method = 'M
   )
 }
 
-# Example 1 for optimParam
-data <- rnorm(n=100, mean=70, sd= 4)
-family <- list(family='norm', package="stats")
-lower <- c('mean' = - Inf)
-upper <- c('mean' = Inf)
-fixed <- c('sd'=2)
-start_parameters <- c('mean' = 0)
-optimParam(data = data, family=family, lower=lower, upper=upper, start_parameters = start_parameters, fixed=fixed, log = T, show_optim_progress = TRUE)
+if (sys.nframe() == 0) {
 
-
-# Example 2 for optimParam
-data <- rbeta(n=100, shape=10, shape2=2)
-family <- list(family='beta', package="stats")
-lower <- c('shape1' = 0, 'shape2' = 0)
-upper <- c('shape1' = Inf, 'shape2' = Inf)
-start_parameters <- c('shape1' = 1, 'shape2' = 1)
-fixed <- list()
-optimParam(data = data, family = family, lower = lower, upper = upper, start_parameters = start_parameters, log = T, show_optim_progress = TRUE)
-
-
-# Example 3 for optimParam
-# TODO: Dos not work, since optimParam doesnt work for integers (discrete parameterspace)
-if (FALSE) {
-data <- rbinom(n=100, size=10, prob=0.5)
-family <- list(family='binom', package="stats")
-lower <- c('size' = 0, 'prob' = 0)
-upper <- c('size' = Inf, 'prob' = 1)
-start_parameters <- c('size' = 1, 'prob' = 0.2)
-fixed <- list()
-optimParam(data = data, family = family, lower = lower, upper = upper, start_parameters = start_parameters, log = T)
+  # Example 1 for optimParam
+  data <- rnorm(n=100, mean=70, sd= 4)
+  family <- list(family='norm', package="stats")
+  lower <- c('mean' = - Inf)
+  upper <- c('mean' = Inf)
+  fixed <- c('sd'=2)
+  start_parameters <- c('mean' = 0)
+  optimParam(data = data, family=family, lower=lower, upper=upper, start_parameters = start_parameters, fixed=fixed, log = T, 
+             parscale=TRUE, fnscale=TRUE, show_optim_progress = TRUE)
+  
+  
+  # Example 2 for optimParam
+  data <- rbeta(n=100, shape=10, shape2=2)
+  family <- list(family='beta', package="stats")
+  lower <- c('shape1' = 0, 'shape2' = 0)
+  upper <- c('shape1' = Inf, 'shape2' = Inf)
+  start_parameters <- c('shape1' = 1, 'shape2' = 1)
+  fixed <- list()
+  optimParam(data = data, family = family, lower = lower, upper = upper, start_parameters = start_parameters, log = T, show_optim_progress = TRUE)
+  
+  
+  # Example 3 for optimParam
+  # TODO: Dos not work, since optimParam doesnt work for integers (discrete parameterspace)
+  if (FALSE) {
+  data <- rbinom(n=100, size=10, prob=0.5)
+  family <- list(family='binom', package="stats")
+  lower <- c('size' = 0, 'prob' = 0)
+  upper <- c('size' = Inf, 'prob' = 1)
+  start_parameters <- c('size' = 1, 'prob' = 0.2)
+  fixed <- list()
+  optimParam(data = data, family = family, lower = lower, upper = upper, start_parameters = start_parameters, log = T)
+  }
+  
 }
 
 # TODO: set fnscale and parscale appropriately
 
-# TODO: on error try to return best value from optimization progress up to now
+# TODO: on error try to return best value from optimization progress up to now -> DONE
 
 # TODO: globalfit needs to remove the fixed parameters from upper, lower and start_parameter
