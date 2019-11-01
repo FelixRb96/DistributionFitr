@@ -56,7 +56,7 @@ test_families <- function(n, families) {
     
     # we do it this way for now since we want to evaluate optim_param
     optimum <- tryCatch(optimParam(data = testing_data, family = fam, lower = result$lower, upper = result$upper, 
-                                   start_parameters = result$default, log = result$log, debug_error = TRUE, show_optim_progress = TRUE),
+                                   start_parameters = result$default, log = result$log, debug_error = TRUE, show_optim_progress = FALSE),
                         error = function(e) {
                           message(e);
                           NULL}

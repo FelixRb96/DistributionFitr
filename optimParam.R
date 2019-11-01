@@ -84,7 +84,7 @@ optimParam <- function(data, family, lower, upper, start_parameters, method = 'M
     }
   })
   
-  tryCatch(
+  optim_result <- tryCatch(
     {
       # Optimize first time
       # TODO: in second optimization set fnscale and parscale accordingly (check if it is set correctly below)
@@ -102,22 +102,25 @@ optimParam <- function(data, family, lower, upper, start_parameters, method = 'M
       
       if(optim_result$convergence!=0)
         warning('No convergence in second optimization!')
+      
+      optim_result
     },
     
     error = function(e) {
       # TODO: try to rethrow the original error (with correct stack trace, here context is changed)
       if (!on_error_use_best_result) stop(e)
       
-      warning("Error occured during optimization, trying to take best result achieved up to now")
+      message("Error occured during optimization, trying to take best result achieved up to now")
       if (nrow(optim_progress) == 0) stop( e, "occured during first optimization, so no valid result can be used instead")
       
       # getting best result from optimization progress up to now
       best_idx <- which.max(optim_progress$log_lik)
       best_row <- optim_progress[best_idx,]
       optim_result <- list()
-      optim_result$value <- row$log_lik
-      optim_result$par <- unlist(row[names(lower)])
+      optim_result$value <- best_row$log_lik
+      optim_result$par <- unlist(best_row[names(lower)])
       optim_result$convergence <- 51  # corresponds to warning
+      return(optim_result)
     }
   )
   
@@ -144,7 +147,6 @@ optimParam <- function(data, family, lower, upper, start_parameters, method = 'M
     )
   )
 }
-
 
 # Example 1 for optimParam
 data <- rnorm(n=100, mean=70, sd= 4)
