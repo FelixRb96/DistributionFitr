@@ -105,8 +105,11 @@ test_families <- function(n, families) {
 
 test_families(1000, families)
 
-
+# Function to compare different optimization techniques
 compare_optimizers <- function(n, families, repetitions_per_family=5) {
+  
+  # result dataframe: columns will be the different approaches / methods, rows will be the distribution families
+  # change column names to whatever you are comparing
   cols <- c("noscale", "fnscale", "parscale", "bothscale")
   rows <- sapply(families, function(fam) fam$family)
   res <- data.frame(matrix(NA, nrow=length(rows), ncol=length(cols)))
@@ -132,30 +135,31 @@ compare_optimizers <- function(n, families, repetitions_per_family=5) {
       ##  CHANGE OPTIMZATION SETTINGS HERE to compare different ones!!!
       
       optim_results[i, 1] <- tryCatch(optimParam(data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
-                                                fnscale=FALSE, parscale=FALSE, optim_method = "BFGS",
+                                                fnscale=FALSE, parscale=FALSE, optim_method = "L-BFGS-B",
                                                 start_parameters = family_info$default, log = family_info$log, 
                                                 debug_error = TRUE, show_optim_progress = TRUE)$value,
                                      error = function(e) NA
                                      )
       optim_results[i, 2] <- tryCatch(optimParam(data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
-                                                fnscale=TRUE, parscale=FALSE, optim_method = "BFGS",
+                                                fnscale=TRUE, parscale=FALSE, optim_method = "L-BFGS-B",
                                                 start_parameters = family_info$default, log = family_info$log, 
                                                 debug_error = TRUE, show_optim_progress = TRUE)$value,
                                      error = function(e) NA
       )
       optim_results[i, 3] <- tryCatch(optimParam(data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
-                                                fnscale=FALSE, parscale=TRUE,
+                                                fnscale=FALSE, parscale=TRUE, optim_method = "L-BFGS-B",
                                                 start_parameters = family_info$default, log = family_info$log, 
                                                 debug_error = TRUE, show_optim_progress = TRUE)$value,
                                      error = function(e) NA
       )
       optim_results[i, 4] <- tryCatch(optimParam(data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
-                                                fnscale=TRUE, parscale=TRUE,
+                                                fnscale=TRUE, parscale=TRUE, optim_method = "L-BFGS-B",
                                                 start_parameters = family_info$default, log = family_info$log, 
                                                 debug_error = TRUE, show_optim_progress = TRUE)$value,
                                      error = function(e) NA
       )
     }
+    # for each method calculate the means and add them to the result matrix
     res[fam$family, ] <- colMeans(optim_results, na.rm = TRUE)
     print(res)
   }

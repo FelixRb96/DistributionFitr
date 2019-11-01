@@ -37,10 +37,10 @@ optimParam(data, family, lower, upper, start_parameters, fixed)
      logical; if TRUE (default) optimization is run over log-likelihood, requires log-likelihood as parameter in selected distribution family
   }
   \item{debug_error}{
-     logical; if TRUE (default) shows optimization 
+     logical; if TRUE (default) shows optimization progress in case an error occured during optimization
   }
-    \item{show_optim_progress}{
-     logical; if TRUE, always show optimization progress
+  \item{show_optim_progress}{
+    logical; if TRUE, always show optimization progress
   }
 }
 
