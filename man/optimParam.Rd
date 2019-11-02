@@ -28,7 +28,7 @@ optimParam(data, family, lower, upper, start_parameters, fixed)
      named vector of starting parameters for optimisation, names must coincide with \code{lower} and \code{upper}
   }
   \item{method}{
-     so far just Maximum-Likelihood implemented, must be \code{MLE}.
+     so far only Maximum-Likelihood is implemented, thus argument must be \code{"MLE"}.
   }
   \item{fixed}{
      named vector of fixed parameters, which are not taken into account while optimization process  

@@ -54,22 +54,35 @@ loglik <- function(param_values, family, data, fixed=list(), log=T) {
 ## Parameters of optimParam:
 # family: list with two elements "family" and "package"
 # lower, upper and start_parameters must only contain the continuous parameters that should be optimized
+# prior: user-given prior information on parameters, updates default values from get_param
 # debug_error: show optimization progress when an error occured
 # show_optim_progress: always show optimization progress
 # on_error_use_best_result: if TRUE and an error occured during optimization the best result achieved prior to the error will be taken
-optimParam <- function(data, family, lower, upper, start_parameters, method = 'MLE', fixed=list(), log=TRUE,
+optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fixed=list(), prior = NULL, log=TRUE,
                        optim_method = 'L-BFGS-B',
                        debug_error=TRUE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, ...) {
   # Input parameter validation
   if(method!='MLE')
     stop('Not implemented.')
-  if(length(lower)!=length(upper) || length(start_parameters)!= length(upper))
+  if(length(lower)!=length(upper) || length(defaults)!= length(upper))
     stop('Length of lower and upper bounds vector do not coincide.')
   if(length(lower)==0) {
     stop('No parameters to optimize as no bounds delivered.')
   }
-  if(any(names(lower) != names(upper)) || any(names(lower) != names(start_parameters)) ) {
+  if(any(names(lower) != names(upper)) || any(names(lower) != names(defaults)) ) {
     stop('Parameter names of lower and upper bounds and start parameters must coincide. ')
+  }
+  if(any(!(names(fixed) %in% names(lower))) || any(!(names(prior) %in% names(lower)))) {
+    stop('Parameter names given as fixed/prior unknown.')
+  }
+  if(anyDuplicated(names(fixed)) || anyDuplicated(names(prior))) {
+    stop('Duplicate entries in fixed/prior.')
+  }
+  
+  if(length(prior) > 0) {
+    prior_positions <- match(names(prior), names(lower), nomatch = NULL)
+    # nomatch should not occur due to the check above: "Parameter names given as prior unknown"
+    defaults[prior_positions] <- prior
   }
   
   # create dataframe where to save the optimization progress
@@ -89,10 +102,14 @@ optimParam <- function(data, family, lower, upper, start_parameters, method = 'M
     {
       # Optimize first time
       # TODO: in second optimization set fnscale and parscale accordingly (check if it is set correctly below)
-      optim_result <- optim(start_parameters, loglik, family = family, data = data, fixed=fixed, lower=lower, upper=upper,
+      cat("First Optimisation\n")
+      optim_result <- optim(defaults, loglik, family = family, data = data, fixed=fixed, lower=lower, upper=upper,
                             log=log, control = list(fnscale=-1, trace=0), method=optim_method)
       if(optim_result$convergence!=0)
         warning('No convergence in first optimization!')
+
+      # to see what happens in first
+      print(tail(optim_progress, 2))
       # TODO: 
       # Problems with convergence can occur, if parscale and fscale not well selected
       # therefore 2 steps with right selection need to be implemented
@@ -103,9 +120,16 @@ optimParam <- function(data, family, lower, upper, start_parameters, method = 'M
       fnscale <- if (hasArg("fnscale") && args$fnscale) -1 / abs(optim_result$value) else -1
       parscale <- if (hasArg("parscale") && args$parscale) 1/optim_result$par else 1
       
-      cat("fnscale:", fnscale, "\n")
-      cat("parscale:")
+      # if a parameter is optimised as zero, parscale will be Infinity, causing trouble.
+      # setting might not be optimal, but never fatal.
+      adjust <- which(parscale == Inf | parscale == -Inf)
+      parscale[adjust] <- mean(parscale[!(parscale == Inf | parscale == -Inf)], na.rm = TRUE)
+      
+      cat("\nfnscale:", fnscale, "\n")
+      cat("parscale:\n")
       print(parscale)
+      # linebreak if parscale not set initially
+      cat("Second Optimisation\n")
       
       optim_result <- optim(optim_result$par, loglik, family = family, data = data, fixed=fixed, lower=lower, upper=upper,
                             log=log, control = list(fnscale=fnscale, trace=0, parscale = parscale), method=optim_method)

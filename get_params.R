@@ -491,7 +491,7 @@ get_support <- function(fam, params) {
 # --------------------------------------------------------------------------------
 
 # Input:
-  # family: list-> package: package_name, family: name of distribution family inside package
+  # fam: list-> package: package_name, family: name of distribution family inside package
 get_params <- function(fam){
   # fam <- family$family
   

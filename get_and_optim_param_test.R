@@ -79,7 +79,7 @@ test_single_family <- function(n, family) {
   
   # we do it this way for now since we want to evaluate optim_param
   optim_result <- tryCatch(optimParam(data = testing_data, family = family, lower = family_info$lower, upper = family_info$upper, 
-                                 start_parameters = family_info$default, log = family_info$log, debug_error = TRUE, show_optim_progress = FALSE),
+                                 defaults = family_info$default, log = family_info$log, debug_error = TRUE, show_optim_progress = FALSE),
                       error = function(e) {
                         message(e);
                         NULL}
@@ -128,33 +128,37 @@ compare_optimizers <- function(n, families, repetitions_per_family=5) {
     for (i in 1:repetitions_per_family) {
       # sample parameters for the family and generate sample data
       true_pars <- sample_params(fam, family_info)
-      cat("Sampled params:", paste(names(true_pars), true_pars, sep=": ", collapse=", "), "\n")
+      cat("Try Nr.", i, "\nSampled params:", paste(names(true_pars), round(true_pars, 4), sep=": ", collapse=", "), "\n")
       
       testing_data <- sample_data(n, fam, true_pars)
       
       ##  CHANGE OPTIMZATION SETTINGS HERE to compare different ones!!!
       
+      cat("fnscale = FALSE, parscale = FALSE\n")
       optim_results[i, 1] <- tryCatch(optimParam(data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
                                                 fnscale=FALSE, parscale=FALSE, optim_method = "L-BFGS-B",
-                                                start_parameters = family_info$default, log = family_info$log, 
+                                                defaults = family_info$default, log = family_info$log, 
                                                 debug_error = TRUE, show_optim_progress = TRUE)$value,
                                      error = function(e) NA
                                      )
+      cat("fnscale = TRUE, parscale = FALSE\n")
       optim_results[i, 2] <- tryCatch(optimParam(data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
                                                 fnscale=TRUE, parscale=FALSE, optim_method = "L-BFGS-B",
-                                                start_parameters = family_info$default, log = family_info$log, 
+                                                defaults = family_info$default, log = family_info$log, 
                                                 debug_error = TRUE, show_optim_progress = TRUE)$value,
                                      error = function(e) NA
       )
+      cat("fnscale = FALSE, parscale = TRUE\n")
       optim_results[i, 3] <- tryCatch(optimParam(data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
                                                 fnscale=FALSE, parscale=TRUE, optim_method = "L-BFGS-B",
-                                                start_parameters = family_info$default, log = family_info$log, 
+                                                defaults = family_info$default, log = family_info$log, 
                                                 debug_error = TRUE, show_optim_progress = TRUE)$value,
                                      error = function(e) NA
       )
+      cat("fnscale = TRUE, parscale = TRUE\n")
       optim_results[i, 4] <- tryCatch(optimParam(data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
                                                 fnscale=TRUE, parscale=TRUE, optim_method = "L-BFGS-B",
-                                                start_parameters = family_info$default, log = family_info$log, 
+                                                defaults = family_info$default, log = family_info$log, 
                                                 debug_error = TRUE, show_optim_progress = TRUE)$value,
                                      error = function(e) NA
       )
