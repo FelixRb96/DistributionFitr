@@ -141,6 +141,7 @@ compare_optimizers <- function(n, families, repetitions_per_family=5) {
                                                 debug_error = TRUE, show_optim_progress = TRUE)$value,
                                      error = function(e) NA
                                      )
+
       cat("fnscale = TRUE, parscale = FALSE\n")
       optim_results[i, 2] <- tryCatch(optimParam(data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
                                                 fnscale=TRUE, parscale=FALSE, optim_method = "L-BFGS-B",

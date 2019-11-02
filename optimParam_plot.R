@@ -100,48 +100,20 @@ optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fix
   
   optim_result <- tryCatch(
     {
-      # Optimize first time
-      # TODO: in second optimization set fnscale and parscale accordingly (check if it is set correctly below)
-      cat("First Optimisation\n")
-      round <- "first"
-      optim_result <- optim(defaults, loglik, family = family, data = data, fixed=fixed, lower=lower, upper=upper,
-                            log=log, control = list(fnscale=-1, trace=0), method=optim_method)
-      if(optim_result$convergence!=0)
-        warning('No convergence in first optimization!')
+      sequence <- list()
+      for(par in names(lower)) {
+	      sequence[[par]] <- seq(lower[par], upper[par], length.out = 21)
+      }
+      inits <- expand.grid(sequence)
 
-      # to see what happens in first
-      print(tail(optim_progress, 2))
-      # TODO: 
-      # Problems with convergence can occur, if parscale and fscale not well selected
-      # therefore 2 steps with right selection need to be implemented
-      # optim_result <- optim(optim_result$par, loglik, family = family, data = data, fixed=fixed, lower=lower, upper=upper,
-      #                      log=log, control = list(fnscale=-1 / abs(optim_result$value), trace=0, parscale = 1/optim_result$par), method='L-BFGS-B')
-      
-      args <- list(...)
-      fnscale <- if (hasArg("fnscale") && args$fnscale) -1/abs(optim_result$value) else -1
-      parscale <- if (hasArg("parscale") && args$parscale) 1/optim_result$par else 1
-      
-      # if a parameter is optimised as zero, parscale will be Infinity, causing trouble.
-      # setting might not be optimal, but never fatal.
-      adjust <- which(parscale == Inf | parscale == -Inf)
-      parscale[adjust] <- mean(parscale[!(parscale == Inf | parscale == -Inf)], na.rm = TRUE)
-      
-      cat("\n\nfnscale:", fnscale, "\n")
-      cat("parscale:\n")
-      print(parscale)
-      # linebreak if parscale not set initially
-      cat("Second Optimisation\n")
-      
-      # adjust precision to number of parameters
-      # note that with many parameters even though likelihood may have converged, parameters are still changing
-      precision <- max(0, length(lower) - 2)
-      # floating numbers are not equally spaced, only about 1e-16 is reliable
-      precision <- max(1e-8/(10^(precision*2)), 1e-16)
+      nexts <- data.frame(NA, nrow = nrow(inits), ncol = length(lower))
+      for(i in 1:nrow(inits)) {
+	      optim_result <- optim(inits[i,], loglik, family = family, data = data, fixed = fixed, lower = lower, upper = upper, log = log, control = list(fnscale = -1, trace = 0, maxit = 1), method = optim_method),
+	      nexts[i] <- optim_result$par
 
-      round <- "second"
-      optim_result <- optim(optim_result$par, loglik, family = family, data = data, fixed=fixed, lower=lower, upper=upper,
-                            log=log, control = list(fnscale=fnscale, trace=0, parscale = parscale, factr = precision), method=optim_method)
-      
+	      ##### CONTINUE HERE
+
+
       optim_successful <- TRUE
       
       if(optim_result$convergence!=0)
