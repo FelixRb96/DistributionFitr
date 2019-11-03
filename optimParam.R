@@ -62,6 +62,13 @@ optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fix
                        optim_method = 'L-BFGS-B',
                        debug_error=TRUE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, ...) {
   # Input parameter validation
+
+  # TODO:
+	# currently it seems customary to allowing the provision of boundaries for non-fixed parameters only.
+	# below I added input validation that checks if the param names given in fixed are present in lower,
+	# throwing an error
+	# It is probably safer to require provision of boundaries for all parameters, regardless of whether fixed or not
+
   if(method!='MLE')
     stop('Not implemented.')
   if(length(lower)!=length(upper) || length(defaults)!= length(upper))
@@ -204,8 +211,8 @@ if (sys.nframe() == 0) {
   lower <- c('mean' = - Inf)
   upper <- c('mean' = Inf)
   fixed <- c('sd'=2)
-  start_parameters <- c('mean' = 0)
-  optimParam(data = data, family=family, lower=lower, upper=upper, start_parameters = start_parameters, fixed=fixed, log = T, 
+  defaults <- c('mean' = 0)
+  optimParam(data = data, family=family, lower=lower, upper=upper, defaults = defaults, fixed=fixed, log = T, 
              parscale=TRUE, fnscale=TRUE, show_optim_progress = TRUE)
   
   
@@ -214,9 +221,9 @@ if (sys.nframe() == 0) {
   family <- list(family='beta', package="stats")
   lower <- c('shape1' = 0, 'shape2' = 0)
   upper <- c('shape1' = Inf, 'shape2' = Inf)
-  start_parameters <- c('shape1' = 1, 'shape2' = 1)
+  defaults <- c('shape1' = 1, 'shape2' = 1)
   fixed <- list()
-  optimParam(data = data, family = family, lower = lower, upper = upper, start_parameters = start_parameters, log = T, show_optim_progress = TRUE)
+  optimParam(data = data, family = family, lower = lower, upper = upper, defaults = defaults, log = T, show_optim_progress = TRUE)
   
   
   # Example 3 for optimParam
@@ -226,9 +233,9 @@ if (sys.nframe() == 0) {
   family <- list(family='binom', package="stats")
   lower <- c('size' = 0, 'prob' = 0)
   upper <- c('size' = Inf, 'prob' = 1)
-  start_parameters <- c('size' = 1, 'prob' = 0.2)
+  defaults <- c('size' = 1, 'prob' = 0.2)
   fixed <- list()
-  optimParam(data = data, family = family, lower = lower, upper = upper, start_parameters = start_parameters, log = T)
+  optimParam(data = data, family = family, lower = lower, upper = upper, defaults = defaults, log = T)
   }
   
 }

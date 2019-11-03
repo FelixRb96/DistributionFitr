@@ -1,8 +1,9 @@
 source("utils.R")
+source("get_params.R")
 
 # Loglik-Function
 # important: family should be list with elements "package" and "family"
-loglik <- function(param_values, family, data, fixed=list(), log=T) {
+loglik <- function(param_values, family, data, fixed=list(), log=TRUE, show_optim_progress = FALSE) {
   arguments <- list(x=data)
   # check wheter log-distribution function is directly available for distribution
   if(log==T)
@@ -27,6 +28,7 @@ loglik <- function(param_values, family, data, fixed=list(), log=T) {
   } 
   ll <- sum(summands)
   
+  if(show_optim_progress) {
   # recursively go through parent frames and check whether there is a variable that tracks the optimisation process
   return_optim_progress <- FALSE
   for (i in 1:length(sys.parents())) {
@@ -47,6 +49,7 @@ loglik <- function(param_values, family, data, fixed=list(), log=T) {
     progress[nrow(progress)+1, ] <- c(param_values, fixed, log_lik = ll)
     assign("optim_progress", envir = parent.frame(i), progress)
   }
+  }
   
   return(ll)
 }
@@ -62,10 +65,13 @@ optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fix
                        optim_method = 'L-BFGS-B',
                        debug_error=TRUE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, ...) {
   # Input parameter validation
+  if(length(fixed) > 0) {
+    stop('Fixed parameters not allowed for this testing function.')
+  }
   if(method!='MLE')
     stop('Not implemented.')
   if(length(lower)!=length(upper) || length(defaults)!= length(upper))
-    stop('Length of lower and upper bounds vector do not coincide.')
+    stop('Vector lengths of upper/lower/defauls do not coincide.')
   if(length(lower)==0) {
     stop('No parameters to optimize as no bounds delivered.')
   }
@@ -94,119 +100,81 @@ optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fix
   on.exit({
     if (exists("optim_progress") && (show_optim_progress || (debug_error && !optim_successful))) {
       cat("Optimization progress:\n")
-      print(tail(optim_progress, 2))
+      # print(tail(optim_progress, 2))
+      print(optim_progress)
     }
   })
-  
-  optim_result <- tryCatch(
-    {
-      sequence <- list()
-      for(par in names(lower)) {
-	      sequence[[par]] <- seq(lower[par], upper[par], length.out = 21)
-      }
-      inits <- expand.grid(sequence)
-
-      nexts <- data.frame(NA, nrow = nrow(inits), ncol = length(lower))
-      for(i in 1:nrow(inits)) {
-	      optim_result <- optim(inits[i,], loglik, family = family, data = data, fixed = fixed, lower = lower, upper = upper, log = log, control = list(fnscale = -1, trace = 0, maxit = 1), method = optim_method),
-	      nexts[i] <- optim_result$par
-
-	      ##### CONTINUE HERE
-
-
-      optim_successful <- TRUE
-      
-      if(optim_result$convergence!=0)
-        warning('No convergence in second optimization!')
-      
-      # so that it is returned and saved to optim_result
-      optim_result
-    },
-    
-    error = function(e) {
-      # TODO: try to rethrow the original error (with correct stack trace, here context is changed)
-      # message("Original error message:")
-      # message(e)
-      if (!on_error_use_best_result) stop(e)
-      
-      message(paste("Error occured during", round, "optimization, trying to take best result achieved up to now"))
-      if (nrow(optim_progress) == 0 || max(optim_progress$log_lik) == -Inf) 
-        stop( e, "occured during first optimization, so no valid result can be used instead")
-      
-      # getting best result from optimization progress up to now
-      best_idx <- which.max(optim_progress$log_lik)
-      best_row <- optim_progress[best_idx,]
-      optim_result <- list()
-      optim_result$value <- best_row$log_lik
-      optim_result$par <- unlist(best_row[names(lower)])
-      optim_result$convergence <- 51  # corresponds to warning
-      return(optim_result)
-    }
-  )
-  
-  if (optim_result$value < max(optim_progress$log_lik) - 1e-8) {
-    message("Final Optimization result is worse than the best result achieved during optimization")
-    cat("Diff to best:", abs(optim_result$value - max(optim_progress$log_lik)), "\n")
+  diagram <- NULL
+  sequence <- list()
+  for(par in names(lower)) {
+	  # sequence with infinity obviously does not work
+	  leftbound <- max(lower[par], -100)
+	  rightbound <- min(upper[par], 100)
+	  sequence[[par]] <- seq(leftbound, rightbound, length.out = 21)
   }
-  
+  inits <- expand.grid(sequence)
 
-  # Information criteria calculation
-  k = length(upper)
-  n = length(data)
-  aic = 2*k - 2 *  optim_result$value          # TODO: should k also include the length of the fixed parameters???
-  bic = log(n) * k - 2 *  optim_result$value
-  aicc = aic + (2*k^2+2*k)/(n-k-1)
+  nexts <- matrix(NA, nrow = nrow(inits), ncol = length(lower))
   
-  return(list(
-    par = optim_result$par,
-    value = optim_result$value,
-    convergence = optim_result$convergence,
-    AIC = aic, 
-    BIC = bic,
-    AICc = aicc
-    )
-  )
+  for(i in 1:nrow(inits)) {
+  	step <- tryCatch(
+    	{
+	      step <- numeric(length(lower))
+	      optim_result <- optim(inits[i,], loglik, family = family, data = data, fixed = fixed, lower = lower, upper = upper, log = log, control = list(fnscale = -1, trace = 0, maxit = 1), method = optim_method)
+	step <- optim_result$par
+      	},
+    	error = function(e) {
+        # TODO: try to rethrow the original error (with correct stack trace, here context is changed)
+	step <- rep(NA, length.out = length(lower))
+	names(step) <- names(lower)
+        # message("Original error message:")
+        # message(e)
+        return(step)
+    	}
+  	)
+  	nexts[i,] <- step
+  }
+  colnames(nexts) <- paste0(colnames(inits), "_it")
+  diagram <- cbind(inits, nexts)
+
+  return(diagram)
 }
-
-if (sys.nframe() == 0) {
-
-  # Example 1 for optimParam
-  data <- rnorm(n=100, mean=70, sd= 4)
-  family <- list(family='norm', package="stats")
-  lower <- c('mean' = - Inf)
-  upper <- c('mean' = Inf)
-  fixed <- c('sd'=2)
-  start_parameters <- c('mean' = 0)
-  optimParam(data = data, family=family, lower=lower, upper=upper, start_parameters = start_parameters, fixed=fixed, log = T, 
-             parscale=TRUE, fnscale=TRUE, show_optim_progress = TRUE)
   
-  
-  # Example 2 for optimParam
-  data <- rbeta(n=100, shape=10, shape2=2)
+# Example 1 for optimParam
+data <- rnorm(n=100, mean=70, sd= 4)
+family <- list(family='norm', package="stats")
+lower <- c('sd' = 0, 'mean' = - Inf)
+upper <- c('sd' = Inf, 'mean' = Inf)
+fixed <- NULL
+defaults <- c('sd' = 1, 'mean' = 0)
+diagram <- optimParam(data = data, family=family, lower=lower, upper=upper, defaults = defaults, fixed=fixed, log = T, 
+           parscale=TRUE, fnscale=TRUE, show_optim_progress = TRUE)
+
+gg <- ggplot(data = diagram)
+gg <- gg + geom_segment(aes(x = mean, y = sd,
+                            xend = mean_it, yend = sd_it),
+                        arrow = arrow(length = unit(0.2, "cm"))) +
+  geom_segment(x = max(lower[2], -100), y = max(lower[1], -100), xend = min(upper[2], 100), yend = max(lower[1], -100), arrow = arrow(length = unit(0.2, "cm")), col = "green") +
+  geom_segment(x = max(lower[2], -100), y = max(lower[1], -100), xend = max(lower[2], -100), yend = min(upper[1], 100), arrow = arrow(length = unit(0.2, "cm")), col = "green") +
+  ggtitle("Phasendiagramm") +
+  xlab(names(diagram)[1]) + ylab(names(diagram)[2])
+print(gg)
+
+  # TODO: Find out where the instability comes from
+  data <- rbeta(n=100, ncp = 20, shape=10, shape2=2)
   family <- list(family='beta', package="stats")
-  lower <- c('shape1' = 0, 'shape2' = 0)
-  upper <- c('shape1' = Inf, 'shape2' = Inf)
-  start_parameters <- c('shape1' = 1, 'shape2' = 1)
+  lower <- c('ncp' = 0, 'shape1' = 0, 'shape2' = 0)
+  upper <- c('ncp' = Inf, 'shape1' = Inf, 'shape2' = Inf)
+  defaults <- c('ncp' = 0, 'shape1' = 1, 'shape2' = 1)
   fixed <- list()
-  optimParam(data = data, family = family, lower = lower, upper = upper, start_parameters = start_parameters, log = T, show_optim_progress = TRUE)
-  
-  
-  # Example 3 for optimParam
-  # TODO: Dos not work, since optimParam doesnt work for integers (discrete parameterspace)
-  if (FALSE) {
-  data <- rbinom(n=100, size=10, prob=0.5)
-  family <- list(family='binom', package="stats")
-  lower <- c('size' = 0, 'prob' = 0)
-  upper <- c('size' = Inf, 'prob' = 1)
-  start_parameters <- c('size' = 1, 'prob' = 0.2)
-  fixed <- list()
-  optimParam(data = data, family = family, lower = lower, upper = upper, start_parameters = start_parameters, log = T)
-  }
-  
-}
+  diagram <- optimParam(data = data, family = family, lower = lower, upper = upper, defaults = defaults, log = T, show_optim_progress = F)
 
-# TODO: set fnscale and parscale appropriately
-
-# TODO: on error try to return best value from optimization progress up to now -> DONE
-
-# TODO: globalfit needs to remove the fixed parameters from upper, lower and start_parameter
+gg <- ggplot(data = diagram)
+gg <- gg + geom_segment(aes(x = ncp, y = shape1,
+                            xend = ncp_it, yend = shape1_it),
+                        arrow = arrow(length = unit(0.2, "cm"))) +
+  geom_segment(x = max(lower[1], -100), y = max(lower[2], -100), xend = min(upper[1], 100), yend = max(lower[2], -100), arrow = arrow(length = unit(0.2, "cm")), col = "green") +
+  geom_segment(x = max(lower[1], -100), y = max(lower[2], -100), xend = max(lower[1], -100), yend = min(upper[2], 100), arrow = arrow(length = unit(0.2, "cm")), col = "green") +
+  ggtitle("Phasendiagramm") +
+  xlab(names(diagram)[1]) + ylab(names(diagram)[2])
+print(gg)
