@@ -5,7 +5,7 @@
   Loglikelihood Function 
 }
 \description{
-  Returns the Loglikelihood Function for a given distribution that depends on the      distribution's parameters.
+  Returns the Loglikelihood Function for a given distribution that depends on the distribution's parameters.
 }
 \usage{
 loglik(arg_opt, family, data, fixed, log, lower, upper)
@@ -19,7 +19,7 @@ loglik(arg_opt, family, data, fixed, log, lower, upper)
      list of two elements. family: distribution family callable in the \code{package}, e.g. 'norm'; package: name of the R package, which contains the distribution family.
   }
   \item{data}{
-     XXX
+     numerical vector.
   }
   \item{fixed}{
      named vector of fixed parameters, which are not taken into account while optimization process 
@@ -39,19 +39,15 @@ loglik(arg_opt, family, data, fixed, log, lower, upper)
   ** If necessary, more details than the description above **
 }
 \value{
-  For \code{loglik} a list with components:
-  \item{par}{Optimal parameters as named vector, over which it was optimized.}
-  \item{value}{(Log-)Likelihood of optimal parameters}
-  \item{convergence}{An integer code. 0 indicates sucessful completion. Refer to \code{optim} in \code{stats} for further details}
-  \item{AIC}{Akaike Information Criterion of optimal parameters}
-  \item{BIC}{Bayes Information Criterion of optimal parameters}
-  \item{AIC}{Corrected Akaike Information Criterion of optimal parameters}
+  \code{loglik} returns a function \code{likelihood} with arguments:
+  \item{params}{An unnamed  vector of values.}
+
 }
 \references{
  ~ put references to the literature/web site here ~
 }
 \author{
-  Till Freihaut, Leonardo Vela
+  Niclas Lietzow, Till Freihaut, Leonardo Vela
 }
 \note{
   **Raum für Notizen**
