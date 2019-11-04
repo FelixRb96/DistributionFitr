@@ -8,13 +8,10 @@
   Returns the Loglikelihood Function for a given distribution that depends on the distribution's parameters.
 }
 \usage{
-loglik(arg_opt, family, data, fixed, log, lower, upper)
+loglik(family, data, fixed, log, lower, upper)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{arg_opt}{
-     character vector
-  }
   \item{family}{
      list of two elements. family: distribution family callable in the \code{package}, e.g. 'norm'; package: name of the R package, which contains the distribution family.
   }
@@ -40,7 +37,7 @@ loglik(arg_opt, family, data, fixed, log, lower, upper)
 }
 \value{
   \code{loglik} returns a function \code{likelihood} with arguments:
-  \item{params}{An unnamed  vector of values.}
+  \item{params}{An named list of values.}
 
 }
 \references{
@@ -64,23 +61,15 @@ loglik(arg_opt, family, data, fixed, log, lower, upper)
 ##--	or do  help(data=index)  for the standard data sets.
 
 # Example 1 for loglik
-arg_opt <- c("mean")
-family <- "norm"
+family <- list(family="norm", package="stats")
 data <- rnorm(10, mean = 7, sd=2)
 fixed <- list(sd=2)
 log = TRUE
-lower <- 2
-upper <- 10
+lower <- c(mean=2)
+upper <- c(mean=10)
 
-out <- loglik(arg_opt = arg_opt, family = family, data = data, fixed = fixed,
+output <- loglik(family = family, data = data, fixed = fixed,
               log = log, lower = lower, upper = upper)
-
-test <- NULL
-for(i in 1:9) {
-  test[i] <- out(i+1)
-}
-plot(2:10,test, xlab = "mean", ylab = "likelihood")
-out(7)
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
