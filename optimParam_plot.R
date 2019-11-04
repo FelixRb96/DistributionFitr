@@ -1,5 +1,6 @@
 source("utils.R")
 source("get_params.R")
+source("optimParam.R")
 
 # Loglik-Function
 # important: family should be list with elements "package" and "family"
@@ -61,13 +62,13 @@ loglik <- function(param_values, family, data, fixed=list(), log=TRUE, show_opti
 # debug_error: show optimization progress when an error occured
 # show_optim_progress: always show optimization progress
 # on_error_use_best_result: if TRUE and an error occured during optimization the best result achieved prior to the error will be taken
-optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fixed=list(), prior = NULL, log=TRUE,
+optimParam_plot <- function(plot = TRUE, dim1 = NULL, dim2 = NULL, data, family, lower, upper, defaults, method = 'MLE', fixed = NULL, prior = NULL, log=TRUE,
                        optim_method = 'L-BFGS-B',
                        debug_error=TRUE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, ...) {
   # Input parameter validation
-  if(length(fixed) > 0) {
-    stop('Fixed parameters not allowed for this testing function.')
-  }
+  # if(length(fixed) > 0) {
+  #  stop('Fixed parameters not allowed for this testing function.')
+  # }
   if(method!='MLE')
     stop('Not implemented.')
   if(length(lower)!=length(upper) || length(defaults)!= length(upper))
@@ -84,13 +85,36 @@ optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fix
   if(anyDuplicated(names(fixed)) || anyDuplicated(names(prior))) {
     stop('Duplicate entries in fixed/prior.')
   }
-  
+  matching <- match(names(fixed), names(lower))
+  if(any( fixed < lower[matching] | fixed > upper[matching] )) {
+    stop('fixed levels given are out of possible parameter bounds')
+  }
   if(length(prior) > 0) {
     prior_positions <- match(names(prior), names(lower), nomatch = NULL)
-    # nomatch should not occur due to the check above: "Parameter names given as prior unknown"
+    # nomatch should not occur anyway due to the check above: "Parameter names given as prior unknown"
     defaults[prior_positions] <- prior
   }
+  if(plot == TRUE) {
+    if( !hasArg(dim1) || is.null(dim1) || !hasArg(dim2) || is.null(dim2) ) {
+      stop('If "plot" is set to TRUE, dim1 and dim2 have to be specified')
+    }
+    plotted <- c(deparse(substitute(dim1)), deparse(substitute(dim2))) 
+    if(any( names(fixed) %in% plotted )) {
+      stop('Parameter can not be plotted if given as fixed')
+    }
+    if(length(fixed) < length(lower) - 2) {
+      stop('If "plot" is set to TRUE, a fixed level has to be supplied for each param not being plotted (dim1 or dim2).')
+    }
+  }
   
+  # no fancy stuff if plot == FALSE
+  if(plot == FALSE) {
+    ret <- optimParam(data = data, family = family, lower = lower, upper = upper, defaults = defaults, method = 'MLE', fixed = NULL, prior = NULL, log = TRUE,
+                       optim_method = 'L-BFGS-B',
+                       debug_error=TRUE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, ...)
+    return(ret)
+  }
+
   # create dataframe where to save the optimization progress
   # 1 column for each parameter and a column for the associated log likelihood
   optim_progress <- data.frame(matrix(nrow=0, ncol=length(lower) + length(fixed) + 1))
@@ -100,13 +124,16 @@ optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fix
   on.exit({
     if (exists("optim_progress") && (show_optim_progress || (debug_error && !optim_successful))) {
       cat("Optimization progress:\n")
-      # print(tail(optim_progress, 2))
-      print(optim_progress)
+      print(tail(optim_progress, 20))
     }
   })
   diagram <- NULL
+  # get parameters to maximise over, partition their intervals and form all possible combinations
+  matching <- !(names(lower) %in% names(fixed))
+  params <- lower[matching]
+  print(params)
   sequence <- list()
-  for(par in names(lower)) {
+  for(par in names(params)) {
 	  # sequence with infinity obviously does not work
 	  leftbound <- max(lower[par], -100)
 	  rightbound <- min(upper[par], 100)
@@ -114,67 +141,66 @@ optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fix
   }
   inits <- expand.grid(sequence)
 
-  nexts <- matrix(NA, nrow = nrow(inits), ncol = length(lower))
+  nexts <- matrix(NA, nrow = nrow(inits), ncol = length(params))
   
   for(i in 1:nrow(inits)) {
-  	step <- tryCatch(
-    	{
-	      step <- numeric(length(lower))
-	      optim_result <- optim(inits[i,], loglik, family = family, data = data, fixed = fixed, lower = lower, upper = upper, log = log, control = list(fnscale = -1, trace = 0, maxit = 1), method = optim_method)
-	step <- optim_result$par
-      	},
-    	error = function(e) {
-        # TODO: try to rethrow the original error (with correct stack trace, here context is changed)
-	step <- rep(NA, length.out = length(lower))
-	names(step) <- names(lower)
-        # message("Original error message:")
-        # message(e)
-        return(step)
-    	}
-  	)
-  	nexts[i,] <- step
+    step <- tryCatch(
+    {
+      step <- numeric(length(lower))
+      optim_result <- optim(inits[i,], loglik, family = family, data = data, fixed = fixed, lower = lower, upper = upper, log = log, control = list(fnscale = -1, trace = 0, maxit = 1), method = optim_method)
+      step <- optim_result$par
+    },
+    error = function(e) {
+      step <- rep(NA, length.out = length(lower))
+      names(step) <- names(lower)
+      return(step)
+    }
+    )
+    nexts[i,] <- step
   }
   colnames(nexts) <- paste0(colnames(inits), "_it")
   diagram <- cbind(inits, nexts)
 
+  gg <- ggplot(data = diagram) +
+      		geom_segment(aes_string(x = dim1, y = dim2, xend = paste0(dim1, "_it"), yend = paste0(dim2, "_it")), arrow = arrow(length = unit(0.2, "cm"))) +
+      		geom_segment(x = max(lower[dim1], -100), y = max(lower[dim2], -100), xend = min(upper[dim1], 100), yend = max(lower[dim2], -100), arrow = arrow(length = unit(0.2, "cm")), col = "green") +
+      		geom_segment(x = max(lower[dim1], -100), y = max(lower[dim2], -100), xend = max(lower[dim1], -100), yend = min(upper[dim2], 100), arrow = arrow(length = unit(0.2, "cm")), col = "green") +
+      		ggtitle( paste("Konvergenzverhalten; konstante Parameter:", paste(names(fixed), fixed, sep = " = ", collapse = "; ")) ) +
+      		xlab(dim1) + ylab(dim2)
+  print(gg)
   return(diagram)
 }
   
-# Example 1 for optimParam
+# Example 1 : norm
 data <- rnorm(n=100, mean=70, sd= 4)
 family <- list(family='norm', package="stats")
 lower <- c('sd' = 0, 'mean' = - Inf)
 upper <- c('sd' = Inf, 'mean' = Inf)
 fixed <- NULL
 defaults <- c('sd' = 1, 'mean' = 0)
-diagram <- optimParam(data = data, family=family, lower=lower, upper=upper, defaults = defaults, fixed=fixed, log = T, 
+diagram <- optimParam_plot(dim1 = "mean", dim2 = "sd", data = data, family=family, lower=lower, upper=upper, defaults = defaults, fixed=fixed, log = T, 
            parscale=TRUE, fnscale=TRUE, show_optim_progress = TRUE)
 
-gg <- ggplot(data = diagram)
-gg <- gg + geom_segment(aes(x = mean, y = sd,
-                            xend = mean_it, yend = sd_it),
-                        arrow = arrow(length = unit(0.2, "cm"))) +
-  geom_segment(x = max(lower[2], -100), y = max(lower[1], -100), xend = min(upper[2], 100), yend = max(lower[1], -100), arrow = arrow(length = unit(0.2, "cm")), col = "green") +
-  geom_segment(x = max(lower[2], -100), y = max(lower[1], -100), xend = max(lower[2], -100), yend = min(upper[1], 100), arrow = arrow(length = unit(0.2, "cm")), col = "green") +
-  ggtitle("Phasendiagramm") +
-  xlab(names(diagram)[1]) + ylab(names(diagram)[2])
-print(gg)
 
-  # TODO: Find out where the instability comes from
-  data <- rbeta(n=100, ncp = 20, shape=10, shape2=2)
-  family <- list(family='beta', package="stats")
-  lower <- c('ncp' = 0, 'shape1' = 0, 'shape2' = 0)
-  upper <- c('ncp' = Inf, 'shape1' = Inf, 'shape2' = Inf)
-  defaults <- c('ncp' = 0, 'shape1' = 1, 'shape2' = 1)
-  fixed <- list()
-  diagram <- optimParam(data = data, family = family, lower = lower, upper = upper, defaults = defaults, log = T, show_optim_progress = F)
+# Example 2: beta (three parameters)
+# TODO: Find out where the instability w.r.t. ncp comes from
+data <- rbeta(n=100, ncp = 20, shape1 = 10, shape2 = 10)
+family <- list(family='beta', package="stats")
+lower <- c('ncp' = 0, 'shape1' = 0, 'shape2' = 0)
+upper <- c('ncp' = Inf, 'shape1' = Inf, 'shape2' = Inf)
+defaults <- c('ncp' = 0, 'shape1' = 1, 'shape2' = 1)
 
-gg <- ggplot(data = diagram)
-gg <- gg + geom_segment(aes(x = ncp, y = shape1,
-                            xend = ncp_it, yend = shape1_it),
-                        arrow = arrow(length = unit(0.2, "cm"))) +
-  geom_segment(x = max(lower[1], -100), y = max(lower[2], -100), xend = min(upper[1], 100), yend = max(lower[2], -100), arrow = arrow(length = unit(0.2, "cm")), col = "green") +
-  geom_segment(x = max(lower[1], -100), y = max(lower[2], -100), xend = max(lower[1], -100), yend = min(upper[2], 100), arrow = arrow(length = unit(0.2, "cm")), col = "green") +
-  ggtitle("Phasendiagramm") +
-  xlab(names(diagram)[1]) + ylab(names(diagram)[2])
-print(gg)
+diagram <- optimParam_plot(dim1 = "ncp", dim2 = "shape1", fixed = (shape2 = 10), data = data, family = family, lower = lower, upper = upper, defaults = defaults, log = T, show_optim_progress = F)
+diagram <- optimParam_plot(dim1 = "ncp", dim2 = "shape2", fixed = (shape1 = 10), data = data, family = family, lower = lower, upper = upper, defaults = defaults, log = T, show_optim_progress = F)
+diagram <- optimParam_plot(dim1 = "shape1", dim2 = "shape2", fixed = (ncp = 20), data = data, family = family, lower = lower, upper = upper, defaults = defaults, log = T, show_optim_progress = F)
+
+# Example 3: f-distribution (also three parameters)
+# see if optim fails in three dimensions or whether the problem is specific w.r.t. ncp in beta
+  
+data <- rf(n=100, df1 = 5, df2 = 10, ncp = 5)
+family <- list(family='f', package="stats")
+lower <- c('ncp' = 0, 'df1' = 0, 'df2' = 0)
+upper <- c('ncp' = Inf, 'df1' = Inf, 'df2' = Inf)
+defaults <- c('ncp' = 0.5, 'df1' = 0.5, 'df2' = 0.5)
+fixed <- list()
+diagram <- optimParam_plot(dim1 = "ncp", dim2 = "df1", fixed = c(df2 = 10), data = data, family = family, lower = lower, upper = upper, defaults = defaults, log = T, show_optim_progress = F)
