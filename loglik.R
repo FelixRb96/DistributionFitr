@@ -1,5 +1,5 @@
-
 rm(list=ls())
+
 
 
 # Loglik-Function
