@@ -1,8 +1,9 @@
 source("utils.R")
+source("loglik.R")
 
 # Loglik-Function
 # important: family should be list with elements "package" and "family"
-loglik <- function(param_values, family, data, fixed=list(), log=T) {
+loglik_old <- function(param_values, family, data, fixed=list(), log=T) {
   arguments <- list(x=data)
   # check wheter log-distribution function is directly available for distribution
   if(log==T)
@@ -79,12 +80,13 @@ optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fix
   if(any(names(lower) != names(upper)) || any(names(lower) != names(defaults)) ) {
     stop('Parameter names of lower and upper bounds and start parameters must coincide. ')
   }
-  if(any(!(names(fixed) %in% names(lower))) || any(!(names(prior) %in% names(lower)))) {
-    stop('Parameter names given as fixed/prior unknown.')
-  }
-  if(anyDuplicated(names(fixed)) || anyDuplicated(names(prior))) {
-    stop('Duplicate entries in fixed/prior.')
-  }
+  
+  # if(any(!(names(fixed) %in% names(lower))) || any(!(names(prior) %in% names(lower)))) {
+  #   stop('Parameter names given as fixed/prior unknown.')
+  # }
+  # if(anyDuplicated(names(fixed)) || anyDuplicated(names(prior))) {
+  #   stop('Duplicate entries in fixed/prior.')
+  # }
   
   # replace default values from get_params with user-given priors
   if(length(prior) > 0) {
@@ -111,9 +113,11 @@ optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fix
       # Optimize first time
       # TODO: in second optimization set fnscale and parscale accordingly (check if it is set correctly below)
       cat("First Optimisation\n")
-      round <- "first"
-      optim_result <- optim(defaults, loglik, family = family, data = data, fixed=fixed, lower=lower, upper=upper,
-                            log=log, control = list(fnscale=-1, trace=0), method=optim_method)
+      
+      # construct loglikelihood function, that only depends on the parameters
+      loglik_fun <- loglik(family=family, data=data, fixed=fixed, log=log, upper=upper, lower=lower)
+      
+      optim_result <- optim(defaults, loglik_fun, control = list(fnscale=-1, trace=0), method=optim_method)
       if(optim_result$convergence!=0)
         warning('No convergence in first optimization!')
 
@@ -127,7 +131,7 @@ optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fix
       
       args <- list(...)
       fnscale <- if (hasArg("fnscale") && args$fnscale) -1/abs(optim_result$value) else -1
-      parscale <- if (hasArg("parscale") && args$parscale) 1/optim_result$par else 1
+      parscale <- if (hasArg("parscale") && args$parscale) 1/optim_result$par else rep(1, length(lower))
       
       # if a parameter is optimised as zero, parscale will be Infinity, causing trouble.
       # setting might not be optimal, but never fatal.
@@ -145,10 +149,11 @@ optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fix
       precision <- max(0, length(lower) - 2)
       # floating numbers are not equally spaced, only about 1e-16 is reliable
       precision <- max(1e-8/(10^(precision*2)), 1e-16)
-
-      round <- "second"
-      optim_result <- optim(optim_result$par, loglik, family = family, data = data, fixed=fixed, lower=lower, upper=upper,
-                            log=log, control = list(fnscale=fnscale, trace=0, parscale = parscale, factr = precision), method=optim_method)
+      
+      # factr = precision
+      
+      optim_result <- optim(optim_result$par, loglik_fun, 
+                            control = list(fnscale=fnscale, trace=0, parscale = parscale, factr = precision), method=optim_method)
       
       optim_successful <- TRUE
       
@@ -165,7 +170,7 @@ optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fix
       # message(e)
       if (!on_error_use_best_result) stop(e)
       
-      message(paste("Error occured during", round, "optimization, trying to take best result achieved up to now"))
+      message(paste("Error occured during optimization, trying to take best result achieved up to now"))
       if (nrow(optim_progress) == 0 || max(optim_progress$log_lik) == -Inf) 
         stop( e, "occured during first optimization, so no valid result can be used instead")
       
@@ -180,7 +185,7 @@ optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fix
     }
   )
   
-  if (optim_result$value < max(optim_progress$log_lik) - 1e-8) {
+  if (nrow(optim_progress) > 0 && optim_result$value < max(optim_progress$log_lik) - 1e-8) {
     message("Final Optimization result is worse than the best result achieved during optimization")
     cat("Diff to best:", abs(optim_result$value - max(optim_progress$log_lik)), "\n")
   }
@@ -218,7 +223,7 @@ if (sys.nframe() == 0) {
   
   
   # Example 2 for optimParam
-  data <- rbeta(n=100, shape=10, shape2=2)
+  data <- rbeta(n=100, shape1=10, shape2=2)
   family <- list(family='beta', package="stats")
   lower <- c('shape1' = 0, 'shape2' = 0)
   upper <- c('shape1' = Inf, 'shape2' = Inf)
@@ -246,3 +251,7 @@ if (sys.nframe() == 0) {
 # TODO: on error try to return best value from optimization progress up to now -> DONE
 
 # TODO: globalfit needs to remove the fixed parameters from upper, lower and start_parameter
+
+# TODO: agree on whether lower and upper should only contain entries for the continuous parameters or also for the fixed ones
+
+
