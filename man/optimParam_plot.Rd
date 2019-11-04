@@ -21,15 +21,18 @@ optimParam_plot(plot = TRUE, dim1, dim2, fixed, data, family, lower, upper, defa
   \item{dim2}{
      character; parameter to plot on the y-axis. Has to be set if \code{plot} is set to TRUE.
   }
-  \item{fixed}{
-     named vector of fixed parameters and their values, which are not taken into account while optimization process. \\
-     If \code{plot} is set to TRUE, parameters specified as \code{dim1} or \code{dim2} can not be fixed, and all other parameters except those two have to be fixed along with a valid value.
-  }
   \item{data}{
      vector of data points
   }
   \item{family}{
      list of two elements. family: distribution family callable in the \code{package}, e.g. 'norm'; package: name of the R package, which contains the distribution family.
+  }
+  \item{fixed}{
+     named vector of fixed parameters and their values, which are not taken into account while optimization process. \\
+     If \code{plot} is set to TRUE, parameters specified as \code{dim1} or \code{dim2} can not be fixed, and all other parameters except those two have to be fixed along with a valid value.
+  }
+  item{prior}{
+     named vector of user guesses for true parameters. Might improve optimisation speed and accuracy - giving priors fpr only some of the parameters is allowed.
   }
   \item{lower}{
      named vector of lower bounds of free parameters, if no lower bound \code{-Inf} 

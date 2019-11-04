@@ -146,14 +146,14 @@ optimParam_plot <- function(plot = TRUE, dim1 = NULL, dim2 = NULL, data, family,
   for(i in 1:nrow(inits)) {
     step <- tryCatch(
     {
-      step <- numeric(length(lower))
+      step <- numeric(length(params))
       optim_result <- optim(inits[i,], loglik, family = family, data = data, fixed = fixed, lower = lower, upper = upper, log = log, control = list(fnscale = -1, trace = 0, maxit = 1), method = optim_method)
       step <- optim_result$par
     },
     error = function(e) {
-      step <- rep(NA, length.out = length(lower))
-      names(step) <- names(lower)
-      return(step)
+      step <- rep(NA, length.out = length(params))
+      names(step) <- names(params)
+     return(step)
     }
     )
     nexts[i,] <- step
@@ -165,8 +165,12 @@ optimParam_plot <- function(plot = TRUE, dim1 = NULL, dim2 = NULL, data, family,
       		geom_segment(aes_string(x = dim1, y = dim2, xend = paste0(dim1, "_it"), yend = paste0(dim2, "_it")), arrow = arrow(length = unit(0.2, "cm"))) +
       		geom_segment(x = max(lower[dim1], -100), y = max(lower[dim2], -100), xend = min(upper[dim1], 100), yend = max(lower[dim2], -100), arrow = arrow(length = unit(0.2, "cm")), col = "green") +
       		geom_segment(x = max(lower[dim1], -100), y = max(lower[dim2], -100), xend = max(lower[dim1], -100), yend = min(upper[dim2], 100), arrow = arrow(length = unit(0.2, "cm")), col = "green") +
-      		ggtitle( paste("Konvergenzverhalten; konstante Parameter:", paste(names(fixed), fixed, sep = " = ", collapse = "; ")) ) +
       		xlab(dim1) + ylab(dim2)
+  if(length(fixed) > 0) {
+    gg <- gg + ggtitle( paste("Konvergenzverhalten; konstante Parameter:", paste(names(fixed), fixed, sep = " = ", collapse = "; ")) )
+  } else {
+    gg <- gg + ggtitle( "Konvergenzverhalten" )
+  }
   print(gg)
   return(diagram)
 }
@@ -190,9 +194,9 @@ lower <- c('ncp' = 0, 'shape1' = 0, 'shape2' = 0)
 upper <- c('ncp' = Inf, 'shape1' = Inf, 'shape2' = Inf)
 defaults <- c('ncp' = 0, 'shape1' = 1, 'shape2' = 1)
 
-diagram <- optimParam_plot(dim1 = "ncp", dim2 = "shape1", fixed = (shape2 = 10), data = data, family = family, lower = lower, upper = upper, defaults = defaults, log = T, show_optim_progress = F)
-diagram <- optimParam_plot(dim1 = "ncp", dim2 = "shape2", fixed = (shape1 = 10), data = data, family = family, lower = lower, upper = upper, defaults = defaults, log = T, show_optim_progress = F)
-diagram <- optimParam_plot(dim1 = "shape1", dim2 = "shape2", fixed = (ncp = 20), data = data, family = family, lower = lower, upper = upper, defaults = defaults, log = T, show_optim_progress = F)
+diagram <- optimParam_plot(dim1 = "ncp", dim2 = "shape1", fixed = c(shape2 = 10), data = data, family = family, lower = lower, upper = upper, defaults = defaults, log = T, show_optim_progress = F)
+diagram <- optimParam_plot(dim1 = "ncp", dim2 = "shape2", fixed = c(shape1 = 10), data = data, family = family, lower = lower, upper = upper, defaults = defaults, log = T, show_optim_progress = F)
+diagram <- optimParam_plot(dim1 = "shape1", dim2 = "shape2", fixed = c(ncp = 20), data = data, family = family, lower = lower, upper = upper, defaults = defaults, log = T, show_optim_progress = F)
 
 # Example 3: f-distribution (also three parameters)
 # see if optim fails in three dimensions or whether the problem is specific w.r.t. ncp in beta

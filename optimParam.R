@@ -86,6 +86,7 @@ optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fix
     stop('Duplicate entries in fixed/prior.')
   }
   
+  # replace default values from get_params with user-given priors
   if(length(prior) > 0) {
     prior_positions <- match(names(prior), names(lower), nomatch = NULL)
     # nomatch should not occur due to the check above: "Parameter names given as prior unknown"

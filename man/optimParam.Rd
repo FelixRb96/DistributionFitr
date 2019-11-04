@@ -18,6 +18,12 @@ optimParam(data, family, lower, upper, start_parameters, fixed)
   \item{family}{
      list of two elements. family: distribution family callable in the \code{package}, e.g. 'norm'; package: name of the R package, which contains the distribution family.
   }
+  \item{fixed}{
+     named vector of fixed parameters, which are not taken into account while optimization process  
+  }
+  \item{prior}{
+     named vector of user guesses for true parameters. Might improve optimisation speed and accuracy - giving priors for only some of the parameters is allowed.
+  }
   \item{lower}{
      named vector of lower bounds of free parameters, if no lower bound \code{-Inf} 
   }
@@ -29,9 +35,6 @@ optimParam(data, family, lower, upper, start_parameters, fixed)
   }
   \item{method}{
      so far only Maximum-Likelihood is implemented, thus argument must be \code{"MLE"}.
-  }
-  \item{fixed}{
-     named vector of fixed parameters, which are not taken into account while optimization process  
   }
   \item{log}{
      logical; if TRUE (default) optimization is run over log-likelihood, requires log-likelihood as parameter in selected distribution family
