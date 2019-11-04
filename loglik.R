@@ -1,12 +1,12 @@
-rm(list=ls())
+source("utils.R")
 
 
 
 # Loglik-Function
 # Formate
-
+ 
 # arg_opt:  Charakter Vektor,   Bezeichnung der Parameter von denen die Funktion abhängen soll
-# family:   Charakter Vektor,   Name der Familie
+# family:   Liste,              Name der Familie + Liste mit Paket
 # data:     Numerischer Vektor, Datenreihe
 # fixed:    banamte Liste,      Namen und fixierte Werte für die übringen Parameter
 #                               Arg_opt und fixed sind disjunkt und ergeben zusammen ALLE paramter der Familie
@@ -16,12 +16,13 @@ rm(list=ls())
 # upper:    Numerischer Vektor, Upper Boundaries for paramters in arg_opt   (same order!)
 
 
+
 loglik <- function(arg_opt, family, data, fixed=list(), log, lower, upper) { #NEW: fixed=list() default
   
   if(length(arg_opt)==0) warning('loglik does not depend on parameters.')
   
   
-  arguments <- list(x=data) #NEW: arg_opt wird erst in likelihood in die Liste eingefügt
+  arguments <- list(x=data) # NEW: arg_opt wird erst in likelihood in die Liste eingefügt
   
   # check wheter log-distribution function is directly available for distribution
   if(log==T)
@@ -34,26 +35,28 @@ loglik <- function(arg_opt, family, data, fixed=list(), log, lower, upper) { #NE
   
   # define loglikelihood function 
   likelihood <- function(params) {
+  
+    print(params) # to be deleted later, checking input  
     
     #NEW: Check boundaries
-    if(any(params-lower<0) | any(upper-params<0))
-      stop('Parameters are outside the boundaries.') #Alternativ hier einen Penalty einbauen
+    for(param_name in names(params)) {
+      if(lower[param_name]>params[[param_name]] | upper[param_name] < params[[param_name]])
+        stop('Parameter outside the boundaries.') #Alternativ einen penalty
+    }
     
     #NEW: length arg_opt = length params
     if(length(params)!=length(arg_opt))
       stop('Incorrect number of arguments')
     
     #Add params with names of parameters to arguments list
-    for(i in 1:length(params)){
-      arguments[[arg_opt[i]]] <- params[i]
-    }
+    arguments <- c(arguments, params)
     
-    summands <- do.call(paste('d', family, sep=''), args=arguments)
+    summands <- do.call(get_fun_from_package(family$family, family$package, type = "d"), args=arguments)
     if(any(is.na(summands)))
       stop('In Log-Likelihood-Function NA occured.')
     
     # log values if not log so far
-        if(!log) {
+    if(!log) {
       summands <- log(summands)
       warning('Could be numerically instable.')
     } 
