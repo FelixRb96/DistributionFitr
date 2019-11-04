@@ -27,14 +27,14 @@ loglik <- function(family, data, fixed=list(), log, lower, upper) { #NEW: fixed=
   # define loglikelihood function 
   likelihood <- function(params) {
     
-    # print(params) # to be deleted later, checking input  
+    print(params) # to be deleted later, checking input  
   
     if(length(params)==0) warning('loglik does not depend on parameters.')
       
     #NEW: Check boundaries
     for(param_name in names(params)) {
       if(lower[param_name]>params[[param_name]] || upper[param_name] < params[[param_name]])
-        stop('Parameter', param_name, 'with value', params[[param_name]], 'outside the boundaries.') #Alternativ einen penalty
+        stop('Parameter ', param_name, ' with value ', params[[param_name]], ' outside the boundaries.') #Alternativ einen penalty
     }
     
     #Add params with names of parameters to arguments list
@@ -71,7 +71,10 @@ loglik <- function(family, data, fixed=list(), log, lower, upper) { #NEW: fixed=
       #print(c(param_values, fixed, log_lik = ll))
       progress[nrow(progress)+1, ] <- c(params, fixed, log_lik = loglik_value)
       assign("optim_progress", envir = parent.frame(i), progress)
+      print(tail(progress,2))
     }
+    
+    message(loglik_value)
     
     return(loglik_value)
   }

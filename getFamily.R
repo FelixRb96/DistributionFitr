@@ -32,6 +32,7 @@ getFamily <- function(pkg){
   return(ret)
 }
 
+# TODO: needs to check whether r and d methods exist, because we definetely need those 2
 
 
 

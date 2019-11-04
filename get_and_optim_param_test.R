@@ -7,47 +7,6 @@ source("optimParam.R")
 source("get_params.R")
 source("utils.R")
 
-sample_params <- function(family, family_info) {
-  npar <- length(family_info$lower)
-  pars <- numeric(npar)
-  names(pars) <- names(family_info$lower)
-  
-  # bound possible values to reasonable range
-  upper <- pmin(family_info$upper, 100)
-  lower <- pmax(family_info$lower, -100)
-  
-  # simulate some "true" parameter values
-  # cat("Sampling some 'true' parameter values and simulating sample data\n")
-  for(param in names(pars)) {
-    
-    if (family_info$accepts_float[param]) {
-      pars[param] <- runif(1, lower[param], upper[param])
-      
-      # check if range contains an integer and if yes sample intergers from this range
-    } else if (floor(family_info$upper[param]) - ceiling(family_info$lower[param]) >= 0) {
-      pars[param] <- sample(ceiling(lower[param]) : floor(upper[param]), 1)
-    } else {
-      stop("Param", param, "does not accept floats and its range does not include any integers")
-    }
-  }
-  
-  # make sure that sampled values make sense for uniform distribution
-  if (family$family == "unif") {
-    h <- pars
-    pars["min"] <- min(h)
-    pars["max"] <- max(h)
-  }
-  return(pars)
-}
-
-sample_data <- function(n, family, params) {
-  rfun <- get_fun_from_package(fam=family$family, package=family$package, type="r")
-  n_or_nn <- if (! "nn" %in% names(formals(rfun))) list(n=n) else list(nn=n)
-  args <- c(n_or_nn, params)
-  testing_data <- do.call(rfun, args)
-  return(testing_data)
-}
-
 evaluate_optimization <- function(true_pars, optim_result) {
   error_percent <- 100 * (true_pars - optim_result$par) / true_pars
   

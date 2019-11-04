@@ -59,8 +59,9 @@ loglik_old <- function(param_values, family, data, fixed=list(), log=T) {
 # debug_error: show optimization progress when an error occured
 # show_optim_progress: always show optimization progress
 # on_error_use_best_result: if TRUE and an error occured during optimization the best result achieved prior to the error will be taken
+# n_starting_points: how many different starting points should be used for optimisation. The best result will be taken.
 optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fixed=list(), prior = NULL, log=TRUE,
-                       optim_method = 'L-BFGS-B',
+                       optim_method = 'L-BFGS-B', n_starting_points=1,
                        debug_error=TRUE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, ...) {
   # Input parameter validation
 
@@ -108,7 +109,13 @@ optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fix
     }
   })
   
-  optim_result <- tryCatch(
+  optim_results <- list()
+  for (i in 1:n_starting_points) {
+      start_params <- if(i>1) sample_params(family, list(lower=lower, upper=upper, accepts_float=!is.na(lower)), params=lower) else defaults
+      cat("Sampling start parameters, Iteration:", i, "\n")
+      print(start_params)
+    
+  optim_results[[i]] <- tryCatch(
     {
       # Optimize first time
       # TODO: in second optimization set fnscale and parscale accordingly (check if it is set correctly below)
@@ -117,7 +124,7 @@ optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fix
       # construct loglikelihood function, that only depends on the parameters
       loglik_fun <- loglik(family=family, data=data, fixed=fixed, log=log, upper=upper, lower=lower)
       
-      optim_result <- optim(defaults, loglik_fun, control = list(fnscale=-1, trace=0), method=optim_method)
+      optim_result <- optim(start_params, loglik_fun, control = list(fnscale=-1, trace=0), lower=lower, upper=upper, method=optim_method)
       if(optim_result$convergence!=0)
         warning('No convergence in first optimization!')
 
@@ -138,9 +145,6 @@ optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fix
       adjust <- which(parscale == Inf | parscale == -Inf)
       parscale[adjust] <- mean(parscale[!(parscale == Inf | parscale == -Inf)], na.rm = TRUE)
       
-      cat("\n\nfnscale:", fnscale, "\n")
-      cat("parscale:\n")
-      print(parscale)
       # linebreak if parscale not set initially
       cat("Second Optimisation\n")
       
@@ -150,10 +154,9 @@ optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fix
       # floating numbers are not equally spaced, only about 1e-16 is reliable
       precision <- max(1e-8/(10^(precision*2)), 1e-16)
       
-      # factr = precision
-      
       optim_result <- optim(optim_result$par, loglik_fun, 
-                            control = list(fnscale=fnscale, trace=0, parscale = parscale, factr = precision), method=optim_method)
+                            control = list(fnscale=fnscale, trace=0, parscale = parscale, factr = precision), 
+                            lower=lower, upper=upper, method=optim_method)
       
       optim_successful <- TRUE
       
@@ -170,8 +173,8 @@ optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fix
       # message(e)
       if (!on_error_use_best_result) stop(e)
       
-      message(paste("Error occured during optimization, trying to take best result achieved up to now"))
-      if (nrow(optim_progress) == 0 || max(optim_progress$log_lik) == -Inf) 
+      message(e, " occured during optimization, trying to take best result achieved up to now")
+      if (nrow(optim_progress) == 0 || max(optim_progress$log_lik, na.rm = TRUE) == -Inf) 
         stop( e, "occured during first optimization, so no valid result can be used instead")
       
       # getting best result from optimization progress up to now
@@ -184,8 +187,12 @@ optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fix
       return(optim_result)
     }
   )
+  }
+  print(optim_results)
+  best_idx <- which.max(sapply(optim_results, function(x) x$value))
+  optim_result <- optim_results[[best_idx]]
   
-  if (nrow(optim_progress) > 0 && optim_result$value < max(optim_progress$log_lik) - 1e-8) {
+  if (nrow(optim_progress) > 0 && optim_result$value < max(optim_progress$log_lik, na.rm = TRUE) - 1e-8) {
     message("Final Optimization result is worse than the best result achieved during optimization")
     cat("Diff to best:", abs(optim_result$value - max(optim_progress$log_lik)), "\n")
   }
@@ -219,7 +226,7 @@ if (sys.nframe() == 0) {
   fixed <- c('sd'=2)
   defaults <- c('mean' = 0)
   optimParam(data = data, family=family, lower=lower, upper=upper, defaults = defaults, fixed=fixed, log = T, 
-             parscale=TRUE, fnscale=TRUE, show_optim_progress = TRUE)
+             parscale=TRUE, fnscale=TRUE, show_optim_progress = TRUE, n_starting_points = 5)
   
   
   # Example 2 for optimParam
@@ -228,12 +235,26 @@ if (sys.nframe() == 0) {
   lower <- c('shape1' = 0, 'shape2' = 0)
   upper <- c('shape1' = Inf, 'shape2' = Inf)
   defaults <- c('shape1' = 1, 'shape2' = 1)
+  fixed <- list("ncp"=0)
+  optimParam(data = data, family = family, lower = lower, upper = upper, defaults = defaults, log = T, show_optim_progress = TRUE, n_starting_points = 5)
+  
+  data <- rweibull(n=100, scale=10, shape = 20)
+  family <- list(family='weibull', package="stats")
+  lower <- c('scale' = 0, 'shape' = 0)
+  upper <- c('scale' = Inf, 'shape' = Inf)
+  defaults <- c('scale' = 1, 'shape' = 0.5)
   fixed <- list()
-  optimParam(data = data, family = family, lower = lower, upper = upper, defaults = defaults, log = T, show_optim_progress = TRUE)
+  optimParam(data = data, family = family, lower = lower, upper = upper, defaults = defaults, log = T, 
+             fnscale=TRUE, parscale=TRUE,
+             show_optim_progress = TRUE)
+  
+  loglik_fun <- loglik(family=family, data=data, fixed=fixed, log=T, upper=upper, lower=lower)
+  optim(defaults, loglik_fun, control=list(fnscale=-1, parscale=c(1,1)), lower=lower, upper=upper, method="SANN")
+  
   
   
   # Example 3 for optimParam
-  # TODO: Dos not work, since optimParam doesnt work for integers (discrete parameterspace)
+  # TODO: Does not work, since optimParam doesnt work for integers (discrete parameterspace)
   if (FALSE) {
   data <- rbinom(n=100, size=10, prob=0.5)
   family <- list(family='binom', package="stats")
