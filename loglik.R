@@ -27,7 +27,7 @@ loglik <- function(family, data, fixed=list(), log, lower, upper) { #NEW: fixed=
   # define loglikelihood function 
   likelihood <- function(params) {
     
-    print(params) # to be deleted later, checking input  
+    # print(params) # to be deleted later, checking input  
   
     if(length(params)==0) warning('loglik does not depend on parameters.')
       
@@ -57,6 +57,7 @@ loglik <- function(family, data, fixed=list(), log, lower, upper) { #NEW: fixed=
     for (i in 1:length(sys.parents())) {
       
       if (exists("optim_progress", envir = parent.frame(i))) {
+        # cat("Env in loglik:\n")
         # print(parent.frame(i))
         return_optim_progress <- TRUE
         break
@@ -71,10 +72,10 @@ loglik <- function(family, data, fixed=list(), log, lower, upper) { #NEW: fixed=
       #print(c(param_values, fixed, log_lik = ll))
       progress[nrow(progress)+1, ] <- c(params, fixed, log_lik = loglik_value)
       assign("optim_progress", envir = parent.frame(i), progress)
-      print(tail(progress,2))
+      # print(tail(progress,2))
     }
     
-    message(loglik_value)
+    # message(loglik_value)
     
     return(loglik_value)
   }

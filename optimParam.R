@@ -33,7 +33,7 @@ loglik_old <- function(param_values, family, data, fixed=list(), log=T) {
   for (i in 1:length(sys.parents())) {
     
     if (exists("optim_progress", envir = parent.frame(i))) {
-      # print(parent.frame(i))
+      print(parent.frame(i))
       return_optim_progress <- TRUE
       break
     }
@@ -105,15 +105,16 @@ optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fix
   on.exit({
     if (exists("optim_progress") && (show_optim_progress || (debug_error && !optim_successful))) {
       cat("Optimization progress:\n")
-      print(tail(optim_progress, 2))
+      print(tail(optim_progress, 10))
     }
   })
   
+  # try multiple starting points hoping for a better result in case of multiple local minima
   optim_results <- list()
   for (i in 1:n_starting_points) {
       start_params <- if(i>1) sample_params(family, list(lower=lower, upper=upper, accepts_float=!is.na(lower)), params=lower) else defaults
       cat("Sampling start parameters, Iteration:", i, "\n")
-      print(start_params)
+      # print(start_params)
     
   optim_results[[i]] <- tryCatch(
     {
@@ -129,7 +130,8 @@ optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fix
         warning('No convergence in first optimization!')
 
       # to see what happens in first
-      print(tail(optim_progress, 2))
+      # print(tail(optim_progress, 2))
+      
       # TODO: 
       # Problems with convergence can occur, if parscale and fscale not well selected
       # therefore 2 steps with right selection need to be implemented
@@ -165,6 +167,7 @@ optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fix
       
       # so that it is returned and saved to optim_result
       optim_result
+      
     },
     
     error = function(e) {
@@ -188,7 +191,8 @@ optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fix
     }
   )
   }
-  print(optim_results)
+  
+  # extract best optim result of all the starting points
   best_idx <- which.max(sapply(optim_results, function(x) x$value))
   optim_result <- optim_results[[best_idx]]
   
@@ -234,22 +238,23 @@ if (sys.nframe() == 0) {
   family <- list(family='beta', package="stats")
   lower <- c('shape1' = 0, 'shape2' = 0)
   upper <- c('shape1' = Inf, 'shape2' = Inf)
-  defaults <- c('shape1' = 1, 'shape2' = 1)
+  defaults <- c('shape1' = 0.5, 'shape2' = 0.5)
   fixed <- list("ncp"=0)
   optimParam(data = data, family = family, lower = lower, upper = upper, defaults = defaults, log = T, show_optim_progress = TRUE, n_starting_points = 5)
   
-  data <- rweibull(n=100, scale=10, shape = 20)
-  family <- list(family='weibull', package="stats")
-  lower <- c('scale' = 0, 'shape' = 0)
-  upper <- c('scale' = Inf, 'shape' = Inf)
-  defaults <- c('scale' = 1, 'shape' = 0.5)
+  data <- rbeta(n=100, shape1=50, shape2=70)
+  family <- list(family='beta', package="stats")
+  lower <- c('shape1' = 0, 'shape2' = 0, "ncp"=0)
+  upper <- c('shape1' = Inf, 'shape2' = Inf, "ncp"=Inf)
+  defaults <- c('shape1' = 0.5, 'shape2' = 0.5, "ncp"=0)
   fixed <- list()
   optimParam(data = data, family = family, lower = lower, upper = upper, defaults = defaults, log = T, 
              fnscale=TRUE, parscale=TRUE,
              show_optim_progress = TRUE)
   
   loglik_fun <- loglik(family=family, data=data, fixed=fixed, log=T, upper=upper, lower=lower)
-  optim(defaults, loglik_fun, control=list(fnscale=-1, parscale=c(1,1)), lower=lower, upper=upper, method="SANN")
+  optim(defaults, loglik_fun, control=list(fnscale=-1), lower=lower, upper=upper, method="L-BFGS-B")
+  optim(c('shape1' = 40, 'shape2' = 10, "ncp"=0), loglik_fun, control=list(fnscale=-1), lower=lower, upper=upper, method="L-BFGS-B")
   
   
   
@@ -274,5 +279,8 @@ if (sys.nframe() == 0) {
 # TODO: globalfit needs to remove the fixed parameters from upper, lower and start_parameter
 
 # TODO: agree on whether lower and upper should only contain entries for the continuous parameters or also for the fixed ones
+
+# TODO: optim_progress contains all calls to log_lik-function, that is also the calls for estimating the gradient, thats why usually
+# always 5 rows refer to the same optimization step
 
 
