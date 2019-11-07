@@ -202,22 +202,16 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults, method =
     cat("Diff to best:", abs(optim_result$value - max(optim_progress$log_lik)), "\n")
   }
   
-<<<<<<< HEAD:optimParamsContinuous.R
   # Information criteria calculation
   ic <- informationCriteria(ll=optim_result$value, n=length(data), k=length(upper))
 
-=======
->>>>>>> f255cdaa1f7112ce402fdca729288c7ea4073043:optimParam.R
   return(list(
     par = optim_result$par,
     value = optim_result$value,
     convergence = optim_result$convergence,
-<<<<<<< HEAD:optimParamsContinuous.R
     AIC = ic$aic, 
     BIC = ic$bic,
     AICc = ic$aicc
-=======
->>>>>>> f255cdaa1f7112ce402fdca729288c7ea4073043:optimParam.R
     )
   )
 }
