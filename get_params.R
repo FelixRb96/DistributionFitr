@@ -344,6 +344,23 @@ get_param_ranges <- function(all_params, fam) {
     if(accepted_float_rate > 1/(num_tests - num_integer)) accepts_float[param] <- TRUE
     else if(accepted_int_rate == 0) stop("distribution does not seem to accept any values")
     else accepts_float[param] <- FALSE
+    
+    # final adjustment to parameter bounds to make sure that integer-parameters have the correct bound
+    # (possible numerical deviations due to iteration algorithm above)
+    low <- lower[param]
+    if(low %% 1 != 0) {
+      lowerbound <- check_values_for_param(param, all_params, fam, floor(low))
+      upperbound <- check_values_for_param(param, all_params, fam, ceiling(low))
+      if(lowerbound == TRUE) { lower[param] <- floor(low) }
+      else { lower[param] <- ceiling(low) }
+    }
+    high <- upper[param]
+    if(high %% 1 != 0) {
+      lowerbound <- check_values_for_param(param, all_params, fam, floor(high))
+      upperbound <- check_values_for_param(param, all_params, fam, ceiling(high))
+      if(lowerbound == TRUE) { upper[param] <- floor(high) }
+      else { upper[param] <- ceiling(high) }
+    }
   }
   return(list(lower=lower,
               upper=upper,
