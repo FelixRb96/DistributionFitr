@@ -236,7 +236,7 @@ if (sys.nframe() == 0) {
   upper <- c('shape1' = Inf, 'shape2' = Inf)
   defaults <- c('shape1' = 0.5, 'shape2' = 0.5)
   fixed <- list("ncp"=0)
-  optimParam(data = data, family = family, lower = lower, upper = upper, defaults = defaults, log = T, show_optim_progress = TRUE, n_starting_points = 5)
+  optimParamsContinuous(data = data, family = family, lower = lower, upper = upper, defaults = defaults, log = T, show_optim_progress = TRUE, n_starting_points = 5)
   
   data <- rbeta(n=100, shape1=50, shape2=70)
   family <- list(family='beta', package="stats")
@@ -244,7 +244,7 @@ if (sys.nframe() == 0) {
   upper <- c('shape1' = Inf, 'shape2' = Inf, "ncp"=Inf)
   defaults <- c('shape1' = 0.5, 'shape2' = 0.5, "ncp"=0)
   fixed <- list()
-  optimParam(data = data, family = family, lower = lower, upper = upper, defaults = defaults, log = T, 
+  optimParamsContinuous(data = data, family = family, lower = lower, upper = upper, defaults = defaults, log = T, 
              fnscale=TRUE, parscale=TRUE,
              show_optim_progress = TRUE)
   

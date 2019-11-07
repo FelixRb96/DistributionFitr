@@ -1,5 +1,5 @@
-source("optimParam.R") # ?
-source("get_families.R") # ?
+source('optimParamsDiscrete.R')
+source("get_families.R") 
 
 globalfit <- function(data, continuity = NULL, method = "MLE"){
   
@@ -21,7 +21,7 @@ getDecimals <- function(x){
   
 }
 
-#' some_percent: wenn fuer eine gegebene Anzahl an Dezimalstellen mindestens der Anteíl percent
+#' some_percent: wenn fuer eine gegebene Anzahl an Dezimalstellen mindestens der Ante?l percent
 #'               an moeglichen Dezimalen (von 10) auftreten, wird TRUE zurueckgegeben 
 some_percent <- function(df, percent){
   for (i in min(df$numbers):max(df$numbers)){
@@ -122,7 +122,7 @@ disc_trafo <- function(data){
   loops <- array(NA, dim=length(families))
   for(i in 1:length(families)){
     
-    loops[i] <- families[[i]]$discrete
+    loops[i] <- families[[i]]$family_info$discrete
     
   }
   loops <- which(loops==TRUE) # Indizes zu diskreten Verteilungen
@@ -143,21 +143,17 @@ disc_trafo <- function(data){
     
   }
   
-  output_liste <- replicate(loops, list())
+  # output_liste <- replicate(loops, list())
   
   for (fam in loops){
     
-    # fixed festlegen
-    
-    if (length(fixed) == 0){ # leere Liste hat Laenge 0
-      
-      liste <- optimParam(data,
-                          families[[fam]]$family,
-                          families[[fam]]$lower,
-                          families[[fam]]$upper,
-                          method,
-                          fixed,
-                          families[[fam]]$log)
+      liste <- optimParamsDiscrete(data = data,
+                          family = families[[fam]][c('package', 'family')],
+                          family_info = families[[fam]]$family_info,
+                          method = 'MLE', prior = NULL, log = families[[fam]]$family_info$log,
+                          optim_method = 'L-BFGS-B', n_starting_points = 1,
+                          debug_error = FALSE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, 
+                          max_discrete_steps= 100, plot=FALSE, discrete_fast = TRUE)
       
       output <- list(likfit = liste$value,
                      AIC = liste$AIC,
@@ -169,14 +165,11 @@ disc_trafo <- function(data){
                      continuousParams = NULL, # hier muss noch was passieren
                      range = NULL) # hier muss noch was passieren
       
-    } else{
-      
-      # hier das mit der Intervallschachtelung
-      
-    }
     
     class(output) <- "globalfit"
     output_liste[fam] <- output
   }
   
 }
+
+globalfit(rnorm(n = 1000, mean=10, sd=1))
