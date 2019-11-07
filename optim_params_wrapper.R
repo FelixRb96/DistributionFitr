@@ -21,12 +21,14 @@ optim_params_wrapper <- function(data, family_info, method = 'MLE', prior = NULL
                                   optim_method = 'L-BFGS-B', n_starting_points=1,
                                   debug_error=TRUE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, ...){
   
+  # optimisation result will be stored here for each case!
+  result <- list()
+
   if (all(family_info$accepts_float)) {
     result <- optimParam(data=data, family=family_info$family, lower= family_info$lower, upper=family_info$upper,
                defaults = family_info$defaults, method = method, fixed=c(), log = log, optim_method = optim_method,
                nn_starting_points= n_starting_points, debug_error = debug_error, show_optim_progress = FALSE,
-               on_error_use_best_result = TRUE, ...)   # TODO: 
-    return(result)
+               on_error_use_best_result = TRUE, ...)
   } else if(sum(!family_info$accepts_float)==1) {
     dispar_id <- family_info$accepts_float==FALSE
     dispar_default <- family_info$defaults[dispar_id]
@@ -76,7 +78,7 @@ optim_params_wrapper <- function(data, family_info, method = 'MLE', prior = NULL
       
     }
     plot((ifelse(is.infinite(cont_optim_value), NA, cont_optim_value)))
-    return(cont_optim_result[[which.max(cont_optim_value)]])
+    result <- cont_optim_result[[which.max(cont_optim_value)]]
     #return(cont_optim_result)
   } else {
     non_floats <- which(family_info$accepts_float)
@@ -94,8 +96,8 @@ optim_params_wrapper <- function(data, family_info, method = 'MLE', prior = NULL
     colnames(grid) <- names(family_info$lower)[non_floats]
     # number of columns of result matrix: number of variable parameters + two (loglikelihood & convergence code)
     num_free_params <- length(family_info$lower) - sum(non_floats)
-    grid_results <- matrix(NA, nrow = nrow(grid), ncol = (num_free_params + 2) )
-    colnames(grid_results) < c(colnames(grid), "loglik", "convergence")
+    grid_results <- matrix(NA, nrow = nrow(grid), ncol = 2)
+    colnames(grid_results) < c("loglik", "convergence")
     for(i in 1:grid) {
       optim_res <- tryCatch(
 	{
@@ -105,18 +107,17 @@ optim_params_wrapper <- function(data, family_info, method = 'MLE', prior = NULL
 	  message(e);
 	  # generate a NA row of appropriate length to impute into grid_results
 	  list(
-	    par = rep(NA, times = (num_free_params)),
-	    val = NA,
+	    value = NA,
 	    convergence = 99
 	  )
 	} # end error handler
       ) # end tryCatch
-      grid_results[i, ] <- c(optim_res$par, optim_res$val, optim_res$convergence)
+      grid_results[i, ] <- c(optim_res$val, optim_res$convergence)
     } # end for-loop in grid
     # drop all weird cases
     discrete_results <- grid_results[grid_results$convergence == 0, ]
     optimum_index <- which.max(discrete_results$loglik)
-    # run optimParam again for the best grid cell to retrieve information criteria, otherwise grid_results would blow up too much
+    # run optimParam again for the best grid cell to retrieve optimal parameters and information criteria, otherwise grid_results would blow up too much
     # difference to the optimParam above: argument fixed is changed!
     optim_res <- tryCatch(
       {
@@ -126,12 +127,27 @@ optim_params_wrapper <- function(data, family_info, method = 'MLE', prior = NULL
       error <- function(e) {
         message(e);
         list(par = rep(NA, times = (num_free_params)),
-	     val = NA,
+	     value = NA,
 	     convergence = 99)
         }
       )
-    return(optim_res)
+    result <- optim_res
   }
+  # lastly: add information criteria
+  # only non-fixed parameters are penalised
+  k <- length(family_info$upper)
+  n <- length(data)
+  aic <- 2*k - 2*result$value
+  bic <- log(n)*k - 2*result$value
+  aicc <- aic + (2*k^2+2*k)/(n-k-1)
+
+  return(list(par = result$par,
+	      values = result$value,
+	      convergence = result$convergence,
+	      AIC = aic,
+	      BIC = bic,
+	      AICc = aicc))
+
 }
 
 

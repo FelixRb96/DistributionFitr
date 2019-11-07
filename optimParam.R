@@ -201,21 +201,10 @@ optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fix
     cat("Diff to best:", abs(optim_result$value - max(optim_progress$log_lik)), "\n")
   }
   
-
-  # Information criteria calculation
-  k = length(upper)
-  n = length(data)
-  aic = 2*k - 2 *  optim_result$value          # TODO: should k also include the length of the fixed parameters???
-  bic = log(n) * k - 2 *  optim_result$value
-  aicc = aic + (2*k^2+2*k)/(n-k-1)
-  
   return(list(
     par = optim_result$par,
     value = optim_result$value,
     convergence = optim_result$convergence,
-    AIC = aic, 
-    BIC = bic,
-    AICc = aicc
     )
   )
 }
