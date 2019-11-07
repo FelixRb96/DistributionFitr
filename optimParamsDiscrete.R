@@ -158,7 +158,11 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
 	     convergence = 99)
         }
       )
-    # TODO: adapt information criteria for discrete k parameters
+    # ICs are the same, since discrete parameters are still parameters we optimise over
+    ic <- informationCriteria(ll = optim_res$value, n = length(data), k = length(family_info$upper))
+    optim_res$AIC <- ic$aic
+    optim_res$BIC <- ic$bic
+    optim_res$AICc <- ic$aicc
     return(optim_res)
   }
 }

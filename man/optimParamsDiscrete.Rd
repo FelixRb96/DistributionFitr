@@ -1,5 +1,5 @@
-\name{optimParam}
-\alias{optimParam}
+\name{optimParamDiscrete}
+\alias{optimParamDiscrete}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
   Fit Optimal Parameters for a Distribution Family
@@ -67,7 +67,7 @@ optimParam(data, family, lower, upper, start_parameters, fixed)
   \item{convergence}{An integer code. 0 indicates sucessful completion. Refer to \code{optim} in \code{stats} for further details}
   \item{AIC}{Akaike Information Criterion of optimal parameters}
   \item{BIC}{Bayes Information Criterion of optimal parameters}
-  \item{AIC}{Corrected Akaike Information Criterion of optimal parameters}
+  \item{AIC}{Akaike Information Criterion of optimal parameters, corrected for small sample sizes}
 }
 \references{
  ~put references to the literature/web site here ~

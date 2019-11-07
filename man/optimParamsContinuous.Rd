@@ -1,8 +1,8 @@
-\name{optimParam}
-\alias{optimParam}
+\name{optimParamsContinuous}
+\alias{optimParamsContinuous}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-  Fit Optimal Parameters for a Distribution Family
+  Fit Optimal Parameters for a Distribution Family, for continuous parameter ranges only
 }
 \description{
   Given data and a distribution family, this function optimises over the given continuous parameters of the function and returns the best fitted parameters and information criteria.
@@ -19,7 +19,7 @@ optimParam(data, family, lower, upper, start_parameters, fixed)
      list of two elements. family: distribution family callable in the \code{package}, e.g. 'norm'; package: name of the R package, which contains the distribution family.
   }
   \item{fixed}{
-     named vector of fixed parameters, which are not taken into account while optimization process  
+     named vector of fixed parameters, which are not taken into account during the optimization process  
   }
   \item{prior}{
      named vector of user guesses for true parameters. Might improve optimisation speed and accuracy - giving priors for only some of the parameters is allowed.
@@ -30,7 +30,7 @@ optimParam(data, family, lower, upper, start_parameters, fixed)
   \item{upper}{
      named vector of upper bounds of free parameters, if no upper bound \code{Inf}, names must coincide with \code{lower}
   }
-  \item{start_parameters}{
+  \item{defaults}{
      named vector of starting parameters for optimisation, names must coincide with \code{lower} and \code{upper}
   }
   \item{method}{
@@ -57,7 +57,7 @@ optimParam(data, family, lower, upper, start_parameters, fixed)
   \item{convergence}{An integer code. 0 indicates sucessful completion. Refer to \code{optim} in \code{stats} for further details}
   \item{AIC}{Akaike Information Criterion of optimal parameters}
   \item{BIC}{Bayes Information Criterion of optimal parameters}
-  \item{AIC}{Corrected Akaike Information Criterion of optimal parameters}
+  \item{AICc}{Akaike Information Criterion of optimal parameters, corrected for small sample sizes}
 }
 \references{
  ~put references to the literature/web site here ~
