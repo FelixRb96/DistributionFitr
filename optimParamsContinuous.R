@@ -1,5 +1,6 @@
 source("utils.R")
 source("loglik.R")
+source("informationCriteria.R")
 
 # Loglik-Function
 # important: family should be list with elements "package" and "family"
@@ -60,7 +61,7 @@ loglik_old <- function(param_values, family, data, fixed=list(), log=T) {
 # show_optim_progress: always show optimization progress
 # on_error_use_best_result: if TRUE and an error occured during optimization the best result achieved prior to the error will be taken
 # n_starting_points: how many different starting points should be used for optimisation. The best result will be taken.
-optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fixed=list(), prior = NULL, log=TRUE,
+optimParamsContinuous <- function(data, family, lower, upper, defaults, method = 'MLE', fixed=list(), prior = NULL, log=TRUE,
                        optim_method = 'L-BFGS-B', n_starting_points=1,
                        debug_error=TRUE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, ...) {
   # Input parameter validation
@@ -201,39 +202,34 @@ optimParam <- function(data, family, lower, upper, defaults, method = 'MLE', fix
     cat("Diff to best:", abs(optim_result$value - max(optim_progress$log_lik)), "\n")
   }
   
-
   # Information criteria calculation
-  k = length(upper)
-  n = length(data)
-  aic = 2*k - 2 *  optim_result$value          # TODO: should k also include the length of the fixed parameters???
-  bic = log(n) * k - 2 *  optim_result$value
-  aicc = aic + (2*k^2+2*k)/(n-k-1)
-  
+  ic <- informationCriteria(ll=optim_result$value, n=length(data), k=length(upper))
+
   return(list(
     par = optim_result$par,
     value = optim_result$value,
     convergence = optim_result$convergence,
-    AIC = aic, 
-    BIC = bic,
-    AICc = aicc
+    AIC = ic$aic, 
+    BIC = ic$bic,
+    AICc = ic$aicc
     )
   )
 }
 
 if (sys.nframe() == 0) {
 
-  # Example 1 for optimParam
+  # Example 1 for optimParamsContinuous
   data <- rnorm(n=100, mean=70, sd= 4)
   family <- list(family='norm', package="stats")
   lower <- c('mean' = - Inf)
   upper <- c('mean' = Inf)
   fixed <- c('sd'=2)
   defaults <- c('mean' = 0)
-  optimParam(data = data, family=family, lower=lower, upper=upper, defaults = defaults, fixed=fixed, log = T, 
+  optimParamsContinuous(data = data, family=family, lower=lower, upper=upper, defaults = defaults, fixed=fixed, log = T, 
              parscale=TRUE, fnscale=TRUE, show_optim_progress = TRUE, n_starting_points = 5)
   
   
-  # Example 2 for optimParam
+  # Example 2 for optimParamsContinuous
   data <- rbeta(n=100, shape1=10, shape2=2)
   family <- list(family='beta', package="stats")
   lower <- c('shape1' = 0, 'shape2' = 0)
