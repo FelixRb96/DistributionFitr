@@ -1,5 +1,5 @@
 source("optimParamsContinuous.R")
-source('informationCriteria.R')
+source('utils.R')
 ### STATEMENT OF PURPOSE ###
 ############################
 
@@ -21,9 +21,8 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
                                   optim_method = 'L-BFGS-B', n_starting_points=1,
                                   debug_error=FALSE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, 
                                   max_discrete_steps= 100, plot=FALSE, discrete_fast = TRUE, ...) {
-  print(method)
   if (all(family_info$accepts_float)) {
-    result <- optimParamsContinuous(data=data, family=family_info$family, lower= family_info$lower, upper=family_info$upper,
+    result <- optimParamsContinuous(data=data, family=family, lower= family_info$lower, upper=family_info$upper,
                defaults = family_info$defaults, method = method, fixed=c(), log = log, optim_method = optim_method,
                nn_starting_points= n_starting_points, debug_error = debug_error, show_optim_progress = show_optim_progress,
                on_error_use_best_result = on_error_use_best_result, ...) 
@@ -38,6 +37,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
     cont_optim_value <- rep(NA, max_discrete_steps)
     touched_lower <- touched_upper <- FALSE
     while(!stop_discrete) {
+      cat("Paran:", dispar, "\n")
       cont_optim_result[[i]] <- tryCatch(optimParamsContinuous(
         data=data, family=family, lower=family_info$lower[-dispar_id], upper=family_info$upper[-dispar_id],
         defaults = family_info$defaults[-dispar_id], method = method, fixed=dispar, log = log, optim_method = optim_method,
@@ -186,3 +186,4 @@ r$par
 # TODO: fix error Error in asNamespace(package): not a namespace
 optimParamsDiscrete(rnorm(n=1000, mean=2, sd=0.5), family = family_list[[12]][c('package', 'family')],
                       family_info = family_list[[12]]$family_info, debug_error=F)
+

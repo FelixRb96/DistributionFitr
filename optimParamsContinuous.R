@@ -1,6 +1,5 @@
 source("utils.R")
 source("loglik.R")
-source("informationCriteria.R")
 
 # Loglik-Function
 # important: family should be list with elements "package" and "family"

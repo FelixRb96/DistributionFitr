@@ -22,11 +22,11 @@ iterate_packages <- function(packages) {
       params <- tryCatch(get_params(package_content[[j]]),
                          error = function(e) {
                            message("Error occured for family ", package_content[[j]]$family, "\n")
+                           message(e)
                            NULL
                          })
-      if (is.null(params)) next
-      
-      res[[length(res) + 1]] <- c(package_content[[j]], list(family_info = params))
+      if (!is.null(params))
+        res[[length(res) + 1]] <- c(package_content[[j]], list(family_info = params))
     }
   }
   
