@@ -83,7 +83,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
               stop_discrete <- TRUE
           }
           if(!any(is.na(cont_optim_value[c((i-2), i)]))) {
-            if(cont_optim_value[i-2]>cont_optim_value[i])
+            if(cont_optim_value[i-1]>cont_optim_value[i] & (touched_upper | touched_lower))
               stop_discrete <- TRUE
           }
         }
@@ -184,8 +184,7 @@ r <- optimParamsDiscrete(rbinom(n=1000, size=10, prob=0.9), family = family_list
 r
 r$par
 
-# TODO: fix error Error in asNamespace(package): not a namespace
-r2 <- optimParamsDiscrete(rnorm(n=1000, mean=2, sd=0.5), family = family_list[[12]][c('package', 'family')],
+r2 <- optimParamsDiscrete(rnorm(n=1e6, mean=2, sd=0.5), family = family_list[[12]][c('package', 'family')],
                       family_info = family_list[[12]]$family_info, debug_error=F)
-
 r2
+r2$par

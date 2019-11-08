@@ -169,7 +169,13 @@ disc_trafo <- function(data){
     class(output) <- "globalfit"
     output_liste[fam] <- output
   }
-  
+  return(output_liste)
 }
 
-globalfit(rnorm(n = 1000, mean=10, sd=1))
+
+
+if (sys.nframe() == 0) {
+  r <- globalfit(rnorm(n = 1000, mean=10, sd=1))
+}
+
+r

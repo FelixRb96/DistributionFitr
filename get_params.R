@@ -373,8 +373,9 @@ get_param_ranges <- function(all_params, fam) {
 #                  each list entry saves either lower, upper, or etc.
 
 # example:
-get_param_ranges(all_params_defaulted, fam)
-
+if (sys.nframe() == 0) {
+  get_param_ranges(all_params_defaulted, fam)
+}
 
 ### Function that checks if log is working ---------------------------------------------------------------------------
 check_log <- function(fam) {
@@ -540,7 +541,7 @@ get_params <- function(fam){
 if (sys.nframe()==0) {
   for (fam in families) {
     cat("\nCurrent Family:", fam$family, "\n")
-    result <- get_params(fam)
+    result <- tryCatch(get_params(fam), error=function(e) warning('Error') )
     print(result)
   }
 }
