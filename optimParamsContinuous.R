@@ -113,14 +113,16 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults, method =
   optim_results <- list()
   for (i in 1:n_starting_points) {
       start_params <- if(i>1) sample_params(family, list(lower=lower, upper=upper, accepts_float=!is.na(lower)), params=lower) else defaults
-      cat("Sampling start parameters, Iteration:", i, "\n")
+      if(show_optim_progress)
+        cat("Sampling start parameters, Iteration:", i, "\n")
       # print(start_params)
     
   optim_results[[i]] <- tryCatch(
     {
       # Optimize first time
       # TODO: in second optimization set fnscale and parscale accordingly (check if it is set correctly below)
-      cat("First Optimisation\n")
+      if(show_optim_progress)
+        cat("First Optimisation\n")
       
       # construct loglikelihood function, that only depends on the parameters
       loglik_fun <- loglik(family=family, data=data, fixed=fixed, log=log, upper=upper, lower=lower)

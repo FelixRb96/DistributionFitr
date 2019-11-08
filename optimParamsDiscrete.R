@@ -37,11 +37,12 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
     cont_optim_value <- rep(NA, max_discrete_steps)
     touched_lower <- touched_upper <- FALSE
     while(!stop_discrete) {
-      cat("Paran:", dispar, "\n")
+      if(show_optim_progress)
+        cat("Discrete Parameter:", dispar, "\n")
       cont_optim_result[[i]] <- tryCatch(optimParamsContinuous(
         data=data, family=family, lower=family_info$lower[-dispar_id], upper=family_info$upper[-dispar_id],
         defaults = family_info$defaults[-dispar_id], method = method, fixed=dispar, log = log, optim_method = optim_method,
-        n_starting_points= n_starting_points, debug_error = debug_error,show_optim_progress = on_error_use_best_result,
+        n_starting_points= n_starting_points, debug_error = debug_error, show_optim_progress = show_optim_progress,
         on_error_use_best_result = on_error_use_best_result, ...),
         error = function(e) {
           message(e);
@@ -178,12 +179,13 @@ load('all_families.Rda')
 # TODO: fix
 r <- optimParamsDiscrete(rbinom(n=1000, size=10, prob=0.9), family = family_list[[2]][c('package', 'family')], 
                       family_info = family_list[[2]]$family_info, debug_error=F, max_discrete_steps = 30, plot=T,
-                      discrete_fast = FALSE)
+                      discrete_fast = TRUE, show_optim_progress = FALSE)
 
 r
 r$par
 
 # TODO: fix error Error in asNamespace(package): not a namespace
-optimParamsDiscrete(rnorm(n=1000, mean=2, sd=0.5), family = family_list[[12]][c('package', 'family')],
+r2 <- optimParamsDiscrete(rnorm(n=1000, mean=2, sd=0.5), family = family_list[[12]][c('package', 'family')],
                       family_info = family_list[[12]]$family_info, debug_error=F)
 
+r2
