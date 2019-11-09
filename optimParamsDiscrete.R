@@ -22,6 +22,9 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
                                   debug_error=FALSE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, 
                                   max_discrete_steps= 100, plot=FALSE, discrete_fast = TRUE, ...) {
   print(method)
+
+  # TODO: input validation, especially for priors, since we will use them here!
+
   if (all(family_info$accepts_float)) {
     result <- optimParamsContinuous(data=data, family=family_info$family, lower= family_info$lower, upper=family_info$upper,
                defaults = family_info$defaults, method = method, fixed=c(), log = log, optim_method = optim_method,
@@ -102,15 +105,28 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
     return(optim_res)
   } else {
     non_floats <- which(family_info$accepts_float)
+    num_discrete <- sum(non_floats)
     ## naive implementation
-    # get paramter ranges of non-float parameters, make grid
-    # as always, chop to reasonable ranges
-    lows <- max(family_info$lower[non_floats], -100)
-    highs <- min(family_info$upper[non_floats], 100)
+    # get parameter ranges of non-float parameters, make compact grid
+    # To deal with a piori arbitrarily large values, let's try something I'll call the Google Earth algorithm
+    # start with reasonable ranges
+    found <- FALSE
+    zoom <- zoom_level <- rep(0, times = num_discrete)
+    # TODO: make sure that defaults is family_info$defaults, but updated with priors
+    # at the start, centre over defaults. later: centre over maximum and zoom in/out
+    centre <- defaults[non_floats]
+    while(found == FALSE) {
+      zoom_level <- zoom_level + zoom
+      grid_low <- rep(centre-(100*(10^zoom_level)), times = num_discrete)
+      grid_high <- rep(centre+(100*(10^zoom_level)), times = num_discrete)
+      stepsize <- rep(1, times = num_discrete)*(10^zoom_level)
+    lows <- max(family_info$lower[non_floats], grid_low)
+    # at the start, centre over defaults. later: centre over maximum and zoom in/out
+    highs <- min(family_info$upper[non_floats], grid_high)
     # get_params shall insure that lower and upper are all integers
     # is there a vectorised version of seq()?
     seq_vec <- Vectorize(seq.default, vectorize.arg = c("from", "to"), SIMPLIFY = FALSE)
-    grid <- list(seq_vec(from = lows, to = highs, by = 1))
+    grid <- list(seq_vec(from = lows, to = highs, by = stepsize))
     # output is a list, list entry number = position of param in family_info$lower 
     grid <- expand.grid(grid)
     colnames(grid) <- names(family_info$lower)[non_floats]
@@ -141,6 +157,12 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
     # drop all weird cases
     discrete_results <- grid_results[grid_results$convergence == 0, ]
     optimum_index <- which.max(discrete_results$loglik)
+
+    # Google Earth: check if optimum is at the bound of our grid. If so, zoom out and center! if not: accept and break.
+    if(any(grid[optimum_index, ] == 
+    TODO: continue here
+
+
     # run optimParamsContinuous again for the best grid cell to retrieve information criteria, otherwise grid_results would blow up too much
     # difference to the optimParamsContinuous above: argument fixed is changed!
     optim_res <- tryCatch(
