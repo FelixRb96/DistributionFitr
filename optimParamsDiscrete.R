@@ -21,6 +21,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
                                   optim_method = 'L-BFGS-B', n_starting_points=1,
                                   debug_error=FALSE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, 
                                   max_discrete_steps= 100, plot=FALSE, discrete_fast = TRUE, ...) {
+
   if (all(family_info$accepts_float)) {
     result <- optimParamsContinuous(data=data, family=family, lower= family_info$lower, upper=family_info$upper,
                defaults = family_info$defaults, method = method, fixed=c(), log = log, optim_method = optim_method,
@@ -103,45 +104,79 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
     return(optim_res)
   } else {
     non_floats <- which(family_info$accepts_float)
+    num_discrete <- sum(non_floats)
     ## naive implementation
-    # get paramter ranges of non-float parameters, make grid
-    # as always, chop to reasonable ranges
-    lows <- max(family_info$lower[non_floats], -100)
-    highs <- min(family_info$upper[non_floats], 100)
-    # get_params shall insure that lower and upper are all integers
-    # is there a vectorised version of seq()?
-    seq_vec <- Vectorize(seq.default, vectorize.arg = c("from", "to"), SIMPLIFY = FALSE)
-    grid <- list(seq_vec(from = lows, to = highs, by = 1))
-    # output is a list, list entry number = position of param in family_info$lower 
-    grid <- expand.grid(grid)
-    colnames(grid) <- names(family_info$lower)[non_floats]
-    # number of columns of result matrix: number of variable parameters + two (loglikelihood & convergence code)
-    num_free_params <- length(family_info$lower) - sum(non_floats)
-    grid_results <- matrix(NA, nrow = nrow(grid), ncol = (num_free_params + 2) )
-    colnames(grid_results) < c(colnames(grid), "loglik", "convergence")
-    for(i in 1:grid) {
-      optim_res <- tryCatch(
-	{
-	  optimParamsContinuous(data = data, family = family, lower = family_info$lower[!non_floats], upper = family_info$upper[!non_floats], 
-	             defaults = family_info$defaults[!non_floats], method = method, fixed = grid[i, ], prior = prior, log = log, 
-	             optim_method = optim_method, n_starting_points = n_starting_points, debug_error = debug_error, 
-	             show_optim_progress = show_optim_progress, on_error_use_best_result = on_error_use_best_result, ...)
-	},
-	error <- function(e) {
-	  message(e);
-	  # generate a NA row of appropriate length to impute into grid_results
-	  list(
-	    par = rep(NA, times = (num_free_params)),
-	    val = NA,
-	    convergence = 99
-	  )
-	} # end error handler
-      ) # end tryCatch
-      grid_results[i, ] <- c(optim_res$par, optim_res$val, optim_res$convergence)
-    } # end for-loop in grid
-    # drop all weird cases
-    discrete_results <- grid_results[grid_results$convergence == 0, ]
-    optimum_index <- which.max(discrete_results$loglik)
+    # get parameter ranges of non-float parameters, make compact grid
+    # To deal with a piori arbitrarily large values, let's try something I'll call the Google Earth algorithm
+    # start with reasonable ranges
+    found <- FALSE
+    zoom <- zoom_level <- rep(0, times = num_discrete)
+    # TODO: make sure that defaults is family_info$defaults, but updated with priors
+    # at the start, centre over defaults. later: centre over maximum and zoom in/out
+    centre <- defaults[non_floats]
+    while(found == FALSE) {
+      zoom_level <- zoom_level + zoom
+      # centre is always an integer
+      grid_low <- centre-(100*(10^zoom_level))
+      grid_high <- centre+(100*(10^zoom_level))
+      stepsize <- rep(1, times = num_discrete)*(10^zoom_level)
+      lows <- max(family_info$lower[non_floats], grid_low)
+      # at the start, centre over defaults. later: centre over maximum and zoom in/out
+      highs <- min(family_info$upper[non_floats], grid_high)
+      # get_params shall insure that lower and upper are all integers
+      # is there a vectorised version of seq()?
+      seq_vec <- Vectorize(seq.default, vectorize.arg = c("from", "to"), SIMPLIFY = FALSE)
+      grid <- list(seq_vec(from = lows, to = highs, by = stepsize))
+      # output is a list, list entry number = position of param in family_info$lower 
+      grid <- expand.grid(grid)
+      colnames(grid) <- names(family_info$lower)[non_floats]
+      # number of columns of result matrix: number of variable parameters + two (loglikelihood & convergence code)
+      num_free_params <- length(family_info$lower) - sum(non_floats)
+      grid_results <- matrix(NA, nrow = nrow(grid), ncol = (num_free_params + 2) )
+      colnames(grid_results) < c(colnames(grid), "loglik", "convergence")
+      for(i in 1:grid) {
+	optim_res <- tryCatch(
+	  {
+	    optimParamsContinuous(data = data, family = family, lower = family_info$lower[!non_floats], upper = family_info$upper[!non_floats], 
+	               defaults = family_info$defaults[!non_floats], method = method, fixed = grid[i, ], prior = prior, log = log, 
+	               optim_method = optim_method, n_starting_points = n_starting_points, debug_error = debug_error, 
+	               show_optim_progress = show_optim_progress, on_error_use_best_result = on_error_use_best_result, ...)
+	  },
+	  error <- function(e) {
+	    message(e);
+	    # generate a NA row of appropriate length to impute into grid_results
+	    list(
+	      par = rep(NA, times = (num_free_params)),
+	      val = NA,
+	      convergence = 99
+	    )
+	  } # end error handler
+        ) # end tryCatch
+        grid_results[i, ] <- c(optim_res$par, optim_res$val, optim_res$convergence)
+      } # end for-loop in grid
+      # drop all weird cases
+      discrete_results <- grid_results[grid_results$convergence == 0, ]
+      optimum_index <- which.max(discrete_results$loglik)
+
+      # Google Earth: check if optimum is at the bound of our grid. If so, zoom out and center! if not: accept and break.
+      boundary_check <- ( (grid[optimum_index, ] == grid_low) | (grid[optimum_index, ] == grid_high) )
+      if (sum(boundary_check) > 0) {
+	centre <- grid[optimum_index, ]
+        # zoom out only in dimensions where max was at boundaries
+        zoom <- boundary_check
+      } else if (max(zoom_level) > 1) {
+	centre <- grid[optimum_index, ]
+        # since no boundary optima, zoom in wherever zoom is highest
+        max_zoom <- max(zoom_level)
+	which_max <- (zoom_level == max_zoom) # do not use which.max, as index may not be unique
+        zoom <- which_max
+      } else {
+	found <- TRUE
+        break;
+      }
+    # take optimum_index and proceed further    
+    }
+
     # run optimParamsContinuous again for the best grid cell to retrieve information criteria, otherwise grid_results would blow up too much
     # difference to the optimParamsContinuous above: argument fixed is changed!
     optim_res <- tryCatch(
