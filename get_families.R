@@ -1,4 +1,4 @@
-source("get_params.R")
+source("getParams.R")
 source("getFamily.R")
 
 

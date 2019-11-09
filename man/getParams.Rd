@@ -1,5 +1,5 @@
-\name{get_params}
-\alias{get_params}
+\name{getParams}
+\alias{getParams}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
   Get parameters and their properties for a Distribution Family
@@ -8,7 +8,7 @@
   Given a distribution family, this function attempts to retrieve the distribution parameters and various characteristics, such as: valid parameter ranges, whether they accept non-integer values and the support of the distribution.
 }
 \usage{
-get_params(family)
+getParams(family)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -18,10 +18,10 @@ get_params(family)
 
 \details{
 	The family name is defined as the part of the function name that follows "d", "p", "q" and "r". Example: uniform distribution. function call: "runif(...)" \rightarrow family name: "unif". \\
-	The values returned by get_params are included in the DistributionFitr-package and updated regularly. Users may use it to update the library of parameter characteristics themselves or find the function useful to use the parameter characteristics retrieved for other purposes.
+	The values returned by getParams are included in the DistributionFitr-package and updated regularly. Users may use it to update the library of parameter characteristics themselves or find the function useful to use the parameter characteristics retrieved for other purposes.
 }
 \value{
-  For \code{get_params} a list with components, each of them a named vector: The name is the arg name as specified in the original "d", "p", ...-function, the value is described below:
+  For \code{getParams} a list with components, each of them a named vector: The name is the arg name as specified in the original "d", "p", ...-function, the value is described below:
   \item{lower}{a named vector. Values: numeric, lower bound of the respective parameter value}
   \item{upper}{a named vector. Values: numeric, upper bound of the respective parameter value. Length and names coincides with entry \code{lower}.}
   \item{accepts_float}{a named vector. Values: boolean, \code{TRUE} if respective parameter value is continuous, \code{FALSE} if only integers are accepted. Length and names must coincide with entry \code{lower}.} 
@@ -53,11 +53,11 @@ get_params(family)
 ##-- ==>  Define data, use random,
 ##--	or do  help(data=index)  for the standard data sets.
 
-# Example 1 for get_params
-parameter_characteristics <- get_params("beta")
+# Example 1 for getParams
+parameter_characteristics <- getParams("beta")
 
 # Example 2 for optimParam
-this_should_also_work <- get_params("unif")
+this_should_also_work <- getParams("unif")
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

@@ -18,90 +18,105 @@ source('utils.R')
 
 # Function for doing the optimisation of discrete parameters
 optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior = NULL, log=TRUE,
-                                  optim_method = 'L-BFGS-B', n_starting_points=1,
-                                  debug_error=FALSE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, 
-                                  max_discrete_steps= 100, plot=FALSE, discrete_fast = TRUE, ...) {
-
+                                optim_method = 'L-BFGS-B', n_starting_points=1,
+                                debug_error=FALSE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, 
+                                max_discrete_steps=100, plot=FALSE, discrete_fast = TRUE, ...) {
+  
+  # CASE 1: No discrete params -> we can directly redirect to optimParamsContinuous
   if (all(family_info$accepts_float)) {
-    result <- optimParamsContinuous(data=data, family=family, lower= family_info$lower, upper=family_info$upper,
+    optim_result <- optimParamsContinuous(data=data, family=family, lower= family_info$lower, upper=family_info$upper,
                defaults = family_info$defaults, method = method, fixed=c(), log = log, optim_method = optim_method,
-               nn_starting_points= n_starting_points, debug_error = debug_error, show_optim_progress = show_optim_progress,
+               nn_starting_points=n_starting_points, debug_error = debug_error, show_optim_progress = show_optim_progress,
                on_error_use_best_result = on_error_use_best_result, ...) 
-    return(result)
-  } else if(sum(!family_info$accepts_float)==1) {
+    
+  } # CASE 2: We have exactly one discrete param
+  else if( sum(!family_info$accepts_float)==1 ) {
+    
+    # get the discrete parameter
     dispar_id <- family_info$accepts_float==FALSE
     dispar_default <- family_info$defaults[dispar_id]
-    dispar <- dispar_default
+    
+    #: define loop variables
     i <- 1
     stop_discrete <- FALSE
-    cont_optim_result <- vector('list',length=max_discrete_steps)
-    cont_optim_value <- rep(NA, max_discrete_steps)
-    touched_lower <- touched_upper <- FALSE
+    cont_optim_results <- vector('list',length=max_discrete_steps)       # vector of the single optimisation results
+    history_ <- data.frame(matrix(NA, nrow=max_discrete_steps, ncol=3))  # history dataframe where the optim progress is stored
+    colnames(history_) <- c("param_value", "direction", "log_lik")
+    
+    # as we iterate both left and rightwards staring from the default value we need to save the current values
+    # first iteration with the default value is considered to be left
+    cur_left_val <- dispar_default
+    cur_right_val <- dispar_default + 1
+    touched_lower <- touched_upper <- FALSE    # whether our left or right iteration has reached the border
     while(!stop_discrete) {
-      if(show_optim_progress)
-        cat("Discrete Parameter:", dispar, "\n")
-      cont_optim_result[[i]] <- tryCatch(optimParamsContinuous(
+      if (!touched_lower && ! touched_upper) {
+        direction <- c("right", "left")[i%%2 + 1]  # make sure that first one is left!, apart from that always alternate if possible
+      } else if (!touched_upper) {
+        direction <- "right"
+      } else if (!touched_lower) {
+        direction <- "left"
+      } else break
+      
+      dispar <- if (direction == "right") cur_right_val else cur_left_val
+      if(show_optim_progress) cat("Discrete Parameter:", dispar, "\n")
+      
+      # optimise with the current fixed value
+      curr_res <- tryCatch(optimParamsContinuous(
         data=data, family=family, lower=family_info$lower[-dispar_id], upper=family_info$upper[-dispar_id],
         defaults = family_info$defaults[-dispar_id], method = method, fixed=dispar, log = log, optim_method = optim_method,
-        n_starting_points= n_starting_points, debug_error = debug_error, show_optim_progress = show_optim_progress,
-        on_error_use_best_result = on_error_use_best_result, ...),
+        n_starting_points = n_starting_points, debug_error = debug_error, show_optim_progress = show_optim_progress,
+        on_error_use_best_result = on_error_use_best_result),
         error = function(e) {
-          message(e);
+          # message(e);
           NULL})
-      if(!is.null(cont_optim_result[[i]])) {
-        cont_optim_result[[i]]$par[names(dispar_default)] <- dispar[1]
-        cont_optim_value[[i]] <-tryCatch(cont_optim_result[[i]]$value, error= function(e) {NA})
-      }
-      # jump on both sides around the default value
-      if(!touched_lower && !touched_upper) {
-        # avoid sign(0)=0
-        dispar <- dispar_default - (abs(dispar-dispar_default)+1) * sign(dispar-dispar_default+0.1)
-      } else if(touched_lower && !touched_upper)  {
-        dispar <- dispar + 1
-      } else if(!touched_lower && !touched_upper) {
-        dispar <- dispar - 1
-      } else {
-        stop_discrete <- TRUE
-      }
-      if(dispar == family_info$lower[dispar_id])
-        touched_lower <- TRUE
-      if(dispar == family_info$upper[dispar_id])
-        touched_upper <- TRUE
       
-      if(show_optim_progress)
-        cat('Discrete Parameter: ', dispar, '\n')
+      # if successful add results to dataframe
+      if(!is.null(curr_res)) {
+        cont_optim_results[[i]] <- curr_res
+        cont_optim_results[[i]]$par[names(dispar_default)] <- dispar[1]
+        history_[i, ] <- list(dispar[1], direction, cont_optim_results[[i]]$value)
+      }
+      
+      # update current iteration values and check whether bound is reached or score has not improved
+      if (direction == "right") {
+        cur_right_val <- cur_right_val + 1
+        if (cur_right_val > family_info$upper[dispar_id]) touched_upper <- TRUE
+        
+        # get all the results for "right" achieved up to now
+        # we stop when the current result is worse than the best one achieved in this direction
+        relevant_hist <- history_[history_$direction == "right", "log_lik"]
+        relevant_hist <- relevant_hist[!is.na(relevant_hist)]
+        if (discrete_fast && length(relevant_hist) > 2 && relevant_hist[length(relevant_hist)] < max(relevant_hist))
+          touched_upper <- TRUE
+      }
+      
+      if (direction == "left") {
+        cur_left_val <- cur_left_val - 1
+        if (cur_left_val < family_info$lower[dispar_id]) touched_lower <- TRUE
+        
+        relevant_hist <- history_[history_$direction == "left", "log_lik"]
+        relevant_hist <- relevant_hist[!is.na(relevant_hist)]
+        if (discrete_fast && length(relevant_hist) > 2 && relevant_hist[length(relevant_hist)] < max(relevant_hist)) 
+          touched_lower <- TRUE
+      }
+      
+      i <- i+1
       
       # stop if not converged so far
       if(i>max_discrete_steps) {
         stop_discrete <- TRUE
         warning('Discrete Optimization aborted, did not converge.')
       }
-      # stop if local maximum reached
-      if(discrete_fast) {
-        if(i>2) {
-          if(!any(is.na(cont_optim_value[c((i-2), i)]))) {
-            if(cont_optim_value[i-2]>cont_optim_value[i])
-              stop_discrete <- TRUE
-          }
-          if(!any(is.na(cont_optim_value[c((i-2), i)]))) {
-            if(cont_optim_value[i-1]>cont_optim_value[i] & (touched_upper | touched_lower))
-              stop_discrete <- TRUE
-          }
-        }
-      }
-      i <- i+1
+    }
       
-    }
     if(plot) {
-      plot((ifelse(is.infinite(cont_optim_value), NA, cont_optim_value)))
+      plot(history_$param_value, ifelse(is.finite(history_$log_lik), history_$log_lik, NA), 
+           ylab="log_lik", xlab=names(family_info$lower)[dispar_id])
     }
-    optim_res <- cont_optim_result[[which.max(cont_optim_value)]]
     
-    ic <- informationCriteria(ll=optim_res$value, n=length(data), k=length(family_info$upper))
-    optim_res$AIC = ic$aic
-    optim_res$BIC = ic$bic
-    optim_res$AICc = ic$aicc
-    return(optim_res)
+    # take the best result
+    optim_res <- cont_optim_results[[which.max(history_$log_lik)]]
+    
   } else {
     non_floats <- which(family_info$accepts_float)
     num_discrete <- sum(non_floats)
@@ -194,32 +209,9 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
 	     convergence = 99)
         }
       )
-    # ICs are the same, since discrete parameters are still parameters we optimise over
-    ic <- informationCriteria(ll = optim_res$value, n = length(data), k = length(family_info$upper))
-    optim_res$AIC <- ic$aic
-    optim_res$BIC <- ic$bic
-    optim_res$AICc <- ic$aicc
-    return(optim_res)
   }
+  
+  # ICs are the same, since discrete parameters are still parameters we optimise over
+  ic <- informationCriteria(ll = optim_res$value, n = length(data), k = length(family_info$upper))
+  optim_res <- c(optim_res, ic)
 }
-
-
-### Testing Area ###
-####################
-
-load('all_families.Rda')
-
-
-# Attention: Returns wrong result :( 
-# TODO: fix
-r <- optimParamsDiscrete(rbinom(n=1000, size=10, prob=0.9), family = family_list[[2]][c('package', 'family')], 
-                      family_info = family_list[[2]]$family_info, debug_error=F, max_discrete_steps = 30, plot=T,
-                      discrete_fast = TRUE, show_optim_progress = FALSE)
-
-r
-r$par
-
-r2 <- optimParamsDiscrete(rnorm(n=1e6, mean=2, sd=0.5), family = family_list[[12]][c('package', 'family')],
-                      family_info = family_list[[12]]$family_info, debug_error=F)
-r2
-r2$par

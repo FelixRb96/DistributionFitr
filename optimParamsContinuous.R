@@ -61,8 +61,8 @@ loglik_old <- function(param_values, family, data, fixed=list(), log=T) {
 # on_error_use_best_result: if TRUE and an error occured during optimization the best result achieved prior to the error will be taken
 # n_starting_points: how many different starting points should be used for optimisation. The best result will be taken.
 optimParamsContinuous <- function(data, family, lower, upper, defaults, method = 'MLE', fixed=list(), prior = NULL, log=TRUE,
-                       optim_method = 'L-BFGS-B', n_starting_points=1,
-                       debug_error=TRUE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, ...) {
+                                  optim_method = 'L-BFGS-B', n_starting_points=1,
+                                  debug_error=TRUE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, ...) {
   # Input parameter validation
 
   # TODO:
@@ -113,8 +113,7 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults, method =
   optim_results <- list()
   for (i in 1:n_starting_points) {
       start_params <- if(i>1) sample_params(family, list(lower=lower, upper=upper, accepts_float=!is.na(lower)), params=lower) else defaults
-      if(show_optim_progress)
-        cat("Sampling start parameters, Iteration:", i, "\n")
+      # cat("Sampling start parameters, Iteration:", i, "\n")
       # print(start_params)
     
   optim_results[[i]] <- tryCatch(
@@ -127,7 +126,8 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults, method =
       # construct loglikelihood function, that only depends on the parameters
       loglik_fun <- loglik(family=family, data=data, fixed=fixed, log=log, upper=upper, lower=lower)
       
-      optim_result <- optim(start_params, loglik_fun, control = list(fnscale=-1, trace=0), lower=lower, upper=upper, method=optim_method)
+      safety_bound <- 1e-10
+      optim_result <- optim(start_params, loglik_fun, control = list(fnscale=-1, trace=0), lower=lower+safety_bound, upper=upper-safety_bound, method=optim_method)
       if(optim_result$convergence!=0)
         warning('No convergence in first optimization!')
 
@@ -149,9 +149,6 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults, method =
       adjust <- which(parscale == Inf | parscale == -Inf)
       parscale[adjust] <- mean(parscale[!(parscale == Inf | parscale == -Inf)], na.rm = TRUE)
       
-      # linebreak if parscale not set initially
-      cat("Second Optimisation\n")
-      
       # adjust precision to number of parameters
       # note that with many parameters even though likelihood may have converged, parameters are still changing
       precision <- max(0, length(lower) - 2)
@@ -160,7 +157,7 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults, method =
       
       optim_result <- optim(optim_result$par, loglik_fun, 
                             control = list(fnscale=fnscale, trace=0, parscale = parscale, factr = precision), 
-                            lower=lower, upper=upper, method=optim_method)
+                            lower=lower+safety_bound, upper=upper-safety_bound, method=optim_method)
       
       optim_successful <- TRUE
       
@@ -203,16 +200,10 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults, method =
     cat("Diff to best:", abs(optim_result$value - max(optim_progress$log_lik)), "\n")
   }
   
-  # Information criteria calculation
-  ic <- informationCriteria(ll=optim_result$value, n=length(data), k=length(upper))
-
   return(list(
     par = optim_result$par,
     value = optim_result$value,
-    convergence = optim_result$convergence,
-    AIC = ic$aic, 
-    BIC = ic$bic,
-    AICc = ic$aicc
+    convergence = optim_result$convergence
     )
   )
 }

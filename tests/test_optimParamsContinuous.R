@@ -3,7 +3,7 @@
 # -------------------------------------------------------------------------------- 
 
 rm(list=ls())
-source("optimParam.R")
+source("optimParamsContinuous.R")
 source("get_params.R")
 source("utils.R")
 
@@ -37,7 +37,7 @@ test_single_family <- function(n, family) {
   
   
   # we do it this way for now since we want to evaluate optim_param
-  optim_result <- tryCatch(optimParam(data = testing_data, family = family, lower = family_info$lower, upper = family_info$upper, 
+  optim_result <- tryCatch(optimParamsContinuous(data = testing_data, family = family, lower = family_info$lower, upper = family_info$upper, 
                                  defaults = family_info$default, log = family_info$log, debug_error = TRUE, show_optim_progress = FALSE),
                       error = function(e) {
                         message(e);
@@ -78,7 +78,7 @@ compare_optimizers <- function(n, families, repetitions_per_family=5) {
   for (fam in families) {
     cat("\nCurrent Family", fam$family, "\n")
     family_info <- get_params(fam)
-    
+    print(family_info)
     # if we couldn't find infos on the distribution
     if (is.null(family_info)) next
     
@@ -94,7 +94,7 @@ compare_optimizers <- function(n, families, repetitions_per_family=5) {
       ##  CHANGE OPTIMZATION SETTINGS HERE to compare different ones!!!
       
       cat("fnscale = FALSE, parscale = FALSE\n")
-      optim_results[i, 1] <- tryCatch(optimParam(data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
+      optim_results[i, 1] <- tryCatch(optimParamsContinuous(data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
                                                 fnscale=FALSE, parscale=FALSE, optim_method = "L-BFGS-B",
                                                 defaults = family_info$default, log = family_info$log, 
                                                 debug_error = TRUE, show_optim_progress = FALSE, n_starting_points = 5)$value,
@@ -102,21 +102,21 @@ compare_optimizers <- function(n, families, repetitions_per_family=5) {
                                      )
 
       cat("fnscale = TRUE, parscale = FALSE\n")
-      optim_results[i, 2] <- tryCatch(optimParam(data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
+      optim_results[i, 2] <- tryCatch(optimParamsContinuous(data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
                                                 fnscale=TRUE, parscale=FALSE, optim_method = "L-BFGS-B",
                                                 defaults = family_info$default, log = family_info$log, 
                                                 debug_error = TRUE, show_optim_progress = FALSE, n_starting_points = 5)$value,
                                      error = function(e) NA
       )
       cat("fnscale = FALSE, parscale = TRUE\n")
-      optim_results[i, 3] <- tryCatch(optimParam(data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
+      optim_results[i, 3] <- tryCatch(optimParamsContinuous(data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
                                                 fnscale=FALSE, parscale=TRUE, optim_method = "L-BFGS-B",
                                                 defaults = family_info$default, log = family_info$log, 
                                                 debug_error = TRUE, show_optim_progress = FALSE)$value,
                                      error = function(e) NA
       )
       cat("fnscale = TRUE, parscale = TRUE\n")
-      optim_results[i, 4] <- tryCatch(optimParam(data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
+      optim_results[i, 4] <- tryCatch(optimParamsContinuous(data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
                                                 fnscale=TRUE, parscale=TRUE, optim_method = "L-BFGS-B",
                                                 defaults = family_info$default, log = family_info$log, 
                                                 debug_error = TRUE, show_optim_progress = FALSE)$value,

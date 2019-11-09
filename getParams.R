@@ -1,48 +1,49 @@
 if (! "stringr" %in% installed.packages()) install.packages("stringr")
 library(stringr)
-library(parallel)
 source("utils.R")
 
 # ----------------------------------------------------------------------  
 # 1) Get all distributions within a package:
 # ----------------------------------------------------------------------
 
-package <- "stats"
-possible_dists <- lsf.str(paste0("package:", package), pattern="^[rdpq]")   # all functions starting with r, d, p or q
-possible_dists
-start_chars <- c("d", "p", "q", "r")   
-first_args <- c("x", "q", "p", "n")    # first parameters of the d, p, q, r functions
-l <- list()
-for (i in 1:length(start_chars)) {
-  char <- start_chars[i]
-  first_arg <- first_args[i]
-  subset <- grep(paste0("^", char), possible_dists, value=TRUE)                     # all functions starting with char
-  valid_idx <- sapply(subset, function(x) names(as.list(args(x)))[1] == first_arg)  # check if all functions have the correct first arg
-  # print(valid_idx)
-  l[[char]] <- subset[valid_idx]
+if (sys.nframe()==0) {
+  package <- "stats"
+  possible_dists <- lsf.str(paste0("package:", package), pattern="^[rdpq]")   # all functions starting with r, d, p or q
+  possible_dists
+  start_chars <- c("d", "p", "q", "r")   
+  first_args <- c("x", "q", "p", "n")    # first parameters of the d, p, q, r functions
+  l <- list()
+  for (i in 1:length(start_chars)) {
+    char <- start_chars[i]
+    first_arg <- first_args[i]
+    subset <- grep(paste0("^", char), possible_dists, value=TRUE)                     # all functions starting with char
+    valid_idx <- sapply(subset, function(x) names(as.list(args(x)))[1] == first_arg)  # check if all functions have the correct first arg
+    # print(valid_idx)
+    l[[char]] <- subset[valid_idx]
+  }
+  
+  get_endings <- function(vec) str_sub(vec, start=2)
+  
+  l_endings <- lapply(l, get_endings)    # remove the d, p, q, r suffixes
+  
+  # we definitely need a function for the density starting with d, as otherwise we cannot evaluate likelihood function
+  # so we only take the endings from p, q and r that also appear in d
+  for (char in start_chars[-1]) {
+    l_endings[[char]] <- intersect(l_endings[[char]], l_endings$d)
+  }
+  
+  freq <- table(unlist(l_endings))     # get a frequency table of the endings
+  freq <- freq[freq>=2]                # only take those distributions that have at least 2 functions implemented
+  freq
+  
+  # drop some not fitting distributions
+  to_drop <- c("multinom")
+  familes <- names(freq)[! (names(freq) %in% to_drop)]
+  
+  # list of lists, where each sublist has the form list(package=some_pkg, family=some_family)
+  families <- lapply(familes, function(x) list(package="stats", family=x))
+  families
 }
-
-get_endings <- function(vec) str_sub(vec, start=2)
-
-l_endings <- lapply(l, get_endings)    # remove the d, p, q, r suffixes
-
-# we definitely need a function for the density starting with d, as otherwise we cannot evaluate likelihood function
-# so we only take the endings from p, q and r that also appear in d
-for (char in start_chars[-1]) {
-  l_endings[[char]] <- intersect(l_endings[[char]], l_endings$d)
-}
-
-freq <- table(unlist(l_endings))     # get a frequency table of the endings
-freq <- freq[freq>=2]                # only take those distributions that have at least 2 functions implemented
-freq
-
-# drop some not fitting distributions
-to_drop <- c("multinom")
-familes <- names(freq)[! (names(freq) %in% to_drop)]
-
-# list of lists, where each sublist has the form list(package=some_pkg, family=some_family)
-families <- lapply(familes, function(x) list(package="stats", family=x))
-families
 
 
 # ----------------------------------------------------------------------
@@ -61,7 +62,7 @@ families
 # check whether param name contains prob or sth like that -> range should be [0,1]
 
 
-fam <- list(package="stats", family="beta")   # gamma
+# fam <- list(package="stats", family="beta")   # gamma
 
 # ----------------------------------------------------------------------
 # (2.1) Given distribution family, return list of parameters
@@ -94,7 +95,7 @@ get_all_params <- function(fam) {
   return(all_params)
 }
 
-all_params <- get_all_params(fam)
+# all_params <- get_all_params(fam)
 
 # data structure "all_params"
 # list, for given distribution family;
@@ -186,7 +187,7 @@ get_default_values <- function(all_params, fam) {
 }
 # return value: list with names corresponding to the parameter names and values to their default values
 
-all_params_defaulted <- get_default_values(all_params, fam)
+# all_params_defaulted <- get_default_values(all_params, fam)
 
 
 #------------------------------------------------------------------------------------------------------ 
@@ -221,7 +222,7 @@ check_values_for_param <- function(param, all_params, fam, values) {
 # return value: TRUE if value was valid, FALSE if not
 
 #  example (for beta family)
-check_values_for_param("shape1", all_params_defaulted, fam, values=c(-100, -10, -1, 1))
+# check_values_for_param("shape1", all_params_defaulted, fam, values=c(-100, -10, -1, 1))
 
 # --------------------------------------------------------------------------- 
 # function that iterates over descending step sizes to find the minimal and maximal valid value of a parameter
@@ -270,7 +271,7 @@ iterate_min_max_vals <- function(param, all_params, fam, cur_val, step_sizes, is
 }
 
 # example (for beta family)
-iterate_min_max_vals("shape1", all_params, fam, cur_val=0, step_sizes = c(1, 0.5, 0.1, 0.05))
+# iterate_min_max_vals("shape1", all_params, fam, cur_val=0, step_sizes = c(1, 0.5, 0.1, 0.05))
 
 # --------------------------------------------------------------------------- 
 # (2.5) Main function for generating the info for each of the params
@@ -345,22 +346,6 @@ get_param_ranges <- function(all_params, fam) {
     else if(accepted_int_rate == 0) stop("distribution does not seem to accept any values")
     else accepts_float[param] <- FALSE
     
-    # final adjustment to parameter bounds to make sure that integer-parameters have the correct bound
-    # (possible numerical deviations due to iteration algorithm above)
-    low <- lower[param]
-    if(low %% 1 != 0) {
-      lowerbound <- check_values_for_param(param, all_params, fam, floor(low))
-      upperbound <- check_values_for_param(param, all_params, fam, ceiling(low))
-      if(lowerbound == TRUE) { lower[param] <- floor(low) }
-      else { lower[param] <- ceiling(low) }
-    }
-    high <- upper[param]
-    if(high %% 1 != 0) {
-      lowerbound <- check_values_for_param(param, all_params, fam, floor(high))
-      upperbound <- check_values_for_param(param, all_params, fam, ceiling(high))
-      if(lowerbound == TRUE) { upper[param] <- floor(high) }
-      else { upper[param] <- ceiling(high) }
-    }
   }
   return(list(lower=lower,
               upper=upper,
@@ -373,9 +358,7 @@ get_param_ranges <- function(all_params, fam) {
 #                  each list entry saves either lower, upper, or etc.
 
 # example:
-if (sys.nframe() == 0) {
-  get_param_ranges(all_params_defaulted, fam)
-}
+# get_param_ranges(all_params_defaulted, fam)
 
 ### Function that checks if log is working ---------------------------------------------------------------------------
 check_log <- function(fam) {
@@ -510,7 +493,7 @@ get_support <- function(fam, params) {
 
 # Input:
   # fam: list-> package: package_name, family: name of distribution family inside package
-get_params <- function(fam){
+getParams <- function(fam){
   # fam <- family$family
   
   # 1) Get list of all parameters:
@@ -535,15 +518,6 @@ get_params <- function(fam){
   result <- c(result, supp)
   
   return(result)
-}
-
-# do not execute when sourced from a different file, like if __name__ == "__main__" in Python
-if (sys.nframe()==0) {
-  for (fam in families) {
-    cat("\nCurrent Family:", fam$family, "\n")
-    result <- tryCatch(get_params(fam), error=function(e) warning('Error') )
-    print(result)
-  }
 }
 
 
