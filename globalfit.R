@@ -1,5 +1,5 @@
 source('optimParamsDiscrete.R')
-source("get_families.R") 
+source("getFamilies.R") 
 
 globalfit <- function(data, continuity = NULL, method = "MLE"){
   
@@ -115,7 +115,7 @@ disc_trafo <- function(data){
   
 # main ----
   
-  families <- get_families()
+  families <- getFamilies()
   
   fam_inds <- 1:length(families)
   
@@ -143,31 +143,31 @@ disc_trafo <- function(data){
     
   }
   
-  # output_liste <- replicate(loops, list())
+  output_liste <- list()
   
   for (fam in loops){
+    cat("Current Family:",  families[[fam]]$family, "\n")
+    liste <- optimParamsDiscrete(data = data,
+                        family = families[[fam]][c('package', 'family')],
+                        family_info = families[[fam]]$family_info,
+                        method = 'MLE', prior = NULL, log = families[[fam]]$family_info$log,
+                        optim_method = 'L-BFGS-B', n_starting_points = 1,
+                        debug_error = FALSE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, 
+                        max_discrete_steps= 100, plot=FALSE, discrete_fast = TRUE)
     
-      liste <- optimParamsDiscrete(data = data,
-                          family = families[[fam]][c('package', 'family')],
-                          family_info = families[[fam]]$family_info,
-                          method = 'MLE', prior = NULL, log = families[[fam]]$family_info$log,
-                          optim_method = 'L-BFGS-B', n_starting_points = 1,
-                          debug_error = FALSE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, 
-                          max_discrete_steps= 100, plot=FALSE, discrete_fast = TRUE)
-      
-      output <- list(likfit = liste$value,
-                     AIC = liste$AIC,
-                     BIC = liste$BIC,
-                     AICc = liste$AICc,
-                     familyName = families[[fam]]$family,
-                     packageName = families[[fam]]$package,
-                     estimatedValues = liste$par,
-                     continuousParams = NULL, # hier muss noch was passieren
-                     range = NULL) # hier muss noch was passieren
-      
+    output <- list(likfit = liste$value,
+                   AIC = liste$AIC,
+                   BIC = liste$BIC,
+                   AICc = liste$AICc,
+                   familyName = families[[fam]]$family,
+                   packageName = families[[fam]]$package,
+                   estimatedValues = liste$par,
+                   continuousParams = NULL, # hier muss noch was passieren
+                   range = NULL) # hier muss noch was passieren
     
+  
     class(output) <- "globalfit"
-    output_liste[fam] <- output
+    output_liste[[fam]] <- output
   }
   return(output_liste)
 }

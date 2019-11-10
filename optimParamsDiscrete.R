@@ -75,6 +75,8 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
         cont_optim_results[[i]] <- curr_res
         cont_optim_results[[i]]$par[names(dispar_default)] <- dispar[1]
         history_[i, ] <- list(dispar[1], direction, cont_optim_results[[i]]$value)
+      } else {
+        history_[i, ] <- list(dispar[1], direction, NA)
       }
       
       # update current iteration values and check whether bound is reached or score has not improved
@@ -108,14 +110,21 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
         warning('Discrete Optimization aborted, did not converge.')
       }
     }
-      
+    
+    print(history_)
     if(plot) {
       plot(history_$param_value, ifelse(is.finite(history_$log_lik), history_$log_lik, NA), 
            ylab="log_lik", xlab=names(family_info$lower)[dispar_id])
     }
     
     # take the best result
-    optim_res <- cont_optim_results[[which.max(history_$log_lik)]]
+    if (sum(!is.na(history_$log_lik)) > 0) {
+      optim_res <- cont_optim_results[[which.max(history_$log_lik)]]
+    } else {
+      message("No valid discrete optimization result achieved")
+      return(NULL)
+    }
+      
     
   } else {
     non_floats <- which(family_info$accepts_float)

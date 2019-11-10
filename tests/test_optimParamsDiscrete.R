@@ -7,9 +7,9 @@ load('all_families.Rda')
 
 info <- family_list[[2]]$family_info
 info$defaults["size"] <- 12
-r <- optimParamsDiscrete(rbinom(n=1000, size=10, prob=0.9), family = family_list[[2]][c('package', 'family')], 
-                         family_info = info, debug_error=F, max_discrete_steps = 30, plot=T,
-                         discrete_fast = TRUE, show_optim_progress = FALSE)
+r <- optimParamsDiscrete(rbinom(n=1000, size=50, prob=0.9), family = family_list[[2]][c('package', 'family')], 
+                         family_info = info, debug_error=F, max_discrete_steps = 100, plot=T,
+                         discrete_fast = FALSE, show_optim_progress = FALSE)
 
 r
 
