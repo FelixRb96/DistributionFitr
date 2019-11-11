@@ -1,5 +1,6 @@
 source("getParams.R")
 source("getFamily.R")
+#source("installAll.R")
 
 
 #iterate over packages and extract families and params
@@ -22,7 +23,7 @@ iterate_packages <- function(packages) {
       stopifnot(package_content[[j]]$package == packages[i])
       
       cat("Current Family:", package_content[[j]]$family, "\n")
-      #fetch params for each family and add to df
+      #fetch params for each family and add to 
       params <- tryCatch(getParams(package_content[[j]]),
                          error = function(e) {
                            message("Error occured for family ", package_content[[j]]$family)
@@ -41,9 +42,10 @@ iterate_packages <- function(packages) {
 
 ## internal
 construct_package_list <- function(all.packages) {
- 
+  
   if (all.packages == TRUE)
   {
+    #installAll
     all.packages <- as.vector(installed.packages()[,"Package"])
     
   } else if (all.packages == FALSE) 
@@ -61,26 +63,22 @@ construct_package_list <- function(all.packages) {
   }
   
   return(all.packages)
-
-  ##Tim
+  
   
 }
 
 construct_package_list(all.packages = FALSE)
 
-# write_file <- function(family_list, file="all_families.Rda") {   # do we need family list as an argument here?
-write_file <- function(file="all_families.Rda", all.packages=FALSE) {
-  ###save list as txt
-  ##Adrian
+write_file <- function(file="all_families.R", all.packages=FALSE) {
   family_list <- iterate_packages(construct_package_list(all.packages = all.packages))
-  save(family_list, file=file)
+  dput(family_list, file=file)
 }
 
 
 # Case 1: all.packages gegeben: Suche nach Verteilungsfamilien
-  # Case 1.1 vector of strings (Liste von Packetnamen) -> take families from those packages
-  # Case 1.2 FALSE -> only take recommended / base packages
-  # Case 1.3 TRUE -> take all installed packages
+# Case 1.1 vector of strings (Liste von Packetnamen) -> take families from those packages
+# Case 1.2 FALSE -> only take recommended / base packages
+# Case 1.3 TRUE -> take all installed packages
 # Case 2 all.packages missing: Take families saved in the file
 
 getFamilies <- function(all.packages, file="all_families.Rda") {
@@ -89,7 +87,7 @@ getFamilies <- function(all.packages, file="all_families.Rda") {
   if (missing(all.packages)) {
     if (! (file %in% list.files()) ) write_file(file=file, all.packages=FALSE)
     #read file and return list of lists
-    load(file = file)
+    family_list <- dget(file=file)
     return(family_list)
   }
   
