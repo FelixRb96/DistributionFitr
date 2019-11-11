@@ -131,6 +131,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
       
     
   } else {
+    return(NULL)
     non_floats <- which(family_info$accepts_float)
     num_discrete <- sum(non_floats)
     ## naive implementation

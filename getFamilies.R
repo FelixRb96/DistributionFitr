@@ -69,7 +69,7 @@ construct_package_list <- function(all.packages) {
 
 construct_package_list(all.packages = FALSE)
 
-write_file <- function(file="all_families.R", all.packages=FALSE) {
+write_file <- function(file="all_families.Rda", all.packages=FALSE) {
   family_list <- iterate_packages(construct_package_list(all.packages = all.packages))
   dput(family_list, file=file)
 }

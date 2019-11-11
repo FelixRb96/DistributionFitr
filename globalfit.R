@@ -141,7 +141,7 @@ disc_trafo <- function(data){
     
   }
   
-  print(sapply(relevant_families, function(x) x$family))
+  cat("Comparing the following distribution families:", paste(sapply(relevant_families, function(x) x$family), collapse = ", "), "\n")
   output_liste <- list()
   
   for (fam in relevant_families){
@@ -169,7 +169,7 @@ disc_trafo <- function(data){
     class(output) <- "optimParams"
     output_liste[[length(output_liste) + 1]] <- output
   }
-  print(data.frame(matrix(unlist(lapply(output_liste, function(x) x[c("family", "log_lik", "AIC")])), nrow=length(output_liste), byrow=TRUE)))
+  
   return(output_liste)
 }
 
@@ -184,22 +184,28 @@ if (sys.nframe() == 0) {
   summary(r, which=2)
   summary(r, which=2, count=5)
   summary(r, which=6, count=5)
+  
+  r <- globalfit(rbinom(n = 1000, size=30, prob=0.7))
+  summary(r)
 }
 
-class(r)
 
 
 
 ##### 
 
 summary.globalfit <- function(x, which=1, count=10) {
-  if(is.null(which) | !is.numeric(which))
-    stop('which parameter must be positive integer.')
-  if(is.null(count) | !is.numeric(count) )
-    stop('count parameter must be positive integer.')
+  if(is.null(which) || !is.numeric(which))
+    stop("Argument 'which' must be positive integer.")
+  if(is.null(count) || !is.numeric(count) )
+    stop("Argument 'count'  must be positive integer.")
+  
+  cols <- c('family', 'package', 'AIC')
   df <- do.call(rbind.data.frame, lapply(x, function(x) {
-                            lapply(x[c('family', 'package', 'AIC')], function(x) ifelse(is.null(x), NA, x))
+                            lapply(x[cols], function(x) ifelse(is.null(x), NA, x))
                             }))
+  # somehow the rownames are messed up and need to be fixed
+  rownames(df) <- 1:nrow(df)
   count <- min(nrow(df), count)
   which <- min(which, count)
   df <- df[order(df$AIC)[1:count],]
@@ -209,10 +215,10 @@ summary.globalfit <- function(x, which=1, count=10) {
   print(selected_fit$estimatedValues)
   if(which!=1) {
     selected_fit <- x[[as.numeric(rownames(df)[which])]]
-    cat('\n Fitted parameters for ', selected_fit$family, 'distribution of', selected_fit$package, 'package. \n \n')
+    cat('\nFitted parameters for', selected_fit$family, 'distribution of', selected_fit$package, 'package. \n')
     print(selected_fit$estimatedValues)
   }
   rownames(df) <- 1:count
-  cat('\n Other good fits: \n')
+  cat('\nOther good fits: \n')
   print(df)
 }
