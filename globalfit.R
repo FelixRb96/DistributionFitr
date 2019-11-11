@@ -164,8 +164,9 @@ disc_trafo <- function(data){
                    continuousParams = NA, # hier muss noch was passieren
                    range = NA) # hier muss noch was passieren
     
+    class(output_liste) <- "globalfit"
   
-    class(output) <- "globalfit"
+    class(output) <- "optimParams"
     output_liste[[length(output_liste) + 1]] <- output
   }
   print(data.frame(matrix(unlist(lapply(output_liste, function(x) x[c("family", "log_lik", "AIC")])), nrow=length(output_liste), byrow=TRUE)))
@@ -176,5 +177,42 @@ disc_trafo <- function(data){
 
 if (sys.nframe() == 0) {
   r <- globalfit(rnorm(n = 1000, mean=10, sd=1))
+  summary(r)  
+  
+  r <- globalfit(rgamma(n = 1000, shape=3, rate = 4))
+  summary(r)
+  summary(r, which=2)
+  summary(r, which=2, count=5)
+  summary(r, which=6, count=5)
 }
 
+class(r)
+
+
+
+##### 
+
+summary.globalfit <- function(x, which=1, count=10) {
+  if(is.null(which) | !is.numeric(which))
+    stop('which parameter must be positive integer.')
+  if(is.null(count) | !is.numeric(count) )
+    stop('count parameter must be positive integer.')
+  df <- do.call(rbind.data.frame, lapply(x, function(x) {
+                            lapply(x[c('family', 'package', 'AIC')], function(x) ifelse(is.null(x), NA, x))
+                            }))
+  count <- min(nrow(df), count)
+  which <- min(which, count)
+  df <- df[order(df$AIC)[1:count],]
+  selected_fit <- x[[as.numeric(rownames(df)[1])]]
+  cat('Best fit: \n', selected_fit$family, 'distribution of', selected_fit$package, 'package. \n \n')
+  cat('Estimated parameters: \n')
+  print(selected_fit$estimatedValues)
+  if(which!=1) {
+    selected_fit <- x[[as.numeric(rownames(df)[which])]]
+    cat('\n Fitted parameters for ', selected_fit$family, 'distribution of', selected_fit$package, 'package. \n \n')
+    print(selected_fit$estimatedValues)
+  }
+  rownames(df) <- 1:count
+  cat('\n Other good fits: \n')
+  print(df)
+}
