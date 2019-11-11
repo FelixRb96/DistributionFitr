@@ -175,9 +175,10 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults, method =
       # message(e)
       if (!on_error_use_best_result) stop(e)
       
-      message(e, " occured during optimization, trying to take best result achieved up to now")
       if (nrow(optim_progress) == 0 || max(optim_progress$log_lik, na.rm = TRUE) == -Inf) 
         stop( e, "occured during first optimization, so no valid result can be used instead")
+      
+      message(e, " occured during optimization, trying to take best result achieved up to now")
       
       # getting best result from optimization progress up to now
       best_idx <- which.max(optim_progress$log_lik)

@@ -117,25 +117,23 @@ disc_trafo <- function(data){
   
   families <- getFamilies()
   
-  fam_inds <- 1:length(families)
-  
-  loops <- array(NA, dim=length(families))
-  for(i in 1:length(families)){
-    
-    loops[i] <- families[[i]]$family_info$discrete
-    
-  }
-  loops <- which(loops==TRUE) # Indizes zu diskreten Verteilungen
+  discrete_families <- sapply(families, function(x) x$family_info$discrete)
+  discrete_families <- which(discrete_families==TRUE) # Indizes zu diskreten Verteilungen
   
   
   if (is.null(continuity)){
     
     trafo_list <- disc_trafo(data)
     data <- trafo_list$data
+    relevant_families <- if(trafo_list$discrete) families[discrete_families] else families[-discrete_families]
     
   } else if (continuity == T){
     
-    loops <- fam_inds[-loops]
+    relevant_families <- families[-discrete_families]
+    
+  } else if(continuity==FALSE) {
+    
+    relevant_families <- families[discrete_families]
     
   } else {
     
@@ -143,32 +141,34 @@ disc_trafo <- function(data){
     
   }
   
+  print(sapply(relevant_families, function(x) x$family))
   output_liste <- list()
   
-  for (fam in loops){
-    cat("Current Family:",  families[[fam]]$family, "\n")
+  for (fam in relevant_families){
+    cat("Current Family:",  fam$family, "\n")
     liste <- optimParamsDiscrete(data = data,
-                        family = families[[fam]][c('package', 'family')],
-                        family_info = families[[fam]]$family_info,
-                        method = 'MLE', prior = NULL, log = families[[fam]]$family_info$log,
+                        family = fam[c('package', 'family')],
+                        family_info = fam$family_info,
+                        method = 'MLE', prior = NULL, log = fam$family_info$log,
                         optim_method = 'L-BFGS-B', n_starting_points = 1,
                         debug_error = FALSE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, 
                         max_discrete_steps= 100, plot=FALSE, discrete_fast = TRUE)
     
-    output <- list(likfit = liste$value,
+    output <- list(family = fam$family,
+                   package = fam$package,
+                   estimatedValues = liste$par,
+                   log_lik = liste$value,
                    AIC = liste$AIC,
                    BIC = liste$BIC,
                    AICc = liste$AICc,
-                   familyName = families[[fam]]$family,
-                   packageName = families[[fam]]$package,
-                   estimatedValues = liste$par,
-                   continuousParams = NULL, # hier muss noch was passieren
-                   range = NULL) # hier muss noch was passieren
+                   continuousParams = NA, # hier muss noch was passieren
+                   range = NA) # hier muss noch was passieren
     
   
     class(output) <- "globalfit"
-    output_liste[[fam]] <- output
+    output_liste[[length(output_liste) + 1]] <- output
   }
+  print(data.frame(matrix(unlist(lapply(output_liste, function(x) x[c("family", "log_lik", "AIC")])), nrow=length(output_liste), byrow=TRUE)))
   return(output_liste)
 }
 
@@ -178,4 +178,3 @@ if (sys.nframe() == 0) {
   r <- globalfit(rnorm(n = 1000, mean=10, sd=1))
 }
 
-r

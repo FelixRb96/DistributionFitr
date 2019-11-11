@@ -24,14 +24,18 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
   
   # CASE 1: No discrete params -> we can directly redirect to optimParamsContinuous
   if (all(family_info$accepts_float)) {
-    optim_result <- optimParamsContinuous(data=data, family=family, lower= family_info$lower, upper=family_info$upper,
-               defaults = family_info$defaults, method = method, fixed=c(), log = log, optim_method = optim_method,
-               nn_starting_points=n_starting_points, debug_error = debug_error, show_optim_progress = show_optim_progress,
-               on_error_use_best_result = on_error_use_best_result, ...) 
+    optim_res <- tryCatch({
+      optimParamsContinuous(data=data, family=family, lower=family_info$lower, upper=family_info$upper,
+                            defaults = family_info$defaults, method = method, fixed=c(), log = log, optim_method = optim_method,
+                            nn_starting_points=n_starting_points, debug_error = debug_error, show_optim_progress = show_optim_progress,
+                            on_error_use_best_result = on_error_use_best_result, ...) 
+      }, error=function(e) NULL
+    )
+    if (is.null(optim_res)) return(NULL)
     
-  } # CASE 2: We have exactly one discrete param
+  } # CASE 2: exactly one discrete parameter 
   else if( sum(!family_info$accepts_float)==1 ) {
-    
+
     # get the discrete parameter
     dispar_id <- family_info$accepts_float==FALSE
     dispar_default <- family_info$defaults[dispar_id]
@@ -219,8 +223,8 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
         }
       )
   }
-  
   # ICs are the same, since discrete parameters are still parameters we optimise over
   ic <- informationCriteria(ll = optim_res$value, n = length(data), k = length(family_info$upper))
   optim_res <- c(optim_res, ic)
+  return(optim_res)
 }
