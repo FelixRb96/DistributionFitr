@@ -69,8 +69,7 @@ construct_package_list <- function(all.packages) {
 
 construct_package_list(all.packages = FALSE)
 
-write_file <- function(file="all_families.Rda", all.packages=FALSE) {
-  family_list <- iterate_packages(construct_package_list(all.packages = all.packages))
+write_file <- function(family_list, file="all_families.R") {
   dput(family_list, file=file)
 }
 
@@ -81,11 +80,10 @@ write_file <- function(file="all_families.Rda", all.packages=FALSE) {
 # Case 1.3 TRUE -> take all installed packages
 # Case 2 all.packages missing: Take families saved in the file
 
-getFamilies <- function(all.packages, file="all_families.Rda") {
-  
+getFamilies <- function(all.packages, file="all_families.R") {
   # CASE 2:
   if (missing(all.packages)) {
-    if (! (file %in% list.files()) ) write_file(file=file, all.packages=FALSE)
+    if (! (file %in% list.files()) ) getFamilies(all.packages = FALSE, file=file)
     #read file and return list of lists
     family_list <- dget(file=file)
     return(family_list)
@@ -93,14 +91,20 @@ getFamilies <- function(all.packages, file="all_families.Rda") {
   
   # CASE 1.3
   if (length(all.packages) == 1 && isTRUE(all.packages)) {
-    return(iterate_packages(construct_package_list(all.packages = TRUE)))
+    family_list <- iterate_packages(construct_package_list(all.packages = TRUE))
+    write_file(family_list=family_list,file="all_families.R")
+    return(family_list)
   }
   
   # CASE 1.2
   if (length(all.packages) == 1 && isFALSE(all.packages)) {
-    return(iterate_packages(construct_package_list(all.packages = FALSE)))
+    family_list <- iterate_packages(construct_package_list(all.packages = FALSE))
+    write_file(family_list=family_list,file="all_families.R")
+    return(family_list)
   }
   
   # CASE 1.1
-  return(iterate_packages(all.packages))
+  family_list <- iterate_packages(all.packages)
+  write_file(family_list=family_list,file="all_families.R")
+  return(family_list)
 }
