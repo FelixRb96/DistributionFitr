@@ -120,7 +120,6 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
         stop_discrete <- TRUE
         warning('Discrete Optimization aborted, did not converge.')
       }
-      i <- i+1
     }
     
     print(history_)

@@ -17,9 +17,6 @@ setClass(Class = "optimParams",
         )
 
 
-new()
-
 if (sys.nframe() == 0) {
-  new('test123', x = c(1,2,3))
   new('globalfit', data = 1, continuity = T, method = 'MLE', fits = list(1,2,3))
 }

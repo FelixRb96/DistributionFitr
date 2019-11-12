@@ -159,7 +159,7 @@ disc_trafo <- function(data){
                         method = 'MLE', prior = NULL, log = fam$family_info$log,
                         optim_method = 'L-BFGS-B', n_starting_points = 1,
                         debug_error = FALSE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, 
-                        max_discrete_steps= 1, plot=FALSE, discrete_fast = TRUE)
+                        max_discrete_steps=100, plot=FALSE, discrete_fast = TRUE)
     if(!is.null(liste)) {
       output <- new('optimParams', family = fam$family,
                    package = fam$package,
