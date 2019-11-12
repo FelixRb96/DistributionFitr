@@ -24,7 +24,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
   
   # update defaults with priors
   if(length(prior) > 0) {
-    match <- match(names(prior) %in% names(family_info$lower))
+    match <- match(names(prior), names(family_info$lower))
     family_info$defaults[match] <- prior
   }
 
