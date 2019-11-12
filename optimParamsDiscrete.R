@@ -25,7 +25,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
   # update defaults with priors
   if(length(prior) > 0) {
     match <- match(names(prior) %in% names(family_info$lower))
-    family_info$lower[match] <- prior
+    family_info$defaults[match] <- prior
   }
 
   # CASE 1: No discrete params -> we can directly redirect to optimParamsContinuous
