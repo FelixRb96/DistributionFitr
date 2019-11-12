@@ -204,4 +204,7 @@ if (sys.nframe() == 0) {
   
   r <- globalfit(rbinom(n = 10000, size=10, prob=0.7))
   summary(r)
+  
+  AIC(r, count=2)
+  BIC(r)
 }
