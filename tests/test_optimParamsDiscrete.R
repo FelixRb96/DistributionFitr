@@ -1,13 +1,19 @@
 # Test for discrete optimization
 ####################
+
 source("optimParamsDiscrete.R")
 
 load('all_families.Rda')
 
+# define fake distribution with two integer parameters
+info <- family_list[[1]]$family_info
+info$accepts_float["ncp"] <- FALSE
+info$accepts_float["shape1"] <- FALSE
+info$defaults["ncp"] <- 0
+info$defaults["shape1"] <- 1
+info$lower["shape1"] <-1
 
-info <- family_list[[2]]$family_info
-info$defaults["size"] <- 12
-r <- optimParamsDiscrete(rbinom(n=1000, size=50, prob=0.9), family = family_list[[2]][c('package', 'family')], 
+r <- optimParamsDiscrete(rbeta(n = 1000, shape1 = 5, shape = 10, ncp = 2), family = family_list[[2]][c('package', 'family')], 
                          family_info = info, debug_error=F, max_discrete_steps = 100, plot=T,
                          discrete_fast = FALSE, show_optim_progress = FALSE)
 

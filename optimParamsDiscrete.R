@@ -10,7 +10,7 @@ source('utils.R')
 # (b) one integer parameter: use greedy solution. Questions to: Moritz Kern
 # (c) multiple integer parameters: use naive solution. Question to: Borui N. Zhu
 
-
+# TODO: make sure input validation is implemented on the uppermost level!
 
 # TODO: in general, we often restrict parameters to be in a reasonable bound: [-100,100] (refer to case (b) )
 # this might not hold. Maybe we can let the user specify something like parscale, that lets us space out everything,
@@ -22,6 +22,12 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
                                 debug_error=FALSE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, 
                                 max_discrete_steps=100, plot=FALSE, discrete_fast = TRUE, ...) {
   
+  # update defaults with priors
+  if(length(prior) > 0) {
+    match <- match(names(prior) %in% names(family_info$lower))
+    family_info$lower[match] <- prior
+  }
+
   # CASE 1: No discrete params -> we can directly redirect to optimParamsContinuous
   if (all(family_info$accepts_float)) {
     optim_res <- tryCatch({
@@ -131,8 +137,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
       
     
   } else {
-    return(NULL)
-    non_floats <- which(family_info$accepts_float)
+    non_floats <- !family_info$accepts_float
     num_discrete <- sum(non_floats)
     ## naive implementation
     # get parameter ranges of non-float parameters, make compact grid
@@ -140,30 +145,29 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
     # start with reasonable ranges
     found <- FALSE
     zoom <- zoom_level <- rep(0, times = num_discrete)
-    # TODO: make sure that defaults is family_info$defaults, but updated with priors
     # at the start, centre over defaults. later: centre over maximum and zoom in/out
-    centre <- defaults[non_floats]
+    centre <- family_info$defaults[non_floats]
     while(found == FALSE) {
       zoom_level <- zoom_level + zoom
       # centre is always an integer
       grid_low <- centre-(100*(10^zoom_level))
       grid_high <- centre+(100*(10^zoom_level))
       stepsize <- rep(1, times = num_discrete)*(10^zoom_level)
-      lows <- max(family_info$lower[non_floats], grid_low)
+      lows <- pmax(family_info$lower[non_floats], grid_low)
       # at the start, centre over defaults. later: centre over maximum and zoom in/out
-      highs <- min(family_info$upper[non_floats], grid_high)
+      highs <- pmin(family_info$upper[non_floats], grid_high)
       # get_params shall insure that lower and upper are all integers
       # is there a vectorised version of seq()?
-      seq_vec <- Vectorize(seq.default, vectorize.arg = c("from", "to"), SIMPLIFY = FALSE)
-      grid <- list(seq_vec(from = lows, to = highs, by = stepsize))
-      # output is a list, list entry number = position of param in family_info$lower 
+      seq_vec <- Vectorize(seq.default, vectorize.arg = c("from", "to", "by"), SIMPLIFY = FALSE)
+      grid <- seq_vec(from = lows, to = highs, by = stepsize)
       grid <- expand.grid(grid)
+      # output is a list, list entry number = position of param in family_info$lower 
       colnames(grid) <- names(family_info$lower)[non_floats]
       # number of columns of result matrix: number of variable parameters + two (loglikelihood & convergence code)
       num_free_params <- length(family_info$lower) - sum(non_floats)
       grid_results <- matrix(NA, nrow = nrow(grid), ncol = (num_free_params + 2) )
       colnames(grid_results) < c(colnames(grid), "loglik", "convergence")
-      for(i in 1:grid) {
+      for(i in 1:nrow(grid)) {
 	optim_res <- tryCatch(
 	  {
 	    optimParamsContinuous(data = data, family = family, lower = family_info$lower[!non_floats], upper = family_info$upper[!non_floats], 
@@ -171,7 +175,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
 	               optim_method = optim_method, n_starting_points = n_starting_points, debug_error = debug_error, 
 	               show_optim_progress = show_optim_progress, on_error_use_best_result = on_error_use_best_result, ...)
 	  },
-	  error <- function(e) {
+	  error = function(e) {
 	    message(e);
 	    # generate a NA row of appropriate length to impute into grid_results
 	    list(
@@ -216,7 +220,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
                    show_optim_progress = show_optim_progress, on_error_use_best_result = on_error_use_best_result, ...)
       },
       # error should not occur because the combination had passed the first time!
-      error <- function(e) {
+      error = function(e) {
         message(e);
         list(par = rep(NA, times = (num_free_params)),
 	     val = NA,
@@ -229,3 +233,5 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
   optim_res <- c(optim_res, ic)
   return(optim_res)
 }
+
+
