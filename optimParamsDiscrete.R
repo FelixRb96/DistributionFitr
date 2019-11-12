@@ -28,6 +28,10 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
     family_info$defaults[match] <- prior
   }
 
+  #: define loop variables
+  i <- 1
+  stop_discrete <- FALSE
+  
   # CASE 1: No discrete params -> we can directly redirect to optimParamsContinuous
   if (all(family_info$accepts_float)) {
     optim_res <- tryCatch({
@@ -46,9 +50,6 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
     dispar_id <- family_info$accepts_float==FALSE
     dispar_default <- family_info$defaults[dispar_id]
     
-    #: define loop variables
-    i <- 1
-    stop_discrete <- FALSE
     cont_optim_results <- vector('list',length=max_discrete_steps)       # vector of the single optimisation results
     history_ <- data.frame(matrix(NA, nrow=max_discrete_steps, ncol=3))  # history dataframe where the optim progress is stored
     colnames(history_) <- c("param_value", "direction", "log_lik")
@@ -119,6 +120,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
         stop_discrete <- TRUE
         warning('Discrete Optimization aborted, did not converge.')
       }
+      i <- i+1
     }
     
     print(history_)
@@ -137,7 +139,11 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
       
     
   } else {
+    warning('Not implemented.')
     return(NULL)
+    ############ PART DISABLED #################
+    ##### @ BORUI: FIRST TEST, THEN PUSH! ######
+    ############################################
     non_floats <- !family_info$accepts_float
     num_discrete <- sum(non_floats)
     ## naive implementation
@@ -148,7 +154,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
     zoom <- zoom_level <- rep(0, times = num_discrete)
     # at the start, centre over defaults. later: centre over maximum and zoom in/out
     centre <- family_info$defaults[non_floats]
-    while(found == FALSE) {
+    while(!found && !stop_discrete) {
       zoom_level <- zoom_level + zoom
       # centre is always an integer
       grid_low <- centre-(100*(10^zoom_level))
@@ -168,23 +174,25 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
       num_free_params <- length(family_info$lower) - sum(non_floats)
       grid_results <- matrix(NA, nrow = nrow(grid), ncol = (num_free_params + 2) )
       colnames(grid_results) < c(colnames(grid), "loglik", "convergence")
+      print(nrow(grid))
+      return(NULL)
       for(i in 1:nrow(grid)) {
-	optim_res <- tryCatch(
-	  {
-	    optimParamsContinuous(data = data, family = family, lower = family_info$lower[!non_floats], upper = family_info$upper[!non_floats], 
+	      optim_res <- tryCatch(
+	        {
+	          optimParamsContinuous(data = data, family = family, lower = family_info$lower[!non_floats], upper = family_info$upper[!non_floats], 
 	               defaults = family_info$defaults[!non_floats], method = method, fixed = grid[i, ], prior = prior, log = log, 
 	               optim_method = optim_method, n_starting_points = n_starting_points, debug_error = debug_error, 
 	               show_optim_progress = show_optim_progress, on_error_use_best_result = on_error_use_best_result, ...)
-	  },
-	  error = function(e) {
-	    message(e);
-	    # generate a NA row of appropriate length to impute into grid_results
-	    list(
-	      par = rep(NA, times = (num_free_params)),
-	      val = NA,
-	      convergence = 99
-	    )
-	  } # end error handler
+	        },
+	        error = function(e) {
+	          message(e);
+            # generate a NA row of appropriate length to impute into grid_results
+            list(
+              par = rep(NA, times = (num_free_params)),
+              val = NA,
+            convergence = 99
+      	    )
+      	  } # end error handler
         ) # end tryCatch
         grid_results[i, ] <- c(optim_res$par, optim_res$val, optim_res$convergence)
       } # end for-loop in grid
@@ -195,20 +203,24 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
       # Google Earth: check if optimum is at the bound of our grid. If so, zoom out and center! if not: accept and break.
       boundary_check <- ( (grid[optimum_index, ] == grid_low) | (grid[optimum_index, ] == grid_high) )
       if (sum(boundary_check) > 0) {
-	centre <- grid[optimum_index, ]
+	      centre <- grid[optimum_index, ]
         # zoom out only in dimensions where max was at boundaries
         zoom <- boundary_check
       } else if (max(zoom_level) > 1) {
-	centre <- grid[optimum_index, ]
+	      centre <- grid[optimum_index, ]
         # since no boundary optima, zoom in wherever zoom is highest
         max_zoom <- max(zoom_level)
-	which_max <- (zoom_level == max_zoom) # do not use which.max, as index may not be unique
+	      which_max <- (zoom_level == max_zoom) # do not use which.max, as index may not be unique
         zoom <- which_max
       } else {
-	found <- TRUE
+        found <- TRUE
         break;
       }
-    # take optimum_index and proceed further    
+      # take optimum_index and proceed further    
+      if(i>max_discrete_steps) {
+        stop_discrete <- TRUE
+        warning('Discrete Optimization aborted, did not converge.')
+      }  
     }
 
     # run optimParamsContinuous again for the best grid cell to retrieve information criteria, otherwise grid_results would blow up too much
@@ -224,8 +236,8 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
       error = function(e) {
         message(e);
         list(par = rep(NA, times = (num_free_params)),
-	     val = NA,
-	     convergence = 99)
+  	     val = NA,
+	       convergence = 99)
         }
       )
   }

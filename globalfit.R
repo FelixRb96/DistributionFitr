@@ -1,7 +1,10 @@
 source('optimParamsDiscrete.R')
 source("getFamilies.R") 
+source('utils.R')
+source('objects.R')
+source('output.R')
 
-globalfit <- function(data, continuity = NULL, method = "MLE"){
+globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, ...){
   
   # method als Nutzereingabe -> ist auch bei optimParam schon dabei
   
@@ -126,6 +129,7 @@ disc_trafo <- function(data){
     trafo_list <- disc_trafo(data)
     data <- trafo_list$data
     relevant_families <- if(trafo_list$discrete) families[discrete_families] else families[-discrete_families]
+    continuity <- ifelse(trafo_list$discrete, F, T)
     
   } else if (continuity == T){
     
@@ -141,20 +145,23 @@ disc_trafo <- function(data){
     
   }
   
-  cat("Comparing the following distribution families:", paste(sapply(relevant_families, function(x) x$family), collapse = ", "), "\n")
+  if(progress==T)
+      message("Comparing the following distribution families:", paste(sapply(relevant_families, function(x) x$family), collapse = ", "))
+
   output_liste <- list()
-  
-  for (fam in relevant_families){
-    cat("Current Family:",  fam$family, "\n")
+
+  for (fam in relevant_families) {
+    if(progress == T)
+      message("Current Family: ",  fam$family)
     liste <- optimParamsDiscrete(data = data,
                         family = fam[c('package', 'family')],
                         family_info = fam$family_info,
                         method = 'MLE', prior = NULL, log = fam$family_info$log,
                         optim_method = 'L-BFGS-B', n_starting_points = 1,
                         debug_error = FALSE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, 
-                        max_discrete_steps= 100, plot=FALSE, discrete_fast = TRUE)
-    
-    output <- list(family = fam$family,
+                        max_discrete_steps= 1, plot=FALSE, discrete_fast = TRUE)
+    if(!is.null(liste)) {
+      output <- new('optimParams', family = fam$family,
                    package = fam$package,
                    estimatedValues = liste$par,
                    log_lik = liste$value,
@@ -162,17 +169,26 @@ disc_trafo <- function(data){
                    BIC = liste$BIC,
                    AICc = liste$AICc,
                    continuousParams = NA, # hier muss noch was passieren
-                   range = NA) # hier muss noch was passieren
-    
-    class(output_liste) <- "globalfit"
-  
-    class(output) <- "optimParams"
+                   range = 'not_implemented') # hier muss noch was passieren
+    } else {
+      output <- new('optimParams', 
+                    family = fam$family,
+                    package = fam$package,
+                    log_lik = NA_integer_,
+                    AIC = NA_integer_,
+                    BIC = NA_integer_,
+                    AICc = NA_integer_,
+                    continuousParams = NA, # hier muss noch was passieren
+                    range = 'not_implemented') # hier muss noch was passieren
+    }
     output_liste[[length(output_liste) + 1]] <- output
   }
   
-  return(output_liste)
+    return(new('globalfit', data = data, 
+               continuity = continuity,
+               method = method,
+               fits = output_liste))
 }
-
 
 
 if (sys.nframe() == 0) {
@@ -180,45 +196,12 @@ if (sys.nframe() == 0) {
   summary(r)  
   
   r <- globalfit(rgamma(n = 1000, shape=3, rate = 4))
-  summary(r)
-  summary(r, which=2)
+  summary(r, ic='BIC')
+  summary(r, ic='AICc')
+  summary(r, which=1:3)
   summary(r, which=2, count=5)
   summary(r, which=6, count=5)
   
-  r <- globalfit(rbinom(n = 1000, size=30, prob=0.7))
+  r <- globalfit(rbinom(n = 10000, size=10, prob=0.7))
   summary(r)
-}
-
-
-
-
-##### 
-
-summary.globalfit <- function(x, which=1, count=10) {
-  if(is.null(which) || !is.numeric(which))
-    stop("Argument 'which' must be positive integer.")
-  if(is.null(count) || !is.numeric(count) )
-    stop("Argument 'count'  must be positive integer.")
-  
-  cols <- c('family', 'package', 'AIC')
-  df <- do.call(rbind.data.frame, lapply(x, function(x) {
-                            lapply(x[cols], function(x) ifelse(is.null(x), NA, x))
-                            }))
-  # somehow the rownames are messed up and need to be fixed
-  rownames(df) <- 1:nrow(df)
-  count <- min(nrow(df), count)
-  which <- min(which, count)
-  df <- df[order(df$AIC)[1:count],]
-  selected_fit <- x[[as.numeric(rownames(df)[1])]]
-  cat('Best fit: \n', selected_fit$family, 'distribution of', selected_fit$package, 'package. \n \n')
-  cat('Estimated parameters: \n')
-  print(selected_fit$estimatedValues)
-  if(which!=1) {
-    selected_fit <- x[[as.numeric(rownames(df)[which])]]
-    cat('\nFitted parameters for', selected_fit$family, 'distribution of', selected_fit$package, 'package. \n')
-    print(selected_fit$estimatedValues)
-  }
-  rownames(df) <- 1:count
-  cat('\nOther good fits: \n')
-  print(df)
 }
