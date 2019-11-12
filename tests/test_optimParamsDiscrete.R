@@ -3,7 +3,7 @@
 
 source("optimParamsDiscrete.R")
 
-load('all_families.Rda')
+family_list <- dget('all_families.Rda')
 
 # define fake distribution with two integer parameters
 info <- family_list[[1]]$family_info
