@@ -95,14 +95,15 @@ setMethod(f = "hist", signature = c("globalfit"),
             selected_fit <- x@fits[[as.numeric(rownames(df)[1])]]
             selected_fit@estimatedValues
             if(x@continuity) {
-              supporting_point <-seq(lower, upper, length.out = 100)
+              supporting_point <-seq(lower, upper, length.out = 300)
             } else {
               supporting_point <- seq(floor(lower), ceiling(upper))
             }
+            breaks <- ifelse(x@continuity, sqrt(length(x@data)), min(nclass.Sturges(x@data), length(unique(x@data))))
             density <- eval(parse(text = paste0("get_fun_from_package(fam = '", selected_fit@family, "', '", selected_fit@package, "', 'd')(supporting_point, ",
                                      paste(names(selected_fit@estimatedValues),  selected_fit@estimatedValues, sep=" = ", collapse =", "), ')')))
-            hi <- hist(x = x@data, xlim=range(lower,upper), freq = FALSE, xlab = 'x', ylab = 'density',
+            hi <- hist(x = x@data, xlim=range(lower,upper), freq = FALSE, xlab = 'x', ylab = 'density', breaks=breaks,
                        main=paste0('Histogramm with density of \n', selected_fit@package, '::', selected_fit@family))
-            lines(supporting_point, density, col='green', ylim=max(hi$density, density), lwd=2)
+            lines(supporting_point, density, col='green', lwd=2)
           }
         )

@@ -202,7 +202,7 @@ if (sys.nframe() == 0) {
   summary(r, which=1:3)
   summary(r, which=2, count=5)
   summary(r, which=6, count=5)
-  hist(r)
+  hist(r, ic='BIC')
   
   r <- globalfit(rbinom(n = 10000, size=10, prob=0.7))
   summary(r)
