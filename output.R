@@ -1,3 +1,7 @@
+setGeneric(name = "summary",		
+           def = function(object, ...) standardGeneric("summary"))		
+
+
 setMethod(f = "summary", signature = c("globalfit"),
           def = function(object, which=1, count=10, ic = c('AIC')) {
               if(is.null(ic) || !ic %in% c('AIC', 'BIC', 'AICc'))
@@ -76,3 +80,29 @@ setMethod(f = "BIC", signature = c("globalfit"),
             names(x) <- paste(df$package, df$family, sep = "::")
             return(x)
           })
+
+
+setMethod(f = "hist", signature = c("globalfit"),
+          def = function(x, ic='AIC', ...) {
+            lower <- min(x@data) - 0.2 * (max(x@data)-min(x@data))
+            upper <- max(x@data) + 0.2 * (max(x@data)-min(x@data))
+            
+            df <- do.call(rbind, lapply(x@fits, function(x) {
+              return(data.frame(family =x@family, package = x@package, ic = eval(parse(text = paste0('x@', ic))),
+                                stringsAsFactors = F))
+            }))
+            df <- df[order(df[,'ic'])[1],]
+            selected_fit <- x@fits[[as.numeric(rownames(df)[1])]]
+            selected_fit@estimatedValues
+            if(x@continuity) {
+              supporting_point <-seq(lower, upper, length.out = 100)
+            } else {
+              supporting_point <- seq(floor(lower), ceiling(upper))
+            }
+            density <- eval(parse(text = paste0("get_fun_from_package(fam = '", selected_fit@family, "', '", selected_fit@package, "', 'd')(supporting_point, ",
+                                     paste(names(selected_fit@estimatedValues),  selected_fit@estimatedValues, sep=" = ", collapse =", "), ')')))
+            hi <- hist(x = x@data, xlim=range(lower,upper), freq = FALSE, xlab = 'x', ylab = 'density',
+                       main=paste0('Histogramm with density of \n', selected_fit@package, '::', selected_fit@family))
+            lines(supporting_point, density, col='green', ylim=max(hi$density, density), lwd=2)
+          }
+        )
