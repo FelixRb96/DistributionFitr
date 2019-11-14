@@ -62,7 +62,7 @@ loglik_old <- function(param_values, family, data, fixed=list(), log=T) {
 # n_starting_points: how many different starting points should be used for optimisation. The best result will be taken.
 optimParamsContinuous <- function(data, family, lower, upper, defaults, method = 'MLE', fixed=list(), prior = NULL, log=TRUE,
                                   optim_method = 'L-BFGS-B', n_starting_points=1,
-                                  debug_error=TRUE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, ...) {
+                                  debug_error=TRUE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, no_second = FALSE, ...) {
   # Input parameter validation
 
   # TODO:
@@ -105,7 +105,7 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults, method =
   on.exit({
     if (exists("optim_progress") && (show_optim_progress || (debug_error && !optim_successful))) {
       cat("Optimization progress:\n")
-      print(tail(optim_progress, 10))
+      print(tail(optim_progress, 2))
     }
   })
   
@@ -139,7 +139,7 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults, method =
       # therefore 2 steps with right selection need to be implemented
       # optim_result <- optim(optim_result$par, loglik, family = family, data = data, fixed=fixed, lower=lower, upper=upper,
       #                      log=log, control = list(fnscale=-1 / abs(optim_result$value), trace=0, parscale = 1/optim_result$par), method='L-BFGS-B')
-      
+      if (!no_second) { 
       args <- list(...)
       fnscale <- if (hasArg("fnscale") && args$fnscale) -1/abs(optim_result$value) else -1
       parscale <- if (hasArg("parscale") && args$parscale) 1/optim_result$par else rep(1, length(lower))
@@ -166,7 +166,9 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults, method =
       
       # so that it is returned and saved to optim_result
       optim_result
-      
+      } else {
+        return(optim_result)
+      }
     },
     
     error = function(e) {

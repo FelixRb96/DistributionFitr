@@ -39,12 +39,16 @@ optimParam(data, family, lower, upper, start_parameters, fixed)
   \item{log}{
      logical; if TRUE (default) optimization is run over log-likelihood, requires log-likelihood as parameter in selected distribution family
   }
+  \item{on_error_use_best_result}{
+     logical; if TRUE (default) if an error occurs/convergence is not established after the max. number of iterations, the best intermediate result achieved during optimisation process is returned as ooptimal parameter fit.}
   \item{debug_error}{
      logical; if TRUE (default) shows optimization progress in case an error occured during optimization
   }
   \item{show_optim_progress}{
-    logical; if TRUE, always show optimization progress
+    logical; if TRUE always show the optimisation progress: last two iterations.
   }
+  \item{no_second}{
+    logical; if TRUE the second run is ommitted. optimParams internally uses two optimisation runs: The first one is coarse and supplies us with intermediate parameters, which are in turn used during the second, more rigorous run.}
 }
 
 \details{
