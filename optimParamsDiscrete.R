@@ -1,4 +1,3 @@
-source("optimParamsContinuous.R")
 source('utils.R')
 ### STATEMENT OF PURPOSE ###
 ############################
@@ -24,7 +23,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
   
   # update defaults with priors
   if(length(prior) > 0) {
-    match <- match(names(prior) %in% names(family_info$lower))
+    match <- match(names(prior), names(family_info$lower))
     family_info$defaults[match] <- prior
   }
 
@@ -145,6 +144,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
     ############################################
     non_floats <- !family_info$accepts_float
     num_discrete <- sum(non_floats)
+    final_ll <- numeric(1)
     ## naive implementation
     # get parameter ranges of non-float parameters, make compact grid
     # To deal with a piori arbitrarily large values, let's try something I'll call the Google Earth algorithm
@@ -153,11 +153,13 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
     zoom <- zoom_level <- rep(0, times = num_discrete)
     # at the start, centre over defaults. later: centre over maximum and zoom in/out
     centre <- family_info$defaults[non_floats]
-    while(!found && !stop_discrete) {
+    while_counter <- 0
+    while(found == FALSE) {
+      while_counter <- while_counter + 1
       zoom_level <- zoom_level + zoom
       # centre is always an integer
-      grid_low <- centre-(100*(10^zoom_level))
-      grid_high <- centre+(100*(10^zoom_level))
+      grid_low <- centre-(25*(10^zoom_level))
+      grid_high <- centre+(25*(10^zoom_level))
       stepsize <- rep(1, times = num_discrete)*(10^zoom_level)
       lows <- pmax(family_info$lower[non_floats], grid_low)
       # at the start, centre over defaults. later: centre over maximum and zoom in/out
@@ -171,49 +173,55 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
       colnames(grid) <- names(family_info$lower)[non_floats]
       # number of columns of result matrix: number of variable parameters + two (loglikelihood & convergence code)
       num_free_params <- length(family_info$lower) - sum(non_floats)
-      grid_results <- matrix(NA, nrow = nrow(grid), ncol = (num_free_params + 2) )
-      colnames(grid_results) < c(colnames(grid), "loglik", "convergence")
-      print(nrow(grid))
-      return(NULL)
+      grid_results <- matrix(NA, nrow = nrow(grid), ncol = 2 )
+      colnames(grid_results) <- c("loglik", "convergence")
+      pb <- txtProgressBar(min = 0, max = nrow(grid))
+      print("Please stand by shortly...")
       for(i in 1:nrow(grid)) {
 	      optim_res <- tryCatch(
 	        {
 	          optimParamsContinuous(data = data, family = family, lower = family_info$lower[!non_floats], upper = family_info$upper[!non_floats], 
 	               defaults = family_info$defaults[!non_floats], method = method, fixed = grid[i, ], prior = prior, log = log, 
 	               optim_method = optim_method, n_starting_points = n_starting_points, debug_error = debug_error, 
-	               show_optim_progress = show_optim_progress, on_error_use_best_result = on_error_use_best_result, ...)
-	        },
-	        error = function(e) {
-	          message(e);
-            # generate a NA row of appropriate length to impute into grid_results
-            list(
-              par = rep(NA, times = (num_free_params)),
-              val = NA,
-            convergence = 99
-      	    )
-      	  } # end error handler
+	               show_optim_progress = show_optim_progress, on_error_use_best_result = on_error_use_best_result, no_second = TRUE, ...)
+	  },
+	  error = function(e) {
+	    message(e);
+	    # generate a NA row of appropriate length to impute into grid_results
+	    list(
+	      val = NA,
+	      convergence = 99
+	    )
+	  } # end error handler
         ) # end tryCatch
-        grid_results[i, ] <- c(optim_res$par, optim_res$val, optim_res$convergence)
+        grid_results[i, ] <- c(optim_res$val, optim_res$convergence)
+	setTxtProgressBar(pb, i)
       } # end for-loop in grid
       # drop all weird cases
-      discrete_results <- grid_results[grid_results$convergence == 0, ]
-      optimum_index <- which.max(discrete_results$loglik)
+      discrete_results <- grid_results[grid_results[,'convergence'] == 0, ]
+      optimum_index <- which.max(discrete_results[,'loglik'])
+      cat('\noptimal index:', optimum_index, '\n')
+
+      final_ll <- grid_results[optimum_index,'loglik']
 
       # Google Earth: check if optimum is at the bound of our grid. If so, zoom out and center! if not: accept and break.
       boundary_check <- ( (grid[optimum_index, ] == grid_low) | (grid[optimum_index, ] == grid_high) )
       if (sum(boundary_check) > 0) {
 	      centre <- grid[optimum_index, ]
         # zoom out only in dimensions where max was at boundaries
-        zoom <- boundary_check
+        zoom <- as.numeric(boundary_check)
+	print("Zooming out!")
       } else if (max(zoom_level) > 1) {
 	      centre <- grid[optimum_index, ]
         # since no boundary optima, zoom in wherever zoom is highest
         max_zoom <- max(zoom_level)
-	      which_max <- (zoom_level == max_zoom) # do not use which.max, as index may not be unique
-        zoom <- which_max
+	which_max <- (zoom_level == max_zoom) # do not use which.max, as index may not be unique
+        zoom <- as.numeric(which_max) * (-1)
+	print("Zooming back in!")
+      } else if (while_counter > 5) {
+        break
       } else {
-        found <- TRUE
-        break;
+	break
       }
       # take optimum_index and proceed further    
       if(i>max_discrete_steps) {
@@ -235,10 +243,17 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
       error = function(e) {
         message(e);
         list(par = rep(NA, times = (num_free_params)),
-  	     val = NA,
-	       convergence = 99)
-        }
-      )
+	     val = NA,
+	     convergence = 99)
+      }
+    )
+    final_params <- as.vector(c(optim_res$par, grid[optimum_index, ]), mode = "numeric")
+    names(final_params) <- c(names(optim_res$par), colnames(grid[optimum_index, ]))
+    reorder <- match(names(final_params), names(family_info$lower))
+    optim_res$par <- final_params[reorder]
+    print(optim_res$par)
+    optim_res$value <- final_ll
+
   }
   # ICs are the same, since discrete parameters are still parameters we optimise over
   ic <- informationCriteria(ll = optim_res$value, n = length(data), k = length(family_info$upper))
