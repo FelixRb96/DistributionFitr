@@ -117,3 +117,14 @@ informationCriteria <- function(ll, k, n) {
   aicc = aic + (2*k^2+2*k)/(n-k-1)
   return(list(AIC=aic, BIC=bic, AICc=aicc))
 }
+
+
+
+is.natural <- function(x, tol = .Machine$double.eps^0.5) {
+  (abs(Im(x)) < tol) &&
+    (abs(Re(x)) > tol) &&
+    isTRUE(all.equal(x, round(x),
+                     tolerance=tol,
+                     check.attributes=FALSE,
+                     check.names=FALSE))
+}

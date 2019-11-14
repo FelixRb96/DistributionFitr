@@ -55,8 +55,8 @@ list(list(package = "stats", family = "beta", family_info = list(
         supp_max_depends_on = c(m = FALSE, n = FALSE, k = TRUE
         ), supp_min_depends_on = c(m = FALSE, n = FALSE, k = FALSE
         ))), list(package = "stats", family = "lnorm", family_info = list(
-    lower = c(meanlog = -Inf, sdlog = 0), upper = c(meanlog = 710.49, 
-    sdlog = Inf), accepts_float = c(meanlog = TRUE, sdlog = TRUE
+    lower = c(meanlog = -Inf, sdlog = 0), upper = c(meanlog = 710, 
+    sdlog = 1001), accepts_float = c(meanlog = TRUE, sdlog = TRUE
     ), defaults = c(meanlog = 0, sdlog = 1), log = TRUE, discrete = FALSE, 
     support_min = 0.0100000000000051, support_max = Inf, supp_max_depends_on = c(meanlog = FALSE, 
     sdlog = FALSE), supp_min_depends_on = c(meanlog = FALSE, 
@@ -95,7 +95,7 @@ list(list(package = "stats", family = "beta", family_info = list(
         support_min = -Inf, support_max = Inf, supp_max_depends_on = c(min = FALSE, 
         max = TRUE), supp_min_depends_on = c(min = TRUE, max = FALSE
         ))), list(package = "stats", family = "weibull", family_info = list(
-        lower = c(scale = 0.01, shape = 0.0100000000000001), 
+        lower = c(scale = 0.01, shape = 8.32667268468867e-17), 
         upper = c(scale = Inf, shape = Inf), accepts_float = c(scale = TRUE, 
         shape = TRUE), defaults = c(scale = 1, shape = 0.5), 
         log = TRUE, discrete = FALSE, support_min = 0, support_max = Inf, 
