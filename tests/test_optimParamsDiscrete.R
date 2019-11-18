@@ -37,7 +37,7 @@ r3
 r3$par
 
 # hyper as three-dimensional grid search
-r4 <- optimParamsDiscrete(rhyper(nn=1000, m= 20, n=10, k = 2), family = family_list[[9]][c('package', 'family')],
+r4 <- optimParamsDiscrete(rhyper(nn = 10000, m = 20, n = 10, k = 1), family = family_list[[9]][c('package', 'family')],
                     family_info = family_list[[9]]$family_info, debug_error=F)
 r4
 r4$par

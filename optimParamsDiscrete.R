@@ -136,8 +136,6 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
       message("No valid discrete optimization result achieved")
       return(NULL)
     }
-      
-    
   } else { # Case 3: more than one non-integer parameter, but at least one continuous one
     non_floats <- !family_info$accepts_float
     num_discrete <- sum(non_floats)
@@ -154,10 +152,14 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
     while(found == FALSE) {
       while_counter <- while_counter + 1
       zoom_level <- zoom_level + zoom
+      cat('current zoom level:', zoom_level, '\n')
+      cat('current focal point: ')
+      print(centre)
       # centre is always an integer
       grid_low <- centre-(25*(10^zoom_level))
       grid_high <- centre+(25*(10^zoom_level))
       stepsize <- rep(1, times = num_discrete)*(10^zoom_level)
+      cat('stepsizes:', stepsize, '\n')
       lows <- pmax(family_info$lower[non_floats], grid_low)
       # at the start, centre over defaults. later: centre over maximum and zoom in/out
       highs <- pmin(family_info$upper[non_floats], grid_high)
@@ -170,14 +172,16 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
       colnames(grid) <- names(family_info$lower)[non_floats]
       # number of columns of result matrix: number of variable parameters + two (loglikelihood & convergence code)
       num_free_params <- length(family_info$lower) - sum(non_floats)
-      grid_results <- matrix(NA, nrow = nrow(grid), ncol = 2 )
-      colnames(grid_results) <- c("loglik", "convergence")
-      pb <- txtProgressBar(min = 0, max = nrow(grid))
-      print("Please stand by shortly...")
-      for(i in 1:nrow(grid)) {
-	      optim_res <- tryCatch(
-	        {
-	          optimParamsContinuous(data = data, family = family, lower = family_info$lower[!non_floats], upper = family_info$upper[!non_floats], 
+      if(num_discrete < length(family_info$lower)) { # case 3
+	      print("entering case 3")
+        grid_results <- matrix(NA, nrow = nrow(grid), ncol = 2 )
+        colnames(grid_results) <- c("loglik", "convergence")
+        pb <- txtProgressBar(min = 0, max = nrow(grid))
+        print("Please stand by shortly...")
+        for(i in 1:nrow(grid)) {
+	  optim_res <- tryCatch(
+	  {
+	    optimParamsContinuous(data = data, family = family, lower = family_info$lower[!non_floats], upper = family_info$upper[!non_floats], 
 	               defaults = family_info$defaults[!non_floats], method = method, fixed = grid[i, ], prior = prior, log = log, 
 	               optim_method = optim_method, n_starting_points = n_starting_points, debug_error = debug_error, 
 	               show_optim_progress = show_optim_progress, on_error_use_best_result = on_error_use_best_result, no_second = TRUE, ...)
@@ -190,26 +194,55 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
 	      convergence = 99
 	    )
 	  } # end error handler
-        ) # end tryCatch
-        grid_results[i, ] <- c(optim_res$val, optim_res$convergence)
-	setTxtProgressBar(pb, i)
-      } # end for-loop in grid
-      # drop all weird cases
-      discrete_results <- grid_results[grid_results[,'convergence'] == 0, ]
-      optimum_index <- which.max(discrete_results[,'loglik'])
-      cat('\noptimal index:', optimum_index, '\n')
+          ) # end tryCatch
+          grid_results[i, ] <- c(optim_res$val, optim_res$convergence)
+	  setTxtProgressBar(pb, i)
+        } # end for-loop in grid
+        # drop all weird cases
+        discrete_results <- grid_results[grid_results[,'convergence'] == 0, ]
+        optimum_index <- which.max(discrete_results[,'loglik'])
+        cat('\noptimal index:', optimum_index, '\n')
 
-      final_ll <- grid_results[optimum_index,'loglik']
+        final_ll <- grid_results[optimum_index,'loglik']
+      } else { # case 4
+	      print("entering case 4")
+	grid_results <- matrix(NA, nrow = nrow(grid), ncol = 1)
+        colnames(grid_results) <- c("loglik")
+	pb <- txtProgressBar(min = 0, max = nrow(grid))
+	print("Please stand by shortly...")
+	# loglik_fun <- loglik(family = family, data = data, log = log, lower = family_info$lower, upper = family_info$upper)
+	for(i in 1:nrow(grid)) {
+	  loglik_fun <- loglik(family = family, data = data, fixed = grid[i, ], log = log, lower = family_info$lower, upper = family_info$upper)
+	  grid_results[i,] <- tryCatch(
+	    {
+	      loglik_fun()
+	    },
+	    error = function(e) {
+	      NA
+	    }
+	  )
+	  setTxtProgressBar(pb, i)
+	}
+	head(grid_results)
+        optimum_index <- which.max(grid_results[,'loglik'])
+        cat('\noptimal index:', optimum_index, '\n')
 
+        final_ll <- grid_results[optimum_index,'loglik']
+      }
+
+      # print(zoom_level)
+      # print(max(zoom_level))
+      
       # Google Earth: check if optimum is at the bound of our grid. If so, zoom out and center! if not: accept and break.
       boundary_check <- ( (grid[optimum_index, ] == grid_low) | (grid[optimum_index, ] == grid_high) )
       if (sum(boundary_check) > 0) {
-	      centre <- grid[optimum_index, ]
+	centre <- grid[optimum_index, ]
         # zoom out only in dimensions where max was at boundaries
         zoom <- as.numeric(boundary_check)
 	print("Zooming out!")
-      } else if (max(zoom_level) > 1) {
-	      centre <- grid[optimum_index, ]
+      } else if (max(zoom_level) > 0) {
+	      print("check")
+	centre <- grid[optimum_index, ]
         # since no boundary optima, zoom in wherever zoom is highest
         max_zoom <- max(zoom_level)
 	which_max <- (zoom_level == max_zoom) # do not use which.max, as index may not be unique
@@ -225,31 +258,37 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
         stop_discrete <- TRUE
         warning('Discrete Optimization aborted, did not converge.')
       }  
-    }
+    } # while end
 
     # run optimParamsContinuous again for the best grid cell to retrieve information criteria, otherwise grid_results would blow up too much
     # difference to the optimParamsContinuous above: argument fixed is changed!
-    optim_res <- tryCatch(
-      {
-        optimParamsContinuous(data = data, family = family, lower = family_info$lower[!non_floats], upper = family_info$upper[!non_floats], 
-                   defaults = family_info$defaults[!non_floats], method = method, fixed = grid[optimum_index, ], prior = prior, 
-                   log = log, optim_method = optim_method, n_starting_points = n_starting_points, debug_error = debug_error, 
-                   show_optim_progress = show_optim_progress, on_error_use_best_result = on_error_use_best_result, ...)
-      },
-      # error should not occur because the combination had passed the first time!
-      error = function(e) {
-        message(e);
-        list(par = rep(NA, times = (num_free_params)),
-	     val = NA,
-	     convergence = 99)
-      }
-    )
-    final_params <- as.vector(c(optim_res$par, grid[optimum_index, ]), mode = "numeric")
-    names(final_params) <- c(names(optim_res$par), colnames(grid[optimum_index, ]))
-    reorder <- match(names(final_params), names(family_info$lower))
-    optim_res$par <- final_params[reorder]
-    print(optim_res$par)
-    optim_res$value <- final_ll
+    if(num_discrete < length(family_info$lower)) {
+      optim_res <- tryCatch(
+        {
+          optimParamsContinuous(data = data, family = family, lower = family_info$lower[!non_floats], upper = family_info$upper[!non_floats], 
+                     defaults = family_info$defaults[!non_floats], method = method, fixed = grid[optimum_index, ], prior = prior, 
+                     log = log, optim_method = optim_method, n_starting_points = n_starting_points, debug_error = debug_error, 
+                     show_optim_progress = show_optim_progress, on_error_use_best_result = on_error_use_best_result, ...)
+        },
+        # error should not occur because the combination had passed the first time!
+        error = function(e) {
+          message(e);
+          list(par = rep(NA, times = (num_free_params)),
+  	     val = NA,
+  	     convergence = 99)
+        }
+      )
+      final_params <- as.vector(c(optim_res$par, grid[optimum_index, ]), mode = "numeric")
+      names(final_params) <- c(names(optim_res$par), colnames(grid[optimum_index, ]))
+      reorder <- match(names(final_params), names(family_info$lower))
+      optim_res$par <- final_params[reorder]
+      print(optim_res$par)
+      optim_res$value <- final_ll
+    } else {
+      optim_res <- list()
+      optim_res$par <- grid[optimum_index,]
+      optim_res$value <- final_ll
+    }
   }
 
   # ICs are the same, since discrete parameters are still parameters we optimise over

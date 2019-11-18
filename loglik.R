@@ -25,7 +25,7 @@ loglik <- function(family, data, fixed=list(), log, lower, upper) { #NEW: fixed=
   
   
   # define loglikelihood function 
-  likelihood <- function(params) {
+  likelihood <- function(params = NULL) {
     
     # print(params) # to be deleted later, checking input  
   
@@ -36,7 +36,6 @@ loglik <- function(family, data, fixed=list(), log, lower, upper) { #NEW: fixed=
       if(lower[param_name]>params[[param_name]] || upper[param_name] < params[[param_name]])
         stop('Parameter ', param_name, ' with value ', params[[param_name]], ' outside the boundaries.') #Alternativ einen penalty
     }
-    
     #Add params with names of parameters to arguments list
     arguments <- c(arguments, params)
     
@@ -48,7 +47,7 @@ loglik <- function(family, data, fixed=list(), log, lower, upper) { #NEW: fixed=
     if(!log) {
       summands <- log(summands)
       warning('Could be numerically instable.')
-    } 
+    }
     loglik_value <- sum(summands)
     
     ## The following is only for tracking the optimisation progress (might be deactivated sometime)
