@@ -8,7 +8,7 @@
    
 }
 \usage{
-getFamilies(all.packages, file=...)
+getFamilies(all.packages, file="../R/all_families.R")
 
 }
 
@@ -45,6 +45,7 @@ getFamilies(all.packages, file=...)
 ##--	or do  help(data=index)  for the standard data sets.
 
 ## getFamilies()
+
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 }

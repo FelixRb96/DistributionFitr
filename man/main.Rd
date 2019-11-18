@@ -1,0 +1,47 @@
+\name{DistributionFitr-package}
+\alias{DistributionFitr}
+\alias{DistributionFitr-package}
+\docType{package}
+\title{
+  Fitting of a (univariate) density
+}
+\description{
+A density (or count density) should be parametrically adapted to a univariate data set, per maximum likelihood. The user only enters the data. The program automatically searches for the best parametric family and the best parameters within a family. The program then returns three best parameter families including fitted parameters.
+
+Examine how several theoretical distibutions describe given univariate data.
+
+The package contains the following functions:
+\code{getFamilies} Browsing for distribution families
+\code{getFamily}  Find all distributions in a package
+\code{getParams}for a single distribution family, parameters are determined and classified, as well as upper and lower limits of parameters
+\code{optimParam}fits the parameters for a given distribution family with known names for the parameters and known value range of each parameter
+\code{globalFit}Determines the best parameters for a list of distribution families and recognizes discrete distributions
+\code{loglik} returns the loglikelihood function to be optimized
+
+}
+
+\author{
+  
+}
+
+\seealso{
+ **objects to See Also as \code{\link{help}}, **~
+ \code{\link{globalFit}}
+ \code{\link{getFamilies}}
+ \code{\link{getFamily}}
+ \code{\link{loglik}}
+ \code{\link{optimParam}}
+ \code{\link{getParams}}
+}
+
+\examples{
+#example for getFamily
+library(stats)
+getFamily('stats')
+
+#example for getParams
+parameter_characteristics <- getParams("beta")
+
+}
+
+\keyword{distributionfitr, distribution, parameters }

@@ -53,7 +53,6 @@ construct_package_list <- function(all.packages) {
     
     all.packages <- as.vector(ins_pck[package_filter,"Package"])
     
-    ##neccessary?
     rm(ins_pck)
   }
   
@@ -86,19 +85,19 @@ getFamilies <- function(all.packages, file="../R/all_families.R") {
   # CASE 1.3
   if (length(all.packages) == 1 && isTRUE(all.packages)) {
     family_list <- iterate_packages(construct_package_list(all.packages = TRUE))
-    write_file(family_list=family_list,file="all_families.R")
+    write_file(family_list=family_list,file="../R/all_families.R")
     return(family_list)
   }
   
   # CASE 1.2
   if (length(all.packages) == 1 && isFALSE(all.packages)) {
     family_list <- iterate_packages(construct_package_list(all.packages = FALSE))
-    write_file(family_list=family_list,file="all_families.R")
+    write_file(family_list=family_list,file="../R/all_families.R")
     return(family_list)
   }
   
   # CASE 1.1
   family_list <- iterate_packages(all.packages)
-  write_file(family_list=family_list,file="all_families.R")
+  write_file(family_list=family_list,file="../R/all_families.R")
   return(family_list)
 }
