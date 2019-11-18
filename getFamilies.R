@@ -1,7 +1,3 @@
-source("getParams.R")
-source("getFamily.R")
-#source("installAll.R")
-
 
 #iterate over packages and extract families and params
 iterate_packages <- function(packages) {
@@ -45,7 +41,6 @@ construct_package_list <- function(all.packages) {
   
   if (all.packages == TRUE)
   {
-    #installAll
     all.packages <- as.vector(installed.packages()[,"Package"])
     
   } else if (all.packages == FALSE) 
@@ -67,7 +62,6 @@ construct_package_list <- function(all.packages) {
   
 }
 
-construct_package_list(all.packages = FALSE)
 
 write_file <- function(family_list, file="all_families.R") {
   dput(family_list, file=file)
@@ -80,7 +74,7 @@ write_file <- function(family_list, file="all_families.R") {
 # Case 1.3 TRUE -> take all installed packages
 # Case 2 all.packages missing: Take families saved in the file
 
-getFamilies <- function(all.packages, file="all_families.R") {
+getFamilies <- function(all.packages, file="../R/all_families.R") {
   # CASE 2:
   if (missing(all.packages)) {
     if (! (file %in% list.files()) ) getFamilies(all.packages = FALSE, file=file)
