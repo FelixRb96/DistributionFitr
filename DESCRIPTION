@@ -8,7 +8,7 @@ Authors@R:
       person("Moritz", "Kern", role="aut"),  
       person(given=c("Borui","Niklas"), "Zhu", role="aut"), 
       person("Kiril", "Dik", role="aut"),
-      person("Andrè", "Ferdinand", role="aut"),                     
+      person("André", "Ferdinand", role="aut"),                     
       person("Till", "Freihaut", role="aut"), 
       person("Tim", "Glockner", role="aut"),   
       person(given("Manuel","J."), "Hentschel", role="aut"),
