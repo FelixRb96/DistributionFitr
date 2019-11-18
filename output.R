@@ -4,7 +4,7 @@ setGeneric(name = "summary",
 
 setMethod(f = "summary", signature = c("globalfit"),
           def = function(object, which=1, count=10, ic = c('AIC')) {
-              if(is.null(ic) || !ic %in% c('AIC', 'BIC', 'AICc'))
+              if(is.null(ic) || !(ic %in% c('AIC', 'BIC', 'AICc')))
                 stop("Argument 'ic' must be 'AIC', 'BIC' or 'AICc'")
             if(is.null(which) || !is.natural(which))
               stop("Argument 'which' must vector of positive integers.")
