@@ -1,27 +1,22 @@
 \name{getFamilies}
 \alias{getFamilies}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{
    Lists all distribution families with their parameters
 }
 \description{
-   This function returns a list of lists of all distribution families with their parameters
+   This function returns a list of lists of all distribution families with their parameters and scans packages if desired.
    
-   ***INTERNAL**
-   iterates over all.packages i
 }
 \usage{
-getFamilies()
+getFamilies(all.packages, file=...)
 
-***INTERNAL***
-getFamilies(all.packages, file)
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
    **internal**
   \item{all.packages}{
       vector of package names to scan for distribution families or
-     \code{TRUE} to scan all packages  or \code{FALSE} to scan base packages only
+     \code{TRUE} to scan all packages  or \code{FALSE} to scan base packages only or \code{MISSING} to return families saved in file
   }
 }
 
@@ -31,11 +26,9 @@ getFamilies(all.packages, file)
 \value{
   %description of output%
 }
-\references{
- ~put references to the literature/web site here ~
-}
+
 \author{
-   AUTHORS
+   Tim Glockner
 }
 \note{
   **further notes**
