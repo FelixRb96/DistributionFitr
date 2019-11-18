@@ -4,7 +4,7 @@
 
 rm(list=ls())
 source("optimParamsContinuous.R")
-source("get_params.R")
+source("getParams.R")
 source("utils.R")
 
 evaluate_optimization <- function(true_pars, optim_result) {
@@ -21,7 +21,7 @@ evaluate_optimization <- function(true_pars, optim_result) {
 test_single_family <- function(n, family) {
     
   # cat("Getting infos about the distribution\n")
-  family_info <- get_params(family)
+  family_info <- getParams(family)
   
   # if we couldn't find infos on the distribution
   if (is.null(family_info)) {
