@@ -4,7 +4,7 @@
 
 rm(list=ls())
 source("optimParamsContinuous.R")
-source("get_params.R")
+source("getParams.R")
 source("utils.R")
 
 evaluate_optimization <- function(true_pars, optim_result) {
@@ -21,7 +21,7 @@ evaluate_optimization <- function(true_pars, optim_result) {
 test_single_family <- function(n, family) {
     
   # cat("Getting infos about the distribution\n")
-  family_info <- get_params(family)
+  family_info <- getParams(family)
   
   # if we couldn't find infos on the distribution
   if (is.null(family_info)) {
@@ -77,7 +77,7 @@ compare_optimizers <- function(n, families, repetitions_per_family=5) {
   
   for (fam in families) {
     cat("\nCurrent Family", fam$family, "\n")
-    family_info <- get_params(fam)
+    family_info <- getParams(fam)
     print(family_info)
     # if we couldn't find infos on the distribution
     if (is.null(family_info)) next
@@ -142,4 +142,4 @@ compare_optimizers(1000, families, repetitions_per_family = 5)
 # maybe try different optimisation procedures
 # for each procedure compare optimisation results across all families (sth like mean percentage deviation)
 
-# maybe try to find the best optimisation procedure for each family independently already in get_params with sampled data
+# maybe try to find the best optimisation procedure for each family independently already in getParams with sampled data

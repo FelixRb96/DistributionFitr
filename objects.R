@@ -5,16 +5,18 @@ setClass(Class = "globalfit",
                    fits = 'list'))
 
 setClass(Class = "optimParams",
-         slots = c(family = "character",
-                                    package = "character",
-                                    estimatedValues = "numeric",
-                                    log_lik = "numeric",
-                                    AIC = "numeric",
-                                    BIC = "numeric",
-                                    AICc= "numeric",
-                                    continuousParams = "logical",
-                                    range = 'character')
-        )
+         slots = c(
+           family = "character",
+           package = "character",
+           estimatedValues = "numeric",
+           log_lik = "numeric",
+           AIC = "numeric",
+           BIC = "numeric",
+           AICc = "numeric",
+           continuousParams = "logical",
+           range = 'character'
+         )
+)
 
 
 if (sys.nframe() == 0) {

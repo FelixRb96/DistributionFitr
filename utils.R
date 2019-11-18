@@ -61,15 +61,7 @@ get_fun_from_package <- function(fam, package, type="r") {
 
 
 sample_params <- function(family, family_info, params=NULL) {
-  if (is.null(params)) {
-    npar <- length(family_info$lower)
-    pars <- numeric(npar)
-    names(pars) <- names(family_info$lower)
-  } else {
-    npar <- length(params)
-    pars <- numeric(npar)
-    names(pars) <- names(params)
-  }
+  pars <- if (is.null(params)) family_info$lower else params
   
   # bound possible values to reasonable range
   upper <- pmin(family_info$upper, 100)
