@@ -1,4 +1,6 @@
 source('utils.R')
+source('optimParamsContinuous.R')
+
 ### STATEMENT OF PURPOSE ###
 ############################
 
@@ -136,12 +138,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
     }
       
     
-  } else {
-    warning('Not implemented.')
-    return(NULL)
-    ############ PART DISABLED #################
-    ##### @ BORUI: FIRST TEST, THEN PUSH! ######
-    ############################################
+  } else { # Case 3: more than one non-integer parameter, but at least one continuous one
     non_floats <- !family_info$accepts_float
     num_discrete <- sum(non_floats)
     final_ll <- numeric(1)
@@ -253,8 +250,8 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
     optim_res$par <- final_params[reorder]
     print(optim_res$par)
     optim_res$value <- final_ll
-
   }
+
   # ICs are the same, since discrete parameters are still parameters we optimise over
   ic <- informationCriteria(ll = optim_res$value, n = length(data), k = length(family_info$upper))
   optim_res <- c(optim_res, ic)

@@ -1,0 +1,10 @@
+export("globalfit")
+
+import(utils)
+import(stats)
+import(base)
+import(stringr)
+import(datasets)
+import(graphics)
+import(grDevices)
+import(methods)

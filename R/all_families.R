@@ -56,7 +56,7 @@ list(list(package = "stats", family = "beta", family_info = list(
         ), supp_min_depends_on = c(m = FALSE, n = FALSE, k = FALSE
         ))), list(package = "stats", family = "lnorm", family_info = list(
     lower = c(meanlog = -Inf, sdlog = 0), upper = c(meanlog = 710, 
-    sdlog = 1001), accepts_float = c(meanlog = TRUE, sdlog = TRUE
+    sdlog = Inf), accepts_float = c(meanlog = TRUE, sdlog = TRUE
     ), defaults = c(meanlog = 0, sdlog = 1), log = TRUE, discrete = FALSE, 
     support_min = 0.0100000000000051, support_max = Inf, supp_max_depends_on = c(meanlog = FALSE, 
     sdlog = FALSE), supp_min_depends_on = c(meanlog = FALSE, 
