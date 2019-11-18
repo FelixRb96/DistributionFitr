@@ -1,6 +1,3 @@
-source("utils.R")
-source("loglik.R")
-
 # Loglik-Function
 # important: family should be list with elements "package" and "family"
 loglik_old <- function(param_values, family, data, fixed=list(), log=T) {

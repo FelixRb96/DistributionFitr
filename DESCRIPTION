@@ -1,0 +1,31 @@
+Package: DistributionFitr
+Type: Package
+Title: Fitting Multiple Distributions
+Version: 1.0.0
+Date: 2019-11-25
+Authors@R: 
+    c(person("Benedikt", "Geier", role="aut"),  
+      person("Moritz", "Kern", role="aut"),  
+      person(given=c("Borui","Niklas"), "Zhu", role=c("cre", "aut"), email="bzhu@mail.uni-mannheim.de"), 
+      person("Kiril", "Dik", role="aut"),
+      person("André", "Ferdinand", role="aut"),                     
+      person("Till", "Freihaut", role="aut"), 
+      person("Tim", "Glockner", role="aut"),   
+      person(given=c("Manuel","J."), "Hentschel", role="aut"),
+      person("Adrian", "Heppeler", role="aut"),     
+      person("Moritz", "Lauff", role="aut"),                       
+      person("Niclas", "Lietzow", role="aut"),                     
+      person("Hélène", "Peter", role="aut"),
+      person("Nadine", "Tampe", role="aut"),                     
+      person(given=c("Valentin","v."), "Trotha", role="aut"),
+      person("Leonardo", "Vela", role="aut"),
+      person("Martin", "Schlather", role="aut"),                     
+      person("Yiqi", "Li", role="ctb"),
+      person("Henrik", "Bengtsson", role="ctb")
+      )
+Maintainer: Borui Niklas Zhu <bzhu@mail.uni-mannheim.de>
+Description: Examine how several theoretical distributions describe given univariate data.  
+License: GPL (>= 3)
+Imports: utils, stats, stringr, datasets, graphics, grDevices, methods
+Encoding: UTF-8
+LazyData: true

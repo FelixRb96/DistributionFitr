@@ -1,7 +1,3 @@
-if (! "stringr" %in% installed.packages()) install.packages("stringr")
-library(stringr)
-source("utils.R")
-
 # ----------------------------------------------------------------------  
 # 1) Get all distributions within a package:
 # ----------------------------------------------------------------------
@@ -38,10 +34,10 @@ if (sys.nframe()==0) {
   
   # drop some not fitting distributions
   to_drop <- c("multinom")
-  familes <- names(freq)[! (names(freq) %in% to_drop)]
+  families <- names(freq)[! (names(freq) %in% to_drop)]
   
   # list of lists, where each sublist has the form list(package=some_pkg, family=some_family)
-  families <- lapply(familes, function(x) list(package="stats", family=x))
+  families <- lapply(families, function(x) list(package=package, family=x))
   families
 }
 

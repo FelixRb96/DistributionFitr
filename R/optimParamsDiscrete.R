@@ -173,7 +173,6 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
       # number of columns of result matrix: number of variable parameters + two (loglikelihood & convergence code)
       num_free_params <- length(family_info$lower) - sum(non_floats)
       if(num_discrete < length(family_info$lower)) { # case 3
-	      print("entering case 3")
         grid_results <- matrix(NA, nrow = nrow(grid), ncol = 2 )
         colnames(grid_results) <- c("loglik", "convergence")
         pb <- txtProgressBar(min = 0, max = nrow(grid))
@@ -205,7 +204,6 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
 
         final_ll <- grid_results[optimum_index,'loglik']
       } else { # case 4
-	      print("entering case 4")
 	grid_results <- matrix(NA, nrow = nrow(grid), ncol = 1)
         colnames(grid_results) <- c("loglik")
 	pb <- txtProgressBar(min = 0, max = nrow(grid))
@@ -296,5 +294,3 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
   optim_res <- c(optim_res, ic)
   return(optim_res)
 }
-
-
