@@ -1,6 +1,5 @@
 if (! "stringr" %in% installed.packages()) install.packages("stringr")
 library(stringr)
-source("utils.R")
 
 # ----------------------------------------------------------------------  
 # 1) Get all distributions within a package:

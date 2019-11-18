@@ -1,5 +1,3 @@
-source("utils.R")
-
 # Loglik-Function
 # Formate
 

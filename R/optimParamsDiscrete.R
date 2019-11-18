@@ -1,6 +1,3 @@
-source('utils.R')
-source('optimParamsContinuous.R')
-
 ### STATEMENT OF PURPOSE ###
 ############################
 
