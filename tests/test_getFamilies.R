@@ -1,6 +1,3 @@
-rm(list=ls())
-source("getFamilies.R")
-
 res <- iterate_packages(c("stats"))
 res
 
