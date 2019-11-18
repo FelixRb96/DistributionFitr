@@ -50,8 +50,8 @@ getFamily(pkg)
 ##--	or do  help(data=index)  for the standard data sets.
 
 # Example 1 for optimParam
-library(stats)
-getFamily('stats')
+## library(stats)
+## getFamily('stats')
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

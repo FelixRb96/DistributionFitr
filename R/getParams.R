@@ -1,6 +1,3 @@
-if (! "stringr" %in% installed.packages()) install.packages("stringr")
-library(stringr)
-
 # ----------------------------------------------------------------------  
 # 1) Get all distributions within a package:
 # ----------------------------------------------------------------------
