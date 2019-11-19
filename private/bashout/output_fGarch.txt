@@ -1,0 +1,248 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: fGarch	Number of families: 5 
+Current Family: ged 
+Current Family: sged 
+Current Family: snorm 
+Current Family: sstd 
+Current Family: std 
+[[1]]
+[[1]]$package
+[1] "fGarch"
+
+[[1]]$family
+[1] "ged"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+mean   sd   nu 
+-Inf -Inf 0.02 
+
+[[1]]$family_info$upper
+mean   sd   nu 
+ Inf  Inf  Inf 
+
+[[1]]$family_info$accepts_float
+mean   sd   nu 
+TRUE TRUE TRUE 
+
+[[1]]$family_info$defaults
+mean   sd   nu 
+   0    1    2 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+ mean    sd    nu 
+FALSE FALSE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+ mean    sd    nu 
+FALSE FALSE FALSE 
+
+
+
+[[2]]
+[[2]]$package
+[1] "fGarch"
+
+[[2]]$family
+[1] "sged"
+
+[[2]]$family_info
+[[2]]$family_info$lower
+mean   sd   nu   xi 
+-Inf -Inf 0.02 -Inf 
+
+[[2]]$family_info$upper
+mean   sd   nu   xi 
+ Inf  Inf  Inf  Inf 
+
+[[2]]$family_info$accepts_float
+mean   sd   nu   xi 
+TRUE TRUE TRUE TRUE 
+
+[[2]]$family_info$defaults
+mean   sd   nu   xi 
+ 0.0  1.0  2.0  1.5 
+
+[[2]]$family_info$log
+[1] TRUE
+
+[[2]]$family_info$discrete
+[1] FALSE
+
+[[2]]$family_info$support_min
+[1] -Inf
+
+[[2]]$family_info$support_max
+[1] Inf
+
+[[2]]$family_info$supp_max_depends_on
+ mean    sd    nu    xi 
+FALSE FALSE FALSE FALSE 
+
+[[2]]$family_info$supp_min_depends_on
+ mean    sd    nu    xi 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[3]]
+[[3]]$package
+[1] "fGarch"
+
+[[3]]$family
+[1] "snorm"
+
+[[3]]$family_info
+[[3]]$family_info$lower
+mean   sd   xi 
+-Inf -Inf -Inf 
+
+[[3]]$family_info$upper
+mean   sd   xi 
+ Inf  Inf  Inf 
+
+[[3]]$family_info$accepts_float
+mean   sd   xi 
+TRUE TRUE TRUE 
+
+[[3]]$family_info$defaults
+mean   sd   xi 
+ 0.0  1.0  1.5 
+
+[[3]]$family_info$log
+[1] TRUE
+
+[[3]]$family_info$discrete
+[1] FALSE
+
+[[3]]$family_info$support_min
+[1] -Inf
+
+[[3]]$family_info$support_max
+[1] Inf
+
+[[3]]$family_info$supp_max_depends_on
+ mean    sd    xi 
+FALSE FALSE FALSE 
+
+[[3]]$family_info$supp_min_depends_on
+ mean    sd    xi 
+FALSE FALSE FALSE 
+
+
+
+[[4]]
+[[4]]$package
+[1] "fGarch"
+
+[[4]]$family
+[1] "sstd"
+
+[[4]]$family_info
+[[4]]$family_info$lower
+mean   sd   nu   xi 
+-Inf -Inf 2.01 -Inf 
+
+[[4]]$family_info$upper
+mean   sd   nu   xi 
+ Inf  Inf  Inf  Inf 
+
+[[4]]$family_info$accepts_float
+mean   sd   nu   xi 
+TRUE TRUE TRUE TRUE 
+
+[[4]]$family_info$defaults
+mean   sd   nu   xi 
+ 0.0  1.0  5.0  1.5 
+
+[[4]]$family_info$log
+[1] TRUE
+
+[[4]]$family_info$discrete
+[1] FALSE
+
+[[4]]$family_info$support_min
+[1] -Inf
+
+[[4]]$family_info$support_max
+[1] Inf
+
+[[4]]$family_info$supp_max_depends_on
+ mean    sd    nu    xi 
+FALSE FALSE FALSE FALSE 
+
+[[4]]$family_info$supp_min_depends_on
+ mean    sd    nu    xi 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[5]]
+[[5]]$package
+[1] "fGarch"
+
+[[5]]$family
+[1] "std"
+
+[[5]]$family_info
+[[5]]$family_info$lower
+mean   sd   nu 
+-Inf -Inf 2.01 
+
+[[5]]$family_info$upper
+mean   sd   nu 
+ Inf  Inf  Inf 
+
+[[5]]$family_info$accepts_float
+mean   sd   nu 
+TRUE TRUE TRUE 
+
+[[5]]$family_info$defaults
+mean   sd   nu 
+   0    1    5 
+
+[[5]]$family_info$log
+[1] TRUE
+
+[[5]]$family_info$discrete
+[1] FALSE
+
+[[5]]$family_info$support_min
+[1] -Inf
+
+[[5]]$family_info$support_max
+[1] Inf
+
+[[5]]$family_info$supp_max_depends_on
+ mean    sd    nu 
+FALSE FALSE FALSE 
+
+[[5]]$family_info$supp_min_depends_on
+ mean    sd    nu 
+FALSE FALSE FALSE 
+
+
+
+Done.

@@ -1,0 +1,17 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: MixMatrix	Number of families: 3 
+Current Family: matrixinvt 
+Current Family: matrixnorm 
+Current Family: matrixt 
+list()
+Done.

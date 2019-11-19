@@ -1,0 +1,16 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: mvtnorm	Number of families: 2 
+Current Family: mvnorm 
+Current Family: mvt 
+list()
+Done.

@@ -7,7 +7,21 @@ iterate_packages <- function(packages) {
   #iterate over packages
   for (i in 1:length(packages)) {
     cat("Current Package:", packages[i])
-    package_content <- getFamily(packages[i])
+    success <- TRUE
+    success <- tryCatch(
+      {
+        package_content <- getFamily(packages[i])
+        TRUE
+      },
+      error = function(e) {
+        message('\nError occured for package ', packages[i])
+        message(e,'\n')
+        FALSE
+      }
+    )
+    if(!success){
+      next
+    }
     cat("\tNumber of families:", length(package_content), "\n")
     
     # no distribution family contained in package
@@ -73,7 +87,7 @@ write_file <- function(family_list, file="all_families.R") {
 # Case 1.3 TRUE -> take all installed packages
 # Case 2 all.packages missing: Take families saved in the file
 
-getFamilies <- function(all.packages, file="../R/all_families.R") {
+getFamilies <- function(all.packages=TRUE, file="../R/all_families.R") {
   # CASE 2:
   if (missing(all.packages)) {
     if (! (file %in% list.files()) ) getFamilies(all.packages = FALSE, file=file)
@@ -85,19 +99,19 @@ getFamilies <- function(all.packages, file="../R/all_families.R") {
   # CASE 1.3
   if (length(all.packages) == 1 && isTRUE(all.packages)) {
     family_list <- iterate_packages(construct_package_list(all.packages = TRUE))
-    write_file(family_list=family_list,file="../R/all_families.R")
+    write_file(family_list=family_list,file=file)
     return(family_list)
   }
   
   # CASE 1.2
   if (length(all.packages) == 1 && isFALSE(all.packages)) {
     family_list <- iterate_packages(construct_package_list(all.packages = FALSE))
-    write_file(family_list=family_list,file="../R/all_families.R")
+    write_file(family_list=family_list,file=file)
     return(family_list)
   }
   
   # CASE 1.1
   family_list <- iterate_packages(all.packages)
-  write_file(family_list=family_list,file="../R/all_families.R")
+  write_file(family_list=family_list,file=file)
   return(family_list)
 }

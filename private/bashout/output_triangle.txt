@@ -1,0 +1,107 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: triangle	Number of families: 2 
+Current Family: ltriangle 
+Current Family: triangle 
+[[1]]
+[[1]]$package
+[1] "triangle"
+
+[[1]]$family
+[1] "ltriangle"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+      a       b logbase 
+   0.01    1.00    1.01 
+
+[[1]]$family_info$upper
+      a       b logbase 
+    100     Inf     Inf 
+
+[[1]]$family_info$accepts_float
+      a       b logbase 
+   TRUE    TRUE    TRUE 
+
+[[1]]$family_info$defaults
+      a       b logbase 
+      1     100      10 
+
+[[1]]$family_info$log
+[1] FALSE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] 0.01
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+      a       b logbase 
+  FALSE    TRUE   FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+      a       b logbase 
+   TRUE   FALSE   FALSE 
+
+
+
+[[2]]
+[[2]]$package
+[1] "triangle"
+
+[[2]]$family
+[1] "triangle"
+
+[[2]]$family_info
+[[2]]$family_info$lower
+   a    b 
+-Inf 0.01 
+
+[[2]]$family_info$upper
+   a    b 
+0.99  Inf 
+
+[[2]]$family_info$accepts_float
+   a    b 
+TRUE TRUE 
+
+[[2]]$family_info$defaults
+a b 
+0 1 
+
+[[2]]$family_info$log
+[1] FALSE
+
+[[2]]$family_info$discrete
+[1] FALSE
+
+[[2]]$family_info$support_min
+[1] -Inf
+
+[[2]]$family_info$support_max
+[1] Inf
+
+[[2]]$family_info$supp_max_depends_on
+    a     b 
+FALSE  TRUE 
+
+[[2]]$family_info$supp_min_depends_on
+    a     b 
+ TRUE FALSE 
+
+
+
+Done.

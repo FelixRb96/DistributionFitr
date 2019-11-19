@@ -1,0 +1,15 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: RMarkWarning: Software mark not found in path.
+         If you have mark executable, you will need to set MarkPath object to its location (e.g. MarkPath="C:/Users/Jeff Laake/Desktop"	Number of families: 0 
+list()
+Done.

@@ -1,0 +1,86 @@
+list(list(package = "EnvStats", family = "evd", family_info = list(
+    lower = c(location = -Inf, scale = 0.01), upper = c(location = Inf, 
+    scale = Inf), accepts_float = c(location = TRUE, scale = TRUE
+    ), defaults = c(location = 0, scale = 1), log = FALSE, discrete = FALSE, 
+    support_min = -Inf, support_max = Inf, supp_max_depends_on = c(location = FALSE, 
+    scale = FALSE), supp_min_depends_on = c(location = FALSE, 
+    scale = FALSE))), list(package = "EnvStats", family = "gammaAlt", 
+    family_info = list(lower = c(cv = -Inf, mean = 8.32667268468867e-17
+    ), upper = c(cv = Inf, mean = Inf), accepts_float = c(cv = TRUE, 
+    mean = TRUE), defaults = c(cv = 1, mean = 0.5), log = TRUE, 
+        discrete = FALSE, support_min = 0, support_max = Inf, 
+        supp_max_depends_on = c(cv = FALSE, mean = FALSE), supp_min_depends_on = c(cv = FALSE, 
+        mean = FALSE))), list(package = "EnvStats", family = "gevd", 
+    family_info = list(lower = c(location = -Inf, scale = 0.01, 
+    shape = -Inf), upper = c(location = 719.78, scale = Inf, 
+    shape = Inf), accepts_float = c(location = TRUE, scale = TRUE, 
+    shape = TRUE), defaults = c(location = 0, scale = 1, shape = 0
+    ), log = FALSE, discrete = FALSE, support_min = -Inf, support_max = Inf, 
+        supp_max_depends_on = c(location = FALSE, scale = FALSE, 
+        shape = FALSE), supp_min_depends_on = c(location = FALSE, 
+        scale = FALSE, shape = FALSE))), list(package = "EnvStats", 
+    family = "lnorm3", family_info = list(lower = c(meanlog = -Inf, 
+    sdlog = 0, threshold = -Inf), upper = c(meanlog = 710, sdlog = Inf, 
+    threshold = Inf), accepts_float = c(meanlog = TRUE, sdlog = TRUE, 
+    threshold = TRUE), defaults = c(meanlog = 0, sdlog = 1, threshold = 0
+    ), log = FALSE, discrete = FALSE, support_min = -Inf, support_max = Inf, 
+        supp_max_depends_on = c(meanlog = FALSE, sdlog = FALSE, 
+        threshold = FALSE), supp_min_depends_on = c(meanlog = FALSE, 
+        sdlog = FALSE, threshold = TRUE))), list(package = "EnvStats", 
+    family = "lnormMix", family_info = list(lower = c(meanlog1 = -Inf, 
+    sdlog1 = 0.01, meanlog2 = -Inf, sdlog2 = 0.01, p.mix = 0), 
+        upper = c(meanlog1 = Inf, sdlog1 = Inf, meanlog2 = Inf, 
+        sdlog2 = Inf, p.mix = 1), accepts_float = c(meanlog1 = TRUE, 
+        sdlog1 = TRUE, meanlog2 = TRUE, sdlog2 = TRUE, p.mix = TRUE
+        ), defaults = c(meanlog1 = 0, sdlog1 = 1, meanlog2 = 0, 
+        sdlog2 = 1, p.mix = 0.5), log = FALSE, discrete = FALSE, 
+        support_min = 0.0100000000000051, support_max = Inf, 
+        supp_max_depends_on = c(meanlog1 = FALSE, sdlog1 = FALSE, 
+        meanlog2 = FALSE, sdlog2 = FALSE, p.mix = FALSE), supp_min_depends_on = c(meanlog1 = FALSE, 
+        sdlog1 = FALSE, meanlog2 = FALSE, sdlog2 = FALSE, p.mix = FALSE
+        ))), list(package = "EnvStats", family = "normMix", family_info = list(
+    lower = c(mean1 = -Inf, sd1 = 0.01, mean2 = -Inf, sd2 = 0.01, 
+    p.mix = 0), upper = c(mean1 = Inf, sd1 = Inf, mean2 = Inf, 
+    sd2 = Inf, p.mix = 1), accepts_float = c(mean1 = TRUE, sd1 = TRUE, 
+    mean2 = TRUE, sd2 = TRUE, p.mix = TRUE), defaults = c(mean1 = 0, 
+    sd1 = 1, mean2 = 0, sd2 = 1, p.mix = 0.5), log = FALSE, discrete = FALSE, 
+    support_min = -Inf, support_max = Inf, supp_max_depends_on = c(mean1 = FALSE, 
+    sd1 = FALSE, mean2 = FALSE, sd2 = FALSE, p.mix = FALSE), 
+    supp_min_depends_on = c(mean1 = FALSE, sd1 = FALSE, mean2 = FALSE, 
+    sd2 = FALSE, p.mix = FALSE))), list(package = "EnvStats", 
+    family = "normTrunc", family_info = list(lower = c(mean = -Inf, 
+    sd = 0.01, max = -Inf), upper = c(mean = Inf, sd = Inf, max = Inf
+    ), accepts_float = c(mean = TRUE, sd = TRUE, max = TRUE), 
+        defaults = c(mean = 0, sd = 1, max = Inf), log = FALSE, 
+        discrete = FALSE, support_min = -Inf, support_max = Inf, 
+        supp_max_depends_on = c(mean = FALSE, sd = FALSE, max = TRUE
+        ), supp_min_depends_on = c(mean = FALSE, sd = FALSE, 
+        max = FALSE))), list(package = "EnvStats", family = "pareto", 
+    family_info = list(lower = c(shape = 0.01, location = 0.0100000000000001
+    ), upper = c(shape = Inf, location = Inf), accepts_float = c(shape = TRUE, 
+    location = TRUE), defaults = c(shape = 1, location = 0.5), 
+        log = FALSE, discrete = FALSE, support_min = 0.0100000000000001, 
+        support_max = Inf, supp_max_depends_on = c(shape = FALSE, 
+        location = FALSE), supp_min_depends_on = c(shape = FALSE, 
+        location = TRUE))), list(package = "EnvStats", family = "tri", 
+    family_info = list(lower = c(min = -Inf, max = 0.5), upper = c(min = 0.49, 
+    max = Inf), accepts_float = c(min = TRUE, max = TRUE), defaults = c(min = 0, 
+    max = 1), log = FALSE, discrete = FALSE, support_min = -Inf, 
+        support_max = Inf, supp_max_depends_on = c(min = FALSE, 
+        max = TRUE), supp_min_depends_on = c(min = TRUE, max = FALSE
+        ))), list(package = "EnvStats", family = "zmlnorm", family_info = list(
+    lower = c(meanlog = -Inf, sdlog = 0.01, p.zero = 8.32667268468867e-17
+    ), upper = c(meanlog = 800, sdlog = Inf, p.zero = 0.99), 
+    accepts_float = c(meanlog = TRUE, sdlog = TRUE, p.zero = TRUE
+    ), defaults = c(meanlog = 0, sdlog = 1, p.zero = 0.5), log = FALSE, 
+    discrete = FALSE, support_min = 0, support_max = Inf, supp_max_depends_on = c(meanlog = FALSE, 
+    sdlog = FALSE, p.zero = FALSE), supp_min_depends_on = c(meanlog = FALSE, 
+    sdlog = FALSE, p.zero = FALSE))), list(package = "EnvStats", 
+    family = "zmnorm", family_info = list(lower = c(mean = -Inf, 
+    sd = 0.01, p.zero = 8.32667268468867e-17), upper = c(mean = Inf, 
+    sd = Inf, p.zero = 0.99), accepts_float = c(mean = TRUE, 
+    sd = TRUE, p.zero = TRUE), defaults = c(mean = 0, sd = 1, 
+    p.zero = 0.5), log = FALSE, discrete = FALSE, support_min = -Inf, 
+        support_max = Inf, supp_max_depends_on = c(mean = FALSE, 
+        sd = FALSE, p.zero = FALSE), supp_min_depends_on = c(mean = FALSE, 
+        sd = FALSE, p.zero = FALSE))))

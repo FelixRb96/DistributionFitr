@@ -1,0 +1,60 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: tmvmixnorm	Number of families: 1 
+Current Family: tuvn 
+[[1]]
+[[1]]$package
+[1] "tmvmixnorm"
+
+[[1]]$family
+[1] "tuvn"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+ mean    sd lower upper 
+ -Inf  -Inf  -Inf   0.5 
+
+[[1]]$family_info$upper
+ mean    sd lower upper 
+  Inf   Inf   0.5   Inf 
+
+[[1]]$family_info$accepts_float
+ mean    sd lower upper 
+ TRUE  TRUE  TRUE  TRUE 
+
+[[1]]$family_info$defaults
+ mean    sd lower upper 
+  0.0   1.0   0.5   0.5 
+
+[[1]]$family_info$log
+[1] FALSE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+ mean    sd lower upper 
+FALSE FALSE FALSE  TRUE 
+
+[[1]]$family_info$supp_min_depends_on
+ mean    sd lower upper 
+FALSE FALSE  TRUE FALSE 
+
+
+
+Done.

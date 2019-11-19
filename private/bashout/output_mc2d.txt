@@ -1,0 +1,206 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: mc2d	Number of families: 9 
+Current Family: bern 
+Current Family: betagen 
+Current Family: dirichlet 
+Current Family: empiricalC 
+Current Family: empiricalD 
+Current Family: multinomial 
+Current Family: multinormal 
+Current Family: pert 
+Current Family: triang 
+[[1]]
+[[1]]$package
+[1] "mc2d"
+
+[[1]]$family
+[1] "bern"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+prob 
+   0 
+
+[[1]]$family_info$upper
+prob 
+   1 
+
+[[1]]$family_info$accepts_float
+prob 
+TRUE 
+
+[[1]]$family_info$defaults
+prob 
+ 0.5 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] TRUE
+
+[[1]]$family_info$support_min
+[1] 0
+
+[[1]]$family_info$support_max
+[1] 1
+
+[[1]]$family_info$supp_max_depends_on
+ prob 
+FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+ prob 
+FALSE 
+
+
+
+[[2]]
+[[2]]$package
+[1] "mc2d"
+
+[[2]]$family
+[1] "betagen"
+
+[[2]]$family_info
+[[2]]$family_info$lower
+         min          max          ncp       shape1       shape2 
+        -Inf 1.000000e-02 0.000000e+00 8.326673e-17 8.326673e-17 
+
+[[2]]$family_info$upper
+   min    max    ncp shape1 shape2 
+  0.99    Inf    Inf    Inf    Inf 
+
+[[2]]$family_info$accepts_float
+   min    max    ncp shape1 shape2 
+  TRUE   TRUE   TRUE   TRUE   TRUE 
+
+[[2]]$family_info$defaults
+   min    max    ncp shape1 shape2 
+   0.0    1.0    0.0    0.5    0.5 
+
+[[2]]$family_info$log
+[1] TRUE
+
+[[2]]$family_info$discrete
+[1] FALSE
+
+[[2]]$family_info$support_min
+[1] -Inf
+
+[[2]]$family_info$support_max
+[1] Inf
+
+[[2]]$family_info$supp_max_depends_on
+   min    max    ncp shape1 shape2 
+ FALSE   TRUE  FALSE  FALSE  FALSE 
+
+[[2]]$family_info$supp_min_depends_on
+   min    max    ncp shape1 shape2 
+  TRUE  FALSE  FALSE  FALSE  FALSE 
+
+
+
+[[3]]
+[[3]]$package
+[1] "mc2d"
+
+[[3]]$family
+[1] "pert"
+
+[[3]]$family_info
+[[3]]$family_info$lower
+ mode   max shape 
+-1.00  0.00  0.01 
+
+[[3]]$family_info$upper
+ mode   max shape 
+    1   Inf   Inf 
+
+[[3]]$family_info$accepts_float
+ mode   max shape 
+ TRUE  TRUE  TRUE 
+
+[[3]]$family_info$defaults
+ mode   max shape 
+    0     1     4 
+
+[[3]]$family_info$log
+[1] TRUE
+
+[[3]]$family_info$discrete
+[1] FALSE
+
+[[3]]$family_info$support_min
+[1] -0.99
+
+[[3]]$family_info$support_max
+[1] Inf
+
+[[3]]$family_info$supp_max_depends_on
+ mode   max shape 
+FALSE  TRUE FALSE 
+
+[[3]]$family_info$supp_min_depends_on
+ mode   max shape 
+FALSE FALSE FALSE 
+
+
+
+[[4]]
+[[4]]$package
+[1] "mc2d"
+
+[[4]]$family
+[1] "triang"
+
+[[4]]$family_info
+[[4]]$family_info$lower
+mode  max 
+  -1    0 
+
+[[4]]$family_info$upper
+mode  max 
+   1  Inf 
+
+[[4]]$family_info$accepts_float
+mode  max 
+TRUE TRUE 
+
+[[4]]$family_info$defaults
+mode  max 
+   0    1 
+
+[[4]]$family_info$log
+[1] TRUE
+
+[[4]]$family_info$discrete
+[1] FALSE
+
+[[4]]$family_info$support_min
+[1] -0.99
+
+[[4]]$family_info$support_max
+[1] Inf
+
+[[4]]$family_info$supp_max_depends_on
+ mode   max 
+FALSE  TRUE 
+
+[[4]]$family_info$supp_min_depends_on
+ mode   max 
+FALSE FALSE 
+
+
+
+Done.

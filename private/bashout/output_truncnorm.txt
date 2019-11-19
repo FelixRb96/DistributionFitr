@@ -1,0 +1,60 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: truncnorm	Number of families: 1 
+Current Family: truncnorm 
+[[1]]
+[[1]]$package
+[1] "truncnorm"
+
+[[1]]$family
+[1] "truncnorm"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+   b mean   sd 
+-Inf -Inf    0 
+
+[[1]]$family_info$upper
+   b mean   sd 
+ Inf  Inf  Inf 
+
+[[1]]$family_info$accepts_float
+   b mean   sd 
+TRUE TRUE TRUE 
+
+[[1]]$family_info$defaults
+   b mean   sd 
+ Inf    0    1 
+
+[[1]]$family_info$log
+[1] FALSE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+    b  mean    sd 
+ TRUE FALSE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+    b  mean    sd 
+FALSE FALSE FALSE 
+
+
+
+Done.

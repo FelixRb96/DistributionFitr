@@ -1,0 +1,107 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: sensitivity	Number of families: 2 
+Current Family: gumbel.trunc 
+Current Family: norm.trunc 
+[[1]]
+[[1]]$package
+[1] "sensitivity"
+
+[[1]]$family
+[1] "gumbel.trunc"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+  loc scale   max 
+ -Inf  0.01  -Inf 
+
+[[1]]$family_info$upper
+  loc scale   max 
+  Inf   Inf   Inf 
+
+[[1]]$family_info$accepts_float
+  loc scale   max 
+ TRUE  TRUE  TRUE 
+
+[[1]]$family_info$defaults
+  loc scale   max 
+0e+00 1e+00 1e+06 
+
+[[1]]$family_info$log
+[1] FALSE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+  loc scale   max 
+FALSE FALSE  TRUE 
+
+[[1]]$family_info$supp_min_depends_on
+  loc scale   max 
+FALSE FALSE FALSE 
+
+
+
+[[2]]
+[[2]]$package
+[1] "sensitivity"
+
+[[2]]$family
+[1] "norm.trunc"
+
+[[2]]$family_info
+[[2]]$family_info$lower
+mean   sd  max 
+-Inf    0 -Inf 
+
+[[2]]$family_info$upper
+mean   sd  max 
+ Inf  Inf  Inf 
+
+[[2]]$family_info$accepts_float
+mean   sd  max 
+TRUE TRUE TRUE 
+
+[[2]]$family_info$defaults
+ mean    sd   max 
+0e+00 1e+00 1e+06 
+
+[[2]]$family_info$log
+[1] FALSE
+
+[[2]]$family_info$discrete
+[1] FALSE
+
+[[2]]$family_info$support_min
+[1] -Inf
+
+[[2]]$family_info$support_max
+[1] Inf
+
+[[2]]$family_info$supp_max_depends_on
+ mean    sd   max 
+FALSE FALSE  TRUE 
+
+[[2]]$family_info$supp_min_depends_on
+ mean    sd   max 
+FALSE FALSE FALSE 
+
+
+
+Done.

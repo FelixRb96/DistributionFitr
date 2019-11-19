@@ -1,0 +1,17 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: lmmen----------------------------------------------------------------------
+This is a test release of the package 'lmmlasso'. If you have any questions or problems, do not hesitate to contact the author.
+----------------------------------------------------------------------
+	Number of families: 0 
+list()
+Done.

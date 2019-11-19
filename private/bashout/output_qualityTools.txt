@@ -1,0 +1,17 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: qualityTools	Number of families: 3 
+Current Family: gamma3 
+Current Family: lnorm3 
+Current Family: weibull3 
+list()
+Done.

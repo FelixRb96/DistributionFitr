@@ -1,0 +1,14 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: smoothmest	Number of families: 2 
+Current Family: doublex 
+Current Family: huber 

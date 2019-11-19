@@ -1,0 +1,61 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: contextual	Number of families: 1 
+Current Family: invgamma 
+scale depends on another earlier parameter and is thus removed
+[[1]]
+[[1]]$package
+[1] "contextual"
+
+[[1]]$family
+[1] "invgamma"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+ rate shape 
+ 0.00  0.01 
+
+[[1]]$family_info$upper
+ rate shape 
+  Inf   Inf 
+
+[[1]]$family_info$accepts_float
+ rate shape 
+ TRUE  TRUE 
+
+[[1]]$family_info$defaults
+ rate shape 
+  1.0   0.5 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] 0.01
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+ rate shape 
+FALSE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+ rate shape 
+FALSE FALSE 
+
+
+
+Done.

@@ -1,0 +1,310 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: evd	Number of families: 21 
+Current Family: bvalog 
+Current Family: bvamix 
+Current Family: bvaneglog 
+Current Family: bvbilog 
+Current Family: bvct 
+Current Family: bvevd 
+Current Family: bvhr 
+Current Family: bvlog 
+Current Family: bvnegbilog 
+Current Family: bvneglog 
+Current Family: extreme 
+Current Family: frechet 
+Current Family: gev 
+Current Family: gpd 
+Current Family: gumbel 
+Current Family: mvalog 
+Current Family: mvevd 
+Current Family: mvlog 
+Current Family: nweibull 
+Current Family: order 
+Current Family: rweibull 
+[[1]]
+[[1]]$package
+[1] "evd"
+
+[[1]]$family
+[1] "frechet"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+  loc scale shape 
+ -Inf  0.01  0.01 
+
+[[1]]$family_info$upper
+  loc scale shape 
+  Inf   Inf   Inf 
+
+[[1]]$family_info$accepts_float
+  loc scale shape 
+ TRUE  TRUE  TRUE 
+
+[[1]]$family_info$defaults
+  loc scale shape 
+    0     1     1 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+  loc scale shape 
+FALSE FALSE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+  loc scale shape 
+ TRUE FALSE FALSE 
+
+
+
+[[2]]
+[[2]]$package
+[1] "evd"
+
+[[2]]$family
+[1] "gev"
+
+[[2]]$family_info
+[[2]]$family_info$lower
+  loc scale shape 
+ -Inf  0.01  -Inf 
+
+[[2]]$family_info$upper
+  loc scale shape 
+  Inf   Inf   Inf 
+
+[[2]]$family_info$accepts_float
+  loc scale shape 
+ TRUE  TRUE  TRUE 
+
+[[2]]$family_info$defaults
+  loc scale shape 
+    0     1     0 
+
+[[2]]$family_info$log
+[1] TRUE
+
+[[2]]$family_info$discrete
+[1] FALSE
+
+[[2]]$family_info$support_min
+[1] -Inf
+
+[[2]]$family_info$support_max
+[1] Inf
+
+[[2]]$family_info$supp_max_depends_on
+  loc scale shape 
+FALSE FALSE FALSE 
+
+[[2]]$family_info$supp_min_depends_on
+  loc scale shape 
+FALSE FALSE FALSE 
+
+
+
+[[3]]
+[[3]]$package
+[1] "evd"
+
+[[3]]$family
+[1] "gpd"
+
+[[3]]$family_info
+[[3]]$family_info$lower
+  loc scale shape 
+ -Inf  0.01  -Inf 
+
+[[3]]$family_info$upper
+  loc scale shape 
+  Inf   Inf   Inf 
+
+[[3]]$family_info$accepts_float
+  loc scale shape 
+ TRUE  TRUE  TRUE 
+
+[[3]]$family_info$defaults
+  loc scale shape 
+    0     1     0 
+
+[[3]]$family_info$log
+[1] TRUE
+
+[[3]]$family_info$discrete
+[1] FALSE
+
+[[3]]$family_info$support_min
+[1] -Inf
+
+[[3]]$family_info$support_max
+[1] Inf
+
+[[3]]$family_info$supp_max_depends_on
+  loc scale shape 
+FALSE FALSE FALSE 
+
+[[3]]$family_info$supp_min_depends_on
+  loc scale shape 
+ TRUE FALSE FALSE 
+
+
+
+[[4]]
+[[4]]$package
+[1] "evd"
+
+[[4]]$family
+[1] "gumbel"
+
+[[4]]$family_info
+[[4]]$family_info$lower
+  loc scale 
+ -Inf  0.01 
+
+[[4]]$family_info$upper
+  loc scale 
+  Inf   Inf 
+
+[[4]]$family_info$accepts_float
+  loc scale 
+ TRUE  TRUE 
+
+[[4]]$family_info$defaults
+  loc scale 
+    0     1 
+
+[[4]]$family_info$log
+[1] TRUE
+
+[[4]]$family_info$discrete
+[1] FALSE
+
+[[4]]$family_info$support_min
+[1] -Inf
+
+[[4]]$family_info$support_max
+[1] Inf
+
+[[4]]$family_info$supp_max_depends_on
+  loc scale 
+FALSE FALSE 
+
+[[4]]$family_info$supp_min_depends_on
+  loc scale 
+FALSE FALSE 
+
+
+
+[[5]]
+[[5]]$package
+[1] "evd"
+
+[[5]]$family
+[1] "nweibull"
+
+[[5]]$family_info
+[[5]]$family_info$lower
+  loc scale shape 
+ -Inf  0.01  0.01 
+
+[[5]]$family_info$upper
+  loc scale shape 
+  Inf   Inf   Inf 
+
+[[5]]$family_info$accepts_float
+  loc scale shape 
+ TRUE  TRUE  TRUE 
+
+[[5]]$family_info$defaults
+  loc scale shape 
+    0     1     1 
+
+[[5]]$family_info$log
+[1] TRUE
+
+[[5]]$family_info$discrete
+[1] FALSE
+
+[[5]]$family_info$support_min
+[1] -Inf
+
+[[5]]$family_info$support_max
+[1] Inf
+
+[[5]]$family_info$supp_max_depends_on
+  loc scale shape 
+ TRUE FALSE FALSE 
+
+[[5]]$family_info$supp_min_depends_on
+  loc scale shape 
+FALSE FALSE FALSE 
+
+
+
+[[6]]
+[[6]]$package
+[1] "evd"
+
+[[6]]$family
+[1] "rweibull"
+
+[[6]]$family_info
+[[6]]$family_info$lower
+  loc scale shape 
+ -Inf  0.01  0.01 
+
+[[6]]$family_info$upper
+  loc scale shape 
+  Inf   Inf   Inf 
+
+[[6]]$family_info$accepts_float
+  loc scale shape 
+ TRUE  TRUE  TRUE 
+
+[[6]]$family_info$defaults
+  loc scale shape 
+    0     1     1 
+
+[[6]]$family_info$log
+[1] TRUE
+
+[[6]]$family_info$discrete
+[1] FALSE
+
+[[6]]$family_info$support_min
+[1] -Inf
+
+[[6]]$family_info$support_max
+[1] Inf
+
+[[6]]$family_info$supp_max_depends_on
+  loc scale shape 
+ TRUE FALSE FALSE 
+
+[[6]]$family_info$supp_min_depends_on
+  loc scale shape 
+FALSE FALSE FALSE 
+
+
+
+Done.

@@ -1,0 +1,30 @@
+list(list(package = "mc2d", family = "bern", family_info = list(
+    lower = c(prob = 0), upper = c(prob = 1), accepts_float = c(prob = TRUE), 
+    defaults = c(prob = 0.5), log = TRUE, discrete = TRUE, support_min = 0, 
+    support_max = 1, supp_max_depends_on = c(prob = FALSE), supp_min_depends_on = c(prob = FALSE))), 
+    list(package = "mc2d", family = "betagen", family_info = list(
+        lower = c(min = -Inf, max = 0.01, ncp = 0, shape1 = 8.32667268468867e-17, 
+        shape2 = 8.32667268468867e-17), upper = c(min = 0.99, 
+        max = Inf, ncp = Inf, shape1 = Inf, shape2 = Inf), accepts_float = c(min = TRUE, 
+        max = TRUE, ncp = TRUE, shape1 = TRUE, shape2 = TRUE), 
+        defaults = c(min = 0, max = 1, ncp = 0, shape1 = 0.5, 
+        shape2 = 0.5), log = TRUE, discrete = FALSE, support_min = -Inf, 
+        support_max = Inf, supp_max_depends_on = c(min = FALSE, 
+        max = TRUE, ncp = FALSE, shape1 = FALSE, shape2 = FALSE
+        ), supp_min_depends_on = c(min = TRUE, max = FALSE, ncp = FALSE, 
+        shape1 = FALSE, shape2 = FALSE))), list(package = "mc2d", 
+        family = "pert", family_info = list(lower = c(mode = -1, 
+        max = 0, shape = 0.01), upper = c(mode = 1, max = Inf, 
+        shape = Inf), accepts_float = c(mode = TRUE, max = TRUE, 
+        shape = TRUE), defaults = c(mode = 0, max = 1, shape = 4
+        ), log = TRUE, discrete = FALSE, support_min = -0.989999999999995, 
+            support_max = Inf, supp_max_depends_on = c(mode = FALSE, 
+            max = TRUE, shape = FALSE), supp_min_depends_on = c(mode = FALSE, 
+            max = FALSE, shape = FALSE))), list(package = "mc2d", 
+        family = "triang", family_info = list(lower = c(mode = -1, 
+        max = 0), upper = c(mode = 1, max = Inf), accepts_float = c(mode = TRUE, 
+        max = TRUE), defaults = c(mode = 0, max = 1), log = TRUE, 
+            discrete = FALSE, support_min = -0.989999999999995, 
+            support_max = Inf, supp_max_depends_on = c(mode = FALSE, 
+            max = TRUE), supp_min_depends_on = c(mode = FALSE, 
+            max = FALSE))))

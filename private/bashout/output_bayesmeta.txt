@@ -1,0 +1,342 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: bayesmeta	Number of families: 7 
+Current Family: halfcauchy 
+Current Family: halflogistic 
+Current Family: halfnormal 
+Current Family: halft 
+Current Family: invchi 
+Current Family: lomax 
+Current Family: rayleigh 
+[[1]]
+[[1]]$package
+[1] "bayesmeta"
+
+[[1]]$family
+[1] "halfcauchy"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+scale 
+ 0.01 
+
+[[1]]$family_info$upper
+scale 
+  Inf 
+
+[[1]]$family_info$accepts_float
+scale 
+ TRUE 
+
+[[1]]$family_info$defaults
+scale 
+    1 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] 0
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+scale 
+FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+scale 
+FALSE 
+
+
+
+[[2]]
+[[2]]$package
+[1] "bayesmeta"
+
+[[2]]$family
+[1] "halflogistic"
+
+[[2]]$family_info
+[[2]]$family_info$lower
+scale 
+ 0.01 
+
+[[2]]$family_info$upper
+scale 
+  Inf 
+
+[[2]]$family_info$accepts_float
+scale 
+ TRUE 
+
+[[2]]$family_info$defaults
+scale 
+    1 
+
+[[2]]$family_info$log
+[1] TRUE
+
+[[2]]$family_info$discrete
+[1] FALSE
+
+[[2]]$family_info$support_min
+[1] 0
+
+[[2]]$family_info$support_max
+[1] Inf
+
+[[2]]$family_info$supp_max_depends_on
+scale 
+FALSE 
+
+[[2]]$family_info$supp_min_depends_on
+scale 
+FALSE 
+
+
+
+[[3]]
+[[3]]$package
+[1] "bayesmeta"
+
+[[3]]$family
+[1] "halfnormal"
+
+[[3]]$family_info
+[[3]]$family_info$lower
+scale 
+ 0.01 
+
+[[3]]$family_info$upper
+scale 
+  Inf 
+
+[[3]]$family_info$accepts_float
+scale 
+ TRUE 
+
+[[3]]$family_info$defaults
+scale 
+    1 
+
+[[3]]$family_info$log
+[1] TRUE
+
+[[3]]$family_info$discrete
+[1] FALSE
+
+[[3]]$family_info$support_min
+[1] 0
+
+[[3]]$family_info$support_max
+[1] Inf
+
+[[3]]$family_info$supp_max_depends_on
+scale 
+FALSE 
+
+[[3]]$family_info$supp_min_depends_on
+scale 
+FALSE 
+
+
+
+[[4]]
+[[4]]$package
+[1] "bayesmeta"
+
+[[4]]$family
+[1] "halft"
+
+[[4]]$family_info
+[[4]]$family_info$lower
+scale    df 
+ 0.01  0.01 
+
+[[4]]$family_info$upper
+scale    df 
+  Inf   Inf 
+
+[[4]]$family_info$accepts_float
+scale    df 
+ TRUE  TRUE 
+
+[[4]]$family_info$defaults
+scale    df 
+  1.0   0.5 
+
+[[4]]$family_info$log
+[1] TRUE
+
+[[4]]$family_info$discrete
+[1] FALSE
+
+[[4]]$family_info$support_min
+[1] 0
+
+[[4]]$family_info$support_max
+[1] Inf
+
+[[4]]$family_info$supp_max_depends_on
+scale    df 
+FALSE FALSE 
+
+[[4]]$family_info$supp_min_depends_on
+scale    df 
+FALSE FALSE 
+
+
+
+[[5]]
+[[5]]$package
+[1] "bayesmeta"
+
+[[5]]$family
+[1] "invchi"
+
+[[5]]$family_info
+[[5]]$family_info$lower
+scale    df 
+ 0.01  0.01 
+
+[[5]]$family_info$upper
+scale    df 
+  Inf   Inf 
+
+[[5]]$family_info$accepts_float
+scale    df 
+ TRUE  TRUE 
+
+[[5]]$family_info$defaults
+scale    df 
+  1.0   0.5 
+
+[[5]]$family_info$log
+[1] TRUE
+
+[[5]]$family_info$discrete
+[1] FALSE
+
+[[5]]$family_info$support_min
+[1] 0.03
+
+[[5]]$family_info$support_max
+[1] Inf
+
+[[5]]$family_info$supp_max_depends_on
+scale    df 
+FALSE FALSE 
+
+[[5]]$family_info$supp_min_depends_on
+scale    df 
+FALSE FALSE 
+
+
+
+[[6]]
+[[6]]$package
+[1] "bayesmeta"
+
+[[6]]$family
+[1] "lomax"
+
+[[6]]$family_info
+[[6]]$family_info$lower
+shape scale 
+ 0.01  0.01 
+
+[[6]]$family_info$upper
+shape scale 
+  Inf   Inf 
+
+[[6]]$family_info$accepts_float
+shape scale 
+ TRUE  TRUE 
+
+[[6]]$family_info$defaults
+shape scale 
+    1     1 
+
+[[6]]$family_info$log
+[1] TRUE
+
+[[6]]$family_info$discrete
+[1] FALSE
+
+[[6]]$family_info$support_min
+[1] 0
+
+[[6]]$family_info$support_max
+[1] Inf
+
+[[6]]$family_info$supp_max_depends_on
+shape scale 
+FALSE FALSE 
+
+[[6]]$family_info$supp_min_depends_on
+shape scale 
+FALSE FALSE 
+
+
+
+[[7]]
+[[7]]$package
+[1] "bayesmeta"
+
+[[7]]$family
+[1] "rayleigh"
+
+[[7]]$family_info
+[[7]]$family_info$lower
+scale 
+ 0.01 
+
+[[7]]$family_info$upper
+scale 
+  Inf 
+
+[[7]]$family_info$accepts_float
+scale 
+ TRUE 
+
+[[7]]$family_info$defaults
+scale 
+    1 
+
+[[7]]$family_info$log
+[1] TRUE
+
+[[7]]$family_info$discrete
+[1] FALSE
+
+[[7]]$family_info$support_min
+[1] 0.01
+
+[[7]]$family_info$support_max
+[1] Inf
+
+[[7]]$family_info$supp_max_depends_on
+scale 
+FALSE 
+
+[[7]]$family_info$supp_min_depends_on
+scale 
+FALSE 
+
+
+
+Done.

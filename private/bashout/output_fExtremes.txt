@@ -1,0 +1,107 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: fExtremes	Number of families: 2 
+Current Family: gev 
+Current Family: gpd 
+[[1]]
+[[1]]$package
+[1] "fExtremes"
+
+[[1]]$family
+[1] "gev"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+  xi   mu beta 
+-Inf -Inf 0.01 
+
+[[1]]$family_info$upper
+  xi   mu beta 
+ Inf  Inf  Inf 
+
+[[1]]$family_info$accepts_float
+  xi   mu beta 
+TRUE TRUE TRUE 
+
+[[1]]$family_info$defaults
+  xi   mu beta 
+   1    0    1 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+   xi    mu  beta 
+FALSE FALSE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+   xi    mu  beta 
+FALSE FALSE FALSE 
+
+
+
+[[2]]
+[[2]]$package
+[1] "fExtremes"
+
+[[2]]$family
+[1] "gpd"
+
+[[2]]$family_info
+[[2]]$family_info$lower
+  xi   mu beta 
+-Inf -Inf 0.01 
+
+[[2]]$family_info$upper
+  xi   mu beta 
+ Inf  Inf  Inf 
+
+[[2]]$family_info$accepts_float
+  xi   mu beta 
+TRUE TRUE TRUE 
+
+[[2]]$family_info$defaults
+  xi   mu beta 
+   1    0    1 
+
+[[2]]$family_info$log
+[1] TRUE
+
+[[2]]$family_info$discrete
+[1] FALSE
+
+[[2]]$family_info$support_min
+[1] -Inf
+
+[[2]]$family_info$support_max
+[1] Inf
+
+[[2]]$family_info$supp_max_depends_on
+   xi    mu  beta 
+FALSE FALSE FALSE 
+
+[[2]]$family_info$supp_min_depends_on
+   xi    mu  beta 
+FALSE  TRUE FALSE 
+
+
+
+Done.

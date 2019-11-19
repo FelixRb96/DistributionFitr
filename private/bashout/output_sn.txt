@@ -1,0 +1,22 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: sn	Number of families: 8 
+Current Family: msc 
+Current Family: msn 
+Current Family: mst 
+Current Family: mSymmModulated 
+Current Family: sc 
+Current Family: sn 
+Current Family: st 
+Current Family: SymmModulated 
+list()
+Done.

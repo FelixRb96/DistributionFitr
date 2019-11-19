@@ -1,0 +1,19 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: sde	Number of families: 5 
+Current Family: cBS 
+Current Family: cCIR 
+Current Family: cOU 
+Current Family: sCIR 
+Current Family: sOU 
+list()
+Done.

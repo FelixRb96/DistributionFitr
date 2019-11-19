@@ -1,0 +1,59 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: LaplacesDemon	Number of families: 50 
+Current Family: alaplace 
+Current Family: allaplace 
+Current Family: aml 
+Current Family: bern 
+Current Family: cat 
+Current Family: crmrf 
+Current Family: dirichlet 
+Current Family: gpd 
+Current Family: halfcauchy 
+Current Family: halfnorm 
+Current Family: halft 
+Current Family: hs 
+Current Family: invbeta 
+Current Family: invchisq 
+scale depends on another earlier parameter and is thus removed
+Current Family: invgamma 
+Current Family: invgaussian 
+Current Family: laplace 
+Current Family: laplacem 
+Current Family: laplacep 
+Current Family: lasso 
+Current Family: llaplace 
+Current Family: lnormp 
+Current Family: mvc 
+Current Family: mvcc 
+Current Family: mvcp 
+Current Family: mvcpc 
+Current Family: mvl 
+Current Family: mvlc 
+Current Family: mvn 
+Current Family: mvnc 
+Current Family: mvnp 
+Current Family: mvnpc 
+Current Family: mvpe 
+Current Family: mvpec 
+Current Family: mvpolya 
+Current Family: mvt 
+Current Family: mvtc 
+Current Family: mvtp 
+Current Family: mvtpc 
+Current Family: normlaplace 
+Current Family: normm 
+Current Family: normp 
+Current Family: normv 
+Current Family: pareto 
+Current Family: pe 
+Current Family: sdlaplace 

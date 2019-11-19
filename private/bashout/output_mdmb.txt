@@ -1,0 +1,108 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: mdmb	Number of families: 3 
+Current Family: bct_scaled 
+Current Family: t_scaled 
+Current Family: yjt_scaled 
+[[1]]
+[[1]]$package
+[1] "mdmb"
+
+[[1]]$family
+[1] "bct_scaled"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+location    shape   lambda       df 
+    -Inf     -Inf     -Inf     -Inf 
+
+[[1]]$family_info$upper
+location    shape   lambda       df 
+     Inf      Inf      801      Inf 
+
+[[1]]$family_info$accepts_float
+location    shape   lambda       df 
+    TRUE     TRUE     TRUE     TRUE 
+
+[[1]]$family_info$defaults
+location    shape   lambda       df 
+       0        1        1      Inf 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] 0.01
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+location    shape   lambda       df 
+   FALSE    FALSE    FALSE    FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+location    shape   lambda       df 
+   FALSE    FALSE    FALSE    FALSE 
+
+
+
+[[2]]
+[[2]]$package
+[1] "mdmb"
+
+[[2]]$family
+[1] "yjt_scaled"
+
+[[2]]$family_info
+[[2]]$family_info$lower
+location    shape   lambda       df   probit 
+    -Inf     -Inf     -Inf     -Inf     -Inf 
+
+[[2]]$family_info$upper
+location    shape   lambda       df   probit 
+     Inf      Inf      Inf      Inf      Inf 
+
+[[2]]$family_info$accepts_float
+location    shape   lambda       df   probit 
+    TRUE     TRUE     TRUE     TRUE     TRUE 
+
+[[2]]$family_info$defaults
+location    shape   lambda       df   probit 
+       0        1        1      Inf        0 
+
+[[2]]$family_info$log
+[1] TRUE
+
+[[2]]$family_info$discrete
+[1] FALSE
+
+[[2]]$family_info$support_min
+[1] -Inf
+
+[[2]]$family_info$support_max
+[1] Inf
+
+[[2]]$family_info$supp_max_depends_on
+location    shape   lambda       df   probit 
+   FALSE    FALSE    FALSE    FALSE    FALSE 
+
+[[2]]$family_info$supp_min_depends_on
+location    shape   lambda       df   probit 
+   FALSE    FALSE    FALSE    FALSE    FALSE 
+
+
+
+Done.

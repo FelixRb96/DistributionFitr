@@ -1,0 +1,14 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: TxDb.Hsapiens.UCSC.hg19.knownGene	Number of families: 0 
+list()
+Done.

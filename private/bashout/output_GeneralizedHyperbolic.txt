@@ -1,0 +1,253 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: GeneralizedHyperbolic	Number of families: 5 
+Current Family: ghyp 
+param depends on another earlier parameter and is thus removed
+Current Family: gig 
+param depends on another earlier parameter and is thus removed
+Current Family: hyperb 
+param depends on another earlier parameter and is thus removed
+Current Family: nig 
+param depends on another earlier parameter and is thus removed
+Current Family: skewlap 
+param depends on another earlier parameter and is thus removed
+[[1]]
+[[1]]$package
+[1] "GeneralizedHyperbolic"
+
+[[1]]$family
+[1] "ghyp"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+     mu   delta   alpha    beta  lambda 
+   -Inf    0.01    0.01   -0.99 -245.82 
+
+[[1]]$family_info$upper
+    mu  delta  alpha   beta lambda 
+   Inf    Inf    Inf   0.99 246.82 
+
+[[1]]$family_info$accepts_float
+    mu  delta  alpha   beta lambda 
+  TRUE   TRUE   TRUE   TRUE   TRUE 
+
+[[1]]$family_info$defaults
+    mu  delta  alpha   beta lambda 
+     0      1      1      0      1 
+
+[[1]]$family_info$log
+[1] FALSE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+    mu  delta  alpha   beta lambda 
+ FALSE  FALSE  FALSE  FALSE  FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+    mu  delta  alpha   beta lambda 
+ FALSE  FALSE  FALSE  FALSE  FALSE 
+
+
+
+[[2]]
+[[2]]$package
+[1] "GeneralizedHyperbolic"
+
+[[2]]$family
+[1] "gig"
+
+[[2]]$family_info
+[[2]]$family_info$lower
+   chi    psi lambda 
+  0.01   0.01   -Inf 
+
+[[2]]$family_info$upper
+   chi    psi lambda 
+   Inf    Inf    Inf 
+
+[[2]]$family_info$accepts_float
+   chi    psi lambda 
+  TRUE   TRUE   TRUE 
+
+[[2]]$family_info$defaults
+   chi    psi lambda 
+     1      1      1 
+
+[[2]]$family_info$log
+[1] FALSE
+
+[[2]]$family_info$discrete
+[1] FALSE
+
+[[2]]$family_info$support_min
+[1] 0.01
+
+[[2]]$family_info$support_max
+[1] Inf
+
+[[2]]$family_info$supp_max_depends_on
+   chi    psi lambda 
+ FALSE  FALSE  FALSE 
+
+[[2]]$family_info$supp_min_depends_on
+   chi    psi lambda 
+ FALSE  FALSE  FALSE 
+
+
+
+[[3]]
+[[3]]$package
+[1] "GeneralizedHyperbolic"
+
+[[3]]$family
+[1] "hyperb"
+
+[[3]]$family_info
+[[3]]$family_info$lower
+   mu delta alpha  beta 
+ -Inf  0.01  0.01 -0.99 
+
+[[3]]$family_info$upper
+   mu delta alpha  beta 
+  Inf   Inf   Inf  0.99 
+
+[[3]]$family_info$accepts_float
+   mu delta alpha  beta 
+ TRUE  TRUE  TRUE  TRUE 
+
+[[3]]$family_info$defaults
+   mu delta alpha  beta 
+    0     1     1     0 
+
+[[3]]$family_info$log
+[1] FALSE
+
+[[3]]$family_info$discrete
+[1] FALSE
+
+[[3]]$family_info$support_min
+[1] -Inf
+
+[[3]]$family_info$support_max
+[1] Inf
+
+[[3]]$family_info$supp_max_depends_on
+   mu delta alpha  beta 
+FALSE FALSE FALSE FALSE 
+
+[[3]]$family_info$supp_min_depends_on
+   mu delta alpha  beta 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[4]]
+[[4]]$package
+[1] "GeneralizedHyperbolic"
+
+[[4]]$family
+[1] "nig"
+
+[[4]]$family_info
+[[4]]$family_info$lower
+   mu delta alpha  beta 
+ -Inf  0.01  0.01 -0.99 
+
+[[4]]$family_info$upper
+   mu delta alpha  beta 
+  Inf   Inf   Inf  0.99 
+
+[[4]]$family_info$accepts_float
+   mu delta alpha  beta 
+ TRUE  TRUE  TRUE  TRUE 
+
+[[4]]$family_info$defaults
+   mu delta alpha  beta 
+    0     1     1     0 
+
+[[4]]$family_info$log
+[1] FALSE
+
+[[4]]$family_info$discrete
+[1] FALSE
+
+[[4]]$family_info$support_min
+[1] -Inf
+
+[[4]]$family_info$support_max
+[1] Inf
+
+[[4]]$family_info$supp_max_depends_on
+   mu delta alpha  beta 
+FALSE FALSE FALSE FALSE 
+
+[[4]]$family_info$supp_min_depends_on
+   mu delta alpha  beta 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[5]]
+[[5]]$package
+[1] "GeneralizedHyperbolic"
+
+[[5]]$family
+[1] "skewlap"
+
+[[5]]$family_info
+[[5]]$family_info$lower
+   mu alpha  beta 
+ -Inf  0.01  0.01 
+
+[[5]]$family_info$upper
+   mu alpha  beta 
+  Inf   Inf   Inf 
+
+[[5]]$family_info$accepts_float
+   mu alpha  beta 
+ TRUE  TRUE  TRUE 
+
+[[5]]$family_info$defaults
+   mu alpha  beta 
+    0     1     1 
+
+[[5]]$family_info$log
+[1] FALSE
+
+[[5]]$family_info$discrete
+[1] FALSE
+
+[[5]]$family_info$support_min
+[1] -Inf
+
+[[5]]$family_info$support_max
+[1] Inf
+
+[[5]]$family_info$supp_max_depends_on
+   mu alpha  beta 
+FALSE FALSE FALSE 
+
+[[5]]$family_info$supp_min_depends_on
+   mu alpha  beta 
+FALSE FALSE FALSE 
+
+
+
+Done.
