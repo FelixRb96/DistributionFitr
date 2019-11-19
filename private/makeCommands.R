@@ -1,7 +1,14 @@
-# Rscript makeCommands.R > run_getFamilies.sh
-# bash run_getFamilies.sh > output.txt 2>&1
+# makes a .sh file that can be used to analyse each package in an individual R-instance
+
+
+# # The following commands can be used to produce/run the .sh file (from within ./private/):
 # rm -r bashout
 # rm -r Rout
+# Rscript makeCommands.R > run_getFamilies.sh
+# bash run_getFamilies.sh > output.txt 2>&1
+# # To check for processes that did not finish:
+# ps -aux | grep getFamilies.R > stuckProcesses.txt
+
 
 pkgList <- installed.packages()
 
