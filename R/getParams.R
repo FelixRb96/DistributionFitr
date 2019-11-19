@@ -1,49 +1,5 @@
-# ----------------------------------------------------------------------  
-# 1) Get all distributions within a package:
 # ----------------------------------------------------------------------
-
-if (sys.nframe()==0) {
-  package <- "stats"
-  possible_dists <- lsf.str(paste0("package:", package), pattern="^[rdpq]")   # all functions starting with r, d, p or q
-  possible_dists
-  start_chars <- c("d", "p", "q", "r")   
-  first_args <- c("x", "q", "p", "n")    # first parameters of the d, p, q, r functions
-  l <- list()
-  for (i in 1:length(start_chars)) {
-    char <- start_chars[i]
-    first_arg <- first_args[i]
-    subset <- grep(paste0("^", char), possible_dists, value=TRUE)                     # all functions starting with char
-    valid_idx <- sapply(subset, function(x) names(as.list(args(x)))[1] == first_arg)  # check if all functions have the correct first arg
-    # print(valid_idx)
-    l[[char]] <- subset[valid_idx]
-  }
-  
-  get_endings <- function(vec) str_sub(vec, start=2)
-  
-  l_endings <- lapply(l, get_endings)    # remove the d, p, q, r suffixes
-  
-  # we definitely need a function for the density starting with d, as otherwise we cannot evaluate likelihood function
-  # so we only take the endings from p, q and r that also appear in d
-  for (char in start_chars[-1]) {
-    l_endings[[char]] <- intersect(l_endings[[char]], l_endings$d)
-  }
-  
-  freq <- table(unlist(l_endings))     # get a frequency table of the endings
-  freq <- freq[freq>=2]                # only take those distributions that have at least 2 functions implemented
-  freq
-  
-  # drop some not fitting distributions
-  to_drop <- c("multinom")
-  families <- names(freq)[! (names(freq) %in% to_drop)]
-  
-  # list of lists, where each sublist has the form list(package=some_pkg, family=some_family)
-  families <- lapply(families, function(x) list(package=package, family=x))
-  families
-}
-
-
-# ----------------------------------------------------------------------
-# 2) Try to get the parameters (+ infos) from a distribution
+# 1) Try to get the parameters (+ infos) from a distribution
 # ----------------------------------------------------------------------
 
 ## Main ideas:
@@ -61,7 +17,7 @@ if (sys.nframe()==0) {
 # fam <- list(package="stats", family="beta")   # gamma
 
 # ----------------------------------------------------------------------
-# (2.1) Given distribution family, return list of parameters
+# (1.1) Given distribution family, return list of parameters
 # ----------------------------------------------------------------------
 
 get_all_params <- function(fam) {
@@ -99,7 +55,7 @@ get_all_params <- function(fam) {
 # list elements field: default value, NULL if not set
 
 # ------------------------------------------------------------------------------------------
-# (2.2) Given distribution family, parameters, some x-values: test if combination is valid
+# (1.2) Given distribution family, parameters, some x-values: test if combination is valid
 # ------------------------------------------------------------------------------------------
 
 .validate_values <- function(fam, n_or_nn, params, x_test) {
@@ -124,7 +80,7 @@ get_all_params <- function(fam) {
 # does parameter combination in input yield a valid value?
 
 # -----------------------------------------------------------------------------------------------------------
-# (2.3) Given updated list of parameters, and a specific family, find one parameter combination that works
+# (1.3) Given updated list of parameters, and a specific family, find one parameter combination that works
 # -----------------------------------------------------------------------------------------------------------
 
 # first we need to find one set of values for each of the params that actually works before we can check for valid values for each
@@ -187,7 +143,7 @@ get_default_values <- function(all_params, fam) {
 
 
 #------------------------------------------------------------------------------------------------------ 
-# (2.4) Get parameter ranges
+# (1.4) Get parameter ranges
 # -----------------------------------------------------------------------------------------------------
 
 # Now we can iterate over the parameters while keeping fixed all others in order to guess some valid ranges
@@ -270,7 +226,7 @@ iterate_min_max_vals <- function(param, all_params, fam, cur_val, step_sizes, is
 # iterate_min_max_vals("shape1", all_params, fam, cur_val=0, step_sizes = c(1, 0.5, 0.1, 0.05))
 
 # --------------------------------------------------------------------------- 
-# (2.5) Main function for generating the info for each of the params
+# (1.5) Main function for generating the info for each of the params
 # ---------------------------------------------------------------------------
 
 get_param_ranges <- function(all_params, fam) {
@@ -378,7 +334,7 @@ check_integer <- function(fam, all_params) {
 }
 
 # -------------------------------------------------------------------------------- 
-# (3) Determining the support of a distribution
+# (2) Determining the support of a distribution
 # --------------------------------------------------------------------------------
 
 # Function for determining the support of a given distribution family and whether the limits of the support are determined by one
@@ -484,7 +440,7 @@ get_support <- function(fam, params) {
 }
 
 # -------------------------------------------------------------------------------- 
-# (5) Final function
+# (3) Final function
 # --------------------------------------------------------------------------------
 
 # Input:

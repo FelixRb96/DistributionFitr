@@ -1,7 +1,3 @@
-
-require(stringr)
-
-
 getFamily <- function(pkg){
   
   # load package pkg (can potentially lead to errors if some requirements are not fulfilled)

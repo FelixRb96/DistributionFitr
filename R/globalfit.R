@@ -1,9 +1,6 @@
-globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, ...){
-  
-  # method als Nutzereingabe -> ist auch bei optimParam schon dabei
-  
-# benoetigte Hilfsfunktionen ----
-  
+
+### 1)  benoetigte Hilfsfunktionen -------------------------------------------------------------------------
+
 # Rundungsproblem mit .5 beheben
 new_round <- function(x) {
   
@@ -109,9 +106,13 @@ disc_trafo <- function(data){
   }
   
 }
-  
-# main ----
-  
+
+
+
+### 2) Main Function --------------------------------------------------------------------------
+
+globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, ...){
+
   families <- getFamilies()
   
   discrete_families <- sapply(families, function(x) x$family_info$discrete)
