@@ -14,8 +14,8 @@ The package contains the following functions:
 \code{getFamilies} Browsing for distribution families
 \code{getFamily}  Find all distributions in a package
 \code{getParams}for a single distribution family, parameters are determined and classified, as well as upper and lower limits of parameters
-\code{optimParam}fits the parameters for a given distribution family with known names for the parameters and known value range of each parameter
-\code{globalFit}Determines the best parameters for a list of distribution families and recognizes discrete distributions
+\code{optimParamsDiscrete}fits the parameters for a given distribution family with known names for the parameters and known value range of each parameter
+\code{globalfit}Determines the best parameters for a list of distribution families and recognizes discrete distributions
 \code{loglik} returns the loglikelihood function to be optimized
 
 }
@@ -26,11 +26,11 @@ The package contains the following functions:
 
 \seealso{
  **objects to See Also as \code{\link{help}}, **~
- \code{\link{globalFit}}
+ \code{\link{globalfit}}
  \code{\link{getFamilies}}
  \code{\link{getFamily}}
  \code{\link{loglik}}
- \code{\link{optimParam}}
+ \code{\link{optimParamsDiscrete}}
  \code{\link{getParams}}
 }
 

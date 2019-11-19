@@ -61,4 +61,5 @@ getParams(family)
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{distribution, parameters }
+}
+\keyword{distribution, parameters}

@@ -1,5 +1,5 @@
-\name{globalFit}
-\alias{globalFit}
+\name{globalfit}
+\alias{globalfit}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
   Detect continuity and fit multiple distributions to given data
@@ -8,7 +8,7 @@
   Given data, this function firstly tests multiple criterea for continuity and may transforms discrete data to integer values. After that it calculates for multiple distributions the best fitted parameters and information criteria.
 }
 \usage{
-  globalfit <- function(data, continious = NULL, method = "MLE")
+  globalfit <- function(data, continuity = NULL, method = "MLE")
   
 }
 %- maybe also 'usage' for other objects documented here.
@@ -16,7 +16,7 @@
   \item{data}{
     numerical vector
   }
-  \item{continious}{
+  \item{continuity}{
     a logical boolean value whether data is continious or not. If no input is given, the data will be tested for continuity.
   }
   \item{method}{
@@ -29,7 +29,7 @@
 }
 
 \value{
-  For \code{globalFit} a list of following components is returned:
+  For \code{globalfit} a list of following components is returned:
   %\item{continuity}{Prediction whether the data is estimated to be continious or discrete}
   \items{familyName}{Name of the distribution}
   \item{packageName}{Name of the package that includes the distribution}
@@ -61,12 +61,12 @@
   ##-- ==>  Define data, use random,
   ##--	or do  help(data=index)  for the standard data sets.
   
-  # Example 1 for optimParam
+  # Example 1
   data <- rnorm(n=100, mean=70, sd= 4)
-  estimation <- globalFit(data)
+  estimation <- globalfit(data)
   
-  # Alternatively, it is possible to input whether the data is continious or discrete
-  estimation <- globalFit(data, continious = TRUE)
+  # Alternatively, it is possible to input whether the data is continuous or discrete
+  estimation <- globalfit(data, continuity = TRUE)
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
