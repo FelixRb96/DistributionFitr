@@ -1,0 +1,74 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: RTDE	Number of families: 4 
+Current Family: EPD 
+Could not find a set of valid default values for family RTDEEPD
+Errors: argument is of length zero
+
+Current Family: frechet 
+Current Family: ufrechet 
+Error occured for family ufrechet
+Error in all_params[[param]]: attempt to select less than one element in get1index
+
+
+Current Family: upareto 
+Error occured for family upareto
+Error in all_params[[param]]: attempt to select less than one element in get1index
+
+
+[[1]]
+[[1]]$package
+[1] "RTDE"
+
+[[1]]$family
+[1] "frechet"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+shape  xmin 
+ 0.01  -Inf 
+
+[[1]]$family_info$upper
+shape  xmin 
+  Inf   Inf 
+
+[[1]]$family_info$accepts_float
+shape  xmin 
+ TRUE  TRUE 
+
+[[1]]$family_info$defaults
+shape  xmin 
+  0.5   0.5 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+shape  xmin 
+FALSE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+shape  xmin 
+FALSE  TRUE 
+
+
+
+Done.

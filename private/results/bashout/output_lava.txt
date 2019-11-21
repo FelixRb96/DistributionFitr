@@ -1,0 +1,18 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: lava	Number of families: 1 
+Current Family: mvn0 
+Could not find a set of valid default values for family lavamvn0
+Errors: non-conformable arrays
+
+list()
+Done.

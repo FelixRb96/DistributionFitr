@@ -1,0 +1,19 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: LCA	Number of families: 1 
+Current Family: PTL 
+Error occured for family PTL
+Error in get(paste0(type, fam), envir = asNamespace(package)): object 'rPTL' not found
+
+
+list()
+Done.

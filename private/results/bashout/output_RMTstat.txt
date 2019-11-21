@@ -1,0 +1,76 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: RMTstat	Number of families: 4 
+Current Family: mp 
+svr depends on another earlier parameter and is thus removed
+Error occured for family mp
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: tw 
+Error occured for family tw
+Error in (function (x, beta = 1, log = FALSE) : 'beta' must be '1', '2', or '4'.
+
+
+Current Family: WishartMax 
+Current Family: WishartSpike 
+Could not find a set of valid default values for family RMTstatWishartSpike
+Errors:
+[[1]]
+[[1]]$package
+[1] "RMTstat"
+
+[[1]]$family
+[1] "WishartMax"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+ var beta  ndf pdim 
+-Inf  1.0  0.5  0.5 
+
+[[1]]$family_info$upper
+ var beta  ndf pdim 
+ Inf    2  Inf  Inf 
+
+[[1]]$family_info$accepts_float
+  var  beta   ndf  pdim 
+ TRUE FALSE  TRUE  TRUE 
+
+[[1]]$family_info$defaults
+ var beta  ndf pdim 
+   1    1    1    1 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+  var  beta   ndf  pdim 
+FALSE FALSE FALSE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+  var  beta   ndf  pdim 
+FALSE FALSE FALSE FALSE 
+
+
+
+Warning message:
+In min(vals[check_res]) : no non-missing arguments to min; returning Inf
+Done.

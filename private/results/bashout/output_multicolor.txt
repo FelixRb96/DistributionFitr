@@ -1,0 +1,16 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: multicolorColors cannot be applied in this environment. Please use another application, such as RStudio or a color-enabled terminal.
+Colors cannot be applied in this environment. Please use another application, such as RStudio or a color-enabled terminal.
+	Number of families: 0 
+list()
+Done.

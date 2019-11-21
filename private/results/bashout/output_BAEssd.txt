@@ -1,0 +1,18 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: BAEssd	Number of families: 1 
+Current Family: ggamma 
+Could not find a set of valid default values for family BAEssdggamma
+Errors: All parameters and values of x must be positive.
+
+list()
+Done.

@@ -1,0 +1,78 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: mixAK	Number of families: 4 
+Current Family: MVN 
+Could not find a set of valid default values for family mixAKMVN
+Errors: default method not implemented for type 'list'
+ NA/NaN/Inf in foreign function call (arg 3)
+ Dist
+Current Family: MVNmixture 
+Current Family: MVNmixture2 
+Could not find a set of valid default values for family mixAKMVNmixture2
+Errors: default method not implemented for type 'list'
+ NA/NaN/Inf in foreign function call (arg 5)
+ weights must be non-negative
+ all Sigma elements must be nonnegative
+
+Current Family: MVT 
+Could not find a set of valid default values for family mixAKMVT
+Errors: default method not implemented for type 'list'
+ df (degrees of freedom) must be positive
+ NA/NaN/Inf in foreign function call (arg 3)
+ Dist
+[[1]]
+[[1]]$package
+[1] "mixAK"
+
+[[1]]$family
+[1] "MVNmixture"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+      weight         mean            Q        Sigma 
+8.326673e-17         -Inf         -Inf 0.000000e+00 
+
+[[1]]$family_info$upper
+weight   mean      Q  Sigma 
+   Inf    Inf    Inf    Inf 
+
+[[1]]$family_info$accepts_float
+weight   mean      Q  Sigma 
+  TRUE   TRUE   TRUE   TRUE 
+
+[[1]]$family_info$defaults
+weight   mean      Q  Sigma 
+   0.5    0.5    0.5    0.5 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+weight   mean      Q  Sigma 
+ FALSE  FALSE  FALSE  FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+weight   mean      Q  Sigma 
+ FALSE  FALSE  FALSE  FALSE 
+
+
+
+Done.

@@ -1,0 +1,60 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: skewt	Number of families: 1 
+Current Family: skt 
+[[1]]
+[[1]]$package
+[1] "skewt"
+
+[[1]]$family
+[1] "skt"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+   df gamma 
+ 0.01  -Inf 
+
+[[1]]$family_info$upper
+   df gamma 
+  Inf   Inf 
+
+[[1]]$family_info$accepts_float
+   df gamma 
+ TRUE  TRUE 
+
+[[1]]$family_info$defaults
+   df gamma 
+  0.5   0.5 
+
+[[1]]$family_info$log
+[1] FALSE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+   df gamma 
+FALSE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+   df gamma 
+FALSE FALSE 
+
+
+
+Done.

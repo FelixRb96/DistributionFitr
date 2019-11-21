@@ -1,0 +1,18 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: hmmhdd	Number of families: 1 
+Current Family: mdistr 
+Could not find a set of valid default values for family hmmhddmdistr
+Errors: 'corr' must be a symmetric matrix
+
+list()
+Done.

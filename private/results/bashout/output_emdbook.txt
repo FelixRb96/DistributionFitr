@@ -1,0 +1,154 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: emdbook	Number of families: 3 
+Current Family: betabinom 
+Current Family: chibarsq 
+Current Family: zinbinom 
+[[1]]
+[[1]]$package
+[1] "emdbook"
+
+[[1]]$family
+[1] "betabinom"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+        prob         size        theta       shape1       shape2 
+0.000000e+00 0.000000e+00 8.326673e-17 0.000000e+00 0.000000e+00 
+
+[[1]]$family_info$upper
+  prob   size  theta shape1 shape2 
+     1    Inf    Inf    Inf    Inf 
+
+[[1]]$family_info$accepts_float
+  prob   size  theta shape1 shape2 
+  TRUE  FALSE   TRUE   TRUE   TRUE 
+
+[[1]]$family_info$defaults
+  prob   size  theta shape1 shape2 
+   0.5    1.0    0.5    0.5    0.5 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] TRUE
+
+[[1]]$family_info$support_min
+[1] 0
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+  prob   size  theta shape1 shape2 
+ FALSE   TRUE  FALSE  FALSE  FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+  prob   size  theta shape1 shape2 
+ FALSE  FALSE  FALSE  FALSE  FALSE 
+
+
+
+[[2]]
+[[2]]$package
+[1] "emdbook"
+
+[[2]]$family
+[1] "chibarsq"
+
+[[2]]$family_info
+[[2]]$family_info$lower
+  df  mix 
+   1 -Inf 
+
+[[2]]$family_info$upper
+ df mix 
+Inf Inf 
+
+[[2]]$family_info$accepts_float
+  df  mix 
+TRUE TRUE 
+
+[[2]]$family_info$defaults
+ df mix 
+1.0 0.5 
+
+[[2]]$family_info$log
+[1] TRUE
+
+[[2]]$family_info$discrete
+[1] FALSE
+
+[[2]]$family_info$support_min
+[1] 0
+
+[[2]]$family_info$support_max
+[1] Inf
+
+[[2]]$family_info$supp_max_depends_on
+   df   mix 
+FALSE FALSE 
+
+[[2]]$family_info$supp_min_depends_on
+   df   mix 
+FALSE FALSE 
+
+
+
+[[3]]
+[[3]]$package
+[1] "emdbook"
+
+[[3]]$family
+[1] "zinbinom"
+
+[[3]]$family_info
+[[3]]$family_info$lower
+   mu  size zprob 
+    0     0  -Inf 
+
+[[3]]$family_info$upper
+   mu  size zprob 
+  Inf   Inf     1 
+
+[[3]]$family_info$accepts_float
+   mu  size zprob 
+ TRUE  TRUE  TRUE 
+
+[[3]]$family_info$defaults
+   mu  size zprob 
+  0.5   0.5   0.5 
+
+[[3]]$family_info$log
+[1] TRUE
+
+[[3]]$family_info$discrete
+[1] TRUE
+
+[[3]]$family_info$support_min
+[1] 0
+
+[[3]]$family_info$support_max
+[1] Inf
+
+[[3]]$family_info$supp_max_depends_on
+   mu  size zprob 
+FALSE FALSE FALSE 
+
+[[3]]$family_info$supp_min_depends_on
+   mu  size zprob 
+FALSE FALSE FALSE 
+
+
+
+Done.

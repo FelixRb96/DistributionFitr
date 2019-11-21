@@ -1,0 +1,31 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: TruncatedNormal	Number of families: 2 
+Current Family: tmvnorm 
+Could not find a set of valid default values for family TruncatedNormaltmvnorm
+Errors: c(length(ind) > 0, ncol(sigma) - length(ind) > 0) are not all TRUE
+ all(eigen(sigma, only.values = TRUE)$value > 0) is not TRUE
+ lb <= ub is not TRUE
+ length(x) == length(mu) is not TRUE
+ missing value where TRUE/FALSE needed
+
+Current Family: tmvt 
+Could not find a set of valid default values for family TruncatedNormaltmvt
+Errors: 'a' is 0-diml
+ all(eigen(sigma, only.values = TRUE)$value > 0) is not TRUE
+ c(length(ind) > 0, ncol(sigma) - length(ind) > 0) are not all TRUE
+ lb <= ub is not TRUE
+ length(x) == length(mu) is not TRUE
+ missing value where TRUE/FALSE needed
+
+list()
+Done.

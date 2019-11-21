@@ -1,0 +1,22 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: lqr	Number of families: 1 
+Current Family: trunc 
+Could not find a set of valid default values for family lqrtrunc
+Errors: object 'p0.5' of mode 'function' was not found
+ object 'p1' of mode 'function' was not found
+ object 'p0' of mode 'function' was not found
+ object 'p-0.5' of mode 'function' was not found
+ object 'p-1' of mode 'function' was not found
+
+list()
+Done.

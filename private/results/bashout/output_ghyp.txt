@@ -1,0 +1,26 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: ghyp	Number of families: 2 
+Current Family: ghyp 
+Error occured for family ghyp
+Error in sum(missing_defaults): invalid 'type' (list) of argument
+
+
+Current Family: gig 
+Error occured for family gig
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+list()
+Warning message:
+In min(vals[check_res]) : no non-missing arguments to min; returning Inf
+Done.

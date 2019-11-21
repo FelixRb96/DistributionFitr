@@ -1,0 +1,166 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: Newdistns	Number of families: 19 
+Current Family: beg 
+Could not find a set of valid default values for family Newdistnsbeg
+Errors: could not find function "q0.5"
+ could not find function "q1"
+ could not find function "q0"
+ could not find function "q-0.5"
+ could not find function "q-1"
+
+Current Family: betaexpg 
+Could not find a set of valid default values for family Newdistnsbetaexpg
+Errors: could not find function "q0.5"
+ could not find function "q1"
+ could not find function "q0"
+ could not find function "q-0.5"
+ could not find function "q-1"
+
+Current Family: betag 
+Could not find a set of valid default values for family Newdistnsbetag
+Errors: could not find function "q0.5"
+ could not find function "q1"
+ could not find function "q0"
+ could not find function "q-0.5"
+ could not find function "q-1"
+
+Current Family: eepg 
+Could not find a set of valid default values for family Newdistnseepg
+Errors: could not find function "q0.5"
+ could not find function "q1"
+ could not find function "q0"
+ could not find function "q-0.5"
+ could not find function "q-1"
+
+Current Family: eg 
+Could not find a set of valid default values for family Newdistnseg
+Errors: could not find function "q0.5"
+ could not find function "q1"
+ could not find function "q0"
+ could not find function "q-0.5"
+ could not find function "q-1"
+
+Current Family: expg 
+Could not find a set of valid default values for family Newdistnsexpg
+Errors: could not find function "q0.5"
+ could not find function "q1"
+ could not find function "q0"
+ could not find function "q-0.5"
+ could not find function "q-1"
+
+Current Family: expkumg 
+Could not find a set of valid default values for family Newdistnsexpkumg
+Errors: could not find function "q0.5"
+ could not find function "q1"
+ could not find function "q0"
+ could not find function "q-0.5"
+ could not find function "q-1"
+
+Current Family: gammag 
+Could not find a set of valid default values for family Newdistnsgammag
+Errors: could not find function "q0.5"
+ could not find function "q1"
+ could not find function "q0"
+ could not find function "q-0.5"
+ could not find function "q-1"
+
+Current Family: gammag1 
+Could not find a set of valid default values for family Newdistnsgammag1
+Errors: could not find function "q0.5"
+ could not find function "q1"
+ could not find function "q0"
+ could not find function "q-0.5"
+ could not find function "q-1"
+
+Current Family: gammag2 
+Could not find a set of valid default values for family Newdistnsgammag2
+Errors: could not find function "q0.5"
+ could not find function "q1"
+ could not find function "q0"
+ could not find function "q-0.5"
+ could not find function "q-1"
+
+Current Family: gbg 
+Could not find a set of valid default values for family Newdistnsgbg
+Errors: could not find function "q0.5"
+ could not find function "q1"
+ could not find function "q0"
+ could not find function "q-0.5"
+ could not find function "q-1"
+
+Current Family: gepg 
+Could not find a set of valid default values for family Newdistnsgepg
+Errors: could not find function "q0.5"
+ could not find function "q1"
+ could not find function "q0"
+ could not find function "q-0.5"
+ could not find function "q-1"
+
+Current Family: kumg 
+Could not find a set of valid default values for family Newdistnskumg
+Errors: could not find function "q0.5"
+ could not find function "q1"
+ could not find function "q0"
+ could not find function "q-0.5"
+ could not find function "q-1"
+
+Current Family: loggammag1 
+Could not find a set of valid default values for family Newdistnsloggammag1
+Errors: could not find function "q0.5"
+ could not find function "q1"
+ could not find function "q0"
+ could not find function "q-0.5"
+ could not find function "q-1"
+
+Current Family: loggammag2 
+Could not find a set of valid default values for family Newdistnsloggammag2
+Errors: could not find function "q0.5"
+ could not find function "q1"
+ could not find function "q0"
+ could not find function "q-0.5"
+ could not find function "q-1"
+
+Current Family: mbetag 
+Could not find a set of valid default values for family Newdistnsmbetag
+Errors: could not find function "q0.5"
+ could not find function "q1"
+ could not find function "q0"
+ could not find function "q-0.5"
+ could not find function "q-1"
+
+Current Family: mog 
+Could not find a set of valid default values for family Newdistnsmog
+Errors: could not find function "q0.5"
+ could not find function "q1"
+ could not find function "q0"
+ could not find function "q-0.5"
+ could not find function "q-1"
+
+Current Family: tessg 
+Could not find a set of valid default values for family Newdistnstessg
+Errors: could not find function "q0.5"
+ could not find function "q1"
+ could not find function "q0"
+ could not find function "q-0.5"
+ could not find function "q-1"
+
+Current Family: weibullg 
+Could not find a set of valid default values for family Newdistnsweibullg
+Errors: could not find function "q0.5"
+ could not find function "q1"
+ could not find function "q0"
+ could not find function "q-0.5"
+ could not find function "q-1"
+
+list()
+Done.

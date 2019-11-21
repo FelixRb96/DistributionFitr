@@ -1,0 +1,18 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: narray
+Error occured for package narray
+Error in intersect(l_endings[[char]], l_endings$d): calls can only reference `data.frame` fields
+
+
+list()
+Done.

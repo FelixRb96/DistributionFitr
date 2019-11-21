@@ -1,0 +1,35 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: ks	Number of families: 4 
+Current Family: kde 
+Could not find a set of valid default values for family kskde
+Errors: $ operator is invalid for atomic vectors
+
+Current Family: mvnorm.mixt 
+Error occured for family mvnorm.mixt
+Error in seq(initial_min_val, initial_max_val, by = step_sizes[1]) + all_params[[param]]: non-numeric argument to binary operator
+
+
+Current Family: mvt.mixt 
+Error occured for family mvt.mixt
+Error in seq(initial_min_val, initial_max_val, by = step_sizes[1]) + all_params[[param]]: non-numeric argument to binary operator
+
+
+Current Family: norm.mixt 
+Error occured for family norm.mixt
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+list()
+Warning message:
+In min(vals[check_res]) : no non-missing arguments to min; returning Inf
+Done.

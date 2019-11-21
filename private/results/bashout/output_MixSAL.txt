@@ -1,0 +1,28 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: MixSAL	Number of families: 2 
+Current Family: msal 
+Could not find a set of valid default values for family MixSALmsal
+Errors: incorrect number of dimensions
+ invalid 'times' argument
+ too few positive probabilities
+ negative probability
+
+Current Family: sal 
+Could not find a set of valid default values for family MixSALsal
+Errors: non-conformable arguments
+ unused argument (p = 1)
+ invalid 'times' argument
+ 'Sigma' is not positive definite
+
+list()
+Done.

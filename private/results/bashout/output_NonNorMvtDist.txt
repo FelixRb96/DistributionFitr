@@ -1,0 +1,67 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: NonNorMvtDist	Number of families: 8 
+Current Family: mvburr 
+Error occured for family mvburr
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: mvf 
+Error occured for family mvf
+Error in sum(missing_defaults): invalid 'type' (list) of argument
+
+
+Current Family: mvglomax 
+Error occured for family mvglomax
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: mvinvbeta 
+Error occured for family mvinvbeta
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: mvlogis 
+Error occured for family mvlogis
+Error in seq(initial_min_val, initial_max_val, by = step_sizes[1]) + all_params[[param]]: non-numeric argument to binary operator
+
+
+Current Family: mvlomax 
+Error occured for family mvlomax
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: mvmpareto1 
+Error occured for family mvmpareto1
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: mvunif 
+Error occured for family mvunif
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+list()
+Warning messages:
+1: In min(vals[check_res]) :
+  no non-missing arguments to min; returning Inf
+2: In min(vals[check_res]) :
+  no non-missing arguments to min; returning Inf
+3: In min(vals[check_res]) :
+  no non-missing arguments to min; returning Inf
+4: In min(vals[check_res]) :
+  no non-missing arguments to min; returning Inf
+5: In min(vals[check_res]) :
+  no non-missing arguments to min; returning Inf
+6: In min(vals[check_res]) :
+  no non-missing arguments to min; returning Inf
+Done.

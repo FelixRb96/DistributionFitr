@@ -1,0 +1,45 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: ggdmc	Number of families: 1 
+Current Family: tnorm 
+Invalid sigma = -999.5
+Invalid sigma = -899.5
+Invalid sigma = -799.5
+Invalid sigma = -699.5
+Invalid sigma = -599.5
+Invalid sigma = -499.5
+Invalid sigma = -399.5
+Invalid sigma = -299.5
+Invalid sigma = -199.5
+Invalid sigma = -99.5
+Invalid sigma = -99.5
+Invalid sigma = -49.5
+Invalid sigma = -49.5
+Invalid sigma = -39.5
+Invalid sigma = -29.5
+Invalid sigma = -19.5
+Invalid sigma = -9.5
+Invalid sigma = -9.5
+Invalid sigma = -8.5
+Invalid sigma = -7.5
+Invalid sigma = -6.5
+Invalid sigma = -5.5
+Invalid sigma = -4.5
+Invalid sigma = -3.5
+Invalid sigma = -2.5
+Invalid sigma = -1.5
+Invalid sigma = -0.5
+Invalid sigma = -0.5
+Invalid sigma = -0.4
+Invalid sigma = -0.3
+Invalid sigma = -0.2
+Invalid sigma = -0.1

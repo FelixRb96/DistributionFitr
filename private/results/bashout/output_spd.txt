@@ -1,0 +1,18 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: spd	Number of families: 1 
+Current Family: spd 
+Could not find a set of valid default values for family spdspd
+Errors: no applicable method for 'rspd' applied to an object of class "c('double', 'numeric')"
+
+list()
+Done.

@@ -1,0 +1,64 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: gb	Number of families: 2 
+Current Family: egld 
+Could not find a set of valid default values for family gbegld
+Errors: missing value where TRUE/FALSE needed
+
+Current Family: rsgld 
+[[1]]
+[[1]]$package
+[1] "gb"
+
+[[1]]$family
+[1] "rsgld"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+lambda 
+  -Inf 
+
+[[1]]$family_info$upper
+lambda 
+   Inf 
+
+[[1]]$family_info$accepts_float
+lambda 
+  TRUE 
+
+[[1]]$family_info$defaults
+lambda 
+   0.5 
+
+[[1]]$family_info$log
+[1] FALSE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+lambda 
+  TRUE 
+
+[[1]]$family_info$supp_min_depends_on
+lambda 
+  TRUE 
+
+
+
+Done.

@@ -1,0 +1,95 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: gamlss.countKinf	Number of families: 16 
+Current Family: KIBNB 
+Error occured for family KIBNB
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: KIDEL 
+Error occured for family KIDEL
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: KIDPO 
+Error occured for family KIDPO
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: KIGEOM 
+Error occured for family KIGEOM
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: KIGEOMo 
+Error occured for family KIGEOMo
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: KIGPO 
+Error occured for family KIGPO
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: KILG 
+Error occured for family KILG
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: KINBF 
+Error occured for family KINBF
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: KINBI 
+Error occured for family KINBI
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: KINBII 
+Error occured for family KINBII
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: KIPIG 
+Error occured for family KIPIG
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: KIPO 
+Error occured for family KIPO
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: KISI 
+Error occured for family KISI
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: KISICHEL 
+Error occured for family KISICHEL
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: KIWARING 
+Error occured for family KIWARING
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: KIYULE 
+Error occured for family KIYULE
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+list()
+There were 16 warnings (use warnings() to see them)
+Done.

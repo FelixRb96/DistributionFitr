@@ -1,0 +1,19 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: exactRankTests	Number of families: 1 
+Current Family: perm 
+Error occured for family perm
+Error in if (accepted_float_rate > 1/(num_tests - num_integer)) accepts_float[param] <- TRUE else if (accepted_int_rate == : missing value where TRUE/FALSE needed
+
+
+list()
+Done.

@@ -1,0 +1,23 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: staTools	Number of families: 1 
+Current Family: displ 
+Could not find a set of valid default values for family staToolsdispl
+Errors: unused argument (xmax = 1e+05)
+ too few positive probabilities
+ NA in probability vector
+ negative probability
+
+list()
+Warning message:
+no DISPLAY variable so Tk is not available 
+Done.

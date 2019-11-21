@@ -1,0 +1,15 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: ConConPiWiFunin method for ‘show’ with signature ‘"Rcpp_cplfunction2"’: no definition for class “Rcpp_cplfunction2”
+	Number of families: 0 
+list()
+Done.

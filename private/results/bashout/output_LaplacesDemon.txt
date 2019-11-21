@@ -1,0 +1,166 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: LaplacesDemon	Number of families: 50 
+Current Family: alaplace 
+Current Family: allaplace 
+Current Family: aml 
+Could not find a set of valid default values for family LaplacesDemonaml
+Errors: non-conformable arguments
+ Matrix Sigma is not positive-definite.
+
+Current Family: bern 
+Current Family: cat 
+Could not find a set of valid default values for family LaplacesDemoncat
+Errors: subscript out of bounds
+ no positive probabilities
+ negative probability
+
+Current Family: crmrf 
+Could not find a set of valid default values for family LaplacesDemoncrmrf
+Errors: non-conformable arguments
+ Matrix Omega is not positive-definite.
+
+Current Family: dirichlet 
+Could not find a set of valid default values for family LaplacesDemondirichlet
+Errors: x must be non-negative.
+
+Current Family: gpd 
+Could not find a set of valid default values for family LaplacesDemongpd
+Errors: x is outside of support.
+ The sigma parameter must be non-negative.
+
+Current Family: halfcauchy 
+Current Family: halfnorm 
+Error occured for family halfnorm
+Error in sum(missing_defaults): invalid 'type' (list) of argument
+
+
+Current Family: halft 
+Current Family: hs 
+Current Family: invbeta 
+Current Family: invchisq 
+scale depends on another earlier parameter and is thus removed
+Could not find a set of valid default values for family LaplacesDemoninvchisq
+Errors: x must be positive.
+ The df parameter must be positive.
+
+Current Family: invgamma 
+Current Family: invgaussian 
+Could not find a set of valid default values for family LaplacesDemoninvgaussian
+Errors: x must be positive.
+ The mu parameter must be positive.
+ The lambda parameter must be positive.
+
+Current Family: laplace 
+Current Family: laplacem 
+Could not find a set of valid default values for family LaplacesDemonlaplacem
+Errors: p must sum to 1 for all components.
+ incorrect number of subscripts on matrix
+ p must be in (0,1].
+ scale must be positive.
+
+Current Family: laplacep 
+Current Family: lasso 
+Could not find a set of valid default values for family LaplacesDemonlasso
+Errors: non-conformable arguments
+ Scale parameters must be positive.
+
+Current Family: llaplace 
+Current Family: lnormp 
+Could not find a set of valid default values for family LaplacesDemonlnormp
+Errors: object 'dens' not found
+
+Current Family: mvc 
+Could not find a set of valid default values for family LaplacesDemonmvc
+Errors: object 'k' not found
+
+Current Family: mvcc 
+Could not find a set of valid default values for family LaplacesDemonmvcc
+Errors: object 'k' not found
+
+Current Family: mvcp 
+Could not find a set of valid default values for family LaplacesDemonmvcp
+Errors: non-conformable arguments
+ Matrix Omega is not positive-definite.
+
+Current Family: mvcpc 
+Could not find a set of valid default values for family LaplacesDemonmvcpc
+Errors: invalid 'times' argument
+
+Current Family: mvl 
+Could not find a set of valid default values for family LaplacesDemonmvl
+Errors: non-conformable arguments
+ Matrix Sigma is not positive-definite.
+
+Current Family: mvlc 
+Could not find a set of valid default values for family LaplacesDemonmvlc
+Errors: non-numeric matrix extent
+
+Current Family: mvn 
+Could not find a set of valid default values for family LaplacesDemonmvn
+Errors: object 'k' not found
+
+Current Family: mvnc 
+Could not find a set of valid default values for family LaplacesDemonmvnc
+Errors: object 'k' not found
+
+Current Family: mvnp 
+Could not find a set of valid default values for family LaplacesDemonmvnp
+Errors: object 'k' not found
+
+Current Family: mvnpc 
+Could not find a set of valid default values for family LaplacesDemonmvnpc
+Errors: object 'k' not found
+
+Current Family: mvpe 
+Error occured for family mvpe
+Error in seq(initial_min_val, initial_max_val, by = step_sizes[1]) + all_params[[param]]: non-numeric argument to binary operator
+
+
+Current Family: mvpec 
+Could not find a set of valid default values for family LaplacesDemonmvpec
+Errors: argument is of length zero
+
+Current Family: mvpolya 
+Could not find a set of valid default values for family LaplacesDemonmvpolya
+Errors: incorrect number of subscripts on matrix
+
+Current Family: mvt 
+Could not find a set of valid default values for family LaplacesDemonmvt
+Errors: object 'k' not found
+
+Current Family: mvtc 
+Could not find a set of valid default values for family LaplacesDemonmvtc
+Errors: object 'k' not found
+
+Current Family: mvtp 
+Could not find a set of valid default values for family LaplacesDemonmvtp
+Errors: non-conformable arguments
+ Matrix Omega is not positive-definite.
+
+Current Family: mvtpc 
+Could not find a set of valid default values for family LaplacesDemonmvtpc
+Errors: invalid 'times' argument
+
+Current Family: normlaplace 
+Current Family: normm 
+Could not find a set of valid default values for family LaplacesDemonnormm
+Errors: p must sum to 1 for all components.
+ incorrect number of subscripts on matrix
+ p must be in (0,1].
+ sigma must be positive.
+
+Current Family: normp 
+Current Family: normv 
+Current Family: pareto 
+Current Family: pe 
+Current Family: sdlaplace 

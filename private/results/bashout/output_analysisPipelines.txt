@@ -1,0 +1,29 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: analysisPipelinesCreating a new generic function for ‘univarCatDistPlots’ in the global environment
+INFO [2019-11-21 11:05:47] ||  Function 'univarCatDistPlots' was registered successfully  ||
+Creating a new generic function for ‘outlierPlot’ in the global environment
+INFO [2019-11-21 11:05:47] ||  Function 'outlierPlot' was registered successfully  ||
+Creating a new generic function for ‘multiVarOutlierPlot’ in the global environment
+INFO [2019-11-21 11:05:47] ||  Function 'multiVarOutlierPlot' was registered successfully  ||
+Creating a new generic function for ‘ignoreCols’ in the global environment
+INFO [2019-11-21 11:05:47] ||  Function 'ignoreCols' was registered successfully  ||
+Creating a new generic function for ‘getFeaturesForPyClassification’ in the global environment
+INFO [2019-11-21 11:05:47] ||  Function 'getFeaturesForPyClassification' was registered successfully  ||
+Creating a new generic function for ‘getTargetForPyClassification’ in the global environment
+INFO [2019-11-21 11:05:47] ||  Function 'getTargetForPyClassification' was registered successfully  ||
+INFO [2019-11-21 11:05:47] ||  Function 'castKafkaStreamAsString_sparkSS' was registered successfully  ||
+INFO [2019-11-21 11:05:47] ||  Function 'convertKafkaValueFromJson_sparkSS' was registered successfully  ||
+INFO [2019-11-21 11:05:47] ||  Predefined utility functions registered  ||
+	Number of families: 0 
+list()
+Done.

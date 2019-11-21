@@ -1,0 +1,60 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: glmx	Number of families: 1 
+Current Family: pregibon 
+[[1]]
+[[1]]$package
+[1] "glmx"
+
+[[1]]$family
+[1] "pregibon"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+   a    b 
+-500 -511 
+
+[[1]]$family_info$upper
+     a      b 
+130.10 511.98 
+
+[[1]]$family_info$accepts_float
+   a    b 
+TRUE TRUE 
+
+[[1]]$family_info$defaults
+a b 
+0 0 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+    a     b 
+FALSE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+    a     b 
+FALSE FALSE 
+
+
+
+Done.

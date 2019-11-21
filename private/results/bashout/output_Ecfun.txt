@@ -1,0 +1,22 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: Ecfun	Number of families: 1 
+Current Family: truncdist 
+Could not find a set of valid default values for family Ecfuntruncdist
+Errors: unused argument (... = 0.5)
+ unused argument (... = 1)
+ unused argument (... = 0)
+ unused argument (... = -0.5)
+ unused argument (... = -1)
+
+list()
+Done.

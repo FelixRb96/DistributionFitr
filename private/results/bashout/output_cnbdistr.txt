@@ -1,0 +1,22 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: cnbdistr	Number of families: 1 
+Current Family: cnb 
+Could not find a set of valid default values for family cnbdistrcnb
+Errors: D needs to be a positive integer.
+ x needs to be a nonempty vector of non-negative integer(s) <= D.
+ r1 needs to be a positive value.
+ r2 needs to be a positive value.
+ lambda needs to be a positive value.
+
+list()
+Done.

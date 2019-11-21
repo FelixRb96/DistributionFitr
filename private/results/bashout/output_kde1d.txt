@@ -1,0 +1,18 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: kde1d	Number of families: 1 
+Current Family: kde1d 
+Could not find a set of valid default values for family kde1dkde1d
+Errors: Object was created without names.
+
+list()
+Done.

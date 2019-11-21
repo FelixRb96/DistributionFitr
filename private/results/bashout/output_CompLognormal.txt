@@ -1,0 +1,22 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: CompLognormal	Number of families: 1 
+Current Family: complnorm 
+Could not find a set of valid default values for family CompLognormalcomplnorm
+Errors: could not find function "d0.5"
+ could not find function "d1"
+ could not find function "d0"
+ could not find function "d-0.5"
+ could not find function "d-1"
+
+list()
+Done.

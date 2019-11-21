@@ -1,0 +1,18 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: fixedTimeEvents	Number of families: 1 
+Current Family: Liland 
+Could not find a set of valid default values for family fixedTimeEventsLiland
+Errors: R and r must both be 2 or larger
+
+list()
+Done.

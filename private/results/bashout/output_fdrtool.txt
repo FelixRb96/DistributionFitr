@@ -1,0 +1,22 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: fdrtool	Number of families: 2 
+Current Family: cor0 
+Could not find a set of valid default values for family fdrtoolcor0
+Errors:
+Current Family: halfnorm 
+Error occured for family halfnorm
+Error in sum(missing_defaults): invalid 'type' (list) of argument
+
+
+list()
+Done.

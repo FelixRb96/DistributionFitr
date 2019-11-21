@@ -1,0 +1,18 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: sgmcmc
+No TensorFlow python installation found.
+This can be installed using the installTF() function.
+
+	Number of families: 0 
+list()
+Done.

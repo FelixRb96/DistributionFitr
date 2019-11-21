@@ -1,0 +1,19 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: ashr	Number of families: 1 
+Current Family: logf 
+Error occured for family logf
+Error in get(paste0(type, fam), envir = asNamespace(package)): object 'rlogf' not found
+
+
+list()
+Done.

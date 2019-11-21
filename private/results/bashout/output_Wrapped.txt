@@ -1,0 +1,22 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: Wrapped	Number of families: 1 
+Current Family: wrappedg 
+Could not find a set of valid default values for family Wrappedwrappedg
+Errors: could not find function "r0.5"
+ could not find function "r1"
+ could not find function "r0"
+ could not find function "r-0.5"
+ could not find function "r-1"
+
+list()
+Done.

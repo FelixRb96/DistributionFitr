@@ -1,0 +1,23 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: conStruct
+Error occured for package conStruct
+Error: package or namespace load failed for ‘conStruct’ in .updateMethodsInTable(fdef, where, attach):
+ lazy-load database '/usr/local/lib/R/site-library/rstan/R/rstan.rdb' is corrupt
+
+
+list()
+Warning message:
+In .updateMethodsInTable(fdef, where, attach) :
+  internal error -4 in R_decompress1
+Done.Warning message:
+system call failed: Cannot allocate memory 

@@ -1,0 +1,201 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: CoSMoS	Number of families: 4 
+Current Family: burrIII 
+Current Family: burrXII 
+Current Family: ggamma 
+Current Family: paretoII 
+[[1]]
+[[1]]$package
+[1] "CoSMoS"
+
+[[1]]$family
+[1] "burrIII"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+       scale       shape1       shape2 
+        -Inf 8.326673e-17 8.326673e-17 
+
+[[1]]$family_info$upper
+ scale shape1 shape2 
+   Inf    Inf 1000.5 
+
+[[1]]$family_info$accepts_float
+ scale shape1 shape2 
+  TRUE   TRUE   TRUE 
+
+[[1]]$family_info$defaults
+ scale shape1 shape2 
+   0.5    0.5    0.5 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+ scale shape1 shape2 
+ FALSE  FALSE  FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+ scale shape1 shape2 
+ FALSE  FALSE  FALSE 
+
+
+
+[[2]]
+[[2]]$package
+[1] "CoSMoS"
+
+[[2]]$family
+[1] "burrXII"
+
+[[2]]$family_info
+[[2]]$family_info$lower
+       scale       shape1       shape2 
+        -Inf 8.326673e-17 8.326673e-17 
+
+[[2]]$family_info$upper
+ scale shape1 shape2 
+   Inf    Inf  950.5 
+
+[[2]]$family_info$accepts_float
+ scale shape1 shape2 
+  TRUE   TRUE   TRUE 
+
+[[2]]$family_info$defaults
+ scale shape1 shape2 
+   0.5    0.5    0.5 
+
+[[2]]$family_info$log
+[1] TRUE
+
+[[2]]$family_info$discrete
+[1] FALSE
+
+[[2]]$family_info$support_min
+[1] -1
+
+[[2]]$family_info$support_max
+[1] Inf
+
+[[2]]$family_info$supp_max_depends_on
+ scale shape1 shape2 
+ FALSE  FALSE  FALSE 
+
+[[2]]$family_info$supp_min_depends_on
+ scale shape1 shape2 
+ FALSE  FALSE  FALSE 
+
+
+
+[[3]]
+[[3]]$package
+[1] "CoSMoS"
+
+[[3]]$family
+[1] "ggamma"
+
+[[3]]$family_info
+[[3]]$family_info$lower
+       scale       shape1       shape2 
+        -Inf 8.326673e-17 1.000000e-02 
+
+[[3]]$family_info$upper
+ scale shape1 shape2 
+   Inf    Inf    Inf 
+
+[[3]]$family_info$accepts_float
+ scale shape1 shape2 
+  TRUE   TRUE   TRUE 
+
+[[3]]$family_info$defaults
+ scale shape1 shape2 
+   0.5    0.5    0.5 
+
+[[3]]$family_info$log
+[1] TRUE
+
+[[3]]$family_info$discrete
+[1] FALSE
+
+[[3]]$family_info$support_min
+[1] -Inf
+
+[[3]]$family_info$support_max
+[1] Inf
+
+[[3]]$family_info$supp_max_depends_on
+ scale shape1 shape2 
+ FALSE  FALSE  FALSE 
+
+[[3]]$family_info$supp_min_depends_on
+ scale shape1 shape2 
+ FALSE  FALSE  FALSE 
+
+
+
+[[4]]
+[[4]]$package
+[1] "CoSMoS"
+
+[[4]]$family
+[1] "paretoII"
+
+[[4]]$family_info
+[[4]]$family_info$lower
+       scale        shape 
+8.326673e-17 8.326673e-17 
+
+[[4]]$family_info$upper
+scale shape 
+  Inf 900.5 
+
+[[4]]$family_info$accepts_float
+scale shape 
+ TRUE  TRUE 
+
+[[4]]$family_info$defaults
+scale shape 
+  0.5   0.5 
+
+[[4]]$family_info$log
+[1] TRUE
+
+[[4]]$family_info$discrete
+[1] FALSE
+
+[[4]]$family_info$support_min
+[1] -Inf
+
+[[4]]$family_info$support_max
+[1] Inf
+
+[[4]]$family_info$supp_max_depends_on
+scale shape 
+FALSE FALSE 
+
+[[4]]$family_info$supp_min_depends_on
+scale shape 
+FALSE FALSE 
+
+
+
+Done.

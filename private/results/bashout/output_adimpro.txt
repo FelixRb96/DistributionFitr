@@ -1,0 +1,18 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: adimproxdpyinfo:  unable to open display "".
+	Number of families: 0 
+list()
+Warning message:
+In system("xdpyinfo  | grep 'dimensions:'", intern = TRUE, ignore.stderr = TRUE) :
+  running command 'xdpyinfo  | grep 'dimensions:' 2>/dev/null' had status 1
+Done.

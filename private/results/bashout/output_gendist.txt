@@ -1,0 +1,56 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: gendist	Number of families: 5 
+Current Family: arctan 
+Could not find a set of valid default values for family gendistarctan
+Errors: could not find function "q0.5"
+ alpha must be of positive values
+ could not find function "q1"
+ could not find function "q0"
+ could not find function "q-0.5"
+ could not find function "q-1"
+
+Current Family: composite 
+Could not find a set of valid default values for family gendistcomposite
+Errors: could not find function "d0.5"
+ could not find function "d1"
+ could not find function "d0"
+ could not find function "d-0.5"
+ could not find function "d-1"
+
+Current Family: folded 
+Could not find a set of valid default values for family gendistfolded
+Errors: could not find function "p0.5"
+ could not find function "p1"
+ could not find function "p0"
+ could not find function "p-0.5"
+ could not find function "p-1"
+
+Current Family: mixt 
+Could not find a set of valid default values for family gendistmixt
+Errors: could not find function "p0.5"
+ phi must be of non-negative values
+ could not find function "p1"
+ could not find function "p0"
+ could not find function "p-0.5"
+ could not find function "p-1"
+
+Current Family: skew 
+Could not find a set of valid default values for family gendistskew
+Errors: could not find function "d0.5"
+ could not find function "d1"
+ could not find function "d0"
+ could not find function "d-0.5"
+ could not find function "d-1"
+
+list()
+Done.

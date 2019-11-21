@@ -1,0 +1,17 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: restatapirestatapi: - config file with the API version 1 loaded from GitHub (the 'current' API version number is 1).
+           - no parallel computing.
+           - 'libcurl' will be used for file download.
+	Number of families: 0 
+list()
+Done.

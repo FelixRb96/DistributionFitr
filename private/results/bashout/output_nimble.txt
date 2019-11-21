@@ -1,0 +1,675 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: nimble	Number of families: 19 
+Current Family: car_normal 
+weights depends on another earlier parameter and is thus removed
+c depends on another earlier parameter and is thus removed
+Could not find a set of valid default values for family nimblecar_normal
+Errors: object 'model' not found
+
+Current Family: car_proper 
+M depends on another earlier parameter and is thus removed
+evs depends on another earlier parameter and is thus removed
+
+ *** caught segfault ***
+address 0x56595d9dc368, cause 'memory not mapped'
+
+Traceback:
+ 1: (function (x, mu, C = CAR_calcC(adj, num), adj, num, M = CAR_calcM(num),     tau, gamma, evs = CAR_calcEVs3(C, adj, num), log = FALSE) {    CAR_proper_checkAdjNumCM(adj, num, C, M)    if (storage.mode(x) != "double")         storage.mode(x) <- "double"    if (storage.mode(mu) != "double")         storage.mode(mu) <- "double"    if (storage.mode(C) != "double")         storage.mode(C) <- "double"    if (storage.mode(adj) != "double")         storage.mode(adj) <- "double"    if (storage.mode(num) != "double")         storage.mode(num) <- "double"    if (storage.mode(M) != "double")         storage.mode(M) <- "double"    if (storage.mode(evs) != "double")         storage.mode(evs) <- "double"    .Call(C_dcar_proper, as.double(x), as.double(mu), as.double(C),         as.double(adj), as.double(num), as.double(M), as.double(tau),         as.double(gamma), as.double(evs), as.logical(log))})(x = c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10), mu = 0.5, adj = 1, num = 1, tau = 1, gamma = -0.5)
+ 2: do.call(dfun, c(x_test, params))
+ 3: eval(expr, envir = envir)
+ 4: eval(expr, envir = envir)
+ 5: eval(expr, env)
+ 6: doTryCatch(return(expr), name, parentenv, handler)
+ 7: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+ 8: tryCatchList(expr, classes, parentenv, handlers)
+ 9: tryCatch(expr, error = function(e) {    call <- conditionCall(e)    if (!is.null(call)) {        if (identical(call[[1L]], quote(doTryCatch)))             call <- sys.call(-4L)        dcall <- deparse(call)[1L]        prefix <- paste("Error in", dcall, ": ")        LONG <- 75L        sm <- strsplit(conditionMessage(e), "\n")[[1L]]        w <- 14L + nchar(dcall, type = "w") + nchar(sm[1L], type = "w")        if (is.na(w))             w <- 14L + nchar(dcall, type = "b") + nchar(sm[1L],                 type = "b")        if (w > LONG)             prefix <- paste0(prefix, "\n  ")    }    else prefix <- "Error : "    msg <- paste0(prefix, conditionMessage(e), "\n")    .Internal(seterrmessage(msg[1L]))    if (!silent && isTRUE(getOption("show.error.messages"))) {        cat(msg, file = outFile)        .Internal(printDeferredWarnings())    }    invisible(structure(msg, class = "try-error", condition = e))})
+10: try(eval(expr, env), silent = TRUE)
+11: sendMaster(try(eval(expr, env), silent = TRUE))
+12: parallel::mcparallel({    eval(expr, envir = envir)}, silent = FALSE)
+13: eval_with_timeout(do.call(dfun, c(x_test, params)), timeout = 1,     return_value_on_timeout = "TIMEOUT")
+14: .validate_values(fam, n_or_nn, curr_params, x_test)
+15: doTryCatch(return(expr), name, parentenv, handler)
+16: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+17: tryCatchList(expr, classes, parentenv, handlers)
+18: tryCatch({    .validate_values(fam, n_or_nn, curr_params, x_test)}, error = function(e) {    errors <<- union(errors, strsplit(as.character(e), ":", fixed = TRUE)[[1]][2])    return(FALSE)})
+19: withCallingHandlers(expr, warning = function(w) invokeRestart("muffleWarning"))
+20: suppressWarnings(tryCatch({    .validate_values(fam, n_or_nn, curr_params, x_test)}, error = function(e) {    errors <<- union(errors, strsplit(as.character(e), ":", fixed = TRUE)[[1]][2])    return(FALSE)}))
+21: get_default_values(all_params, fam)
+22: getParams(package_content[[j]])
+23: doTryCatch(return(expr), name, parentenv, handler)
+24: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+25: tryCatchList(expr, classes, parentenv, handlers)
+26: tryCatch(getParams(package_content[[j]]), error = function(e) {    message("Error occured for family ", package_content[[j]]$family)    message(e, "\n")    NULL})
+27: iterate_packages(all.packages)
+28: getFamilies(all.packages = pkgList, file = fileName)
+An irrecoverable exception occurred. R is aborting now ...
+
+ *** caught segfault ***
+address 0x56595d9dc368, cause 'memory not mapped'
+
+Traceback:
+ 1: (function (x, mu, C = CAR_calcC(adj, num), adj, num, M = CAR_calcM(num),     tau, gamma, evs = CAR_calcEVs3(C, adj, num), log = FALSE) {    CAR_proper_checkAdjNumCM(adj, num, C, M)    if (storage.mode(x) != "double")         storage.mode(x) <- "double"    if (storage.mode(mu) != "double")         storage.mode(mu) <- "double"    if (storage.mode(C) != "double")         storage.mode(C) <- "double"    if (storage.mode(adj) != "double")         storage.mode(adj) <- "double"    if (storage.mode(num) != "double")         storage.mode(num) <- "double"    if (storage.mode(M) != "double")         storage.mode(M) <- "double"    if (storage.mode(evs) != "double")         storage.mode(evs) <- "double"    .Call(C_dcar_proper, as.double(x), as.double(mu), as.double(C),         as.double(adj), as.double(num), as.double(M), as.double(tau),         as.double(gamma), as.double(evs), as.logical(log))})(x = c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10), mu = 0.5, adj = 1, num = 1, tau = 1, gamma = -1)
+ 2: do.call(dfun, c(x_test, params))
+ 3: eval(expr, envir = envir)
+ 4: eval(expr, envir = envir)
+ 5: eval(expr, env)
+ 6: doTryCatch(return(expr), name, parentenv, handler)
+ 7: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+ 8: tryCatchList(expr, classes, parentenv, handlers)
+ 9: tryCatch(expr, error = function(e) {    call <- conditionCall(e)    if (!is.null(call)) {        if (identical(call[[1L]], quote(doTryCatch)))             call <- sys.call(-4L)        dcall <- deparse(call)[1L]        prefix <- paste("Error in", dcall, ": ")        LONG <- 75L        sm <- strsplit(conditionMessage(e), "\n")[[1L]]        w <- 14L + nchar(dcall, type = "w") + nchar(sm[1L], type = "w")        if (is.na(w))             w <- 14L + nchar(dcall, type = "b") + nchar(sm[1L],                 type = "b")        if (w > LONG)             prefix <- paste0(prefix, "\n  ")    }    else prefix <- "Error : "    msg <- paste0(prefix, conditionMessage(e), "\n")    .Internal(seterrmessage(msg[1L]))    if (!silent && isTRUE(getOption("show.error.messages"))) {        cat(msg, file = outFile)        .Internal(printDeferredWarnings())    }    invisible(structure(msg, class = "try-error", condition = e))})
+10: try(eval(expr, env), silent = TRUE)
+11: sendMaster(try(eval(expr, env), silent = TRUE))
+12: parallel::mcparallel({    eval(expr, envir = envir)}, silent = FALSE)
+13: eval_with_timeout(do.call(dfun, c(x_test, params)), timeout = 1,     return_value_on_timeout = "TIMEOUT")
+14: .validate_values(fam, n_or_nn, curr_params, x_test)
+15: doTryCatch(return(expr), name, parentenv, handler)
+16: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+17: tryCatchList(expr, classes, parentenv, handlers)
+18: tryCatch({    .validate_values(fam, n_or_nn, curr_params, x_test)}, error = function(e) {    errors <<- union(errors, strsplit(as.character(e), ":", fixed = TRUE)[[1]][2])    return(FALSE)})
+19: withCallingHandlers(expr, warning = function(w) invokeRestart("muffleWarning"))
+20: suppressWarnings(tryCatch({    .validate_values(fam, n_or_nn, curr_params, x_test)}, error = function(e) {    errors <<- union(errors, strsplit(as.character(e), ":", fixed = TRUE)[[1]][2])    return(FALSE)}))
+21: get_default_values(all_params, fam)
+22: getParams(package_content[[j]])
+23: doTryCatch(return(expr), name, parentenv, handler)
+24: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+25: tryCatchList(expr, classes, parentenv, handlers)
+26: tryCatch(getParams(package_content[[j]]), error = function(e) {    message("Error occured for family ", package_content[[j]]$family)    message(e, "\n")    NULL})
+27: iterate_packages(all.packages)
+28: getFamilies(all.packages = pkgList, file = fileName)
+An irrecoverable exception occurred. R is aborting now ...
+Could not find a set of valid default values for family nimblecar_proper
+Errors: num argument to dcar_proper() can only contain non-negative integers
+ argument is of length zero
+ attempt to select less than one element in get1index <real>
+ dcar_proper() distribution must specify some neighbors
+
+Current Family: cat 
+Current Family: constraint 
+Could not find a set of valid default values for family nimbleconstraint
+Errors: dconstraint is not vectorized
+
+Current Family: CRP 
+Could not find a set of valid default values for family nimbleCRP
+Errors: dCRP invalid 'times' argument
+
+Current Family: dexp 
+rate depends on another earlier parameter and is thus removed
+Current Family: dirch 
+Error (C_ddirch): length of x must equal length of alpha.
+Error (C_ddirch): length of x must equal length of alpha.
+Could not find a set of valid default values for family nimbledirch
+Errors: argument is of length zero
+
+Current Family: exp_nimble 
+Current Family: flat 
+Error occured for family flat
+Error in all_params[[param]]: attempt to select less than one element in get1index
+
+
+Current Family: halfflat 
+Error occured for family halfflat
+Error in all_params[[param]]: attempt to select less than one element in get1index
+
+
+Current Family: interval 
+Current Family: invgamma 
+rate depends on another earlier parameter and is thus removed
+Current Family: invwish_chol 
+Error (C_rinvwish_chol): inconsistent degrees of freedom and dimension.
+Error (C_rinvwish_chol): inconsistent degrees of freedom and dimension.
+Error (C_rinvwish_chol): inconsistent degrees of freedom and dimension.
+Error (C_rinvwish_chol): inconsistent degrees of freedom and dimension.
+Error (C_rinvwish_chol): inconsistent degrees of freedom and dimension.
+Error (C_rinvwish_chol): inconsistent degrees of freedom and dimension.
+Error (C_rinvwish_chol): inconsistent degrees of freedom and dimension.
+Error (C_rinvwish_chol): inconsistent degrees of freedom and dimension.
+Error (C_rinvwish_chol): inconsistent degrees of freedom and dimension.
+Error (C_rinvwish_chol): inconsistent degrees of freedom and dimension.
+Error (C_rinvwish_chol): inconsistent degrees of freedom and dimension.
+Error (C_rinvwish_chol): inconsistent degrees of freedom and dimension.
+Error (C_rinvwish_chol): inconsistent degrees of freedom and dimension.
+Error (C_rinvwish_chol): inconsistent degrees of freedom and dimension.
+Error (C_rinvwish_chol): inconsistent degrees of freedom and dimension.
+Error (C_rinvwish_chol): inconsistent degrees of freedom and dimension.
+Error (C_rinvwish_chol): inconsistent degrees of freedom and dimension.
+Error (C_rinvwish_chol): inconsistent degrees of freedom and dimension.
+Error (C_rinvwish_chol): inconsistent degrees of freedom and dimension.
+Error (C_rinvwish_chol): inconsistent degrees of freedom and dimension.
+Could not find a set of valid default values for family nimbleinvwish_chol
+Errors: argument is of length zero
+
+Current Family: mnorm_chol 
+Error (C_rmnorm_chol): 'chol' should be a real matrix.
+Error (C_rmnorm_chol): 'chol' should be a real matrix.
+Error (C_rmnorm_chol): 'chol' should be a real matrix.
+Error (C_rmnorm_chol): 'chol' should be a real matrix.
+Error (C_rmnorm_chol): 'chol' should be a real matrix.
+Error (C_rmnorm_chol): 'chol' should be a real matrix.
+Error (C_rmnorm_chol): 'chol' should be a real matrix.
+Error (C_rmnorm_chol): 'chol' should be a real matrix.
+Error (C_rmnorm_chol): 'chol' should be a real matrix.
+Error (C_rmnorm_chol): 'chol' should be a real matrix.
+Error (C_rmnorm_chol): 'chol' should be a real matrix.
+Error (C_rmnorm_chol): 'chol' should be a real matrix.
+Error (C_rmnorm_chol): 'chol' should be a real matrix.
+Error (C_rmnorm_chol): 'chol' should be a real matrix.
+Error (C_rmnorm_chol): 'chol' should be a real matrix.
+Error (C_rmnorm_chol): 'chol' should be a real matrix.
+Error (C_rmnorm_chol): 'chol' should be a real matrix.
+Error (C_rmnorm_chol): 'chol' should be a real matrix.
+Error (C_rmnorm_chol): 'chol' should be a real matrix.
+Error (C_rmnorm_chol): 'chol' should be a real matrix.
+Error (C_rmnorm_chol): 'chol' should be a real matrix.
+Error (C_rmnorm_chol): 'chol' should be a real matrix.
+Error (C_rmnorm_chol): 'chol' should be a real matrix.
+Error (C_rmnorm_chol): 'chol' should be a real matrix.
+Error (C_rmnorm_chol): 'chol' should be a real matrix.
+Could not find a set of valid default values for family nimblemnorm_chol
+Errors: argument is of length zero
+
+Current Family: multi 
+Error (C_dmulti): length of x must equal size.
+Error (C_dmulti): length of x must equal size.
+Error (C_dmulti): length of x must equal size.
+Error (C_dmulti): length of x must equal size.
+Error (C_dmulti): length of x must equal size.
+Error (C_dmulti): length of x must equal size.
+Error (C_dmulti): length of x must equal size.
+Error (C_dmulti): length of x must equal size.
+Could not find a set of valid default values for family nimblemulti
+Errors: argument is of length zero
+
+Current Family: mvt_chol 
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Error (C_rmvt_chol): 'chol' should be a real matrix.
+Could not find a set of valid default values for family nimblemvt_chol
+Errors: argument is of length zero
+
+Current Family: sqrtinvgamma 
+rate depends on another earlier parameter and is thus removed
+Current Family: t_nonstandard 
+Current Family: wish_chol 
+Error (Crwish_chol): 'chol' must be a real matrix.
+Error (Crwish_chol): 'chol' must be a real matrix.
+Error (Crwish_chol): 'chol' must be a real matrix.
+Error (Crwish_chol): 'chol' must be a real matrix.
+Error (Crwish_chol): 'chol' must be a real matrix.
+Error (Crwish_chol): 'chol' must be a real matrix.
+Error (Crwish_chol): 'chol' must be a real matrix.
+Error (Crwish_chol): 'chol' must be a real matrix.
+Error (Crwish_chol): 'chol' must be a real matrix.
+Error (Crwish_chol): 'chol' must be a real matrix.
+Error (Crwish_chol): 'chol' must be a real matrix.
+Error (Crwish_chol): 'chol' must be a real matrix.
+Error (Crwish_chol): 'chol' must be a real matrix.
+Error (Crwish_chol): 'chol' must be a real matrix.
+Error (Crwish_chol): 'chol' must be a real matrix.
+Error (Crwish_chol): 'chol' must be a real matrix.
+Error (Crwish_chol): 'chol' must be a real matrix.
+Error (Crwish_chol): 'chol' must be a real matrix.
+Error (Crwish_chol): 'chol' must be a real matrix.
+Error (Crwish_chol): 'chol' must be a real matrix.
+Error (Crwish_chol): 'chol' must be a real matrix.
+Error (Crwish_chol): 'chol' must be a real matrix.
+Error (Crwish_chol): 'chol' must be a real matrix.
+Error (Crwish_chol): 'chol' must be a real matrix.
+Error (Crwish_chol): 'chol' must be a real matrix.
+Could not find a set of valid default values for family nimblewish_chol
+Errors: argument is of length zero
+
+[[1]]
+[[1]]$package
+[1] "nimble"
+
+[[1]]$family
+[1] "cat"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+prob 
+-Inf 
+
+[[1]]$family_info$upper
+prob 
+ Inf 
+
+[[1]]$family_info$accepts_float
+prob 
+TRUE 
+
+[[1]]$family_info$defaults
+prob 
+ 0.5 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] TRUE
+
+[[1]]$family_info$support_min
+[1] 1
+
+[[1]]$family_info$support_max
+[1] 1
+
+[[1]]$family_info$supp_max_depends_on
+ prob 
+FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+ prob 
+FALSE 
+
+
+
+[[2]]
+[[2]]$package
+[1] "nimble"
+
+[[2]]$family
+[1] "dexp"
+
+[[2]]$family_info
+[[2]]$family_info$lower
+location    scale 
+    -Inf        0 
+
+[[2]]$family_info$upper
+location    scale 
+     Inf      Inf 
+
+[[2]]$family_info$accepts_float
+location    scale 
+    TRUE     TRUE 
+
+[[2]]$family_info$defaults
+location    scale 
+       0        1 
+
+[[2]]$family_info$log
+[1] TRUE
+
+[[2]]$family_info$discrete
+[1] FALSE
+
+[[2]]$family_info$support_min
+[1] -Inf
+
+[[2]]$family_info$support_max
+[1] Inf
+
+[[2]]$family_info$supp_max_depends_on
+location    scale 
+   FALSE    FALSE 
+
+[[2]]$family_info$supp_min_depends_on
+location    scale 
+   FALSE    FALSE 
+
+
+
+[[3]]
+[[3]]$package
+[1] "nimble"
+
+[[3]]$family
+[1] "exp_nimble"
+
+[[3]]$family_info
+[[3]]$family_info$lower
+scale 
+ 0.01 
+
+[[3]]$family_info$upper
+scale 
+  Inf 
+
+[[3]]$family_info$accepts_float
+scale 
+ TRUE 
+
+[[3]]$family_info$defaults
+scale 
+    1 
+
+[[3]]$family_info$log
+[1] TRUE
+
+[[3]]$family_info$discrete
+[1] FALSE
+
+[[3]]$family_info$support_min
+[1] 0
+
+[[3]]$family_info$support_max
+[1] Inf
+
+[[3]]$family_info$supp_max_depends_on
+scale 
+FALSE 
+
+[[3]]$family_info$supp_min_depends_on
+scale 
+FALSE 
+
+
+
+[[4]]
+[[4]]$package
+[1] "nimble"
+
+[[4]]$family
+[1] "interval"
+
+[[4]]$family_info
+[[4]]$family_info$lower
+   t    c 
+-Inf -Inf 
+
+[[4]]$family_info$upper
+  t   c 
+Inf Inf 
+
+[[4]]$family_info$accepts_float
+   t    c 
+TRUE TRUE 
+
+[[4]]$family_info$defaults
+  t   c 
+0.5 0.5 
+
+[[4]]$family_info$log
+[1] TRUE
+
+[[4]]$family_info$discrete
+[1] TRUE
+
+[[4]]$family_info$support_min
+[1] 0
+
+[[4]]$family_info$support_max
+[1] 1
+
+[[4]]$family_info$supp_max_depends_on
+    t     c 
+FALSE FALSE 
+
+[[4]]$family_info$supp_min_depends_on
+    t     c 
+FALSE FALSE 
+
+
+
+[[5]]
+[[5]]$package
+[1] "nimble"
+
+[[5]]$family
+[1] "invgamma"
+
+[[5]]$family_info
+[[5]]$family_info$lower
+scale shape 
+ 0.00  0.01 
+
+[[5]]$family_info$upper
+scale shape 
+  Inf   Inf 
+
+[[5]]$family_info$accepts_float
+scale shape 
+ TRUE  TRUE 
+
+[[5]]$family_info$defaults
+scale shape 
+  1.0   0.5 
+
+[[5]]$family_info$log
+[1] TRUE
+
+[[5]]$family_info$discrete
+[1] FALSE
+
+[[5]]$family_info$support_min
+[1] 0.01
+
+[[5]]$family_info$support_max
+[1] Inf
+
+[[5]]$family_info$supp_max_depends_on
+scale shape 
+FALSE FALSE 
+
+[[5]]$family_info$supp_min_depends_on
+scale shape 
+FALSE FALSE 
+
+
+
+[[6]]
+[[6]]$package
+[1] "nimble"
+
+[[6]]$family
+[1] "sqrtinvgamma"
+
+[[6]]$family_info
+[[6]]$family_info$lower
+scale shape 
+ 0.00  0.01 
+
+[[6]]$family_info$upper
+scale shape 
+  Inf   Inf 
+
+[[6]]$family_info$accepts_float
+scale shape 
+ TRUE  TRUE 
+
+[[6]]$family_info$defaults
+scale shape 
+  1.0   0.5 
+
+[[6]]$family_info$log
+[1] TRUE
+
+[[6]]$family_info$discrete
+[1] FALSE
+
+[[6]]$family_info$support_min
+[1] 0.04
+
+[[6]]$family_info$support_max
+[1] Inf
+
+[[6]]$family_info$supp_max_depends_on
+scale shape 
+FALSE FALSE 
+
+[[6]]$family_info$supp_min_depends_on
+scale shape 
+FALSE FALSE 
+
+
+
+[[7]]
+[[7]]$package
+[1] "nimble"
+
+[[7]]$family
+[1] "t_nonstandard"
+
+[[7]]$family_info
+[[7]]$family_info$lower
+   df    mu sigma 
+ 0.01  -Inf  0.00 
+
+[[7]]$family_info$upper
+   df    mu sigma 
+  Inf   Inf   Inf 
+
+[[7]]$family_info$accepts_float
+   df    mu sigma 
+ TRUE  TRUE  TRUE 
+
+[[7]]$family_info$defaults
+   df    mu sigma 
+    1     0     1 
+
+[[7]]$family_info$log
+[1] TRUE
+
+[[7]]$family_info$discrete
+[1] FALSE
+
+[[7]]$family_info$support_min
+[1] -Inf
+
+[[7]]$family_info$support_max
+[1] Inf
+
+[[7]]$family_info$supp_max_depends_on
+   df    mu sigma 
+FALSE FALSE FALSE 
+
+[[7]]$family_info$supp_min_depends_on
+   df    mu sigma 
+FALSE FALSE FALSE 
+
+
+
+Done.

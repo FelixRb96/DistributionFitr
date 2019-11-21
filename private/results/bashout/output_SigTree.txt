@@ -1,0 +1,26 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: SigTreeFound more than one class "Annotated" in cache; using the first, from namespace 'RNeXML'
+Also defined by ‘S4Vectors’
+Found more than one class "Annotated" in cache; using the first, from namespace 'RNeXML'
+Also defined by ‘S4Vectors’
+Found more than one class "Annotated" in cache; using the first, from namespace 'RNeXML'
+Also defined by ‘S4Vectors’
+Found more than one class "Annotated" in cache; using the first, from namespace 'RNeXML'
+Also defined by ‘S4Vectors’
+Found more than one class "Annotated" in cache; using the first, from namespace 'RNeXML'
+Also defined by ‘S4Vectors’
+Found more than one class "Annotated" in cache; using the first, from namespace 'RNeXML'
+Also defined by ‘S4Vectors’
+	Number of families: 0 
+list()
+Done.

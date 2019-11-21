@@ -1,0 +1,19 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: survival	Number of families: 1 
+Current Family: survreg 
+Error occured for family survreg
+Error in seq(initial_min_val, initial_max_val, by = step_sizes[1]) + all_params[[param]]: non-numeric argument to binary operator
+
+
+list()
+Done.

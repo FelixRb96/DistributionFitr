@@ -1,0 +1,60 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: robustloggamma	Number of families: 1 
+Current Family: loggamma 
+[[1]]
+[[1]]$package
+[1] "robustloggamma"
+
+[[1]]$family
+[1] "loggamma"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+    mu  sigma   zero lambda 
+  -Inf   0.01   -Inf -99.50 
+
+[[1]]$family_info$upper
+    mu  sigma   zero lambda 
+   Inf    Inf    Inf   50.5 
+
+[[1]]$family_info$accepts_float
+    mu  sigma   zero lambda 
+  TRUE   TRUE   TRUE   TRUE 
+
+[[1]]$family_info$defaults
+    mu  sigma   zero lambda 
+ 0e+00  1e+00  1e-04  5e-01 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+    mu  sigma   zero lambda 
+ FALSE  FALSE  FALSE  FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+    mu  sigma   zero lambda 
+ FALSE  FALSE  FALSE  FALSE 
+
+
+
+Done.

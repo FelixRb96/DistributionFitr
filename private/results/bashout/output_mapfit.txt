@@ -1,0 +1,24 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: mapfit	Number of families: 2 
+Current Family: herlang 
+Error occured for family herlang
+Error in sum(missing_defaults): invalid 'type' (list) of argument
+
+
+Current Family: ph 
+Error occured for family ph
+Error in sum(missing_defaults): invalid 'type' (list) of argument
+
+
+list()
+Done.

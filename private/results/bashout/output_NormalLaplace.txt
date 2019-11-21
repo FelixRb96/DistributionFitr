@@ -1,0 +1,61 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: NormalLaplace	Number of families: 1 
+Current Family: nl 
+param depends on another earlier parameter and is thus removed
+[[1]]
+[[1]]$package
+[1] "NormalLaplace"
+
+[[1]]$family
+[1] "nl"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+   mu sigma alpha  beta 
+ -Inf  0.01  0.01  0.01 
+
+[[1]]$family_info$upper
+   mu sigma alpha  beta 
+  Inf   Inf   Inf   Inf 
+
+[[1]]$family_info$accepts_float
+   mu sigma alpha  beta 
+ TRUE  TRUE  TRUE  TRUE 
+
+[[1]]$family_info$defaults
+   mu sigma alpha  beta 
+    0     1     1     1 
+
+[[1]]$family_info$log
+[1] FALSE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+   mu sigma alpha  beta 
+FALSE FALSE FALSE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+   mu sigma alpha  beta 
+FALSE FALSE FALSE FALSE 
+
+
+
+Done.

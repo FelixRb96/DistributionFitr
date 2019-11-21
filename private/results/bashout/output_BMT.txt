@@ -1,0 +1,112 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: BMT	Number of families: 3 
+Current Family: BMT 
+Error occured for family BMT
+Error in seq(initial_min_val, initial_max_val, by = step_sizes[1]) + all_params[[param]]: non-numeric argument to binary operator
+
+
+Current Family: BMT.Phi 
+Current Family: BMT.Psi 
+[[1]]
+[[1]]$package
+[1] "BMT"
+
+[[1]]$family
+[1] "BMT.Phi"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+mean   sd 
+-Inf 0.01 
+
+[[1]]$family_info$upper
+mean   sd 
+ Inf  Inf 
+
+[[1]]$family_info$accepts_float
+mean   sd 
+TRUE TRUE 
+
+[[1]]$family_info$defaults
+mean   sd 
+   0    1 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -28.19
+
+[[1]]$family_info$support_max
+[1] 28.19
+
+[[1]]$family_info$supp_max_depends_on
+ mean    sd 
+FALSE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+ mean    sd 
+FALSE FALSE 
+
+
+
+[[2]]
+[[2]]$package
+[1] "BMT"
+
+[[2]]$family
+[1] "BMT.Psi"
+
+[[2]]$family_info
+[[2]]$family_info$lower
+mean   sd 
+-Inf 0.01 
+
+[[2]]$family_info$upper
+mean   sd 
+ Inf  Inf 
+
+[[2]]$family_info$accepts_float
+mean   sd 
+TRUE TRUE 
+
+[[2]]$family_info$defaults
+mean   sd 
+   0    1 
+
+[[2]]$family_info$log
+[1] TRUE
+
+[[2]]$family_info$discrete
+[1] FALSE
+
+[[2]]$family_info$support_min
+[1] -29.81
+
+[[2]]$family_info$support_max
+[1] 29.81
+
+[[2]]$family_info$supp_max_depends_on
+ mean    sd 
+FALSE FALSE 
+
+[[2]]$family_info$supp_min_depends_on
+ mean    sd 
+FALSE FALSE 
+
+
+
+Done.

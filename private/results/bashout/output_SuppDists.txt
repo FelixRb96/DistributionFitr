@@ -1,0 +1,192 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: SuppDists	Number of families: 10 
+Current Family: Friedman 
+Could not find a set of valid default values for family SuppDistsFriedman
+Errors:
+Current Family: ghyper 
+Current Family: invGauss 
+Could not find a set of valid default values for family SuppDistsinvGauss
+Errors: missing value where TRUE/FALSE needed
+
+Current Family: Johnson 
+Could not find a set of valid default values for family SuppDistsJohnson
+Errors: subscript out of bounds
+
+Current Family: Kendall 
+Could not find a set of valid default values for family SuppDistsKendall
+Errors:
+Current Family: KruskalWallis 
+Could not find a set of valid default values for family SuppDistsKruskalWallis
+Errors:
+Current Family: maxFratio 
+SuppDistsmaxFratio produced timeout for params df: 1,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 1,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 101,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 201,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 301,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 401,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 501,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 601,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 701,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 801,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 901,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 1001,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 1,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 1,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 1,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 1,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 1,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 868.001190495677,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 555.418374928413,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 960.006191638066,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 659.161252814578,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 557.619133793283,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 882.12601739727,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 671.609871485038,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 991.066400875337,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 621.460679323412,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 868,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 555,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 960,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 659,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 557,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 882,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 671,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 991,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 621,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 1,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 1,k: 801 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 1,k: 901 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 1,k: 1001 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 1,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 1,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 1,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 1,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 1,k: 1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 1,k: 930.942034023814 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 1,k: 790.265485780314 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 1,k: 726.372981790919 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 1,k: 717.050259783166 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 1,k: 930 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 1,k: 3 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 1,k: 790 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 1,k: 726 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SuppDistsmaxFratio produced timeout for params df: 1,k: 717 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+Current Family: NormScore 
+Could not find a set of valid default values for family SuppDistsNormScore
+Errors:
+Current Family: Pearson 
+Could not find a set of valid default values for family SuppDistsPearson
+Errors: cannot allocate memory block of size 134217728 Tb
+
+Current Family: Spearman 
+Could not find a set of valid default values for family SuppDistsSpearman
+Errors:
+[[1]]
+[[1]]$package
+[1] "SuppDists"
+
+[[1]]$family
+[1] "ghyper"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+           a            k            N 
+8.326673e-17 8.326673e-17 8.326673e-17 
+
+[[1]]$family_info$upper
+   a    k    N 
+0.99 0.99  Inf 
+
+[[1]]$family_info$accepts_float
+   a    k    N 
+TRUE TRUE TRUE 
+
+[[1]]$family_info$defaults
+  a   k   N 
+0.5 0.5 0.5 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] TRUE
+
+[[1]]$family_info$support_min
+[1] 0
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+    a     k     N 
+FALSE FALSE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+    a     k     N 
+FALSE FALSE FALSE 
+
+
+
+[[2]]
+[[2]]$package
+[1] "SuppDists"
+
+[[2]]$family
+[1] "maxFratio"
+
+[[2]]$family_info
+[[2]]$family_info$lower
+df  k 
+ 1  1 
+
+[[2]]$family_info$upper
+ df   k 
+Inf Inf 
+
+[[2]]$family_info$accepts_float
+  df    k 
+TRUE TRUE 
+
+[[2]]$family_info$defaults
+df  k 
+ 1  1 
+
+[[2]]$family_info$log
+[1] TRUE
+
+[[2]]$family_info$discrete
+[1] TRUE
+
+[[2]]$family_info$support_min
+[1] 1
+
+[[2]]$family_info$support_max
+[1] Inf
+
+[[2]]$family_info$supp_max_depends_on
+   df     k 
+ TRUE FALSE 
+
+[[2]]$family_info$supp_min_depends_on
+   df     k 
+ TRUE FALSE 
+
+
+
+Warning messages:
+1: In max(min_criterium[is.finite(row_support_min)]) :
+  no non-missing arguments to max; returning -Inf
+2: In max(max_criterium[is.finite(row_support_min)]) :
+  no non-missing arguments to max; returning -Inf
+Done.

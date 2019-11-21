@@ -1,0 +1,19 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: ftnonpar	Number of families: 1 
+Current Family: claw 
+Error occured for family claw
+Error in all_params[[param]]: attempt to select less than one element in get1index
+
+
+list()
+Done.

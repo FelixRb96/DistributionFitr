@@ -1,0 +1,22 @@
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+manuel    8102 87.4  0.0 186888    40 ?        R    11:28  13:13 /usr/lib/R/bin/exec/R --slave --no-restore --file=test_getFamilies.R --args CircularDDM
+manuel   10346 94.5  0.0 338464    20 ?        R    11:02  38:44 /usr/lib/R/bin/exec/R --slave --no-restore --file=test_getFamilies.R --args actuar
+manuel   12695  8.0 97.0 20168336 19774228 ?   R    11:33   0:47 /usr/lib/R/bin/exec/R --slave --no-restore --file=test_getFamilies.R --args COMPoissonReg
+manuel   10443 12.7  0.3 272524 71936 ?        R    13:13  28:57 /usr/lib/R/bin/exec/R --slave --no-restore --file=test_getFamilies.R --args LaplacesDemon
+manuel   11839 11.5  0.3 228424 82124 ?        R    14:46  15:21 /usr/lib/R/bin/exec/R --slave --no-restore --file=test_getFamilies.R --args SinIW
+manuel   12575 12.1  0.6 285704 144844 ?       R    15:17  12:28 /usr/lib/R/bin/exec/R --slave --no-restore --file=test_getFamilies.R --args VGAM
+manuel   13611 13.6  0.0 261332    36 ?        R    12:45  34:43 /usr/lib/R/bin/exec/R --slave --no-restore --file=test_getFamilies.R --args ggdmc
+manuel   13970 11.5  0.5 259516 112560 ?       R    14:48  15:07 /usr/lib/R/bin/exec/R --slave --no-restore --file=test_getFamilies.R --args smoothmest
+manuel   15008 12.7  0.3 358544 74780 ?        Rl   13:16  28:26 /usr/lib/R/bin/exec/R --slave --no-restore --file=test_getFamilies.R --args LindleyR
+manuel   16277 18.8  0.3 228360 81628 ?        R    12:04  55:29 /usr/lib/R/bin/exec/R --slave --no-restore --file=test_getFamilies.R --args CosW
+manuel   17282 18.4  0.7 333544 153232 ?       R    12:05  54:17 /usr/lib/R/bin/exec/R --slave --no-restore --file=test_getFamilies.R --args cpd
+manuel   17303 13.3  0.4 235216 91860 ?        R    12:47  33:43 /usr/lib/R/bin/exec/R --slave --no-restore --file=test_getFamilies.R --args gk
+manuel   22120 14.5 12.7 4357336 2717352 ?     R    12:32  38:53 /usr/lib/R/bin/exec/R --slave --no-restore --file=test_getFamilies.R --args FatTailsR
+manuel   25032 13.2  0.0 194120    56 ?        R    12:55  32:17 /usr/lib/R/bin/exec/R --slave --no-restore --file=test_getFamilies.R --args heavy
+manuel   26880 13.1  0.2 206692 61212 ?        R    12:57  31:55 /usr/lib/R/bin/exec/R --slave --no-restore --file=test_getFamilies.R --args HMMpa
+manuel   29245 11.7  0.3 225208 79284 ?        R    15:02  13:44 /usr/lib/R/bin/exec/R --slave --no-restore --file=test_getFamilies.R --args TanB
+manuel   29560 16.4  0.5 264548 112956 ?       R    12:16  46:46 /usr/lib/R/bin/exec/R --slave --no-restore --file=test_getFamilies.R --args DiscreteWeibull
+manuel    5363 11.5  0.3 215992 68460 ?        R    14:39  16:01 /usr/lib/R/bin/exec/R --slave --no-restore --file=test_getFamilies.R --args SecKW
+
+
+NOTE: COMPoissonReg uses up all available RAM and caused the bash script to halt. Needed to be killed before continuing.

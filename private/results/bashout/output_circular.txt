@@ -1,0 +1,210 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: circular	Number of families: 9 
+Current Family: cardioid 
+Current Family: circularuniform 
+Error occured for family circularuniform
+Error in sum(missing_defaults): invalid 'type' (list) of argument
+
+
+Current Family: katojones 
+Error occured for family katojones
+Error in if (check_res[1]) {: argument is not interpretable as logical
+
+
+Current Family: mixedvonmises 
+Current Family: pnorm 
+Could not find a set of valid default values for family circularpnorm
+Errors: the mean direction parameter 'mu' is mandatory and it must have length 1
+
+Current Family: triangular 
+Could not find a set of valid default values for family circulartriangular
+Errors: 'rho' must be between 0 and 4/pi^2
+
+Current Family: vonmises 
+Current Family: wrappedcauchy 
+Error occured for family wrappedcauchy
+Error in seq(initial_min_val, initial_max_val, by = step_sizes[1]) + all_params[[param]]: non-numeric argument to binary operator
+
+
+Current Family: wrappednormal 
+Error occured for family wrappednormal
+Error in if (check_res[1]) {: argument is not interpretable as logical
+
+
+[[1]]
+[[1]]$package
+[1] "circular"
+
+[[1]]$family
+[1] "cardioid"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+ rho 
+-0.5 
+
+[[1]]$family_info$upper
+rho 
+0.5 
+
+[[1]]$family_info$accepts_float
+ rho 
+TRUE 
+
+[[1]]$family_info$defaults
+rho 
+  0 
+
+[[1]]$family_info$log
+[1] FALSE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+  rho 
+FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+  rho 
+FALSE 
+
+
+
+[[2]]
+[[2]]$package
+[1] "circular"
+
+[[2]]$family
+[1] "mixedvonmises"
+
+[[2]]$family_info
+[[2]]$family_info$lower
+   mu1    mu2 kappa1 kappa2   prop 
+  -Inf   -Inf      0      0      0 
+
+[[2]]$family_info$upper
+   mu1    mu2 kappa1 kappa2   prop 
+   Inf    Inf    Inf    Inf      1 
+
+[[2]]$family_info$accepts_float
+   mu1    mu2 kappa1 kappa2   prop 
+  TRUE   TRUE   TRUE   TRUE   TRUE 
+
+[[2]]$family_info$defaults
+   mu1    mu2 kappa1 kappa2   prop 
+   0.5    0.5    0.5    0.5    0.5 
+
+[[2]]$family_info$log
+[1] FALSE
+
+[[2]]$family_info$discrete
+[1] FALSE
+
+[[2]]$family_info$support_min
+[1] -Inf
+
+[[2]]$family_info$support_max
+[1] Inf
+
+[[2]]$family_info$supp_max_depends_on
+   mu1    mu2 kappa1 kappa2   prop 
+ FALSE  FALSE  FALSE  FALSE  FALSE 
+
+[[2]]$family_info$supp_min_depends_on
+   mu1    mu2 kappa1 kappa2   prop 
+ FALSE  FALSE  FALSE  FALSE  FALSE 
+
+
+
+[[3]]
+[[3]]$package
+[1] "circular"
+
+[[3]]$family
+[1] "vonmises"
+
+[[3]]$family_info
+[[3]]$family_info$lower
+   mu kappa 
+ -Inf     0 
+
+[[3]]$family_info$upper
+   mu kappa 
+  Inf   Inf 
+
+[[3]]$family_info$accepts_float
+   mu kappa 
+ TRUE  TRUE 
+
+[[3]]$family_info$defaults
+   mu kappa 
+  0.5   0.5 
+
+[[3]]$family_info$log
+[1] TRUE
+
+[[3]]$family_info$discrete
+[1] FALSE
+
+[[3]]$family_info$support_min
+[1] -Inf
+
+[[3]]$family_info$support_max
+[1] Inf
+
+[[3]]$family_info$supp_max_depends_on
+   mu kappa 
+FALSE FALSE 
+
+[[3]]$family_info$supp_min_depends_on
+   mu kappa 
+FALSE FALSE 
+
+
+
+Warning messages:
+1: In as.circular(x) :
+  an object is coerced to the class 'circular' using default value for the following components:
+  type: 'angles'
+  units: 'radians'
+  template: 'none'
+  modulo: 'asis'
+  zero: 0
+  rotation: 'counter'
+conversion.circularmu1radians0counter
+2: In as.circular(x) :
+  an object is coerced to the class 'circular' using default value for the following components:
+  type: 'angles'
+  units: 'radians'
+  template: 'none'
+  modulo: 'asis'
+  zero: 0
+  rotation: 'counter'
+conversion.circularmu2radians0counter
+3: In as.circular(x) :
+  an object is coerced to the class 'circular' using default value for the following components:
+  type: 'angles'
+  units: 'radians'
+  template: 'none'
+  modulo: 'asis'
+  zero: 0
+  rotation: 'counter'
+conversion.circularmuradians0counter
+Done.

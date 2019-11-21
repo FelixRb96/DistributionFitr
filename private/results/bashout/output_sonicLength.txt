@@ -1,0 +1,20 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: sonicLength	Number of families: 1 
+Current Family: frag 
+maxx depends on another earlier parameter and is thus removed
+Error occured for family frag
+Error in (function (x, loc = 45, lscale = 2.5, rate = 0.02, maxx = qgeom(1 - : all(x <= maxx) is not TRUE
+
+
+list()
+Done.

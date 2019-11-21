@@ -1,0 +1,107 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: cubfits	Number of families: 2 
+Current Family: asl 
+Current Family: asla 
+[[1]]
+[[1]]$package
+[1] "cubfits"
+
+[[1]]$family
+[1] "asl"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+theta    mu sigma 
+ -Inf  -Inf  0.01 
+
+[[1]]$family_info$upper
+theta    mu sigma 
+  Inf   Inf   Inf 
+
+[[1]]$family_info$accepts_float
+theta    mu sigma 
+ TRUE  TRUE  TRUE 
+
+[[1]]$family_info$defaults
+theta    mu sigma 
+    0     0     1 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+theta    mu sigma 
+FALSE FALSE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+theta    mu sigma 
+FALSE FALSE FALSE 
+
+
+
+[[2]]
+[[2]]$package
+[1] "cubfits"
+
+[[2]]$family
+[1] "asla"
+
+[[2]]$family_info
+[[2]]$family_info$lower
+theta kappa sigma 
+ -Inf  0.01  0.01 
+
+[[2]]$family_info$upper
+theta kappa sigma 
+  Inf   Inf   Inf 
+
+[[2]]$family_info$accepts_float
+theta kappa sigma 
+ TRUE  TRUE  TRUE 
+
+[[2]]$family_info$defaults
+theta kappa sigma 
+    0     1     1 
+
+[[2]]$family_info$log
+[1] TRUE
+
+[[2]]$family_info$discrete
+[1] FALSE
+
+[[2]]$family_info$support_min
+[1] -Inf
+
+[[2]]$family_info$support_max
+[1] Inf
+
+[[2]]$family_info$supp_max_depends_on
+theta kappa sigma 
+FALSE FALSE FALSE 
+
+[[2]]$family_info$supp_min_depends_on
+theta kappa sigma 
+FALSE FALSE FALSE 
+
+
+
+Done.

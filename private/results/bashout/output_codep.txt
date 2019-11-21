@@ -1,0 +1,24 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: codep	Number of families: 2 
+Current Family: phi 
+Error occured for family phi
+Error in get(paste0(type, fam), envir = asNamespace(package)): object 'rphi' not found
+
+
+Current Family: tau 
+Error occured for family tau
+Error in get(paste0(type, fam), envir = asNamespace(package)): object 'rtau' not found
+
+
+list()
+Done.

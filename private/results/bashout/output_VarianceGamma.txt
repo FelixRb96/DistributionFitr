@@ -1,0 +1,61 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: VarianceGamma	Number of families: 1 
+Current Family: vg 
+param depends on another earlier parameter and is thus removed
+[[1]]
+[[1]]$package
+[1] "VarianceGamma"
+
+[[1]]$family
+[1] "vg"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+  vgC sigma theta    nu 
+ -Inf  0.01  -Inf  0.12 
+
+[[1]]$family_info$upper
+  vgC sigma theta    nu 
+  Inf   Inf   Inf   Inf 
+
+[[1]]$family_info$accepts_float
+  vgC sigma theta    nu 
+ TRUE  TRUE  TRUE  TRUE 
+
+[[1]]$family_info$defaults
+  vgC sigma theta    nu 
+    0     1     0     1 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+  vgC sigma theta    nu 
+FALSE FALSE FALSE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+  vgC sigma theta    nu 
+FALSE FALSE FALSE FALSE 
+
+
+
+Done.

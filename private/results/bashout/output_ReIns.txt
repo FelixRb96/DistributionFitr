@@ -1,0 +1,371 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: ReIns	Number of families: 13 
+Current Family: burr 
+Current Family: epd 
+Current Family: frechet 
+Current Family: gpd 
+Current Family: pareto 
+Current Family: Splice 
+Could not find a set of valid default values for family ReInsSplice
+Errors: splicefit should be of class SpliceFit.
+
+Current Family: tburr 
+Error occured for family tburr
+Error in (function (x, alpha, rho, eta = 1, endpoint = Inf, log = FALSE) : endpoint should be strictly positive.
+
+
+Current Family: texp 
+Error occured for family texp
+Error in (function (x, rate = 1, endpoint = Inf, log = FALSE) : endpoint should be strictly positive.
+
+
+Current Family: tfrechet 
+Current Family: tgpd 
+Current Family: tlnorm 
+Error occured for family tlnorm
+Error in (function (x, meanlog = 0, sdlog = 1, endpoint = Inf, log = FALSE) : endpoint should be strictly positive.
+
+
+Current Family: tpareto 
+Error occured for family tpareto
+Error in (function (x, shape, scale = 1, endpoint = Inf, log = FALSE) : endpoint should be strictly larger than scale.
+
+
+Current Family: tweibull 
+Error occured for family tweibull
+Error in (function (x, shape, scale = 1, endpoint = Inf, log = FALSE) : endpoint should be strictly positive.
+
+
+[[1]]
+[[1]]$package
+[1] "ReIns"
+
+[[1]]$family
+[1] "burr"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+          eta         alpha           rho 
+ 1.000000e-02  8.326673e-17 -9.005000e+02 
+
+[[1]]$family_info$upper
+  eta alpha   rho 
+  Inf   Inf -0.01 
+
+[[1]]$family_info$accepts_float
+  eta alpha   rho 
+ TRUE  TRUE  TRUE 
+
+[[1]]$family_info$defaults
+  eta alpha   rho 
+  1.0   0.5  -0.5 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] 0.01
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+  eta alpha   rho 
+FALSE FALSE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+  eta alpha   rho 
+FALSE FALSE FALSE 
+
+
+
+[[2]]
+[[2]]$package
+[1] "ReIns"
+
+[[2]]$family
+[1] "epd"
+
+[[2]]$family_info
+[[2]]$family_info$lower
+        gamma         kappa 
+ 8.326673e-17 -1.000000e+00 
+
+[[2]]$family_info$upper
+gamma kappa 
+  Inf   Inf 
+
+[[2]]$family_info$accepts_float
+gamma kappa 
+ TRUE  TRUE 
+
+[[2]]$family_info$defaults
+gamma kappa 
+  0.5   0.5 
+
+[[2]]$family_info$log
+[1] TRUE
+
+[[2]]$family_info$discrete
+[1] FALSE
+
+[[2]]$family_info$support_min
+[1] 1.01
+
+[[2]]$family_info$support_max
+[1] Inf
+
+[[2]]$family_info$supp_max_depends_on
+gamma kappa 
+FALSE FALSE 
+
+[[2]]$family_info$supp_min_depends_on
+gamma kappa 
+FALSE FALSE 
+
+
+
+[[3]]
+[[3]]$package
+[1] "ReIns"
+
+[[3]]$family
+[1] "frechet"
+
+[[3]]$family_info
+[[3]]$family_info$lower
+         loc        scale        shape 
+        -Inf 1.000000e-02 8.326673e-17 
+
+[[3]]$family_info$upper
+  loc scale shape 
+  Inf   Inf   Inf 
+
+[[3]]$family_info$accepts_float
+  loc scale shape 
+ TRUE  TRUE  TRUE 
+
+[[3]]$family_info$defaults
+  loc scale shape 
+  0.0   1.0   0.5 
+
+[[3]]$family_info$log
+[1] TRUE
+
+[[3]]$family_info$discrete
+[1] FALSE
+
+[[3]]$family_info$support_min
+[1] -Inf
+
+[[3]]$family_info$support_max
+[1] Inf
+
+[[3]]$family_info$supp_max_depends_on
+  loc scale shape 
+FALSE FALSE FALSE 
+
+[[3]]$family_info$supp_min_depends_on
+  loc scale shape 
+ TRUE FALSE FALSE 
+
+
+
+[[4]]
+[[4]]$package
+[1] "ReIns"
+
+[[4]]$family
+[1] "gpd"
+
+[[4]]$family_info
+[[4]]$family_info$lower
+          mu        gamma        sigma 
+        -Inf         -Inf 8.326673e-17 
+
+[[4]]$family_info$upper
+   mu gamma sigma 
+  Inf 700.5   Inf 
+
+[[4]]$family_info$accepts_float
+   mu gamma sigma 
+ TRUE  TRUE  TRUE 
+
+[[4]]$family_info$defaults
+   mu gamma sigma 
+  0.0   0.5   0.5 
+
+[[4]]$family_info$log
+[1] TRUE
+
+[[4]]$family_info$discrete
+[1] FALSE
+
+[[4]]$family_info$support_min
+[1] -Inf
+
+[[4]]$family_info$support_max
+[1] Inf
+
+[[4]]$family_info$supp_max_depends_on
+   mu gamma sigma 
+FALSE FALSE FALSE 
+
+[[4]]$family_info$supp_min_depends_on
+   mu gamma sigma 
+ TRUE FALSE FALSE 
+
+
+
+[[5]]
+[[5]]$package
+[1] "ReIns"
+
+[[5]]$family
+[1] "pareto"
+
+[[5]]$family_info
+[[5]]$family_info$lower
+scale shape 
+ 0.01  0.01 
+
+[[5]]$family_info$upper
+scale shape 
+  Inf   Inf 
+
+[[5]]$family_info$accepts_float
+scale shape 
+ TRUE  TRUE 
+
+[[5]]$family_info$defaults
+scale shape 
+  1.0   0.5 
+
+[[5]]$family_info$log
+[1] TRUE
+
+[[5]]$family_info$discrete
+[1] FALSE
+
+[[5]]$family_info$support_min
+[1] 0.01
+
+[[5]]$family_info$support_max
+[1] Inf
+
+[[5]]$family_info$supp_max_depends_on
+scale shape 
+FALSE FALSE 
+
+[[5]]$family_info$supp_min_depends_on
+scale shape 
+ TRUE FALSE 
+
+
+
+[[6]]
+[[6]]$package
+[1] "ReIns"
+
+[[6]]$family
+[1] "tfrechet"
+
+[[6]]$family_info
+[[6]]$family_info$lower
+         loc        scale     endpoint        shape 
+        -Inf 1.000000e-02         -Inf 8.326673e-17 
+
+[[6]]$family_info$upper
+     loc    scale endpoint    shape 
+     Inf      Inf      Inf      Inf 
+
+[[6]]$family_info$accepts_float
+     loc    scale endpoint    shape 
+    TRUE     TRUE     TRUE     TRUE 
+
+[[6]]$family_info$defaults
+     loc    scale endpoint    shape 
+     0.0      1.0      Inf      0.5 
+
+[[6]]$family_info$log
+[1] TRUE
+
+[[6]]$family_info$discrete
+[1] FALSE
+
+[[6]]$family_info$support_min
+[1] -Inf
+
+[[6]]$family_info$support_max
+[1] Inf
+
+[[6]]$family_info$supp_max_depends_on
+     loc    scale endpoint    shape 
+   FALSE    FALSE     TRUE    FALSE 
+
+[[6]]$family_info$supp_min_depends_on
+     loc    scale endpoint    shape 
+    TRUE    FALSE    FALSE    FALSE 
+
+
+
+[[7]]
+[[7]]$package
+[1] "ReIns"
+
+[[7]]$family
+[1] "tgpd"
+
+[[7]]$family_info
+[[7]]$family_info$lower
+          mu     endpoint        gamma        sigma 
+        -Inf         -Inf         -Inf 8.326673e-17 
+
+[[7]]$family_info$upper
+      mu endpoint    gamma    sigma 
+     Inf      Inf   1000.5      Inf 
+
+[[7]]$family_info$accepts_float
+      mu endpoint    gamma    sigma 
+    TRUE     TRUE     TRUE     TRUE 
+
+[[7]]$family_info$defaults
+      mu endpoint    gamma    sigma 
+     0.0      Inf      0.5      0.5 
+
+[[7]]$family_info$log
+[1] TRUE
+
+[[7]]$family_info$discrete
+[1] FALSE
+
+[[7]]$family_info$support_min
+[1] -Inf
+
+[[7]]$family_info$support_max
+[1] Inf
+
+[[7]]$family_info$supp_max_depends_on
+      mu endpoint    gamma    sigma 
+   FALSE     TRUE    FALSE    FALSE 
+
+[[7]]$family_info$supp_min_depends_on
+      mu endpoint    gamma    sigma 
+    TRUE    FALSE    FALSE    FALSE 
+
+
+
+Done.

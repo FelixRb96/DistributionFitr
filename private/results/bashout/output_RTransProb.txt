@@ -1,0 +1,16 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: RTransProb	Number of families: 0 
+list()
+Warning message:
+no DISPLAY variable so Tk is not available 
+Done.

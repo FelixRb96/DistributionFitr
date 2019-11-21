@@ -1,0 +1,17 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: aroma.apd	Number of families: 0 
+list()
+Warning message:
+In .requireBiocPackage("affxparser", neededBy = pkgname) :
+  Package 'affxparser' could not be loaded. Without it aroma.apd will not work. Please install it from Bioconductor, cf. http://www.bioconductor.org/
+Done.

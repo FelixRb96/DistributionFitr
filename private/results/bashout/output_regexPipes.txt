@@ -1,0 +1,23 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: regexPipes	Number of families: 0 
+list()
+Warning messages:
+1: In base::grep(pattern = pattern, x = x, ignore.case = ignore.case,  :
+  argument 'pattern' has length > 1 and only the first element will be used
+2: In base::grep(pattern = pattern, x = x, ignore.case = ignore.case,  :
+  argument 'pattern' has length > 1 and only the first element will be used
+3: In base::grep(pattern = pattern, x = x, ignore.case = ignore.case,  :
+  argument 'pattern' has length > 1 and only the first element will be used
+4: In base::grep(pattern = pattern, x = x, ignore.case = ignore.case,  :
+  argument 'pattern' has length > 1 and only the first element will be used
+Done.

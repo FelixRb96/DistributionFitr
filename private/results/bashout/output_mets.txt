@@ -1,0 +1,1267 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: mets	Number of families: 1 
+Current Family: mvn 
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+
+error: subtraction: incompatible matrix dimensions: 1x21 and 1x1
+Could not find a set of valid default values for family metsmvn
+Errors: subtraction
+list()
+Done.

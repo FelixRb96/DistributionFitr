@@ -1,0 +1,118 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: gnorm	Number of families: 1 
+Current Family: gnorm 
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+Not defined for negative values of alpha and/or beta.
+[[1]]
+[[1]]$package
+[1] "gnorm"
+
+[[1]]$family
+[1] "gnorm"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+   mu alpha  beta 
+ -Inf  0.01  0.01 
+
+[[1]]$family_info$upper
+   mu alpha  beta 
+  Inf   Inf   Inf 
+
+[[1]]$family_info$accepts_float
+   mu alpha  beta 
+ TRUE  TRUE  TRUE 
+
+[[1]]$family_info$defaults
+   mu alpha  beta 
+    0     1     1 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+   mu alpha  beta 
+FALSE FALSE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+   mu alpha  beta 
+FALSE FALSE FALSE 
+
+
+
+Done.

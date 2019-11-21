@@ -1,0 +1,107 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: evir	Number of families: 2 
+Current Family: gev 
+Current Family: gpd 
+[[1]]
+[[1]]$package
+[1] "evir"
+
+[[1]]$family
+[1] "gev"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+   xi    mu sigma 
+ -Inf  -Inf  -Inf 
+
+[[1]]$family_info$upper
+   xi    mu sigma 
+  Inf   Inf   Inf 
+
+[[1]]$family_info$accepts_float
+   xi    mu sigma 
+ TRUE  TRUE  TRUE 
+
+[[1]]$family_info$defaults
+   xi    mu sigma 
+    1     0     1 
+
+[[1]]$family_info$log
+[1] FALSE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+   xi    mu sigma 
+FALSE FALSE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+   xi    mu sigma 
+FALSE FALSE FALSE 
+
+
+
+[[2]]
+[[2]]$package
+[1] "evir"
+
+[[2]]$family
+[1] "gpd"
+
+[[2]]$family_info
+[[2]]$family_info$lower
+  mu beta   xi 
+-Inf -Inf -Inf 
+
+[[2]]$family_info$upper
+   mu  beta    xi 
+  Inf   Inf 900.5 
+
+[[2]]$family_info$accepts_float
+  mu beta   xi 
+TRUE TRUE TRUE 
+
+[[2]]$family_info$defaults
+  mu beta   xi 
+ 0.0  1.0  0.5 
+
+[[2]]$family_info$log
+[1] FALSE
+
+[[2]]$family_info$discrete
+[1] FALSE
+
+[[2]]$family_info$support_min
+[1] -Inf
+
+[[2]]$family_info$support_max
+[1] Inf
+
+[[2]]$family_info$supp_max_depends_on
+   mu  beta    xi 
+FALSE FALSE FALSE 
+
+[[2]]$family_info$supp_min_depends_on
+   mu  beta    xi 
+FALSE FALSE FALSE 
+
+
+
+Done.

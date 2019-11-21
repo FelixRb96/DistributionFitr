@@ -1,0 +1,24 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: SCI	Number of families: 2 
+Current Family: genlog 
+Error occured for family genlog
+Error in get(paste0(type, fam), envir = asNamespace(package)): object 'rgenlog' not found
+
+
+Current Family: pe3 
+Error occured for family pe3
+Error in get(paste0(type, fam), envir = asNamespace(package)): object 'rpe3' not found
+
+
+list()
+Done.

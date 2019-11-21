@@ -1,0 +1,21 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: randomcoloR
+Error occured for package randomcoloR
+Error: package or namespace load failed for ‘randomcoloR’:
+ .onLoad failed in loadNamespace() for 'randomcoloR', details:
+  call: hue_pal(l = 60:100)
+  error: length(l) == 1 is not TRUE
+
+
+list()
+Done.

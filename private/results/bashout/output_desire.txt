@@ -1,0 +1,88 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: desire	Number of families: 3 
+Current Family: desire 
+Could not find a set of valid default values for family desiredesire
+Errors: could not find function "f"
+
+Current Family: harrington1 
+Current Family: harrington2 
+Could not find a set of valid default values for family desireharrington2
+Errors: LSL must be smaller than USL.
+ argument is of length zero
+ unused argument (ns = 1)
+ invalid arguments
+
+[[1]]
+[[1]]$package
+[1] "desire"
+
+[[1]]$family
+[1] "harrington1"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+          y1           d1           y2           d2         mean           sd 
+        -Inf 8.326673e-17         -Inf 8.326673e-17         -Inf 0.000000e+00 
+
+[[1]]$family_info$upper
+  y1   d1   y2   d2 mean   sd 
+ Inf 0.99  Inf 1.00  Inf  Inf 
+
+[[1]]$family_info$accepts_float
+  y1   d1   y2   d2 mean   sd 
+TRUE TRUE TRUE TRUE TRUE TRUE 
+
+[[1]]$family_info$defaults
+  y1   d1   y2   d2 mean   sd 
+ 1.0  0.5  0.5  0.5  0.5  0.5 
+
+[[1]]$family_info$log
+[1] FALSE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+   y1    d1    y2    d2  mean    sd 
+ TRUE FALSE  TRUE FALSE  TRUE  TRUE 
+
+[[1]]$family_info$supp_min_depends_on
+   y1    d1    y2    d2  mean    sd 
+ TRUE FALSE  TRUE FALSE  TRUE  TRUE 
+
+
+
+Warning messages:
+1: In max(min_criterium[is.finite(row_support_min)]) :
+  no non-missing arguments to max; returning -Inf
+2: In max(max_criterium[is.finite(row_support_min)]) :
+  no non-missing arguments to max; returning -Inf
+3: In max(min_criterium[is.finite(row_support_min)]) :
+  no non-missing arguments to max; returning -Inf
+4: In max(max_criterium[is.finite(row_support_min)]) :
+  no non-missing arguments to max; returning -Inf
+5: In max(min_criterium[is.finite(row_support_min)]) :
+  no non-missing arguments to max; returning -Inf
+6: In max(max_criterium[is.finite(row_support_min)]) :
+  no non-missing arguments to max; returning -Inf
+7: In max(min_criterium[is.finite(row_support_min)]) :
+  no non-missing arguments to max; returning -Inf
+8: In max(max_criterium[is.finite(row_support_min)]) :
+  no non-missing arguments to max; returning -Inf
+Done.

@@ -1,0 +1,22 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: dng	Number of families: 2 
+Current Family: splitn 
+Could not find a set of valid default values for family dngsplitn
+Errors: argument "logarithm" is missing, with no default
+
+Current Family: splitt 
+Could not find a set of valid default values for family dngsplitt
+Errors: argument "logarithm" is missing, with no default
+
+list()
+Done.

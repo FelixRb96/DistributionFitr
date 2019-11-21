@@ -1,0 +1,201 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: qrmtools	Number of families: 4 
+Current Family: GEV 
+Current Family: GPD 
+Current Family: GPDtail 
+Current Family: Par 
+[[1]]
+[[1]]$package
+[1] "qrmtools"
+
+[[1]]$family
+[1] "GEV"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+  loc scale shape 
+ -Inf  0.01  -Inf 
+
+[[1]]$family_info$upper
+  loc scale shape 
+  Inf   Inf   Inf 
+
+[[1]]$family_info$accepts_float
+  loc scale shape 
+ TRUE  TRUE  TRUE 
+
+[[1]]$family_info$defaults
+  loc scale shape 
+  0.0   1.0   0.5 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+  loc scale shape 
+FALSE FALSE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+  loc scale shape 
+FALSE FALSE FALSE 
+
+
+
+[[2]]
+[[2]]$package
+[1] "qrmtools"
+
+[[2]]$family
+[1] "GPD"
+
+[[2]]$family_info
+[[2]]$family_info$lower
+       shape        scale 
+        -Inf 8.326673e-17 
+
+[[2]]$family_info$upper
+shape scale 
+790.5   Inf 
+
+[[2]]$family_info$accepts_float
+shape scale 
+ TRUE  TRUE 
+
+[[2]]$family_info$defaults
+shape scale 
+  0.5   0.5 
+
+[[2]]$family_info$log
+[1] TRUE
+
+[[2]]$family_info$discrete
+[1] FALSE
+
+[[2]]$family_info$support_min
+[1] -Inf
+
+[[2]]$family_info$support_max
+[1] Inf
+
+[[2]]$family_info$supp_max_depends_on
+shape scale 
+FALSE FALSE 
+
+[[2]]$family_info$supp_min_depends_on
+shape scale 
+FALSE FALSE 
+
+
+
+[[3]]
+[[3]]$package
+[1] "qrmtools"
+
+[[3]]$family
+[1] "GPDtail"
+
+[[3]]$family_info
+[[3]]$family_info$lower
+   threshold     p.exceed        shape        scale 
+        -Inf 0.000000e+00         -Inf 8.326673e-17 
+
+[[3]]$family_info$upper
+threshold  p.exceed     shape     scale 
+      Inf         1       Inf       Inf 
+
+[[3]]$family_info$accepts_float
+threshold  p.exceed     shape     scale 
+     TRUE      TRUE      TRUE      TRUE 
+
+[[3]]$family_info$defaults
+threshold  p.exceed     shape     scale 
+      0.5       0.5       0.5       0.5 
+
+[[3]]$family_info$log
+[1] TRUE
+
+[[3]]$family_info$discrete
+[1] FALSE
+
+[[3]]$family_info$support_min
+[1] -Inf
+
+[[3]]$family_info$support_max
+[1] Inf
+
+[[3]]$family_info$supp_max_depends_on
+threshold  p.exceed     shape     scale 
+    FALSE     FALSE     FALSE     FALSE 
+
+[[3]]$family_info$supp_min_depends_on
+threshold  p.exceed     shape     scale 
+     TRUE     FALSE     FALSE     FALSE 
+
+
+
+[[4]]
+[[4]]$package
+[1] "qrmtools"
+
+[[4]]$family
+[1] "Par"
+
+[[4]]$family_info
+[[4]]$family_info$lower
+scale shape 
+ 0.01  0.01 
+
+[[4]]$family_info$upper
+scale shape 
+  Inf   Inf 
+
+[[4]]$family_info$accepts_float
+scale shape 
+ TRUE  TRUE 
+
+[[4]]$family_info$defaults
+scale shape 
+  1.0   0.5 
+
+[[4]]$family_info$log
+[1] TRUE
+
+[[4]]$family_info$discrete
+[1] FALSE
+
+[[4]]$family_info$support_min
+[1] -10
+
+[[4]]$family_info$support_max
+[1] Inf
+
+[[4]]$family_info$supp_max_depends_on
+scale shape 
+FALSE FALSE 
+
+[[4]]$family_info$supp_min_depends_on
+scale shape 
+FALSE FALSE 
+
+
+
+Done.

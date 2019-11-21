@@ -1,0 +1,60 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: documair	Number of families: 1 
+Current Family: pert 
+[[1]]
+[[1]]$package
+[1] "documair"
+
+[[1]]$family
+[1] "pert"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+ mode   max shape 
+-1.00  0.00  0.01 
+
+[[1]]$family_info$upper
+ mode   max shape 
+    1   Inf   Inf 
+
+[[1]]$family_info$accepts_float
+ mode   max shape 
+ TRUE  TRUE  TRUE 
+
+[[1]]$family_info$defaults
+ mode   max shape 
+    0     1     4 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -0.99
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+ mode   max shape 
+FALSE  TRUE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+ mode   max shape 
+FALSE FALSE FALSE 
+
+
+
+Done.

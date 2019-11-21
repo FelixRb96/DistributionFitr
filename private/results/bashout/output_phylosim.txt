@@ -1,0 +1,16 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: phylosim	Number of families: 0 
+list()
+Warning message:
+replacing previous import ‘R.oo::throw’ by ‘R.methodsS3::throw’ when loading ‘phylosim’ 
+Done.

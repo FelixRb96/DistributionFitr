@@ -1,0 +1,17 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: rDotNet	Number of families: 0 
+list()
+Warning message:
+In fun(libname, pkgname) :
+  could not find nuget in path; will not be able to use rDotNet unless corrected and rebuilt
+Done.

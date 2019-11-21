@@ -1,0 +1,24 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: FMStable	Number of families: 2 
+Current Family: Estable 
+Error occured for family Estable
+Error in get(paste0(type, fam), envir = asNamespace(package)): object 'rEstable' not found
+
+
+Current Family: FMstable 
+Error occured for family FMstable
+Error in get(paste0(type, fam), envir = asNamespace(package)): object 'rFMstable' not found
+
+
+list()
+Done.

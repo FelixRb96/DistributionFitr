@@ -1,0 +1,136 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: reliaR	Number of families: 20 
+Current Family: burrX 
+Could not find a set of valid default values for family reliaRburrX
+Errors: Invalid arguments
+
+Current Family: chen 
+Could not find a set of valid default values for family reliaRchen
+Errors: Invalid arguments
+
+Current Family: exp.ext 
+Could not find a set of valid default values for family reliaRexp.ext
+Errors: Invalid arguments
+
+Current Family: exp.power 
+Could not find a set of valid default values for family reliaRexp.power
+Errors: Invalid arguments
+
+Current Family: expo.logistic 
+Could not find a set of valid default values for family reliaRexpo.logistic
+Errors: Invalid arguments
+
+Current Family: expo.weibull 
+Could not find a set of valid default values for family reliaRexpo.weibull
+Errors: Invalid arguments
+
+Current Family: flex.weibull 
+Could not find a set of valid default values for family reliaRflex.weibull
+Errors: Invalid arguments
+
+Current Family: gen.exp 
+Could not find a set of valid default values for family reliaRgen.exp
+Errors: Invalid arguments
+
+Current Family: gompertz 
+Could not find a set of valid default values for family reliaRgompertz
+Errors: Invalid arguments
+
+Current Family: gp.weibull 
+Could not find a set of valid default values for family reliaRgp.weibull
+Errors: Invalid arguments
+
+Current Family: gumbel 
+Current Family: inv.genexp 
+Could not find a set of valid default values for family reliaRinv.genexp
+Errors: Invalid arguments
+
+Current Family: lfr 
+Could not find a set of valid default values for family reliaRlfr
+Errors: Invalid arguments
+
+Current Family: log.gamma 
+Could not find a set of valid default values for family reliaRlog.gamma
+Errors: Invalid arguments
+
+Current Family: logis.exp 
+Could not find a set of valid default values for family reliaRlogis.exp
+Errors: Invalid arguments
+
+Current Family: logis.rayleigh 
+Could not find a set of valid default values for family reliaRlogis.rayleigh
+Errors: Invalid arguments
+
+Current Family: loglog 
+Could not find a set of valid default values for family reliaRloglog
+Errors: Invalid arguments
+
+Current Family: moee 
+Could not find a set of valid default values for family reliaRmoee
+Errors: Invalid arguments
+
+Current Family: moew 
+Could not find a set of valid default values for family reliaRmoew
+Errors: Invalid arguments
+
+Current Family: weibull.ext 
+Could not find a set of valid default values for family reliaRweibull.ext
+Errors: Invalid arguments
+
+[[1]]
+[[1]]$package
+[1] "reliaR"
+
+[[1]]$family
+[1] "gumbel"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+          mu        sigma 
+        -Inf 8.326673e-17 
+
+[[1]]$family_info$upper
+    mu  sigma 
+364.54    Inf 
+
+[[1]]$family_info$accepts_float
+   mu sigma 
+ TRUE  TRUE 
+
+[[1]]$family_info$defaults
+   mu sigma 
+  0.5   0.5 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+   mu sigma 
+FALSE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+   mu sigma 
+FALSE FALSE 
+
+
+
+Done.

@@ -1,0 +1,18 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: cdfquantreg	Number of families: 1 
+Current Family: q 
+Could not find a set of valid default values for family cdfquantregq
+Errors: could not find function "qant"
+
+list()
+Done.

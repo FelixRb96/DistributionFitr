@@ -1,0 +1,37 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: compositions	Number of families: 5 
+Current Family: Aitchison 
+Error occured for family Aitchison
+Error in seq(initial_min_val, initial_max_val, by = step_sizes[1]) + all_params[[param]]: non-numeric argument to binary operator
+
+
+Current Family: lnorm.rplus 
+Could not find a set of valid default values for family compositionslnorm.rplus
+Errors: 'b' (21 x 1) must be compatible with 'a' (1 x 1)
+ the leading minor of order 1 is not positive definite
+
+Current Family: norm.acomp 
+Could not find a set of valid default values for family compositionsnorm.acomp
+Errors: argument is of length zero
+
+Current Family: norm.aplus 
+Could not find a set of valid default values for family compositionsnorm.aplus
+Errors: 'b' (21 x 1) must be compatible with 'a' (1 x 1)
+ the leading minor of order 1 is not positive definite
+
+Current Family: norm.rmult 
+Could not find a set of valid default values for family compositionsnorm.rmult
+Errors: non-numeric matrix extent
+
+list()
+Done.

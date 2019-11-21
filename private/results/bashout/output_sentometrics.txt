@@ -1,0 +1,19 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: sentometrics
+Error occured for package sentometrics
+Error: package or namespace load failed for ‘sentometrics’:
+ object ‘predict.elnet’ is not exported by 'namespace:glmnet'
+
+
+list()
+Done.

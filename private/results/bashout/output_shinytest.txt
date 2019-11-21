@@ -1,0 +1,17 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: shinytestshinytest requires a headless web browser (PhantomJS) to record and run tests.
+To install it, run shinytest::installDependencies()
+If it is installed, please make sure the phantomjs executable can be found via the PATH variable.
+	Number of families: 0 
+list()
+Done.

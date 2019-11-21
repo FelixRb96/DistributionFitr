@@ -1,0 +1,29 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: qualityTools	Number of families: 3 
+Current Family: gamma3 
+Error occured for family gamma3
+Error in get(paste0(type, fam), envir = asNamespace(package)): object 'rgamma3' not found
+
+
+Current Family: lnorm3 
+Error occured for family lnorm3
+Error in get(paste0(type, fam), envir = asNamespace(package)): object 'rlnorm3' not found
+
+
+Current Family: weibull3 
+Error occured for family weibull3
+Error in get(paste0(type, fam), envir = asNamespace(package)): object 'rweibull3' not found
+
+
+list()
+Done.

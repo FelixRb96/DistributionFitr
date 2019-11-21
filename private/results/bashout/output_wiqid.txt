@@ -1,0 +1,117 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: wiqid	Number of families: 4 
+Current Family: beta2 
+Could not find a set of valid default values for family wiqidbeta2
+Errors: 'mean' must be between 0 and 1.
+ 'sd' must be greater than 0.
+
+Current Family: beta3 
+Could not find a set of valid default values for family wiqidbeta3
+Errors: 'concentration' must be 2 or more.
+ 'mode' must be between 0 and 1.
+
+Current Family: gamma2 
+Current Family: t2 
+[[1]]
+[[1]]$package
+[1] "wiqid"
+
+[[1]]$family
+[1] "gamma2"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+        mean           sd 
+8.326673e-17 8.326673e-17 
+
+[[1]]$family_info$upper
+mean   sd 
+ Inf  Inf 
+
+[[1]]$family_info$accepts_float
+mean   sd 
+TRUE TRUE 
+
+[[1]]$family_info$defaults
+mean   sd 
+ 0.5  0.5 
+
+[[1]]$family_info$log
+[1] FALSE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] 0
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+ mean    sd 
+FALSE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+ mean    sd 
+FALSE FALSE 
+
+
+
+[[2]]
+[[2]]$package
+[1] "wiqid"
+
+[[2]]$family
+[1] "t2"
+
+[[2]]$family_info
+[[2]]$family_info$lower
+mean   sd   df 
+-Inf -Inf 0.01 
+
+[[2]]$family_info$upper
+mean   sd   df 
+ Inf  Inf  Inf 
+
+[[2]]$family_info$accepts_float
+mean   sd   df 
+TRUE TRUE TRUE 
+
+[[2]]$family_info$defaults
+mean   sd   df 
+ 0.5  0.5  0.5 
+
+[[2]]$family_info$log
+[1] FALSE
+
+[[2]]$family_info$discrete
+[1] FALSE
+
+[[2]]$family_info$support_min
+[1] -Inf
+
+[[2]]$family_info$support_max
+[1] Inf
+
+[[2]]$family_info$supp_max_depends_on
+ mean    sd    df 
+FALSE FALSE FALSE 
+
+[[2]]$family_info$supp_min_depends_on
+ mean    sd    df 
+FALSE FALSE FALSE 
+
+
+
+Done.

@@ -1,0 +1,18 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: gtools	Number of families: 1 
+Current Family: dirichlet 
+Could not find a set of valid default values for family gtoolsdirichlet
+Errors: Mismatch between dimensions of 'x' and 'alpha'.
+
+list()
+Done.

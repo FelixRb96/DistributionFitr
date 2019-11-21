@@ -1,0 +1,132 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: ACDm	Number of families: 7 
+Current Family: burr 
+Current Family: genf 
+Error occured for family genf
+Error in get(paste0(type, fam), envir = asNamespace(package)): object 'rgenf' not found
+
+
+Current Family: gengamma 
+Current Family: mixinvgauss 
+Error occured for family mixinvgauss
+Error in get(paste0(type, fam), envir = asNamespace(package)): object 'rmixinvgauss' not found
+
+
+Current Family: mixqwe 
+Error occured for family mixqwe
+Error in get(paste0(type, fam), envir = asNamespace(package)): object 'rmixqwe' not found
+
+
+Current Family: mixqww 
+Error occured for family mixqww
+Error in get(paste0(type, fam), envir = asNamespace(package)): object 'rmixqww' not found
+
+
+Current Family: qweibull 
+Error occured for family qweibull
+Error in if (accepted_float_rate > 1/(num_tests - num_integer)) accepts_float[param] <- TRUE else if (accepted_int_rate == : missing value where TRUE/FALSE needed
+
+
+[[1]]
+[[1]]$package
+[1] "ACDm"
+
+[[1]]$family
+[1] "burr"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+           theta            kappa             sig2 forceExpectation 
+            -Inf             -Inf             0.01             -Inf 
+
+[[1]]$family_info$upper
+           theta            kappa             sig2 forceExpectation 
+             Inf              Inf             1.19              Inf 
+
+[[1]]$family_info$accepts_float
+           theta            kappa             sig2 forceExpectation 
+            TRUE             TRUE             TRUE             TRUE 
+
+[[1]]$family_info$defaults
+           theta            kappa             sig2 forceExpectation 
+             1.0              1.2              0.3              0.5 
+
+[[1]]$family_info$log
+[1] FALSE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+           theta            kappa             sig2 forceExpectation 
+           FALSE            FALSE            FALSE            FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+           theta            kappa             sig2 forceExpectation 
+           FALSE            FALSE            FALSE            FALSE 
+
+
+
+[[2]]
+[[2]]$package
+[1] "ACDm"
+
+[[2]]$family
+[1] "gengamma"
+
+[[2]]$family_info
+[[2]]$family_info$lower
+           gamma            kappa           lambda forceExpectation 
+            0.01             0.01             -Inf             -Inf 
+
+[[2]]$family_info$upper
+           gamma            kappa           lambda forceExpectation 
+             Inf              Inf              Inf              Inf 
+
+[[2]]$family_info$accepts_float
+           gamma            kappa           lambda forceExpectation 
+            TRUE             TRUE             TRUE             TRUE 
+
+[[2]]$family_info$defaults
+           gamma            kappa           lambda forceExpectation 
+             0.3              3.0              0.3              0.5 
+
+[[2]]$family_info$log
+[1] FALSE
+
+[[2]]$family_info$discrete
+[1] FALSE
+
+[[2]]$family_info$support_min
+[1] 0
+
+[[2]]$family_info$support_max
+[1] Inf
+
+[[2]]$family_info$supp_max_depends_on
+           gamma            kappa           lambda forceExpectation 
+           FALSE            FALSE            FALSE            FALSE 
+
+[[2]]$family_info$supp_min_depends_on
+           gamma            kappa           lambda forceExpectation 
+           FALSE            FALSE            FALSE            FALSE 
+
+
+
+Done.

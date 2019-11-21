@@ -1,0 +1,92 @@
+list(list(package = "sadists", family = "dnbeta", family_info = list(
+    lower = c(df1 = 8.32667268468867e-17, df2 = 0, ncp1 = 0, 
+    ncp2 = 0), upper = c(df1 = Inf, df2 = Inf, ncp1 = Inf, ncp2 = Inf
+    ), accepts_float = c(df1 = TRUE, df2 = TRUE, ncp1 = TRUE, 
+    ncp2 = TRUE), defaults = c(df1 = 0.5, df2 = 0.5, ncp1 = 0.5, 
+    ncp2 = 0.5), log = TRUE, discrete = FALSE, support_min = 0, 
+    support_max = Inf, supp_max_depends_on = c(df1 = TRUE, df2 = FALSE, 
+    ncp1 = TRUE, ncp2 = TRUE), supp_min_depends_on = c(df1 = TRUE, 
+    df2 = FALSE, ncp1 = TRUE, ncp2 = TRUE))), list(package = "sadists", 
+    family = "dneta", family_info = list(lower = c(df = 0.0100000000000001, 
+    ncp1 = -1.64, ncp2 = 0), upper = c(df = Inf, ncp1 = 1.64, 
+    ncp2 = 0.19), accepts_float = c(df = TRUE, ncp1 = TRUE, ncp2 = TRUE
+    ), defaults = c(df = 0.5, ncp1 = 0.5, ncp2 = 0), log = TRUE, 
+        discrete = FALSE, support_min = -0.989999999999995, support_max = 0.990000000000009, 
+        supp_max_depends_on = c(df = FALSE, ncp1 = FALSE, ncp2 = FALSE
+        ), supp_min_depends_on = c(df = FALSE, ncp1 = FALSE, 
+        ncp2 = FALSE))), list(package = "sadists", family = "dnf", 
+    family_info = list(lower = c(df1 = 8.32667268468867e-17, 
+    df2 = 0.0100000000000001, ncp1 = 0, ncp2 = 0), upper = c(df1 = Inf, 
+    df2 = Inf, ncp1 = Inf, ncp2 = Inf), accepts_float = c(df1 = TRUE, 
+    df2 = TRUE, ncp1 = TRUE, ncp2 = TRUE), defaults = c(df1 = 0.5, 
+    df2 = 0.5, ncp1 = 0.5, ncp2 = 0.5), log = TRUE, discrete = FALSE, 
+        support_min = 0, support_max = Inf, supp_max_depends_on = c(df1 = TRUE, 
+        df2 = FALSE, ncp1 = TRUE, ncp2 = TRUE), supp_min_depends_on = c(df1 = TRUE, 
+        df2 = FALSE, ncp1 = TRUE, ncp2 = TRUE))), list(package = "sadists", 
+    family = "dnt", family_info = list(lower = c(df = 0.0100000000000001, 
+    ncp1 = -1.64, ncp2 = 0), upper = c(df = Inf, ncp1 = 1.64, 
+    ncp2 = 0.19), accepts_float = c(df = TRUE, ncp1 = TRUE, ncp2 = TRUE
+    ), defaults = c(df = 0.5, ncp1 = 0.5, ncp2 = 0), log = TRUE, 
+        discrete = FALSE, support_min = -Inf, support_max = Inf, 
+        supp_max_depends_on = c(df = FALSE, ncp1 = FALSE, ncp2 = FALSE
+        ), supp_min_depends_on = c(df = FALSE, ncp1 = FALSE, 
+        ncp2 = FALSE))), list(package = "sadists", family = "kprime", 
+    family_info = list(lower = c(b = 0, v1 = 8.32667268468867e-17, 
+    v2 = 0.0100000000000001, a = -Inf), upper = c(b = Inf, v1 = Inf, 
+    v2 = Inf, a = Inf), accepts_float = c(b = TRUE, v1 = TRUE, 
+    v2 = TRUE, a = TRUE), defaults = c(b = 1, v1 = 0.5, v2 = 0.5, 
+    a = 0.5), log = TRUE, discrete = FALSE, support_min = -Inf, 
+        support_max = Inf, supp_max_depends_on = c(b = FALSE, 
+        v1 = FALSE, v2 = FALSE, a = FALSE), supp_min_depends_on = c(b = FALSE, 
+        v1 = FALSE, v2 = FALSE, a = FALSE))), list(package = "sadists", 
+    family = "lambdap", family_info = list(lower = c(df = 8.32667268468867e-17, 
+    t = -Inf), upper = c(df = Inf, t = Inf), accepts_float = c(df = TRUE, 
+    t = TRUE), defaults = c(df = 0.5, t = 0.5), log = TRUE, discrete = FALSE, 
+        support_min = -Inf, support_max = Inf, supp_max_depends_on = c(df = FALSE, 
+        t = FALSE), supp_min_depends_on = c(df = FALSE, t = FALSE
+        ))), list(package = "sadists", family = "prodchisqpow", 
+    family_info = list(lower = c(ncp = 0, pow = -799, df = 8.32667268468867e-17
+    ), upper = c(ncp = 779.4, pow = Inf, df = Inf), accepts_float = c(ncp = TRUE, 
+    pow = TRUE, df = TRUE), defaults = c(ncp = 0, pow = 1, df = 0.5
+    ), log = TRUE, discrete = FALSE, support_min = 0.0100000000000051, 
+        support_max = Inf, supp_max_depends_on = c(ncp = FALSE, 
+        pow = FALSE, df = FALSE), supp_min_depends_on = c(ncp = FALSE, 
+        pow = FALSE, df = FALSE))), list(package = "sadists", 
+    family = "proddnf", family_info = list(lower = c(df1 = 8.32667268468867e-17, 
+    df2 = 0.0100000000000001, ncp1 = 0, ncp2 = 0), upper = c(df1 = Inf, 
+    df2 = Inf, ncp1 = Inf, ncp2 = Inf), accepts_float = c(df1 = TRUE, 
+    df2 = TRUE, ncp1 = TRUE, ncp2 = TRUE), defaults = c(df1 = 0.5, 
+    df2 = 0.5, ncp1 = 0.5, ncp2 = 0.5), log = TRUE, discrete = FALSE, 
+        support_min = 0.0100000000000051, support_max = Inf, 
+        supp_max_depends_on = c(df1 = FALSE, df2 = FALSE, ncp1 = FALSE, 
+        ncp2 = FALSE), supp_min_depends_on = c(df1 = FALSE, df2 = FALSE, 
+        ncp1 = FALSE, ncp2 = FALSE))), list(package = "sadists", 
+    family = "prodnormal", family_info = list(lower = c(mu = -Inf, 
+    sigma = 0.0100000000000001), upper = c(mu = Inf, sigma = Inf
+    ), accepts_float = c(mu = TRUE, sigma = TRUE), defaults = c(mu = 0.5, 
+    sigma = 0.5), log = TRUE, discrete = FALSE, support_min = -Inf, 
+        support_max = Inf, supp_max_depends_on = c(mu = FALSE, 
+        sigma = FALSE), supp_min_depends_on = c(mu = FALSE, sigma = FALSE
+        ))), list(package = "sadists", family = "sumchisqpow", 
+    family_info = list(lower = c(ncp = 0, pow = -729, wts = -Inf, 
+    df = 0), upper = c(ncp = Inf, pow = Inf, wts = Inf, df = Inf
+    ), accepts_float = c(ncp = TRUE, pow = TRUE, wts = TRUE, 
+    df = TRUE), defaults = c(ncp = 0, pow = 1, wts = 0.5, df = 0.5
+    ), log = TRUE, discrete = FALSE, support_min = -Inf, support_max = Inf, 
+        supp_max_depends_on = c(ncp = FALSE, pow = FALSE, wts = FALSE, 
+        df = FALSE), supp_min_depends_on = c(ncp = FALSE, pow = FALSE, 
+        wts = FALSE, df = FALSE))), list(package = "sadists", 
+    family = "sumlogchisq", family_info = list(lower = c(ncp = 0, 
+    wts = -Inf, df = 0.0100000000000001), upper = c(ncp = 636.82, 
+    wts = Inf, df = Inf), accepts_float = c(ncp = TRUE, wts = TRUE, 
+    df = TRUE), defaults = c(ncp = 0, wts = 0.5, df = 0.5), log = TRUE, 
+        discrete = FALSE, support_min = -Inf, support_max = Inf, 
+        supp_max_depends_on = c(ncp = FALSE, wts = FALSE, df = FALSE
+        ), supp_min_depends_on = c(ncp = FALSE, wts = FALSE, 
+        df = FALSE))), list(package = "sadists", family = "upsilon", 
+    family_info = list(lower = c(df = 8.32667268468867e-17, t = -Inf
+    ), upper = c(df = Inf, t = Inf), accepts_float = c(df = TRUE, 
+    t = TRUE), defaults = c(df = 0.5, t = 0.5), log = TRUE, discrete = FALSE, 
+        support_min = -Inf, support_max = Inf, supp_max_depends_on = c(df = FALSE, 
+        t = FALSE), supp_min_depends_on = c(df = FALSE, t = FALSE
+        ))))

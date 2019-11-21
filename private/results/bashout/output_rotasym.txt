@@ -1,0 +1,44 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: rotasym	Number of families: 6 
+Current Family: _ACG 
+Could not find a set of valid default values for family rotasym_ACG
+Errors: x and Lambda do not have the same dimension.
+ the leading minor of order 1 is not positive definite
+
+Current Family: _tang_norm 
+Could not find a set of valid default values for family rotasym_tang_norm
+Errors: p must be an integer larger or equal to 2.
+ No remaining data in theta after excluding zeros.
+
+Current Family: _TE 
+Could not find a set of valid default values for family rotasym_TE
+Errors: theta and Lambda do not have sizes p and (p - 1) x (p - 1), respectively.
+
+Current Family: _TM 
+Could not find a set of valid default values for family rotasym_TM
+Errors: theta and mu do not have lengths p and p - 1, respectively.
+
+Current Family: _unif_sphere 
+Could not find a set of valid default values for family rotasym_unif_sphere
+Errors: argument is of length zero
+ unused argument (p = 1)
+ invalid arguments
+
+Current Family: _vMF 
+Could not find a set of valid default values for family rotasym_vMF
+Errors: x and mu do not have the same dimension.
+ No remaining data in mu after excluding zeros.
+ kappa must be positive.
+
+list()
+Done.

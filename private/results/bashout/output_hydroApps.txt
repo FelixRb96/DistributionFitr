@@ -1,0 +1,19 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: hydroApps	Number of families: 1 
+Current Family: BurrXII 
+Error occured for family BurrXII
+Error in get(paste0(type, fam), envir = asNamespace(package)): object 'rBurrXII' not found
+
+
+list()
+Done.

@@ -1,0 +1,19 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: e1071	Number of families: 1 
+Current Family: discrete 
+Could not find a set of valid default values for family e1071discrete
+Errors:length(probs))  too few positive probabilities
+ negative probability
+
+list()
+Done.

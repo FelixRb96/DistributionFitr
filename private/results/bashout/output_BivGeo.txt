@@ -1,0 +1,22 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: BivGeo	Number of families: 2 
+Current Family: bivgeo1 
+Could not find a set of valid default values for family BivGeobivgeo1
+Errors: missing value where TRUE/FALSE needed
+
+Current Family: bivgeo2 
+Could not find a set of valid default values for family BivGeobivgeo2
+Errors: missing value where TRUE/FALSE needed
+
+list()
+Done.

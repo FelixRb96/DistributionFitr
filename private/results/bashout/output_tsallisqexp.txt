@@ -1,0 +1,31 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: tsallisqexp	Number of families: 2 
+Current Family: tsal 
+q depends on another earlier parameter and is thus removed
+Error occured for family tsal
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: tsal.tail 
+q depends on another earlier parameter and is thus removed
+Error occured for family tsal.tail
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+list()
+Warning messages:
+1: In min(vals[check_res]) :
+  no non-missing arguments to min; returning Inf
+2: In min(vals[check_res]) :
+  no non-missing arguments to min; returning Inf
+Done.

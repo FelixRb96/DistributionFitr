@@ -1,0 +1,19 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: sdcMicro
+Error occured for package sdcMicro
+Error: package or namespace load failed for ‘sdcMicro’:
+ object ‘knit_print.html’ is not exported by 'namespace:shiny'
+
+
+list()
+Done.

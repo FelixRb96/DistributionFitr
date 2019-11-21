@@ -1,0 +1,24 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: mnormt	Number of families: 2 
+Current Family: mnorm 
+Could not find a set of valid default values for family mnormtmnorm
+Errors: unused argument (sqrt = NULL)
+ the leading minor of order 1 is not positive definite
+
+Current Family: mt 
+Could not find a set of valid default values for family mnormtmt
+Errors: unused argument (sqrt = NULL)
+ the leading minor of order 1 is not positive definite
+
+list()
+Done.

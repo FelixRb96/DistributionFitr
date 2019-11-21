@@ -1,0 +1,29 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: TauStar	Number of families: 3 
+Current Family: DisHoeffInd 
+Could not find a set of valid default values for family TauStarDisHoeffInd
+Errors: either probs1 or probs2 in rDisHoeffInd is not a probability vector.
+ since length(probs1) == 1 or length(probs2) == 1 resulting distribution is degenerate and thus has no density.
+
+Current Family: HoeffInd 
+Error occured for family HoeffInd
+Error in all_params[[param]]: attempt to select less than one element in get1index
+
+
+Current Family: MixHoeffInd 
+Could not find a set of valid default values for family TauStarMixHoeffInd
+Errors: probs in rMixHoeffInd is not a probability vector.
+ probs represents a degenerate discrete random variable and thus the density of the asymptotic distribution doesn't exist
+
+list()
+Done.

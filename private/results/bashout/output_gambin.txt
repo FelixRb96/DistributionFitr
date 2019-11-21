@@ -1,0 +1,60 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: gambin	Number of families: 1 
+Current Family: gambin 
+[[1]]
+[[1]]$package
+[1] "gambin"
+
+[[1]]$family
+[1] "gambin"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+        w     alpha maxoctave 
+     0.00      0.01      0.00 
+
+[[1]]$family_info$upper
+        w     alpha maxoctave 
+      Inf       Inf       Inf 
+
+[[1]]$family_info$accepts_float
+        w     alpha maxoctave 
+     TRUE      TRUE      TRUE 
+
+[[1]]$family_info$defaults
+        w     alpha maxoctave 
+      1.0       0.5       0.5 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] TRUE
+
+[[1]]$family_info$support_min
+[1] 0
+
+[[1]]$family_info$support_max
+[1] 10
+
+[[1]]$family_info$supp_max_depends_on
+        w     alpha maxoctave 
+    FALSE     FALSE     FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+        w     alpha maxoctave 
+    FALSE     FALSE     FALSE 
+
+
+
+Done.

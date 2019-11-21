@@ -1,0 +1,18 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: kerasR
+numpy  not available
+See reticulate::use_python() to set python path, 
+then use kerasR::keras_init() to retry
+	Number of families: 0 
+list()
+Done.

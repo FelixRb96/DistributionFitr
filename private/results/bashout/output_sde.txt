@@ -1,0 +1,34 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: sde	Number of families: 5 
+Current Family: cBS 
+Could not find a set of valid default values for family sdecBS
+Errors: missing value where TRUE/FALSE needed
+
+Current Family: cCIR 
+Could not find a set of valid default values for family sdecCIR
+Errors: missing value where TRUE/FALSE needed
+
+Current Family: cOU 
+Could not find a set of valid default values for family sdecOU
+Errors: missing value where TRUE/FALSE needed
+
+Current Family: sCIR 
+Could not find a set of valid default values for family sdesCIR
+Errors: missing value where TRUE/FALSE needed
+
+Current Family: sOU 
+Could not find a set of valid default values for family sdesOU
+Errors: missing value where TRUE/FALSE needed
+
+list()
+Done.

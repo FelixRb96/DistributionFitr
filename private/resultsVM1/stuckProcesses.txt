@@ -1,9 +1,0 @@
-manuel    2891 23.8  0.3 344600 66936 pts/0    R    Nov19  52:37 /usr/lib/R/bin/exec/R --slave --no-restore --file=test_getFamilies.R --args actuar
-manuel    3587 22.7  0.6 259492 133756 pts/0   R    Nov19  35:05 /usr/lib/R/bin/exec/R --slave --no-restore --file=test_getFamilies.R --args smoothmest
-manuel    8199 23.0  0.5 340992 120108 pts/0   R    Nov19  50:13 /usr/lib/R/bin/exec/R --slave --no-restore --file=test_getFamilies.R --args actuar
-manuel   12044 21.3  0.8 306508 178912 pts/0   R    Nov19  41:58 /usr/lib/R/bin/exec/R --slave --no-restore --file=test_getFamilies.R --args gamlss.dist
-manuel   15412 23.2  0.8 306308 178524 pts/0   R    Nov19  33:55 /usr/lib/R/bin/exec/R --slave --no-restore --file=test_getFamilies.R --args VGAM
-manuel   18146 21.4  0.4 218672 95160 pts/0    R    Nov19  41:29 /usr/lib/R/bin/exec/R --slave --no-restore --file=test_getFamilies.R --args gk
-manuel   21558  0.0  0.0  21532  1100 pts/6    S+   00:04   0:00 grep --color=auto getFamilies.R
-manuel   27638 21.1  0.5 258916 122792 pts/0   R    Nov19  43:07 /usr/lib/R/bin/exec/R --slave --no-restore --file=test_getFamilies.R --args DiscreteWeibull
-manuel   30072 22.4  0.5 253364 128780 pts/0   R    Nov19  41:27 /usr/lib/R/bin/exec/R --slave --no-restore --file=test_getFamilies.R --args LaplacesDemon

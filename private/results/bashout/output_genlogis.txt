@@ -1,0 +1,107 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: genlogis	Number of families: 2 
+Current Family: genlog 
+Current Family: genlog_sk 
+[[1]]
+[[1]]$package
+[1] "genlogis"
+
+[[1]]$family
+[1] "genlog"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+     b      p     mu 
+  0.00   0.01 -12.37 
+
+[[1]]$family_info$upper
+   b    p   mu 
+ Inf  Inf 9.86 
+
+[[1]]$family_info$accepts_float
+   b    p   mu 
+TRUE TRUE TRUE 
+
+[[1]]$family_info$defaults
+  b   p  mu 
+0.5 2.0 0.0 
+
+[[1]]$family_info$log
+[1] FALSE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -25.49
+
+[[1]]$family_info$support_max
+[1] 37.21
+
+[[1]]$family_info$supp_max_depends_on
+    b     p    mu 
+FALSE FALSE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+    b     p    mu 
+FALSE FALSE FALSE 
+
+
+
+[[2]]
+[[2]]$package
+[1] "genlogis"
+
+[[2]]$family
+[1] "genlog_sk"
+
+[[2]]$family_info
+[[2]]$family_info$lower
+     b      p     mu   skew 
+  0.00   0.01 -12.37  -1.00 
+
+[[2]]$family_info$upper
+   b    p   mu skew 
+ Inf  Inf 9.86 1.00 
+
+[[2]]$family_info$accepts_float
+   b    p   mu skew 
+TRUE TRUE TRUE TRUE 
+
+[[2]]$family_info$defaults
+   b    p   mu skew 
+ 0.5  2.0  0.0  0.5 
+
+[[2]]$family_info$log
+[1] FALSE
+
+[[2]]$family_info$discrete
+[1] FALSE
+
+[[2]]$family_info$support_min
+[1] -25.49
+
+[[2]]$family_info$support_max
+[1] 37.21
+
+[[2]]$family_info$supp_max_depends_on
+    b     p    mu  skew 
+FALSE FALSE FALSE FALSE 
+
+[[2]]$family_info$supp_min_depends_on
+    b     p    mu  skew 
+FALSE FALSE FALSE FALSE 
+
+
+
+Done.

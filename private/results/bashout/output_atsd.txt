@@ -1,0 +1,14 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: atsdSet connection parameters from the configuration file /home/manuel/R/x86_64-pc-linux-gnu-library/3.6/atsd/connection.config	Number of families: 0 
+list()
+Done.

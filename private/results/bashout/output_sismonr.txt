@@ -1,0 +1,18 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: sismonr	Number of families: 0 
+list()
+Warning message:
+In fun(libname, pkgname) :
+  Julia is not installed on the computer or not accessible by R. Check that Julia is correcly installed and/or in the PATH variable.
+
+Done.

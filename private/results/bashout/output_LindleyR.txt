@@ -1,0 +1,36 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: LindleyR	Number of families: 21 
+Current Family: dlindley 
+Could not find a set of valid default values for family LindleyRdlindley
+Errors: x >= 0 are not all TRUE
+ theta > 0 is not TRUE
+
+Current Family: dplindley 
+Could not find a set of valid default values for family LindleyRdplindley
+Errors: x >= 0 are not all TRUE
+ theta > 0 is not TRUE
+ alpha > 0 is not TRUE
+
+Current Family: dwlindley 
+Could not find a set of valid default values for family LindleyRdwlindley
+Errors: x >= 0 are not all TRUE
+ theta > 0 is not TRUE
+ alpha > 0 is not TRUE
+
+Current Family: explindley 
+Current Family: expplindley 
+Current Family: extilindley 
+Could not find a set of valid default values for family LindleyRextilindley
+Errors: unused argument (mixture = TRUE)
+
+Current Family: extlindley 

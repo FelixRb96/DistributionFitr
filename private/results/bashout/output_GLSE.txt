@@ -1,0 +1,16 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: GLSE	Number of families: 0 
+list()
+Warning message:
+replacing previous import ‘gRbase::topo_sort’ by ‘igraph::topo_sort’ when loading ‘GLSE’ 
+Done.

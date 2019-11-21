@@ -1,0 +1,71 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: harmonicmeanp	Number of families: 3 
+Current Family: harmonicmeanp 
+Current Family: Landau 
+Error occured for family Landau
+Error in seq(initial_min_val, initial_max_val, by = step_sizes[1]) + all_params[[param]]: non-numeric argument to binary operator
+
+
+Current Family: mamml 
+Could not find a set of valid default values for family harmonicmeanpmamml
+Errors: f() values at end points not of opposite sign
+ NA/NaN/Inf in foreign function call (arg 4)
+ NA/NaN/Inf in foreign function call (arg 5)
+
+[[1]]
+[[1]]$package
+[1] "harmonicmeanp"
+
+[[1]]$family
+[1] "harmonicmeanp"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+           L 
+8.326673e-17 
+
+[[1]]$family_info$upper
+  L 
+Inf 
+
+[[1]]$family_info$accepts_float
+   L 
+TRUE 
+
+[[1]]$family_info$defaults
+  L 
+0.5 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] 0.01
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+    L 
+FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+    L 
+FALSE 
+
+
+
+Done.

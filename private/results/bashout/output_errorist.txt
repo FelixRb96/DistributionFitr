@@ -1,0 +1,15 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: erroristWarnings and errors will automatically trigger a web search.
+	Number of families: 0 
+list()
+Done.

@@ -1,0 +1,60 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: ihs	Number of families: 1 
+Current Family: ihs 
+[[1]]
+[[1]]$package
+[1] "ihs"
+
+[[1]]$family
+[1] "ihs"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+     mu  lambda       k   sigma 
+   -Inf -709.69    -Inf    -Inf 
+
+[[1]]$family_info$upper
+    mu lambda      k  sigma 
+   Inf 709.69    Inf    Inf 
+
+[[1]]$family_info$accepts_float
+    mu lambda      k  sigma 
+  TRUE   TRUE   TRUE   TRUE 
+
+[[1]]$family_info$defaults
+    mu lambda      k  sigma 
+   0.0    0.0    1.0    0.5 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+    mu lambda      k  sigma 
+ FALSE  FALSE  FALSE  FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+    mu lambda      k  sigma 
+ FALSE  FALSE  FALSE  FALSE 
+
+
+
+Done.

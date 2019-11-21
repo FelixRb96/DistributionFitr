@@ -1,0 +1,30 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: HyperbolicDist	Number of families: 4 
+Current Family: ghyp 
+Could not find a set of valid default values for family HyperbolicDistghyp
+Errors: parameter vector must contain 5 values
+
+Current Family: gig 
+Could not find a set of valid default values for family HyperbolicDistgig
+Errors: missing value where TRUE/FALSE needed
+
+Current Family: hyperb 
+Could not find a set of valid default values for family HyperbolicDisthyperb
+Errors: missing value where TRUE/FALSE needed
+
+Current Family: skewlap 
+Could not find a set of valid default values for family HyperbolicDistskewlap
+Errors: parameter vector must contain 3 values
+
+list()
+Done.

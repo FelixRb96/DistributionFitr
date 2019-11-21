@@ -1,0 +1,18 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: stackoverflow	Number of families: 1 
+Current Family: density 
+Could not find a set of valid default values for family stackoverflowdensity
+Errors: $ operator is invalid for atomic vectors
+
+list()
+Done.

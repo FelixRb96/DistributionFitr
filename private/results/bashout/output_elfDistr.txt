@@ -1,0 +1,288 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: elfDistr	Number of families: 1 
+Current Family: kwcwg 
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.1,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.2,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.3,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.4,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 8.32667268468867e-17,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.0100000000000001,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.0200000000000001,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.0300000000000001,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.0400000000000001,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.0500000000000001,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.0600000000000001,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.0700000000000001,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.0800000000000001,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.0900000000000001,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.1,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.6,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.7,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.8,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.9,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 1,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 1,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.191850755829364,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.26961301616393,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.815456906566396,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.664339693961665,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.397140882909298,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.488436623709276,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.193679584888741,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.021619116421789,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.403343460056931,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.605376722989604,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 100.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 200.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 300.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 400.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 500.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 600.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 700.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 800.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 900.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 1000.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.1,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.2,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.3,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.4,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.0100000000000001,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.0200000000000001,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.0300000000000001,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.0400000000000001,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.0500000000000001,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.0600000000000001,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.0700000000000001,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.0800000000000001,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.0900000000000001,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.1,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 100.642006964877,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 173.039555557962,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 156.277644206218,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 154.767789600892,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 268.166551441327,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 892.078866535737,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 276.332215314149,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 821.088636122041,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 547.3934485339,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 784.828955917244,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 100,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 173,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 156,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 154,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 268,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 892,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 276,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 821,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 547,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 784,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 100.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 200.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 300.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 400.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 500.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 600.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 700.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 800.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 900.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 1000.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.1,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.2,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.3,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.4,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 8.32667268468867e-17,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.0100000000000001,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.0200000000000001,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.0300000000000001,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.0400000000000001,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.0500000000000001,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.0600000000000001,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.0700000000000001,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.0800000000000001,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.0900000000000001,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.1,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 782.740334281698,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 398.551858728752,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 589.491314487532,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 860.604657791555,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 889.209012733772,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 291.810168884695,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 362.470971653238,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 683.020823867992,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 180.637812241912,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 663.88477711007,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 782,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 398,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 589,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 860,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 889,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 291,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 362,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 683,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 180,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 663,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 100.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 200.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 300.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 400.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 500.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 600.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 700.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 800.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 900.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 1000.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.1,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.2,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.3,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.4,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 139.819692121819,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 774.789622984827,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 899.828864261508,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 553.113479632884,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 274.41594353877,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 386.573839234188,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 993.911752244458,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 83.6598502937704,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 288.478101138026,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 703.706125961617,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 139,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 774,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 899,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 553,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 274,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 386,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 993,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 83,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 288,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 703,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 100.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 200.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 300.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 400.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 500.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 600.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 700.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 800.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 900.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 1000.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.2 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.3 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.4 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.5 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.0100000000000001 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.0300000000000001 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.0400000000000001 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.0600000000000001 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.0700000000000001 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.0800000000000001 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.0900000000000001 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 0.1 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 574.541520673148 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 860.265769204015 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 548.231983902534 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 12.3837322974321 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 382.933890226446 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 212.995509366391 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 578.155468978414 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 856.881218721699 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 238.290821548379 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 219.312708033058 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 574 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 860 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 548 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 12 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 382 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 212 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 578 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 856 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 238 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+elfDistrkwcwg produced timeout for params alpha: 0.5,beta: 0.5,gamma: 0.5,a: 0.5,b: 219 on c(-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+[[1]]
+[[1]]$package
+[1] "elfDistr"
+
+[[1]]$family
+[1] "kwcwg"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+       alpha         beta        gamma            a            b 
+8.326673e-17 1.000000e-02 8.326673e-17 0.000000e+00 1.000000e-02 
+
+[[1]]$family_info$upper
+alpha  beta gamma     a     b 
+    1   Inf   Inf   Inf   Inf 
+
+[[1]]$family_info$accepts_float
+alpha  beta gamma     a     b 
+ TRUE  TRUE  TRUE  TRUE  TRUE 
+
+[[1]]$family_info$defaults
+alpha  beta gamma     a     b 
+  0.5   0.5   0.5   0.5   0.5 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] 0
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+alpha  beta gamma     a     b 
+FALSE FALSE FALSE FALSE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+alpha  beta gamma     a     b 
+FALSE FALSE FALSE FALSE FALSE 
+
+
+
+Done.

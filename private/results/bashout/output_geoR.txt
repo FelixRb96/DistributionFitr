@@ -1,0 +1,27 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: geoR	Number of families: 2 
+Current Family: boxcox 
+Error occured for family boxcox
+Error in if (check_res[1]) {: argument is not interpretable as logical
+
+
+Current Family: invchisq 
+scale depends on another earlier parameter and is thus removed
+Could not find a set of valid default values for family geoRinvchisq
+Errors: missing value where TRUE/FALSE needed
+ df must be greater than zero
+
+list()
+Warning message:
+no DISPLAY variable so Tk is not available 
+Done.

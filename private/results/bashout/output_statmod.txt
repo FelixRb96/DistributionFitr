@@ -1,0 +1,19 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: statmod	Number of families: 1 
+Current Family: invgauss 
+Error occured for family invgauss
+Error in if (check_res[1]) {: argument is not interpretable as logical
+
+
+list()
+Done.

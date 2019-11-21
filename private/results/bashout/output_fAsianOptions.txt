@@ -1,0 +1,34 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: fAsianOptions	Number of families: 4 
+Current Family: gam 
+Error occured for family gam
+Error in get(paste0(type, fam), envir = asNamespace(package)): object 'rgam' not found
+
+
+Current Family: johnson 
+Error occured for family johnson
+Error in get(paste0(type, fam), envir = asNamespace(package)): object 'rjohnson' not found
+
+
+Current Family: lognorm 
+Error occured for family lognorm
+Error in get(paste0(type, fam), envir = asNamespace(package)): object 'rlognorm' not found
+
+
+Current Family: rgam 
+Error occured for family rgam
+Error in get(paste0(type, fam), envir = asNamespace(package)): object 'rrgam' not found
+
+
+list()
+Done.

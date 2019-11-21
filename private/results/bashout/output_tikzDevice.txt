@@ -1,0 +1,42 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: tikzDevice	Number of families: 0 
+list()
+Warning message:
+In fun(libname, pkgname) : 
+
+tikzDevice: No appropriate LaTeX compiler could be found.
+Access to LaTeX is required in order for the TikZ device
+to produce output.
+
+The following places were tested for a valid LaTeX compiler:
+
+	the global option: tikzLatex
+	the environment variable: R_LATEXCMD
+	the environment variable: R_PDFLATEXCMD
+	the global option: latexcmd
+	the PATH using the command: pdflatex
+	the PATH using the command: latex
+	the PATH using the command: /usr/texbin/pdflatex
+
+If you have a working LaTeX compiler, try one of the
+following solutions:
+
+	Set the path to your compiler as the value of either latexcmd or
+	tikzLatex in .Rprofile using options().
+
+	Set the path to your compiler as the value of either R_LATEXCMD or
+	R_PDFLATEXCMD in .Renviron.
+
+	Ensure the folder containing your compiler is included in PATH.
+
+Done.

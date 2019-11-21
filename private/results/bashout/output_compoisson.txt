@@ -1,0 +1,20 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: compoisson	Number of families: 1 
+Current Family: com 
+Could not find a set of valid default values for family compoissoncom
+Errors: unused argument (log.z = NULL)
+ missing value where TRUE/FALSE needed
+ Invalid arguments, only defined for lambda >= 0, nu >= 0
+
+list()
+Done.

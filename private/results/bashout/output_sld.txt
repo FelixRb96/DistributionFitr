@@ -1,0 +1,37 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: sld	Number of families: 1 
+Current Family: sl 
+Could not find a set of valid default values for family sldsl
+Errors: The parameter values 0.5 
+do not produce a proper skew logistic distrbution.
+Note that beta must be positive and delta needs to be in the range [0,1]
+
+ The parameter values 1 
+do not produce a proper skew logistic distrbution.
+Note that beta must be positive and delta needs to be in the range [0,1]
+
+ The parameter values 0 
+do not produce a proper skew logistic distrbution.
+Note that beta must be positive and delta needs to be in the range [0,1]
+
+ The parameter values -0.5 
+do not produce a proper skew logistic distrbution.
+Note that beta must be positive and delta needs to be in the range [0,1]
+
+ The parameter values -1 
+do not produce a proper skew logistic distrbution.
+Note that beta must be positive and delta needs to be in the range [0,1]
+
+
+list()
+Done.

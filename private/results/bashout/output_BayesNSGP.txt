@@ -1,0 +1,26 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: BayesNSGP	Number of families: 2 
+Current Family: mnorm_nngp 
+Could not find a set of valid default values for family BayesNSGPmnorm_nngp
+Errors: argument is of length zero
+ incorrect number of dimensions
+ invalid 'times' argument
+
+Current Family: mnorm_sgv 
+Could not find a set of valid default values for family BayesNSGPmnorm_sgv
+Errors: argument is of length zero
+ incorrect number of dimensions
+ invalid 'times' argument
+
+list()
+Done.

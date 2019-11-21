@@ -1,0 +1,208 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: Rlab	Number of families: 5 
+Current Family: bern 
+Current Family: exp 
+beta depends on another earlier parameter and is thus removed
+Current Family: gamma 
+scale depends on another earlier parameter and is thus removed
+Current Family: tri 
+Error occured for family tri
+Error in get(paste0(type, fam), envir = asNamespace(package)): object 'rtri' not found
+
+
+Current Family: weibull 
+[[1]]
+[[1]]$package
+[1] "Rlab"
+
+[[1]]$family
+[1] "bern"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+prob 
+   0 
+
+[[1]]$family_info$upper
+prob 
+   1 
+
+[[1]]$family_info$accepts_float
+prob 
+TRUE 
+
+[[1]]$family_info$defaults
+prob 
+ 0.5 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] TRUE
+
+[[1]]$family_info$support_min
+[1] 0
+
+[[1]]$family_info$support_max
+[1] 1
+
+[[1]]$family_info$supp_max_depends_on
+ prob 
+FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+ prob 
+FALSE 
+
+
+
+[[2]]
+[[2]]$package
+[1] "Rlab"
+
+[[2]]$family
+[1] "exp"
+
+[[2]]$family_info
+[[2]]$family_info$lower
+rate 
+0.01 
+
+[[2]]$family_info$upper
+rate 
+ Inf 
+
+[[2]]$family_info$accepts_float
+rate 
+TRUE 
+
+[[2]]$family_info$defaults
+rate 
+   1 
+
+[[2]]$family_info$log
+[1] TRUE
+
+[[2]]$family_info$discrete
+[1] FALSE
+
+[[2]]$family_info$support_min
+[1] 0
+
+[[2]]$family_info$support_max
+[1] Inf
+
+[[2]]$family_info$supp_max_depends_on
+ rate 
+FALSE 
+
+[[2]]$family_info$supp_min_depends_on
+ rate 
+FALSE 
+
+
+
+[[3]]
+[[3]]$package
+[1] "Rlab"
+
+[[3]]$family
+[1] "gamma"
+
+[[3]]$family_info
+[[3]]$family_info$lower
+       shape         rate        alpha         beta 
+        -Inf 1.000000e-02 8.326673e-17 8.326673e-17 
+
+[[3]]$family_info$upper
+shape  rate alpha  beta 
+  Inf   Inf   Inf   Inf 
+
+[[3]]$family_info$accepts_float
+shape  rate alpha  beta 
+ TRUE  TRUE  TRUE  TRUE 
+
+[[3]]$family_info$defaults
+shape  rate alpha  beta 
+  1.0   1.0   0.5   0.5 
+
+[[3]]$family_info$log
+[1] TRUE
+
+[[3]]$family_info$discrete
+[1] FALSE
+
+[[3]]$family_info$support_min
+[1] 0
+
+[[3]]$family_info$support_max
+[1] Inf
+
+[[3]]$family_info$supp_max_depends_on
+shape  rate alpha  beta 
+FALSE FALSE FALSE FALSE 
+
+[[3]]$family_info$supp_min_depends_on
+shape  rate alpha  beta 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[4]]
+[[4]]$package
+[1] "Rlab"
+
+[[4]]$family
+[1] "weibull"
+
+[[4]]$family_info
+[[4]]$family_info$lower
+       shape        scale        alpha         beta 
+        -Inf         -Inf 8.326673e-17 8.326673e-17 
+
+[[4]]$family_info$upper
+shape scale alpha  beta 
+  Inf   Inf   Inf   Inf 
+
+[[4]]$family_info$accepts_float
+shape scale alpha  beta 
+ TRUE  TRUE  TRUE  TRUE 
+
+[[4]]$family_info$defaults
+shape scale alpha  beta 
+  1.0   1.0   0.5   0.5 
+
+[[4]]$family_info$log
+[1] TRUE
+
+[[4]]$family_info$discrete
+[1] FALSE
+
+[[4]]$family_info$support_min
+[1] 0
+
+[[4]]$family_info$support_max
+[1] Inf
+
+[[4]]$family_info$supp_max_depends_on
+shape scale alpha  beta 
+FALSE FALSE FALSE FALSE 
+
+[[4]]$family_info$supp_min_depends_on
+shape scale alpha  beta 
+FALSE FALSE FALSE FALSE 
+
+
+
+Done.

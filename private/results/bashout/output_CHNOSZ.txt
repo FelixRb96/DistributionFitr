@@ -1,0 +1,16 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: CHNOSZreset: creating "thermo" object
+obigt: loading default database with 1849 aqueous, 3372 total species
+	Number of families: 0 
+list()
+Done.

@@ -1,0 +1,107 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: countfitteR	Number of families: 2 
+Current Family: ZINB 
+Current Family: ZIP 
+[[1]]
+[[1]]$package
+[1] "countfitteR"
+
+[[1]]$family
+[1] "ZINB"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+        size           mu            r 
+8.326673e-17 0.000000e+00 0.000000e+00 
+
+[[1]]$family_info$upper
+size   mu    r 
+ Inf  Inf    1 
+
+[[1]]$family_info$accepts_float
+size   mu    r 
+TRUE TRUE TRUE 
+
+[[1]]$family_info$defaults
+size   mu    r 
+ 0.5  0.5  0.5 
+
+[[1]]$family_info$log
+[1] FALSE
+
+[[1]]$family_info$discrete
+[1] TRUE
+
+[[1]]$family_info$support_min
+[1] 0
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+ size    mu     r 
+FALSE FALSE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+ size    mu     r 
+FALSE FALSE FALSE 
+
+
+
+[[2]]
+[[2]]$package
+[1] "countfitteR"
+
+[[2]]$family
+[1] "ZIP"
+
+[[2]]$family_info
+[[2]]$family_info$lower
+lambda      r 
+     0      0 
+
+[[2]]$family_info$upper
+lambda      r 
+   Inf      1 
+
+[[2]]$family_info$accepts_float
+lambda      r 
+  TRUE   TRUE 
+
+[[2]]$family_info$defaults
+lambda      r 
+   0.5    0.5 
+
+[[2]]$family_info$log
+[1] FALSE
+
+[[2]]$family_info$discrete
+[1] TRUE
+
+[[2]]$family_info$support_min
+[1] 0
+
+[[2]]$family_info$support_max
+[1] Inf
+
+[[2]]$family_info$supp_max_depends_on
+lambda      r 
+ FALSE  FALSE 
+
+[[2]]$family_info$supp_min_depends_on
+lambda      r 
+ FALSE  FALSE 
+
+
+
+Done.

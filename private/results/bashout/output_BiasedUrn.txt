@@ -1,0 +1,30 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: BiasedUrn	Number of families: 2 
+Current Family: FNCHypergeo 
+Could not find a set of valid default values for family BiasedUrnFNCHypergeo
+Errors: Parameter nran must be positive
+ n > m1 + m2 unused argument (nran = 1)
+ Negative parameter
+ Not enough items with nonzero weight
+ Invalid value for odds
+
+Current Family: WNCHypergeo 
+Could not find a set of valid default values for family BiasedUrnWNCHypergeo
+Errors: Parameter nran must be positive
+ n > m1 + m2 unused argument (nran = 1)
+ Negative parameter
+ Not enough items with nonzero weight
+ Invalid value for odds
+
+list()
+Done.

@@ -1,0 +1,50 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: PearsonDS	Number of families: 9 
+Current Family: pearson 
+Could not find a set of valid default values for family PearsonDSpearson
+Errors: subscript out of bounds
+
+Current Family: pearson0 
+Could not find a set of valid default values for family PearsonDSpearson0
+Errors: subscript out of bounds
+
+Current Family: pearsonI 
+Could not find a set of valid default values for family PearsonDSpearsonI
+Errors: subscript out of bounds
+
+Current Family: pearsonII 
+Could not find a set of valid default values for family PearsonDSpearsonII
+Errors: subscript out of bounds
+
+Current Family: pearsonIII 
+Could not find a set of valid default values for family PearsonDSpearsonIII
+Errors: subscript out of bounds
+
+Current Family: pearsonIV 
+Could not find a set of valid default values for family PearsonDSpearsonIV
+Errors: subscript out of bounds
+
+Current Family: pearsonV 
+Could not find a set of valid default values for family PearsonDSpearsonV
+Errors: subscript out of bounds
+
+Current Family: pearsonVI 
+Could not find a set of valid default values for family PearsonDSpearsonVI
+Errors: subscript out of bounds
+
+Current Family: pearsonVII 
+Could not find a set of valid default values for family PearsonDSpearsonVII
+Errors: subscript out of bounds
+
+list()
+Done.

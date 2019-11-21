@@ -1,0 +1,2200 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: gamlss.dist	Number of families: 115 
+Current Family: BB 
+Error occured for family BB
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: BCCG 
+Error occured for family BCCG
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: BCCGo 
+Error occured for family BCCGo
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: BCPE 
+Error occured for family BCPE
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: BCPEo 
+Error occured for family BCPEo
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: BCT 
+Error occured for family BCT
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: BCTo 
+Error occured for family BCTo
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: BE 
+Error occured for family BE
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: BEINF 
+Error occured for family BEINF
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: BEINF0 
+Error occured for family BEINF0
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: BEINF1 
+Error occured for family BEINF1
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: BEo 
+Error occured for family BEo
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: BEOI 
+Error occured for family BEOI
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: BEZI 
+Error occured for family BEZI
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: BI 
+Error occured for family BI
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: BNB 
+Error occured for family BNB
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: DBI 
+Error occured for family DBI
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: DBURR12 
+Error occured for family DBURR12
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: DEL 
+Error occured for family DEL
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: DPO 
+Error occured for family DPO
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: EGB2 
+Current Family: exGAUS 
+Could not find a set of valid default values for family gamlss.distexGAUS
+Errors: unused argument (... = 0.5)
+ unused argument (... = 1)
+ unused argument (... = 0)
+ unused argument (... = -0.5)
+ unused argument (... = -1)
+
+Current Family: EXP 
+Error occured for family EXP
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: GA 
+Error occured for family GA
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: GAF 
+Current Family: GB1 
+Error occured for family GB1
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: GB2 
+Current Family: GEOM 
+Error occured for family GEOM
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: GEOMo 
+Error occured for family GEOMo
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: GG 
+Error occured for family GG
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: GIG 
+Could not find a set of valid default values for family gamlss.distGIG
+Errors: unused argument (... = 0.5)
+ unused argument (... = 1)
+ unused argument (... = 0)
+ unused argument (... = -0.5)
+ unused argument (... = -1)
+
+Current Family: GP 
+Current Family: GPO 
+Error occured for family GPO
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: GT 
+Current Family: GU 
+Current Family: IG 
+Could not find a set of valid default values for family gamlss.distIG
+Errors: unused argument (... = 0.5)
+ unused argument (... = 1)
+ unused argument (... = 0)
+ unused argument (... = -0.5)
+ unused argument (... = -1)
+
+Current Family: IGAMMA 
+Error occured for family IGAMMA
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: JSU 
+Current Family: JSUo 
+Current Family: LG 
+Error occured for family LG
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: LNO 
+Error occured for family LNO
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: LO 
+Current Family: LOGITNO 
+Error occured for family LOGITNO
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: LOGNO 
+Error occured for family LOGNO
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: LOGNO2 
+Current Family: LQNO 
+Current Family: MN3 
+Error occured for family MN3
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: MN4 
+Error occured for family MN4
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: MN5 
+Error occured for family MN5
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: NBF 
+Error occured for family NBF
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: NBI 
+Error occured for family NBI
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: NBII 
+Current Family: NET 
+Current Family: NO 
+Current Family: NO2 
+Current Family: NOF 
+Current Family: PARETO 
+Error occured for family PARETO
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: PARETO1 
+Error occured for family PARETO1
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: PARETO1o 
+Error occured for family PARETO1o
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: PARETO2 
+Error occured for family PARETO2
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: PARETO2o 
+Error occured for family PARETO2o
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: PE 
+Current Family: PE2 
+Current Family: PIG 
+Error occured for family PIG
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: PO 
+Error occured for family PO
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: RG 
+Current Family: RGE 
+Error occured for family RGE
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: SEP 
+Current Family: SEP1 
+Current Family: SEP2 
+Current Family: SEP3 
+Current Family: SEP4 
+Current Family: SHASH 
+Current Family: SHASHo 
+Current Family: SHASHo2 
+Current Family: SI 
+Error occured for family SI
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: SICHEL 
+Error occured for family SICHEL
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: SIMPLEX 
+Error occured for family SIMPLEX
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: SN1 
+Current Family: SN2 
+Current Family: SST 
+Current Family: ST1 
+Current Family: ST2 
+Current Family: ST3 
+Current Family: ST3C 
+Current Family: ST4 
+Current Family: ST5 
+Current Family: TF 
+Current Family: TF2 
+Current Family: WARING 
+Error occured for family WARING
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: WEI 
+Error occured for family WEI
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: WEI2 
+Error occured for family WEI2
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: WEI3 
+Error occured for family WEI3
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: YULE 
+Error occured for family YULE
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: ZABB 
+Error occured for family ZABB
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: ZABI 
+Error occured for family ZABI
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: ZABNB 
+Error occured for family ZABNB
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: ZAGA 
+Could not find a set of valid default values for family gamlss.distZAGA
+Errors: unused argument (... = 0.5)
+ unused argument (... = 1)
+ unused argument (... = 0)
+ unused argument (... = -0.5)
+ unused argument (... = -1)
+
+Current Family: ZAIG 
+Could not find a set of valid default values for family gamlss.distZAIG
+Errors: unused argument (... = 0.5)
+ unused argument (... = 1)
+ unused argument (... = 0)
+ unused argument (... = -0.5)
+ unused argument (... = -1)
+
+Current Family: ZALG 
+Error occured for family ZALG
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: ZANBI 
+Error occured for family ZANBI
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: ZAP 
+Error occured for family ZAP
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: ZAPIG 
+Error occured for family ZAPIG
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: ZASICHEL 
+Error occured for family ZASICHEL
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: ZAZIPF 
+Error occured for family ZAZIPF
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: ZIBB 
+Error occured for family ZIBB
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: ZIBI 
+Error occured for family ZIBI
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: ZIBNB 
+Error occured for family ZIBNB
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: ZINBF 
+Error occured for family ZINBF
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: ZINBI 
+Error occured for family ZINBI
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: ZIP 
+Error occured for family ZIP
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: ZIP2 
+Error occured for family ZIP2
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: ZIPF 
+Error occured for family ZIPF
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: ZIPIG 
+Error occured for family ZIPIG
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: ZISICHEL 
+Error occured for family ZISICHEL
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+[[1]]
+[[1]]$package
+[1] "gamlss.dist"
+
+[[1]]$family
+[1] "EGB2"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+   mu sigma    nu   tau 
+ -Inf  -Inf  0.02  0.01 
+
+[[1]]$family_info$upper
+   mu sigma    nu   tau 
+  Inf   Inf   Inf   Inf 
+
+[[1]]$family_info$accepts_float
+   mu sigma    nu   tau 
+ TRUE  TRUE  TRUE  TRUE 
+
+[[1]]$family_info$defaults
+   mu sigma    nu   tau 
+  0.0   1.0   1.0   0.5 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[2]]
+[[2]]$package
+[1] "gamlss.dist"
+
+[[2]]$family
+[1] "GAF"
+
+[[2]]$family_info
+[[2]]$family_info$lower
+   mu sigma    nu 
+ 0.01  0.01  -Inf 
+
+[[2]]$family_info$upper
+   mu sigma    nu 
+  Inf   Inf   Inf 
+
+[[2]]$family_info$accepts_float
+   mu sigma    nu 
+ TRUE  TRUE  TRUE 
+
+[[2]]$family_info$defaults
+   mu sigma    nu 
+    1     1     2 
+
+[[2]]$family_info$log
+[1] TRUE
+
+[[2]]$family_info$discrete
+[1] FALSE
+
+[[2]]$family_info$support_min
+[1] 0.01
+
+[[2]]$family_info$support_max
+[1] Inf
+
+[[2]]$family_info$supp_max_depends_on
+   mu sigma    nu 
+FALSE FALSE FALSE 
+
+[[2]]$family_info$supp_min_depends_on
+   mu sigma    nu 
+FALSE FALSE FALSE 
+
+
+
+[[3]]
+[[3]]$package
+[1] "gamlss.dist"
+
+[[3]]$family
+[1] "GB2"
+
+[[3]]$family_info
+[[3]]$family_info$lower
+   mu sigma    nu   tau 
+ 0.01  -Inf  0.01  0.01 
+
+[[3]]$family_info$upper
+   mu sigma    nu   tau 
+  Inf   Inf   Inf   Inf 
+
+[[3]]$family_info$accepts_float
+   mu sigma    nu   tau 
+ TRUE  TRUE  TRUE  TRUE 
+
+[[3]]$family_info$defaults
+   mu sigma    nu   tau 
+  1.0   1.0   1.0   0.5 
+
+[[3]]$family_info$log
+[1] TRUE
+
+[[3]]$family_info$discrete
+[1] FALSE
+
+[[3]]$family_info$support_min
+[1] 0.01
+
+[[3]]$family_info$support_max
+[1] Inf
+
+[[3]]$family_info$supp_max_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+[[3]]$family_info$supp_min_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[4]]
+[[4]]$package
+[1] "gamlss.dist"
+
+[[4]]$family
+[1] "GP"
+
+[[4]]$family_info
+[[4]]$family_info$lower
+   mu sigma 
+ 0.01  0.01 
+
+[[4]]$family_info$upper
+   mu sigma 
+  Inf   Inf 
+
+[[4]]$family_info$accepts_float
+   mu sigma 
+ TRUE  TRUE 
+
+[[4]]$family_info$defaults
+   mu sigma 
+    1     1 
+
+[[4]]$family_info$log
+[1] TRUE
+
+[[4]]$family_info$discrete
+[1] FALSE
+
+[[4]]$family_info$support_min
+[1] 0.01
+
+[[4]]$family_info$support_max
+[1] Inf
+
+[[4]]$family_info$supp_max_depends_on
+   mu sigma 
+FALSE FALSE 
+
+[[4]]$family_info$supp_min_depends_on
+   mu sigma 
+FALSE FALSE 
+
+
+
+[[5]]
+[[5]]$package
+[1] "gamlss.dist"
+
+[[5]]$family
+[1] "GT"
+
+[[5]]$family_info
+[[5]]$family_info$lower
+   mu sigma    nu   tau 
+ -Inf  0.01  0.05  0.20 
+
+[[5]]$family_info$upper
+   mu sigma    nu   tau 
+  Inf   Inf   Inf   Inf 
+
+[[5]]$family_info$accepts_float
+   mu sigma    nu   tau 
+ TRUE  TRUE  TRUE  TRUE 
+
+[[5]]$family_info$defaults
+   mu sigma    nu   tau 
+  0.0   1.0   3.0   1.5 
+
+[[5]]$family_info$log
+[1] TRUE
+
+[[5]]$family_info$discrete
+[1] FALSE
+
+[[5]]$family_info$support_min
+[1] -Inf
+
+[[5]]$family_info$support_max
+[1] Inf
+
+[[5]]$family_info$supp_max_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+[[5]]$family_info$supp_min_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[6]]
+[[6]]$package
+[1] "gamlss.dist"
+
+[[6]]$family
+[1] "GU"
+
+[[6]]$family_info
+[[6]]$family_info$lower
+   mu sigma 
+ -Inf  0.01 
+
+[[6]]$family_info$upper
+   mu sigma 
+  Inf   Inf 
+
+[[6]]$family_info$accepts_float
+   mu sigma 
+ TRUE  TRUE 
+
+[[6]]$family_info$defaults
+   mu sigma 
+    0     1 
+
+[[6]]$family_info$log
+[1] TRUE
+
+[[6]]$family_info$discrete
+[1] FALSE
+
+[[6]]$family_info$support_min
+[1] -Inf
+
+[[6]]$family_info$support_max
+[1] Inf
+
+[[6]]$family_info$supp_max_depends_on
+   mu sigma 
+FALSE FALSE 
+
+[[6]]$family_info$supp_min_depends_on
+   mu sigma 
+FALSE FALSE 
+
+
+
+[[7]]
+[[7]]$package
+[1] "gamlss.dist"
+
+[[7]]$family
+[1] "JSU"
+
+[[7]]$family_info
+[[7]]$family_info$lower
+     mu   sigma      nu     tau 
+   -Inf    0.01 -354.73    0.06 
+
+[[7]]$family_info$upper
+    mu  sigma     nu    tau 
+   Inf    Inf 354.73    Inf 
+
+[[7]]$family_info$accepts_float
+   mu sigma    nu   tau 
+ TRUE  TRUE  TRUE  TRUE 
+
+[[7]]$family_info$defaults
+   mu sigma    nu   tau 
+    0     1     1     1 
+
+[[7]]$family_info$log
+[1] TRUE
+
+[[7]]$family_info$discrete
+[1] FALSE
+
+[[7]]$family_info$support_min
+[1] -Inf
+
+[[7]]$family_info$support_max
+[1] Inf
+
+[[7]]$family_info$supp_max_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+[[7]]$family_info$supp_min_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[8]]
+[[8]]$package
+[1] "gamlss.dist"
+
+[[8]]$family
+[1] "JSUo"
+
+[[8]]$family_info
+[[8]]$family_info$lower
+     mu   sigma      nu     tau 
+   -Inf    0.01 -711.88    0.01 
+
+[[8]]$family_info$upper
+   mu sigma    nu   tau 
+  Inf   Inf   709   Inf 
+
+[[8]]$family_info$accepts_float
+   mu sigma    nu   tau 
+ TRUE  TRUE  TRUE  TRUE 
+
+[[8]]$family_info$defaults
+   mu sigma    nu   tau 
+    0     1     0     1 
+
+[[8]]$family_info$log
+[1] TRUE
+
+[[8]]$family_info$discrete
+[1] FALSE
+
+[[8]]$family_info$support_min
+[1] -Inf
+
+[[8]]$family_info$support_max
+[1] Inf
+
+[[8]]$family_info$supp_max_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+[[8]]$family_info$supp_min_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[9]]
+[[9]]$package
+[1] "gamlss.dist"
+
+[[9]]$family
+[1] "LO"
+
+[[9]]$family_info
+[[9]]$family_info$lower
+   mu sigma 
+ -Inf  0.01 
+
+[[9]]$family_info$upper
+   mu sigma 
+  Inf   Inf 
+
+[[9]]$family_info$accepts_float
+   mu sigma 
+ TRUE  TRUE 
+
+[[9]]$family_info$defaults
+   mu sigma 
+    0     1 
+
+[[9]]$family_info$log
+[1] TRUE
+
+[[9]]$family_info$discrete
+[1] FALSE
+
+[[9]]$family_info$support_min
+[1] -Inf
+
+[[9]]$family_info$support_max
+[1] Inf
+
+[[9]]$family_info$supp_max_depends_on
+   mu sigma 
+FALSE FALSE 
+
+[[9]]$family_info$supp_min_depends_on
+   mu sigma 
+FALSE FALSE 
+
+
+
+[[10]]
+[[10]]$package
+[1] "gamlss.dist"
+
+[[10]]$family
+[1] "LOGNO2"
+
+[[10]]$family_info
+[[10]]$family_info$lower
+   mu sigma 
+ 0.01  0.01 
+
+[[10]]$family_info$upper
+   mu sigma 
+  Inf   Inf 
+
+[[10]]$family_info$accepts_float
+   mu sigma 
+ TRUE  TRUE 
+
+[[10]]$family_info$defaults
+   mu sigma 
+    1     1 
+
+[[10]]$family_info$log
+[1] TRUE
+
+[[10]]$family_info$discrete
+[1] FALSE
+
+[[10]]$family_info$support_min
+[1] 0.01
+
+[[10]]$family_info$support_max
+[1] Inf
+
+[[10]]$family_info$supp_max_depends_on
+   mu sigma 
+FALSE FALSE 
+
+[[10]]$family_info$supp_min_depends_on
+   mu sigma 
+FALSE FALSE 
+
+
+
+[[11]]
+[[11]]$package
+[1] "gamlss.dist"
+
+[[11]]$family
+[1] "LQNO"
+
+[[11]]$family_info
+[[11]]$family_info$lower
+   mu sigma 
+ 0.01  0.01 
+
+[[11]]$family_info$upper
+   mu sigma 
+  Inf   Inf 
+
+[[11]]$family_info$accepts_float
+   mu sigma 
+ TRUE  TRUE 
+
+[[11]]$family_info$defaults
+   mu sigma 
+    1     1 
+
+[[11]]$family_info$log
+[1] TRUE
+
+[[11]]$family_info$discrete
+[1] FALSE
+
+[[11]]$family_info$support_min
+[1] -Inf
+
+[[11]]$family_info$support_max
+[1] Inf
+
+[[11]]$family_info$supp_max_depends_on
+   mu sigma 
+FALSE FALSE 
+
+[[11]]$family_info$supp_min_depends_on
+   mu sigma 
+FALSE FALSE 
+
+
+
+[[12]]
+[[12]]$package
+[1] "gamlss.dist"
+
+[[12]]$family
+[1] "NBII"
+
+[[12]]$family_info
+[[12]]$family_info$lower
+   mu sigma 
+ 0.01  0.01 
+
+[[12]]$family_info$upper
+   mu sigma 
+  Inf   Inf 
+
+[[12]]$family_info$accepts_float
+   mu sigma 
+ TRUE  TRUE 
+
+[[12]]$family_info$defaults
+   mu sigma 
+    1     1 
+
+[[12]]$family_info$log
+[1] TRUE
+
+[[12]]$family_info$discrete
+[1] TRUE
+
+[[12]]$family_info$support_min
+[1] 0
+
+[[12]]$family_info$support_max
+[1] Inf
+
+[[12]]$family_info$supp_max_depends_on
+   mu sigma 
+FALSE FALSE 
+
+[[12]]$family_info$supp_min_depends_on
+   mu sigma 
+FALSE FALSE 
+
+
+
+[[13]]
+[[13]]$package
+[1] "gamlss.dist"
+
+[[13]]$family
+[1] "NET"
+
+[[13]]$family_info
+[[13]]$family_info$lower
+   mu sigma    nu   tau 
+ -Inf  0.01  0.51  1.50 
+
+[[13]]$family_info$upper
+   mu sigma    nu   tau 
+  Inf   Inf     2   102 
+
+[[13]]$family_info$accepts_float
+   mu sigma    nu   tau 
+ TRUE  TRUE  TRUE  TRUE 
+
+[[13]]$family_info$defaults
+   mu sigma    nu   tau 
+  0.0   1.0   1.5   2.0 
+
+[[13]]$family_info$log
+[1] TRUE
+
+[[13]]$family_info$discrete
+[1] FALSE
+
+[[13]]$family_info$support_min
+[1] -Inf
+
+[[13]]$family_info$support_max
+[1] Inf
+
+[[13]]$family_info$supp_max_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+[[13]]$family_info$supp_min_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[14]]
+[[14]]$package
+[1] "gamlss.dist"
+
+[[14]]$family
+[1] "NO"
+
+[[14]]$family_info
+[[14]]$family_info$lower
+   mu sigma 
+ -Inf  0.01 
+
+[[14]]$family_info$upper
+   mu sigma 
+  Inf   Inf 
+
+[[14]]$family_info$accepts_float
+   mu sigma 
+ TRUE  TRUE 
+
+[[14]]$family_info$defaults
+   mu sigma 
+    0     1 
+
+[[14]]$family_info$log
+[1] TRUE
+
+[[14]]$family_info$discrete
+[1] FALSE
+
+[[14]]$family_info$support_min
+[1] -Inf
+
+[[14]]$family_info$support_max
+[1] Inf
+
+[[14]]$family_info$supp_max_depends_on
+   mu sigma 
+FALSE FALSE 
+
+[[14]]$family_info$supp_min_depends_on
+   mu sigma 
+FALSE FALSE 
+
+
+
+[[15]]
+[[15]]$package
+[1] "gamlss.dist"
+
+[[15]]$family
+[1] "NO2"
+
+[[15]]$family_info
+[[15]]$family_info$lower
+   mu sigma 
+ -Inf  0.01 
+
+[[15]]$family_info$upper
+   mu sigma 
+  Inf   Inf 
+
+[[15]]$family_info$accepts_float
+   mu sigma 
+ TRUE  TRUE 
+
+[[15]]$family_info$defaults
+   mu sigma 
+    0     1 
+
+[[15]]$family_info$log
+[1] TRUE
+
+[[15]]$family_info$discrete
+[1] FALSE
+
+[[15]]$family_info$support_min
+[1] -Inf
+
+[[15]]$family_info$support_max
+[1] Inf
+
+[[15]]$family_info$supp_max_depends_on
+   mu sigma 
+FALSE FALSE 
+
+[[15]]$family_info$supp_min_depends_on
+   mu sigma 
+FALSE FALSE 
+
+
+
+[[16]]
+[[16]]$package
+[1] "gamlss.dist"
+
+[[16]]$family
+[1] "NOF"
+
+[[16]]$family_info
+[[16]]$family_info$lower
+   mu sigma    nu 
+ -Inf  0.01  0.00 
+
+[[16]]$family_info$upper
+   mu sigma    nu 
+  Inf   Inf   Inf 
+
+[[16]]$family_info$accepts_float
+   mu sigma    nu 
+ TRUE  TRUE  TRUE 
+
+[[16]]$family_info$defaults
+   mu sigma    nu 
+    0     1     0 
+
+[[16]]$family_info$log
+[1] TRUE
+
+[[16]]$family_info$discrete
+[1] FALSE
+
+[[16]]$family_info$support_min
+[1] -Inf
+
+[[16]]$family_info$support_max
+[1] Inf
+
+[[16]]$family_info$supp_max_depends_on
+   mu sigma    nu 
+FALSE FALSE FALSE 
+
+[[16]]$family_info$supp_min_depends_on
+   mu sigma    nu 
+FALSE FALSE FALSE 
+
+
+
+[[17]]
+[[17]]$package
+[1] "gamlss.dist"
+
+[[17]]$family
+[1] "PE"
+
+[[17]]$family_info
+[[17]]$family_info$lower
+   mu sigma    nu 
+ -Inf  0.01  0.01 
+
+[[17]]$family_info$upper
+   mu sigma    nu 
+  Inf   Inf   Inf 
+
+[[17]]$family_info$accepts_float
+   mu sigma    nu 
+ TRUE  TRUE  TRUE 
+
+[[17]]$family_info$defaults
+   mu sigma    nu 
+    0     1     2 
+
+[[17]]$family_info$log
+[1] TRUE
+
+[[17]]$family_info$discrete
+[1] FALSE
+
+[[17]]$family_info$support_min
+[1] -Inf
+
+[[17]]$family_info$support_max
+[1] Inf
+
+[[17]]$family_info$supp_max_depends_on
+   mu sigma    nu 
+FALSE FALSE FALSE 
+
+[[17]]$family_info$supp_min_depends_on
+   mu sigma    nu 
+FALSE FALSE FALSE 
+
+
+
+[[18]]
+[[18]]$package
+[1] "gamlss.dist"
+
+[[18]]$family
+[1] "PE2"
+
+[[18]]$family_info
+[[18]]$family_info$lower
+   mu sigma    nu 
+ -Inf  0.01  0.01 
+
+[[18]]$family_info$upper
+   mu sigma    nu 
+  Inf   Inf   Inf 
+
+[[18]]$family_info$accepts_float
+   mu sigma    nu 
+ TRUE  TRUE  TRUE 
+
+[[18]]$family_info$defaults
+   mu sigma    nu 
+    0     1     2 
+
+[[18]]$family_info$log
+[1] TRUE
+
+[[18]]$family_info$discrete
+[1] FALSE
+
+[[18]]$family_info$support_min
+[1] -Inf
+
+[[18]]$family_info$support_max
+[1] Inf
+
+[[18]]$family_info$supp_max_depends_on
+   mu sigma    nu 
+FALSE FALSE FALSE 
+
+[[18]]$family_info$supp_min_depends_on
+   mu sigma    nu 
+FALSE FALSE FALSE 
+
+
+
+[[19]]
+[[19]]$package
+[1] "gamlss.dist"
+
+[[19]]$family
+[1] "RG"
+
+[[19]]$family_info
+[[19]]$family_info$lower
+   mu sigma 
+ -Inf  0.01 
+
+[[19]]$family_info$upper
+   mu sigma 
+  Inf   Inf 
+
+[[19]]$family_info$accepts_float
+   mu sigma 
+ TRUE  TRUE 
+
+[[19]]$family_info$defaults
+   mu sigma 
+    0     1 
+
+[[19]]$family_info$log
+[1] TRUE
+
+[[19]]$family_info$discrete
+[1] FALSE
+
+[[19]]$family_info$support_min
+[1] -Inf
+
+[[19]]$family_info$support_max
+[1] Inf
+
+[[19]]$family_info$supp_max_depends_on
+   mu sigma 
+FALSE FALSE 
+
+[[19]]$family_info$supp_min_depends_on
+   mu sigma 
+FALSE FALSE 
+
+
+
+[[20]]
+[[20]]$package
+[1] "gamlss.dist"
+
+[[20]]$family
+[1] "SEP"
+
+[[20]]$family_info
+[[20]]$family_info$lower
+   mu sigma    nu   tau 
+ -Inf  0.01  -Inf  0.02 
+
+[[20]]$family_info$upper
+   mu sigma    nu   tau 
+  Inf   Inf   Inf   202 
+
+[[20]]$family_info$accepts_float
+   mu sigma    nu   tau 
+ TRUE  TRUE  TRUE  TRUE 
+
+[[20]]$family_info$defaults
+   mu sigma    nu   tau 
+    0     1     0     2 
+
+[[20]]$family_info$log
+[1] TRUE
+
+[[20]]$family_info$discrete
+[1] FALSE
+
+[[20]]$family_info$support_min
+[1] -Inf
+
+[[20]]$family_info$support_max
+[1] Inf
+
+[[20]]$family_info$supp_max_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+[[20]]$family_info$supp_min_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[21]]
+[[21]]$package
+[1] "gamlss.dist"
+
+[[21]]$family
+[1] "SEP1"
+
+[[21]]$family_info
+[[21]]$family_info$lower
+   mu sigma    nu   tau 
+ -Inf  0.01  -Inf  0.01 
+
+[[21]]$family_info$upper
+   mu sigma    nu   tau 
+  Inf   Inf   Inf   Inf 
+
+[[21]]$family_info$accepts_float
+   mu sigma    nu   tau 
+ TRUE  TRUE  TRUE  TRUE 
+
+[[21]]$family_info$defaults
+   mu sigma    nu   tau 
+    0     1     0     2 
+
+[[21]]$family_info$log
+[1] TRUE
+
+[[21]]$family_info$discrete
+[1] FALSE
+
+[[21]]$family_info$support_min
+[1] -Inf
+
+[[21]]$family_info$support_max
+[1] Inf
+
+[[21]]$family_info$supp_max_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+[[21]]$family_info$supp_min_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[22]]
+[[22]]$package
+[1] "gamlss.dist"
+
+[[22]]$family
+[1] "SEP2"
+
+[[22]]$family_info
+[[22]]$family_info$lower
+   mu sigma    nu   tau 
+ -Inf  0.01  -Inf  0.01 
+
+[[22]]$family_info$upper
+    mu  sigma     nu    tau 
+   Inf    Inf    Inf 207.51 
+
+[[22]]$family_info$accepts_float
+   mu sigma    nu   tau 
+ TRUE  TRUE  TRUE  TRUE 
+
+[[22]]$family_info$defaults
+   mu sigma    nu   tau 
+    0     1     0     2 
+
+[[22]]$family_info$log
+[1] TRUE
+
+[[22]]$family_info$discrete
+[1] FALSE
+
+[[22]]$family_info$support_min
+[1] -Inf
+
+[[22]]$family_info$support_max
+[1] Inf
+
+[[22]]$family_info$supp_max_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+[[22]]$family_info$supp_min_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[23]]
+[[23]]$package
+[1] "gamlss.dist"
+
+[[23]]$family
+[1] "SEP3"
+
+[[23]]$family_info
+[[23]]$family_info$lower
+   mu sigma    nu   tau 
+ -Inf  0.01  0.01  0.01 
+
+[[23]]$family_info$upper
+   mu sigma    nu   tau 
+  Inf   Inf   Inf   Inf 
+
+[[23]]$family_info$accepts_float
+   mu sigma    nu   tau 
+ TRUE  TRUE  TRUE  TRUE 
+
+[[23]]$family_info$defaults
+   mu sigma    nu   tau 
+    0     1     2     2 
+
+[[23]]$family_info$log
+[1] TRUE
+
+[[23]]$family_info$discrete
+[1] FALSE
+
+[[23]]$family_info$support_min
+[1] -Inf
+
+[[23]]$family_info$support_max
+[1] Inf
+
+[[23]]$family_info$supp_max_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+[[23]]$family_info$supp_min_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[24]]
+[[24]]$package
+[1] "gamlss.dist"
+
+[[24]]$family
+[1] "SEP4"
+
+[[24]]$family_info
+[[24]]$family_info$lower
+   mu sigma    nu   tau 
+ -Inf  0.01  0.01  0.01 
+
+[[24]]$family_info$upper
+   mu sigma    nu   tau 
+  Inf   Inf   Inf   Inf 
+
+[[24]]$family_info$accepts_float
+   mu sigma    nu   tau 
+ TRUE  TRUE  TRUE  TRUE 
+
+[[24]]$family_info$defaults
+   mu sigma    nu   tau 
+    0     1     2     2 
+
+[[24]]$family_info$log
+[1] TRUE
+
+[[24]]$family_info$discrete
+[1] FALSE
+
+[[24]]$family_info$support_min
+[1] -Inf
+
+[[24]]$family_info$support_max
+[1] Inf
+
+[[24]]$family_info$supp_max_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+[[24]]$family_info$supp_min_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[25]]
+[[25]]$package
+[1] "gamlss.dist"
+
+[[25]]$family
+[1] "SHASH"
+
+[[25]]$family_info
+[[25]]$family_info$lower
+   mu sigma    nu   tau 
+ -Inf  0.01  0.00  0.00 
+
+[[25]]$family_info$upper
+   mu sigma    nu   tau 
+  Inf   Inf   Inf   Inf 
+
+[[25]]$family_info$accepts_float
+   mu sigma    nu   tau 
+ TRUE  TRUE  TRUE  TRUE 
+
+[[25]]$family_info$defaults
+   mu sigma    nu   tau 
+  0.0   1.0   0.5   0.5 
+
+[[25]]$family_info$log
+[1] TRUE
+
+[[25]]$family_info$discrete
+[1] FALSE
+
+[[25]]$family_info$support_min
+[1] -Inf
+
+[[25]]$family_info$support_max
+[1] Inf
+
+[[25]]$family_info$supp_max_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+[[25]]$family_info$supp_min_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[26]]
+[[26]]$package
+[1] "gamlss.dist"
+
+[[26]]$family
+[1] "SHASHo"
+
+[[26]]$family_info
+[[26]]$family_info$lower
+     mu   sigma      nu     tau 
+   -Inf    0.01 -710.00    0.01 
+
+[[26]]$family_info$upper
+   mu sigma    nu   tau 
+  Inf   Inf   709   Inf 
+
+[[26]]$family_info$accepts_float
+   mu sigma    nu   tau 
+ TRUE  TRUE  TRUE  TRUE 
+
+[[26]]$family_info$defaults
+   mu sigma    nu   tau 
+    0     1     0     1 
+
+[[26]]$family_info$log
+[1] TRUE
+
+[[26]]$family_info$discrete
+[1] FALSE
+
+[[26]]$family_info$support_min
+[1] -Inf
+
+[[26]]$family_info$support_max
+[1] Inf
+
+[[26]]$family_info$supp_max_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+[[26]]$family_info$supp_min_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[27]]
+[[27]]$package
+[1] "gamlss.dist"
+
+[[27]]$family
+[1] "SHASHo2"
+
+[[27]]$family_info
+[[27]]$family_info$lower
+     mu   sigma      nu     tau 
+   -Inf    0.01 -710.00    0.01 
+
+[[27]]$family_info$upper
+    mu  sigma     nu    tau 
+   Inf    Inf 711.09    Inf 
+
+[[27]]$family_info$accepts_float
+   mu sigma    nu   tau 
+ TRUE  TRUE  TRUE  TRUE 
+
+[[27]]$family_info$defaults
+   mu sigma    nu   tau 
+    0     1     0     1 
+
+[[27]]$family_info$log
+[1] TRUE
+
+[[27]]$family_info$discrete
+[1] FALSE
+
+[[27]]$family_info$support_min
+[1] -Inf
+
+[[27]]$family_info$support_max
+[1] Inf
+
+[[27]]$family_info$supp_max_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+[[27]]$family_info$supp_min_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[28]]
+[[28]]$package
+[1] "gamlss.dist"
+
+[[28]]$family
+[1] "SN1"
+
+[[28]]$family_info
+[[28]]$family_info$lower
+   mu sigma    nu 
+ -Inf  0.01  -Inf 
+
+[[28]]$family_info$upper
+   mu sigma    nu 
+  Inf   Inf   Inf 
+
+[[28]]$family_info$accepts_float
+   mu sigma    nu 
+ TRUE  TRUE  TRUE 
+
+[[28]]$family_info$defaults
+   mu sigma    nu 
+    0     1     0 
+
+[[28]]$family_info$log
+[1] TRUE
+
+[[28]]$family_info$discrete
+[1] FALSE
+
+[[28]]$family_info$support_min
+[1] -Inf
+
+[[28]]$family_info$support_max
+[1] Inf
+
+[[28]]$family_info$supp_max_depends_on
+   mu sigma    nu 
+FALSE FALSE FALSE 
+
+[[28]]$family_info$supp_min_depends_on
+   mu sigma    nu 
+FALSE FALSE FALSE 
+
+
+
+[[29]]
+[[29]]$package
+[1] "gamlss.dist"
+
+[[29]]$family
+[1] "SN2"
+
+[[29]]$family_info
+[[29]]$family_info$lower
+   mu sigma    nu 
+ -Inf  0.01  0.01 
+
+[[29]]$family_info$upper
+   mu sigma    nu 
+  Inf   Inf   Inf 
+
+[[29]]$family_info$accepts_float
+   mu sigma    nu 
+ TRUE  TRUE  TRUE 
+
+[[29]]$family_info$defaults
+   mu sigma    nu 
+    0     1     2 
+
+[[29]]$family_info$log
+[1] TRUE
+
+[[29]]$family_info$discrete
+[1] FALSE
+
+[[29]]$family_info$support_min
+[1] -Inf
+
+[[29]]$family_info$support_max
+[1] Inf
+
+[[29]]$family_info$supp_max_depends_on
+   mu sigma    nu 
+FALSE FALSE FALSE 
+
+[[29]]$family_info$supp_min_depends_on
+   mu sigma    nu 
+FALSE FALSE FALSE 
+
+
+
+[[30]]
+[[30]]$package
+[1] "gamlss.dist"
+
+[[30]]$family
+[1] "SST"
+
+[[30]]$family_info
+[[30]]$family_info$lower
+   mu sigma    nu   tau 
+ -Inf  0.01  0.01  2.01 
+
+[[30]]$family_info$upper
+   mu sigma    nu   tau 
+  Inf   Inf   Inf   Inf 
+
+[[30]]$family_info$accepts_float
+   mu sigma    nu   tau 
+ TRUE  TRUE  TRUE  TRUE 
+
+[[30]]$family_info$defaults
+   mu sigma    nu   tau 
+  0.0   1.0   0.8   7.0 
+
+[[30]]$family_info$log
+[1] TRUE
+
+[[30]]$family_info$discrete
+[1] FALSE
+
+[[30]]$family_info$support_min
+[1] -Inf
+
+[[30]]$family_info$support_max
+[1] Inf
+
+[[30]]$family_info$supp_max_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+[[30]]$family_info$supp_min_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[31]]
+[[31]]$package
+[1] "gamlss.dist"
+
+[[31]]$family
+[1] "ST1"
+
+[[31]]$family_info
+[[31]]$family_info$lower
+   mu sigma    nu   tau 
+ -Inf  0.01  -Inf  0.07 
+
+[[31]]$family_info$upper
+   mu sigma    nu   tau 
+  Inf   Inf   Inf   Inf 
+
+[[31]]$family_info$accepts_float
+   mu sigma    nu   tau 
+ TRUE  TRUE  TRUE  TRUE 
+
+[[31]]$family_info$defaults
+   mu sigma    nu   tau 
+    0     1     0     2 
+
+[[31]]$family_info$log
+[1] TRUE
+
+[[31]]$family_info$discrete
+[1] FALSE
+
+[[31]]$family_info$support_min
+[1] -Inf
+
+[[31]]$family_info$support_max
+[1] Inf
+
+[[31]]$family_info$supp_max_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+[[31]]$family_info$supp_min_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[32]]
+[[32]]$package
+[1] "gamlss.dist"
+
+[[32]]$family
+[1] "ST2"
+
+[[32]]$family_info
+[[32]]$family_info$lower
+   mu sigma    nu   tau 
+ -Inf  0.01  -Inf  0.10 
+
+[[32]]$family_info$upper
+    mu  sigma     nu    tau 
+   Inf    Inf 867.46    Inf 
+
+[[32]]$family_info$accepts_float
+   mu sigma    nu   tau 
+ TRUE  TRUE  TRUE  TRUE 
+
+[[32]]$family_info$defaults
+   mu sigma    nu   tau 
+    0     1     0     2 
+
+[[32]]$family_info$log
+[1] TRUE
+
+[[32]]$family_info$discrete
+[1] FALSE
+
+[[32]]$family_info$support_min
+[1] -Inf
+
+[[32]]$family_info$support_max
+[1] Inf
+
+[[32]]$family_info$supp_max_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+[[32]]$family_info$supp_min_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[33]]
+[[33]]$package
+[1] "gamlss.dist"
+
+[[33]]$family
+[1] "ST3"
+
+[[33]]$family_info
+[[33]]$family_info$lower
+   mu sigma    nu   tau 
+ -Inf  0.01  0.01  0.01 
+
+[[33]]$family_info$upper
+   mu sigma    nu   tau 
+  Inf   Inf   Inf   Inf 
+
+[[33]]$family_info$accepts_float
+   mu sigma    nu   tau 
+ TRUE  TRUE  TRUE  TRUE 
+
+[[33]]$family_info$defaults
+   mu sigma    nu   tau 
+    0     1     1    10 
+
+[[33]]$family_info$log
+[1] TRUE
+
+[[33]]$family_info$discrete
+[1] FALSE
+
+[[33]]$family_info$support_min
+[1] -Inf
+
+[[33]]$family_info$support_max
+[1] Inf
+
+[[33]]$family_info$supp_max_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+[[33]]$family_info$supp_min_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[34]]
+[[34]]$package
+[1] "gamlss.dist"
+
+[[34]]$family
+[1] "ST3C"
+
+[[34]]$family_info
+[[34]]$family_info$lower
+   mu sigma    nu   tau 
+ -Inf  0.01  0.01  0.01 
+
+[[34]]$family_info$upper
+   mu sigma    nu   tau 
+  Inf   Inf   Inf   Inf 
+
+[[34]]$family_info$accepts_float
+   mu sigma    nu   tau 
+ TRUE  TRUE  TRUE  TRUE 
+
+[[34]]$family_info$defaults
+   mu sigma    nu   tau 
+    0     1     1    10 
+
+[[34]]$family_info$log
+[1] TRUE
+
+[[34]]$family_info$discrete
+[1] FALSE
+
+[[34]]$family_info$support_min
+[1] -Inf
+
+[[34]]$family_info$support_max
+[1] Inf
+
+[[34]]$family_info$supp_max_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+[[34]]$family_info$supp_min_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[35]]
+[[35]]$package
+[1] "gamlss.dist"
+
+[[35]]$family
+[1] "ST4"
+
+[[35]]$family_info
+[[35]]$family_info$lower
+   mu sigma    nu   tau 
+ -Inf  0.01  0.01  0.01 
+
+[[35]]$family_info$upper
+   mu sigma    nu   tau 
+  Inf   Inf   Inf   Inf 
+
+[[35]]$family_info$accepts_float
+   mu sigma    nu   tau 
+ TRUE  TRUE  TRUE  TRUE 
+
+[[35]]$family_info$defaults
+   mu sigma    nu   tau 
+    0     1     1    10 
+
+[[35]]$family_info$log
+[1] TRUE
+
+[[35]]$family_info$discrete
+[1] FALSE
+
+[[35]]$family_info$support_min
+[1] -Inf
+
+[[35]]$family_info$support_max
+[1] Inf
+
+[[35]]$family_info$supp_max_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+[[35]]$family_info$supp_min_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[36]]
+[[36]]$package
+[1] "gamlss.dist"
+
+[[36]]$family
+[1] "ST5"
+
+[[36]]$family_info
+[[36]]$family_info$lower
+   mu sigma    nu   tau 
+ -Inf  0.01  -Inf  0.01 
+
+[[36]]$family_info$upper
+   mu sigma    nu   tau 
+  Inf   Inf   800   701 
+
+[[36]]$family_info$accepts_float
+   mu sigma    nu   tau 
+ TRUE  TRUE  TRUE  TRUE 
+
+[[36]]$family_info$defaults
+   mu sigma    nu   tau 
+    0     1     0     1 
+
+[[36]]$family_info$log
+[1] TRUE
+
+[[36]]$family_info$discrete
+[1] FALSE
+
+[[36]]$family_info$support_min
+[1] -Inf
+
+[[36]]$family_info$support_max
+[1] Inf
+
+[[36]]$family_info$supp_max_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+[[36]]$family_info$supp_min_depends_on
+   mu sigma    nu   tau 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[37]]
+[[37]]$package
+[1] "gamlss.dist"
+
+[[37]]$family
+[1] "TF"
+
+[[37]]$family_info
+[[37]]$family_info$lower
+   mu sigma    nu 
+ -Inf  0.01  0.01 
+
+[[37]]$family_info$upper
+   mu sigma    nu 
+  Inf   Inf   Inf 
+
+[[37]]$family_info$accepts_float
+   mu sigma    nu 
+ TRUE  TRUE  TRUE 
+
+[[37]]$family_info$defaults
+   mu sigma    nu 
+    0     1    10 
+
+[[37]]$family_info$log
+[1] TRUE
+
+[[37]]$family_info$discrete
+[1] FALSE
+
+[[37]]$family_info$support_min
+[1] -Inf
+
+[[37]]$family_info$support_max
+[1] Inf
+
+[[37]]$family_info$supp_max_depends_on
+   mu sigma    nu 
+FALSE FALSE FALSE 
+
+[[37]]$family_info$supp_min_depends_on
+   mu sigma    nu 
+FALSE FALSE FALSE 
+
+
+
+[[38]]
+[[38]]$package
+[1] "gamlss.dist"
+
+[[38]]$family
+[1] "TF2"
+
+[[38]]$family_info
+[[38]]$family_info$lower
+   mu sigma    nu 
+ -Inf  0.01  2.01 
+
+[[38]]$family_info$upper
+   mu sigma    nu 
+  Inf   Inf   Inf 
+
+[[38]]$family_info$accepts_float
+   mu sigma    nu 
+ TRUE  TRUE  TRUE 
+
+[[38]]$family_info$defaults
+   mu sigma    nu 
+    0     1    10 
+
+[[38]]$family_info$log
+[1] TRUE
+
+[[38]]$family_info$discrete
+[1] FALSE
+
+[[38]]$family_info$support_min
+[1] -Inf
+
+[[38]]$family_info$support_max
+[1] Inf
+
+[[38]]$family_info$supp_max_depends_on
+   mu sigma    nu 
+FALSE FALSE FALSE 
+
+[[38]]$family_info$supp_min_depends_on
+   mu sigma    nu 
+FALSE FALSE FALSE 
+
+
+
+There were 50 or more warnings (use warnings() to see the first 50)
+Done.

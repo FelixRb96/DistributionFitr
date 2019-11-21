@@ -1,0 +1,60 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: POT	Number of families: 1 
+Current Family: gpd 
+[[1]]
+[[1]]$package
+[1] "POT"
+
+[[1]]$family
+[1] "gpd"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+  loc scale shape 
+ -Inf  0.01  -Inf 
+
+[[1]]$family_info$upper
+  loc scale shape 
+  Inf   Inf   Inf 
+
+[[1]]$family_info$accepts_float
+  loc scale shape 
+ TRUE  TRUE  TRUE 
+
+[[1]]$family_info$defaults
+  loc scale shape 
+    0     1     0 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+  loc scale shape 
+FALSE FALSE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+  loc scale shape 
+ TRUE FALSE FALSE 
+
+
+
+Done.

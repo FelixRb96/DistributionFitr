@@ -1,0 +1,15 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: wppExplorerCreating a generic function for ‘toJSON’ from package ‘jsonlite’ in package ‘googleVis’
+	Number of families: 0 
+list()
+Done.

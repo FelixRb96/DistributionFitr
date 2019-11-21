@@ -1,0 +1,26 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: MixMatrix	Number of families: 3 
+Current Family: matrixinvt 
+Could not find a set of valid default values for family MixMatrixmatrixinvt
+Errors: cannot coerce type 'closure' to vector of type 'any'
+
+Current Family: matrixnorm 
+Could not find a set of valid default values for family MixMatrixmatrixnorm
+Errors: cannot coerce type 'closure' to vector of type 'any'
+
+Current Family: matrixt 
+Could not find a set of valid default values for family MixMatrixmatrixt
+Errors: cannot coerce type 'closure' to vector of type 'any'
+
+list()
+Done.

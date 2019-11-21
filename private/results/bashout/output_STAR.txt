@@ -1,0 +1,75 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: STAR	Number of families: 3 
+Current Family: invgauss 
+Error occured for family invgauss
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: llogis 
+Error occured for family llogis
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+Current Family: rexp 
+[[1]]
+[[1]]$package
+[1] "STAR"
+
+[[1]]$family
+[1] "rexp"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+ rate    rp 
+0.010 0.005 
+
+[[1]]$family_info$upper
+rate   rp 
+ Inf  Inf 
+
+[[1]]$family_info$accepts_float
+rate   rp 
+TRUE TRUE 
+
+[[1]]$family_info$defaults
+ rate    rp 
+1e+01 5e-03 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] 0.005
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+ rate    rp 
+FALSE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+ rate    rp 
+FALSE  TRUE 
+
+
+
+Warning messages:
+1: In min(vals[check_res]) :
+  no non-missing arguments to min; returning Inf
+2: In min(vals[check_res]) :
+  no non-missing arguments to min; returning Inf
+Done.

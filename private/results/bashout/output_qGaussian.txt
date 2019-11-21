@@ -1,0 +1,21 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: qGaussian	Number of families: 1 
+Current Family: qgauss 
+Error occured for family qgauss
+Error in seq.default(border, cur_val, by = step_sizes[i + 1]): 'from' must be a finite number
+
+
+list()
+Warning message:
+In min(vals[check_res]) : no non-missing arguments to min; returning Inf
+Done.

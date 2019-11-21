@@ -1,0 +1,64 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: ForestFit	Number of families: 2 
+Current Family: gsm 
+Current Family: mixture 
+Could not find a set of valid default values for family ForestFitmixture
+Errors: Baseline distribution is not implemented or misspelled.
+
+[[1]]
+[[1]]$package
+[1] "ForestFit"
+
+[[1]]$family
+[1] "gsm"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+       omega         beta 
+8.326673e-17 8.326673e-17 
+
+[[1]]$family_info$upper
+omega  beta 
+  Inf   Inf 
+
+[[1]]$family_info$accepts_float
+omega  beta 
+ TRUE  TRUE 
+
+[[1]]$family_info$defaults
+omega  beta 
+  0.5   0.5 
+
+[[1]]$family_info$log
+[1] FALSE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] 0
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+omega  beta 
+FALSE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+omega  beta 
+FALSE FALSE 
+
+
+
+Done.

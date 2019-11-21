@@ -1,0 +1,60 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: GSM	Number of families: 1 
+Current Family: gsm 
+[[1]]
+[[1]]$package
+[1] "GSM"
+
+[[1]]$family
+[1] "gsm"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+      weight    rateparam 
+8.326673e-17 8.326673e-17 
+
+[[1]]$family_info$upper
+   weight rateparam 
+      Inf       Inf 
+
+[[1]]$family_info$accepts_float
+   weight rateparam 
+     TRUE      TRUE 
+
+[[1]]$family_info$defaults
+   weight rateparam 
+      0.5       0.5 
+
+[[1]]$family_info$log
+[1] FALSE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] 0
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+   weight rateparam 
+    FALSE     FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+   weight rateparam 
+    FALSE     FALSE 
+
+
+
+Done.

@@ -1,0 +1,17 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: tidyLPA	Number of families: 0 
+list()
+Warning message:
+In system2("type", args = "mplus", stdout = FALSE, stderr = FALSE) :
+  error in running command
+Done.

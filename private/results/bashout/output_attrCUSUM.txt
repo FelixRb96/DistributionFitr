@@ -1,0 +1,28 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: attrCUSUM	Number of families: 2 
+Current Family: zibinom 
+Could not find a set of valid default values for family attrCUSUMzibinom
+Errors: 
+CheckArgs_rzibinom(n, rho, size, prob)
+1 
+CheckArgs_dzibinom(x, rho, size, prob, log)
+1
+Current Family: zipois 
+Could not find a set of valid default values for family attrCUSUMzipois
+Errors: 
+CheckArgs_dzipois(x, rho, lambda, log)
+1 
+CheckArgs_rzipois(n, rho, lambda)
+1
+list()
+Done.

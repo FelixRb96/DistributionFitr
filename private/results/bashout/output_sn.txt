@@ -1,0 +1,53 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: sn	Number of families: 8 
+Current Family: msc 
+Error occured for family msc
+Error in if (check_res[1]) {: argument is not interpretable as logical
+
+
+Current Family: msn 
+Error occured for family msn
+Error in if (check_res[1]) {: argument is not interpretable as logical
+
+
+Current Family: mst 
+Error occured for family mst
+Error in if (check_res[1]) {: argument is not interpretable as logical
+
+
+Current Family: mSymmModulated 
+Could not find a set of valid default values for family snmSymmModulated
+Errors: Omega must be a matrix
+
+Current Family: sc 
+Error occured for family sc
+Error in if (check_res[1]) {: argument is not interpretable as logical
+
+
+Current Family: sn 
+Error occured for family sn
+Error in if (check_res[1]) {: argument is not interpretable as logical
+
+
+Current Family: st 
+Error occured for family st
+Error in if (check_res[1]) {: argument is not interpretable as logical
+
+
+Current Family: SymmModulated 
+Could not find a set of valid default values for family snSymmModulated
+Errors: EXPR must be a length 1 vector
+ could not find function "w"
+
+list()
+Done.

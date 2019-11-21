@@ -1,0 +1,22 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: sads	Number of families: 14 
+Current Family: bs 
+Could not find a set of valid default values for family sadsbs
+Errors: need at least two non-NA values to interpolate
+
+Current Family: gs 
+Current Family: ls 
+Current Family: mand 
+Current Family: mzsm 
+Current Family: pareto 
+Current Family: poig 

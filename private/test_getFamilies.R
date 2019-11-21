@@ -10,7 +10,7 @@
 # res_all <- iterate_packages(all_pkgs)
 
 ###
-setwd("/home/manuel/RProjekt/DistributionFitr/private")
+# setwd("/home/manuel/RProjekt/DistributionFitr/private")
 source('../R/source_all.R')
 
 # l <- installed.packages()

@@ -1,0 +1,25 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: PtProcess	Number of families: 2 
+Current Family: pareto 
+Could not find a set of valid default values for family PtProcesspareto
+Errors: Invalid data All values of lambda must be positive
+ Argument a must be positive
+
+Current Family: tappareto 
+Could not find a set of valid default values for family PtProcesstappareto
+Errors: Invalid data All values of lambda must be positive
+ All values of theta must be positive
+ Argument a must be positive
+
+list()
+Done.

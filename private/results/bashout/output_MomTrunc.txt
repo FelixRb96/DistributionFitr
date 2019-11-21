@@ -1,0 +1,22 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: MomTrunc	Number of families: 2 
+Current Family: mvESN 
+Could not find a set of valid default values for family MomTruncmvESN
+Errors: object 'lambda' not found
+
+Current Family: mvSN 
+Could not find a set of valid default values for family MomTruncmvSN
+Errors: object 'lambda' not found
+
+list()
+Done.

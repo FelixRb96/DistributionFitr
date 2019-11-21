@@ -1,0 +1,812 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: powdist	Number of families: 17 
+Current Family: expow 
+Current Family: gumbel 
+Current Family: pcauchy 
+Current Family: pexpow 
+Current Family: plaplace 
+Current Family: plogis 
+Current Family: pnorm 
+Current Family: prgumbel 
+Current Family: pt 
+Current Family: rgumbel 
+Current Family: rpcauchy 
+Current Family: rpexpow 
+Current Family: rplaplace 
+Current Family: rplogis 
+Current Family: rpnorm 
+Current Family: rprgumbel 
+Current Family: rpt 
+[[1]]
+[[1]]$package
+[1] "powdist"
+
+[[1]]$family
+[1] "expow"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+   mu sigma     k 
+ -Inf  -Inf    -1 
+
+[[1]]$family_info$upper
+   mu sigma     k 
+  Inf   Inf     1 
+
+[[1]]$family_info$accepts_float
+   mu sigma     k 
+ TRUE  TRUE  TRUE 
+
+[[1]]$family_info$defaults
+   mu sigma     k 
+    0     1     0 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+   mu sigma     k 
+FALSE FALSE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+   mu sigma     k 
+FALSE FALSE FALSE 
+
+
+
+[[2]]
+[[2]]$package
+[1] "powdist"
+
+[[2]]$family
+[1] "gumbel"
+
+[[2]]$family_info
+[[2]]$family_info$lower
+   mu sigma 
+ -Inf  -Inf 
+
+[[2]]$family_info$upper
+   mu sigma 
+  Inf   Inf 
+
+[[2]]$family_info$accepts_float
+   mu sigma 
+ TRUE  TRUE 
+
+[[2]]$family_info$defaults
+   mu sigma 
+    0     1 
+
+[[2]]$family_info$log
+[1] TRUE
+
+[[2]]$family_info$discrete
+[1] FALSE
+
+[[2]]$family_info$support_min
+[1] -Inf
+
+[[2]]$family_info$support_max
+[1] Inf
+
+[[2]]$family_info$supp_max_depends_on
+   mu sigma 
+FALSE FALSE 
+
+[[2]]$family_info$supp_min_depends_on
+   mu sigma 
+FALSE FALSE 
+
+
+
+[[3]]
+[[3]]$package
+[1] "powdist"
+
+[[3]]$family
+[1] "pcauchy"
+
+[[3]]$family_info
+[[3]]$family_info$lower
+lambda     mu  sigma 
+  0.01   -Inf   -Inf 
+
+[[3]]$family_info$upper
+lambda     mu  sigma 
+   Inf    Inf    Inf 
+
+[[3]]$family_info$accepts_float
+lambda     mu  sigma 
+  TRUE   TRUE   TRUE 
+
+[[3]]$family_info$defaults
+lambda     mu  sigma 
+     1      0      1 
+
+[[3]]$family_info$log
+[1] TRUE
+
+[[3]]$family_info$discrete
+[1] FALSE
+
+[[3]]$family_info$support_min
+[1] -Inf
+
+[[3]]$family_info$support_max
+[1] Inf
+
+[[3]]$family_info$supp_max_depends_on
+lambda     mu  sigma 
+ FALSE  FALSE  FALSE 
+
+[[3]]$family_info$supp_min_depends_on
+lambda     mu  sigma 
+ FALSE  FALSE  FALSE 
+
+
+
+[[4]]
+[[4]]$package
+[1] "powdist"
+
+[[4]]$family
+[1] "pexpow"
+
+[[4]]$family_info
+[[4]]$family_info$lower
+lambda     mu  sigma      k 
+  0.01   -Inf   -Inf  -1.00 
+
+[[4]]$family_info$upper
+lambda     mu  sigma      k 
+   Inf    Inf    Inf      1 
+
+[[4]]$family_info$accepts_float
+lambda     mu  sigma      k 
+  TRUE   TRUE   TRUE   TRUE 
+
+[[4]]$family_info$defaults
+lambda     mu  sigma      k 
+     1      0      1      0 
+
+[[4]]$family_info$log
+[1] TRUE
+
+[[4]]$family_info$discrete
+[1] FALSE
+
+[[4]]$family_info$support_min
+[1] -Inf
+
+[[4]]$family_info$support_max
+[1] Inf
+
+[[4]]$family_info$supp_max_depends_on
+lambda     mu  sigma      k 
+ FALSE  FALSE  FALSE  FALSE 
+
+[[4]]$family_info$supp_min_depends_on
+lambda     mu  sigma      k 
+ FALSE  FALSE  FALSE  FALSE 
+
+
+
+[[5]]
+[[5]]$package
+[1] "powdist"
+
+[[5]]$family
+[1] "plaplace"
+
+[[5]]$family_info
+[[5]]$family_info$lower
+lambda     mu  sigma 
+  0.01   -Inf   -Inf 
+
+[[5]]$family_info$upper
+lambda     mu  sigma 
+   Inf    Inf    Inf 
+
+[[5]]$family_info$accepts_float
+lambda     mu  sigma 
+  TRUE   TRUE   TRUE 
+
+[[5]]$family_info$defaults
+lambda     mu  sigma 
+     1      0      1 
+
+[[5]]$family_info$log
+[1] TRUE
+
+[[5]]$family_info$discrete
+[1] FALSE
+
+[[5]]$family_info$support_min
+[1] -Inf
+
+[[5]]$family_info$support_max
+[1] Inf
+
+[[5]]$family_info$supp_max_depends_on
+lambda     mu  sigma 
+ FALSE  FALSE  FALSE 
+
+[[5]]$family_info$supp_min_depends_on
+lambda     mu  sigma 
+ FALSE  FALSE  FALSE 
+
+
+
+[[6]]
+[[6]]$package
+[1] "powdist"
+
+[[6]]$family
+[1] "plogis"
+
+[[6]]$family_info
+[[6]]$family_info$lower
+lambda     mu  sigma 
+  0.01   -Inf   -Inf 
+
+[[6]]$family_info$upper
+lambda     mu  sigma 
+   Inf    Inf    Inf 
+
+[[6]]$family_info$accepts_float
+lambda     mu  sigma 
+  TRUE   TRUE   TRUE 
+
+[[6]]$family_info$defaults
+lambda     mu  sigma 
+     1      0      1 
+
+[[6]]$family_info$log
+[1] TRUE
+
+[[6]]$family_info$discrete
+[1] FALSE
+
+[[6]]$family_info$support_min
+[1] -Inf
+
+[[6]]$family_info$support_max
+[1] Inf
+
+[[6]]$family_info$supp_max_depends_on
+lambda     mu  sigma 
+ FALSE  FALSE  FALSE 
+
+[[6]]$family_info$supp_min_depends_on
+lambda     mu  sigma 
+ FALSE  FALSE  FALSE 
+
+
+
+[[7]]
+[[7]]$package
+[1] "powdist"
+
+[[7]]$family
+[1] "pnorm"
+
+[[7]]$family_info
+[[7]]$family_info$lower
+lambda     mu  sigma 
+  0.01   -Inf   -Inf 
+
+[[7]]$family_info$upper
+lambda     mu  sigma 
+   Inf    Inf    Inf 
+
+[[7]]$family_info$accepts_float
+lambda     mu  sigma 
+  TRUE   TRUE   TRUE 
+
+[[7]]$family_info$defaults
+lambda     mu  sigma 
+     1      0      1 
+
+[[7]]$family_info$log
+[1] TRUE
+
+[[7]]$family_info$discrete
+[1] FALSE
+
+[[7]]$family_info$support_min
+[1] -Inf
+
+[[7]]$family_info$support_max
+[1] Inf
+
+[[7]]$family_info$supp_max_depends_on
+lambda     mu  sigma 
+ FALSE  FALSE  FALSE 
+
+[[7]]$family_info$supp_min_depends_on
+lambda     mu  sigma 
+ FALSE  FALSE  FALSE 
+
+
+
+[[8]]
+[[8]]$package
+[1] "powdist"
+
+[[8]]$family
+[1] "prgumbel"
+
+[[8]]$family_info
+[[8]]$family_info$lower
+lambda     mu  sigma 
+  0.01   -Inf   -Inf 
+
+[[8]]$family_info$upper
+lambda     mu  sigma 
+   Inf    Inf    Inf 
+
+[[8]]$family_info$accepts_float
+lambda     mu  sigma 
+  TRUE   TRUE   TRUE 
+
+[[8]]$family_info$defaults
+lambda     mu  sigma 
+     1      0      1 
+
+[[8]]$family_info$log
+[1] TRUE
+
+[[8]]$family_info$discrete
+[1] FALSE
+
+[[8]]$family_info$support_min
+[1] -Inf
+
+[[8]]$family_info$support_max
+[1] Inf
+
+[[8]]$family_info$supp_max_depends_on
+lambda     mu  sigma 
+ FALSE  FALSE  FALSE 
+
+[[8]]$family_info$supp_min_depends_on
+lambda     mu  sigma 
+ FALSE  FALSE  FALSE 
+
+
+
+[[9]]
+[[9]]$package
+[1] "powdist"
+
+[[9]]$family
+[1] "pt"
+
+[[9]]$family_info
+[[9]]$family_info$lower
+lambda     mu  sigma     df 
+  0.01   -Inf   -Inf   0.01 
+
+[[9]]$family_info$upper
+lambda     mu  sigma     df 
+   Inf    Inf    Inf    Inf 
+
+[[9]]$family_info$accepts_float
+lambda     mu  sigma     df 
+  TRUE   TRUE   TRUE   TRUE 
+
+[[9]]$family_info$defaults
+lambda     mu  sigma     df 
+   1.0    0.0    1.0    0.5 
+
+[[9]]$family_info$log
+[1] TRUE
+
+[[9]]$family_info$discrete
+[1] FALSE
+
+[[9]]$family_info$support_min
+[1] -Inf
+
+[[9]]$family_info$support_max
+[1] Inf
+
+[[9]]$family_info$supp_max_depends_on
+lambda     mu  sigma     df 
+ FALSE  FALSE  FALSE  FALSE 
+
+[[9]]$family_info$supp_min_depends_on
+lambda     mu  sigma     df 
+ FALSE  FALSE  FALSE  FALSE 
+
+
+
+[[10]]
+[[10]]$package
+[1] "powdist"
+
+[[10]]$family
+[1] "rgumbel"
+
+[[10]]$family_info
+[[10]]$family_info$lower
+   mu sigma 
+ -Inf  -Inf 
+
+[[10]]$family_info$upper
+   mu sigma 
+  Inf   Inf 
+
+[[10]]$family_info$accepts_float
+   mu sigma 
+ TRUE  TRUE 
+
+[[10]]$family_info$defaults
+   mu sigma 
+    0     1 
+
+[[10]]$family_info$log
+[1] TRUE
+
+[[10]]$family_info$discrete
+[1] FALSE
+
+[[10]]$family_info$support_min
+[1] -Inf
+
+[[10]]$family_info$support_max
+[1] Inf
+
+[[10]]$family_info$supp_max_depends_on
+   mu sigma 
+FALSE FALSE 
+
+[[10]]$family_info$supp_min_depends_on
+   mu sigma 
+FALSE FALSE 
+
+
+
+[[11]]
+[[11]]$package
+[1] "powdist"
+
+[[11]]$family
+[1] "rpcauchy"
+
+[[11]]$family_info
+[[11]]$family_info$lower
+lambda     mu  sigma 
+  0.01   -Inf   -Inf 
+
+[[11]]$family_info$upper
+lambda     mu  sigma 
+   Inf    Inf    Inf 
+
+[[11]]$family_info$accepts_float
+lambda     mu  sigma 
+  TRUE   TRUE   TRUE 
+
+[[11]]$family_info$defaults
+lambda     mu  sigma 
+     1      0      1 
+
+[[11]]$family_info$log
+[1] TRUE
+
+[[11]]$family_info$discrete
+[1] FALSE
+
+[[11]]$family_info$support_min
+[1] -Inf
+
+[[11]]$family_info$support_max
+[1] Inf
+
+[[11]]$family_info$supp_max_depends_on
+lambda     mu  sigma 
+ FALSE  FALSE  FALSE 
+
+[[11]]$family_info$supp_min_depends_on
+lambda     mu  sigma 
+ FALSE  FALSE  FALSE 
+
+
+
+[[12]]
+[[12]]$package
+[1] "powdist"
+
+[[12]]$family
+[1] "rpexpow"
+
+[[12]]$family_info
+[[12]]$family_info$lower
+lambda     mu  sigma      k 
+  0.01   -Inf   -Inf  -1.00 
+
+[[12]]$family_info$upper
+lambda     mu  sigma      k 
+   Inf    Inf    Inf      1 
+
+[[12]]$family_info$accepts_float
+lambda     mu  sigma      k 
+  TRUE   TRUE   TRUE   TRUE 
+
+[[12]]$family_info$defaults
+lambda     mu  sigma      k 
+     1      0      1      0 
+
+[[12]]$family_info$log
+[1] TRUE
+
+[[12]]$family_info$discrete
+[1] FALSE
+
+[[12]]$family_info$support_min
+[1] -Inf
+
+[[12]]$family_info$support_max
+[1] Inf
+
+[[12]]$family_info$supp_max_depends_on
+lambda     mu  sigma      k 
+ FALSE  FALSE  FALSE  FALSE 
+
+[[12]]$family_info$supp_min_depends_on
+lambda     mu  sigma      k 
+ FALSE  FALSE  FALSE  FALSE 
+
+
+
+[[13]]
+[[13]]$package
+[1] "powdist"
+
+[[13]]$family
+[1] "rplaplace"
+
+[[13]]$family_info
+[[13]]$family_info$lower
+lambda     mu  sigma 
+  0.01   -Inf   -Inf 
+
+[[13]]$family_info$upper
+lambda     mu  sigma 
+   Inf    Inf    Inf 
+
+[[13]]$family_info$accepts_float
+lambda     mu  sigma 
+  TRUE   TRUE   TRUE 
+
+[[13]]$family_info$defaults
+lambda     mu  sigma 
+     1      0      1 
+
+[[13]]$family_info$log
+[1] TRUE
+
+[[13]]$family_info$discrete
+[1] FALSE
+
+[[13]]$family_info$support_min
+[1] -Inf
+
+[[13]]$family_info$support_max
+[1] Inf
+
+[[13]]$family_info$supp_max_depends_on
+lambda     mu  sigma 
+ FALSE  FALSE  FALSE 
+
+[[13]]$family_info$supp_min_depends_on
+lambda     mu  sigma 
+ FALSE  FALSE  FALSE 
+
+
+
+[[14]]
+[[14]]$package
+[1] "powdist"
+
+[[14]]$family
+[1] "rplogis"
+
+[[14]]$family_info
+[[14]]$family_info$lower
+lambda     mu  sigma 
+  0.01   -Inf   -Inf 
+
+[[14]]$family_info$upper
+lambda     mu  sigma 
+   Inf    Inf    Inf 
+
+[[14]]$family_info$accepts_float
+lambda     mu  sigma 
+  TRUE   TRUE   TRUE 
+
+[[14]]$family_info$defaults
+lambda     mu  sigma 
+     1      0      1 
+
+[[14]]$family_info$log
+[1] TRUE
+
+[[14]]$family_info$discrete
+[1] FALSE
+
+[[14]]$family_info$support_min
+[1] -Inf
+
+[[14]]$family_info$support_max
+[1] Inf
+
+[[14]]$family_info$supp_max_depends_on
+lambda     mu  sigma 
+ FALSE  FALSE  FALSE 
+
+[[14]]$family_info$supp_min_depends_on
+lambda     mu  sigma 
+ FALSE  FALSE  FALSE 
+
+
+
+[[15]]
+[[15]]$package
+[1] "powdist"
+
+[[15]]$family
+[1] "rpnorm"
+
+[[15]]$family_info
+[[15]]$family_info$lower
+lambda     mu  sigma 
+  0.01   -Inf   -Inf 
+
+[[15]]$family_info$upper
+lambda     mu  sigma 
+   Inf    Inf    Inf 
+
+[[15]]$family_info$accepts_float
+lambda     mu  sigma 
+  TRUE   TRUE   TRUE 
+
+[[15]]$family_info$defaults
+lambda     mu  sigma 
+     1      0      1 
+
+[[15]]$family_info$log
+[1] TRUE
+
+[[15]]$family_info$discrete
+[1] FALSE
+
+[[15]]$family_info$support_min
+[1] -Inf
+
+[[15]]$family_info$support_max
+[1] Inf
+
+[[15]]$family_info$supp_max_depends_on
+lambda     mu  sigma 
+ FALSE  FALSE  FALSE 
+
+[[15]]$family_info$supp_min_depends_on
+lambda     mu  sigma 
+ FALSE  FALSE  FALSE 
+
+
+
+[[16]]
+[[16]]$package
+[1] "powdist"
+
+[[16]]$family
+[1] "rprgumbel"
+
+[[16]]$family_info
+[[16]]$family_info$lower
+lambda     mu  sigma 
+  0.02   -Inf   -Inf 
+
+[[16]]$family_info$upper
+lambda     mu  sigma 
+   Inf    Inf    Inf 
+
+[[16]]$family_info$accepts_float
+lambda     mu  sigma 
+  TRUE   TRUE   TRUE 
+
+[[16]]$family_info$defaults
+lambda     mu  sigma 
+     1      0      1 
+
+[[16]]$family_info$log
+[1] TRUE
+
+[[16]]$family_info$discrete
+[1] FALSE
+
+[[16]]$family_info$support_min
+[1] -Inf
+
+[[16]]$family_info$support_max
+[1] Inf
+
+[[16]]$family_info$supp_max_depends_on
+lambda     mu  sigma 
+ FALSE  FALSE  FALSE 
+
+[[16]]$family_info$supp_min_depends_on
+lambda     mu  sigma 
+ FALSE  FALSE  FALSE 
+
+
+
+[[17]]
+[[17]]$package
+[1] "powdist"
+
+[[17]]$family
+[1] "rpt"
+
+[[17]]$family_info
+[[17]]$family_info$lower
+lambda     mu  sigma     df 
+  0.01   -Inf   -Inf   0.01 
+
+[[17]]$family_info$upper
+lambda     mu  sigma     df 
+   Inf    Inf    Inf    Inf 
+
+[[17]]$family_info$accepts_float
+lambda     mu  sigma     df 
+  TRUE   TRUE   TRUE   TRUE 
+
+[[17]]$family_info$defaults
+lambda     mu  sigma     df 
+   1.0    0.0    1.0    0.5 
+
+[[17]]$family_info$log
+[1] TRUE
+
+[[17]]$family_info$discrete
+[1] FALSE
+
+[[17]]$family_info$support_min
+[1] -Inf
+
+[[17]]$family_info$support_max
+[1] Inf
+
+[[17]]$family_info$supp_max_depends_on
+lambda     mu  sigma     df 
+ FALSE  FALSE  FALSE  FALSE 
+
+[[17]]$family_info$supp_min_depends_on
+lambda     mu  sigma     df 
+ FALSE  FALSE  FALSE  FALSE 
+
+
+
+Done.

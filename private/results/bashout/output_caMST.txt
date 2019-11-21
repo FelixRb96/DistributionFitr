@@ -1,0 +1,27 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: caMST
+             ___  ___ _____  _____
+             |  \/  |/  ___||_   _|
+  ___   __ _ | .  . |\ `--.   | |
+ / __| / _` || |\/| | `--. \  | |
+| (__ | (_| || |  | |/\__/ /  | |
+ \___| \__,_|\_|  |_/\____/   \_/
+     
+	Version 0.1.2
+	\   /\ 
+	 ) ( ')	 >^)
+	( /  ) 	 /\\ 
+	\(__)|	_\_V
+	Number of families: 0 
+list()
+Done.

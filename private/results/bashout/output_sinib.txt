@@ -1,0 +1,17 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: sinib	Number of families: 1 
+Current Family: sinib 
+Could not find a set of valid default values for family sinibsinib
+Errors:sum(size), size = size, prob = prob)
+list()
+Done.

@@ -1,0 +1,754 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: sadists	Number of families: 12 
+Current Family: dnbeta 
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Loading required package: polynom
+Current Family: dneta 
+Current Family: dnf 
+Current Family: dnt 
+Current Family: kprime 
+Current Family: lambdap 
+Current Family: prodchisqpow 
+Current Family: proddnf 
+Current Family: prodnormal 
+Current Family: sumchisqpow 
+Current Family: sumlogchisq 
+Current Family: upsilon 
+[[1]]
+[[1]]$package
+[1] "sadists"
+
+[[1]]$family
+[1] "dnbeta"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+         df1          df2         ncp1         ncp2 
+8.326673e-17 0.000000e+00 0.000000e+00 0.000000e+00 
+
+[[1]]$family_info$upper
+ df1  df2 ncp1 ncp2 
+ Inf  Inf  Inf  Inf 
+
+[[1]]$family_info$accepts_float
+ df1  df2 ncp1 ncp2 
+TRUE TRUE TRUE TRUE 
+
+[[1]]$family_info$defaults
+ df1  df2 ncp1 ncp2 
+ 0.5  0.5  0.5  0.5 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] 0
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+  df1   df2  ncp1  ncp2 
+ TRUE FALSE  TRUE  TRUE 
+
+[[1]]$family_info$supp_min_depends_on
+  df1   df2  ncp1  ncp2 
+ TRUE FALSE  TRUE  TRUE 
+
+
+
+[[2]]
+[[2]]$package
+[1] "sadists"
+
+[[2]]$family
+[1] "dneta"
+
+[[2]]$family_info
+[[2]]$family_info$lower
+   df  ncp1  ncp2 
+ 0.01 -1.64  0.00 
+
+[[2]]$family_info$upper
+  df ncp1 ncp2 
+ Inf 1.64 0.19 
+
+[[2]]$family_info$accepts_float
+  df ncp1 ncp2 
+TRUE TRUE TRUE 
+
+[[2]]$family_info$defaults
+  df ncp1 ncp2 
+ 0.5  0.5  0.0 
+
+[[2]]$family_info$log
+[1] TRUE
+
+[[2]]$family_info$discrete
+[1] FALSE
+
+[[2]]$family_info$support_min
+[1] -0.99
+
+[[2]]$family_info$support_max
+[1] 0.99
+
+[[2]]$family_info$supp_max_depends_on
+   df  ncp1  ncp2 
+FALSE FALSE FALSE 
+
+[[2]]$family_info$supp_min_depends_on
+   df  ncp1  ncp2 
+FALSE FALSE FALSE 
+
+
+
+[[3]]
+[[3]]$package
+[1] "sadists"
+
+[[3]]$family
+[1] "dnf"
+
+[[3]]$family_info
+[[3]]$family_info$lower
+         df1          df2         ncp1         ncp2 
+8.326673e-17 1.000000e-02 0.000000e+00 0.000000e+00 
+
+[[3]]$family_info$upper
+ df1  df2 ncp1 ncp2 
+ Inf  Inf  Inf  Inf 
+
+[[3]]$family_info$accepts_float
+ df1  df2 ncp1 ncp2 
+TRUE TRUE TRUE TRUE 
+
+[[3]]$family_info$defaults
+ df1  df2 ncp1 ncp2 
+ 0.5  0.5  0.5  0.5 
+
+[[3]]$family_info$log
+[1] TRUE
+
+[[3]]$family_info$discrete
+[1] FALSE
+
+[[3]]$family_info$support_min
+[1] 0
+
+[[3]]$family_info$support_max
+[1] Inf
+
+[[3]]$family_info$supp_max_depends_on
+  df1   df2  ncp1  ncp2 
+ TRUE FALSE  TRUE  TRUE 
+
+[[3]]$family_info$supp_min_depends_on
+  df1   df2  ncp1  ncp2 
+ TRUE FALSE  TRUE  TRUE 
+
+
+
+[[4]]
+[[4]]$package
+[1] "sadists"
+
+[[4]]$family
+[1] "dnt"
+
+[[4]]$family_info
+[[4]]$family_info$lower
+   df  ncp1  ncp2 
+ 0.01 -1.64  0.00 
+
+[[4]]$family_info$upper
+  df ncp1 ncp2 
+ Inf 1.64 0.19 
+
+[[4]]$family_info$accepts_float
+  df ncp1 ncp2 
+TRUE TRUE TRUE 
+
+[[4]]$family_info$defaults
+  df ncp1 ncp2 
+ 0.5  0.5  0.0 
+
+[[4]]$family_info$log
+[1] TRUE
+
+[[4]]$family_info$discrete
+[1] FALSE
+
+[[4]]$family_info$support_min
+[1] -Inf
+
+[[4]]$family_info$support_max
+[1] Inf
+
+[[4]]$family_info$supp_max_depends_on
+   df  ncp1  ncp2 
+FALSE FALSE FALSE 
+
+[[4]]$family_info$supp_min_depends_on
+   df  ncp1  ncp2 
+FALSE FALSE FALSE 
+
+
+
+[[5]]
+[[5]]$package
+[1] "sadists"
+
+[[5]]$family
+[1] "kprime"
+
+[[5]]$family_info
+[[5]]$family_info$lower
+           b           v1           v2            a 
+0.000000e+00 8.326673e-17 1.000000e-02         -Inf 
+
+[[5]]$family_info$upper
+  b  v1  v2   a 
+Inf Inf Inf Inf 
+
+[[5]]$family_info$accepts_float
+   b   v1   v2    a 
+TRUE TRUE TRUE TRUE 
+
+[[5]]$family_info$defaults
+  b  v1  v2   a 
+1.0 0.5 0.5 0.5 
+
+[[5]]$family_info$log
+[1] TRUE
+
+[[5]]$family_info$discrete
+[1] FALSE
+
+[[5]]$family_info$support_min
+[1] -Inf
+
+[[5]]$family_info$support_max
+[1] Inf
+
+[[5]]$family_info$supp_max_depends_on
+    b    v1    v2     a 
+FALSE FALSE FALSE FALSE 
+
+[[5]]$family_info$supp_min_depends_on
+    b    v1    v2     a 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[6]]
+[[6]]$package
+[1] "sadists"
+
+[[6]]$family
+[1] "lambdap"
+
+[[6]]$family_info
+[[6]]$family_info$lower
+          df            t 
+8.326673e-17         -Inf 
+
+[[6]]$family_info$upper
+ df   t 
+Inf Inf 
+
+[[6]]$family_info$accepts_float
+  df    t 
+TRUE TRUE 
+
+[[6]]$family_info$defaults
+ df   t 
+0.5 0.5 
+
+[[6]]$family_info$log
+[1] TRUE
+
+[[6]]$family_info$discrete
+[1] FALSE
+
+[[6]]$family_info$support_min
+[1] -Inf
+
+[[6]]$family_info$support_max
+[1] Inf
+
+[[6]]$family_info$supp_max_depends_on
+   df     t 
+FALSE FALSE 
+
+[[6]]$family_info$supp_min_depends_on
+   df     t 
+FALSE FALSE 
+
+
+
+[[7]]
+[[7]]$package
+[1] "sadists"
+
+[[7]]$family
+[1] "prodchisqpow"
+
+[[7]]$family_info
+[[7]]$family_info$lower
+          ncp           pow            df 
+ 0.000000e+00 -7.990000e+02  8.326673e-17 
+
+[[7]]$family_info$upper
+  ncp   pow    df 
+779.4   Inf   Inf 
+
+[[7]]$family_info$accepts_float
+ ncp  pow   df 
+TRUE TRUE TRUE 
+
+[[7]]$family_info$defaults
+ncp pow  df 
+0.0 1.0 0.5 
+
+[[7]]$family_info$log
+[1] TRUE
+
+[[7]]$family_info$discrete
+[1] FALSE
+
+[[7]]$family_info$support_min
+[1] 0.01
+
+[[7]]$family_info$support_max
+[1] Inf
+
+[[7]]$family_info$supp_max_depends_on
+  ncp   pow    df 
+FALSE FALSE FALSE 
+
+[[7]]$family_info$supp_min_depends_on
+  ncp   pow    df 
+FALSE FALSE FALSE 
+
+
+
+[[8]]
+[[8]]$package
+[1] "sadists"
+
+[[8]]$family
+[1] "proddnf"
+
+[[8]]$family_info
+[[8]]$family_info$lower
+         df1          df2         ncp1         ncp2 
+8.326673e-17 1.000000e-02 0.000000e+00 0.000000e+00 
+
+[[8]]$family_info$upper
+ df1  df2 ncp1 ncp2 
+ Inf  Inf  Inf  Inf 
+
+[[8]]$family_info$accepts_float
+ df1  df2 ncp1 ncp2 
+TRUE TRUE TRUE TRUE 
+
+[[8]]$family_info$defaults
+ df1  df2 ncp1 ncp2 
+ 0.5  0.5  0.5  0.5 
+
+[[8]]$family_info$log
+[1] TRUE
+
+[[8]]$family_info$discrete
+[1] FALSE
+
+[[8]]$family_info$support_min
+[1] 0.01
+
+[[8]]$family_info$support_max
+[1] Inf
+
+[[8]]$family_info$supp_max_depends_on
+  df1   df2  ncp1  ncp2 
+FALSE FALSE FALSE FALSE 
+
+[[8]]$family_info$supp_min_depends_on
+  df1   df2  ncp1  ncp2 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[9]]
+[[9]]$package
+[1] "sadists"
+
+[[9]]$family
+[1] "prodnormal"
+
+[[9]]$family_info
+[[9]]$family_info$lower
+   mu sigma 
+ -Inf  0.01 
+
+[[9]]$family_info$upper
+   mu sigma 
+  Inf   Inf 
+
+[[9]]$family_info$accepts_float
+   mu sigma 
+ TRUE  TRUE 
+
+[[9]]$family_info$defaults
+   mu sigma 
+  0.5   0.5 
+
+[[9]]$family_info$log
+[1] TRUE
+
+[[9]]$family_info$discrete
+[1] FALSE
+
+[[9]]$family_info$support_min
+[1] -Inf
+
+[[9]]$family_info$support_max
+[1] Inf
+
+[[9]]$family_info$supp_max_depends_on
+   mu sigma 
+FALSE FALSE 
+
+[[9]]$family_info$supp_min_depends_on
+   mu sigma 
+FALSE FALSE 
+
+
+
+[[10]]
+[[10]]$package
+[1] "sadists"
+
+[[10]]$family
+[1] "sumchisqpow"
+
+[[10]]$family_info
+[[10]]$family_info$lower
+ ncp  pow  wts   df 
+   0 -729 -Inf    0 
+
+[[10]]$family_info$upper
+ncp pow wts  df 
+Inf Inf Inf Inf 
+
+[[10]]$family_info$accepts_float
+ ncp  pow  wts   df 
+TRUE TRUE TRUE TRUE 
+
+[[10]]$family_info$defaults
+ncp pow wts  df 
+0.0 1.0 0.5 0.5 
+
+[[10]]$family_info$log
+[1] TRUE
+
+[[10]]$family_info$discrete
+[1] FALSE
+
+[[10]]$family_info$support_min
+[1] -Inf
+
+[[10]]$family_info$support_max
+[1] Inf
+
+[[10]]$family_info$supp_max_depends_on
+  ncp   pow   wts    df 
+FALSE FALSE FALSE FALSE 
+
+[[10]]$family_info$supp_min_depends_on
+  ncp   pow   wts    df 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[11]]
+[[11]]$package
+[1] "sadists"
+
+[[11]]$family
+[1] "sumlogchisq"
+
+[[11]]$family_info
+[[11]]$family_info$lower
+ ncp  wts   df 
+0.00 -Inf 0.01 
+
+[[11]]$family_info$upper
+   ncp    wts     df 
+636.82    Inf    Inf 
+
+[[11]]$family_info$accepts_float
+ ncp  wts   df 
+TRUE TRUE TRUE 
+
+[[11]]$family_info$defaults
+ncp wts  df 
+0.0 0.5 0.5 
+
+[[11]]$family_info$log
+[1] TRUE
+
+[[11]]$family_info$discrete
+[1] FALSE
+
+[[11]]$family_info$support_min
+[1] -Inf
+
+[[11]]$family_info$support_max
+[1] Inf
+
+[[11]]$family_info$supp_max_depends_on
+  ncp   wts    df 
+FALSE FALSE FALSE 
+
+[[11]]$family_info$supp_min_depends_on
+  ncp   wts    df 
+FALSE FALSE FALSE 
+
+
+
+[[12]]
+[[12]]$package
+[1] "sadists"
+
+[[12]]$family
+[1] "upsilon"
+
+[[12]]$family_info
+[[12]]$family_info$lower
+          df            t 
+8.326673e-17         -Inf 
+
+[[12]]$family_info$upper
+ df   t 
+Inf Inf 
+
+[[12]]$family_info$accepts_float
+  df    t 
+TRUE TRUE 
+
+[[12]]$family_info$defaults
+ df   t 
+0.5 0.5 
+
+[[12]]$family_info$log
+[1] TRUE
+
+[[12]]$family_info$discrete
+[1] FALSE
+
+[[12]]$family_info$support_min
+[1] -Inf
+
+[[12]]$family_info$support_max
+[1] Inf
+
+[[12]]$family_info$supp_max_depends_on
+   df     t 
+FALSE FALSE 
+
+[[12]]$family_info$supp_min_depends_on
+   df     t 
+FALSE FALSE 
+
+
+
+There were 12 warnings (use warnings() to see them)
+Done.

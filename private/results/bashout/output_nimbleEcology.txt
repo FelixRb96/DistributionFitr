@@ -1,0 +1,116 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: nimbleEcology	Number of families: 22 
+Current Family: CJS_ss 
+Could not find a set of valid default values for family nimbleEcologyCJS_ss
+Errors: argument is of length zero
+
+Current Family: CJS_sv 
+Could not find a set of valid default values for family nimbleEcologyCJS_sv
+Errors: Length of probCapture is not the same as len.
+
+Current Family: CJS_vs 
+Could not find a set of valid default values for family nimbleEcologyCJS_vs
+Errors: Length of probSurvive is not the same as len.
+
+Current Family: CJS_vv 
+Could not find a set of valid default values for family nimbleEcologyCJS_vv
+Errors: Length of probSurvive is not the same as len.
+
+Current Family: DHMM 
+Could not find a set of valid default values for family nimbleEcologyDHMM
+Errors: missing value where TRUE/FALSE needed
+
+Current Family: DHMMo 
+Could not find a set of valid default values for family nimbleEcologyDHMMo
+Errors:j, i]j])) j <- j + 1 invalid 'times' argument
+
+Current Family: DynOcc_ssm 
+Could not find a set of valid default values for family nimbleEcologyDynOcc_ssm
+Errors: incorrect number of dimensions
+
+Current Family: DynOcc_sss 
+Could not find a set of valid default values for family nimbleEcologyDynOcc_sss
+Errors: invalid arguments
+ missing value where TRUE/FALSE needed
+end[1], value = occupied * rbinom(end[1] - end[1]] <- occupied * rbinom(end[1] - start[1] +  invalid 'times' argument
+
+Current Family: DynOcc_ssv 
+Could not find a set of valid default values for family nimbleEcologyDynOcc_ssv
+Errors: invalid arguments
+ missing value where TRUE/FALSE needed
+end[1], value = occupied * rbinom(end[1] - end[1]] <- occupied * rbinom(end[1] - start[1] +  invalid 'times' argument
+
+Current Family: DynOcc_svm 
+Could not find a set of valid default values for family nimbleEcologyDynOcc_svm
+Errors: incorrect number of dimensions
+
+Current Family: DynOcc_svs 
+Could not find a set of valid default values for family nimbleEcologyDynOcc_svs
+Errors: invalid arguments
+ missing value where TRUE/FALSE needed
+end[1], value = occupied * rbinom(end[1] - end[1]] <- occupied * rbinom(end[1] - start[1] +  invalid 'times' argument
+
+Current Family: DynOcc_svv 
+Could not find a set of valid default values for family nimbleEcologyDynOcc_svv
+Errors: invalid arguments
+ missing value where TRUE/FALSE needed
+end[1], value = occupied * rbinom(end[1] - end[1]] <- occupied * rbinom(end[1] - start[1] +  invalid 'times' argument
+
+Current Family: DynOcc_vsm 
+Could not find a set of valid default values for family nimbleEcologyDynOcc_vsm
+Errors: incorrect number of dimensions
+
+Current Family: DynOcc_vss 
+Could not find a set of valid default values for family nimbleEcologyDynOcc_vss
+Errors: invalid arguments
+ missing value where TRUE/FALSE needed
+end[1], value = occupied * rbinom(end[1] - end[1]] <- occupied * rbinom(end[1] - start[1] +  invalid 'times' argument
+
+Current Family: DynOcc_vsv 
+Could not find a set of valid default values for family nimbleEcologyDynOcc_vsv
+Errors: invalid arguments
+ missing value where TRUE/FALSE needed
+end[1], value = occupied * rbinom(end[1] - end[1]] <- occupied * rbinom(end[1] - start[1] +  invalid 'times' argument
+
+Current Family: DynOcc_vvm 
+Could not find a set of valid default values for family nimbleEcologyDynOcc_vvm
+Errors: incorrect number of dimensions
+
+Current Family: DynOcc_vvs 
+Could not find a set of valid default values for family nimbleEcologyDynOcc_vvs
+Errors: invalid arguments
+ missing value where TRUE/FALSE needed
+end[1], value = occupied * rbinom(end[1] - end[1]] <- occupied * rbinom(end[1] - start[1] +  invalid 'times' argument
+
+Current Family: DynOcc_vvv 
+Could not find a set of valid default values for family nimbleEcologyDynOcc_vvv
+Errors: invalid arguments
+ missing value where TRUE/FALSE needed
+end[1], value = occupied * rbinom(end[1] - end[1]] <- occupied * rbinom(end[1] - start[1] +  invalid 'times' argument
+
+Current Family: HMM 
+Could not find a set of valid default values for family nimbleEcologyHMM
+Errors:j])) j <- j + 1j]
+Current Family: HMMo 
+Could not find a set of valid default values for family nimbleEcologyHMMo
+Errors:j])) j <- j + 1j]
+Current Family: Occ_s 
+Could not find a set of valid default values for family nimbleEcologyOcc_s
+Errors: Argument 'len' must be given for rOcc_s (or if a nimble model with dOcc_s is used for simulation).
+
+Current Family: Occ_v 
+Could not find a set of valid default values for family nimbleEcologyOcc_v
+Errors: Length of data does not match length of detection vector.
+
+list()
+Done.

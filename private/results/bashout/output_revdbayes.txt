@@ -1,0 +1,107 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: revdbayes	Number of families: 2 
+Current Family: gev 
+Current Family: gp 
+[[1]]
+[[1]]$package
+[1] "revdbayes"
+
+[[1]]$family
+[1] "gev"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+  loc scale shape     m 
+ -Inf  0.01  -Inf  0.01 
+
+[[1]]$family_info$upper
+  loc scale shape     m 
+  Inf   Inf  1000   Inf 
+
+[[1]]$family_info$accepts_float
+  loc scale shape     m 
+ TRUE  TRUE  TRUE  TRUE 
+
+[[1]]$family_info$defaults
+  loc scale shape     m 
+    0     1     0     1 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] -Inf
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+  loc scale shape     m 
+FALSE FALSE FALSE FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+  loc scale shape     m 
+FALSE FALSE FALSE FALSE 
+
+
+
+[[2]]
+[[2]]$package
+[1] "revdbayes"
+
+[[2]]$family
+[1] "gp"
+
+[[2]]$family_info
+[[2]]$family_info$lower
+  loc scale shape 
+ -Inf  0.01  -Inf 
+
+[[2]]$family_info$upper
+  loc scale shape 
+  Inf   Inf   950 
+
+[[2]]$family_info$accepts_float
+  loc scale shape 
+ TRUE  TRUE  TRUE 
+
+[[2]]$family_info$defaults
+  loc scale shape 
+    0     1     0 
+
+[[2]]$family_info$log
+[1] TRUE
+
+[[2]]$family_info$discrete
+[1] FALSE
+
+[[2]]$family_info$support_min
+[1] -Inf
+
+[[2]]$family_info$support_max
+[1] Inf
+
+[[2]]$family_info$supp_max_depends_on
+  loc scale shape 
+FALSE FALSE FALSE 
+
+[[2]]$family_info$supp_min_depends_on
+  loc scale shape 
+ TRUE FALSE FALSE 
+
+
+
+Done.

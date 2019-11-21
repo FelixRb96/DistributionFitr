@@ -1,0 +1,49 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: LindleyPowerSeries	Number of families: 5 
+Current Family: lindleybinomial 
+Could not find a set of valid default values for family LindleyPowerSerieslindleybinomial
+Errors: m%%1 == 0 is not TRUE
+ lambda > 0 is not TRUE
+ theta < 1 is not TRUE
+ theta > 0 is not TRUE
+
+Current Family: lindleygeometric 
+Could not find a set of valid default values for family LindleyPowerSerieslindleygeometric
+Errors: x > 0 are not all TRUE
+ lambda > 0 is not TRUE
+ theta < 1 is not TRUE
+ theta > 0 is not TRUE
+
+Current Family: lindleylogarithmic 
+Could not find a set of valid default values for family LindleyPowerSerieslindleylogarithmic
+Errors: x > 0 are not all TRUE
+ lambda > 0 is not TRUE
+ theta < 1 is not TRUE
+ theta > 0 is not TRUE
+
+Current Family: lindleynb 
+Could not find a set of valid default values for family LindleyPowerSerieslindleynb
+Errors: m%%1 == 0 is not TRUE
+ lambda > 0 is not TRUE
+ theta < 1 is not TRUE
+ theta > 0 is not TRUE
+ x > 0 are not all TRUE
+
+Current Family: lindleypoisson 
+Could not find a set of valid default values for family LindleyPowerSerieslindleypoisson
+Errors: x > 0 are not all TRUE
+ lambda > 0 is not TRUE
+ theta > 0 is not TRUE
+
+list()
+Done.

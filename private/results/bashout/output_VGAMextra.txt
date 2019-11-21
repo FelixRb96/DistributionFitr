@@ -1,0 +1,201 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: VGAMextra	Number of families: 4 
+Current Family: gen.betaII 
+Current Family: inv.chisq 
+Current Family: invgamma 
+Current Family: invweibull 
+[[1]]
+[[1]]$package
+[1] "VGAMextra"
+
+[[1]]$family
+[1] "gen.betaII"
+
+[[1]]$family_info
+[[1]]$family_info$lower
+   scale shape1.a shape2.p shape3.q 
+    0.01     0.00     0.00     0.02 
+
+[[1]]$family_info$upper
+   scale shape1.a shape2.p shape3.q 
+     Inf      Inf      Inf      Inf 
+
+[[1]]$family_info$accepts_float
+   scale shape1.a shape2.p shape3.q 
+    TRUE     TRUE     TRUE     TRUE 
+
+[[1]]$family_info$defaults
+   scale shape1.a shape2.p shape3.q 
+       1        1        1        1 
+
+[[1]]$family_info$log
+[1] TRUE
+
+[[1]]$family_info$discrete
+[1] FALSE
+
+[[1]]$family_info$support_min
+[1] 0.01
+
+[[1]]$family_info$support_max
+[1] Inf
+
+[[1]]$family_info$supp_max_depends_on
+   scale shape1.a shape2.p shape3.q 
+   FALSE    FALSE    FALSE    FALSE 
+
+[[1]]$family_info$supp_min_depends_on
+   scale shape1.a shape2.p shape3.q 
+   FALSE    FALSE    FALSE    FALSE 
+
+
+
+[[2]]
+[[2]]$package
+[1] "VGAMextra"
+
+[[2]]$family
+[1] "inv.chisq"
+
+[[2]]$family_info
+[[2]]$family_info$lower
+  df 
+0.01 
+
+[[2]]$family_info$upper
+ df 
+Inf 
+
+[[2]]$family_info$accepts_float
+  df 
+TRUE 
+
+[[2]]$family_info$defaults
+ df 
+0.5 
+
+[[2]]$family_info$log
+[1] TRUE
+
+[[2]]$family_info$discrete
+[1] FALSE
+
+[[2]]$family_info$support_min
+[1] 0.01
+
+[[2]]$family_info$support_max
+[1] Inf
+
+[[2]]$family_info$supp_max_depends_on
+   df 
+FALSE 
+
+[[2]]$family_info$supp_min_depends_on
+   df 
+FALSE 
+
+
+
+[[3]]
+[[3]]$package
+[1] "VGAMextra"
+
+[[3]]$family
+[1] "invgamma"
+
+[[3]]$family_info
+[[3]]$family_info$lower
+ rate shape 
+ 0.01  0.01 
+
+[[3]]$family_info$upper
+ rate shape 
+  Inf   Inf 
+
+[[3]]$family_info$accepts_float
+ rate shape 
+ TRUE  TRUE 
+
+[[3]]$family_info$defaults
+ rate shape 
+  1.0   0.5 
+
+[[3]]$family_info$log
+[1] TRUE
+
+[[3]]$family_info$discrete
+[1] FALSE
+
+[[3]]$family_info$support_min
+[1] 0.01
+
+[[3]]$family_info$support_max
+[1] Inf
+
+[[3]]$family_info$supp_max_depends_on
+ rate shape 
+FALSE FALSE 
+
+[[3]]$family_info$supp_min_depends_on
+ rate shape 
+FALSE FALSE 
+
+
+
+[[4]]
+[[4]]$package
+[1] "VGAMextra"
+
+[[4]]$family
+[1] "invweibull"
+
+[[4]]$family_info
+[[4]]$family_info$lower
+       scale        shape 
+1.000000e-02 8.326673e-17 
+
+[[4]]$family_info$upper
+scale shape 
+  Inf   Inf 
+
+[[4]]$family_info$accepts_float
+scale shape 
+ TRUE  TRUE 
+
+[[4]]$family_info$defaults
+scale shape 
+  1.0   0.5 
+
+[[4]]$family_info$log
+[1] TRUE
+
+[[4]]$family_info$discrete
+[1] FALSE
+
+[[4]]$family_info$support_min
+[1] 0.01
+
+[[4]]$family_info$support_max
+[1] Inf
+
+[[4]]$family_info$supp_max_depends_on
+scale shape 
+FALSE FALSE 
+
+[[4]]$family_info$supp_min_depends_on
+scale shape 
+FALSE FALSE 
+
+
+
+Done.

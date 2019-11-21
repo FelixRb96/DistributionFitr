@@ -1,0 +1,24 @@
+all_families.R 
+getFamilies.R 
+getFamily.R 
+getParams.R 
+globalfit.R 
+loglik.R 
+objects.R 
+optimParamsContinuous.R 
+optimParamsDiscrete.R 
+output.R 
+utils.R 
+Current Package: PDQutils	Number of families: 2 
+Current Family: apx_edgeworth 
+Error occured for family apx_edgeworth
+Error in get(paste0(type, fam), envir = asNamespace(package)): object 'rapx_edgeworth' not found
+
+
+Current Family: apx_gca 
+Error occured for family apx_gca
+Error in get(paste0(type, fam), envir = asNamespace(package)): object 'rapx_gca' not found
+
+
+list()
+Done.
