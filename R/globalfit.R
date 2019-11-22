@@ -32,7 +32,7 @@ is.discrete <- function(data, border = 0.35, percent = 0.8){
   
   # # Umwandeln zu vector
   if(is.data.frame(data)){
-    data <- as.vector(data = data[,1])
+    data <- as.vector(data[,1])
   }
   
   # Entfernen der NA's

@@ -17,7 +17,7 @@ getParams(family)
 }
 
 \details{
-	The family name is defined as the part of the function name that follows "d", "p", "q" and "r". Example: uniform distribution. function call: "runif(...)" \rightarrow family name: "unif". \\
+	The family name is defined as the part of the function name that follows "d", "p", "q" and "r". Example: uniform distribution. function call: "runif(...)" --> family name: "unif". \\
 	The values returned by getParams are included in the DistributionFitr-package and updated regularly. Users may use it to update the library of parameter characteristics themselves or find the function useful to use the parameter characteristics retrieved for other purposes.
 }
 \value{
@@ -61,4 +61,5 @@ getParams(family)
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{distribution, parameters }
+}
+\keyword{distribution, parameters}

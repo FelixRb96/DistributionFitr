@@ -83,7 +83,7 @@ list(list(package = "stats", family = "beta", family_info = list(
         log = TRUE, discrete = TRUE, support_min = 0, support_max = Inf, 
         supp_max_depends_on = c(n = FALSE), supp_min_depends_on = c(n = FALSE))), 
     list(package = "stats", family = "t", family_info = list(
-        lower = c(df = 0.0100000000000001, ncp = -Inf), upper = c(df = Inf, 
+        lower = c(df = 0.0200000000000001, ncp = -Inf), upper = c(df = Inf, 
         ncp = Inf), accepts_float = c(df = TRUE, ncp = TRUE), 
         defaults = c(df = 0.5, ncp = 0.5), log = TRUE, discrete = FALSE, 
         support_min = -Inf, support_max = Inf, supp_max_depends_on = c(df = FALSE, 
@@ -95,7 +95,7 @@ list(list(package = "stats", family = "beta", family_info = list(
         support_min = -Inf, support_max = Inf, supp_max_depends_on = c(min = FALSE, 
         max = TRUE), supp_min_depends_on = c(min = TRUE, max = FALSE
         ))), list(package = "stats", family = "weibull", family_info = list(
-        lower = c(scale = 0.01, shape = 8.32667268468867e-17), 
+        lower = c(scale = 0.01, shape = 0.0100000000000001), 
         upper = c(scale = Inf, shape = Inf), accepts_float = c(scale = TRUE, 
         shape = TRUE), defaults = c(scale = 1, shape = 0.5), 
         log = TRUE, discrete = FALSE, support_min = 0, support_max = Inf, 
