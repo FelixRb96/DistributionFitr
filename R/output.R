@@ -32,6 +32,7 @@ setMethod(f = "summary", signature = c("globalfit"),
                 print(selected_fit@estimatedValues)
               }
             }
+            rownames(df) <- 1:nrow(df)
             cat('\nOther good fits: \n')
             print(df)
           })
@@ -83,7 +84,12 @@ setMethod(f = "BIC", signature = c("globalfit"),
 
 
 setMethod(f = "hist", signature = c("globalfit"),
-          def = function(x, ic='AIC', ...) {
+          def = function(x, ic='AIC', which=1, ...) {
+            if(is.null(ic) || !(ic %in% c('AIC', 'BIC', 'AICc')))
+              stop("Argument 'ic' must be 'AIC', 'BIC' or 'AICc'")
+            if(is.null(which) || !is.natural(which))
+              stop("Argument 'which'  must be positive integer.")
+            
             lower <- min(x@data) - 0.2 * (max(x@data)-min(x@data))
             upper <- max(x@data) + 0.2 * (max(x@data)-min(x@data))
             
@@ -91,8 +97,12 @@ setMethod(f = "hist", signature = c("globalfit"),
               return(data.frame(family =x@family, package = x@package, ic = eval(parse(text = paste0('x@', ic))),
                                 stringsAsFactors = F))
             }))
-            df <- df[order(df[,'ic'])[1],]
-            selected_fit <- x@fits[[as.numeric(rownames(df)[1])]]
+            rownames(df) <- 1:nrow(df)
+            which <- min(which, nrow(df))
+            print(which)
+            
+            df <- df[order(df[,'ic']),]
+            selected_fit <- x@fits[[as.numeric(rownames(df)[which])]]
             selected_fit@estimatedValues
             if(x@continuity) {
               supporting_point <-seq(lower, upper, length.out = 300)
@@ -102,8 +112,11 @@ setMethod(f = "hist", signature = c("globalfit"),
             breaks <- ifelse(x@continuity, sqrt(length(x@data)), min(nclass.Sturges(x@data), length(unique(x@data))))
             density <- eval(parse(text = paste0("get_fun_from_package(fam = '", selected_fit@family, "', '", selected_fit@package, "', 'd')(supporting_point, ",
                                      paste(names(selected_fit@estimatedValues),  selected_fit@estimatedValues, sep=" = ", collapse =", "), ')')))
+            print(density)
             hi <- hist(x = x@data, xlim=range(lower,upper), freq = FALSE, xlab = 'x', ylab = 'density', breaks=breaks,
                        main=paste0('Histogramm with density of \n', selected_fit@package, '::', selected_fit@family))
             lines(supporting_point, density, col='green', lwd=2)
+            plot(supporting_point, density, col='green', lwd=2)
+            return(density)
           }
         )

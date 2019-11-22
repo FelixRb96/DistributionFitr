@@ -1,6 +1,7 @@
 r <- globalfit(rnorm(n = 1000, mean=10, sd=1))
-summary(r)  
+summary(r, count=50, which=13)  
 hist(r)
+hist(r, which=13)
 
 r <- globalfit(rgamma(n = 1000, shape=3, rate = 4))
 summary(r, ic='BIC')

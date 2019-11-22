@@ -111,10 +111,13 @@ disc_trafo <- function(data){
 
 ### 2) Main Function --------------------------------------------------------------------------
 
-globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, ...){
+globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, preloaded_families = T, ...){
 
-  families <- getFamilies()
-  
+  if(preloaded_families) {
+    families <- dget('R/all_families.R')
+  } else {
+    families <- getFamilies()
+  }
   discrete_families <- sapply(families, function(x) x$family_info$discrete)
   discrete_families <- which(discrete_families==TRUE) # Indizes zu diskreten Verteilungen
   
