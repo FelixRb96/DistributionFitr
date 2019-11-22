@@ -44,21 +44,16 @@ optimParamsDiscrete(data, family, lower, upper, start_parameters, fixed)
   In the near future direct usage of \code{optim_params} will be deprecated in the DistributionFitR-package internally and will be replaced with always using this wrapper function. \\
 
   family_info is expected to be a named list as returned by get_params, with the entries:
-  \item{family}{
+  \code{family} \\
     family name of the distribution, e.g. for \code{runif(...)} -> "unif", or \code{dnorm(...)} -> "norm"
-  }
-  \item{lower}{
+  \code{lower} \\
     named vector. names: parameter names. values: lower bounds of validity for each parameter.
-  }
-  \item{upper}{
+  \code{upper} \\
     named vector. names: parameter names. values: upper bounds of validity for each parameter.
-  }
-  \item{defaults}{
+  \code{defaults} \\
     named vector. names: parameter names. values: some valid parameter values such that \code{d[...]} produces a valid result with the whole 'defaults' vector.
-  }
-  \item{optional:}{
+  optional: \\
     the other values returned by \code{get_params}, such as information on the support.
-  }
 }
 \value{
   For \code{optim_params_wrapper} a list with components:

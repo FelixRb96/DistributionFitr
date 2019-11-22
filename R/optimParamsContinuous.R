@@ -145,7 +145,7 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults, method =
         if(optim_result$convergence!=0) {
           warning('No convergence in second optimization!')
           if(debug_error) {
-            print(tail(optim_progrss, 2))
+            print(tail(optim_progress, 2))
 	  }
         } else {
 	  optim_successful <- TRUE

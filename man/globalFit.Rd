@@ -31,7 +31,7 @@
 \value{
   For \code{globalfit} a list of following components is returned:
   %\item{continuity}{Prediction whether the data is estimated to be continious or discrete}
-  \items{familyName}{Name of the distribution}
+  \item{familyName}{Name of the distribution}
   \item{packageName}{Name of the package that includes the distribution}
   
   \item{par}{Optimal parameters as named vector, over which it was optimized.}
@@ -71,4 +71,4 @@
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{distribution }
+\keyword{distribution}

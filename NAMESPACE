@@ -1,4 +1,4 @@
-export("globalfit")
+export("globalfit, getFamilies")
 
 import(utils)
 import(stats)
