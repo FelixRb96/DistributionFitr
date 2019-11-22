@@ -8,11 +8,11 @@
   Given a distribution family, this function attempts to retrieve the distribution parameters and various characteristics, such as: valid parameter ranges, whether they accept non-integer values and the support of the distribution.
 }
 \usage{
-getParams(family)
+getParams(fam)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{family}{
+  \item{fam}{
      List with two entries: "package" and "family", e.g. list(package="stats", family="beta")  }
 }
 
