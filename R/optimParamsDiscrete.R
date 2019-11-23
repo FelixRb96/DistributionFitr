@@ -37,7 +37,10 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
                             defaults = family_info$defaults, method = method, fixed=c(), log = log, optim_method = optim_method,
                             nn_starting_points=n_starting_points, debug_error = debug_error, show_optim_progress = show_optim_progress,
                             on_error_use_best_result = on_error_use_best_result, ...) 
-      }, error=function(e) NULL
+      }, error=function(e) {
+        message(e)
+        return(NULL)
+      }
     )
     if (is.null(optim_res)) return(NULL)
     

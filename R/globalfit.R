@@ -116,6 +116,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, pre
   if(preloaded_families) {
     families <- dget('R/all_families.R')
   } else {
+    message("Not using preloaded families, but extracting families via getFamilies")
     families <- getFamilies()
   }
   discrete_families <- sapply(families, function(x) x$family_info$discrete)
@@ -141,6 +142,17 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, pre
     
     stop("The argument 'continuity' has to be either NULL, TRUE or FALSE.")
     
+  }
+  
+  # TODO: How do we handle not yet installed packages? Force install or warn and ignore?
+  
+  all_pkgs <- sapply(relevant_families, function(x) x$package)
+  all_pkgs_unique <- unique(all_pkgs)
+  missing_pkgs <- setdiff(all_pkgs_unique, rownames(installed.packages()))
+  if (length(missing_pkgs) > 0) {
+    message("The following packages are not installed, and are thus ignored during optimisation. ",
+            "If you want to use them please install manually:", paste(missing_pkgs, collapse=", "))
+    relevant_families <- relevant_families[!(all_pkgs %in% missing_pkgs)]
   }
   
   if(progress==T)

@@ -5,6 +5,7 @@ for(i in 1:10) {
   tryCatch(hist(r, which=i), error=function(x) return(NA))
   Sys.sleep(1)
 }
+
 r <- globalfit(rgamma(n = 10000, shape=3, rate = 4))
 summary(r, ic='BIC')
 summary(r, ic='AICc')

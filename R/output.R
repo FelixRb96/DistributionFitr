@@ -99,7 +99,7 @@ setMethod(f = "hist", signature = c("globalfit"),
             }))
             rownames(df) <- 1:nrow(df)
             which <- min(which, nrow(df))
-            print(which)
+            # print(which)
             
             df <- df[order(df[,'ic']),]
             selected_fit <- x@fits[[as.numeric(rownames(df)[which])]]
@@ -112,13 +112,14 @@ setMethod(f = "hist", signature = c("globalfit"),
             breaks <- ifelse(x@continuity, sqrt(length(x@data)), min(nclass.Sturges(x@data), length(unique(x@data))))
             density <- eval(parse(text = paste0("get_fun_from_package(fam = '", selected_fit@family, "', '", selected_fit@package, "', 'd')(supporting_point, ",
                                      paste(names(selected_fit@estimatedValues),  selected_fit@estimatedValues, sep=" = ", collapse =", "), ')')))
-            print(density)
+
+            # print(density)
             plot(supporting_point, density, col='green', lwd=2)
             Sys.sleep(2)
             hist(x = x@data, xlim=range(lower,upper), freq = FALSE, xlab = 'x', ylab = 'density', breaks=breaks,
                        main=paste0('Histogramm with density of \n', selected_fit@package, '::', selected_fit@family))
             lines(supporting_point, density, col='green', lwd=2)
-            return(density)
+            return(invisible(density))
           }
         )
 
