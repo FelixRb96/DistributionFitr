@@ -13,14 +13,4 @@ for(i in 1:length(files)) {
   }
 }
 dput(distributions,file='all_families.R')
-
-
-# install required packaged
-install.packages(packages[!(packages %in% rownames(installed.packages()))])
-
-# load required packages
-for(i in 1:length(packages)) {
-  tryCatch(suppressMessages(eval(parse(text=paste0('library(', packages[i],')')))),
-           error = function(x) warning("Library '", packages[i], "'not available")
-  )
-}
+save(packages, file='private/relevant_packages.Rda')
