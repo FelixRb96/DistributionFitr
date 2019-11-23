@@ -1,3 +1,16 @@
+# helper function
+get_best_result_from_progress <- function(optim_progress) {
+  best_idx <- which.max(optim_progress$log_lik)
+  best_row <- optim_progress[best_idx,]
+  optim_result <- list()
+  optim_result$value <- best_row$log_lik
+  optim_result$par <- unlist(best_row[names(lower)])
+  optim_result$convergence <- 51  # corresponds to warning
+  
+  return(optim_result)
+}
+
+
 ## Parameters of optimParamsContinous:
 # family: list with two elements "family" and "package"
 # lower, upper and start_parameters must only contain the continuous parameters that should be optimized
@@ -46,7 +59,6 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults, method =
   # 1 column for each parameter and a column for the associated log likelihood
   optim_progress <- data.frame(matrix(nrow=0, ncol=length(lower) + length(fixed) + 1))
   colnames(optim_progress) <- c(names(lower), names(fixed), "log_lik")
-  optim_successful <- TRUE
   
   on.exit({
     if (exists("optim_progress") && (show_optim_progress || (debug_error && !optim_successful))) {
@@ -58,6 +70,7 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults, method =
   # try multiple starting points hoping for a better result in case of multiple local minima
   optim_results <- list()
   for (i in 1:n_starting_points) {
+      optim_successful <- TRUE
       start_params <- if(i>1) sample_params(family, list(lower=lower, upper=upper, accepts_float=!is.na(lower)), params=lower) else defaults
       # cat("Sampling start parameters, Iteration:", i, "\n")
       # print(start_params)
@@ -72,31 +85,28 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults, method =
       safety_bound <- 1e-10
 
       optim_result <- tryCatch(
-	{
-	  optim(start_params, loglik_fun, control = list(fnscale=-1, trace=0), lower=lower+safety_bound, upper=upper-safety_bound, method=optim_method)
-	},
-	error = function(e) {
-	  optim_successful <- FALSE
+        optim(start_params, loglik_fun, control = list(fnscale=-1, trace=0), lower=lower+safety_bound, upper=upper-safety_bound, method=optim_method),
+        
+        error = function(e) {
+          assign("optim_successful", FALSE, envir=parent.frame(4))
+          # optim_successful <<- FALSE
+          
           if(!on_error_use_best_result) {
-	    stop(e, " occured during (first) opimisation, fatal.\n")	
-	  } else {
+	          stop(e, " occured during (first) opimisation, fatal.\n")	
+          } else {
             message(e, " occured during (first) optimization, trying to take best result achieved up to now\n")
             # getting best result from optimization progress up to now
-	    best_idx <- which.max(optim_progress$log_lik)
-      	    best_row <- optim_progress[best_idx,]
-      	    optim_result <- list()
-      	    optim_result$value <- best_row$log_lik
-      	    optim_result$par <- unlist(best_row[names(lower)])
-      	    optim_result$convergence <- 51  # corresponds to warning
-      	    return(optim_result)
-	  }
-	}
+            
+	          return(get_best_result_from_progress(optim_progress))
+      	    }
+          }
       )
+      
       if(optim_result$convergence!=0) {
         warning('No convergence in first optimization!')
         if(debug_error) {
           print(tail(optim_progress, 2))
-	}
+        }
       }
 
       # TODO: 
@@ -105,7 +115,7 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults, method =
       # optim_result <- optim(optim_result$par, loglik, family = family, data = data, fixed=fixed, lower=lower, upper=upper,
       #                      log=log, control = list(fnscale=-1 / abs(optim_result$value), trace=0, parscale = 1/optim_result$par), method='L-BFGS-B')
       if (!no_second && optim_successful) { 
-	optim_successful <- TRUE
+
         args <- list(...)
         fnscale <- if (hasArg("fnscale") && args$fnscale) -1/abs(optim_result$value) else -1
         parscale <- if (hasArg("parscale") && args$parscale) 1/optim_result$par else rep(1, length(lower))
@@ -122,35 +132,26 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults, method =
         precision <- max(1e-8/(10^(precision*2)), 1e-16)
       
         optim_result <- tryCatch(
-	  {
-	    optim(optim_result$par, loglik_fun, control = list(fnscale=fnscale, trace=0, parscale = parscale, factr = precision), lower=lower+safety_bound, upper=upper-safety_bound, method=optim_method)
-          },
+	        optim(optim_result$par, loglik_fun, control = list(fnscale=fnscale, trace=0, parscale = parscale, factr = precision), 
+	              lower=lower+safety_bound, upper=upper-safety_bound, method=optim_method),
+	     
           error = function(e) {
-	    optim_successful <- FALSE
-	    if(!on_error_use_best_result) {
-	      stop(e, "occured during (second) optimisation, fatal.\n")	
-	    } else {
+      	    if(!on_error_use_best_result) {
+      	      stop(e, "occured during (second) optimisation, fatal.\n")	
+      	    } else {
               message(e, " occured during optimization, trying to take best result achieved up to now\n")
               # getting best result from optimization progress up to now
-              best_idx <- which.max(optim_progress$log_lik)
-              best_row <- optim_progress[best_idx,]
-              optim_result <- list()
-              optim_result$value <- best_row$log_lik
-              optim_result$par <- unlist(best_row[names(lower)])
-              optim_result$convergence <- 51  # corresponds to warning
-              return(optim_result)
-	    }
-	  }
+              return(get_best_result_from_progress(optim_progress))
+      	    }
+      	  }
         )	
         if(optim_result$convergence!=0) {
           warning('No convergence in second optimization!')
           if(debug_error) {
             print(tail(optim_progress, 2))
-	  }
-        } else {
-	  optim_successful <- TRUE
-        } 
-      } # end if-statement "no_second"
+          }
+        }
+    } # end if-statement "no_second"
       optim_results[[i]] <- optim_result
   } # end for-loop over starting values
   
@@ -206,7 +207,6 @@ if (sys.nframe() == 0) {
   loglik_fun <- loglik(family=family, data=data, fixed=fixed, log=T, upper=upper, lower=lower)
   optim(defaults, loglik_fun, control=list(fnscale=-1), lower=lower, upper=upper, method="L-BFGS-B")
   optim(c('shape1' = 40, 'shape2' = 10, "ncp"=0), loglik_fun, control=list(fnscale=-1), lower=lower, upper=upper, method="L-BFGS-B")
-  
   
   
   # Example 3 for optimParam
