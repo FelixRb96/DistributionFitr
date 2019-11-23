@@ -166,7 +166,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, pre
                         optim_method = 'L-BFGS-B', n_starting_points = 1,
                         debug_error = FALSE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, 
                         max_discrete_steps=100, plot=FALSE, discrete_fast = TRUE)
-    if(!is.null(output_liste)) {
+    if(!is.null(output_liste) || !is.na(output_liste$value) || !is.infinite(output_liste$value)) {
       output <- new('optimParams', family = fam$family,
                    package = fam$package,
                    estimatedValues = output_liste$par,
