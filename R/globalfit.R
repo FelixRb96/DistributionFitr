@@ -188,7 +188,13 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, pre
                    AICc = output_liste$AICc,
                    continuousParams = NA, # hier muss noch was passieren
                    range = 'not_implemented') # hier muss noch was passieren
+      # aim: check whether solution has good loglik but does not fit
+      # experimental feature - please watch out!
+      sanity_check <- fitting_sanity_check(output, data, continuity = continuity)
     } else {
+      sanity_check <- list(good=F, meanquot=NA)
+    }
+    if(!sanity_check$good)
       output <- new('optimParams', 
                     family = fam$family,
                     package = fam$package,
@@ -198,7 +204,6 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, pre
                     AICc = NA_integer_,
                     continuousParams = NA, # hier muss noch was passieren
                     range = 'not_implemented') # hier muss noch was passieren
-    }
     #output_liste[[length(output_liste) + 1]] <- output
     return(output)
   }
