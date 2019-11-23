@@ -113,10 +113,11 @@ setMethod(f = "hist", signature = c("globalfit"),
             density <- eval(parse(text = paste0("get_fun_from_package(fam = '", selected_fit@family, "', '", selected_fit@package, "', 'd')(supporting_point, ",
                                      paste(names(selected_fit@estimatedValues),  selected_fit@estimatedValues, sep=" = ", collapse =", "), ')')))
             print(density)
+            plot(supporting_point, density, col='green', lwd=2)
+            Sys.sleep(2)
             hi <- hist(x = x@data, xlim=range(lower,upper), freq = FALSE, xlab = 'x', ylab = 'density', breaks=breaks,
                        main=paste0('Histogramm with density of \n', selected_fit@package, '::', selected_fit@family))
             lines(supporting_point, density, col='green', lwd=2)
-            plot(supporting_point, density, col='green', lwd=2)
             return(density)
           }
         )
