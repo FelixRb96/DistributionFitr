@@ -111,7 +111,7 @@ disc_trafo <- function(data){
 
 ### 2) Main Function --------------------------------------------------------------------------
 
-globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, preloaded_families = T, ...){
+globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, preloaded_families = T, cores = NULL, ...){
 
   if(preloaded_families) {
     families <- dget('R/all_families.R')
@@ -159,25 +159,33 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, pre
       message("Comparing the following distribution families:", paste(sapply(relevant_families, function(x) x$family), collapse = ", "))
 
   output_liste <- list()
-
-  for (fam in relevant_families) {
+  
+  if(is.null(cores))
+    cores <- detectCores()
+  cl <- makeCluster(cores, outfile='log.txt')
+  registerDoParallel(cl)
+  
+  output_liste <- foreach(i=1:length(relevant_families), .packages = c(), .errorhandling = 'pass') %dopar% {
+  #for (fam in relevant_families) {
+    source('private/source_all.R')
+    fam <- relevant_families[[i]]
     if(progress == T)
       message("Current Family: ",  fam$family)
-    liste <- optimParamsDiscrete(data = data,
+    output_liste <- optimParamsDiscrete(data = data,
                         family = fam[c('package', 'family')],
                         family_info = fam$family_info,
                         method = 'MLE', prior = NULL, log = fam$family_info$log,
                         optim_method = 'L-BFGS-B', n_starting_points = 1,
                         debug_error = FALSE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, 
                         max_discrete_steps=100, plot=FALSE, discrete_fast = TRUE)
-    if(!is.null(liste)) {
+    if(!is.null(output_liste) && !is.na(output_liste$value) && !is.infinite(output_liste$value)) {
       output <- new('optimParams', family = fam$family,
                    package = fam$package,
-                   estimatedValues = liste$par,
-                   log_lik = liste$value,
-                   AIC = liste$AIC,
-                   BIC = liste$BIC,
-                   AICc = liste$AICc,
+                   estimatedValues = output_liste$par,
+                   log_lik = output_liste$value,
+                   AIC = output_liste$AIC,
+                   BIC = output_liste$BIC,
+                   AICc = output_liste$AICc,
                    continuousParams = NA, # hier muss noch was passieren
                    range = 'not_implemented') # hier muss noch was passieren
     } else {
@@ -191,8 +199,10 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, pre
                     continuousParams = NA, # hier muss noch was passieren
                     range = 'not_implemented') # hier muss noch was passieren
     }
-    output_liste[[length(output_liste) + 1]] <- output
+    #output_liste[[length(output_liste) + 1]] <- output
+    return(output)
   }
+  stopCluster(cl)
   
     return(new('globalfit', data = data, 
                continuity = continuity,
