@@ -1,6 +1,33 @@
+## Authors 
+## Manuel Hentschel, mhentsch@mail.uni-mannheim.de
+##
+## Extract distribution families from a single R package
+##
+## Copyright (C) 2019 -- 2020 Manuel Hentschel
+##
+## This program is free software; you can redistribute it and/or
+## modify it under the terms of the GNU General Public License
+## as published by the Free Software Foundation; either version 3
+## of the License, or (at your option) any later version.
+##
+## This program is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+## GNU General Public License for more details.
+##
+## You should have received a copy of the GNU General Public License
+## along with this program; if not, write to the Free Software
+## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.  
+
+
 getFamily <- function(pkg){
   
   # load package pkg (can potentially lead to errors if some requirements are not fulfilled)
+
+  ## seltsame Konstruktion.
+  ## Ist
+  ## load_successful <- !is(try( suppressPackageStartupMessages(library(pkg, character.only=TRUE)), silent=TRUE), "try-error")
+  ## nicht einfacher?
   load_successful <- tryCatch({
     suppressPackageStartupMessages(library(pkg, character.only=TRUE))
     TRUE
@@ -11,26 +38,31 @@ getFamily <- function(pkg){
     )
   if (!load_successful) return(list())
   
-  # all functions starting with r, d, p or q
+  ## all functions starting with r, d, p or q
+  ## rdpq ist ein   paste(start_chars, collapse="")  
   possible_dists <- lsf.str(paste0("package:", pkg), pattern="^[rdpq]")
   
   if (length(possible_dists) == 0) return(list())
   
-  start_chars <- c("d", "p", "q", "r")   
+  start_chars <- c("d", "p", "q", "r")  ## definitionen nach oben
   first_args <- c("x", "q", "p", "n")    # first parameters of the d, p, q, r functions
   l <- list()
+  ## l <- vector("list", length(start_chars))
+  ## names(l) <- start_chars
   
   # function for checking whether the first argument of fun in first_arg (used with first_arg = "x", "n",...)
   check_first_param <- function(fun, first_arg) {
     f_arg <- names(formals(fun))[1]
-    if(length(f_arg) == 0) FALSE else f_arg == first_arg
+    if(length(f_arg) == 0) FALSE else f_arg == first_arg ## genau dafuer gibt es &&
   }
   
   for (i in 1:length(start_chars)) {
     char <- start_chars[i]
-    first_arg <- first_args[i]
+    first_arg <- first_args[i] ## wird nur 1x verwendet
     subset <- grep(paste0("^", char), possible_dists, value=TRUE)                     # all functions starting with char
-    
+
+    ## mit obigen nur noch
+    ##   if (length(subset) != 0) ...
     if (length(subset) == 0) {
       l[[char]] <- c()
     } else {
