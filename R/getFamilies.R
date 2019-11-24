@@ -65,15 +65,10 @@ iterate_packages <- function(packages) {
 ## internal
 construct_package_list <- function(all.packages) {
   
-  if (all.packages == TRUE) ## if (all.packages)
-  {
+  if (all.packages) {
     all.packages <- as.vector(installed.packages()[,"Package"])
     
-  } else
-    if (all.packages == FALSE) ## (i) if (!all.packages)... waere besser
-    ##                                (ii) ganz weglassen! (Alternativen zu
-    ##                                     TRUE / FALSE ?)
-  {
+  } else {
     #only select "base" and "recommended" packages
     ins_pck <- installed.packages()
     
@@ -87,9 +82,7 @@ construct_package_list <- function(all.packages) {
     rm(ins_pck)
   }
   
-  return(all.packages)
-  
-  
+  return(all.packages())
 }
 
 
@@ -107,35 +100,22 @@ write_file <- function(family_list, file="all_families.rds") {
 getFamilies <- function(all.packages, file="R/all_families.rds") {
   # CASE 2:
   if (missing(all.packages)) {
-    if (! (file %in% list.files()) ) ## das passt mit dem default
-      ## von file nicht zusammen
-      getFamilies(all.packages = FALSE, file=file) ## warum nicht return(...) ?
+    if (! (file %in% list.files("R")) )
+      return(getFamilies(all.packages = FALSE, file=file))
     #read file and return list of lists
     family_list <- readRDS(file=file)
     return(family_list)
   }
 
-  ## CASES 1.3 und 1.2 ist Code massiv gedoppelt. Bitte is.logical verwenden
-  ## und die Zeilenzahl halbieren.
-  # CASE 1.3
-  if (length(all.packages) == 1 && isTRUE(all.packages)) {
-    ## doppelt gemoppelt. S. Def von isTRUE
-    family_list <- iterate_packages(construct_package_list(all.packages = TRUE))
-    write_file(family_list=family_list,file="R/all_families.rds")## Konstanten
-    ## mitten im Code darf nicht sein!!
-    return(family_list)
-  }
-  
-  # CASE 1.2
-  if (length(all.packages) == 1 && isFALSE(all.packages)) {
-    ## doppelt gemoppelt. S. Def von isFALSE
-    family_list <- iterate_packages(construct_package_list(all.packages = FALSE))
-    write_file(family_list=family_list,file="R/all_families.rds")
+  # CASE 1.2 & 1.3
+  if (is.logical(all.packages)) {
+    family_list <- iterate_packages(construct_package_list(all.packages = all.packages))
+    write_file(family_list=family_list,file=file)
     return(family_list)
   }
   
   # CASE 1.1
   family_list <- iterate_packages(all.packages)
-  write_file(family_list=family_list,file="R/all_families.rds")
+  write_file(family_list=family_list,file=file)
   return(family_list)
 }
