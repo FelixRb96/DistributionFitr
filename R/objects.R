@@ -40,6 +40,11 @@ setClass(Class = "optimParams",
 )
 
 
+## verstehe ich nicht wozu diese gebraucht wird
+## gehoert dies in zzz.R, als
+## .onLoad <- function(lib, pkg) {
+##   ...
+## }
 if (sys.nframe() == 0) {
   new('globalfit', data = 1, continuity = T, method = 'MLE', fits = list(1,2,3))
 }

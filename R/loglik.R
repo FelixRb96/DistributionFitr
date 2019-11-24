@@ -38,8 +38,8 @@ loglik <- function(family, data, fixed=list(), log, lower, upper) { #NEW: fixed=
   arguments <- list(x=data) # NEW: arg_opt wird erst in likelihood in die Liste eingefügt
   
   # check wheter log-distribution function is directly available for distribution
-  if(log==T)
-    arguments$log <- T
+  if(log==T) ## if (log)
+    arguments$log <- T ## TRUE
   # add fixed parameter values of distribution to list
   if(length(fixed)>0) {
     arguments <- c(arguments, fixed)
@@ -50,35 +50,47 @@ loglik <- function(family, data, fixed=list(), log, lower, upper) { #NEW: fixed=
   likelihood <- function(params) {
     
     # print(params) # to be deleted later, checking input  
-  
+
+    ## ist warning adaequat? stop(...) ?? Gegebenenfalls ruecksprache
     if(length(params)==0) warning('loglik does not depend on parameters.')
       
     #NEW: Check boundaries
     for(param_name in names(params)) {
-      if(lower[param_name]>params[[param_name]] || upper[param_name] < params[[param_name]])
-        stop('Parameter ', param_name, ' with value ', params[[param_name]], ' outside the boundaries.') #Alternativ einen penalty
+      if(lower[param_name]>params[[param_name]] ||
+         upper[param_name] < params[[param_name]])
+        stop('Parameter ', param_name, ' with value ', params[[param_name]],
+             ' outside the boundaries.') #Alternativ einen penalty
     }
     
     #Add params with names of parameters to arguments list
     arguments <- c(arguments, params)
-    
-    summands <- do.call(get_fun_from_package(family$family, family$package, type = "d"), args=arguments)
+
+    summands <- do.call(get_fun_from_package(family$family, family$package,
+                                             type = "d"), args=arguments)
     
     if(any(is.na(summands))) stop('In Log-Likelihood-Function NA occured.')
     
     # log values if not log so far
     if(!log) {
       summands <- log(summands)
+      ## keine warning
       warning('Could be numerically instable.')
     } 
     loglik_value <- sum(summands)
     
     ## The following is only for tracking the optimisation progress (might be deactivated sometime)
     # recursively go through parent frames and check whether there is a variable that tracks the optimisation process
-    return_optim_progress <- FALSE
+    return_optim_progress <- FALSE ## loeschen
     for (i in 1:length(sys.parents())) {
-      
+       
       if (exists("optim_progress", envir = parent.frame(i))) {
+        ## hier direkt 
+     ## progress <- get("optim_progress", envir = parent.frame(i))
+     ## progress[nrow(progress)+1, ] <- c(params, fixed, log_lik = loglik_value)
+        ## assign("optim_progress", envir = parent.frame(i), progress)
+        ## break
+
+        
         # cat("Env in loglik:\n")
         # print(parent.frame(i))
         return_optim_progress <- TRUE
