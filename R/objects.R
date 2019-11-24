@@ -45,6 +45,6 @@ setClass(Class = "optimParams",
 ## .onLoad <- function(lib, pkg) {
 ##   ...
 ## }
-if (sys.nframe() == 0) {
-  new('globalfit', data = 1, continuity = T, method = 'MLE', fits = list(1,2,3))
-}
+## if (sys.nframe() == 0) {
+##   new('globalfit', data = 1, continuity = T, method = 'MLE', fits = list(1,2,3))
+## }
