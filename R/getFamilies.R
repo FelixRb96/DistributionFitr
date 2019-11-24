@@ -93,7 +93,7 @@ construct_package_list <- function(all.packages) {
 }
 
 
-write_file <- function(family_list, file="all_families.rds") {
+write_file <- function(family_list, file="data/all_families.rds") {
   saveRDS(family_list, file=file)
 }
 
@@ -104,7 +104,7 @@ write_file <- function(family_list, file="all_families.rds") {
 # Case 1.3 TRUE -> take all installed packages
 # Case 2 all.packages missing: Take families saved in the file
 
-getFamilies <- function(all.packages, file="R/all_families.rds") {
+getFamilies <- function(all.packages, file="data/all_families.rds") {
   # CASE 2:
   if (missing(all.packages)) {
     if (! (file %in% list.files()) ) ## das passt mit dem default
@@ -121,8 +121,7 @@ getFamilies <- function(all.packages, file="R/all_families.rds") {
   if (length(all.packages) == 1 && isTRUE(all.packages)) {
     ## doppelt gemoppelt. S. Def von isTRUE
     family_list <- iterate_packages(construct_package_list(all.packages = TRUE))
-    write_file(family_list=family_list,file="R/all_families.rds")## Konstanten
-    ## mitten im Code darf nicht sein!!
+    write_file(family_list=family_list,file = file)
     return(family_list)
   }
   
@@ -130,12 +129,12 @@ getFamilies <- function(all.packages, file="R/all_families.rds") {
   if (length(all.packages) == 1 && isFALSE(all.packages)) {
     ## doppelt gemoppelt. S. Def von isFALSE
     family_list <- iterate_packages(construct_package_list(all.packages = FALSE))
-    write_file(family_list=family_list,file="R/all_families.rds")
+    write_file(family_list=family_list,file = file)
     return(family_list)
   }
   
   # CASE 1.1
   family_list <- iterate_packages(all.packages)
-  write_file(family_list=family_list,file="R/all_families.rds")
+  write_file(family_list=family_list,file = file)
   return(family_list)
 }

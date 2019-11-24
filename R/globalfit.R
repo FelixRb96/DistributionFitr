@@ -144,7 +144,7 @@ disc_trafo <- function(data){
 globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, preloaded_families = T, cores = NULL, ...){
 
   if(preloaded_families) {
-    families <- readRDS('R/all_families.rds') ## keine Konstanten im Code!
+    families <- readRDS('data/all_families.rds') ## keine Konstanten im Code!
     ## besser als Argumenet mit default wert
   } else {
     message("Not using preloaded families, but extracting families via getFamilies")
