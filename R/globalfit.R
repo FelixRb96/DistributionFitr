@@ -1,6 +1,6 @@
 ## Authors 
 ## Moritz Lauff, mlauff@mail.uni-mannheim.de
-## Kiril Dik, kiril.dik@web.de
+## Kiril Dik, kdik@mail.uni-mannheim.de
 ## Nadine Tampe
 ##
 ## Fit multiple distribution families to a given univariate dataset
@@ -19,7 +19,8 @@
 ##
 ## You should have received a copy of the GNU General Public License
 ## along with this program; if not, write to the Free Software
-## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.  
+## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
 
 
 
