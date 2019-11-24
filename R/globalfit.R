@@ -1,6 +1,7 @@
 ## Authors 
 ## Moritz Lauff, mlauff@mail.uni-mannheim.de
 ## Kiril Dik, kdik@mail.uni-mannheim.de
+## Moritz Kern, mkern@mail.uni-mannheim.de
 ## Nadine Tampe
 ##
 ## Fit multiple distribution families to a given univariate dataset
@@ -142,17 +143,11 @@ disc_trafo <- function(data){
 
 ### 2) Main Function --------------------------------------------------------------------------
 
-globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE, preloaded_families = TRUE, cores = NULL, ...){
+globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE, cores = NULL, 
+                      preload_families = 'data/all_families.rds', ...){
 
-  if(preloaded_families) {
-<<<<<<< HEAD
-## MS: all_families.rds darf nicht in R sein. Habe es nach privat verschoben
-  
-    families <- readRDS('R/all_families.rds') ## keine Konstanten im Code!
-=======
-    families <- readRDS('data/all_families.rds') ## keine Konstanten im Code!
->>>>>>> 66cde6dd99dd63795fadcae7dd6c360373fe8503
-    ## besser als Argumenet mit default wert
+  if(!is.null(preload_families) && file.exists(preload_families)) {
+    families <- readRDS(preload_families)
   } else {
     message("Not using preloaded families, but extracting families via getFamilies")
     families <- getFamilies()
@@ -244,7 +239,6 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE, 
                     AICc = NA_integer_,
                     continuousParams = NA, # hier muss noch was passieren
                     range = 'not_implemented') # hier muss noch was passieren
-    #output_liste[[length(output_liste) + 1]] <- output
     return(output)
   }
   stopCluster(cl)
