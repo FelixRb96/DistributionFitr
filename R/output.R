@@ -133,7 +133,7 @@ setMethod(f = "hist", signature = c("globalfit"),
             } else {
               supporting_point <- seq(floor(lower)+0.5, ceiling(upper)+0.5)
             }
-            ## ifelse ist hier semantisch falsch
+            ## ifelse ist hier semantisch falsch 
             ## breaks <- if (x@continuity)  sqrt(length(x@data)) else ...
             breaks <- ifelse(x@continuity, sqrt(length(x@data)), min(nclass.Sturges(x@data), length(unique(x@data))))
             ## geht nachfolgendes nicht einfacher ueber direkte Aufrufe

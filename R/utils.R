@@ -101,7 +101,7 @@ sample_params <- function(family, family_info, params=NULL,
     }
   }
 
-  ## taucht das Problem nur bei unif auf ??
+  ## taucht das Problem nur bei unif auf??
   # make sure that sampled values make sense for uniform distribution
   if (family$family == "unif") {
     h <- pars
