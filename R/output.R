@@ -1,9 +1,9 @@
-setGeneric(name = "summary",		
-           def = function(object, ...) standardGeneric("summary"))		
+#setGeneric(name = "summary",		
+#           def = function(object, ...) standardGeneric("summary"))		
 
 
 setMethod(f = "summary", signature = c("globalfit"),
-          def = function(object, which=1, count=10, ic = c('AIC')) {
+          def = function(object, which=1, count=10, ic = 'AIC') {
               if(is.null(ic) || !(ic %in% c('AIC', 'BIC', 'AICc')))
                 stop("Argument 'ic' must be 'AIC', 'BIC' or 'AICc'")
             if(is.null(which) || !is.natural(which))
