@@ -122,10 +122,10 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
       
       if (is(optim_result, "try-error")) {
         optim_successful <- FALSE
-        if(!on_error_use_best_result) {
-          stop(e, " occured during (first) opimisation, fatal.\n")	
+        if(!on_error_use_best_result || nrow(optim_progress) == 0) {
+          stop(optim_result, " occured during (first) opimisation, fatal.\n")	
         } else {
-          message(e, " occured during (first) optimization, trying to take best result achieved up to now\n")
+          message(optim_result, " occured during (first) optimization, trying to take best result achieved up to now\n")
           # getting best result from optimization progress up to now
           optim_result <- get_best_result_from_progress(optim_progress, param_names = names(lower))
         }
@@ -171,10 +171,10 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
                             silent = TRUE)
         
         if (is(optim_result, "try-error")) {
-    	    if(!on_error_use_best_result) {
-    	      stop(e, "occured during (second) optimisation, fatal.\n")	
+    	    if(!on_error_use_best_result || nrow(optim_progress) == 0) {
+    	      stop(optim_result, "occured during (second) optimisation, fatal.\n")	
     	    } else {
-            message(e, " occured during optimization, trying to take best result achieved up to now\n")
+            message(optim_result, " occured during optimization, trying to take best result achieved up to now\n")
             # getting best result from optimization progress up to now
             optim_result <- get_best_result_from_progress(optim_progress, param_names = names(lower))
     	    }
