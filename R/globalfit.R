@@ -144,6 +144,8 @@ disc_trafo <- function(data){
 globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, preloaded_families = T, cores = NULL, ...){
 
   if(preloaded_families) {
+## MS: all_families.rds darf nicht in R sein. Habe es nach privat verschoben
+  
     families <- readRDS('R/all_families.rds') ## keine Konstanten im Code!
     ## besser als Argumenet mit default wert
   } else {

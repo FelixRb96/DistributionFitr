@@ -104,6 +104,7 @@ write_file <- function(family_list, file="all_families.rds") {
 # Case 1.3 TRUE -> take all installed packages
 # Case 2 all.packages missing: Take families saved in the file
 
+## MS: all_families.rds darf nicht in R sein. Habe es nach privat verschoben
 getFamilies <- function(all.packages, file="R/all_families.rds") {
   # CASE 2:
   if (missing(all.packages)) {
