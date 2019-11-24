@@ -45,11 +45,11 @@ getDecimals <- function(x){
 some_percent <- function(df, percent){
   for (i in min(df$numbers):max(df$numbers)){
     if (length(unique(df$decimals[df$numbers == i])) >= percent * 10){
-      return(T)
+      return(T) ## TRUE
     }
   }
   
-  return(F)
+  return(F) ## dito
 }
 
 # Testen, ob Daten diskret sind
@@ -72,17 +72,20 @@ is.discrete <- function(data, border = 0.35, percent = 0.8){
   if (1 / border > obs){
     border <- 1 / obs
   }
-  
+
+  ## bitte nichts zu einem data.frame zusammenfassen, was
+  ## intern einfach anders handhabbar ist
   percent_df <- data.frame(decimals = decs,
                            numbers = numbers)
   
-  
+  ## das sollte man alles (oder weitgehend) mit &&, || zu 1 Return
+  ## zusammenfassen koennen
   if (n_unique_dec / obs <= border){
     if (any(numbers >= 4)){
       return(F)
     } else {
-      if (some_percent(percent_df, percent)){
-        return(F)
+       if (some_percent(percent_df, percent)){
+        return(F) 
       } else {
         return(T)
       }
@@ -96,8 +99,10 @@ is.discrete <- function(data, border = 0.35, percent = 0.8){
 disc_trafo <- function(data){
   
   if (is.discrete(data)){ # Trafo nur, wenn Daten diskret
-    
+
+
     data_new <- sort(data) # Daten sortieren
+    ## Keine data.frames! Die sind i.W. nur fuer user
     data_new <- data.frame(data_new = data_new,
                            decimals = getDecimals(data_new)) # Daten mit zugehoerigen Dezimalen
     
@@ -139,12 +144,14 @@ disc_trafo <- function(data){
 globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, preloaded_families = T, cores = NULL, ...){
 
   if(preloaded_families) {
-    families <- readRDS('R/all_families.rds')
+    families <- readRDS('R/all_families.rds') ## keine Konstanten im Code!
+    ## besser als Argumenet mit default wert
   } else {
     message("Not using preloaded families, but extracting families via getFamilies")
     families <- getFamilies()
   }
   discrete_families <- sapply(families, function(x) x$family_info$discrete)
+  ## bitte nur  which(discrete_families) ## wenn nicht klar warum, melden.
   discrete_families <- which(discrete_families==TRUE) # Indizes zu diskreten Verteilungen
   
   
@@ -155,19 +162,24 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, pre
     relevant_families <- if(trafo_list$discrete) families[discrete_families] else families[-discrete_families]
     continuity <- ifelse(trafo_list$discrete, F, T)
     
-  } else if (continuity == T){
+  } else
+    if (continuity == T){ ## if (continuity) ## !!!
     
     relevant_families <- families[-discrete_families]
     
-  } else if(continuity==FALSE) {
+  } else if(continuity==FALSE) { ## gibt es noch andere moeglichkeiten ?
     
     relevant_families <- families[discrete_families]
     
-  } else {
+  } else { ## sicher dass das else jemals erreiht wird ?
     
     stop("The argument 'continuity' has to be either NULL, TRUE or FALSE.")
     
   }
+  
+  ## bitte obige Kommentare durcharbeiten, dann ersetzen durch
+  ## relevant_families <- families[if (continuity) -discrete_families else discrete_families]
+  
   
   # TODO: How do we handle not yet installed packages? Force install or warn and ignore?
   
@@ -180,10 +192,10 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, pre
     relevant_families <- relevant_families[!(all_pkgs %in% missing_pkgs)]
   }
   
-  if(progress==T)
+  if(progress==T) ## if (progress)
       message("Comparing the following distribution families:", paste(sapply(relevant_families, function(x) x$family), collapse = ", "))
 
-  output_liste <- list()
+  output_liste <- list() ## loeschen, da ueberschrieben
   
   if(is.null(cores))
     cores <- detectCores()
@@ -192,9 +204,9 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, pre
   
   output_liste <- foreach(i=1:length(relevant_families), .packages = c(), .errorhandling = 'pass') %dopar% {
   #for (fam in relevant_families) {
-    source('private/source_all.R')
+    source('private/source_all.R') ## keine Konstanten im Code
     fam <- relevant_families[[i]]
-    if(progress == T)
+    if(progress == T) ## dito
       message("Current Family: ",  fam$family)
     output_liste <- optimParamsDiscrete(data = data,
                         family = fam[c('package', 'family')],
@@ -217,7 +229,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, pre
       # experimental feature - please watch out!
       sanity_check <- fitting_sanity_check(output, data, continuity = continuity)
     } else {
-      sanity_check <- list(good=F, meanquot=NA)
+      sanity_check <- list(good=F, meanquot=NA)## FALSE
     }
     if(!sanity_check$good)
       output <- new('optimParams', 

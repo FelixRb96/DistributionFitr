@@ -11,13 +11,15 @@ A density (or count density) should be parametrically adapted to a univariate da
 Examine how several theoretical distibutions describe given univariate data.
 
 The package contains the following functions:
-\code{getFamilies} Browsing for distribution families
-\code{getFamily}  Find all distributions in a package
-\code{getParams}for a single distribution family, parameters are determined and classified, as well as upper and lower limits of parameters
-\code{optimParamsDiscrete}fits the parameters for a given distribution family with known names for the parameters and known value range of each parameter
-\code{globalfit}Determines the best parameters for a list of distribution families and recognizes discrete distributions
-\code{loglik} returns the loglikelihood function to be optimized
+\itemize{
+ \item \code{getFamilies} Browsing for distribution families item
+\item \code{getFamily}  Find all distributions in a package item
+\item \code{getParams}for a single distribution family, parameters are determined and classified, as well as upper and lower limits of parameters item
+\item \code{optimParamsDiscrete}fits the parameters for a given distribution family with known names for the parameters and known value range of each parameter item
+\item \code{globalfit}Determines the best parameters for a list of distribution families and recognizes discrete distributions item
+\item \code{loglik} returns the loglikelihood function to be optimized item
 
+}
 }
 
 \author{

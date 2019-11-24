@@ -87,41 +87,26 @@ get_fun_from_package <- function(fam, package, type="r") {
 # get_fun_from_package("filter", "stats", "")
 # get_fun_from_package("filter", "dplyr", "")
 
-
-sample_params <- function(family, family_info, params=NULL,
-                          ## max = 100
-                          ) {
+sample_params <- function(family, family_info, params=NULL, max = 100) {
   pars <- if (is.null(params)) family_info$lower else params
   
   # bound possible values to reasonable range
-  upper <- pmin(family_info$upper,
-                ## max
-                100) ## nie Konstanten vergraben
-  lower <- pmax(family_info$lower,
-                ## -max
-                -100)
+  upper <- pmin(family_info$upper, max)
+  lower <- pmax(family_info$lower, -max)
   
   # simulate some "true" parameter values
   # cat("Sampling some 'true' parameter values and simulating sample data\n")
 
-  ## bitte ohne for chleife
-  ## float <- pars[family_info$accepts_float]
-  ## pars[float] <- runif(length(float), lower[float], upper[float])
-  ## int <- pars[!family_info$accepts_float]
-  ## if (any(...)) stop
-  ## part[int] <- ...
+
+  float <- names(pars)[family_info$accepts_float]
+  pars[float] <- runif(length(float), lower[float], upper[float])
+  int <- names(pars)[!family_info$accepts_float]
   
-  for(param in names(pars)) {
-    
-    if (family_info$accepts_float[param]) {
-      pars[param] <- runif(1, lower[param], upper[param])
-      
-      # check if range contains an integer and if yes sample intergers from this range
-    } else if (floor(family_info$upper[param]) - ceiling(family_info$lower[param]) >= 0) {
-      pars[param] <- sample(ceiling(lower[param]) : floor(upper[param]), 1)
-    } else {
-      stop("Param", param, "does not accept floats and its range does not include any integers")
-    }
+  if (length(int) > 0) {
+    impossible_ranges <- floor(family_info$upper[int]) - ceiling(family_info$lower[int]) < 0
+    if (any(impossible_ranges)) stop("Param(s)", paste(names(int)[which(impossible_ranges)], collapse=", "), "do not accept floats and
+                                     their range does not include any integer")
+    pars[int] <- sapply(1:length(int), function(i) sample(ceiling(lower[int[i]]): floor(upper[int[i]]), 1))
   }
 
   ## taucht das Problem nur bei unif auf??
