@@ -87,7 +87,6 @@ get_fun_from_package <- function(fam, package, type="r") {
 # get_fun_from_package("filter", "stats", "")
 # get_fun_from_package("filter", "dplyr", "")
 
-
 sample_params <- function(family, family_info, params=NULL, max = 100) {
   pars <- if (is.null(params)) family_info$lower else params
   

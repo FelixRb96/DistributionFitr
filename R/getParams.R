@@ -81,7 +81,7 @@ get_all_params <- function(fam) {
 # (1.2) Given distribution family, parameters, some x-values: test if combination is valid
 # ------------------------------------------------------------------------------------------
 
-## namen startend mit . sind tabu
+## MS namen startend mit . sind tabu
 .validate_values <- function(fam, n_or_nn, params, x_test) {
   # try to generate a random number from the distribution
   rfun <- get_fun_from_package(fam = fam$family, package = fam$package, type="r")
@@ -92,6 +92,7 @@ get_all_params <- function(fam) {
   # as this sometimes takes a while we use a timeout to stop the execution after a while
   # however we consider a timeout as a valid parameter value as no error occurs (it just takes to lang)
   if (is.finite(r)) {
+    ## MS eventuell hier auch ein try(..., silent=TRUE)
     r_ <- eval_with_timeout(do.call(dfun, c(x_test, params)), timeout = 1, return_value_on_timeout = "TIMEOUT")
     if (r_ == "TIMEOUT") message(fam, " produced timeout for params ", paste(names(params), params, sep=": ", collapse=","), " on ", x_test)
     any(!is.na(r_))
@@ -156,7 +157,10 @@ get_default_values <- function(all_params, fam) {
     } 
   }
   if (is.null(valid_params)) {
-    message("Could not find a set of valid default values for family ", fam)
+    
+    message("Could not find a set of valid default values for family ", fam
+            ## MS , "\nErrors:", errors)
+            )
     message("Errors:", errors)
   }
   return(valid_params)
@@ -228,8 +232,11 @@ iterate_min_max_vals <- function(param, all_params, fam, cur_val, step_sizes, is
     check_res <- check_values_for_param(param, all_params, fam, vals)
     
     # usually at least the first (when is_min = FALSE) or the last (when is_min = TRUE) should be valid
-    # but due to overflow it can happen that none is TRUE then we break with the current value
+                                        # but due to overflow it can happen that none is TRUE then we break with the current value
+
+    ## MS vielleicht schoener ohne else : if (!any(check_res)) return(cur_val)
     if (any(check_res)) {
+      ## MS semantisch falsch. cur_val <- if (is.min) ... else 
       cur_val <- ifelse(is_min, min(vals[check_res]), max(vals[check_res]))
     } else {
       return(cur_val)
@@ -275,7 +282,9 @@ get_param_ranges <- function(all_params, fam) {
   for (param in names(all_params)){
     
     # 1) Try to find upper and lower bounds (if there are some)
-    initial_min_val <- -1e3
+    initial_min_val <- -1e3  ## MS besser als Argument mit default Wert?
+    ##                         Wenn beibehalten zumindest vor die For-Schleife
+    ##                         oder ganz an den Anfang
     initial_max_val <- 1e3
     step_sizes <- c(1e2, 50, 10, 1, 0.1, 0.01)
     
@@ -285,14 +294,16 @@ get_param_ranges <- function(all_params, fam) {
     check_res <- check_values_for_param(param, all_params, fam, vals)
     
     # if lowest or highest value was valid in the first check we already have an min_val or max_val
-    # otherwise we iterate with the above method
+                                        # otherwise we iterate with the above method
+    ## MS min_val <- if () ...
     if (check_res[1]) {
       min_val <- - Inf
     } else {
       min_val <- iterate_min_max_vals(param=param, all_params = all_params, fam=fam,
                                       cur_val = min(vals[check_res]), step_sizes = step_sizes, is_min = TRUE)
     }
-    
+
+    ## MS dito
     if (check_res[length(check_res)]) {
       max_val <- Inf
     } else {
@@ -303,7 +314,8 @@ get_param_ranges <- function(all_params, fam) {
     lower[param] <- min_val
     upper[param] <- max_val
     
-    # 2) Check if the parameter accepts floats or only integers
+                                        # 2) Check if the parameter accepts floats or only integers
+    ## MS Keine Konstanten mitten im Code
     n <- 10
     testsequence <- runif(n, max(min_val, -1e3), min(max_val, 1e3))
     testsequence <- unique(c(testsequence, trunc(testsequence)))
@@ -318,6 +330,9 @@ get_param_ranges <- function(all_params, fam) {
     accepted_float <- sum(!is_integer & testoutcome)
     accepted_float_rate <- accepted_float/(num_tests - num_integer)
 
+    ## MS besser:
+    ##accepts_float[param] <- accepted_float_rate > 1/(num_tests - num_integer))
+    ## if (!accepts_float[param] && accepted_int_rate == 0) stop("distribution does not seem to accept any values")
     if(accepted_float_rate > 1/(num_tests - num_integer)) accepts_float[param] <- TRUE
     else if(accepted_int_rate == 0) stop("distribution does not seem to accept any values")
     else accepts_float[param] <- FALSE
@@ -339,6 +354,7 @@ get_param_ranges <- function(all_params, fam) {
 ### Function that checks if log is working ---------------------------------------------------------------------------
 check_log <- function(fam) {
   dfun <- get_fun_from_package(fam = fam$family, package = fam$package, type="d")
+  ## MS 'log' %in% names(formals(dfun))  ## mehr nicht !!!
   if('log' %in% names(formals(dfun))) {
     return(T)
   } else {
@@ -367,12 +383,14 @@ check_integer <- function(fam, all_params) {
 # additionally params$discrete specifies whether fam is a discrete distribution
 get_support <- function(fam, params) {
   
-  # in case the parameter is unbounded we cap it to avoid extreme values
+                                        # in case the parameter is unbounded we cap it to avoid extreme values
+  ## MS keine Konstanten mitten im Code
   low_capped <- pmax(params$lower, -10)
   upp_capped <- pmin(params$upper, 10)
   
   # we additionally ignore the 10% highest and lowest parameter values (e.g. for "binom" we only consider prop in [0.1, 0.9])
-  # remark: what happens with values x: lox_capped < x < low_capped + 0.1 * (upp_capped - low_capped), i.e. 0.05?
+                                        # remark: what happens with values x: lox_capped < x < low_capped + 0.1 * (upp_capped - low_capped), i.e. 0.05?
+  ## MS keine Konstanten mitten im Code  
   low <- ifelse(params$lower == low_capped, low_capped + 0.1 * (upp_capped-low_capped), low_capped)
   upp <- ifelse(params$upper == upp_capped, upp_capped - 0.1 * (upp_capped-low_capped), upp_capped)
   
@@ -382,19 +400,21 @@ get_support <- function(fam, params) {
   
   # define the base choices for all parameters that are chosen when only varying one parameter and keeping the others constant
   # base_choices <- (low + upp)/2
-  #base_choices <- as.list(ifelse(params$accepts_float, base_choices, round(base_choices)))
-  base_choices <- as.list(ifelse(params$accepts_float, params$defaults, round(params$defaults)))
+                                        #base_choices <- as.list(ifelse(params$accepts_float, base_choices, round(base_choices)))
+  
+  base_choices <- as.list(ifelse(params$accepts_float, params$defaults,
+                                 round(params$defaults)))
   
   # define the sequence of test points
-  precision <- 0.01
-  x <- seq(-100, 100, precision)
+  precision <- 0.01 ## MS dito
+  x <- seq(-100, 100, precision) ## MS dito
   if (params$discrete) x <- unique(round(x))
   
   # and add the points to the list of parameter choices
   base_choices$x <- x
   
   # define the number of values to test for each parameter
-  n_test <- 11
+  n_test <- 11 ## MS dito
   
   # initialize limits of support to maximum / minimum possible value each
   support_min <- Inf
@@ -405,6 +425,7 @@ get_support <- function(fam, params) {
   for (param in names(low)) {
     # define n_test equally distributed values for the current param dependend on its adapted range from above
     param_choices <- seq(low[param], upp[param], length.out = n_test)
+    ## MS warum trunc und nicht round?
     if (!params$accepts_float[param]) param_choices <- trunc(param_choices)
     
     # copy base choices to args_ so that we can change the value for the current param below
@@ -414,9 +435,13 @@ get_support <- function(fam, params) {
       
       # row i of the result matrix will be the density values at x when taking the i-th choice for the current param
       result_mat <- matrix(NA, nrow=length(param_choices), ncol=length(x))
+      ## MS unklar warum diese Konstruktion.
+      ## for (i in 1:length(param_choices)) { ## ok falls length()>0
+      ##    choice <- param_choices[i]
       i <- 1
       for (choice in param_choices) {
         # calulate density value and add to result matrix
+        ## MS ohne Unterstrich, da keine spezielle Funktion von args
         args_[[param]] <- choice
         res <- suppressWarnings(do.call(dfun, args = args_))
         result_mat[i, ] <- res
@@ -427,7 +452,7 @@ get_support <- function(fam, params) {
     
     result_mat <- get_result_mat(param_choices)
     
-    # for each row calculate the minimum and maximum evaluation point with positive density
+    ## for each row calculate the minimum and maximum evaluation point with positive density
     row_support_min <- apply(result_mat, 1, function(row) {if (length(which(row>0)) > 0) x[min(which(row>0))] else Inf})
     row_support_max <- apply(result_mat, 1, function(row) {if (length(which(row>0)) > 0) x[max(which(row>0))] else -Inf})
     
@@ -455,12 +480,14 @@ get_support <- function(fam, params) {
     
     # cat("After param", param, "--> \tsupport_min:", support_min, "\tsupport_max", support_max, "\n")
   }
-  # if minimum / maximum support is small / high enough we assume that the support is the whole real line
+                                        # if minimum / maximum support is small / high enough we assume that the support is the whole real line
+  ## MS dito -50
   if (support_min <= -50) support_min <- -Inf
   if (support_max >= 50) support_max <- Inf
   
   return(list(support_min = support_min, support_max = support_max, 
-              supp_max_depends_on=supp_max_depends_on, supp_min_depends_on=supp_min_depends_on))
+              supp_max_depends_on=supp_max_depends_on,
+              supp_min_depends_on=supp_min_depends_on))
 }
 
 # -------------------------------------------------------------------------------- 
@@ -478,7 +505,7 @@ getParams <- function(fam){
   # 2) Add default values to all params that don't have any
   all_params <- get_default_values(all_params, fam)
   
-  if (is.null(all_params)) return(NULL)
+  if (is.null(all_params)) return(NULL) ## oder length() == 0 ?
   
   # 3) Get valid parameter ranges:
   result <- get_param_ranges(all_params, fam)
