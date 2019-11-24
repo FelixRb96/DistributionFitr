@@ -269,10 +269,6 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
         } # end for-loop in grid
         # drop all weird cases
         discrete_results <- grid_results[grid_results[,'convergence'] == 0, ]
-        optimum_index <- which.max(discrete_results[,'loglik'])
-        cat('\noptimal index:', optimum_index, '\n')
-
-        final_ll <- grid_results[optimum_index,'loglik']
       } else { # case 4
 	grid_results <- matrix(NA, nrow = nrow(grid), ncol = 1)
         colnames(grid_results) <- c("loglik")
@@ -292,11 +288,10 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
 	  )
 	  setTxtProgressBar(pb, i)
 	}
-        optimum_index <- which.max(grid_results[,'loglik'])
-        # cat('\noptimal index:', optimum_index, '\n') # for debug only
-
-        final_ll <- grid_results[optimum_index,'loglik']
       }
+      optimum_index <- which.max(grid_results[,'loglik'])
+      # cat('\noptimal index:', optimum_index, '\n') # for debug only
+      final_ll <- grid_results[optimum_index,'loglik']
 
       # print(zoom_level)
       # print(max(zoom_level))
@@ -309,9 +304,12 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
 	centre <- optimum_gridcell
         # zoom out only in dimensions where max was at boundaries
         zoom <- as.numeric(boundary_check)
-	if(zoom_level >= max_zoom_level - 1) {
-	  par_outofbound <- family_info$lower[which.max(zoom_level)] # here which.max is okay, showing one parameter only is fine
-	  cat('Maximum zoom reached. Parameter', par_outofbound, 'appears to be far off. Maybe adjust priors or max_zoom_level?\n')
+	if(max(zoom_level) >= (max_zoom_level - 1) ) {
+	  # par_outofbound <- non_floats[which.max(zoom_level)] # here which.max is okay, showing one parameter only is fine
+	  # cat('Maximum zoom reached. Parameter', names(par_outofbound)[1], 'appears to be far off.\nMaybe adjust priors or max_zoom_level?\n')
+	  # Above is unstable as best parameters can be jointly off, and display the name of a parameter that incidentally might be an okay one.
+	
+	  cat('Maximum zoom reached; some parameters appear to be far off.\nMaybe adjust priors or max_zoom_level?\n')
 	  break # no need to zoom in if par -> Inf
 	} else {
 	  print("Zooming out!")
