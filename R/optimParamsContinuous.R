@@ -29,6 +29,7 @@ get_best_result_from_progress <- function(optim_progress, param_names) {
   optim_result <- list()
   optim_result$value <- best_row$log_lik
   optim_result$par <- unlist(best_row[param_names])
+  ## warum 51? -> bitte Rueckmeldung an mich
   optim_result$convergence <- 51  # corresponds to warning
   
   return(optim_result)
@@ -43,9 +44,14 @@ get_best_result_from_progress <- function(optim_progress, param_names) {
 # show_optim_progress: always show optimization progress
 # on_error_use_best_result: if TRUE and an error occured during optimization the best result achieved prior to the error will be taken
 # n_starting_points: how many different starting points should be used for optimisation. The best result will be taken.
-optimParamsContinuous <- function(data, family, lower, upper, defaults, method = 'MLE', fixed=list(), prior = NULL, log=TRUE,
-                                  optim_method = 'L-BFGS-B', n_starting_points=1,
-                                  debug_error=TRUE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, no_second = FALSE, ...) {
+optimParamsContinuous <- function(data, family, lower, upper, defaults,
+                                  method = 'MLE', fixed=list(), prior = NULL,
+                                  log=TRUE,
+                                  optim_method = 'L-BFGS-B',
+                                  n_starting_points=1,
+                                  debug_error=TRUE, show_optim_progress=FALSE,
+                                  on_error_use_best_result=TRUE,
+                                  no_second = FALSE, ...) {
   # Input parameter validation
 
   # TODO:
@@ -81,20 +87,23 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults, method =
   
   # create dataframe where to save the optimization progress
   # 1 column for each parameter and a column for the associated log likelihood
+  ## keine unnoetiger data.frame im Code. data.frames sind fuer user
   optim_progress <- data.frame(matrix(nrow=0, ncol=length(lower) + length(fixed) + 1))
   colnames(optim_progress) <- c(names(lower), names(fixed), "log_lik")
   
   on.exit({
-    if (exists("optim_progress") && (show_optim_progress || (debug_error && !optim_successful))) {
+    if (exists("optim_progress") ## diese Abfrage schein mir unnoetig
+        && (show_optim_progress || (debug_error && !optim_successful))) {
       cat("Optimization progress:\n")
       print(tail(optim_progress, 2))
     }
   })
   
   # try multiple starting points hoping for a better result in case of multiple local minima
-  optim_results <- list()
+  optim_results <- list() ## optim_results <- vector("list", n_starting_points)
+  ## was passiert bei n_starting_points == 0 ?
   for (i in 1:n_starting_points) {
-      optim_successful <- TRUE
+      optim_successful <- TRUE ## loeschen
       start_params <- if(i>1) sample_params(family, list(lower=lower, upper=upper, accepts_float=!is.na(lower)), params=lower) else defaults
       # cat("Sampling start parameters, Iteration:", i, "\n")
       # print(start_params)
@@ -112,6 +121,8 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults, method =
         optim(start_params, loglik_fun, control = list(fnscale=-1, trace=0), lower=lower+safety_bound, upper=upper-safety_bound, method=optim_method),
         
         error = function(e) {
+          ## das muss ohne assign(optim_successful... gehen
+          ## siehe andere Konstruktionen mit tryCatch( in anderen Dateien
           assign("optim_successful", FALSE, envir=parent.frame(4))
           # optim_successful <<- FALSE
           
@@ -139,14 +150,18 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults, method =
       # optim_result <- optim(optim_result$par, loglik, family = family, data = data, fixed=fixed, lower=lower, upper=upper,
       #                      log=log, control = list(fnscale=-1 / abs(optim_result$value), trace=0, parscale = 1/optim_result$par), method='L-BFGS-B')
       if (!no_second && optim_successful) { 
-
+        ## bitte hier nicht mit ... arbeiten. Hier geht es um zwei
+        ## (bekannte) Argumente, die oben als Argumente aufgefuehrt
+        ## werden koennnen. Abfrage mit "missing(...)" vermutlich notwendig
         args <- list(...)
         fnscale <- if (hasArg("fnscale") && args$fnscale) -1/abs(optim_result$value) else -1
         parscale <- if (hasArg("parscale") && args$parscale) 1/optim_result$par else rep(1, length(lower))
       
         # if a parameter is optimised as zero, parscale will be Infinity, causing trouble.
         # setting might not be optimal, but never fatal.
+        ## reicht auch !is.finite(parscale) ?
         adjust <- which(parscale == Inf | parscale == -Inf)
+        ## mean(parscale[-adjust]) ??
         parscale[adjust] <- mean(parscale[!(parscale == Inf | parscale == -Inf)], na.rm = TRUE)
       
         # adjust precision to number of parameters
@@ -183,9 +198,11 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults, method =
   best_idx <- which.max(sapply(optim_results, function(x) x$value))
   optim_result <- optim_results[[best_idx]]
   
-  if (nrow(optim_progress) > 0 && optim_result$value < max(optim_progress$log_lik, na.rm = TRUE) - 1e-8) {
+  if (nrow(optim_progress) > 0 &&
+      optim_result$value < max(optim_progress$log_lik, na.rm = TRUE) - 1e-8) {
     message("Final Optimization result is worse than the best result achieved during optimization")
-    cat("Diff to best:", abs(optim_result$value - max(optim_progress$log_lik)), "\n")
+    cat("Diff to best:", abs(optim_result$value - max(optim_progress$log_lik)),
+        "\n")
   }
   
   return(list(
@@ -196,6 +213,9 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults, method =
   )
 }
 
+
+## bitte rausnehmen und in eine privat/example**.R Datei
+## die wiederum source("../R/optimParamsContinuous.R") aufruft
 if (sys.nframe() == 0) {
 
   # Example 1 for optimParamsContinuous

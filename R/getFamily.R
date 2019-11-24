@@ -23,29 +23,22 @@
 getFamily <- function(pkg){
   
   # load package pkg (can potentially lead to errors if some requirements are not fulfilled)
-
-  ## seltsame Konstruktion.
-  ## Ist
-  ## load_successful <- !is(try( suppressPackageStartupMessages(library(pkg, character.only=TRUE)), silent=TRUE), "try-error")
-  ## nicht einfacher?
-  load_successful <- tryCatch({
-    suppressPackageStartupMessages(library(pkg, character.only=TRUE))
-    TRUE
-    }, error = function(e) {
-      message(e)
-      FALSE
-      }
-    )
-  if (!load_successful) return(list())
+  load_successful <- !is(try( suppressPackageStartupMessages(library(pkg, character.only=TRUE)), silent=TRUE), "try-error")
+  
+  if (!load_successful) {
+    warning("Error loading package ", pkg, ". Skipping package.")
+    return(list())
+  }
+  
+  start_chars <- c("d", "p", "q", "r")
+  first_args <- c("x", "q", "p", "n")    # first parameters of the d, p, q, r functions
   
   ## all functions starting with r, d, p or q
-  ## rdpq ist ein   paste(start_chars, collapse="")  
-  possible_dists <- lsf.str(paste0("package:", pkg), pattern="^[rdpq]")
+  possible_dists <- lsf.str(paste0("package:", pkg), pattern=paste0("^[", paste(start_chars, collapse = ""), "]"))
   
   if (length(possible_dists) == 0) return(list())
   
-  start_chars <- c("d", "p", "q", "r")  ## definitionen nach oben
-  first_args <- c("x", "q", "p", "n")    # first parameters of the d, p, q, r functions
+  
   l <- list()
   ## l <- vector("list", length(start_chars))
   ## names(l) <- start_chars
@@ -53,20 +46,19 @@ getFamily <- function(pkg){
   # function for checking whether the first argument of fun in first_arg (used with first_arg = "x", "n",...)
   check_first_param <- function(fun, first_arg) {
     f_arg <- names(formals(fun))[1]
-    if(length(f_arg) == 0) FALSE else f_arg == first_arg ## genau dafuer gibt es &&
+    !(length(f_arg) == 0) && f_arg == first_arg
   }
   
   for (i in 1:length(start_chars)) {
     char <- start_chars[i]
-    first_arg <- first_args[i] ## wird nur 1x verwendet
-    subset <- grep(paste0("^", char), possible_dists, value=TRUE)                     # all functions starting with char
+    subset <- grep(paste0("^", char), possible_dists, value=TRUE)           # all functions starting with char
 
     ## mit obigen nur noch
     ##   if (length(subset) != 0) ...
     if (length(subset) == 0) {
       l[[char]] <- c()
     } else {
-      valid_idx <- sapply(subset, check_first_param, first_arg = first_arg)             # check if all functions have the correct first arg
+      valid_idx <- sapply(subset, check_first_param, first_arg = first_args[i])   # check if all functions have the correct first arg
       # print(valid_idx)
       l[[char]] <- subset[valid_idx]
     }
