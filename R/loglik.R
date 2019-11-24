@@ -47,7 +47,7 @@ loglik <- function(family, data, fixed=list(), log, lower, upper) { #NEW: fixed=
   
   
   # define loglikelihood function 
-  likelihood <- function(params) {
+  likelihood <- function(params = NULL) { # BNZ: allow for empty params for distributions with all-integer parameters
     
     # print(params) # to be deleted later, checking input  
 

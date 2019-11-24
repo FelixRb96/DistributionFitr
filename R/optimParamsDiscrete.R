@@ -213,7 +213,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
       while_counter <- while_counter + 1
       zoom_level <- zoom_level + zoom
       cat('current zoom level:', zoom_level, '\n')
-      cat('current focal point: ')
+      cat('current focal point:\n')
       print(centre)
       # centre is always an integer
       grid_low <- centre-(25*(10^zoom_level)) ## Konstanten nicht mitten im Code
@@ -292,9 +292,8 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
 	  )
 	  setTxtProgressBar(pb, i)
 	}
-	head(grid_results)
         optimum_index <- which.max(grid_results[,'loglik'])
-        cat('\noptimal index:', optimum_index, '\n')
+        # cat('\noptimal index:', optimum_index, '\n') # for debug only
 
         final_ll <- grid_results[optimum_index,'loglik']
       }
