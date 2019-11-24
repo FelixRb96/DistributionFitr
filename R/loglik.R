@@ -3,7 +3,7 @@
 ## Till Freihaut
 ## Leonardo Vela
 ##
-## Calculate the log-lieklihood function
+## Calculate the log-likelihood function
 ##
 ## Copyright (C) 2019 -- 2020 Niclas Lietzow
 ##
@@ -22,20 +22,9 @@
 ## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 
-# Loglik-Function
-# Formate
-
-# family:   Liste,              Name der Familie + Liste mit Paket
-# data:     Numerischer Vektor, Datenreihe
-# fixed:    banamte Liste,      Namen und fixierte Werte für die übringen Parameter
-#                               Arg_opt und fixed sind disjunkt und ergeben zusammen ALLE paramter der Familie
-# log:      Boolean (T/F),      Does the log argument exist when calling the distribuition function of the family
-# lower:    Benamter Vektor,    Lower Boundaries for paramters in arg_opt   (same order!)
-# upper:    Benamter Vektor,    Upper Boundaries for paramters in arg_opt   (same order!)
-
-loglik <- function(family, data, fixed=list(), log, lower, upper) { #NEW: fixed=list() default
+loglik <- function(family, data, fixed=list(), log, lower, upper) {
   
-  arguments <- list(x=data) # NEW: arg_opt wird erst in likelihood in die Liste eingefügt
+  arguments <- list(x=data) # NEW: arg_opt wird erst in likelihood in die Liste eingefuegt
   
   # check wheter log-distribution function is directly available for distribution
   if(log==T) ## if (log)
@@ -49,17 +38,16 @@ loglik <- function(family, data, fixed=list(), log, lower, upper) { #NEW: fixed=
   # define loglikelihood function 
   likelihood <- function(params = NULL) { # BNZ: allow for empty params for distributions with all-integer parameters
     
-    # print(params) # to be deleted later, checking input  
 
     ## ist warning adaequat? stop(...) ?? Gegebenenfalls ruecksprache
     if(length(params)==0) warning('loglik does not depend on parameters.')
       
-    #NEW: Check boundaries
+    
     for(param_name in names(params)) {
       if(lower[param_name]>params[[param_name]] ||
          upper[param_name] < params[[param_name]])
         stop('Parameter ', param_name, ' with value ', params[[param_name]],
-             ' outside the boundaries.') #Alternativ einen penalty
+             ' outside the boundaries.')
     }
     
     #Add params with names of parameters to arguments list
@@ -97,7 +85,7 @@ loglik <- function(family, data, fixed=list(), log, lower, upper) { #NEW: fixed=
         break
       }
     }
-    
+      
     # if we've found one, then we can update the progress
     if (return_optim_progress) {
       # cat("Found optimization progress in parent frame", i, "\n")
