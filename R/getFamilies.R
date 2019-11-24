@@ -86,7 +86,7 @@ construct_package_list <- function(all.packages) {
 }
 
 
-write_file <- function(family_list, file="all_families.rds") {
+write_file <- function(family_list, file="data/all_families.rds") {
   saveRDS(family_list, file=file)
 }
 
@@ -97,7 +97,7 @@ write_file <- function(family_list, file="all_families.rds") {
 # Case 1.3 TRUE -> take all installed packages
 # Case 2 all.packages missing: Take families saved in the file
 
-getFamilies <- function(all.packages, file="R/all_families.rds") {
+getFamilies <- function(all.packages, file="data/all_families.rds") {
   # CASE 2:
   if (missing(all.packages)) {
     if (! (file %in% list.files("R")) )
@@ -116,6 +116,6 @@ getFamilies <- function(all.packages, file="R/all_families.rds") {
   
   # CASE 1.1
   family_list <- iterate_packages(all.packages)
-  write_file(family_list=family_list,file=file)
+  write_file(family_list=family_list,file = file)
   return(family_list)
 }
