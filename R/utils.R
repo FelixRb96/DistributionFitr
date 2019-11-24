@@ -87,10 +87,8 @@ get_fun_from_package <- function(fam, package, type="r") {
 # get_fun_from_package("filter", "stats", "")
 # get_fun_from_package("filter", "dplyr", "")
 
-
-sample_params <- function(family, family_info, params=NULL,
-                          ## max = 100
-                          ) {
+## zusaetzliches Argument: ## max = 100
+sample_params <- function(family, family_info, params=NULL) {
   pars <- if (is.null(params)) family_info$lower else params
   
   # bound possible values to reasonable range
