@@ -1,7 +1,7 @@
 ## Authors 
 ## Moritz Kern, mkern@mail.uni-mannheim.de
 ## Benedikt Geier, bgeier@mail.uni-mannheim.de
-## Borui N. Zhu, borui.n.zhu@gmail.com
+## Borui N. Zhu, bzhu@mail.uni-mannheim.de
 ##
 ## Optimise the discrete and continuous parameters of a distribution
 ##
@@ -179,7 +179,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
       }
     }
     
-    print(history_)
+    if(show_optim_progress) print(history_)
     if(plot) {
       ## braucht man wirklich dieses ifelse ? plot ist doch eigentlich robust
       ## Man sollte eher ylim setzen
@@ -212,14 +212,16 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
       ## noch besser 5 als Konstante oben definieren
       while_counter <- while_counter + 1
       zoom_level <- zoom_level + zoom
-      cat('current zoom level:', zoom_level, '\n')
-      cat('current focal point:\n')
-      print(centre)
       # centre is always an integer
       grid_low <- centre-(25*(10^zoom_level)) ## Konstanten nicht mitten im Code
       grid_high <- centre+(25*(10^zoom_level))
       stepsize <- rep(1, times = num_discrete)*(10^zoom_level)
-      cat('stepsizes:', stepsize, '\n')
+      if(show_optim_progress) {
+	cat('current zoom level:', zoom_level, '\n')
+        cat('current focal point:\n')
+        print(centre)
+        cat('stepsizes:', stepsize, '\n')
+      }
       lows <- pmax(family_info$lower[non_floats], grid_low)
       # at the start, centre over defaults. later: centre over maximum and zoom in/out
       highs <- pmin(family_info$upper[non_floats], grid_high)
@@ -309,17 +311,17 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
 	  # cat('Maximum zoom reached. Parameter', names(par_outofbound)[1], 'appears to be far off.\nMaybe adjust priors or max_zoom_level?\n')
 	  # Above is unstable as best parameters can be jointly off, and display the name of a parameter that incidentally might be an okay one.
 	
-	  cat('Maximum zoom reached; some parameters appear to be far off.\nMaybe adjust priors or max_zoom_level?\n')
+	  message('Maximum zoom reached; some parameters appear to be far off.\nMaybe adjust priors or max_zoom_level?\n')
 	  break # no need to zoom in if par -> Inf
 	} else {
-	  print("Zooming out!")
+	  if(show_optim_progress) print("Zooming out!")
 	}
       } else if (max(zoom_level) > 0) {
 	centre <- optimum_gridcell
         # since no boundary optima, zoom in wherever zoom is highest
 	which_max <- (zoom_level == max(zoom_level)) # do not use which.max, as index may not be unique
         zoom <- as.numeric(which_max) * (-1)
-	print("Zooming back in!")
+	if(show_optim_progress) print("Zooming back in!")
       } else { ## hmm. Unklar # BNZ: Der einzige Fall, der bis hierhin überlebt, ist wenn die optimale Gitterzelle nicht am Rande steht
 	                      # UND der Zoom wieder auf genauester Ebene ist. Deswegen ist hier das Optimum erreicht --> break
 	break
@@ -348,7 +350,6 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
       names(final_params) <- c(names(optim_res$par), colnames(grid[optimum_index, ]))
       reorder <- match(names(final_params), names(family_info$lower))
       optim_res$par <- final_params[reorder]
-      print(optim_res$par)
     } else {
       optim_res <- list()
       optim_res$par <- grid[optimum_index,]
