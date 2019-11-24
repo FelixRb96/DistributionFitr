@@ -311,7 +311,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
 	  # cat('Maximum zoom reached. Parameter', names(par_outofbound)[1], 'appears to be far off.\nMaybe adjust priors or max_zoom_level?\n')
 	  # Above is unstable as best parameters can be jointly off, and display the name of a parameter that incidentally might be an okay one.
 	
-	  message('Maximum zoom reached; some parameters appear to be far off.\nMaybe adjust priors or max_zoom_level?\n')
+	  warning('Maximum zoom reached; some parameters appear to be far off.\nMaybe adjust priors or max_zoom_level?\n')
 	  break # no need to zoom in if par -> Inf
 	} else {
 	  if(show_optim_progress) print("Zooming out!")
