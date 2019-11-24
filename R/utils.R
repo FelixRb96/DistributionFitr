@@ -48,7 +48,12 @@ eval_with_timeout <- function(expr, envir = parent.frame(), timeout, return_valu
 
 # given a family name (e.g. "beta"), a package name (e.g. "stats") and the type ("r" for "rbeta", "d" for "dbeta") gets the function
 # from the desired package and returns it
-# this is needed as we cant use "stats::rbeta" directly in formals or do.call -> error, that it cannot find the function
+                                        # this is needed as we cant use "stats::rbeta" directly in formals or do.call -> error, that it cannot find the function
+
+## jede Funktion ruft get_fun_from_package mit
+##   get_fun_from_package(fam = fam$family, package = fam$package)
+## auf.  Zumindest als Option waere gut, dass package nicht angegeben
+## wird und get_fun_from_package(fam = fam, type="r") aufgerufen werden kann
 get_fun_from_package <- function(fam, package, type="r") {
   return( get(paste0(type, fam), envir = asNamespace(package)) )
 }
@@ -60,15 +65,29 @@ get_fun_from_package <- function(fam, package, type="r") {
 # get_fun_from_package("filter", "dplyr", "")
 
 
-sample_params <- function(family, family_info, params=NULL) {
+sample_params <- function(family, family_info, params=NULL,
+                          ## max = 100
+                          ) {
   pars <- if (is.null(params)) family_info$lower else params
   
   # bound possible values to reasonable range
-  upper <- pmin(family_info$upper, 100)
-  lower <- pmax(family_info$lower, -100)
+  upper <- pmin(family_info$upper,
+                ## max
+                100) ## nie Konstanten vergraben
+  lower <- pmax(family_info$lower,
+                ## -max
+                -100)
   
   # simulate some "true" parameter values
   # cat("Sampling some 'true' parameter values and simulating sample data\n")
+
+  ## bitte ohne for chleife
+  ## float <- pars[family_info$accepts_float]
+  ## pars[float] <- runif(length(float), lower[float], upper[float])
+  ## int <- pars[!family_info$accepts_float]
+  ## if (any(...)) stop
+  ## part[int] <- ...
+  
   for(param in names(pars)) {
     
     if (family_info$accepts_float[param]) {
@@ -81,7 +100,8 @@ sample_params <- function(family, family_info, params=NULL) {
       stop("Param", param, "does not accept floats and its range does not include any integers")
     }
   }
-  
+
+  ## taucht das Problem nur bei unif auf ??
   # make sure that sampled values make sense for uniform distribution
   if (family$family == "unif") {
     h <- pars
@@ -106,7 +126,7 @@ sample_data <- function(n, family, params) {
 informationCriteria <- function(ll, k, n) {
   aic = 2*k - 2 *  ll
   bic = log(n) * k - 2 *  ll
-  aicc = aic + (2*k^2+2*k)/(n-k-1)
+  aicc = aic + (2 * k^2 + 2 * k) / (n - k - 1)
   return(list(AIC=aic, BIC=bic, AICc=aicc))
 }
 
