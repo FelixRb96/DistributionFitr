@@ -141,7 +141,7 @@ disc_trafo <- function(data){
 
 ### 2) Main Function --------------------------------------------------------------------------
 
-globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, preloaded_families = T, cores = NULL, ...){
+globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE, preloaded_families = TRUE, cores = NULL, ...){
 
   if(preloaded_families) {
     families <- readRDS('data/all_families.rds') ## keine Konstanten im Code!
@@ -151,9 +151,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, pre
     families <- getFamilies()
   }
   discrete_families <- sapply(families, function(x) x$family_info$discrete)
-  ## bitte nur  which(discrete_families) ## wenn nicht klar warum, melden.
-  discrete_families <- which(discrete_families==TRUE) # Indizes zu diskreten Verteilungen
-  
+  discrete_families <- which(discrete_families) # Indizes zu diskreten Verteilungen
   
   if (is.null(continuity)){
     
@@ -162,12 +160,11 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, pre
     relevant_families <- if(trafo_list$discrete) families[discrete_families] else families[-discrete_families]
     continuity <- ifelse(trafo_list$discrete, F, T)
     
-  } else
-    if (continuity == T){ ## if (continuity) ## !!!
+  } else if (continuity ){
     
     relevant_families <- families[-discrete_families]
     
-  } else if(continuity==FALSE) { ## gibt es noch andere moeglichkeiten ?
+  } else if(!continuity) { ## gibt es noch andere moeglichkeiten ?
     
     relevant_families <- families[discrete_families]
     
@@ -192,11 +189,9 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, pre
     relevant_families <- relevant_families[!(all_pkgs %in% missing_pkgs)]
   }
   
-  if(progress==T) ## if (progress)
+  if(progress)
       message("Comparing the following distribution families:", paste(sapply(relevant_families, function(x) x$family), collapse = ", "))
 
-  output_liste <- list() ## loeschen, da ueberschrieben
-  
   if(is.null(cores))
     cores <- detectCores()
   cl <- makeCluster(cores, outfile='log.txt')
@@ -206,8 +201,9 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, pre
   #for (fam in relevant_families) {
     source('private/source_all.R') ## keine Konstanten im Code
     fam <- relevant_families[[i]]
-    if(progress == T) ## dito
+    if(progress)
       message("Current Family: ",  fam$family)
+    
     output_liste <- optimParamsDiscrete(data = data,
                         family = fam[c('package', 'family')],
                         family_info = fam$family_info,
@@ -229,7 +225,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, pre
       # experimental feature - please watch out!
       sanity_check <- fitting_sanity_check(output, data, continuity = continuity)
     } else {
-      sanity_check <- list(good=F, meanquot=NA)## FALSE
+      sanity_check <- list(good=FALSE, meanquot=NA)## FALSE
     }
     if(!sanity_check$good)
       output <- new('optimParams', 
