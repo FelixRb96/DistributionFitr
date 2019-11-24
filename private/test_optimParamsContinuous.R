@@ -7,6 +7,46 @@ source("optimParamsContinuous.R")
 source("getParams.R")
 source("utils.R")
 
+
+# Example 1 for optimParamsContinuous
+data <- rnorm(n=100, mean=70, sd= 4)
+family <- list(family='norm', package="stats")
+lower <- c('mean' = - Inf)
+upper <- c('mean' = Inf)
+fixed <- c('sd'=2)
+defaults <- c('mean' = 0)
+optimParamsContinuous(data = data, family=family, lower=lower, upper=upper, defaults = defaults, fixed=fixed, log = T, 
+                      parscale=TRUE, fnscale=TRUE, show_optim_progress = TRUE, n_starting_points = 5)
+
+
+# Example 2 for optimParamsContinuous
+data <- rbeta(n=100, shape1=10, shape2=2)
+family <- list(family='beta', package="stats")
+lower <- c('shape1' = 0, 'shape2' = 0)
+upper <- c('shape1' = Inf, 'shape2' = Inf)
+defaults <- c('shape1' = 0.5, 'shape2' = 0.5)
+fixed <- list("ncp"=0)
+optimParamsContinuous(data = data, family = family, lower = lower, upper = upper, defaults = defaults, log = T, show_optim_progress = TRUE, n_starting_points = 5)
+
+data <- rbeta(n=100, shape1=50, shape2=70)
+family <- list(family='beta', package="stats")
+lower <- c('shape1' = 0, 'shape2' = 0, "ncp"=0)
+upper <- c('shape1' = Inf, 'shape2' = Inf, "ncp"=Inf)
+defaults <- c('shape1' = 0.5, 'shape2' = 0.5, "ncp"=0)
+fixed <- list()
+optimParamsContinuous(data = data, family = family, lower = lower, upper = upper, defaults = defaults, log = T, 
+                      fnscale=TRUE, parscale=TRUE,
+                      show_optim_progress = TRUE)
+
+loglik_fun <- loglik(family=family, data=data, fixed=fixed, log=T, upper=upper, lower=lower)
+optim(defaults, loglik_fun, control=list(fnscale=-1), lower=lower, upper=upper, method="L-BFGS-B")
+optim(c('shape1' = 40, 'shape2' = 10, "ncp"=0), loglik_fun, control=list(fnscale=-1), lower=lower, upper=upper, method="L-BFGS-B")
+
+
+
+
+#### Evaulation of different optimization approaches:
+
 evaluate_optimization <- function(true_pars, optim_result) {
   error_percent <- 100 * (true_pars - optim_result$par) / true_pars
   

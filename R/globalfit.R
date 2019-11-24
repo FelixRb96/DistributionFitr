@@ -1,6 +1,6 @@
 ## Authors 
 ## Moritz Lauff, mlauff@mail.uni-mannheim.de
-## Kiril Dik, kiril.dik@web.de
+## Kiril Dik, kdik@mail.uni-mannheim.de
 ## Nadine Tampe
 ##
 ## Fit multiple distribution families to a given univariate dataset
@@ -19,7 +19,8 @@
 ##
 ## You should have received a copy of the GNU General Public License
 ## along with this program; if not, write to the Free Software
-## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.  
+## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
 
 
 
@@ -141,21 +142,23 @@ disc_trafo <- function(data){
 
 ### 2) Main Function --------------------------------------------------------------------------
 
-globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, preloaded_families = T, cores = NULL, ...){
+globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE, preloaded_families = TRUE, cores = NULL, ...){
 
   if(preloaded_families) {
+<<<<<<< HEAD
 ## MS: all_families.rds darf nicht in R sein. Habe es nach privat verschoben
   
     families <- readRDS('R/all_families.rds') ## keine Konstanten im Code!
+=======
+    families <- readRDS('data/all_families.rds') ## keine Konstanten im Code!
+>>>>>>> 66cde6dd99dd63795fadcae7dd6c360373fe8503
     ## besser als Argumenet mit default wert
   } else {
     message("Not using preloaded families, but extracting families via getFamilies")
     families <- getFamilies()
   }
   discrete_families <- sapply(families, function(x) x$family_info$discrete)
-  ## bitte nur  which(discrete_families) ## wenn nicht klar warum, melden.
-  discrete_families <- which(discrete_families==TRUE) # Indizes zu diskreten Verteilungen
-  
+  discrete_families <- which(discrete_families) # Indizes zu diskreten Verteilungen
   
   if (is.null(continuity)){
     
@@ -164,12 +167,11 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, pre
     relevant_families <- if(trafo_list$discrete) families[discrete_families] else families[-discrete_families]
     continuity <- ifelse(trafo_list$discrete, F, T)
     
-  } else
-    if (continuity == T){ ## if (continuity) ## !!!
+  } else if (continuity ){
     
     relevant_families <- families[-discrete_families]
     
-  } else if(continuity==FALSE) { ## gibt es noch andere moeglichkeiten ?
+  } else if(!continuity) { ## gibt es noch andere moeglichkeiten ?
     
     relevant_families <- families[discrete_families]
     
@@ -194,11 +196,9 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, pre
     relevant_families <- relevant_families[!(all_pkgs %in% missing_pkgs)]
   }
   
-  if(progress==T) ## if (progress)
+  if(progress)
       message("Comparing the following distribution families:", paste(sapply(relevant_families, function(x) x$family), collapse = ", "))
 
-  output_liste <- list() ## loeschen, da ueberschrieben
-  
   if(is.null(cores))
     cores <- detectCores()
   cl <- makeCluster(cores, outfile='log.txt')
@@ -208,8 +208,9 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, pre
   #for (fam in relevant_families) {
     source('private/source_all.R') ## keine Konstanten im Code
     fam <- relevant_families[[i]]
-    if(progress == T) ## dito
+    if(progress)
       message("Current Family: ",  fam$family)
+    
     output_liste <- optimParamsDiscrete(data = data,
                         family = fam[c('package', 'family')],
                         family_info = fam$family_info,
@@ -231,7 +232,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, pre
       # experimental feature - please watch out!
       sanity_check <- fitting_sanity_check(output, data, continuity = continuity)
     } else {
-      sanity_check <- list(good=F, meanquot=NA)## FALSE
+      sanity_check <- list(good=FALSE, meanquot=NA)## FALSE
     }
     if(!sanity_check$good)
       output <- new('optimParams', 

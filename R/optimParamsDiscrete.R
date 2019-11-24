@@ -45,7 +45,8 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
                                 optim_method = 'L-BFGS-B', n_starting_points=1,
                                 debug_error=FALSE, show_optim_progress=FALSE,
                                 on_error_use_best_result=TRUE, 
-                                max_discrete_steps=100, plot=FALSE,
+                                max_discrete_steps = 100, max_zoom_level = 4,
+				plot=FALSE,
                                 discrete_fast = TRUE, ...) {
   
   # update defaults with priors
@@ -194,7 +195,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
       message("No valid discrete optimization result achieved")
       return(NULL)
     }
-  } else { # Case 3: more than one non-integer parameter, but at least one continuous one
+  } else { # Cases 3 & 4: more than one non-integer parameter
     non_floats <- !family_info$accepts_float
     num_discrete <- sum(non_floats)
     final_ll <- numeric(1)
@@ -202,18 +203,17 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
     # get parameter ranges of non-float parameters, make compact grid
     # To deal with a piori arbitrarily large values, let's try something I'll call the Google Earth algorithm
     # start with reasonable ranges
-    found <- FALSE ## loeschen
     zoom <- zoom_level <- rep(0, times = num_discrete)
     # at the start, centre over defaults. later: centre over maximum and zoom in/out
     centre <- family_info$defaults[non_floats]
     while_counter <- 0
-    while(found == FALSE) { ## besser !found; noch besser repeat {
+    repeat { ## besser !found; noch besser repeat {
       ## noch besser for (while_counter in 1:5) {
       ## noch besser 5 als Konstante oben definieren
       while_counter <- while_counter + 1
       zoom_level <- zoom_level + zoom
       cat('current zoom level:', zoom_level, '\n')
-      cat('current focal point: ')
+      cat('current focal point:\n')
       print(centre)
       # centre is always an integer
       grid_low <- centre-(25*(10^zoom_level)) ## Konstanten nicht mitten im Code
@@ -269,16 +269,11 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
         } # end for-loop in grid
         # drop all weird cases
         discrete_results <- grid_results[grid_results[,'convergence'] == 0, ]
-        optimum_index <- which.max(discrete_results[,'loglik'])
-        cat('\noptimal index:', optimum_index, '\n')
-
-        final_ll <- grid_results[optimum_index,'loglik']
       } else { # case 4
 	grid_results <- matrix(NA, nrow = nrow(grid), ncol = 1)
         colnames(grid_results) <- c("loglik")
 	pb <- txtProgressBar(min = 0, max = nrow(grid))
 	print("Please stand by shortly...")
-	# loglik_fun <- loglik(family = family, data = data, log = log, lower = family_info$lower, upper = family_info$upper)
 	for(i in 1:nrow(grid)) {
 	  loglik_fun <- loglik(family = family, data = data, fixed = grid[i, ],
                                log = log, lower = family_info$lower,
@@ -293,44 +288,42 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
 	  )
 	  setTxtProgressBar(pb, i)
 	}
-	head(grid_results)
-        optimum_index <- which.max(grid_results[,'loglik'])
-        cat('\noptimal index:', optimum_index, '\n')
-
-        final_ll <- grid_results[optimum_index,'loglik']
       }
+      optimum_index <- which.max(grid_results[,'loglik'])
+      # cat('\noptimal index:', optimum_index, '\n') # for debug only
+      final_ll <- grid_results[optimum_index,'loglik']
 
       # print(zoom_level)
       # print(max(zoom_level))
       
       # Google Earth: check if optimum is at the bound of our grid. If so, zoom out and center! if not: accept and break.
-      ## grid[optimum_index, ] wird 4x verwendet. Variablennamen zuweisen?
-      boundary_check <- ( (grid[optimum_index, ] == grid_low) |
-                          (grid[optimum_index, ] == grid_high) )
+      optimum_gridcell <- grid[optimum_index, ]
+      boundary_check <- ( (optimum_gridcell == grid_low) |
+                          (optimum_gridcell == grid_high) )
       if (sum(boundary_check) > 0) {
-	centre <- grid[optimum_index, ]
+	centre <- optimum_gridcell
         # zoom out only in dimensions where max was at boundaries
         zoom <- as.numeric(boundary_check)
-	print("Zooming out!")
+	if(max(zoom_level) >= (max_zoom_level - 1) ) {
+	  # par_outofbound <- non_floats[which.max(zoom_level)] # here which.max is okay, showing one parameter only is fine
+	  # cat('Maximum zoom reached. Parameter', names(par_outofbound)[1], 'appears to be far off.\nMaybe adjust priors or max_zoom_level?\n')
+	  # Above is unstable as best parameters can be jointly off, and display the name of a parameter that incidentally might be an okay one.
+	
+	  cat('Maximum zoom reached; some parameters appear to be far off.\nMaybe adjust priors or max_zoom_level?\n')
+	  break # no need to zoom in if par -> Inf
+	} else {
+	  print("Zooming out!")
+	}
       } else if (max(zoom_level) > 0) {
-	      print("check")
-	centre <- grid[optimum_index, ]
+	centre <- optimum_gridcell
         # since no boundary optima, zoom in wherever zoom is highest
-        ## 1 Zeile statt 2
-        max_zoom <- max(zoom_level)
-	which_max <- (zoom_level == max_zoom) # do not use which.max, as index may not be unique
+	which_max <- (zoom_level == max(zoom_level)) # do not use which.max, as index may not be unique
         zoom <- as.numeric(which_max) * (-1)
 	print("Zooming back in!")
-      } else if (while_counter > 5) {
-        break
-      } else { ## hmm. Unklar
+      } else { ## hmm. Unklar # BNZ: Der einzige Fall, der bis hierhin überlebt, ist wenn die optimale Gitterzelle nicht am Rande steht
+	                      # UND der Zoom wieder auf genauester Ebene ist. Deswegen ist hier das Optimum erreicht --> break
 	break
       }
-      # take optimum_index and proceed further    
-      if(i>max_discrete_steps) { ## copy-paste-fehler ??
-        stop_discrete <- TRUE
-        warning('Discrete Optimization aborted, did not converge.')
-      }  
     } # while end
 
     # run optimParamsContinuous again for the best grid cell to retrieve information criteria, otherwise grid_results would blow up too much
@@ -356,13 +349,11 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
       reorder <- match(names(final_params), names(family_info$lower))
       optim_res$par <- final_params[reorder]
       print(optim_res$par)
-      optim_res$value <- final_ll ## s.u.
     } else {
       optim_res <- list()
       optim_res$par <- grid[optimum_index,]
-      optim_res$value <- final_ll ## s.o. gleiche Zeile
     }
-    ## optim_res$value <- final_ll
+    optim_res$value <- final_ll
   }
 
   # ICs are the same, since discrete parameters are still parameters we optimise over
