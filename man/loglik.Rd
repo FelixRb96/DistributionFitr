@@ -1,5 +1,6 @@
 \name{loglik}
 \alias{loglik}
+
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
   Loglikelihood Function 
@@ -32,9 +33,7 @@ loglik(family, data, fixed, log, lower, upper)
   }
 }
 
-\details{
-  ** If necessary, more details than the description above **
-}
+
 \value{
   \code{loglik} returns a function \code{likelihood} with arguments:
   \item{params}{An named list of values.}
@@ -46,19 +45,23 @@ loglik(family, data, fixed, log, lower, upper)
 \author{
   Niclas Lietzow, Till Freihaut, Leonardo Vela
 }
-\note{
-  **Raum für Notizen**
-}
 
-% ~Make other sections like Warning with \section{Warning }{....} ~
+
+
+\section{Warning }{
+  \item{loglik does not depend on parameters} {The returned log-likelihood function is a constant function.}
+  
+  \item{Parameter x with value y outside the boundaries} {At least one parameter value passed on to the log-likelihood function exceeds the distribution's parameter boundaries of upper or lower bound.}
+  
+  \item{Could be numerically instable} {The respective distribution function lacks the argument \code{log} and was hence called without \code{log = TRUE}. Logging the summands afterwards renders the result numerically instable.}
+}  
+  
 
 \seealso{
- **objects to See Also as \code{\link{help}}, **~
+ \code{\link{optimParam}}
 }
+
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
 
 # Example 1 for loglik
 family <- list(family="norm", package="stats")
@@ -68,10 +71,12 @@ log = TRUE
 lower <- c(mean=2)
 upper <- c(mean=10)
 
-output <- loglik(family = family, data = data, fixed = fixed,
+likelihood <- loglik(family = family, data = data, fixed = fixed,
               log = log, lower = lower, upper = upper)
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{distribution }
+\keyword{distribution}
+\keyword{Maximum-Likelihood}
+\keyword{Log-Likelihood}
