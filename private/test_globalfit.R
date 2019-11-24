@@ -15,7 +15,7 @@ tempwrapper <- function(r) {
 
 
 
-r <- tempwrapper(globalfit(rnorm(n = 1000, mean=10, sd=1)))
+r <- globalfit(rnorm(n = 1000, mean=10, sd=1))
 
 summary(r, count=10, which=2)  
 hist(r)

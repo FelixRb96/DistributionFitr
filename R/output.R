@@ -81,8 +81,7 @@ setMethod(f = "summary", signature = c("globalfit"),
 ## Wert "AIC" udn "BIC" annimmt
 
 setMethod(f = "AIC", signature = c("globalfit"),
-          def = function(object, ..., k = 2, ## count = Inf
-                         ) {
+          def = function(object, ..., k = 2) { ## count = Inf
             ls <- list(...) ## loeschen ?!
             if(is.null(k) || k!=2)
               stop("Not implemented. Argument 'k' must be set to 2.  ")
@@ -107,8 +106,7 @@ setMethod(f = "AIC", signature = c("globalfit"),
 
 
 setMethod(f = "BIC", signature = c("globalfit"),
-          def = function(object, ..., ## count = Inf 
-                         ) {
+          def = function(object, ... ) { ## count = Inf
             ## ff: dito
             ls <- list(...)
             if(is.null(ls$count))
