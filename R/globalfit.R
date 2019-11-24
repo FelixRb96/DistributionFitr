@@ -145,7 +145,7 @@ disc_trafo <- function(data){
 
 globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE, cores = NULL, ...){
 
-    families <- getFamilies()
+  families <- getFamilies()
 
   discrete_families <- sapply(families, function(x) x$family_info$discrete)
   discrete_families <- which(discrete_families) # Indizes zu diskreten Verteilungen
@@ -194,7 +194,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE, 
   cl <- makeCluster(cores, outfile='log.txt')
   registerDoParallel(cl)
   
-  output_liste <- foreach(i=1:length(relevant_families), .packages = c(), .errorhandling = 'pass') %dopar% {
+  output_liste <- foreach(i=1:length(relevant_families), .packages = c(), .errorhandling = 'remove') %dopar% {
   #for (fam in relevant_families) {
     source('private/source_all.R') ## keine Konstanten im Code
     fam <- relevant_families[[i]]
@@ -238,9 +238,9 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE, 
   }
   stopCluster(cl)
   
-    return(new('globalfit', data = data, 
-               continuity = continuity,
-               method = method,
-               fits = output_liste))
+  return(new('globalfit', data = data, 
+             continuity = continuity,
+             method = method,
+             fits = output_liste))
 }
 

@@ -82,7 +82,7 @@ construct_package_list <- function(all.packages) {
     rm(ins_pck)
   }
   
-  return(all.packages())
+  return(all.packages)
 }
 
 
@@ -101,7 +101,7 @@ write_file <- function(family_list, file="data/all_families.rds") {
 getFamilies <- function(all.packages, file="private/all_families.rds") {
   # CASE 2:
   if (missing(all.packages)) {
-    if (! (file %in% list.files("R")) )
+    if (!file.exists(file))
       return(getFamilies(all.packages = FALSE, file=file))
     #read file and return list of lists
     family_list <- readRDS(file=file)
