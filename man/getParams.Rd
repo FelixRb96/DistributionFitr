@@ -8,16 +8,16 @@
   Given a distribution family, this function attempts to retrieve the distribution parameters and various characteristics, such as: valid parameter ranges, whether they accept non-integer values and the support of the distribution.
 }
 \usage{
-getParams(family)
+getParams(fam)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{family}{
+  \item{fam}{
      List with two entries: "package" and "family", e.g. list(package="stats", family="beta")  }
 }
 
 \details{
-	The family name is defined as the part of the function name that follows "d", "p", "q" and "r". Example: uniform distribution. function call: "runif(...)" \rightarrow family name: "unif". \\
+	The family name is defined as the part of the function name that follows "d", "p", "q" and "r". Example: uniform distribution. function call: "runif(...)" --> family name: "unif". \\
 	The values returned by getParams are included in the DistributionFitr-package and updated regularly. Users may use it to update the library of parameter characteristics themselves or find the function useful to use the parameter characteristics retrieved for other purposes.
 }
 \value{

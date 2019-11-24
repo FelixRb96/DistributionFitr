@@ -32,7 +32,7 @@ is.discrete <- function(data, border = 0.35, percent = 0.8){
   
   # # Umwandeln zu vector
   if(is.data.frame(data)){
-    data <- as.vector(data = data[,1])
+    data <- as.vector(data[,1])
   }
   
   # Entfernen der NA's
@@ -111,10 +111,14 @@ disc_trafo <- function(data){
 
 ### 2) Main Function --------------------------------------------------------------------------
 
-globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, ...){
+globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, preloaded_families = T, cores = NULL, ...){
 
-  families <- getFamilies()
-  
+  if(preloaded_families) {
+    families <- dget('R/all_families.R')
+  } else {
+    message("Not using preloaded families, but extracting families via getFamilies")
+    families <- getFamilies()
+  }
   discrete_families <- sapply(families, function(x) x$family_info$discrete)
   discrete_families <- which(discrete_families==TRUE) # Indizes zu diskreten Verteilungen
   
@@ -140,32 +144,57 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, ...
     
   }
   
+  # TODO: How do we handle not yet installed packages? Force install or warn and ignore?
+  
+  all_pkgs <- sapply(relevant_families, function(x) x$package)
+  all_pkgs_unique <- unique(all_pkgs)
+  missing_pkgs <- setdiff(all_pkgs_unique, rownames(installed.packages()))
+  if (length(missing_pkgs) > 0) {
+    message("The following packages are not installed, and are thus ignored during optimisation. ",
+            "If you want to use them please install manually:", paste(missing_pkgs, collapse=", "))
+    relevant_families <- relevant_families[!(all_pkgs %in% missing_pkgs)]
+  }
+  
   if(progress==T)
       message("Comparing the following distribution families:", paste(sapply(relevant_families, function(x) x$family), collapse = ", "))
 
   output_liste <- list()
-
-  for (fam in relevant_families) {
+  
+  if(is.null(cores))
+    cores <- detectCores()
+  cl <- makeCluster(cores, outfile='log.txt')
+  registerDoParallel(cl)
+  
+  output_liste <- foreach(i=1:length(relevant_families), .packages = c(), .errorhandling = 'pass') %dopar% {
+  #for (fam in relevant_families) {
+    source('private/source_all.R')
+    fam <- relevant_families[[i]]
     if(progress == T)
       message("Current Family: ",  fam$family)
-    liste <- optimParamsDiscrete(data = data,
+    output_liste <- optimParamsDiscrete(data = data,
                         family = fam[c('package', 'family')],
                         family_info = fam$family_info,
                         method = 'MLE', prior = NULL, log = fam$family_info$log,
                         optim_method = 'L-BFGS-B', n_starting_points = 1,
                         debug_error = FALSE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, 
                         max_discrete_steps=100, plot=FALSE, discrete_fast = TRUE)
-    if(!is.null(liste)) {
+    if(!is.null(output_liste) && !is.na(output_liste$value) && !is.infinite(output_liste$value)) {
       output <- new('optimParams', family = fam$family,
                    package = fam$package,
-                   estimatedValues = liste$par,
-                   log_lik = liste$value,
-                   AIC = liste$AIC,
-                   BIC = liste$BIC,
-                   AICc = liste$AICc,
+                   estimatedValues = output_liste$par,
+                   log_lik = output_liste$value,
+                   AIC = output_liste$AIC,
+                   BIC = output_liste$BIC,
+                   AICc = output_liste$AICc,
                    continuousParams = NA, # hier muss noch was passieren
                    range = 'not_implemented') # hier muss noch was passieren
+      # aim: check whether solution has good loglik but does not fit
+      # experimental feature - please watch out!
+      sanity_check <- fitting_sanity_check(output, data, continuity = continuity)
     } else {
+      sanity_check <- list(good=F, meanquot=NA)
+    }
+    if(!sanity_check$good)
       output <- new('optimParams', 
                     family = fam$family,
                     package = fam$package,
@@ -175,9 +204,10 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, ...
                     AICc = NA_integer_,
                     continuousParams = NA, # hier muss noch was passieren
                     range = 'not_implemented') # hier muss noch was passieren
-    }
-    output_liste[[length(output_liste) + 1]] <- output
+    #output_liste[[length(output_liste) + 1]] <- output
+    return(output)
   }
+  stopCluster(cl)
   
     return(new('globalfit', data = data, 
                continuity = continuity,

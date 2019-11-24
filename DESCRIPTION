@@ -1,6 +1,6 @@
 Package: DistributionFitr
 Type: Package
-Title: Fitting Multiple Distributions
+Title: Fitting Multiple Parametric Distributions
 Version: 1.0.0
 Date: 2019-11-25
 Authors@R: 
@@ -24,8 +24,8 @@ Authors@R:
       person("Henrik", "Bengtsson", role="ctb")
       )
 Maintainer: Borui Niklas Zhu <bzhu@mail.uni-mannheim.de>
-Description: Examine how several theoretical distributions describe given univariate data.  
+Description: Given an univariate dataset, returns the best parameter families including fitted parameter for modeling the distribution of the data.
 License: GPL (>= 3)
-Imports: utils, stats, stringr, datasets, graphics, grDevices, methods
+Imports: utils, stats, stringr, datasets, graphics, grDevices, methods, parallel, doParallel, foreach
 Encoding: UTF-8
 LazyData: true

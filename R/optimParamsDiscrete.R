@@ -37,7 +37,10 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
                             defaults = family_info$defaults, method = method, fixed=c(), log = log, optim_method = optim_method,
                             nn_starting_points=n_starting_points, debug_error = debug_error, show_optim_progress = show_optim_progress,
                             on_error_use_best_result = on_error_use_best_result, ...) 
-      }, error=function(e) NULL
+      }, error=function(e) {
+        message(e)
+        return(NULL)
+      }
     )
     if (is.null(optim_res)) return(NULL)
     
@@ -162,7 +165,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE', prior
       highs <- pmin(family_info$upper[non_floats], grid_high)
       # get_params shall insure that lower and upper are all integers
       # is there a vectorised version of seq()?
-      seq_vec <- Vectorize(seq.default, vectorize.arg = c("from", "to", "by"), SIMPLIFY = FALSE)
+      seq_vec <- Vectorize(seq.default, vectorize.args = c("from", "to", "by"), SIMPLIFY = FALSE)
       grid <- seq_vec(from = lows, to = highs, by = stepsize)
       grid <- expand.grid(grid)
       # output is a list, list entry number = position of param in family_info$lower 

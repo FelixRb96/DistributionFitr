@@ -3,7 +3,7 @@
 \alias{DistributionFitr-package}
 \docType{package}
 \title{
-  Fitting of a (univariate) density
+  Fitting Multiple Parametric Distributions
 }
 \description{
 A density (or count density) should be parametrically adapted to a univariate data set, per maximum likelihood. The user only enters the data. The program automatically searches for the best parametric family and the best parameters within a family. The program then returns three best parameter families including fitted parameters.
@@ -44,4 +44,8 @@ parameter_characteristics <- getParams("beta")
 
 }
 
+
 \keyword{distributionfitr, distribution, parameters }
+\references{
+Zucchini, W. (2000). An introduction to model selection. Journal of mathematical psychology, 44(1), 41-61.
+}
