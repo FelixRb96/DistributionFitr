@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 ## Authors 
 ## Moritz Kern, mkern@mail.uni-mannheim.de
 ##
@@ -25,7 +23,6 @@
 
 # AIM: Filter distributions where density obiviously does not fit
 # but returned with good logliks (due to unkown reasons)
->>>>>>> 763b9917a7711c5cfa139534ba27b2851dc9db2d
 
 ## bitte deshalb auf mich zukommen.
 ### AIM: Filter distributions where density obiviously does not fit
