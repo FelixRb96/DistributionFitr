@@ -1,19 +1,3 @@
-#####
-# Solver for current issue, need to be deleted, after it is solved
-tempwrapper <- function(r) {
-  i <- 1
-  while(i<=length(r@fits)) {
-    if(class(r@fits[[i]])[1]!= 'optimParams') {
-      r@fits[[i]] <- NULL
-    } else {
-      i <- i+1
-    }
-  }
-  return(r)
-}
-######
-
-
 
 r <- globalfit(rnorm(n = 1000, mean=10, sd=1))
 
@@ -24,7 +8,7 @@ for(i in 1:20) {
   Sys.sleep(1)
 }
 
-r <- tempwrapper(globalfit(rgamma(n = 10000, shape=3, rate = 4)))
+r <-globalfit(rgamma(n = 10000, shape=3, rate = 4))
 summary(r, ic='BIC')
 summary(r, ic='AICc')
 summary(r, which=1:3)
@@ -36,7 +20,7 @@ hist(r, ic='BIC', which=18)
 hist(r, ic='BIC', which=4)
 hist(r, ic='BIC', which=30)
 
-r <- tempwrapper(globalfit(rbinom(n = 1000, size=10, prob=0.7)))
+r <- globalfit(rbinom(n = 1000, size=10, prob=0.7))
 summary(r)
 
 AIC(r, count=2)

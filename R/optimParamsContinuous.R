@@ -23,12 +23,12 @@
 
 
 # helper function
-get_best_result_from_progress <- function(optim_progress) {
+get_best_result_from_progress <- function(optim_progress, param_names) {
   best_idx <- which.max(optim_progress$log_lik)
   best_row <- optim_progress[best_idx,]
   optim_result <- list()
   optim_result$value <- best_row$log_lik
-  optim_result$par <- unlist(best_row[names(lower)])
+  optim_result$par <- unlist(best_row[param_names])
   optim_result$convergence <- 51  # corresponds to warning
   
   return(optim_result)
@@ -121,7 +121,7 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults, method =
             message(e, " occured during (first) optimization, trying to take best result achieved up to now\n")
             # getting best result from optimization progress up to now
             
-	          return(get_best_result_from_progress(optim_progress))
+	          return(get_best_result_from_progress(optim_progress, param_names = names(lower)))
       	    }
           }
       )
@@ -165,7 +165,7 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults, method =
       	    } else {
               message(e, " occured during optimization, trying to take best result achieved up to now\n")
               # getting best result from optimization progress up to now
-              return(get_best_result_from_progress(optim_progress))
+              return(get_best_result_from_progress(optim_progress, param_names = names(lower)))
       	    }
       	  }
         )	
