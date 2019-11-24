@@ -58,6 +58,7 @@ get_all_params <- function(fam) {
 # (1.2) Given distribution family, parameters, some x-values: test if combination is valid
 # ------------------------------------------------------------------------------------------
 
+## namen startend mit . sind tabu
 .validate_values <- function(fam, n_or_nn, params, x_test) {
   # try to generate a random number from the distribution
   rfun <- get_fun_from_package(fam = fam$family, package = fam$package, type="r")

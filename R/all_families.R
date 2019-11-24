@@ -1,3 +1,8 @@
+
+## variablen namen fehlt !!
+## bitte irgendwo im Code ein  signif() einfuegen, so dass die
+## unschoenen Zahlen wie 0.0099999999999972 verschwinden
+
 list(list(package = "ACDm", family = "burr", family_info = list(
     lower = c(theta = -Inf, kappa = -Inf, sig2 = 0.0099999999999972, 
     forceExpectation = -Inf), upper = c(theta = Inf, kappa = Inf, 

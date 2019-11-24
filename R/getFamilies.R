@@ -6,6 +6,7 @@ iterate_packages <- function(packages) {
   
   #iterate over packages
   for (i in 1:length(packages)) {
+    ## package <- packages[i]
     cat("Current Package:", packages[i])
     package_content <- getFamily(packages[i])
     cat("\tNumber of families:", length(package_content), "\n")
@@ -22,12 +23,15 @@ iterate_packages <- function(packages) {
       #fetch params for each family and add to 
       params <- tryCatch(getParams(package_content[[j]]),
                          error = function(e) {
-                           message("Error occured for family ", package_content[[j]]$family)
-                           message(e, "\n")
+                           message("Error occured for family ",
+                                   package_content[[j]]$family,
+                                   "\n", e)
+                           ## message(e, "\n")
                            NULL
                          })
-      if (!is.null(params))
-        res[[length(res) + 1]] <- c(package_content[[j]], list(family_info = params))
+      if (!is.null(params)) ## length(params) != 0 ## semantisch das richtige?
+        res[[length(res) + 1]] <- c(package_content[[j]],
+                                    list(family_info = params))
     }
   }
   
@@ -39,17 +43,22 @@ iterate_packages <- function(packages) {
 ## internal
 construct_package_list <- function(all.packages) {
   
-  if (all.packages == TRUE)
+  if (all.packages == TRUE) ## if (all.packages)
   {
     all.packages <- as.vector(installed.packages()[,"Package"])
     
-  } else if (all.packages == FALSE) 
+  } else
+    if (all.packages == FALSE) ## (i) if (!all.packages)... waere besser
+    ##                                (ii) ganz weglassen! (Alternativen zu
+    ##                                     TRUE / FALSE ?)
   {
     #only select "base" and "recommended" packages
     ins_pck <- installed.packages()
     
     ## boolean value of what to keep
-    package_filter <- ((ins_pck[,"Priority"] == "base" | ins_pck[,"Priority"] == "recommended") & !is.na(ins_pck[,"Priority"]))
+    package_filter <- ((ins_pck[,"Priority"] == "base" |
+                        ins_pck[,"Priority"] == "recommended")
+      & !is.na(ins_pck[,"Priority"]))
     
     all.packages <- as.vector(ins_pck[package_filter,"Package"])
     
@@ -74,23 +83,31 @@ write_file <- function(family_list, file="all_families.R") {
 # Case 2 all.packages missing: Take families saved in the file
 
 getFamilies <- function(all.packages, file="R/all_families.R") {
+  
   # CASE 2:
   if (missing(all.packages)) {
-    if (! (file %in% list.files()) ) getFamilies(all.packages = FALSE, file=file)
+    if (! (file %in% list.files()) ) ## das passt mit dem default
+      ## von file nicht zusammen
+      getFamilies(all.packages = FALSE, file=file) ## warum nicht return(...) ?
     #read file and return list of lists
     family_list <- dget(file=file)
     return(family_list)
   }
-  
+
+  ## CASES 1.3 und 1.2 ist Code massiv gedoppelt. Bitte is.logical verwenden
+  ## und die Zeilenzahl halbieren.
   # CASE 1.3
   if (length(all.packages) == 1 && isTRUE(all.packages)) {
+    ## doppelt gemoppelt. S. Def von isTRUE
     family_list <- iterate_packages(construct_package_list(all.packages = TRUE))
-    write_file(family_list=family_list,file="R/all_families.R")
+    write_file(family_list=family_list,file="R/all_families.R")## Konstanten
+    ## mitten im Code darf nicht sein!!
     return(family_list)
   }
   
   # CASE 1.2
   if (length(all.packages) == 1 && isFALSE(all.packages)) {
+    ## doppelt gemoppelt. S. Def von isFALSE
     family_list <- iterate_packages(construct_package_list(all.packages = FALSE))
     write_file(family_list=family_list,file="R/all_families.R")
     return(family_list)
