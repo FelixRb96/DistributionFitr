@@ -114,7 +114,7 @@ disc_trafo <- function(data){
 globalfit <- function(data, continuity = NULL, method = "MLE", progress = T, preloaded_families = T, cores = NULL, ...){
 
   if(preloaded_families) {
-    families <- dget('R/all_families.R')
+    families <- readRDS('R/all_families.rds')
   } else {
     message("Not using preloaded families, but extracting families via getFamilies")
     families <- getFamilies()
