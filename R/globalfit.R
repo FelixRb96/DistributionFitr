@@ -143,15 +143,10 @@ disc_trafo <- function(data){
 
 ### 2) Main Function --------------------------------------------------------------------------
 
-globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE, cores = NULL, 
-                      preload_families = 'data/all_families.rds', ...){
+globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE, cores = NULL, ...){
 
-  if(!is.null(preload_families) && file.exists(preload_families)) {
-    families <- readRDS(preload_families)
-  } else {
-    message("Not using preloaded families, but extracting families via getFamilies")
     families <- getFamilies()
-  }
+
   discrete_families <- sapply(families, function(x) x$family_info$discrete)
   discrete_families <- which(discrete_families) # Indizes zu diskreten Verteilungen
   
