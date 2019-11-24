@@ -28,7 +28,7 @@ getFamilies(all.packages, file="R/all_families.R")
 }
 
 \author{
-   Tim Glockner
+   Tim Glockner, Adrian Heppeler
 }
 \note{
   **further notes**
