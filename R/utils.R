@@ -77,11 +77,45 @@ eval_with_timeout <- function(expr, envir = parent.frame(), timeout, return_valu
 ##   get_fun_from_package(fam = fam$family, package = fam$package)
 ## auf.  Zumindest als Option waere gut, dass package nicht angegeben
 ## wird und get_fun_from_package(fam = fam, type="r") aufgerufen werden kann
-get_fun_from_package <- function(fam, package, type="r") {
+get_fun_from_package_internal <- function(type, fam, package) {
   return( get(paste0(type, fam), envir = asNamespace(package)) )
 }
 
-# get_fun_from_package("beta", "stats", "r")
+setGeneric(name="get_fun_from_package",
+           def = function(type, family, package) standardGeneric("get_fun_from_package"))
+
+setMethod(f="get_fun_from_package",
+          signature=c("character", "optimParams", "missing"),
+          definition = function(type, family, package) {
+            return(get_fun_from_package_internal(type, family@family, family@package))
+          })
+
+setMethod(f="get_fun_from_package",
+          signature=c("character", "list", "missing"),
+          definition = function(type, family, package) {
+            return(get_fun_from_package_internal(type, family$family, family$package))
+          })
+
+setMethod(f="get_fun_from_package",
+          signature=c("character", "character", "character"),
+          definition = function(type, family, package) {
+            return(get_fun_from_package_internal(type, family, package))
+          })
+
+# fam <- list(package="stats", family="norm")
+# 
+# # with optimParams object
+# case1 <- globalfit(rnorm(1000))
+# get_fun_from_package("d", case1@fits[[1]])
+# 
+# # with list object
+# get_fun_from_package(type="d", fam)
+# 
+# # with all 3 arguments
+# get_fun_from_package("norm", "stats", type="d")
+
+
+# get_fun_from_package("r", "beta", "stats")
 
 # # show an example where a function exists in two packages and it loads the right one
 # get_fun_from_package("filter", "stats", "")

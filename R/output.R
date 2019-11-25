@@ -129,8 +129,12 @@ setMethod(f = "hist", signature = c("globalfit"),
             breaks <- if(x@continuity) sqrt(length(x@data)) else min(nclass.Sturges(x@data), length(unique(x@data)))
             ## geht nachfolgendes nicht einfacher ueber direkte Aufrufe
             ## und/oder do.call ?
-            density <- eval(parse(text = paste0("get_fun_from_package(fam = '", selected_fit@family, "', '", selected_fit@package, "', 'd')(supporting_point, ",
-                                     paste(names(selected_fit@estimatedValues),  selected_fit@estimatedValues, sep=" = ", collapse =", "), ')')))
+            
+            fun <- get_fun_from_package(type="d", family = object)
+            param_list <- split(selected_fit@estimatedValues, names(selected_fit@estimatedValues))
+            param_list$x <- x
+            density <- do.call(fun, param_list)
+            
             ## for evalation of fitting_sanity_check
             ## need to be deleted finally
             ## print(density)
