@@ -33,9 +33,7 @@ setClass(Class = "optimParams",
            log_lik = "numeric",
            AIC = "numeric",
            BIC = "numeric",
-           AICc = "numeric",
-           continuousParams = "logical",
-           range = 'character'
+           AICc = "numeric"
          )
 )
 
