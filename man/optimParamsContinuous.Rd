@@ -90,7 +90,7 @@ lower <- c('mean' = - Inf)
 upper <- c('mean' = Inf)
 fixed <- c('sd'=2)
 start_parameters <- c('mean' = 0)
-optimParam(data = data, family=family, lower=lower, upper=upper, 
+optimParamsContinuous(data = data, family=family, lower=lower, upper=upper, 
 start_parameters = start_parameters, 
 fixed=fixed, log = T, show_optim_progress = TRUE)
 
@@ -101,7 +101,7 @@ lower <- c('shape1' = 0, 'shape2' = 0)
 upper <- c('shape1' = Inf, 'shape2' = Inf)
 start_parameters <- c('shape1' = 1, 'shape2' = 1)
 fixed <- list()
-optimParam(data =data, family = family, lower = lower, 
+optimParamsContinuous(data =data, family = family, lower = lower, 
 upper = upper, start_parameters = start_parameters, 
 log = T, show_optim_progress = TRUE)
 

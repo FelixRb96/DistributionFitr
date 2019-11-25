@@ -47,8 +47,7 @@ library(stats)
 getFamily('stats')
 
 #example for getParams
-parameter_characteristics <- getParams("beta")
-
+parameter_characteristics <- getParams(list(package = "stats", family = "beta"))
 }
 
 
