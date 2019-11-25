@@ -6,7 +6,7 @@
 ##
 ## Fit multiple distribution families to a given univariate dataset
 ##
-## Copyright (C) 2019 -- 2020 Moritz Lauff
+## Copyright (C) 2019 -- 2020 Moritz Lauff, Kiril Dik, Moritz Kern, Nadine Tampe
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
