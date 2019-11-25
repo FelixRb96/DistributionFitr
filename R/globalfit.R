@@ -2,7 +2,7 @@
 ## Moritz Lauff, mlauff@mail.uni-mannheim.de
 ## Kiril Dik, kdik@mail.uni-mannheim.de
 ## Moritz Kern, mkern@mail.uni-mannheim.de
-## Nadine Tampe
+## Nadine Tampe, ntampe@mail.uni-mannheim.de
 ##
 ## Fit multiple distribution families to a given univariate dataset
 ##
