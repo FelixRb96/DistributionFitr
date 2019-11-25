@@ -353,7 +353,7 @@ get_param_ranges <- function(all_params, fam) {
 
 ### Function that checks if log is working ---------------------------------------------------------------------------
 check_log <- function(fam) {
-  dfun <- get_fun_from_package(ype="d", family=fam)
+  dfun <- get_fun_from_package(type="d", family=fam)
   ## MS 'log' %in% names(formals(dfun))  ## mehr nicht !!!
   return('log' %in% names(formals(dfun)))
 }
