@@ -5,5 +5,5 @@ private
 .git
 .gitignore
 .README.md
-./man/optimParamsContinuous.Rd
-./man/optimParamsDiscrete.Rd
+^.*\.optimParamsContinuous.Rd
+^.*\.optimParamsDiscrete.Rd

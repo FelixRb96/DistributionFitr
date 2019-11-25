@@ -8,7 +8,11 @@
   Given data and a distribution family, this function optimises over the given continuous parameters of the function and returns the best fitted parameters and information criteria.
 }
 \usage{
-optimParamsDiscrete(data, family, family_info)
+optimParamsDiscrete(data, family, family_info, method = "MLE", prior = NULL, log = TRUE,
+		    optim_method = "L-BFGS-B", n_starting_points = 1, debug_error = FALSE,
+		    show_optim_progress = FALSE, on_error_use_best_result = TRUE,
+		    max_discrete_steps = 100, discrete_fast = TRUE, plot = FALSE,
+		    max_zoom_level = 4, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -35,10 +39,10 @@ optimParamsDiscrete(data, family, family_info)
      logical; if TRUE (default) optimization is run over log-likelihood, requires log-likelihood as parameter in selected distribution family
   }
   \item{optim_method}{
-     which optimisation method R is to use internally. Generally recommended: L-BFGS-B (default)
+     character string; specifies which optimisation method R is to use internally. Generally recommended: \code{"L-BFGS-B"} (default). See \code{optim} for details.
   }
   \item{n_starting_points}{
-     number of different starting values. Choosing more starting values might be helpful to avoid local but not global maxima
+     integer; number of different starting values. Choosing more starting values might be helpful to avoid local but not global maxima.
   }
   \item{debug_error}{
      logical; if TRUE (default) shows optimization progress in case an error occures during optimization
@@ -60,6 +64,9 @@ optimParamsDiscrete(data, family, family_info)
   }
   \item{max_zoom_level}{
     integer; if distribution has two or more integer-only parameters, this argument controls how many steps are allowed in our internal algorithm.
+  }
+  \item{...}{
+    other arguments passed down to the lower level functions, such as d[family].
   }
 }
 
@@ -113,7 +120,7 @@ optimParamsDiscrete(data, family, family_info)
 % ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
- **objects to See Also as \code{\link{help}}, **~
+ \code{\link{optim}}
 }
 \examples{
 
