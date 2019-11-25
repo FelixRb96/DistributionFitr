@@ -12,14 +12,14 @@ Examine how several theoretical distibutions describe given univariate data.
 
 The package contains the following functions:
 \itemize{
- \item \code{getFamilies} Browsing for distribution families item
-\item \code{getFamily} Find all distributions in a package item
-\item \code{getParams} For a single distribution family, parameters are determined and classified, as well as upper and lower limits of parameters item
-\item \code{optimParamsDiscrete}: Fits the parameters for a given distribution family with known names for the parameters and known value range of each parameter item
-\item \code{globalfit} Determines the best parameters for a list of distribution families and recognizes discrete distributions item
-\item \code{loglik} Returns the loglikelihood function to be optimized item
-
+ \item \code{getFamilies} Browsing for distribution families 
+\item \code{getFamily} Find all distributions in a package 
+\item \code{getParams} For a single distribution family, parameters are determined and classified, as well as upper and lower limits of parameters 
+\item \code{optimParamsDiscrete}: Fits the parameters for a given distribution family with known names for the parameters and known value range of each parameter
+\item \code{globalfit} Determines the best parameters for a list of distribution families and recognizes discrete distributions 
+\item \code{loglik} Returns the loglikelihood function to be optimized 
 }
+
 }
 
 \author{
