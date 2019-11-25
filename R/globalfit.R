@@ -2,7 +2,7 @@
 ## Moritz Lauff, mlauff@mail.uni-mannheim.de
 ## Kiril Dik, kdik@mail.uni-mannheim.de
 ## Moritz Kern, mkern@mail.uni-mannheim.de
-## Nadine Tampe, ntampe@mail.uni-mannheim.de
+## Nadine Tampe
 ##
 ## Fit multiple distribution families to a given univariate dataset
 ##
@@ -25,7 +25,6 @@
 
 
 
-
 ### 1)  benoetigte Hilfsfunktionen -------------------------------------------------------------------------
 
 # Rundungsproblem mit .5 beheben
@@ -42,17 +41,18 @@ getDecimals <- function(x){
   
 }
 
-#' some_percent: wenn fuer eine gegebene Anzahl an Dezimalstellen mindestens der Ante?l percent
+#' some_percent: wenn fuer eine gegebene Anzahl an Dezimalstellen mindestens der Anteil percent
 #'               an moeglichen Dezimalen (von 10) auftreten, wird TRUE zurueckgegeben 
-some_percent <- function(df, percent){
-  for (i in min(df$numbers):max(df$numbers)){
-    if (length(unique(df$decimals[df$numbers == i])) >= percent * 10){
-      return(TRUE) ## TRUE
+
+some_percent <- function(decs, numbers, percent){
+  for (i in min(numbers):max(numbers)){
+    if (length(unique(decs[numbers == i])) >= percent * 10){
+      return(TRUE) 
     }
   }
-  
-  return(FALSE) ## dito
+  return(FALSE)
 }
+
 
 # Testen, ob Daten diskret sind
 is.discrete <- function(data, border = 0.35, percent = 0.8){
@@ -75,27 +75,14 @@ is.discrete <- function(data, border = 0.35, percent = 0.8){
     border <- 1 / obs
   }
 
-  ## bitte nichts zu einem data.frame zusammenfassen, was
-  ## intern einfach anders handhabbar ist
-  percent_df <- data.frame(decimals = decs,
-                           numbers = numbers)
   
-  ## das sollte man alles (oder weitgehend) mit &&, || zu 1 Return
-  ## zusammenfassen koennen
-  if (n_unique_dec / obs <= border){
-    if (any(numbers >= 4)){
-      return(FALSE)
-    } else {
-       if (some_percent(percent_df, percent)){
-        return(FALSE) 
-      } else {
-        return(TRUE)
-      }
-    }
-  } else {
+  if (n_unique_dec / obs <= border && any(numbers >= 4) && some_percent(decs, numbers, percent)){
+    return(TRUE)
+  }else{
     return(FALSE)
   }
 }
+
 
 # Behandlung diskreter nicht-ganzzahliger Daten
 disc_trafo <- function(data){
@@ -145,10 +132,13 @@ disc_trafo <- function(data){
 
 globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE, cores = NULL, ...){
 
+  file <- 'private/source_all.R'
+  
   families <- getFamilies()
 
   discrete_families <- sapply(families, function(x) x$family_info$discrete)
   discrete_families <- which(discrete_families) # Indizes zu diskreten Verteilungen
+  
   
   if (is.null(continuity)){
     
@@ -157,23 +147,10 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE, 
     relevant_families <- if(trafo_list$discrete) families[discrete_families] else families[-discrete_families]
     continuity <- ifelse(trafo_list$discrete, FALSE, TRUE)
     
-  } else if (continuity ){
-    
-    relevant_families <- families[-discrete_families]
-    
-  } else if(!continuity) { ## gibt es noch andere moeglichkeiten ?
-    
-    relevant_families <- families[discrete_families]
-    
-  } else { ## sicher dass das else jemals erreiht wird ?
-    
-    stop("The argument 'continuity' has to be either NULL, TRUE or FALSE.")
-    
+  } else {
+    relevant_families <-  families[if (continuity) -discrete_families else discrete_families]
   }
-  
-  ## bitte obige Kommentare durcharbeiten, dann ersetzen durch
-  ## relevant_families <- families[if (continuity) -discrete_families else discrete_families]
-  
+
   
   # TODO: How do we handle not yet installed packages? Force install or warn and ignore?
   
@@ -196,7 +173,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE, 
   
   output_liste <- foreach(i=1:length(relevant_families), .packages = c(), .errorhandling = 'remove') %dopar% {
   #for (fam in relevant_families) {
-    source('private/source_all.R') ## keine Konstanten im Code
+    source(file)
     fam <- relevant_families[[i]]
     if(progress)
       message("Current Family: ",  fam$family)
@@ -215,14 +192,12 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE, 
                    log_lik = output_liste$value,
                    AIC = output_liste$AIC,
                    BIC = output_liste$BIC,
-                   AICc = output_liste$AICc,
-                   continuousParams = NA, # hier muss noch was passieren
-                   range = 'not_implemented') # hier muss noch was passieren
+                   AICc = output_liste$AICc) 
       # aim: check whether solution has good loglik but does not fit
       # experimental feature - please watch out!
       sanity_check <- fitting_sanity_check(output, data, continuity = continuity)
     } else {
-      sanity_check <- list(good=FALSE, meanquot=NA)## FALSE
+      sanity_check <- list(good=FALSE, meanquot=NA)
     }
     if(!sanity_check$good)
       output <- new('optimParams', 
@@ -231,9 +206,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE, 
                     log_lik = NA_integer_,
                     AIC = NA_integer_,
                     BIC = NA_integer_,
-                    AICc = NA_integer_,
-                    continuousParams = NA, # hier muss noch was passieren
-                    range = 'not_implemented') # hier muss noch was passieren
+                    AICc = NA_integer_)
     return(output)
   }
   stopCluster(cl)
