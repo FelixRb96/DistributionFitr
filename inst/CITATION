@@ -1,6 +1,6 @@
-year <- sub("-.*", "", meta$Date)
+year <- sub("-.*", "", meta["Date"])
 
-note <- sprintf("R package version %s", meta$Version) 
+note <- sprintf("R package version %s", meta["Version"]) 
 
 bibentry(bibtype = "Manual",          
          title = "{DistributionFitr}: Fitting Multiple Distributions",
@@ -21,8 +21,8 @@ bibentry(bibtype = "Manual",
                     person("Leonardo", "Vela", role="aut"),
                     person("Martin", "Schlather", role="cre"),                     
                     person("Yiqi", "Li", role="ctb"),
-                    person("Henrik", "Bengtsson", role="ctb"),
-                    year = year,          
-                    note = note,          
-                    url = "http://CRAN.R-project.org/package=DistributionFitR")
-                    )
+                    person("Henrik", "Bengtsson", role="ctb")),
+        year = year,          
+        note = note,          
+        url = "http://CRAN.R-project.org/package=DistributionFitR"
+        )

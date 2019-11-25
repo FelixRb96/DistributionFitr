@@ -53,8 +53,7 @@ loglik <- function(family, data, fixed=list(), log, lower, upper) {
     #Add params with names of parameters to arguments list
     arguments <- c(arguments, params)
 
-    summands <- do.call(get_fun_from_package(family$family, family$package,
-                                             type = "d"), args=arguments)
+    summands <- do.call(get_fun_from_package(type = "d", family=family), args=arguments)
     
     if(any(is.na(summands))) stop('In Log-Likelihood-Function NA occured.')
     

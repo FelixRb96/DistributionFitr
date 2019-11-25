@@ -29,8 +29,7 @@
 ### but returned with good logliks (due to unkown reasons)
 
 
-fitting_sanity_check <- function(object, data, continuity, plot=F##ALSE
-                                 ) {
+fitting_sanity_check <- function(object, data, continuity, plot=FALSE) {
   if(class(object)!='optimParams')
     ## besser
     ## if (!is(object, 'optimParams'))
@@ -45,21 +44,21 @@ fitting_sanity_check <- function(object, data, continuity, plot=F##ALSE
   upper <- max(data) + 0.2 * (max(data) - min(data))
 
   ## semantisch falsch. if (continuity)  sqrt(length(data)) else 
-  breaks <- ifelse(continuity, sqrt(length(data)), min(nclass.Sturges(data),
-                                                       length(unique(data))))
+  breaks <- if (continuity) sqrt(length(data)) else min(nclass.Sturges(data), length(unique(data)))
   h <- suppressWarnings(hist(x = data, xlim=range(lower,upper), freq = FALSE,
                              xlab = 'x', ylab = 'density', breaks=breaks,
                              plot=plot))
 
   x <- h$mids
   y <- h$density ## wo wird y verwendet?
-  ## s. Kommentar output.R
-  command <- paste0("get_fun_from_package(fam = '", object@family, "', '",
-                    object@package, "', 'd')(x, ",
-                    paste(names(object@estimatedValues),  object@estimatedValues, sep=" = ", collapse =", "), ')')
-  z <- eval(parse(text = command))
+  
+  fun <- get_fun_from_package(type="d", family = object)
+  param_list <- split(object@estimatedValues, names(object@estimatedValues))
+  param_list$x <- x
+  z <- do.call(fun, param_list)
+  
   if(plot)
-    lines(x,z, col='red')
+    lines(x, z, col='red')
 
   # meanquot <- sum(x)/sum(y)
   # good <- meanquot > 0.01 & meanquot<100

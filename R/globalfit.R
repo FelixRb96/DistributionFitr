@@ -47,11 +47,11 @@ getDecimals <- function(x){
 some_percent <- function(df, percent){
   for (i in min(df$numbers):max(df$numbers)){
     if (length(unique(df$decimals[df$numbers == i])) >= percent * 10){
-      return(T) ## TRUE
+      return(TRUE) ## TRUE
     }
   }
   
-  return(F) ## dito
+  return(FALSE) ## dito
 }
 
 # Testen, ob Daten diskret sind
@@ -84,16 +84,16 @@ is.discrete <- function(data, border = 0.35, percent = 0.8){
   ## zusammenfassen koennen
   if (n_unique_dec / obs <= border){
     if (any(numbers >= 4)){
-      return(F)
+      return(FALSE)
     } else {
        if (some_percent(percent_df, percent)){
-        return(F) 
+        return(FALSE) 
       } else {
-        return(T)
+        return(TRUE)
       }
     }
   } else {
-    return(F)
+    return(FALSE)
   }
 }
 
@@ -121,7 +121,7 @@ disc_trafo <- function(data){
     
     return(list(data = data_new,
                 trafo_df = decimals,
-                discrete = T,
+                discrete = TRUE,
                 trafo_decription = paste0("Divide the simulated data by ",
                                           m,
                                           " and replace the decimals c(", 
@@ -133,7 +133,7 @@ disc_trafo <- function(data){
   } else {
     return(list(data = data,
                 trafo_df = NULL,
-                discrete = F,
+                discrete = FALSE,
                 trafo_decription = NULL))
   }
   
@@ -155,7 +155,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE, 
     trafo_list <- disc_trafo(data)
     data <- trafo_list$data
     relevant_families <- if(trafo_list$discrete) families[discrete_families] else families[-discrete_families]
-    continuity <- ifelse(trafo_list$discrete, F, T)
+    continuity <- ifelse(trafo_list$discrete, FALSE, TRUE)
     
   } else if (continuity ){
     
