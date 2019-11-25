@@ -1,20 +1,15 @@
-
-## variablen namen fehlt !!
-## bitte irgendwo im Code ein  signif() einfuegen, so dass die
-## unschoenen Zahlen wie 0.0099999999999972 verschwinden
-
+FamilyList<-
 list(list(package = "ACDm", family = "burr", family_info = list(
-    lower = c(theta = -Inf, kappa = -Inf, sig2 = 0.0099999999999972, 
-    forceExpectation = -Inf), upper = c(theta = Inf, kappa = Inf, 
-    sig2 = 1.19, forceExpectation = Inf), accepts_float = c(theta = TRUE, 
-    kappa = TRUE, sig2 = TRUE, forceExpectation = TRUE), defaults = c(theta = 1, 
-    kappa = 1.2, sig2 = 0.3, forceExpectation = 0.5), log = FALSE, 
-    discrete = FALSE, support_min = -Inf, support_max = Inf, 
-    supp_max_depends_on = c(theta = FALSE, kappa = FALSE, sig2 = FALSE, 
-    forceExpectation = FALSE), supp_min_depends_on = c(theta = FALSE, 
+    lower = c(theta = -Inf, kappa = -Inf, sig2 = 0.01, forceExpectation = -Inf
+    ), upper = c(theta = Inf, kappa = Inf, sig2 = 1.19, forceExpectation = Inf
+    ), accepts_float = c(theta = TRUE, kappa = TRUE, sig2 = TRUE, 
+    forceExpectation = TRUE), defaults = c(theta = 1, kappa = 1.2, 
+    sig2 = 0.3, forceExpectation = 0.5), log = FALSE, discrete = FALSE, 
+    support_min = -Inf, support_max = Inf, supp_max_depends_on = c(theta = FALSE, 
+    kappa = FALSE, sig2 = FALSE, forceExpectation = FALSE), supp_min_depends_on = c(theta = FALSE, 
     kappa = FALSE, sig2 = FALSE, forceExpectation = FALSE))), 
     list(package = "ACDm", family = "gengamma", family_info = list(
-        lower = c(gamma = 0.0099999999999972, kappa = 0.01, lambda = -Inf, 
+        lower = c(gamma = 0.01, kappa = 0.01, lambda = -Inf, 
         forceExpectation = -Inf), upper = c(gamma = Inf, kappa = Inf, 
         lambda = Inf, forceExpectation = Inf), accepts_float = c(gamma = TRUE, 
         kappa = TRUE, lambda = TRUE, forceExpectation = TRUE), 
@@ -26,56 +21,55 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         ))), list(package = "adehabitatLT", family = "chi", family_info = list(
         lower = c(df = 0.01), upper = c(df = Inf), accepts_float = c(df = TRUE), 
         defaults = c(df = 2), log = FALSE, discrete = FALSE, 
-        support_min = 0.0100000000000051, support_max = 38.6, 
-        supp_max_depends_on = c(df = FALSE), supp_min_depends_on = c(df = FALSE))), 
-    list(package = "agop", family = "dpareto2", family_info = list(
+        support_min = 0.01, support_max = 38.6, supp_max_depends_on = c(df = FALSE), 
+        supp_min_depends_on = c(df = FALSE))), list(package = "agop", 
+        family = "dpareto2", family_info = list(lower = c(k = 0.01, 
+        s = 0.01), upper = c(k = Inf, s = Inf), accepts_float = c(k = TRUE, 
+        s = TRUE), defaults = c(k = 1, s = 1), log = FALSE, discrete = TRUE, 
+            support_min = 0, support_max = Inf, supp_max_depends_on = c(k = FALSE, 
+            s = FALSE), supp_min_depends_on = c(k = FALSE, s = FALSE
+            ))), list(package = "agop", family = "pareto2", family_info = list(
         lower = c(k = 0.01, s = 0.01), upper = c(k = Inf, s = Inf
         ), accepts_float = c(k = TRUE, s = TRUE), defaults = c(k = 1, 
-        s = 1), log = FALSE, discrete = TRUE, support_min = 0, 
-        support_max = Inf, supp_max_depends_on = c(k = FALSE, 
-        s = FALSE), supp_min_depends_on = c(k = FALSE, s = FALSE
-        ))), list(package = "agop", family = "pareto2", family_info = list(
-        lower = c(k = 0.01, s = 0.01), upper = c(k = Inf, s = Inf
-        ), accepts_float = c(k = TRUE, s = TRUE), defaults = c(k = 1, 
-        s = 1), log = FALSE, discrete = FALSE, support_min = 0.0100000000000051, 
+        s = 1), log = FALSE, discrete = FALSE, support_min = 0.01, 
         support_max = Inf, supp_max_depends_on = c(k = FALSE, 
         s = FALSE), supp_min_depends_on = c(k = FALSE, s = FALSE
         ))), list(package = "ARTIVA", family = "invgamma", family_info = list(
-        lower = c(shape = 0.0100000000000001, scale = 8.32667268468867e-17
-        ), upper = c(shape = Inf, scale = Inf), accepts_float = c(shape = TRUE, 
-        scale = TRUE), defaults = c(shape = 0.5, scale = 0.5), 
-        log = FALSE, discrete = FALSE, support_min = 0.0100000000000051, 
-        support_max = Inf, supp_max_depends_on = c(shape = FALSE, 
-        scale = FALSE), supp_min_depends_on = c(shape = FALSE, 
-        scale = FALSE))), list(package = "bayesmeta", family = "halfcauchy", 
-        family_info = list(lower = c(scale = 0.01), upper = c(scale = Inf), 
-            accepts_float = c(scale = TRUE), defaults = c(scale = 1), 
-            log = TRUE, discrete = FALSE, support_min = 0, support_max = Inf, 
-            supp_max_depends_on = c(scale = FALSE), supp_min_depends_on = c(scale = FALSE))), 
-    list(package = "bayesmeta", family = "halflogistic", family_info = list(
+        lower = c(shape = 0.01, scale = 0), upper = c(shape = Inf, 
+        scale = Inf), accepts_float = c(shape = TRUE, scale = TRUE
+        ), defaults = c(shape = 0.5, scale = 0.5), log = FALSE, 
+        discrete = FALSE, support_min = 0.01, support_max = Inf, 
+        supp_max_depends_on = c(shape = FALSE, scale = FALSE), 
+        supp_min_depends_on = c(shape = FALSE, scale = FALSE))), 
+    list(package = "bayesmeta", family = "halfcauchy", family_info = list(
         lower = c(scale = 0.01), upper = c(scale = Inf), accepts_float = c(scale = TRUE), 
         defaults = c(scale = 1), log = TRUE, discrete = FALSE, 
         support_min = 0, support_max = Inf, supp_max_depends_on = c(scale = FALSE), 
         supp_min_depends_on = c(scale = FALSE))), list(package = "bayesmeta", 
+        family = "halflogistic", family_info = list(lower = c(scale = 0.01), 
+            upper = c(scale = Inf), accepts_float = c(scale = TRUE), 
+            defaults = c(scale = 1), log = TRUE, discrete = FALSE, 
+            support_min = 0, support_max = Inf, supp_max_depends_on = c(scale = FALSE), 
+            supp_min_depends_on = c(scale = FALSE))), list(package = "bayesmeta", 
         family = "halfnormal", family_info = list(lower = c(scale = 0.01), 
             upper = c(scale = Inf), accepts_float = c(scale = TRUE), 
             defaults = c(scale = 1), log = TRUE, discrete = FALSE, 
             support_min = 0, support_max = Inf, supp_max_depends_on = c(scale = FALSE), 
             supp_min_depends_on = c(scale = FALSE))), list(package = "bayesmeta", 
         family = "halft", family_info = list(lower = c(scale = 0.01, 
-        df = 0.0100000000000001), upper = c(scale = Inf, df = Inf
-        ), accepts_float = c(scale = TRUE, df = TRUE), defaults = c(scale = 1, 
-        df = 0.5), log = TRUE, discrete = FALSE, support_min = 0, 
-            support_max = Inf, supp_max_depends_on = c(scale = FALSE, 
-            df = FALSE), supp_min_depends_on = c(scale = FALSE, 
-            df = FALSE))), list(package = "bayesmeta", family = "invchi", 
-        family_info = list(lower = c(scale = 0.01, df = 0.0100000000000001
-        ), upper = c(scale = Inf, df = Inf), accepts_float = c(scale = TRUE, 
+        df = 0.01), upper = c(scale = Inf, df = Inf), accepts_float = c(scale = TRUE, 
         df = TRUE), defaults = c(scale = 1, df = 0.5), log = TRUE, 
-            discrete = FALSE, support_min = 0.0300000000000011, 
-            support_max = Inf, supp_max_depends_on = c(scale = FALSE, 
-            df = FALSE), supp_min_depends_on = c(scale = FALSE, 
-            df = FALSE))), list(package = "bayesmeta", family = "lomax", 
+            discrete = FALSE, support_min = 0, support_max = Inf, 
+            supp_max_depends_on = c(scale = FALSE, df = FALSE
+            ), supp_min_depends_on = c(scale = FALSE, df = FALSE
+            ))), list(package = "bayesmeta", family = "invchi", 
+        family_info = list(lower = c(scale = 0.01, df = 0.01), 
+            upper = c(scale = Inf, df = Inf), accepts_float = c(scale = TRUE, 
+            df = TRUE), defaults = c(scale = 1, df = 0.5), log = TRUE, 
+            discrete = FALSE, support_min = 0.03, support_max = Inf, 
+            supp_max_depends_on = c(scale = FALSE, df = FALSE
+            ), supp_min_depends_on = c(scale = FALSE, df = FALSE
+            ))), list(package = "bayesmeta", family = "lomax", 
         family_info = list(lower = c(shape = 0.01, scale = 0.01
         ), upper = c(shape = Inf, scale = Inf), accepts_float = c(shape = TRUE, 
         scale = TRUE), defaults = c(shape = 1, scale = 1), log = TRUE, 
@@ -85,7 +79,7 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             ))), list(package = "bayesmeta", family = "rayleigh", 
         family_info = list(lower = c(scale = 0.01), upper = c(scale = Inf), 
             accepts_float = c(scale = TRUE), defaults = c(scale = 1), 
-            log = TRUE, discrete = FALSE, support_min = 0.0100000000000051, 
+            log = TRUE, discrete = FALSE, support_min = 0.01, 
             support_max = Inf, supp_max_depends_on = c(scale = FALSE), 
             supp_min_depends_on = c(scale = FALSE))), list(package = "benchden", 
         family = "berdev", family_info = list(lower = c(dnum = 1), 
@@ -135,10 +129,10 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         support_min = -29.81, support_max = 29.81, supp_max_depends_on = c(mean = FALSE, 
         sd = FALSE), supp_min_depends_on = c(mean = FALSE, sd = FALSE
         ))), list(package = "Boom", family = "invgamma", family_info = list(
-        lower = c(shape = 0.0100000000000001, rate = 0), upper = c(shape = Inf, 
+        lower = c(shape = 0.01, rate = 0), upper = c(shape = Inf, 
         rate = Inf), accepts_float = c(shape = TRUE, rate = TRUE
         ), defaults = c(shape = 0.5, rate = 0.5), log = FALSE, 
-        discrete = FALSE, support_min = 0.0100000000000051, support_max = Inf, 
+        discrete = FALSE, support_min = 0.01, support_max = Inf, 
         supp_max_depends_on = c(shape = FALSE, rate = FALSE), 
         supp_min_depends_on = c(shape = FALSE, rate = FALSE))), 
     list(package = "brms", family = "asym_laplace", family_info = list(
@@ -150,10 +144,10 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         sigma = FALSE, quantile = TRUE), supp_min_depends_on = c(mu = FALSE, 
         sigma = FALSE, quantile = TRUE))), list(package = "brms", 
         family = "exgaussian", family_info = list(lower = c(mu = -Inf, 
-        sigma = 8.32667268468867e-17, beta = 8.32667268468867e-17
-        ), upper = c(mu = Inf, sigma = Inf, beta = Inf), accepts_float = c(mu = TRUE, 
-        sigma = TRUE, beta = TRUE), defaults = c(mu = 0.5, sigma = 0.5, 
-        beta = 0.5), log = TRUE, discrete = FALSE, support_min = -Inf, 
+        sigma = 0, beta = 0), upper = c(mu = Inf, sigma = Inf, 
+        beta = Inf), accepts_float = c(mu = TRUE, sigma = TRUE, 
+        beta = TRUE), defaults = c(mu = 0.5, sigma = 0.5, beta = 0.5
+        ), log = TRUE, discrete = FALSE, support_min = -Inf, 
             support_max = Inf, supp_max_depends_on = c(mu = FALSE, 
             sigma = FALSE, beta = FALSE), supp_min_depends_on = c(mu = FALSE, 
             sigma = FALSE, beta = FALSE))), list(package = "brms", 
@@ -161,7 +155,7 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         scale = 0.01, shape = 0.01), upper = c(loc = 9.99, scale = Inf, 
         shape = Inf), accepts_float = c(loc = TRUE, scale = TRUE, 
         shape = TRUE), defaults = c(loc = 0, scale = 1, shape = 1
-        ), log = TRUE, discrete = FALSE, support_min = -9.98999999999999, 
+        ), log = TRUE, discrete = FALSE, support_min = -9.99, 
             support_max = Inf, supp_max_depends_on = c(loc = FALSE, 
             scale = FALSE, shape = FALSE), supp_min_depends_on = c(loc = FALSE, 
             scale = FALSE, shape = FALSE))), list(package = "brms", 
@@ -176,10 +170,10 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         family = "inv_gaussian", family_info = list(lower = c(mu = 0.01, 
         shape = 0.01), upper = c(mu = Inf, shape = Inf), accepts_float = c(mu = TRUE, 
         shape = TRUE), defaults = c(mu = 1, shape = 1), log = TRUE, 
-            discrete = FALSE, support_min = 0.0100000000000051, 
-            support_max = Inf, supp_max_depends_on = c(mu = FALSE, 
-            shape = FALSE), supp_min_depends_on = c(mu = FALSE, 
-            shape = FALSE))), list(package = "brms", family = "shifted_lnorm", 
+            discrete = FALSE, support_min = 0.01, support_max = Inf, 
+            supp_max_depends_on = c(mu = FALSE, shape = FALSE
+            ), supp_min_depends_on = c(mu = FALSE, shape = FALSE
+            ))), list(package = "brms", family = "shifted_lnorm", 
         family_info = list(lower = c(meanlog = -Inf, sdlog = 0, 
         shift = -Inf), upper = c(meanlog = 710, sdlog = 1001, 
         shift = Inf), accepts_float = c(meanlog = TRUE, sdlog = TRUE, 
@@ -189,10 +183,10 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             sdlog = FALSE, shift = FALSE), supp_min_depends_on = c(meanlog = FALSE, 
             sdlog = FALSE, shift = TRUE))), list(package = "brms", 
         family = "student_t", family_info = list(lower = c(mu = -Inf, 
-        sigma = 0.01, df = 0.0100000000000001), upper = c(mu = Inf, 
-        sigma = Inf, df = Inf), accepts_float = c(mu = TRUE, 
-        sigma = TRUE, df = TRUE), defaults = c(mu = 0, sigma = 1, 
-        df = 0.5), log = TRUE, discrete = FALSE, support_min = -Inf, 
+        sigma = 0.01, df = 0.01), upper = c(mu = Inf, sigma = Inf, 
+        df = Inf), accepts_float = c(mu = TRUE, sigma = TRUE, 
+        df = TRUE), defaults = c(mu = 0, sigma = 1, df = 0.5), 
+            log = TRUE, discrete = FALSE, support_min = -Inf, 
             support_max = Inf, supp_max_depends_on = c(mu = FALSE, 
             sigma = FALSE, df = FALSE), supp_min_depends_on = c(mu = FALSE, 
             sigma = FALSE, df = FALSE))), list(package = "brms", 
@@ -238,10 +232,10 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         family = "pareto2", family_info = list(lower = c(scale = -Inf, 
         shape = -Inf), upper = c(scale = Inf, shape = Inf), accepts_float = c(scale = TRUE, 
         shape = TRUE), defaults = c(scale = 1, shape = 1), log = FALSE, 
-            discrete = FALSE, support_min = 0.0100000000000051, 
-            support_max = Inf, supp_max_depends_on = c(scale = FALSE, 
-            shape = FALSE), supp_min_depends_on = c(scale = FALSE, 
-            shape = FALSE))), list(package = "cbinom", family = "cbinom", 
+            discrete = FALSE, support_min = 0.01, support_max = Inf, 
+            supp_max_depends_on = c(scale = FALSE, shape = FALSE
+            ), supp_min_depends_on = c(scale = FALSE, shape = FALSE
+            ))), list(package = "cbinom", family = "cbinom", 
         family_info = list(lower = c(size = 0, prob = 0), upper = c(size = Inf, 
         prob = 1), accepts_float = c(size = TRUE, prob = TRUE
         ), defaults = c(size = 0.5, prob = 0.5), log = TRUE, 
@@ -251,14 +245,14 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             ))), list(package = "chi", family = "chi", family_info = list(
         lower = c(ncp = 0, df = 0), upper = c(ncp = Inf, df = Inf
         ), accepts_float = c(ncp = TRUE, df = TRUE), defaults = c(ncp = 0, 
-        df = 0.5), log = TRUE, discrete = FALSE, support_min = 0.0100000000000051, 
+        df = 0.5), log = TRUE, discrete = FALSE, support_min = 0.01, 
         support_max = Inf, supp_max_depends_on = c(ncp = FALSE, 
         df = FALSE), supp_min_depends_on = c(ncp = FALSE, df = FALSE
         ))), list(package = "chi", family = "invchi", family_info = list(
-        lower = c(ncp = 0, df = 0.0100000000000001), upper = c(ncp = Inf, 
-        df = Inf), accepts_float = c(ncp = TRUE, df = TRUE), 
-        defaults = c(ncp = 0, df = 0.5), log = TRUE, discrete = FALSE, 
-        support_min = 0.019999999999996, support_max = Inf, supp_max_depends_on = c(ncp = FALSE, 
+        lower = c(ncp = 0, df = 0.01), upper = c(ncp = Inf, df = Inf
+        ), accepts_float = c(ncp = TRUE, df = TRUE), defaults = c(ncp = 0, 
+        df = 0.5), log = TRUE, discrete = FALSE, support_min = 0.02, 
+        support_max = Inf, supp_max_depends_on = c(ncp = FALSE, 
         df = FALSE), supp_min_depends_on = c(ncp = FALSE, df = FALSE
         ))), list(package = "circular", family = "cardioid", 
         family_info = list(lower = c(rho = -0.5), upper = c(rho = 0.5), 
@@ -283,62 +277,58 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         support_min = -Inf, support_max = Inf, supp_max_depends_on = c(mu = FALSE, 
         kappa = FALSE), supp_min_depends_on = c(mu = FALSE, kappa = FALSE
         ))), list(package = "ContaminatedMixt", family = "CN", 
-        family_info = list(lower = c(alpha = 0.00999999999999488, 
-        eta = 1.01, Sigma = 8.32667268468867e-17), upper = c(alpha = 1, 
-        eta = Inf, Sigma = Inf), accepts_float = c(alpha = TRUE, 
-        eta = TRUE, Sigma = TRUE), defaults = c(alpha = 0.99, 
-        eta = 1.01, Sigma = 0.5), log = FALSE, discrete = FALSE, 
-            support_min = -Inf, support_max = Inf, supp_max_depends_on = c(alpha = FALSE, 
+        family_info = list(lower = c(alpha = 0.01, eta = 1.01, 
+        Sigma = 0), upper = c(alpha = 1, eta = Inf, Sigma = Inf
+        ), accepts_float = c(alpha = TRUE, eta = TRUE, Sigma = TRUE
+        ), defaults = c(alpha = 0.99, eta = 1.01, Sigma = 0.5
+        ), log = FALSE, discrete = FALSE, support_min = -Inf, 
+            support_max = Inf, supp_max_depends_on = c(alpha = FALSE, 
             eta = FALSE, Sigma = FALSE), supp_min_depends_on = c(alpha = FALSE, 
             eta = FALSE, Sigma = FALSE))), list(package = "contextual", 
         family = "invgamma", family_info = list(lower = c(rate = 0, 
-        shape = 0.0100000000000001), upper = c(rate = Inf, shape = Inf
-        ), accepts_float = c(rate = TRUE, shape = TRUE), defaults = c(rate = 1, 
-        shape = 0.5), log = TRUE, discrete = FALSE, support_min = 0.0100000000000051, 
-            support_max = Inf, supp_max_depends_on = c(rate = FALSE, 
-            shape = FALSE), supp_min_depends_on = c(rate = FALSE, 
-            shape = FALSE))), list(package = "CoSMoS", family = "burrIII", 
-        family_info = list(lower = c(scale = -Inf, shape1 = 8.32667268468867e-17, 
-        shape2 = 8.32667268468867e-17), upper = c(scale = Inf, 
-        shape1 = Inf, shape2 = 1000.5), accepts_float = c(scale = TRUE, 
-        shape1 = TRUE, shape2 = TRUE), defaults = c(scale = 0.5, 
-        shape1 = 0.5, shape2 = 0.5), log = TRUE, discrete = FALSE, 
-            support_min = -Inf, support_max = Inf, supp_max_depends_on = c(scale = FALSE, 
-            shape1 = FALSE, shape2 = FALSE), supp_min_depends_on = c(scale = FALSE, 
-            shape1 = FALSE, shape2 = FALSE))), list(package = "CoSMoS", 
-        family = "burrXII", family_info = list(lower = c(scale = -Inf, 
-        shape1 = 8.32667268468867e-17, shape2 = 8.32667268468867e-17
-        ), upper = c(scale = Inf, shape1 = Inf, shape2 = 950.5
+        shape = 0.01), upper = c(rate = Inf, shape = Inf), accepts_float = c(rate = TRUE, 
+        shape = TRUE), defaults = c(rate = 1, shape = 0.5), log = TRUE, 
+            discrete = FALSE, support_min = 0.01, support_max = Inf, 
+            supp_max_depends_on = c(rate = FALSE, shape = FALSE
+            ), supp_min_depends_on = c(rate = FALSE, shape = FALSE
+            ))), list(package = "CoSMoS", family = "burrIII", 
+        family_info = list(lower = c(scale = -Inf, shape1 = 0, 
+        shape2 = 0), upper = c(scale = Inf, shape1 = Inf, shape2 = 1000.5
         ), accepts_float = c(scale = TRUE, shape1 = TRUE, shape2 = TRUE
         ), defaults = c(scale = 0.5, shape1 = 0.5, shape2 = 0.5
-        ), log = TRUE, discrete = FALSE, support_min = -1, support_max = Inf, 
-            supp_max_depends_on = c(scale = FALSE, shape1 = FALSE, 
-            shape2 = FALSE), supp_min_depends_on = c(scale = FALSE, 
-            shape1 = FALSE, shape2 = FALSE))), list(package = "CoSMoS", 
-        family = "ggamma", family_info = list(lower = c(scale = -Inf, 
-        shape1 = 8.32667268468867e-17, shape2 = 0.0100000000000001
-        ), upper = c(scale = Inf, shape1 = Inf, shape2 = Inf), 
-            accepts_float = c(scale = TRUE, shape1 = TRUE, shape2 = TRUE
-            ), defaults = c(scale = 0.5, shape1 = 0.5, shape2 = 0.5
-            ), log = TRUE, discrete = FALSE, support_min = -Inf, 
+        ), log = TRUE, discrete = FALSE, support_min = -Inf, 
             support_max = Inf, supp_max_depends_on = c(scale = FALSE, 
             shape1 = FALSE, shape2 = FALSE), supp_min_depends_on = c(scale = FALSE, 
             shape1 = FALSE, shape2 = FALSE))), list(package = "CoSMoS", 
-        family = "paretoII", family_info = list(lower = c(scale = 8.32667268468867e-17, 
-        shape = 8.32667268468867e-17), upper = c(scale = Inf, 
-        shape = 900.5), accepts_float = c(scale = TRUE, shape = TRUE
-        ), defaults = c(scale = 0.5, shape = 0.5), log = TRUE, 
-            discrete = FALSE, support_min = -Inf, support_max = Inf, 
-            supp_max_depends_on = c(scale = FALSE, shape = FALSE
-            ), supp_min_depends_on = c(scale = FALSE, shape = FALSE
-            ))), list(package = "countfitteR", family = "ZINB", 
-        family_info = list(lower = c(size = 8.32667268468867e-17, 
-        mu = 0, r = 0), upper = c(size = Inf, mu = Inf, r = 1
-        ), accepts_float = c(size = TRUE, mu = TRUE, r = TRUE
-        ), defaults = c(size = 0.5, mu = 0.5, r = 0.5), log = FALSE, 
-            discrete = TRUE, support_min = 0, support_max = Inf, 
-            supp_max_depends_on = c(size = FALSE, mu = FALSE, 
-            r = FALSE), supp_min_depends_on = c(size = FALSE, 
+        family = "burrXII", family_info = list(lower = c(scale = -Inf, 
+        shape1 = 0, shape2 = 0), upper = c(scale = Inf, shape1 = Inf, 
+        shape2 = 950.5), accepts_float = c(scale = TRUE, shape1 = TRUE, 
+        shape2 = TRUE), defaults = c(scale = 0.5, shape1 = 0.5, 
+        shape2 = 0.5), log = TRUE, discrete = FALSE, support_min = -1, 
+            support_max = Inf, supp_max_depends_on = c(scale = FALSE, 
+            shape1 = FALSE, shape2 = FALSE), supp_min_depends_on = c(scale = FALSE, 
+            shape1 = FALSE, shape2 = FALSE))), list(package = "CoSMoS", 
+        family = "ggamma", family_info = list(lower = c(scale = -Inf, 
+        shape1 = 0, shape2 = 0.01), upper = c(scale = Inf, shape1 = Inf, 
+        shape2 = Inf), accepts_float = c(scale = TRUE, shape1 = TRUE, 
+        shape2 = TRUE), defaults = c(scale = 0.5, shape1 = 0.5, 
+        shape2 = 0.5), log = TRUE, discrete = FALSE, support_min = -Inf, 
+            support_max = Inf, supp_max_depends_on = c(scale = FALSE, 
+            shape1 = FALSE, shape2 = FALSE), supp_min_depends_on = c(scale = FALSE, 
+            shape1 = FALSE, shape2 = FALSE))), list(package = "CoSMoS", 
+        family = "paretoII", family_info = list(lower = c(scale = 0, 
+        shape = 0), upper = c(scale = Inf, shape = 900.5), accepts_float = c(scale = TRUE, 
+        shape = TRUE), defaults = c(scale = 0.5, shape = 0.5), 
+            log = TRUE, discrete = FALSE, support_min = -Inf, 
+            support_max = Inf, supp_max_depends_on = c(scale = FALSE, 
+            shape = FALSE), supp_min_depends_on = c(scale = FALSE, 
+            shape = FALSE))), list(package = "countfitteR", family = "ZINB", 
+        family_info = list(lower = c(size = 0, mu = 0, r = 0), 
+            upper = c(size = Inf, mu = Inf, r = 1), accepts_float = c(size = TRUE, 
+            mu = TRUE, r = TRUE), defaults = c(size = 0.5, mu = 0.5, 
+            r = 0.5), log = FALSE, discrete = TRUE, support_min = 0, 
+            support_max = Inf, supp_max_depends_on = c(size = FALSE, 
+            mu = FALSE, r = FALSE), supp_min_depends_on = c(size = FALSE, 
             mu = FALSE, r = FALSE))), list(package = "countfitteR", 
         family = "ZIP", family_info = list(lower = c(lambda = 0, 
         r = 0), upper = c(lambda = Inf, r = 1), accepts_float = c(lambda = TRUE, 
@@ -364,11 +354,10 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             sd = FALSE, right = FALSE), supp_min_depends_on = c(mean = FALSE, 
             sd = FALSE, right = FALSE))), list(package = "crch", 
         family = "ct", family_info = list(lower = c(location = -Inf, 
-        scale = -Inf, right = -Inf, df = 0.0100000000000001), 
-            upper = c(location = Inf, scale = Inf, right = Inf, 
-            df = Inf), accepts_float = c(location = TRUE, scale = TRUE, 
-            right = TRUE, df = TRUE), defaults = c(location = 0, 
-            scale = 1, right = Inf, df = 0.5), log = TRUE, discrete = FALSE, 
+        scale = -Inf, right = -Inf, df = 0.01), upper = c(location = Inf, 
+        scale = Inf, right = Inf, df = Inf), accepts_float = c(location = TRUE, 
+        scale = TRUE, right = TRUE, df = TRUE), defaults = c(location = 0, 
+        scale = 1, right = Inf, df = 0.5), log = TRUE, discrete = FALSE, 
             support_min = -Inf, support_max = Inf, supp_max_depends_on = c(location = FALSE, 
             scale = FALSE, right = FALSE, df = FALSE), supp_min_depends_on = c(location = FALSE, 
             scale = FALSE, right = FALSE, df = FALSE))), list(
@@ -390,11 +379,10 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             sd = FALSE, right = TRUE), supp_min_depends_on = c(mean = FALSE, 
             sd = FALSE, right = FALSE))), list(package = "crch", 
         family = "tt", family_info = list(lower = c(location = -Inf, 
-        scale = -Inf, right = -Inf, df = 0.0100000000000001), 
-            upper = c(location = Inf, scale = Inf, right = Inf, 
-            df = Inf), accepts_float = c(location = TRUE, scale = TRUE, 
-            right = TRUE, df = TRUE), defaults = c(location = 0, 
-            scale = 1, right = Inf, df = 0.5), log = TRUE, discrete = FALSE, 
+        scale = -Inf, right = -Inf, df = 0.01), upper = c(location = Inf, 
+        scale = Inf, right = Inf, df = Inf), accepts_float = c(location = TRUE, 
+        scale = TRUE, right = TRUE, df = TRUE), defaults = c(location = 0, 
+        scale = 1, right = Inf, df = 0.5), log = TRUE, discrete = FALSE, 
             support_min = -Inf, support_max = Inf, supp_max_depends_on = c(location = FALSE, 
             scale = FALSE, right = TRUE, df = FALSE), supp_min_depends_on = c(location = FALSE, 
             scale = FALSE, right = FALSE, df = FALSE))), list(
@@ -516,9 +504,8 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             shape = FALSE), supp_min_depends_on = c(loc = FALSE, 
             scale = FALSE, shape = FALSE))), list(package = "desire", 
         family = "harrington1", family_info = list(lower = c(y1 = -Inf, 
-        d1 = 8.32667268468867e-17, y2 = -Inf, d2 = 8.32667268468867e-17, 
-        mean = -Inf, sd = 0), upper = c(y1 = Inf, d1 = 0.99, 
-        y2 = Inf, d2 = 1, mean = Inf, sd = Inf), accepts_float = c(y1 = TRUE, 
+        d1 = 0, y2 = -Inf, d2 = 0, mean = -Inf, sd = 0), upper = c(y1 = Inf, 
+        d1 = 0.99, y2 = Inf, d2 = 1, mean = Inf, sd = Inf), accepts_float = c(y1 = TRUE, 
         d1 = TRUE, y2 = TRUE, d2 = TRUE, mean = TRUE, sd = TRUE
         ), defaults = c(y1 = 1, d1 = 0.5, y2 = 0.5, d2 = 0.5, 
         mean = 0.5, sd = 0.5), log = FALSE, discrete = FALSE, 
@@ -527,20 +514,19 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             ), supp_min_depends_on = c(y1 = TRUE, d1 = FALSE, 
             y2 = TRUE, d2 = FALSE, mean = TRUE, sd = TRUE))), 
     list(package = "DGLMExtPois", family = "hP", family_info = list(
-        lower = c(gamma = 8.32667268468867e-17, lambda = 8.32667268468867e-17
-        ), upper = c(gamma = Inf, lambda = 148.4), accepts_float = c(gamma = TRUE, 
-        lambda = TRUE), defaults = c(gamma = 0.5, lambda = 0.5
-        ), log = FALSE, discrete = TRUE, support_min = 0, support_max = 46, 
-        supp_max_depends_on = c(gamma = FALSE, lambda = FALSE
-        ), supp_min_depends_on = c(gamma = FALSE, lambda = FALSE
-        ))), list(package = "dhh", family = "hh", family_info = list(
-        lower = c(a = -Inf, b = 0.01, alpha = 0.00999999999999431
+        lower = c(gamma = 0, lambda = 0), upper = c(gamma = Inf, 
+        lambda = 148.4), accepts_float = c(gamma = TRUE, lambda = TRUE
+        ), defaults = c(gamma = 0.5, lambda = 0.5), log = FALSE, 
+        discrete = TRUE, support_min = 0, support_max = 46, supp_max_depends_on = c(gamma = FALSE, 
+        lambda = FALSE), supp_min_depends_on = c(gamma = FALSE, 
+        lambda = FALSE))), list(package = "dhh", family = "hh", 
+        family_info = list(lower = c(a = -Inf, b = 0.01, alpha = 0.01
         ), upper = c(a = 0.99, b = Inf, alpha = Inf), accepts_float = c(a = TRUE, 
         b = TRUE, alpha = TRUE), defaults = c(a = 0, b = 1, alpha = 0.1
         ), log = FALSE, discrete = FALSE, support_min = -Inf, 
-        support_max = Inf, supp_max_depends_on = c(a = FALSE, 
-        b = TRUE, alpha = FALSE), supp_min_depends_on = c(a = TRUE, 
-        b = FALSE, alpha = FALSE))), list(package = "disclap", 
+            support_max = Inf, supp_max_depends_on = c(a = FALSE, 
+            b = TRUE, alpha = FALSE), supp_min_depends_on = c(a = TRUE, 
+            b = FALSE, alpha = FALSE))), list(package = "disclap", 
         family = "disclap", family_info = list(lower = c(p = 0), 
             upper = c(p = 0.99), accepts_float = c(p = TRUE), 
             defaults = c(p = 0.5), log = FALSE, discrete = TRUE, 
@@ -552,9 +538,8 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             discrete = TRUE, support_min = -Inf, support_max = Inf, 
             supp_max_depends_on = c(p = FALSE, q = FALSE), supp_min_depends_on = c(p = FALSE, 
             q = FALSE))), list(package = "DiscreteLaplace", family = "dlaplace2", 
-        family_info = list(lower = c(p = 8.32667268468867e-17, 
-        q = 8.32667268468867e-17), upper = c(p = Inf, q = 1000.5
-        ), accepts_float = c(p = TRUE, q = TRUE), defaults = c(p = 0.5, 
+        family_info = list(lower = c(p = 0, q = 0), upper = c(p = Inf, 
+        q = 1000.5), accepts_float = c(p = TRUE, q = TRUE), defaults = c(p = 0.5, 
         q = 0.5), log = FALSE, discrete = TRUE, support_min = -Inf, 
             support_max = Inf, supp_max_depends_on = c(p = FALSE, 
             q = FALSE), supp_min_depends_on = c(p = FALSE, q = FALSE
@@ -562,7 +547,7 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         family_info = list(lower = c(mode = -1, max = 0, shape = 0.01
         ), upper = c(mode = 1, max = Inf, shape = Inf), accepts_float = c(mode = TRUE, 
         max = TRUE, shape = TRUE), defaults = c(mode = 0, max = 1, 
-        shape = 4), log = TRUE, discrete = FALSE, support_min = -0.989999999999995, 
+        shape = 4), log = TRUE, discrete = FALSE, support_min = -0.99, 
             support_max = Inf, supp_max_depends_on = c(mode = FALSE, 
             max = TRUE, shape = FALSE), supp_min_depends_on = c(mode = FALSE, 
             max = FALSE, shape = FALSE))), list(package = "DWreg", 
@@ -571,7 +556,7 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             defaults = c(beta = 1), log = FALSE, discrete = TRUE, 
             support_min = 0, support_max = Inf, supp_max_depends_on = c(beta = FALSE), 
             supp_min_depends_on = c(beta = FALSE))), list(package = "EDISON", 
-        family = "invgamma", family_info = list(lower = c(shape = 0.0100000000000001, 
+        family = "invgamma", family_info = list(lower = c(shape = 0.01, 
         scale = 0), upper = c(shape = Inf, scale = Inf), accepts_float = c(shape = TRUE, 
         scale = TRUE), defaults = c(shape = 0.5, scale = 0.5), 
             log = TRUE, discrete = FALSE, support_min = 0, support_max = Inf, 
@@ -602,8 +587,7 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             log = TRUE, discrete = FALSE, support_min = 0, support_max = 42.66, 
             supp_max_depends_on = c(scale = FALSE), supp_min_depends_on = c(scale = FALSE))), 
     list(package = "elfDistr", family = "kwcwg", family_info = list(
-        lower = c(alpha = 8.32667268468867e-17, beta = 0.0100000000000001, 
-        gamma = 8.32667268468867e-17, a = 0, b = 0.0100000000000001
+        lower = c(alpha = 0, beta = 0.01, gamma = 0, a = 0, b = 0.01
         ), upper = c(alpha = 1, beta = Inf, gamma = Inf, a = Inf, 
         b = Inf), accepts_float = c(alpha = TRUE, beta = TRUE, 
         gamma = TRUE, a = TRUE, b = TRUE), defaults = c(alpha = 0.5, 
@@ -613,9 +597,9 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         gamma = FALSE, a = FALSE, b = FALSE), supp_min_depends_on = c(alpha = FALSE, 
         beta = FALSE, gamma = FALSE, a = FALSE, b = FALSE))), 
     list(package = "emdbook", family = "betabinom", family_info = list(
-        lower = c(prob = 0, size = 0, theta = 8.32667268468867e-17, 
-        shape1 = 0, shape2 = 0), upper = c(prob = 1, size = Inf, 
-        theta = Inf, shape1 = Inf, shape2 = Inf), accepts_float = c(prob = TRUE, 
+        lower = c(prob = 0, size = 0, theta = 0, shape1 = 0, 
+        shape2 = 0), upper = c(prob = 1, size = Inf, theta = Inf, 
+        shape1 = Inf, shape2 = Inf), accepts_float = c(prob = TRUE, 
         size = FALSE, theta = TRUE, shape1 = TRUE, shape2 = TRUE
         ), defaults = c(prob = 0.5, size = 1, theta = 0.5, shape1 = 0.5, 
         shape2 = 0.5), log = TRUE, discrete = TRUE, support_min = 0, 
@@ -653,21 +637,20 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             supp_max_depends_on = c(location = FALSE, scale = FALSE
             ), supp_min_depends_on = c(location = FALSE, scale = FALSE
             ))), list(package = "EnvStats", family = "gammaAlt", 
-        family_info = list(lower = c(cv = -Inf, mean = 8.32667268468867e-17
-        ), upper = c(cv = Inf, mean = Inf), accepts_float = c(cv = TRUE, 
-        mean = TRUE), defaults = c(cv = 1, mean = 0.5), log = TRUE, 
-            discrete = FALSE, support_min = 0, support_max = Inf, 
-            supp_max_depends_on = c(cv = FALSE, mean = FALSE), 
-            supp_min_depends_on = c(cv = FALSE, mean = FALSE))), 
-    list(package = "EnvStats", family = "gevd", family_info = list(
-        lower = c(location = -Inf, scale = 0.01, shape = -957.79
-        ), upper = c(location = 719.78, scale = Inf, shape = Inf
-        ), accepts_float = c(location = TRUE, scale = TRUE, shape = TRUE
-        ), defaults = c(location = 0, scale = 1, shape = 0), 
-        log = FALSE, discrete = FALSE, support_min = -Inf, support_max = Inf, 
-        supp_max_depends_on = c(location = FALSE, scale = FALSE, 
-        shape = FALSE), supp_min_depends_on = c(location = FALSE, 
-        scale = FALSE, shape = FALSE))), list(package = "EnvStats", 
+        family_info = list(lower = c(cv = -Inf, mean = 0), upper = c(cv = Inf, 
+        mean = Inf), accepts_float = c(cv = TRUE, mean = TRUE
+        ), defaults = c(cv = 1, mean = 0.5), log = TRUE, discrete = FALSE, 
+            support_min = 0, support_max = Inf, supp_max_depends_on = c(cv = FALSE, 
+            mean = FALSE), supp_min_depends_on = c(cv = FALSE, 
+            mean = FALSE))), list(package = "EnvStats", family = "gevd", 
+        family_info = list(lower = c(location = -Inf, scale = 0.01, 
+        shape = -957.79), upper = c(location = 719.78, scale = Inf, 
+        shape = Inf), accepts_float = c(location = TRUE, scale = TRUE, 
+        shape = TRUE), defaults = c(location = 0, scale = 1, 
+        shape = 0), log = FALSE, discrete = FALSE, support_min = -Inf, 
+            support_max = Inf, supp_max_depends_on = c(location = FALSE, 
+            scale = FALSE, shape = FALSE), supp_min_depends_on = c(location = FALSE, 
+            scale = FALSE, shape = FALSE))), list(package = "EnvStats", 
         family = "lnorm3", family_info = list(lower = c(meanlog = -Inf, 
         sdlog = 0, threshold = -Inf), upper = c(meanlog = 710, 
         sdlog = Inf, threshold = Inf), accepts_float = c(meanlog = TRUE, 
@@ -683,58 +666,56 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         sdlog1 = TRUE, meanlog2 = TRUE, sdlog2 = TRUE, p.mix = TRUE
         ), defaults = c(meanlog1 = 0, sdlog1 = 1, meanlog2 = 0, 
         sdlog2 = 1, p.mix = 0.5), log = FALSE, discrete = FALSE, 
-            support_min = 0.0100000000000051, support_max = Inf, 
-            supp_max_depends_on = c(meanlog1 = FALSE, sdlog1 = FALSE, 
-            meanlog2 = FALSE, sdlog2 = FALSE, p.mix = FALSE), 
-            supp_min_depends_on = c(meanlog1 = FALSE, sdlog1 = FALSE, 
-            meanlog2 = FALSE, sdlog2 = FALSE, p.mix = FALSE))), 
-    list(package = "EnvStats", family = "normMix", family_info = list(
-        lower = c(mean1 = -Inf, sd1 = 0.01, mean2 = -Inf, sd2 = 0.01, 
-        p.mix = 0), upper = c(mean1 = Inf, sd1 = Inf, mean2 = Inf, 
-        sd2 = Inf, p.mix = 1), accepts_float = c(mean1 = TRUE, 
+            support_min = 0.01, support_max = Inf, supp_max_depends_on = c(meanlog1 = FALSE, 
+            sdlog1 = FALSE, meanlog2 = FALSE, sdlog2 = FALSE, 
+            p.mix = FALSE), supp_min_depends_on = c(meanlog1 = FALSE, 
+            sdlog1 = FALSE, meanlog2 = FALSE, sdlog2 = FALSE, 
+            p.mix = FALSE))), list(package = "EnvStats", family = "normMix", 
+        family_info = list(lower = c(mean1 = -Inf, sd1 = 0.01, 
+        mean2 = -Inf, sd2 = 0.01, p.mix = 0), upper = c(mean1 = Inf, 
+        sd1 = Inf, mean2 = Inf, sd2 = Inf, p.mix = 1), accepts_float = c(mean1 = TRUE, 
         sd1 = TRUE, mean2 = TRUE, sd2 = TRUE, p.mix = TRUE), 
-        defaults = c(mean1 = 0, sd1 = 1, mean2 = 0, sd2 = 1, 
-        p.mix = 0.5), log = FALSE, discrete = FALSE, support_min = -Inf, 
-        support_max = Inf, supp_max_depends_on = c(mean1 = FALSE, 
-        sd1 = FALSE, mean2 = FALSE, sd2 = FALSE, p.mix = FALSE
-        ), supp_min_depends_on = c(mean1 = FALSE, sd1 = FALSE, 
-        mean2 = FALSE, sd2 = FALSE, p.mix = FALSE))), list(package = "EnvStats", 
-        family = "normTrunc", family_info = list(lower = c(mean = -Inf, 
-        sd = 0.01, max = -Inf), upper = c(mean = Inf, sd = Inf, 
-        max = Inf), accepts_float = c(mean = TRUE, sd = TRUE, 
-        max = TRUE), defaults = c(mean = 0, sd = 1, max = Inf
-        ), log = FALSE, discrete = FALSE, support_min = -Inf, 
+            defaults = c(mean1 = 0, sd1 = 1, mean2 = 0, sd2 = 1, 
+            p.mix = 0.5), log = FALSE, discrete = FALSE, support_min = -Inf, 
+            support_max = Inf, supp_max_depends_on = c(mean1 = FALSE, 
+            sd1 = FALSE, mean2 = FALSE, sd2 = FALSE, p.mix = FALSE
+            ), supp_min_depends_on = c(mean1 = FALSE, sd1 = FALSE, 
+            mean2 = FALSE, sd2 = FALSE, p.mix = FALSE))), list(
+        package = "EnvStats", family = "normTrunc", family_info = list(
+            lower = c(mean = -Inf, sd = 0.01, max = -Inf), upper = c(mean = Inf, 
+            sd = Inf, max = Inf), accepts_float = c(mean = TRUE, 
+            sd = TRUE, max = TRUE), defaults = c(mean = 0, sd = 1, 
+            max = Inf), log = FALSE, discrete = FALSE, support_min = -Inf, 
             support_max = Inf, supp_max_depends_on = c(mean = FALSE, 
             sd = FALSE, max = TRUE), supp_min_depends_on = c(mean = FALSE, 
             sd = FALSE, max = FALSE))), list(package = "EnvStats", 
         family = "pareto", family_info = list(lower = c(shape = 0.01, 
-        location = 0.0100000000000001), upper = c(shape = Inf, 
-        location = Inf), accepts_float = c(shape = TRUE, location = TRUE
-        ), defaults = c(shape = 1, location = 0.5), log = FALSE, 
-            discrete = FALSE, support_min = 0.0100000000000001, 
-            support_max = Inf, supp_max_depends_on = c(shape = FALSE, 
-            location = FALSE), supp_min_depends_on = c(shape = FALSE, 
-            location = TRUE))), list(package = "EnvStats", family = "tri", 
-        family_info = list(lower = c(min = -Inf, max = 0.5), 
-            upper = c(min = 0.49, max = Inf), accepts_float = c(min = TRUE, 
-            max = TRUE), defaults = c(min = 0, max = 1), log = FALSE, 
-            discrete = FALSE, support_min = -Inf, support_max = Inf, 
-            supp_max_depends_on = c(min = FALSE, max = TRUE), 
-            supp_min_depends_on = c(min = TRUE, max = FALSE))), 
-    list(package = "EnvStats", family = "zmlnorm", family_info = list(
-        lower = c(meanlog = -Inf, sdlog = 0.01, p.zero = 8.32667268468867e-17
-        ), upper = c(meanlog = 1000, sdlog = Inf, p.zero = 0.99
-        ), accepts_float = c(meanlog = TRUE, sdlog = TRUE, p.zero = TRUE
+        location = 0.01), upper = c(shape = Inf, location = Inf
+        ), accepts_float = c(shape = TRUE, location = TRUE), 
+            defaults = c(shape = 1, location = 0.5), log = FALSE, 
+            discrete = FALSE, support_min = 0.01, support_max = Inf, 
+            supp_max_depends_on = c(shape = FALSE, location = FALSE
+            ), supp_min_depends_on = c(shape = FALSE, location = TRUE
+            ))), list(package = "EnvStats", family = "tri", family_info = list(
+        lower = c(min = -Inf, max = 0.5), upper = c(min = 0.49, 
+        max = Inf), accepts_float = c(min = TRUE, max = TRUE), 
+        defaults = c(min = 0, max = 1), log = FALSE, discrete = FALSE, 
+        support_min = -Inf, support_max = Inf, supp_max_depends_on = c(min = FALSE, 
+        max = TRUE), supp_min_depends_on = c(min = TRUE, max = FALSE
+        ))), list(package = "EnvStats", family = "zmlnorm", family_info = list(
+        lower = c(meanlog = -Inf, sdlog = 0.01, p.zero = 0), 
+        upper = c(meanlog = 1000, sdlog = Inf, p.zero = 0.99), 
+        accepts_float = c(meanlog = TRUE, sdlog = TRUE, p.zero = TRUE
         ), defaults = c(meanlog = 0, sdlog = 1, p.zero = 0.5), 
         log = FALSE, discrete = FALSE, support_min = 0, support_max = Inf, 
         supp_max_depends_on = c(meanlog = FALSE, sdlog = FALSE, 
         p.zero = FALSE), supp_min_depends_on = c(meanlog = FALSE, 
         sdlog = FALSE, p.zero = FALSE))), list(package = "EnvStats", 
         family = "zmnorm", family_info = list(lower = c(mean = -Inf, 
-        sd = 0.01, p.zero = 8.32667268468867e-17), upper = c(mean = Inf, 
-        sd = Inf, p.zero = 0.99), accepts_float = c(mean = TRUE, 
-        sd = TRUE, p.zero = TRUE), defaults = c(mean = 0, sd = 1, 
-        p.zero = 0.5), log = FALSE, discrete = FALSE, support_min = -Inf, 
+        sd = 0.01, p.zero = 0), upper = c(mean = Inf, sd = Inf, 
+        p.zero = 0.99), accepts_float = c(mean = TRUE, sd = TRUE, 
+        p.zero = TRUE), defaults = c(mean = 0, sd = 1, p.zero = 0.5
+        ), log = FALSE, discrete = FALSE, support_min = -Inf, 
             support_max = Inf, supp_max_depends_on = c(mean = FALSE, 
             sd = FALSE, p.zero = FALSE), supp_min_depends_on = c(mean = FALSE, 
             sd = FALSE, p.zero = FALSE))), list(package = "epandist", 
@@ -893,14 +874,13 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         scale = Inf, thres = 709.49), accepts_float = c(shape = TRUE, 
         scale = TRUE, thres = TRUE), defaults = c(shape = 1, 
         scale = 1, thres = 1), log = TRUE, discrete = FALSE, 
-        support_min = 0.0100000000000051, support_max = Inf, 
-        supp_max_depends_on = c(shape = FALSE, scale = FALSE, 
-        thres = FALSE), supp_min_depends_on = c(shape = FALSE, 
+        support_min = 0.01, support_max = Inf, supp_max_depends_on = c(shape = FALSE, 
+        scale = FALSE, thres = FALSE), supp_min_depends_on = c(shape = FALSE, 
         scale = FALSE, thres = FALSE))), list(package = "FAdist", 
         family = "llog", family_info = list(lower = c(shape = 0.01, 
         scale = -Inf), upper = c(shape = Inf, scale = 710.57), 
             accepts_float = c(shape = TRUE, scale = TRUE), defaults = c(shape = 1, 
-            scale = 1), log = TRUE, discrete = FALSE, support_min = 0.0100000000000051, 
+            scale = 1), log = TRUE, discrete = FALSE, support_min = 0.01, 
             support_max = Inf, supp_max_depends_on = c(shape = FALSE, 
             scale = FALSE), supp_min_depends_on = c(shape = FALSE, 
             scale = FALSE))), list(package = "FAdist", family = "llog3", 
@@ -921,11 +901,11 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             scale = FALSE, thres = FALSE), supp_min_depends_on = c(shape = FALSE, 
             scale = FALSE, thres = TRUE))), list(package = "FAdist", 
         family = "weibull3", family_info = list(lower = c(scale = 0.01, 
-        thres = -Inf, shape = 8.32667268468867e-17), upper = c(scale = Inf, 
-        thres = Inf, shape = Inf), accepts_float = c(scale = TRUE, 
-        thres = TRUE, shape = TRUE), defaults = c(scale = 1, 
-        thres = 0, shape = 0.5), log = TRUE, discrete = FALSE, 
-            support_min = -Inf, support_max = Inf, supp_max_depends_on = c(scale = FALSE, 
+        thres = -Inf, shape = 0), upper = c(scale = Inf, thres = Inf, 
+        shape = Inf), accepts_float = c(scale = TRUE, thres = TRUE, 
+        shape = TRUE), defaults = c(scale = 1, thres = 0, shape = 0.5
+        ), log = TRUE, discrete = FALSE, support_min = -Inf, 
+            support_max = Inf, supp_max_depends_on = c(scale = FALSE, 
             thres = FALSE, shape = FALSE), supp_min_depends_on = c(scale = FALSE, 
             thres = TRUE, shape = FALSE))), list(package = "fBasics", 
         family = "gh", family_info = list(lower = c(alpha = 0.01, 
@@ -991,38 +971,40 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         a = Inf, b = Inf, sigma = Inf), accepts_float = c(t0 = TRUE, 
         T = TRUE, a = TRUE, b = TRUE, sigma = TRUE), defaults = c(t0 = 0, 
         T = 1, a = 0, b = 0, sigma = 1), log = FALSE, discrete = FALSE, 
-            support_min = -Inf, support_max = 4.99000000000001, 
-            supp_max_depends_on = c(t0 = FALSE, T = FALSE, a = FALSE, 
-            b = FALSE, sigma = FALSE), supp_min_depends_on = c(t0 = FALSE, 
-            T = FALSE, a = FALSE, b = FALSE, sigma = FALSE))), 
-    list(package = "fExtremes", family = "gev", family_info = list(
-        lower = c(xi = -Inf, mu = -Inf, beta = 0.01), upper = c(xi = Inf, 
-        mu = Inf, beta = Inf), accepts_float = c(xi = TRUE, mu = TRUE, 
+            support_min = -Inf, support_max = 4.99, supp_max_depends_on = c(t0 = FALSE, 
+            T = FALSE, a = FALSE, b = FALSE, sigma = FALSE), 
+            supp_min_depends_on = c(t0 = FALSE, T = FALSE, a = FALSE, 
+            b = FALSE, sigma = FALSE))), list(package = "fExtremes", 
+        family = "gev", family_info = list(lower = c(xi = -Inf, 
+        mu = -Inf, beta = 0.01), upper = c(xi = Inf, mu = Inf, 
+        beta = Inf), accepts_float = c(xi = TRUE, mu = TRUE, 
         beta = TRUE), defaults = c(xi = 1, mu = 0, beta = 1), 
-        log = TRUE, discrete = FALSE, support_min = -Inf, support_max = Inf, 
-        supp_max_depends_on = c(xi = FALSE, mu = FALSE, beta = FALSE
-        ), supp_min_depends_on = c(xi = FALSE, mu = FALSE, beta = FALSE
-        ))), list(package = "fExtremes", family = "gpd", family_info = list(
-        lower = c(xi = -Inf, mu = -Inf, beta = 0.01), upper = c(xi = Inf, 
-        mu = Inf, beta = Inf), accepts_float = c(xi = TRUE, mu = TRUE, 
+            log = TRUE, discrete = FALSE, support_min = -Inf, 
+            support_max = Inf, supp_max_depends_on = c(xi = FALSE, 
+            mu = FALSE, beta = FALSE), supp_min_depends_on = c(xi = FALSE, 
+            mu = FALSE, beta = FALSE))), list(package = "fExtremes", 
+        family = "gpd", family_info = list(lower = c(xi = -Inf, 
+        mu = -Inf, beta = 0.01), upper = c(xi = Inf, mu = Inf, 
+        beta = Inf), accepts_float = c(xi = TRUE, mu = TRUE, 
         beta = TRUE), defaults = c(xi = 1, mu = 0, beta = 1), 
-        log = TRUE, discrete = FALSE, support_min = -Inf, support_max = Inf, 
-        supp_max_depends_on = c(xi = FALSE, mu = FALSE, beta = FALSE
-        ), supp_min_depends_on = c(xi = FALSE, mu = TRUE, beta = FALSE
-        ))), list(package = "fGarch", family = "ged", family_info = list(
-        lower = c(mean = -Inf, sd = -Inf, nu = 0.02), upper = c(mean = Inf, 
-        sd = Inf, nu = Inf), accepts_float = c(mean = TRUE, sd = TRUE, 
+            log = TRUE, discrete = FALSE, support_min = -Inf, 
+            support_max = Inf, supp_max_depends_on = c(xi = FALSE, 
+            mu = FALSE, beta = FALSE), supp_min_depends_on = c(xi = FALSE, 
+            mu = TRUE, beta = FALSE))), list(package = "fGarch", 
+        family = "ged", family_info = list(lower = c(mean = -Inf, 
+        sd = -Inf, nu = 0.02), upper = c(mean = Inf, sd = Inf, 
+        nu = Inf), accepts_float = c(mean = TRUE, sd = TRUE, 
         nu = TRUE), defaults = c(mean = 0, sd = 1, nu = 2), log = TRUE, 
-        discrete = FALSE, support_min = -Inf, support_max = Inf, 
-        supp_max_depends_on = c(mean = FALSE, sd = FALSE, nu = FALSE
-        ), supp_min_depends_on = c(mean = FALSE, sd = FALSE, 
-        nu = FALSE))), list(package = "fGarch", family = "sged", 
-        family_info = list(lower = c(mean = -Inf, sd = -Inf, 
-        nu = 0.02, xi = -Inf), upper = c(mean = Inf, sd = Inf, 
-        nu = Inf, xi = Inf), accepts_float = c(mean = TRUE, sd = TRUE, 
-        nu = TRUE, xi = TRUE), defaults = c(mean = 0, sd = 1, 
-        nu = 2, xi = 1.5), log = TRUE, discrete = FALSE, support_min = -Inf, 
-            support_max = Inf, supp_max_depends_on = c(mean = FALSE, 
+            discrete = FALSE, support_min = -Inf, support_max = Inf, 
+            supp_max_depends_on = c(mean = FALSE, sd = FALSE, 
+            nu = FALSE), supp_min_depends_on = c(mean = FALSE, 
+            sd = FALSE, nu = FALSE))), list(package = "fGarch", 
+        family = "sged", family_info = list(lower = c(mean = -Inf, 
+        sd = -Inf, nu = 0.02, xi = -Inf), upper = c(mean = Inf, 
+        sd = Inf, nu = Inf, xi = Inf), accepts_float = c(mean = TRUE, 
+        sd = TRUE, nu = TRUE, xi = TRUE), defaults = c(mean = 0, 
+        sd = 1, nu = 2, xi = 1.5), log = TRUE, discrete = FALSE, 
+            support_min = -Inf, support_max = Inf, supp_max_depends_on = c(mean = FALSE, 
             sd = FALSE, nu = FALSE, xi = FALSE), supp_min_depends_on = c(mean = FALSE, 
             sd = FALSE, nu = FALSE, xi = FALSE))), list(package = "fGarch", 
         family = "snorm", family_info = list(lower = c(mean = -Inf, 
@@ -1060,15 +1042,14 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         sigma = 1001, Q = Inf, P = Inf), accepts_float = c(mu = TRUE, 
         sigma = TRUE, Q = TRUE, P = TRUE), defaults = c(mu = 0, 
         sigma = 1, Q = 0.5, P = 0.5), log = TRUE, discrete = FALSE, 
-        support_min = 0.0100000000000051, support_max = Inf, 
-        supp_max_depends_on = c(mu = FALSE, sigma = FALSE, Q = FALSE, 
-        P = FALSE), supp_min_depends_on = c(mu = FALSE, sigma = FALSE, 
-        Q = FALSE, P = FALSE))), list(package = "flexsurv", family = "genf.orig", 
-        family_info = list(lower = c(mu = -Inf, sigma = 0, s1 = 8.32667268468867e-17, 
-        s2 = 0.0100000000000001), upper = c(mu = 713, sigma = Inf, 
+        support_min = 0.01, support_max = Inf, supp_max_depends_on = c(mu = FALSE, 
+        sigma = FALSE, Q = FALSE, P = FALSE), supp_min_depends_on = c(mu = FALSE, 
+        sigma = FALSE, Q = FALSE, P = FALSE))), list(package = "flexsurv", 
+        family = "genf.orig", family_info = list(lower = c(mu = -Inf, 
+        sigma = 0, s1 = 0, s2 = 0.01), upper = c(mu = 713, sigma = Inf, 
         s1 = Inf, s2 = Inf), accepts_float = c(mu = TRUE, sigma = TRUE, 
         s1 = TRUE, s2 = TRUE), defaults = c(mu = 0, sigma = 1, 
-        s1 = 0.5, s2 = 0.5), log = TRUE, discrete = FALSE, support_min = 0.0100000000000051, 
+        s1 = 0.5, s2 = 0.5), log = TRUE, discrete = FALSE, support_min = 0.01, 
             support_max = Inf, supp_max_depends_on = c(mu = FALSE, 
             sigma = FALSE, s1 = FALSE, s2 = FALSE), supp_min_depends_on = c(mu = FALSE, 
             sigma = FALSE, s1 = FALSE, s2 = FALSE))), list(package = "flexsurv", 
@@ -1076,7 +1057,7 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         sigma = 0, Q = -99.5), upper = c(mu = 709.9, sigma = Inf, 
         Q = Inf), accepts_float = c(mu = TRUE, sigma = TRUE, 
         Q = TRUE), defaults = c(mu = 0, sigma = 1, Q = 0.5), 
-            log = TRUE, discrete = FALSE, support_min = 0.0100000000000051, 
+            log = TRUE, discrete = FALSE, support_min = 0.01, 
             support_max = Inf, supp_max_depends_on = c(mu = FALSE, 
             sigma = FALSE, Q = FALSE), supp_min_depends_on = c(mu = FALSE, 
             sigma = FALSE, Q = FALSE))), list(package = "flexsurv", 
@@ -1098,17 +1079,17 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         family_info = list(lower = c(shape = 0.01, scale = 0.01
         ), upper = c(shape = Inf, scale = Inf), accepts_float = c(shape = TRUE, 
         scale = TRUE), defaults = c(shape = 1, scale = 1), log = TRUE, 
-            discrete = FALSE, support_min = 0.0100000000000051, 
-            support_max = Inf, supp_max_depends_on = c(shape = FALSE, 
-            scale = FALSE), supp_min_depends_on = c(shape = FALSE, 
-            scale = FALSE))), list(package = "flexsurv", family = "weibullPH", 
-        family_info = list(lower = c(scale = -Inf, shape = 8.32667268468867e-17
-        ), upper = c(scale = Inf, shape = Inf), accepts_float = c(scale = TRUE, 
-        shape = TRUE), defaults = c(scale = 1, shape = 0.5), 
-            log = TRUE, discrete = FALSE, support_min = 0, support_max = Inf, 
-            supp_max_depends_on = c(scale = FALSE, shape = FALSE
-            ), supp_min_depends_on = c(scale = FALSE, shape = FALSE
-            ))), list(package = "fMultivar", family = "cauchy2d", 
+            discrete = FALSE, support_min = 0.01, support_max = Inf, 
+            supp_max_depends_on = c(shape = FALSE, scale = FALSE
+            ), supp_min_depends_on = c(shape = FALSE, scale = FALSE
+            ))), list(package = "flexsurv", family = "weibullPH", 
+        family_info = list(lower = c(scale = -Inf, shape = 0), 
+            upper = c(scale = Inf, shape = Inf), accepts_float = c(scale = TRUE, 
+            shape = TRUE), defaults = c(scale = 1, shape = 0.5
+            ), log = TRUE, discrete = FALSE, support_min = 0, 
+            support_max = Inf, supp_max_depends_on = c(scale = FALSE, 
+            shape = FALSE), supp_min_depends_on = c(scale = FALSE, 
+            shape = FALSE))), list(package = "fMultivar", family = "cauchy2d", 
         family_info = list(lower = c(rho = -0.99), upper = c(rho = 0.99), 
             accepts_float = c(rho = TRUE), defaults = c(rho = 0), 
             log = FALSE, discrete = FALSE, support_min = -Inf, 
@@ -1126,23 +1107,22 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             supp_max_depends_on = c(rho = FALSE, nu = FALSE), 
             supp_min_depends_on = c(rho = FALSE, nu = FALSE))), 
     list(package = "ForestFit", family = "gsm", family_info = list(
-        lower = c(omega = 8.32667268468867e-17, beta = 8.32667268468867e-17
-        ), upper = c(omega = Inf, beta = Inf), accepts_float = c(omega = TRUE, 
-        beta = TRUE), defaults = c(omega = 0.5, beta = 0.5), 
-        log = FALSE, discrete = FALSE, support_min = 0, support_max = Inf, 
+        lower = c(omega = 0, beta = 0), upper = c(omega = Inf, 
+        beta = Inf), accepts_float = c(omega = TRUE, beta = TRUE
+        ), defaults = c(omega = 0.5, beta = 0.5), log = FALSE, 
+        discrete = FALSE, support_min = 0, support_max = Inf, 
         supp_max_depends_on = c(omega = FALSE, beta = FALSE), 
         supp_min_depends_on = c(omega = FALSE, beta = FALSE))), 
     list(package = "gambin", family = "gambin", family_info = list(
-        lower = c(w = 0, alpha = 0.0100000000000001, maxoctave = 0
-        ), upper = c(w = Inf, alpha = Inf, maxoctave = Inf), 
-        accepts_float = c(w = TRUE, alpha = TRUE, maxoctave = TRUE
-        ), defaults = c(w = 1, alpha = 0.5, maxoctave = 0.5), 
-        log = TRUE, discrete = TRUE, support_min = 0, support_max = 10, 
-        supp_max_depends_on = c(w = FALSE, alpha = FALSE, maxoctave = FALSE
-        ), supp_min_depends_on = c(w = FALSE, alpha = FALSE, 
-        maxoctave = FALSE))), list(package = "gamlss.dist", family = "EGB2", 
-        family_info = list(lower = c(mu = -Inf, sigma = -Inf, 
-        nu = 0.02, tau = 0.0100000000000001), upper = c(mu = Inf, 
+        lower = c(w = 0, alpha = 0.01, maxoctave = 0), upper = c(w = Inf, 
+        alpha = Inf, maxoctave = Inf), accepts_float = c(w = TRUE, 
+        alpha = TRUE, maxoctave = TRUE), defaults = c(w = 1, 
+        alpha = 0.5, maxoctave = 0.5), log = TRUE, discrete = TRUE, 
+        support_min = 0, support_max = 10, supp_max_depends_on = c(w = FALSE, 
+        alpha = FALSE, maxoctave = FALSE), supp_min_depends_on = c(w = FALSE, 
+        alpha = FALSE, maxoctave = FALSE))), list(package = "gamlss.dist", 
+        family = "EGB2", family_info = list(lower = c(mu = -Inf, 
+        sigma = -Inf, nu = 0.02, tau = 0.01), upper = c(mu = Inf, 
         sigma = Inf, nu = Inf, tau = Inf), accepts_float = c(mu = TRUE, 
         sigma = TRUE, nu = TRUE, tau = TRUE), defaults = c(mu = 0, 
         sigma = 1, nu = 1, tau = 0.5), log = TRUE, discrete = FALSE, 
@@ -1153,26 +1133,25 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         sigma = 0.01, nu = -Inf), upper = c(mu = Inf, sigma = Inf, 
         nu = Inf), accepts_float = c(mu = TRUE, sigma = TRUE, 
         nu = TRUE), defaults = c(mu = 1, sigma = 1, nu = 2), 
-            log = TRUE, discrete = FALSE, support_min = 0.0100000000000051, 
+            log = TRUE, discrete = FALSE, support_min = 0.01, 
             support_max = Inf, supp_max_depends_on = c(mu = FALSE, 
             sigma = FALSE, nu = FALSE), supp_min_depends_on = c(mu = FALSE, 
             sigma = FALSE, nu = FALSE))), list(package = "gamlss.dist", 
         family = "GB2", family_info = list(lower = c(mu = 0.01, 
-        sigma = -Inf, nu = 0.01, tau = 0.0100000000000001), upper = c(mu = Inf, 
+        sigma = -Inf, nu = 0.01, tau = 0.01), upper = c(mu = Inf, 
         sigma = Inf, nu = Inf, tau = Inf), accepts_float = c(mu = TRUE, 
         sigma = TRUE, nu = TRUE, tau = TRUE), defaults = c(mu = 1, 
         sigma = 1, nu = 1, tau = 0.5), log = TRUE, discrete = FALSE, 
-            support_min = 0.0100000000000051, support_max = Inf, 
-            supp_max_depends_on = c(mu = FALSE, sigma = FALSE, 
-            nu = FALSE, tau = FALSE), supp_min_depends_on = c(mu = FALSE, 
+            support_min = 0.01, support_max = Inf, supp_max_depends_on = c(mu = FALSE, 
+            sigma = FALSE, nu = FALSE, tau = FALSE), supp_min_depends_on = c(mu = FALSE, 
             sigma = FALSE, nu = FALSE, tau = FALSE))), list(package = "gamlss.dist", 
         family = "GP", family_info = list(lower = c(mu = 0.01, 
         sigma = 0.01), upper = c(mu = Inf, sigma = Inf), accepts_float = c(mu = TRUE, 
         sigma = TRUE), defaults = c(mu = 1, sigma = 1), log = TRUE, 
-            discrete = FALSE, support_min = 0.0100000000000051, 
-            support_max = Inf, supp_max_depends_on = c(mu = FALSE, 
-            sigma = FALSE), supp_min_depends_on = c(mu = FALSE, 
-            sigma = FALSE))), list(package = "gamlss.dist", family = "GT", 
+            discrete = FALSE, support_min = 0.01, support_max = Inf, 
+            supp_max_depends_on = c(mu = FALSE, sigma = FALSE
+            ), supp_min_depends_on = c(mu = FALSE, sigma = FALSE
+            ))), list(package = "gamlss.dist", family = "GT", 
         family_info = list(lower = c(mu = -Inf, sigma = 0.01, 
         nu = 0.05, tau = 0.2), upper = c(mu = Inf, sigma = Inf, 
         nu = Inf, tau = Inf), accepts_float = c(mu = TRUE, sigma = TRUE, 
@@ -1214,10 +1193,10 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         family_info = list(lower = c(mu = 0.01, sigma = 0.01), 
             upper = c(mu = Inf, sigma = Inf), accepts_float = c(mu = TRUE, 
             sigma = TRUE), defaults = c(mu = 1, sigma = 1), log = TRUE, 
-            discrete = FALSE, support_min = 0.0100000000000051, 
-            support_max = Inf, supp_max_depends_on = c(mu = FALSE, 
-            sigma = FALSE), supp_min_depends_on = c(mu = FALSE, 
-            sigma = FALSE))), list(package = "gamlss.dist", family = "LQNO", 
+            discrete = FALSE, support_min = 0.01, support_max = Inf, 
+            supp_max_depends_on = c(mu = FALSE, sigma = FALSE
+            ), supp_min_depends_on = c(mu = FALSE, sigma = FALSE
+            ))), list(package = "gamlss.dist", family = "LQNO", 
         family_info = list(lower = c(mu = 0.01, sigma = 0.01), 
             upper = c(mu = Inf, sigma = Inf), accepts_float = c(mu = TRUE, 
             sigma = TRUE), defaults = c(mu = 1, sigma = 1), log = TRUE, 
@@ -1366,7 +1345,7 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             sigma = FALSE, nu = FALSE), supp_min_depends_on = c(mu = FALSE, 
             sigma = FALSE, nu = FALSE))), list(package = "gamlss.dist", 
         family = "SST", family_info = list(lower = c(mu = -Inf, 
-        sigma = 0.01, nu = 0.0099999999999972, tau = 2.01), upper = c(mu = Inf, 
+        sigma = 0.01, nu = 0.01, tau = 2.01), upper = c(mu = Inf, 
         sigma = Inf, nu = Inf, tau = Inf), accepts_float = c(mu = TRUE, 
         sigma = TRUE, nu = TRUE, tau = TRUE), defaults = c(mu = 0, 
         sigma = 1, nu = 0.8, tau = 7), log = TRUE, discrete = FALSE, 
@@ -1451,10 +1430,9 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             support_min = -Inf, support_max = Inf, supp_max_depends_on = c(lambda = TRUE), 
             supp_min_depends_on = c(lambda = TRUE))), list(package = "GB2", 
         family = "gb2", family_info = list(lower = c(shape1 = -Inf, 
-        scale = -Inf, shape2 = 0, shape3 = 0.0100000000000001
-        ), upper = c(shape1 = Inf, scale = Inf, shape2 = Inf, 
-        shape3 = Inf), accepts_float = c(shape1 = TRUE, scale = TRUE, 
-        shape2 = TRUE, shape3 = TRUE), defaults = c(shape1 = 0.5, 
+        scale = -Inf, shape2 = 0, shape3 = 0.01), upper = c(shape1 = Inf, 
+        scale = Inf, shape2 = Inf, shape3 = Inf), accepts_float = c(shape1 = TRUE, 
+        scale = TRUE, shape2 = TRUE, shape3 = TRUE), defaults = c(shape1 = 0.5, 
         scale = 0.5, shape2 = 0.5, shape3 = 0.5), log = FALSE, 
             discrete = FALSE, support_min = -Inf, support_max = Inf, 
             supp_max_depends_on = c(shape1 = FALSE, scale = FALSE, 
@@ -1476,9 +1454,8 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             upper = c(chi = Inf, psi = Inf, lambda = Inf), accepts_float = c(chi = TRUE, 
             psi = TRUE, lambda = TRUE), defaults = c(chi = 1, 
             psi = 1, lambda = 1), log = FALSE, discrete = FALSE, 
-            support_min = 0.0100000000000051, support_max = Inf, 
-            supp_max_depends_on = c(chi = FALSE, psi = FALSE, 
-            lambda = FALSE), supp_min_depends_on = c(chi = FALSE, 
+            support_min = 0.01, support_max = Inf, supp_max_depends_on = c(chi = FALSE, 
+            psi = FALSE, lambda = FALSE), supp_min_depends_on = c(chi = FALSE, 
             psi = FALSE, lambda = FALSE))), list(package = "GeneralizedHyperbolic", 
         family = "hyperb", family_info = list(lower = c(mu = -Inf, 
         delta = 0.01, alpha = 0.01, beta = -0.99), upper = c(mu = Inf, 
@@ -1540,10 +1517,10 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         sd = FALSE, nu = FALSE, xi = FALSE), supp_min_depends_on = c(mean = FALSE, 
         sd = FALSE, nu = FALSE, xi = FALSE))), list(package = "GIGrvg", 
         family = "gig", family_info = list(lower = c(lambda = -Inf, 
-        chi = 0, psi = 8.32667268468867e-17), upper = c(lambda = Inf, 
-        chi = Inf, psi = Inf), accepts_float = c(lambda = TRUE, 
-        chi = TRUE, psi = TRUE), defaults = c(lambda = 0.5, chi = 0.5, 
-        psi = 0.5), log = TRUE, discrete = FALSE, support_min = 0.0100000000000051, 
+        chi = 0, psi = 0), upper = c(lambda = Inf, chi = Inf, 
+        psi = Inf), accepts_float = c(lambda = TRUE, chi = TRUE, 
+        psi = TRUE), defaults = c(lambda = 0.5, chi = 0.5, psi = 0.5
+        ), log = TRUE, discrete = FALSE, support_min = 0.01, 
             support_max = Inf, supp_max_depends_on = c(lambda = FALSE, 
             chi = FALSE, psi = FALSE), supp_min_depends_on = c(lambda = FALSE, 
             chi = FALSE, psi = FALSE))), list(package = "glmx", 
@@ -1577,48 +1554,49 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             supp_max_depends_on = c(lambda1 = FALSE, lambda2 = FALSE
             ), supp_min_depends_on = c(lambda1 = FALSE, lambda2 = FALSE
             ))), list(package = "GSM", family = "gsm", family_info = list(
-        lower = c(weight = 8.32667268468867e-17, rateparam = 8.32667268468867e-17
-        ), upper = c(weight = Inf, rateparam = Inf), accepts_float = c(weight = TRUE, 
-        rateparam = TRUE), defaults = c(weight = 0.5, rateparam = 0.5
-        ), log = FALSE, discrete = FALSE, support_min = 0, support_max = Inf, 
+        lower = c(weight = 0, rateparam = 0), upper = c(weight = Inf, 
+        rateparam = Inf), accepts_float = c(weight = TRUE, rateparam = TRUE
+        ), defaults = c(weight = 0.5, rateparam = 0.5), log = FALSE, 
+        discrete = FALSE, support_min = 0, support_max = Inf, 
         supp_max_depends_on = c(weight = FALSE, rateparam = FALSE
         ), supp_min_depends_on = c(weight = FALSE, rateparam = FALSE
         ))), list(package = "harmonicmeanp", family = "harmonicmeanp", 
-        family_info = list(lower = c(L = 8.32667268468867e-17), 
-            upper = c(L = Inf), accepts_float = c(L = TRUE), 
-            defaults = c(L = 0.5), log = TRUE, discrete = FALSE, 
-            support_min = 0.0100000000000051, support_max = Inf, 
-            supp_max_depends_on = c(L = FALSE), supp_min_depends_on = c(L = FALSE))), 
-    list(package = "hermite", family = "hermite", family_info = list(
-        lower = c(m = 2, a = 0, b = 0), upper = c(m = Inf, a = Inf, 
-        b = Inf), accepts_float = c(m = FALSE, a = TRUE, b = TRUE
-        ), defaults = c(m = 2, a = 0.5, b = 0.5), log = FALSE, 
-        discrete = TRUE, support_min = 0, support_max = Inf, 
-        supp_max_depends_on = c(m = FALSE, a = FALSE, b = FALSE
-        ), supp_min_depends_on = c(m = FALSE, a = FALSE, b = FALSE
-        ))), list(package = "hesim", family = "weibullNMA", family_info = list(
-        lower = c(a0 = -745.13, a1 = -0.99), upper = c(a0 = 709.78, 
-        a1 = Inf), accepts_float = c(a0 = TRUE, a1 = TRUE), defaults = c(a0 = 0.5, 
-        a1 = 0.5), log = TRUE, discrete = FALSE, support_min = 0.0100000000000051, 
-        support_max = Inf, supp_max_depends_on = c(a0 = FALSE, 
-        a1 = FALSE), supp_min_depends_on = c(a0 = FALSE, a1 = FALSE
-        ))), list(package = "hoa", family = "Huber", family_info = list(
-        lower = c(k = 0.00499999999999892), upper = c(k = Inf), 
-        accepts_float = c(k = TRUE), defaults = c(k = 1.345), 
-        log = FALSE, discrete = FALSE, support_min = -Inf, support_max = Inf, 
-        supp_max_depends_on = c(k = FALSE), supp_min_depends_on = c(k = FALSE))), 
-    list(package = "hurdlr", family = "gpd", family_info = list(
-        lower = c(mu = -Inf, sigma = -Inf, xi = -Inf), upper = c(mu = Inf, 
-        sigma = Inf, xi = 1001), accepts_float = c(mu = TRUE, 
-        sigma = TRUE, xi = TRUE), defaults = c(mu = 0, sigma = 1, 
-        xi = 1), log = TRUE, discrete = FALSE, support_min = -Inf, 
-        support_max = Inf, supp_max_depends_on = c(mu = FALSE, 
-        sigma = FALSE, xi = FALSE), supp_min_depends_on = c(mu = TRUE, 
-        sigma = FALSE, xi = FALSE))), list(package = "icensBKL", 
+        family_info = list(lower = c(L = 0), upper = c(L = Inf), 
+            accepts_float = c(L = TRUE), defaults = c(L = 0.5), 
+            log = TRUE, discrete = FALSE, support_min = 0.01, 
+            support_max = Inf, supp_max_depends_on = c(L = FALSE), 
+            supp_min_depends_on = c(L = FALSE))), list(package = "hermite", 
+        family = "hermite", family_info = list(lower = c(m = 2, 
+        a = 0, b = 0), upper = c(m = Inf, a = Inf, b = Inf), 
+            accepts_float = c(m = FALSE, a = TRUE, b = TRUE), 
+            defaults = c(m = 2, a = 0.5, b = 0.5), log = FALSE, 
+            discrete = TRUE, support_min = 0, support_max = Inf, 
+            supp_max_depends_on = c(m = FALSE, a = FALSE, b = FALSE
+            ), supp_min_depends_on = c(m = FALSE, a = FALSE, 
+            b = FALSE))), list(package = "hesim", family = "weibullNMA", 
+        family_info = list(lower = c(a0 = -745.13, a1 = -0.99
+        ), upper = c(a0 = 709.78, a1 = Inf), accepts_float = c(a0 = TRUE, 
+        a1 = TRUE), defaults = c(a0 = 0.5, a1 = 0.5), log = TRUE, 
+            discrete = FALSE, support_min = 0.01, support_max = Inf, 
+            supp_max_depends_on = c(a0 = FALSE, a1 = FALSE), 
+            supp_min_depends_on = c(a0 = FALSE, a1 = FALSE))), 
+    list(package = "hoa", family = "Huber", family_info = list(
+        lower = c(k = 0.005), upper = c(k = Inf), accepts_float = c(k = TRUE), 
+        defaults = c(k = 1.345), log = FALSE, discrete = FALSE, 
+        support_min = -Inf, support_max = Inf, supp_max_depends_on = c(k = FALSE), 
+        supp_min_depends_on = c(k = FALSE))), list(package = "hurdlr", 
+        family = "gpd", family_info = list(lower = c(mu = -Inf, 
+        sigma = -Inf, xi = -Inf), upper = c(mu = Inf, sigma = Inf, 
+        xi = 1001), accepts_float = c(mu = TRUE, sigma = TRUE, 
+        xi = TRUE), defaults = c(mu = 0, sigma = 1, xi = 1), 
+            log = TRUE, discrete = FALSE, support_min = -Inf, 
+            support_max = Inf, supp_max_depends_on = c(mu = FALSE, 
+            sigma = FALSE, xi = FALSE), supp_min_depends_on = c(mu = TRUE, 
+            sigma = FALSE, xi = FALSE))), list(package = "icensBKL", 
         family = "llogis", family_info = list(lower = c(scale = 0.01, 
-        shape = 0.0100000000000001), upper = c(scale = Inf, shape = Inf
-        ), accepts_float = c(scale = TRUE, shape = TRUE), defaults = c(scale = 1, 
-        shape = 0.5), log = TRUE, discrete = FALSE, support_min = 0.0100000000000051, 
+        shape = 0.01), upper = c(scale = Inf, shape = Inf), accepts_float = c(scale = TRUE, 
+        shape = TRUE), defaults = c(scale = 1, shape = 0.5), 
+            log = TRUE, discrete = FALSE, support_min = 0.01, 
             support_max = Inf, supp_max_depends_on = c(scale = FALSE, 
             shape = FALSE), supp_min_depends_on = c(scale = FALSE, 
             shape = FALSE))), list(package = "ihs", family = "ihs", 
@@ -1631,40 +1609,39 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             lambda = FALSE, k = FALSE, sigma = FALSE), supp_min_depends_on = c(mu = FALSE, 
             lambda = FALSE, k = FALSE, sigma = FALSE))), list(
         package = "invgamma", family = "invchisq", family_info = list(
-            lower = c(ncp = 0, df = 0.0100000000000001), upper = c(ncp = Inf, 
+            lower = c(ncp = 0, df = 0.01), upper = c(ncp = Inf, 
             df = Inf), accepts_float = c(ncp = TRUE, df = TRUE
             ), defaults = c(ncp = 0, df = 0.5), log = TRUE, discrete = FALSE, 
-            support_min = 0.0100000000000051, support_max = Inf, 
-            supp_max_depends_on = c(ncp = FALSE, df = FALSE), 
-            supp_min_depends_on = c(ncp = FALSE, df = FALSE))), 
-    list(package = "invgamma", family = "invexp", family_info = list(
-        lower = c(rate = 0.01), upper = c(rate = Inf), accepts_float = c(rate = TRUE), 
-        defaults = c(rate = 1), log = TRUE, discrete = FALSE, 
-        support_min = 0.0100000000000051, support_max = Inf, 
-        supp_max_depends_on = c(rate = FALSE), supp_min_depends_on = c(rate = FALSE))), 
-    list(package = "invgamma", family = "invgamma", family_info = list(
-        lower = c(rate = 0, shape = 0.0100000000000001), upper = c(rate = Inf, 
-        shape = Inf), accepts_float = c(rate = TRUE, shape = TRUE
-        ), defaults = c(rate = 1, shape = 0.5), log = TRUE, discrete = FALSE, 
-        support_min = 0.0100000000000051, support_max = Inf, 
-        supp_max_depends_on = c(rate = FALSE, shape = FALSE), 
-        supp_min_depends_on = c(rate = FALSE, shape = FALSE))), 
-    list(package = "jmuOutlier", family = "laplace", family_info = list(
-        lower = c(mean = -Inf, sd = 0), upper = c(mean = Inf, 
+            support_min = 0.01, support_max = Inf, supp_max_depends_on = c(ncp = FALSE, 
+            df = FALSE), supp_min_depends_on = c(ncp = FALSE, 
+            df = FALSE))), list(package = "invgamma", family = "invexp", 
+        family_info = list(lower = c(rate = 0.01), upper = c(rate = Inf), 
+            accepts_float = c(rate = TRUE), defaults = c(rate = 1), 
+            log = TRUE, discrete = FALSE, support_min = 0.01, 
+            support_max = Inf, supp_max_depends_on = c(rate = FALSE), 
+            supp_min_depends_on = c(rate = FALSE))), list(package = "invgamma", 
+        family = "invgamma", family_info = list(lower = c(rate = 0, 
+        shape = 0.01), upper = c(rate = Inf, shape = Inf), accepts_float = c(rate = TRUE, 
+        shape = TRUE), defaults = c(rate = 1, shape = 0.5), log = TRUE, 
+            discrete = FALSE, support_min = 0.01, support_max = Inf, 
+            supp_max_depends_on = c(rate = FALSE, shape = FALSE
+            ), supp_min_depends_on = c(rate = FALSE, shape = FALSE
+            ))), list(package = "jmuOutlier", family = "laplace", 
+        family_info = list(lower = c(mean = -Inf, sd = 0), upper = c(mean = Inf, 
         sd = Inf), accepts_float = c(mean = TRUE, sd = TRUE), 
-        defaults = c(mean = 0, sd = 1), log = FALSE, discrete = FALSE, 
-        support_min = -Inf, support_max = Inf, supp_max_depends_on = c(mean = FALSE, 
-        sd = FALSE), supp_min_depends_on = c(mean = FALSE, sd = FALSE
-        ))), list(package = "kdist", family = "k", family_info = list(
-        lower = c(shape = 0.01, scale = 0, intensity = -Inf), 
-        upper = c(shape = Inf, scale = Inf, intensity = Inf), 
-        accepts_float = c(shape = TRUE, scale = TRUE, intensity = TRUE
-        ), defaults = c(shape = 1, scale = 1, intensity = 0), 
-        log = TRUE, discrete = FALSE, support_min = 0.0100000000000051, 
-        support_max = Inf, supp_max_depends_on = c(shape = FALSE, 
-        scale = FALSE, intensity = FALSE), supp_min_depends_on = c(shape = FALSE, 
-        scale = FALSE, intensity = FALSE))), list(package = "KScorrect", 
-        family = "lunif", family_info = list(lower = c(min = 8.32667268468867e-17, 
+            defaults = c(mean = 0, sd = 1), log = FALSE, discrete = FALSE, 
+            support_min = -Inf, support_max = Inf, supp_max_depends_on = c(mean = FALSE, 
+            sd = FALSE), supp_min_depends_on = c(mean = FALSE, 
+            sd = FALSE))), list(package = "kdist", family = "k", 
+        family_info = list(lower = c(shape = 0.01, scale = 0, 
+        intensity = -Inf), upper = c(shape = Inf, scale = Inf, 
+        intensity = Inf), accepts_float = c(shape = TRUE, scale = TRUE, 
+        intensity = TRUE), defaults = c(shape = 1, scale = 1, 
+        intensity = 0), log = TRUE, discrete = FALSE, support_min = 0.01, 
+            support_max = Inf, supp_max_depends_on = c(shape = FALSE, 
+            scale = FALSE, intensity = FALSE), supp_min_depends_on = c(shape = FALSE, 
+            scale = FALSE, intensity = FALSE))), list(package = "KScorrect", 
+        family = "lunif", family_info = list(lower = c(min = 0, 
         max = 0.5), upper = c(min = 0.5, max = Inf), accepts_float = c(min = TRUE, 
         max = TRUE), defaults = c(min = 0.5, max = 0.5), log = FALSE, 
             discrete = FALSE, support_min = 0, support_max = Inf, 
@@ -1685,24 +1662,23 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         supp_max_depends_on = c(location = FALSE, scale = FALSE
         ), supp_min_depends_on = c(location = FALSE, scale = FALSE
         ))), list(package = "LearnBayes", family = "mnorm", family_info = list(
-        lower = c(varcov = 8.32667268468867e-17), upper = c(varcov = Inf), 
-        accepts_float = c(varcov = TRUE), defaults = c(varcov = 0.5), 
-        log = TRUE, discrete = FALSE, support_min = -Inf, support_max = Inf, 
-        supp_max_depends_on = c(varcov = FALSE), supp_min_depends_on = c(varcov = FALSE))), 
-    list(package = "llogistic", family = "llogistic", family_info = list(
-        lower = c(m = 8.32667268468867e-17, phi = 0.0100000000000001
-        ), upper = c(m = 0.99, phi = 538), accepts_float = c(m = TRUE, 
+        lower = c(varcov = 0), upper = c(varcov = Inf), accepts_float = c(varcov = TRUE), 
+        defaults = c(varcov = 0.5), log = TRUE, discrete = FALSE, 
+        support_min = -Inf, support_max = Inf, supp_max_depends_on = c(varcov = FALSE), 
+        supp_min_depends_on = c(varcov = FALSE))), list(package = "llogistic", 
+        family = "llogistic", family_info = list(lower = c(m = 0, 
+        phi = 0.01), upper = c(m = 0.99, phi = 538), accepts_float = c(m = TRUE, 
         phi = TRUE), defaults = c(m = 0.5, phi = 0.5), log = TRUE, 
-        discrete = FALSE, support_min = 0, support_max = 1, supp_max_depends_on = c(m = FALSE, 
-        phi = FALSE), supp_min_depends_on = c(m = FALSE, phi = FALSE
-        ))), list(package = "loglognorm", family = "loglognorm", 
-        family_info = list(lower = c(mean = -Inf, sd = 0), upper = c(mean = Inf, 
+            discrete = FALSE, support_min = 0, support_max = 1, 
+            supp_max_depends_on = c(m = FALSE, phi = FALSE), 
+            supp_min_depends_on = c(m = FALSE, phi = FALSE))), 
+    list(package = "loglognorm", family = "loglognorm", family_info = list(
+        lower = c(mean = -Inf, sd = 0), upper = c(mean = Inf, 
         sd = Inf), accepts_float = c(mean = TRUE, sd = TRUE), 
-            defaults = c(mean = 0, sd = 1), log = FALSE, discrete = FALSE, 
-            support_min = 0.0100000000000051, support_max = 0.990000000000009, 
-            supp_max_depends_on = c(mean = FALSE, sd = FALSE), 
-            supp_min_depends_on = c(mean = FALSE, sd = FALSE))), 
-    list(package = "lqmm", family = "al", family_info = list(
+        defaults = c(mean = 0, sd = 1), log = FALSE, discrete = FALSE, 
+        support_min = 0.01, support_max = 0.99, supp_max_depends_on = c(mean = FALSE, 
+        sd = FALSE), supp_min_depends_on = c(mean = FALSE, sd = FALSE
+        ))), list(package = "lqmm", family = "al", family_info = list(
         lower = c(mu = -Inf, sigma = -Inf, tau = 0), upper = c(mu = Inf, 
         sigma = Inf, tau = 1), accepts_float = c(mu = TRUE, sigma = TRUE, 
         tau = TRUE), defaults = c(mu = 0, sigma = 1, tau = 0.5
@@ -1710,7 +1686,7 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         support_max = Inf, supp_max_depends_on = c(mu = FALSE, 
         sigma = FALSE, tau = FALSE), supp_min_depends_on = c(mu = FALSE, 
         sigma = FALSE, tau = FALSE))), list(package = "marg", 
-        family = "Huber", family_info = list(lower = c(k = 0.00499999999999892), 
+        family = "Huber", family_info = list(lower = c(k = 0.005), 
             upper = c(k = Inf), accepts_float = c(k = TRUE), 
             defaults = c(k = 1.345), log = FALSE, discrete = FALSE, 
             support_min = -Inf, support_max = Inf, supp_max_depends_on = c(k = FALSE), 
@@ -1721,54 +1697,53 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             support_min = 0, support_max = 1, supp_max_depends_on = c(prob = FALSE), 
             supp_min_depends_on = c(prob = FALSE))), list(package = "mc2d", 
         family = "betagen", family_info = list(lower = c(min = -Inf, 
-        max = 0.01, ncp = 0, shape1 = 8.32667268468867e-17, shape2 = 8.32667268468867e-17
-        ), upper = c(min = 0.99, max = Inf, ncp = Inf, shape1 = Inf, 
-        shape2 = Inf), accepts_float = c(min = TRUE, max = TRUE, 
-        ncp = TRUE, shape1 = TRUE, shape2 = TRUE), defaults = c(min = 0, 
-        max = 1, ncp = 0, shape1 = 0.5, shape2 = 0.5), log = TRUE, 
-            discrete = FALSE, support_min = -Inf, support_max = Inf, 
-            supp_max_depends_on = c(min = FALSE, max = TRUE, 
-            ncp = FALSE, shape1 = FALSE, shape2 = FALSE), supp_min_depends_on = c(min = TRUE, 
-            max = FALSE, ncp = FALSE, shape1 = FALSE, shape2 = FALSE
-            ))), list(package = "mc2d", family = "pert", family_info = list(
-        lower = c(mode = -1, max = 0, shape = 0.01), upper = c(mode = 1, 
-        max = Inf, shape = Inf), accepts_float = c(mode = TRUE, 
-        max = TRUE, shape = TRUE), defaults = c(mode = 0, max = 1, 
-        shape = 4), log = TRUE, discrete = FALSE, support_min = -0.989999999999995, 
-        support_max = Inf, supp_max_depends_on = c(mode = FALSE, 
-        max = TRUE, shape = FALSE), supp_min_depends_on = c(mode = FALSE, 
-        max = FALSE, shape = FALSE))), list(package = "mc2d", 
+        max = 0.01, ncp = 0, shape1 = 0, shape2 = 0), upper = c(min = 0.99, 
+        max = Inf, ncp = Inf, shape1 = Inf, shape2 = Inf), accepts_float = c(min = TRUE, 
+        max = TRUE, ncp = TRUE, shape1 = TRUE, shape2 = TRUE), 
+            defaults = c(min = 0, max = 1, ncp = 0, shape1 = 0.5, 
+            shape2 = 0.5), log = TRUE, discrete = FALSE, support_min = -Inf, 
+            support_max = Inf, supp_max_depends_on = c(min = FALSE, 
+            max = TRUE, ncp = FALSE, shape1 = FALSE, shape2 = FALSE
+            ), supp_min_depends_on = c(min = TRUE, max = FALSE, 
+            ncp = FALSE, shape1 = FALSE, shape2 = FALSE))), list(
+        package = "mc2d", family = "pert", family_info = list(
+            lower = c(mode = -1, max = 0, shape = 0.01), upper = c(mode = 1, 
+            max = Inf, shape = Inf), accepts_float = c(mode = TRUE, 
+            max = TRUE, shape = TRUE), defaults = c(mode = 0, 
+            max = 1, shape = 4), log = TRUE, discrete = FALSE, 
+            support_min = -0.99, support_max = Inf, supp_max_depends_on = c(mode = FALSE, 
+            max = TRUE, shape = FALSE), supp_min_depends_on = c(mode = FALSE, 
+            max = FALSE, shape = FALSE))), list(package = "mc2d", 
         family = "triang", family_info = list(lower = c(mode = -1, 
         max = 0), upper = c(mode = 1, max = Inf), accepts_float = c(mode = TRUE, 
         max = TRUE), defaults = c(mode = 0, max = 1), log = TRUE, 
-            discrete = FALSE, support_min = -0.989999999999995, 
-            support_max = Inf, supp_max_depends_on = c(mode = FALSE, 
-            max = TRUE), supp_min_depends_on = c(mode = FALSE, 
-            max = FALSE))), list(package = "MCMC4Extremes", family = "ggev", 
+            discrete = FALSE, support_min = -0.99, support_max = Inf, 
+            supp_max_depends_on = c(mode = FALSE, max = TRUE), 
+            supp_min_depends_on = c(mode = FALSE, max = FALSE
+            ))), list(package = "MCMC4Extremes", family = "ggev", 
         family_info = list(lower = c(xi = -Inf, mu = -Inf, sigma = -Inf, 
-        delta = 0.0100000000000001), upper = c(xi = Inf, mu = Inf, 
-        sigma = Inf, delta = Inf), accepts_float = c(xi = TRUE, 
-        mu = TRUE, sigma = TRUE, delta = TRUE), defaults = c(xi = 0.5, 
-        mu = 0.5, sigma = 0.5, delta = 0.5), log = FALSE, discrete = FALSE, 
+        delta = 0.01), upper = c(xi = Inf, mu = Inf, sigma = Inf, 
+        delta = Inf), accepts_float = c(xi = TRUE, mu = TRUE, 
+        sigma = TRUE, delta = TRUE), defaults = c(xi = 0.5, mu = 0.5, 
+        sigma = 0.5, delta = 0.5), log = FALSE, discrete = FALSE, 
             support_min = -Inf, support_max = Inf, supp_max_depends_on = c(xi = FALSE, 
             mu = FALSE, sigma = FALSE, delta = FALSE), supp_min_depends_on = c(xi = FALSE, 
             mu = FALSE, sigma = FALSE, delta = FALSE))), list(
         package = "MCMCpack", family = "invgamma", family_info = list(
-            lower = c(scale = 0.01, shape = 0.0100000000000001
-            ), upper = c(scale = Inf, shape = Inf), accepts_float = c(scale = TRUE, 
-            shape = TRUE), defaults = c(scale = 1, shape = 0.5
-            ), log = FALSE, discrete = FALSE, support_min = 0.0100000000000051, 
-            support_max = Inf, supp_max_depends_on = c(scale = FALSE, 
-            shape = FALSE), supp_min_depends_on = c(scale = FALSE, 
-            shape = FALSE))), list(package = "mdmb", family = "bct_scaled", 
+            lower = c(scale = 0.01, shape = 0.01), upper = c(scale = Inf, 
+            shape = Inf), accepts_float = c(scale = TRUE, shape = TRUE
+            ), defaults = c(scale = 1, shape = 0.5), log = FALSE, 
+            discrete = FALSE, support_min = 0.01, support_max = Inf, 
+            supp_max_depends_on = c(scale = FALSE, shape = FALSE
+            ), supp_min_depends_on = c(scale = FALSE, shape = FALSE
+            ))), list(package = "mdmb", family = "bct_scaled", 
         family_info = list(lower = c(location = -Inf, shape = -Inf, 
         lambda = -899, df = -Inf), upper = c(location = Inf, 
         shape = Inf, lambda = Inf, df = Inf), accepts_float = c(location = TRUE, 
         shape = TRUE, lambda = TRUE, df = TRUE), defaults = c(location = 0, 
         shape = 1, lambda = 1, df = Inf), log = TRUE, discrete = FALSE, 
-            support_min = 0.0100000000000051, support_max = Inf, 
-            supp_max_depends_on = c(location = FALSE, shape = FALSE, 
-            lambda = FALSE, df = FALSE), supp_min_depends_on = c(location = FALSE, 
+            support_min = 0.01, support_max = Inf, supp_max_depends_on = c(location = FALSE, 
+            shape = FALSE, lambda = FALSE, df = FALSE), supp_min_depends_on = c(location = FALSE, 
             shape = FALSE, lambda = FALSE, df = FALSE))), list(
         package = "mdmb", family = "yjt_scaled", family_info = list(
             lower = c(location = -Inf, shape = -Inf, lambda = -999, 
@@ -1783,8 +1758,8 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             shape = FALSE, lambda = FALSE, df = FALSE, probit = FALSE
             ))), list(package = "metRology", family = "t.scaled", 
         family_info = list(lower = c(mean = -Inf, sd = -Inf, 
-        df = 0.0100000000000001, ncp = -Inf), upper = c(mean = Inf, 
-        sd = Inf, df = Inf, ncp = Inf), accepts_float = c(mean = TRUE, 
+        df = 0.01, ncp = -Inf), upper = c(mean = Inf, sd = Inf, 
+        df = Inf, ncp = Inf), accepts_float = c(mean = TRUE, 
         sd = TRUE, df = TRUE, ncp = TRUE), defaults = c(mean = 0, 
         sd = 1, df = 0.5, ncp = 0.5), log = TRUE, discrete = FALSE, 
             support_min = -Inf, support_max = Inf, supp_max_depends_on = c(mean = FALSE, 
@@ -1796,21 +1771,20 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             support_min = -Inf, support_max = Inf, supp_max_depends_on = c(a = FALSE, 
             b = FALSE), supp_min_depends_on = c(a = FALSE, b = FALSE
             ))), list(package = "mistr", family = "burr", family_info = list(
-        lower = c(shape1 = 0.0100000000000001, shape2 = 0.0100000000000001
-        ), upper = c(shape1 = Inf, shape2 = Inf), accepts_float = c(shape1 = TRUE, 
-        shape2 = TRUE), defaults = c(shape1 = 0.5, shape2 = 0.5
-        ), log = TRUE, discrete = FALSE, support_min = 0.0100000000000051, 
-        support_max = Inf, supp_max_depends_on = c(shape1 = FALSE, 
-        shape2 = FALSE), supp_min_depends_on = c(shape1 = FALSE, 
-        shape2 = FALSE))), list(package = "mistr", family = "frechet", 
-        family_info = list(lower = c(loc = -Inf, scale = 0.01, 
-        shape = 0.01), upper = c(loc = Inf, scale = Inf, shape = Inf
-        ), accepts_float = c(loc = TRUE, scale = TRUE, shape = TRUE
-        ), defaults = c(loc = 0, scale = 1, shape = 1), log = TRUE, 
-            discrete = FALSE, support_min = -Inf, support_max = Inf, 
-            supp_max_depends_on = c(loc = FALSE, scale = FALSE, 
-            shape = FALSE), supp_min_depends_on = c(loc = TRUE, 
-            scale = FALSE, shape = FALSE))), list(package = "mistr", 
+        lower = c(shape1 = 0.01, shape2 = 0.01), upper = c(shape1 = Inf, 
+        shape2 = Inf), accepts_float = c(shape1 = TRUE, shape2 = TRUE
+        ), defaults = c(shape1 = 0.5, shape2 = 0.5), log = TRUE, 
+        discrete = FALSE, support_min = 0.01, support_max = Inf, 
+        supp_max_depends_on = c(shape1 = FALSE, shape2 = FALSE
+        ), supp_min_depends_on = c(shape1 = FALSE, shape2 = FALSE
+        ))), list(package = "mistr", family = "frechet", family_info = list(
+        lower = c(loc = -Inf, scale = 0.01, shape = 0.01), upper = c(loc = Inf, 
+        scale = Inf, shape = Inf), accepts_float = c(loc = TRUE, 
+        scale = TRUE, shape = TRUE), defaults = c(loc = 0, scale = 1, 
+        shape = 1), log = TRUE, discrete = FALSE, support_min = -Inf, 
+        support_max = Inf, supp_max_depends_on = c(loc = FALSE, 
+        scale = FALSE, shape = FALSE), supp_min_depends_on = c(loc = TRUE, 
+        scale = FALSE, shape = FALSE))), list(package = "mistr", 
         family = "GPD", family_info = list(lower = c(loc = -Inf, 
         scale = 0.01, shape = -Inf), upper = c(loc = Inf, scale = Inf, 
         shape = 700), accepts_float = c(loc = TRUE, scale = TRUE, 
@@ -1820,9 +1794,9 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             scale = FALSE, shape = FALSE), supp_min_depends_on = c(loc = TRUE, 
             scale = FALSE, shape = FALSE))), list(package = "mistr", 
         family = "gumbel", family_info = list(lower = c(loc = -Inf, 
-        scale = 8.32667268468867e-17), upper = c(loc = Inf, scale = Inf
-        ), accepts_float = c(loc = TRUE, scale = TRUE), defaults = c(loc = 0.5, 
-        scale = 0.5), log = TRUE, discrete = FALSE, support_min = -Inf, 
+        scale = 0), upper = c(loc = Inf, scale = Inf), accepts_float = c(loc = TRUE, 
+        scale = TRUE), defaults = c(loc = 0.5, scale = 0.5), 
+            log = TRUE, discrete = FALSE, support_min = -Inf, 
             support_max = Inf, supp_max_depends_on = c(loc = FALSE, 
             scale = FALSE), supp_min_depends_on = c(loc = FALSE, 
             scale = FALSE))), list(package = "mistr", family = "pareto", 
@@ -1833,9 +1807,9 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             supp_max_depends_on = c(scale = FALSE, shape = FALSE
             ), supp_min_depends_on = c(scale = TRUE, shape = FALSE
             ))), list(package = "mixAK", family = "MVNmixture", 
-        family_info = list(lower = c(weight = 8.32667268468867e-17, 
-        mean = -Inf, Q = -Inf, Sigma = 0), upper = c(weight = Inf, 
-        mean = Inf, Q = Inf, Sigma = Inf), accepts_float = c(weight = TRUE, 
+        family_info = list(lower = c(weight = 0, mean = -Inf, 
+        Q = -Inf, Sigma = 0), upper = c(weight = Inf, mean = Inf, 
+        Q = Inf, Sigma = Inf), accepts_float = c(weight = TRUE, 
         mean = TRUE, Q = TRUE, Sigma = TRUE), defaults = c(weight = 0.5, 
         mean = 0.5, Q = 0.5, Sigma = 0.5), log = TRUE, discrete = FALSE, 
             support_min = -Inf, support_max = Inf, supp_max_depends_on = c(weight = FALSE, 
@@ -1857,10 +1831,10 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             scale = FALSE, alpha = FALSE), supp_min_depends_on = c(th = FALSE, 
             scale = FALSE, alpha = FALSE))), list(package = "msm", 
         family = "2phase", family_info = list(lower = c(l1 = 0, 
-        mu1 = 0, mu2 = 8.32667268468867e-17), upper = c(l1 = Inf, 
-        mu1 = Inf, mu2 = Inf), accepts_float = c(l1 = TRUE, mu1 = TRUE, 
-        mu2 = TRUE), defaults = c(l1 = 0.5, mu1 = 0.5, mu2 = 0.5
-        ), log = TRUE, discrete = FALSE, support_min = 0, support_max = Inf, 
+        mu1 = 0, mu2 = 0), upper = c(l1 = Inf, mu1 = Inf, mu2 = Inf
+        ), accepts_float = c(l1 = TRUE, mu1 = TRUE, mu2 = TRUE
+        ), defaults = c(l1 = 0.5, mu1 = 0.5, mu2 = 0.5), log = TRUE, 
+            discrete = FALSE, support_min = 0, support_max = Inf, 
             supp_max_depends_on = c(l1 = FALSE, mu1 = FALSE, 
             mu2 = FALSE), supp_min_depends_on = c(l1 = FALSE, 
             mu1 = FALSE, mu2 = FALSE))), list(package = "msm", 
@@ -1894,13 +1868,13 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         family = "nfw", family_info = list(lower = c(con = 0.01), 
             upper = c(con = Inf), accepts_float = c(con = TRUE), 
             defaults = c(con = 5), log = TRUE, discrete = FALSE, 
-            support_min = 0.0100000000000051, support_max = 1, 
-            supp_max_depends_on = c(con = FALSE), supp_min_depends_on = c(con = FALSE))), 
-    list(package = "nimble", family = "cat", family_info = list(
-        lower = c(prob = -Inf), upper = c(prob = Inf), accepts_float = c(prob = TRUE), 
-        defaults = c(prob = 0.5), log = TRUE, discrete = TRUE, 
-        support_min = 1, support_max = 1, supp_max_depends_on = c(prob = FALSE), 
-        supp_min_depends_on = c(prob = FALSE))), list(package = "nimble", 
+            support_min = 0.01, support_max = 1, supp_max_depends_on = c(con = FALSE), 
+            supp_min_depends_on = c(con = FALSE))), list(package = "nimble", 
+        family = "cat", family_info = list(lower = c(prob = -Inf), 
+            upper = c(prob = Inf), accepts_float = c(prob = TRUE), 
+            defaults = c(prob = 0.5), log = TRUE, discrete = TRUE, 
+            support_min = 1, support_max = 1, supp_max_depends_on = c(prob = FALSE), 
+            supp_min_depends_on = c(prob = FALSE))), list(package = "nimble", 
         family = "dexp", family_info = list(lower = c(location = -Inf, 
         scale = 0), upper = c(location = Inf, scale = Inf), accepts_float = c(location = TRUE, 
         scale = TRUE), defaults = c(location = 0, scale = 1), 
@@ -1919,17 +1893,17 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         support_max = 1, supp_max_depends_on = c(t = FALSE, c = FALSE
         ), supp_min_depends_on = c(t = FALSE, c = FALSE))), list(
         package = "nimble", family = "invgamma", family_info = list(
-            lower = c(scale = 0, shape = 0.0100000000000001), 
+            lower = c(scale = 0, shape = 0.01), upper = c(scale = Inf, 
+            shape = Inf), accepts_float = c(scale = TRUE, shape = TRUE
+            ), defaults = c(scale = 1, shape = 0.5), log = TRUE, 
+            discrete = FALSE, support_min = 0.01, support_max = Inf, 
+            supp_max_depends_on = c(scale = FALSE, shape = FALSE
+            ), supp_min_depends_on = c(scale = FALSE, shape = FALSE
+            ))), list(package = "nimble", family = "sqrtinvgamma", 
+        family_info = list(lower = c(scale = 0, shape = 0.01), 
             upper = c(scale = Inf, shape = Inf), accepts_float = c(scale = TRUE, 
             shape = TRUE), defaults = c(scale = 1, shape = 0.5
-            ), log = TRUE, discrete = FALSE, support_min = 0.0100000000000051, 
-            support_max = Inf, supp_max_depends_on = c(scale = FALSE, 
-            shape = FALSE), supp_min_depends_on = c(scale = FALSE, 
-            shape = FALSE))), list(package = "nimble", family = "sqrtinvgamma", 
-        family_info = list(lower = c(scale = 0, shape = 0.0100000000000001
-        ), upper = c(scale = Inf, shape = Inf), accepts_float = c(scale = TRUE, 
-        shape = TRUE), defaults = c(scale = 1, shape = 0.5), 
-            log = TRUE, discrete = FALSE, support_min = 0.0400000000000063, 
+            ), log = TRUE, discrete = FALSE, support_min = 0.04, 
             support_max = Inf, supp_max_depends_on = c(scale = FALSE, 
             shape = FALSE), supp_min_depends_on = c(scale = FALSE, 
             shape = FALSE))), list(package = "nimble", family = "t_nonstandard", 
@@ -1965,12 +1939,12 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             scale = FALSE, max = FALSE), supp_min_depends_on = c(location = FALSE, 
             scale = FALSE, max = FALSE))), list(package = "ParetoPosStable", 
         family = "PPS", family_info = list(lower = c(lam = -Inf, 
-        sc = -Inf, v = 0.0600000000000001), upper = c(lam = Inf, 
-        sc = Inf, v = Inf), accepts_float = c(lam = TRUE, sc = TRUE, 
-        v = TRUE), defaults = c(lam = 0.5, sc = 0.5, v = 0.5), 
-            log = TRUE, discrete = FALSE, support_min = -Inf, 
-            support_max = Inf, supp_max_depends_on = c(lam = FALSE, 
-            sc = FALSE, v = FALSE), supp_min_depends_on = c(lam = FALSE, 
+        sc = -Inf, v = 0.06), upper = c(lam = Inf, sc = Inf, 
+        v = Inf), accepts_float = c(lam = TRUE, sc = TRUE, v = TRUE
+        ), defaults = c(lam = 0.5, sc = 0.5, v = 0.5), log = TRUE, 
+            discrete = FALSE, support_min = -Inf, support_max = Inf, 
+            supp_max_depends_on = c(lam = FALSE, sc = FALSE, 
+            v = FALSE), supp_min_depends_on = c(lam = FALSE, 
             sc = TRUE, v = FALSE))), list(package = "pearson7", 
         family = "pearson7", family_info = list(lower = c(mu = -Inf, 
         sigma = -Inf), upper = c(mu = Inf, sigma = Inf), accepts_float = c(mu = TRUE, 
@@ -1979,17 +1953,17 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             supp_max_depends_on = c(mu = FALSE, sigma = FALSE
             ), supp_min_depends_on = c(mu = FALSE, sigma = FALSE
             ))), list(package = "PIGShift", family = "norminvgamma", 
-        family_info = list(lower = c(alpha = 0.0100000000000001, 
-        beta = 0), upper = c(alpha = Inf, beta = Inf), accepts_float = c(alpha = TRUE, 
-        beta = TRUE), defaults = c(alpha = 0.5, beta = 0.5), 
-            log = TRUE, discrete = FALSE, support_min = -Inf, 
+        family_info = list(lower = c(alpha = 0.01, beta = 0), 
+            upper = c(alpha = Inf, beta = Inf), accepts_float = c(alpha = TRUE, 
+            beta = TRUE), defaults = c(alpha = 0.5, beta = 0.5
+            ), log = TRUE, discrete = FALSE, support_min = -Inf, 
             support_max = Inf, supp_max_depends_on = c(alpha = FALSE, 
             beta = FALSE), supp_min_depends_on = c(alpha = FALSE, 
             beta = FALSE))), list(package = "polyaAeppli", family = "PolyaAeppli", 
-        family_info = list(lower = c(lambda = 8.32667268468867e-17, 
-        prob = 0), upper = c(lambda = Inf, prob = 0.99), accepts_float = c(lambda = TRUE, 
-        prob = TRUE), defaults = c(lambda = 0.5, prob = 0.5), 
-            log = TRUE, discrete = TRUE, support_min = 0, support_max = Inf, 
+        family_info = list(lower = c(lambda = 0, prob = 0), upper = c(lambda = Inf, 
+        prob = 0.99), accepts_float = c(lambda = TRUE, prob = TRUE
+        ), defaults = c(lambda = 0.5, prob = 0.5), log = TRUE, 
+            discrete = TRUE, support_min = 0, support_max = Inf, 
             supp_max_depends_on = c(lambda = FALSE, prob = FALSE
             ), supp_min_depends_on = c(lambda = FALSE, prob = FALSE
             ))), list(package = "POT", family = "gpd", family_info = list(
@@ -2064,7 +2038,7 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             mu = FALSE, sigma = FALSE), supp_min_depends_on = c(lambda = FALSE, 
             mu = FALSE, sigma = FALSE))), list(package = "powdist", 
         family = "pt", family_info = list(lower = c(lambda = 0.01, 
-        mu = -Inf, sigma = -Inf, df = 0.0100000000000001), upper = c(lambda = Inf, 
+        mu = -Inf, sigma = -Inf, df = 0.01), upper = c(lambda = Inf, 
         mu = Inf, sigma = Inf, df = Inf), accepts_float = c(lambda = TRUE, 
         mu = TRUE, sigma = TRUE, df = TRUE), defaults = c(lambda = 1, 
         mu = 0, sigma = 1, df = 0.5), log = TRUE, discrete = FALSE, 
@@ -2127,7 +2101,7 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             mu = FALSE, sigma = FALSE), supp_min_depends_on = c(lambda = FALSE, 
             mu = FALSE, sigma = FALSE))), list(package = "powdist", 
         family = "rpt", family_info = list(lower = c(lambda = 0.01, 
-        mu = -Inf, sigma = -Inf, df = 0.0100000000000001), upper = c(lambda = Inf, 
+        mu = -Inf, sigma = -Inf, df = 0.01), upper = c(lambda = Inf, 
         mu = Inf, sigma = Inf, df = Inf), accepts_float = c(lambda = TRUE, 
         mu = TRUE, sigma = TRUE, df = TRUE), defaults = c(lambda = 1, 
         mu = 0, sigma = 1, df = 0.5), log = TRUE, discrete = FALSE, 
@@ -2141,10 +2115,10 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             support_max = Inf, supp_max_depends_on = c(xmin = FALSE, 
             alpha = FALSE), supp_min_depends_on = c(xmin = TRUE, 
             alpha = FALSE))), list(package = "PowerNormal", family = "pn", 
-        family_info = list(lower = c(alpha = 0.0100000000000001), 
-            upper = c(alpha = Inf), accepts_float = c(alpha = TRUE), 
-            defaults = c(alpha = 0.5), log = FALSE, discrete = FALSE, 
-            support_min = -37.51, support_max = 38.56, supp_max_depends_on = c(alpha = FALSE), 
+        family_info = list(lower = c(alpha = 0.01), upper = c(alpha = Inf), 
+            accepts_float = c(alpha = TRUE), defaults = c(alpha = 0.5), 
+            log = FALSE, discrete = FALSE, support_min = -37.51, 
+            support_max = 38.56, supp_max_depends_on = c(alpha = FALSE), 
             supp_min_depends_on = c(alpha = FALSE))), list(package = "ProDenICA", 
         family = ".gaussmix", family_info = list(lower = c(means = -Inf), 
             upper = c(means = Inf), accepts_float = c(means = TRUE), 
@@ -2188,30 +2162,28 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             scale = FALSE, shape = FALSE), supp_min_depends_on = c(prob = FALSE, 
             scale = FALSE, shape = FALSE))), list(package = "qqtest", 
         family = "kay", family_info = list(lower = c(ncp = -Inf, 
-        df = 8.32667268468867e-17), upper = c(ncp = Inf, df = Inf
-        ), accepts_float = c(ncp = TRUE, df = TRUE), defaults = c(ncp = 0, 
-        df = 0.5), log = FALSE, discrete = FALSE, support_min = 0.0100000000000051, 
-            support_max = Inf, supp_max_depends_on = c(ncp = FALSE, 
-            df = FALSE), supp_min_depends_on = c(ncp = FALSE, 
-            df = FALSE))), list(package = "qrmtools", family = "GEV", 
-        family_info = list(lower = c(loc = -Inf, scale = 0.01, 
-        shape = -Inf), upper = c(loc = Inf, scale = Inf, shape = Inf
-        ), accepts_float = c(loc = TRUE, scale = TRUE, shape = TRUE
-        ), defaults = c(loc = 0, scale = 1, shape = 0.5), log = TRUE, 
-            discrete = FALSE, support_min = -Inf, support_max = Inf, 
-            supp_max_depends_on = c(loc = FALSE, scale = FALSE, 
-            shape = FALSE), supp_min_depends_on = c(loc = FALSE, 
-            scale = FALSE, shape = FALSE))), list(package = "qrmtools", 
+        df = 0), upper = c(ncp = Inf, df = Inf), accepts_float = c(ncp = TRUE, 
+        df = TRUE), defaults = c(ncp = 0, df = 0.5), log = FALSE, 
+            discrete = FALSE, support_min = 0.01, support_max = Inf, 
+            supp_max_depends_on = c(ncp = FALSE, df = FALSE), 
+            supp_min_depends_on = c(ncp = FALSE, df = FALSE))), 
+    list(package = "qrmtools", family = "GEV", family_info = list(
+        lower = c(loc = -Inf, scale = 0.01, shape = -Inf), upper = c(loc = Inf, 
+        scale = Inf, shape = Inf), accepts_float = c(loc = TRUE, 
+        scale = TRUE, shape = TRUE), defaults = c(loc = 0, scale = 1, 
+        shape = 0.5), log = TRUE, discrete = FALSE, support_min = -Inf, 
+        support_max = Inf, supp_max_depends_on = c(loc = FALSE, 
+        scale = FALSE, shape = FALSE), supp_min_depends_on = c(loc = FALSE, 
+        scale = FALSE, shape = FALSE))), list(package = "qrmtools", 
         family = "GPD", family_info = list(lower = c(shape = -Inf, 
-        scale = 8.32667268468867e-17), upper = c(shape = 790.5, 
-        scale = Inf), accepts_float = c(shape = TRUE, scale = TRUE
-        ), defaults = c(shape = 0.5, scale = 0.5), log = TRUE, 
-            discrete = FALSE, support_min = -Inf, support_max = Inf, 
-            supp_max_depends_on = c(shape = FALSE, scale = FALSE
-            ), supp_min_depends_on = c(shape = FALSE, scale = FALSE
-            ))), list(package = "qrmtools", family = "GPDtail", 
+        scale = 0), upper = c(shape = 790.5, scale = Inf), accepts_float = c(shape = TRUE, 
+        scale = TRUE), defaults = c(shape = 0.5, scale = 0.5), 
+            log = TRUE, discrete = FALSE, support_min = -Inf, 
+            support_max = Inf, supp_max_depends_on = c(shape = FALSE, 
+            scale = FALSE), supp_min_depends_on = c(shape = FALSE, 
+            scale = FALSE))), list(package = "qrmtools", family = "GPDtail", 
         family_info = list(lower = c(threshold = -Inf, p.exceed = 0, 
-        shape = -Inf, scale = 8.32667268468867e-17), upper = c(threshold = Inf, 
+        shape = -Inf, scale = 0), upper = c(threshold = Inf, 
         p.exceed = 1, shape = Inf, scale = Inf), accepts_float = c(threshold = TRUE, 
         p.exceed = TRUE, shape = TRUE, scale = TRUE), defaults = c(threshold = 0.5, 
         p.exceed = 0.5, shape = 0.5, scale = 0.5), log = TRUE, 
@@ -2220,14 +2192,14 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             shape = FALSE, scale = FALSE), supp_min_depends_on = c(threshold = TRUE, 
             p.exceed = FALSE, shape = FALSE, scale = FALSE))), 
     list(package = "qrmtools", family = "Par", family_info = list(
-        lower = c(scale = 0.01, shape = 0.0100000000000001), 
-        upper = c(scale = Inf, shape = Inf), accepts_float = c(scale = TRUE, 
-        shape = TRUE), defaults = c(scale = 1, shape = 0.5), 
-        log = TRUE, discrete = FALSE, support_min = -10, support_max = Inf, 
+        lower = c(scale = 0.01, shape = 0.01), upper = c(scale = Inf, 
+        shape = Inf), accepts_float = c(scale = TRUE, shape = TRUE
+        ), defaults = c(scale = 1, shape = 0.5), log = TRUE, 
+        discrete = FALSE, support_min = -10, support_max = Inf, 
         supp_max_depends_on = c(scale = FALSE, shape = FALSE), 
         supp_min_depends_on = c(scale = FALSE, shape = FALSE))), 
     list(package = "randtests", family = "runs", family_info = list(
-        lower = c(n1 = 0.01, n2 = 0.0100000000000001), upper = c(n1 = 501, 
+        lower = c(n1 = 0.01, n2 = 0.01), upper = c(n1 = 501, 
         n2 = Inf), accepts_float = c(n1 = TRUE, n2 = TRUE), defaults = c(n1 = 1, 
         n2 = 0.5), log = TRUE, discrete = TRUE, support_min = 2, 
         support_max = Inf, supp_max_depends_on = c(n1 = FALSE, 
@@ -2240,47 +2212,46 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         supp_max_depends_on = c(location = FALSE, scale = FALSE
         ), supp_min_depends_on = c(location = FALSE, scale = FALSE
         ))), list(package = "ReIns", family = "burr", family_info = list(
-        lower = c(eta = 0.01, alpha = 8.32667268468867e-17, rho = -900.5
-        ), upper = c(eta = Inf, alpha = Inf, rho = -0.00999999999999998
-        ), accepts_float = c(eta = TRUE, alpha = TRUE, rho = TRUE
-        ), defaults = c(eta = 1, alpha = 0.5, rho = -0.5), log = TRUE, 
-        discrete = FALSE, support_min = 0.0100000000000051, support_max = Inf, 
-        supp_max_depends_on = c(eta = FALSE, alpha = FALSE, rho = FALSE
-        ), supp_min_depends_on = c(eta = FALSE, alpha = FALSE, 
-        rho = FALSE))), list(package = "ReIns", family = "epd", 
-        family_info = list(lower = c(gamma = 8.32667268468867e-17, 
+        lower = c(eta = 0.01, alpha = 0, rho = -900.5), upper = c(eta = Inf, 
+        alpha = Inf, rho = -0.01), accepts_float = c(eta = TRUE, 
+        alpha = TRUE, rho = TRUE), defaults = c(eta = 1, alpha = 0.5, 
+        rho = -0.5), log = TRUE, discrete = FALSE, support_min = 0.01, 
+        support_max = Inf, supp_max_depends_on = c(eta = FALSE, 
+        alpha = FALSE, rho = FALSE), supp_min_depends_on = c(eta = FALSE, 
+        alpha = FALSE, rho = FALSE))), list(package = "ReIns", 
+        family = "epd", family_info = list(lower = c(gamma = 0, 
         kappa = -1), upper = c(gamma = Inf, kappa = Inf), accepts_float = c(gamma = TRUE, 
         kappa = TRUE), defaults = c(gamma = 0.5, kappa = 0.5), 
-            log = TRUE, discrete = FALSE, support_min = 1.01000000000001, 
+            log = TRUE, discrete = FALSE, support_min = 1.01, 
             support_max = Inf, supp_max_depends_on = c(gamma = FALSE, 
             kappa = FALSE), supp_min_depends_on = c(gamma = FALSE, 
             kappa = FALSE))), list(package = "ReIns", family = "frechet", 
         family_info = list(lower = c(loc = -Inf, scale = 0.01, 
-        shape = 8.32667268468867e-17), upper = c(loc = Inf, scale = Inf, 
-        shape = Inf), accepts_float = c(loc = TRUE, scale = TRUE, 
-        shape = TRUE), defaults = c(loc = 0, scale = 1, shape = 0.5
-        ), log = TRUE, discrete = FALSE, support_min = -Inf, 
-            support_max = Inf, supp_max_depends_on = c(loc = FALSE, 
-            scale = FALSE, shape = FALSE), supp_min_depends_on = c(loc = TRUE, 
+        shape = 0), upper = c(loc = Inf, scale = Inf, shape = Inf
+        ), accepts_float = c(loc = TRUE, scale = TRUE, shape = TRUE
+        ), defaults = c(loc = 0, scale = 1, shape = 0.5), log = TRUE, 
+            discrete = FALSE, support_min = -Inf, support_max = Inf, 
+            supp_max_depends_on = c(loc = FALSE, scale = FALSE, 
+            shape = FALSE), supp_min_depends_on = c(loc = TRUE, 
             scale = FALSE, shape = FALSE))), list(package = "ReIns", 
         family = "gpd", family_info = list(lower = c(mu = -Inf, 
-        gamma = -Inf, sigma = 8.32667268468867e-17), upper = c(mu = Inf, 
-        gamma = 700.5, sigma = Inf), accepts_float = c(mu = TRUE, 
-        gamma = TRUE, sigma = TRUE), defaults = c(mu = 0, gamma = 0.5, 
-        sigma = 0.5), log = TRUE, discrete = FALSE, support_min = -Inf, 
+        gamma = -Inf, sigma = 0), upper = c(mu = Inf, gamma = 700.5, 
+        sigma = Inf), accepts_float = c(mu = TRUE, gamma = TRUE, 
+        sigma = TRUE), defaults = c(mu = 0, gamma = 0.5, sigma = 0.5
+        ), log = TRUE, discrete = FALSE, support_min = -Inf, 
             support_max = Inf, supp_max_depends_on = c(mu = FALSE, 
             gamma = FALSE, sigma = FALSE), supp_min_depends_on = c(mu = TRUE, 
             gamma = FALSE, sigma = FALSE))), list(package = "ReIns", 
         family = "pareto", family_info = list(lower = c(scale = 0.01, 
-        shape = 0.0100000000000001), upper = c(scale = Inf, shape = Inf
-        ), accepts_float = c(scale = TRUE, shape = TRUE), defaults = c(scale = 1, 
-        shape = 0.5), log = TRUE, discrete = FALSE, support_min = 0.01, 
+        shape = 0.01), upper = c(scale = Inf, shape = Inf), accepts_float = c(scale = TRUE, 
+        shape = TRUE), defaults = c(scale = 1, shape = 0.5), 
+            log = TRUE, discrete = FALSE, support_min = 0.01, 
             support_max = Inf, supp_max_depends_on = c(scale = FALSE, 
             shape = FALSE), supp_min_depends_on = c(scale = TRUE, 
             shape = FALSE))), list(package = "ReIns", family = "tfrechet", 
         family_info = list(lower = c(loc = -Inf, scale = 0.01, 
-        endpoint = -Inf, shape = 8.32667268468867e-17), upper = c(loc = Inf, 
-        scale = Inf, endpoint = Inf, shape = Inf), accepts_float = c(loc = TRUE, 
+        endpoint = -Inf, shape = 0), upper = c(loc = Inf, scale = Inf, 
+        endpoint = Inf, shape = Inf), accepts_float = c(loc = TRUE, 
         scale = TRUE, endpoint = TRUE, shape = TRUE), defaults = c(loc = 0, 
         scale = 1, endpoint = Inf, shape = 0.5), log = TRUE, 
             discrete = FALSE, support_min = -Inf, support_max = Inf, 
@@ -2288,7 +2259,7 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             endpoint = TRUE, shape = FALSE), supp_min_depends_on = c(loc = TRUE, 
             scale = FALSE, endpoint = FALSE, shape = FALSE))), 
     list(package = "ReIns", family = "tgpd", family_info = list(
-        lower = c(mu = -Inf, endpoint = -Inf, gamma = -Inf, sigma = 8.32667268468867e-17
+        lower = c(mu = -Inf, endpoint = -Inf, gamma = -Inf, sigma = 0
         ), upper = c(mu = Inf, endpoint = Inf, gamma = 1000.5, 
         sigma = Inf), accepts_float = c(mu = TRUE, endpoint = TRUE, 
         gamma = TRUE, sigma = TRUE), defaults = c(mu = 0, endpoint = Inf, 
@@ -2297,35 +2268,33 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         endpoint = TRUE, gamma = FALSE, sigma = FALSE), supp_min_depends_on = c(mu = TRUE, 
         endpoint = FALSE, gamma = FALSE, sigma = FALSE))), list(
         package = "reliaR", family = "gumbel", family_info = list(
-            lower = c(mu = -Inf, sigma = 8.32667268468867e-17
-            ), upper = c(mu = 364.54, sigma = Inf), accepts_float = c(mu = TRUE, 
-            sigma = TRUE), defaults = c(mu = 0.5, sigma = 0.5
-            ), log = TRUE, discrete = FALSE, support_min = -Inf, 
-            support_max = Inf, supp_max_depends_on = c(mu = FALSE, 
-            sigma = FALSE), supp_min_depends_on = c(mu = FALSE, 
-            sigma = FALSE))), list(package = "Renext", family = "GPD", 
-        family_info = list(lower = c(loc = -Inf, scale = 0.01, 
-        shape = -Inf), upper = c(loc = Inf, scale = Inf, shape = 750
-        ), accepts_float = c(loc = TRUE, scale = TRUE, shape = TRUE
-        ), defaults = c(loc = 0, scale = 1, shape = 0), log = TRUE, 
+            lower = c(mu = -Inf, sigma = 0), upper = c(mu = 364.54, 
+            sigma = Inf), accepts_float = c(mu = TRUE, sigma = TRUE
+            ), defaults = c(mu = 0.5, sigma = 0.5), log = TRUE, 
             discrete = FALSE, support_min = -Inf, support_max = Inf, 
-            supp_max_depends_on = c(loc = FALSE, scale = FALSE, 
-            shape = FALSE), supp_min_depends_on = c(loc = TRUE, 
-            scale = FALSE, shape = FALSE))), list(package = "Renext", 
+            supp_max_depends_on = c(mu = FALSE, sigma = FALSE
+            ), supp_min_depends_on = c(mu = FALSE, sigma = FALSE
+            ))), list(package = "Renext", family = "GPD", family_info = list(
+        lower = c(loc = -Inf, scale = 0.01, shape = -Inf), upper = c(loc = Inf, 
+        scale = Inf, shape = 750), accepts_float = c(loc = TRUE, 
+        scale = TRUE, shape = TRUE), defaults = c(loc = 0, scale = 1, 
+        shape = 0), log = TRUE, discrete = FALSE, support_min = -Inf, 
+        support_max = Inf, supp_max_depends_on = c(loc = FALSE, 
+        scale = FALSE, shape = FALSE), supp_min_depends_on = c(loc = TRUE, 
+        scale = FALSE, shape = FALSE))), list(package = "Renext", 
         family = "lomax", family_info = list(lower = c(scale = 0.01, 
         shape = 0.01), upper = c(scale = Inf, shape = Inf), accepts_float = c(scale = TRUE, 
         shape = TRUE), defaults = c(scale = 1, shape = 4), log = TRUE, 
-            discrete = FALSE, support_min = 0.0100000000000051, 
-            support_max = Inf, supp_max_depends_on = c(scale = FALSE, 
-            shape = FALSE), supp_min_depends_on = c(scale = FALSE, 
-            shape = FALSE))), list(package = "Renext", family = "maxlo", 
-        family_info = list(lower = c(scale = 0.01, shape = 0.01
-        ), upper = c(scale = Inf, shape = Inf), accepts_float = c(scale = TRUE, 
-        shape = TRUE), defaults = c(scale = 1, shape = 4), log = TRUE, 
-            discrete = FALSE, support_min = 0.0100000000000051, 
-            support_max = Inf, supp_max_depends_on = c(scale = TRUE, 
-            shape = FALSE), supp_min_depends_on = c(scale = FALSE, 
-            shape = FALSE))), list(package = "Renext", family = "mixexp2", 
+            discrete = FALSE, support_min = 0.01, support_max = Inf, 
+            supp_max_depends_on = c(scale = FALSE, shape = FALSE
+            ), supp_min_depends_on = c(scale = FALSE, shape = FALSE
+            ))), list(package = "Renext", family = "maxlo", family_info = list(
+        lower = c(scale = 0.01, shape = 0.01), upper = c(scale = Inf, 
+        shape = Inf), accepts_float = c(scale = TRUE, shape = TRUE
+        ), defaults = c(scale = 1, shape = 4), log = TRUE, discrete = FALSE, 
+        support_min = 0.01, support_max = Inf, supp_max_depends_on = c(scale = TRUE, 
+        shape = FALSE), supp_min_depends_on = c(scale = FALSE, 
+        shape = FALSE))), list(package = "Renext", family = "mixexp2", 
         family_info = list(lower = c(rate1 = 0, prob1 = 0, delta = -1
         ), upper = c(rate1 = Inf, prob1 = 1, delta = Inf), accepts_float = c(rate1 = TRUE, 
         prob1 = TRUE, delta = TRUE), defaults = c(rate1 = 1, 
@@ -2337,7 +2306,7 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         shape = 0.01, scale = 0.01), upper = c(delta = Inf, shape = Inf, 
         scale = Inf), accepts_float = c(delta = TRUE, shape = TRUE, 
         scale = TRUE), defaults = c(delta = 1, shape = 1, scale = 1
-        ), log = TRUE, discrete = FALSE, support_min = 0.0100000000000051, 
+        ), log = TRUE, discrete = FALSE, support_min = 0.01, 
             support_max = Inf, supp_max_depends_on = c(delta = FALSE, 
             shape = FALSE, scale = FALSE), supp_min_depends_on = c(delta = FALSE, 
             shape = FALSE, scale = FALSE))), list(package = "revdbayes", 
@@ -2368,19 +2337,18 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             support_min = 0, support_max = Inf, supp_max_depends_on = c(rate = FALSE), 
             supp_min_depends_on = c(rate = FALSE))), list(package = "Rlab", 
         family = "gamma", family_info = list(lower = c(shape = -Inf, 
-        rate = 0.01, alpha = 8.32667268468867e-17, beta = 8.32667268468867e-17
-        ), upper = c(shape = Inf, rate = Inf, alpha = Inf, beta = Inf
-        ), accepts_float = c(shape = TRUE, rate = TRUE, alpha = TRUE, 
-        beta = TRUE), defaults = c(shape = 1, rate = 1, alpha = 0.5, 
-        beta = 0.5), log = TRUE, discrete = FALSE, support_min = 0, 
-            support_max = Inf, supp_max_depends_on = c(shape = FALSE, 
+        rate = 0.01, alpha = 0, beta = 0), upper = c(shape = Inf, 
+        rate = Inf, alpha = Inf, beta = Inf), accepts_float = c(shape = TRUE, 
+        rate = TRUE, alpha = TRUE, beta = TRUE), defaults = c(shape = 1, 
+        rate = 1, alpha = 0.5, beta = 0.5), log = TRUE, discrete = FALSE, 
+            support_min = 0, support_max = Inf, supp_max_depends_on = c(shape = FALSE, 
             rate = FALSE, alpha = FALSE, beta = FALSE), supp_min_depends_on = c(shape = FALSE, 
             rate = FALSE, alpha = FALSE, beta = FALSE))), list(
         package = "Rlab", family = "weibull", family_info = list(
-            lower = c(shape = -Inf, scale = -Inf, alpha = 8.32667268468867e-17, 
-            beta = 8.32667268468867e-17), upper = c(shape = Inf, 
-            scale = Inf, alpha = Inf, beta = Inf), accepts_float = c(shape = TRUE, 
-            scale = TRUE, alpha = TRUE, beta = TRUE), defaults = c(shape = 1, 
+            lower = c(shape = -Inf, scale = -Inf, alpha = 0, 
+            beta = 0), upper = c(shape = Inf, scale = Inf, alpha = Inf, 
+            beta = Inf), accepts_float = c(shape = TRUE, scale = TRUE, 
+            alpha = TRUE, beta = TRUE), defaults = c(shape = 1, 
             scale = 1, alpha = 0.5, beta = 0.5), log = TRUE, 
             discrete = FALSE, support_min = 0, support_max = Inf, 
             supp_max_depends_on = c(shape = FALSE, scale = FALSE, 
@@ -2412,38 +2380,38 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             sigma = FALSE, zero = FALSE, lambda = FALSE), supp_min_depends_on = c(mu = FALSE, 
             sigma = FALSE, zero = FALSE, lambda = FALSE))), list(
         package = "RTDE", family = "frechet", family_info = list(
-            lower = c(shape = 0.0100000000000001, xmin = -Inf
-            ), upper = c(shape = Inf, xmin = Inf), accepts_float = c(shape = TRUE, 
-            xmin = TRUE), defaults = c(shape = 0.5, xmin = 0.5
-            ), log = TRUE, discrete = FALSE, support_min = -Inf, 
-            support_max = Inf, supp_max_depends_on = c(shape = FALSE, 
-            xmin = FALSE), supp_min_depends_on = c(shape = FALSE, 
-            xmin = TRUE))), list(package = "sadists", family = "dnbeta", 
-        family_info = list(lower = c(df1 = 8.32667268468867e-17, 
-        df2 = 0, ncp1 = 0, ncp2 = 0), upper = c(df1 = Inf, df2 = Inf, 
-        ncp1 = Inf, ncp2 = Inf), accepts_float = c(df1 = TRUE, 
-        df2 = TRUE, ncp1 = TRUE, ncp2 = TRUE), defaults = c(df1 = 0.5, 
-        df2 = 0.5, ncp1 = 0.5, ncp2 = 0.5), log = TRUE, discrete = FALSE, 
+            lower = c(shape = 0.01, xmin = -Inf), upper = c(shape = Inf, 
+            xmin = Inf), accepts_float = c(shape = TRUE, xmin = TRUE
+            ), defaults = c(shape = 0.5, xmin = 0.5), log = TRUE, 
+            discrete = FALSE, support_min = -Inf, support_max = Inf, 
+            supp_max_depends_on = c(shape = FALSE, xmin = FALSE
+            ), supp_min_depends_on = c(shape = FALSE, xmin = TRUE
+            ))), list(package = "sadists", family = "dnbeta", 
+        family_info = list(lower = c(df1 = 0, df2 = 0, ncp1 = 0, 
+        ncp2 = 0), upper = c(df1 = Inf, df2 = Inf, ncp1 = Inf, 
+        ncp2 = Inf), accepts_float = c(df1 = TRUE, df2 = TRUE, 
+        ncp1 = TRUE, ncp2 = TRUE), defaults = c(df1 = 0.5, df2 = 0.5, 
+        ncp1 = 0.5, ncp2 = 0.5), log = TRUE, discrete = FALSE, 
             support_min = 0, support_max = Inf, supp_max_depends_on = c(df1 = TRUE, 
             df2 = FALSE, ncp1 = TRUE, ncp2 = TRUE), supp_min_depends_on = c(df1 = TRUE, 
             df2 = FALSE, ncp1 = TRUE, ncp2 = TRUE))), list(package = "sadists", 
-        family = "dneta", family_info = list(lower = c(df = 0.0100000000000001, 
+        family = "dneta", family_info = list(lower = c(df = 0.01, 
         ncp1 = -1.64, ncp2 = 0), upper = c(df = Inf, ncp1 = 1.64, 
         ncp2 = 0.19), accepts_float = c(df = TRUE, ncp1 = TRUE, 
         ncp2 = TRUE), defaults = c(df = 0.5, ncp1 = 0.5, ncp2 = 0
-        ), log = TRUE, discrete = FALSE, support_min = -0.989999999999995, 
-            support_max = 0.990000000000009, supp_max_depends_on = c(df = FALSE, 
+        ), log = TRUE, discrete = FALSE, support_min = -0.99, 
+            support_max = 0.99, supp_max_depends_on = c(df = FALSE, 
             ncp1 = FALSE, ncp2 = FALSE), supp_min_depends_on = c(df = FALSE, 
             ncp1 = FALSE, ncp2 = FALSE))), list(package = "sadists", 
-        family = "dnf", family_info = list(lower = c(df1 = 8.32667268468867e-17, 
-        df2 = 0.0100000000000001, ncp1 = 0, ncp2 = 0), upper = c(df1 = Inf, 
+        family = "dnf", family_info = list(lower = c(df1 = 0, 
+        df2 = 0.01, ncp1 = 0, ncp2 = 0), upper = c(df1 = Inf, 
         df2 = Inf, ncp1 = Inf, ncp2 = Inf), accepts_float = c(df1 = TRUE, 
         df2 = TRUE, ncp1 = TRUE, ncp2 = TRUE), defaults = c(df1 = 0.5, 
         df2 = 0.5, ncp1 = 0.5, ncp2 = 0.5), log = TRUE, discrete = FALSE, 
             support_min = 0, support_max = Inf, supp_max_depends_on = c(df1 = TRUE, 
             df2 = FALSE, ncp1 = TRUE, ncp2 = TRUE), supp_min_depends_on = c(df1 = TRUE, 
             df2 = FALSE, ncp1 = TRUE, ncp2 = TRUE))), list(package = "sadists", 
-        family = "dnt", family_info = list(lower = c(df = 0.0100000000000001, 
+        family = "dnt", family_info = list(lower = c(df = 0.01, 
         ncp1 = -1.64, ncp2 = 0), upper = c(df = Inf, ncp1 = 1.64, 
         ncp2 = 0.19), accepts_float = c(df = TRUE, ncp1 = TRUE, 
         ncp2 = TRUE), defaults = c(df = 0.5, ncp1 = 0.5, ncp2 = 0
@@ -2452,43 +2420,42 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             ncp1 = FALSE, ncp2 = FALSE), supp_min_depends_on = c(df = FALSE, 
             ncp1 = FALSE, ncp2 = FALSE))), list(package = "sadists", 
         family = "kprime", family_info = list(lower = c(b = 0, 
-        v1 = 8.32667268468867e-17, v2 = 0.0100000000000001, a = -Inf
-        ), upper = c(b = Inf, v1 = Inf, v2 = Inf, a = Inf), accepts_float = c(b = TRUE, 
-        v1 = TRUE, v2 = TRUE, a = TRUE), defaults = c(b = 1, 
-        v1 = 0.5, v2 = 0.5, a = 0.5), log = TRUE, discrete = FALSE, 
-            support_min = -Inf, support_max = Inf, supp_max_depends_on = c(b = FALSE, 
+        v1 = 0, v2 = 0.01, a = -Inf), upper = c(b = Inf, v1 = Inf, 
+        v2 = Inf, a = Inf), accepts_float = c(b = TRUE, v1 = TRUE, 
+        v2 = TRUE, a = TRUE), defaults = c(b = 1, v1 = 0.5, v2 = 0.5, 
+        a = 0.5), log = TRUE, discrete = FALSE, support_min = -Inf, 
+            support_max = Inf, supp_max_depends_on = c(b = FALSE, 
             v1 = FALSE, v2 = FALSE, a = FALSE), supp_min_depends_on = c(b = FALSE, 
             v1 = FALSE, v2 = FALSE, a = FALSE))), list(package = "sadists", 
-        family = "lambdap", family_info = list(lower = c(df = 8.32667268468867e-17, 
+        family = "lambdap", family_info = list(lower = c(df = 0, 
         t = -Inf), upper = c(df = Inf, t = Inf), accepts_float = c(df = TRUE, 
         t = TRUE), defaults = c(df = 0.5, t = 0.5), log = TRUE, 
             discrete = FALSE, support_min = -Inf, support_max = Inf, 
             supp_max_depends_on = c(df = FALSE, t = FALSE), supp_min_depends_on = c(df = FALSE, 
             t = FALSE))), list(package = "sadists", family = "prodchisqpow", 
-        family_info = list(lower = c(ncp = 0, pow = -799, df = 8.32667268468867e-17
+        family_info = list(lower = c(ncp = 0, pow = -799, df = 0
         ), upper = c(ncp = 779.4, pow = Inf, df = Inf), accepts_float = c(ncp = TRUE, 
         pow = TRUE, df = TRUE), defaults = c(ncp = 0, pow = 1, 
-        df = 0.5), log = TRUE, discrete = FALSE, support_min = 0.0100000000000051, 
+        df = 0.5), log = TRUE, discrete = FALSE, support_min = 0.01, 
             support_max = Inf, supp_max_depends_on = c(ncp = FALSE, 
             pow = FALSE, df = FALSE), supp_min_depends_on = c(ncp = FALSE, 
             pow = FALSE, df = FALSE))), list(package = "sadists", 
-        family = "proddnf", family_info = list(lower = c(df1 = 8.32667268468867e-17, 
-        df2 = 0.0100000000000001, ncp1 = 0, ncp2 = 0), upper = c(df1 = Inf, 
+        family = "proddnf", family_info = list(lower = c(df1 = 0, 
+        df2 = 0.01, ncp1 = 0, ncp2 = 0), upper = c(df1 = Inf, 
         df2 = Inf, ncp1 = Inf, ncp2 = Inf), accepts_float = c(df1 = TRUE, 
         df2 = TRUE, ncp1 = TRUE, ncp2 = TRUE), defaults = c(df1 = 0.5, 
         df2 = 0.5, ncp1 = 0.5, ncp2 = 0.5), log = TRUE, discrete = FALSE, 
-            support_min = 0.0100000000000051, support_max = Inf, 
-            supp_max_depends_on = c(df1 = FALSE, df2 = FALSE, 
-            ncp1 = FALSE, ncp2 = FALSE), supp_min_depends_on = c(df1 = FALSE, 
+            support_min = 0.01, support_max = Inf, supp_max_depends_on = c(df1 = FALSE, 
+            df2 = FALSE, ncp1 = FALSE, ncp2 = FALSE), supp_min_depends_on = c(df1 = FALSE, 
             df2 = FALSE, ncp1 = FALSE, ncp2 = FALSE))), list(
         package = "sadists", family = "prodnormal", family_info = list(
-            lower = c(mu = -Inf, sigma = 0.0100000000000001), 
-            upper = c(mu = Inf, sigma = Inf), accepts_float = c(mu = TRUE, 
-            sigma = TRUE), defaults = c(mu = 0.5, sigma = 0.5
-            ), log = TRUE, discrete = FALSE, support_min = -Inf, 
-            support_max = Inf, supp_max_depends_on = c(mu = FALSE, 
-            sigma = FALSE), supp_min_depends_on = c(mu = FALSE, 
-            sigma = FALSE))), list(package = "sadists", family = "sumchisqpow", 
+            lower = c(mu = -Inf, sigma = 0.01), upper = c(mu = Inf, 
+            sigma = Inf), accepts_float = c(mu = TRUE, sigma = TRUE
+            ), defaults = c(mu = 0.5, sigma = 0.5), log = TRUE, 
+            discrete = FALSE, support_min = -Inf, support_max = Inf, 
+            supp_max_depends_on = c(mu = FALSE, sigma = FALSE
+            ), supp_min_depends_on = c(mu = FALSE, sigma = FALSE
+            ))), list(package = "sadists", family = "sumchisqpow", 
         family_info = list(lower = c(ncp = 0, pow = -729, wts = -Inf, 
         df = 0), upper = c(ncp = Inf, pow = Inf, wts = Inf, df = Inf
         ), accepts_float = c(ncp = TRUE, pow = TRUE, wts = TRUE, 
@@ -2498,14 +2465,14 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             pow = FALSE, wts = FALSE, df = FALSE), supp_min_depends_on = c(ncp = FALSE, 
             pow = FALSE, wts = FALSE, df = FALSE))), list(package = "sadists", 
         family = "sumlogchisq", family_info = list(lower = c(ncp = 0, 
-        wts = -Inf, df = 0.0100000000000001), upper = c(ncp = 636.82, 
-        wts = Inf, df = Inf), accepts_float = c(ncp = TRUE, wts = TRUE, 
+        wts = -Inf, df = 0.01), upper = c(ncp = 636.82, wts = Inf, 
+        df = Inf), accepts_float = c(ncp = TRUE, wts = TRUE, 
         df = TRUE), defaults = c(ncp = 0, wts = 0.5, df = 0.5
         ), log = TRUE, discrete = FALSE, support_min = -Inf, 
             support_max = Inf, supp_max_depends_on = c(ncp = FALSE, 
             wts = FALSE, df = FALSE), supp_min_depends_on = c(ncp = FALSE, 
             wts = FALSE, df = FALSE))), list(package = "sadists", 
-        family = "upsilon", family_info = list(lower = c(df = 8.32667268468867e-17, 
+        family = "upsilon", family_info = list(lower = c(df = 0, 
         t = -Inf), upper = c(df = Inf, t = Inf), accepts_float = c(df = TRUE, 
         t = TRUE), defaults = c(df = 0.5, t = 0.5), log = TRUE, 
             discrete = FALSE, support_min = -Inf, support_max = Inf, 
@@ -2563,20 +2530,19 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         family = "Rayleigh", family_info = list(lower = c(scale = 0.01), 
             upper = c(scale = Inf), accepts_float = c(scale = TRUE), 
             defaults = c(scale = 1), log = FALSE, discrete = FALSE, 
-            support_min = 0.0100000000000051, support_max = Inf, 
-            supp_max_depends_on = c(scale = FALSE), supp_min_depends_on = c(scale = FALSE))), 
-    list(package = "shotGroups", family = "Rice", family_info = list(
-        lower = c(nu = 0, sigma = 8.32667268468867e-17), upper = c(nu = Inf, 
-        sigma = Inf), accepts_float = c(nu = TRUE, sigma = TRUE
-        ), defaults = c(nu = 0.5, sigma = 0.5), log = FALSE, 
-        discrete = FALSE, support_min = 0.0100000000000051, support_max = Inf, 
-        supp_max_depends_on = c(nu = FALSE, sigma = FALSE), supp_min_depends_on = c(nu = FALSE, 
-        sigma = FALSE))), list(package = "sirt", family = "invgamma2", 
-        family_info = list(lower = c(n0 = 0.0100000000000001, 
-        var0 = 8.32667268468867e-17), upper = c(n0 = Inf, var0 = Inf
-        ), accepts_float = c(n0 = TRUE, var0 = TRUE), defaults = c(n0 = 0.5, 
-        var0 = 0.5), log = FALSE, discrete = FALSE, support_min = 0.0100000000000051, 
-            support_max = Inf, supp_max_depends_on = c(n0 = FALSE, 
+            support_min = 0.01, support_max = Inf, supp_max_depends_on = c(scale = FALSE), 
+            supp_min_depends_on = c(scale = FALSE))), list(package = "shotGroups", 
+        family = "Rice", family_info = list(lower = c(nu = 0, 
+        sigma = 0), upper = c(nu = Inf, sigma = Inf), accepts_float = c(nu = TRUE, 
+        sigma = TRUE), defaults = c(nu = 0.5, sigma = 0.5), log = FALSE, 
+            discrete = FALSE, support_min = 0.01, support_max = Inf, 
+            supp_max_depends_on = c(nu = FALSE, sigma = FALSE
+            ), supp_min_depends_on = c(nu = FALSE, sigma = FALSE
+            ))), list(package = "sirt", family = "invgamma2", 
+        family_info = list(lower = c(n0 = 0.01, var0 = 0), upper = c(n0 = Inf, 
+        var0 = Inf), accepts_float = c(n0 = TRUE, var0 = TRUE
+        ), defaults = c(n0 = 0.5, var0 = 0.5), log = FALSE, discrete = FALSE, 
+            support_min = 0.01, support_max = Inf, supp_max_depends_on = c(n0 = FALSE, 
             var0 = FALSE), supp_min_depends_on = c(n0 = FALSE, 
             var0 = FALSE))), list(package = "skellam", family = "skellam", 
         family_info = list(lower = c(lambda1 = 0, lambda2 = 0
@@ -2586,7 +2552,7 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             supp_max_depends_on = c(lambda1 = FALSE, lambda2 = FALSE
             ), supp_min_depends_on = c(lambda1 = FALSE, lambda2 = FALSE
             ))), list(package = "skewt", family = "skt", family_info = list(
-        lower = c(df = 0.0100000000000001, gamma = -Inf), upper = c(df = Inf, 
+        lower = c(df = 0.01, gamma = -Inf), upper = c(df = Inf, 
         gamma = Inf), accepts_float = c(df = TRUE, gamma = TRUE
         ), defaults = c(df = 0.5, gamma = 0.5), log = FALSE, 
         discrete = FALSE, support_min = -Inf, support_max = Inf, 
@@ -2616,21 +2582,21 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             supp_max_depends_on = c(k = FALSE, d = FALSE, lambda = FALSE
             ), supp_min_depends_on = c(k = FALSE, d = FALSE, 
             lambda = FALSE))), list(package = "ssdtools", family = "gompertz", 
-        family_info = list(lower = c(scale = 0.01, shape = 8.32667268468867e-17
-        ), upper = c(scale = Inf, shape = Inf), accepts_float = c(scale = TRUE, 
-        shape = TRUE), defaults = c(scale = 1, shape = 0.5), 
-            log = TRUE, discrete = FALSE, support_min = 0, support_max = 7.25, 
-            supp_max_depends_on = c(scale = FALSE, shape = FALSE
-            ), supp_min_depends_on = c(scale = FALSE, shape = FALSE
-            ))), list(package = "ssdtools", family = "llog", 
+        family_info = list(lower = c(scale = 0.01, shape = 0), 
+            upper = c(scale = Inf, shape = Inf), accepts_float = c(scale = TRUE, 
+            shape = TRUE), defaults = c(scale = 1, shape = 0.5
+            ), log = TRUE, discrete = FALSE, support_min = 0, 
+            support_max = 7.25, supp_max_depends_on = c(scale = FALSE, 
+            shape = FALSE), supp_min_depends_on = c(scale = FALSE, 
+            shape = FALSE))), list(package = "ssdtools", family = "llog", 
         family_info = list(lower = c(shape = 0.01, scale = -Inf
         ), upper = c(shape = Inf, scale = 711), accepts_float = c(shape = TRUE, 
         scale = TRUE), defaults = c(shape = 1, scale = 1), log = TRUE, 
-            discrete = FALSE, support_min = 0.0100000000000051, 
-            support_max = Inf, supp_max_depends_on = c(shape = FALSE, 
-            scale = FALSE), supp_min_depends_on = c(shape = FALSE, 
-            scale = FALSE))), list(package = "ssdtools", family = "pareto", 
-        family_info = list(lower = c(scale = 0.01, shape = 0.0100000000000001
+            discrete = FALSE, support_min = 0.01, support_max = Inf, 
+            supp_max_depends_on = c(shape = FALSE, scale = FALSE
+            ), supp_min_depends_on = c(shape = FALSE, scale = FALSE
+            ))), list(package = "ssdtools", family = "pareto", 
+        family_info = list(lower = c(scale = 0.01, shape = 0.01
         ), upper = c(scale = Inf, shape = Inf), accepts_float = c(scale = TRUE, 
         shape = TRUE), defaults = c(scale = 1, shape = 0.5), 
             log = TRUE, discrete = FALSE, support_min = 0.01, 
@@ -2638,7 +2604,7 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             shape = FALSE), supp_min_depends_on = c(scale = TRUE, 
             shape = FALSE))), list(package = "stabledist", family = "stable", 
         family_info = list(lower = c(gamma = 0.01, delta = -Inf, 
-        pm = 0, alpha = 0.0100000000000001, beta = -1), upper = c(gamma = Inf, 
+        pm = 0, alpha = 0.01, beta = -1), upper = c(gamma = Inf, 
         delta = Inf, pm = 2, alpha = 2, beta = 1), accepts_float = c(gamma = TRUE, 
         delta = TRUE, pm = FALSE, alpha = TRUE, beta = TRUE), 
             defaults = c(gamma = 1, delta = 0, pm = 0, alpha = 0.5, 
@@ -2648,26 +2614,25 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             ), supp_min_depends_on = c(gamma = FALSE, delta = FALSE, 
             pm = FALSE, alpha = FALSE, beta = FALSE))), list(
         package = "STAR", family = "rexp", family_info = list(
-            lower = c(rate = 0.01, rp = 0.00499999999999545), 
-            upper = c(rate = Inf, rp = Inf), accepts_float = c(rate = TRUE, 
-            rp = TRUE), defaults = c(rate = 10, rp = 0.005), 
-            log = TRUE, discrete = FALSE, support_min = 0.00499999999999545, 
-            support_max = Inf, supp_max_depends_on = c(rate = FALSE, 
-            rp = FALSE), supp_min_depends_on = c(rate = FALSE, 
-            rp = TRUE))), list(package = "statip", family = "bern", 
-        family_info = list(lower = c(prob = 0), upper = c(prob = 1), 
-            accepts_float = c(prob = TRUE), defaults = c(prob = 0.5), 
-            log = TRUE, discrete = TRUE, support_min = 0, support_max = 1, 
-            supp_max_depends_on = c(prob = FALSE), supp_min_depends_on = c(prob = FALSE))), 
-    list(package = "stats", family = "beta", family_info = list(
-        lower = c(ncp = 0, shape1 = 8.32667268468867e-17, shape2 = 8.32667268468867e-17
-        ), upper = c(ncp = Inf, shape1 = Inf, shape2 = Inf), 
-        accepts_float = c(ncp = TRUE, shape1 = TRUE, shape2 = TRUE
-        ), defaults = c(ncp = 0, shape1 = 0.5, shape2 = 0.5), 
-        log = TRUE, discrete = FALSE, support_min = 0, support_max = 1, 
-        supp_max_depends_on = c(ncp = FALSE, shape1 = FALSE, 
-        shape2 = FALSE), supp_min_depends_on = c(ncp = FALSE, 
-        shape1 = FALSE, shape2 = FALSE))), list(package = "stats", 
+            lower = c(rate = 0.01, rp = 0.005), upper = c(rate = Inf, 
+            rp = Inf), accepts_float = c(rate = TRUE, rp = TRUE
+            ), defaults = c(rate = 10, rp = 0.005), log = TRUE, 
+            discrete = FALSE, support_min = 0.005, support_max = Inf, 
+            supp_max_depends_on = c(rate = FALSE, rp = FALSE), 
+            supp_min_depends_on = c(rate = FALSE, rp = TRUE))), 
+    list(package = "statip", family = "bern", family_info = list(
+        lower = c(prob = 0), upper = c(prob = 1), accepts_float = c(prob = TRUE), 
+        defaults = c(prob = 0.5), log = TRUE, discrete = TRUE, 
+        support_min = 0, support_max = 1, supp_max_depends_on = c(prob = FALSE), 
+        supp_min_depends_on = c(prob = FALSE))), list(package = "stats", 
+        family = "beta", family_info = list(lower = c(ncp = 0, 
+        shape1 = 0, shape2 = 0), upper = c(ncp = Inf, shape1 = Inf, 
+        shape2 = Inf), accepts_float = c(ncp = TRUE, shape1 = TRUE, 
+        shape2 = TRUE), defaults = c(ncp = 0, shape1 = 0.5, shape2 = 0.5
+        ), log = TRUE, discrete = FALSE, support_min = 0, support_max = 1, 
+            supp_max_depends_on = c(ncp = FALSE, shape1 = FALSE, 
+            shape2 = FALSE), supp_min_depends_on = c(ncp = FALSE, 
+            shape1 = FALSE, shape2 = FALSE))), list(package = "stats", 
         family = "binom", family_info = list(lower = c(size = 0, 
         prob = 0), upper = c(size = Inf, prob = 1), accepts_float = c(size = FALSE, 
         prob = TRUE), defaults = c(size = 1, prob = 0.5), log = TRUE, 
@@ -2692,13 +2657,13 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         defaults = c(rate = 1), log = TRUE, discrete = FALSE, 
         support_min = 0, support_max = Inf, supp_max_depends_on = c(rate = FALSE), 
         supp_min_depends_on = c(rate = FALSE))), list(package = "stats", 
-        family = "f", family_info = list(lower = c(df1 = 8.32667268468867e-17, 
-        df2 = 0.0100000000000001, ncp = 0), upper = c(df1 = Inf, 
-        df2 = Inf, ncp = Inf), accepts_float = c(df1 = TRUE, 
-        df2 = TRUE, ncp = TRUE), defaults = c(df1 = 0.5, df2 = 0.5, 
-        ncp = 0.5), log = TRUE, discrete = FALSE, support_min = 0, 
-            support_max = Inf, supp_max_depends_on = c(df1 = FALSE, 
-            df2 = FALSE, ncp = FALSE), supp_min_depends_on = c(df1 = FALSE, 
+        family = "f", family_info = list(lower = c(df1 = 0, df2 = 0.01, 
+        ncp = 0), upper = c(df1 = Inf, df2 = Inf, ncp = Inf), 
+            accepts_float = c(df1 = TRUE, df2 = TRUE, ncp = TRUE
+            ), defaults = c(df1 = 0.5, df2 = 0.5, ncp = 0.5), 
+            log = TRUE, discrete = FALSE, support_min = 0, support_max = Inf, 
+            supp_max_depends_on = c(df1 = FALSE, df2 = FALSE, 
+            ncp = FALSE), supp_min_depends_on = c(df1 = FALSE, 
             df2 = FALSE, ncp = FALSE))), list(package = "stats", 
         family = "gamma", family_info = list(lower = c(rate = 0.01, 
         shape = 0), upper = c(rate = Inf, shape = Inf), accepts_float = c(rate = TRUE, 
@@ -2707,21 +2672,21 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             supp_max_depends_on = c(rate = FALSE, shape = FALSE
             ), supp_min_depends_on = c(rate = FALSE, shape = FALSE
             ))), list(package = "stats", family = "geom", family_info = list(
-        lower = c(prob = 0.0100000000000001), upper = c(prob = 1), 
-        accepts_float = c(prob = TRUE), defaults = c(prob = 0.5), 
-        log = TRUE, discrete = TRUE, support_min = 0, support_max = Inf, 
-        supp_max_depends_on = c(prob = FALSE), supp_min_depends_on = c(prob = FALSE))), 
-    list(package = "stats", family = "hyper", family_info = list(
-        lower = c(m = 0, n = 0, k = 0), upper = c(m = Inf, n = Inf, 
-        k = 2), accepts_float = c(m = FALSE, n = FALSE, k = FALSE
-        ), defaults = c(m = 1, n = 1, k = 1), log = TRUE, discrete = TRUE, 
-        support_min = 0, support_max = 2, supp_max_depends_on = c(m = FALSE, 
-        n = FALSE, k = TRUE), supp_min_depends_on = c(m = FALSE, 
-        n = FALSE, k = FALSE))), list(package = "stats", family = "lnorm", 
+        lower = c(prob = 0.01), upper = c(prob = 1), accepts_float = c(prob = TRUE), 
+        defaults = c(prob = 0.5), log = TRUE, discrete = TRUE, 
+        support_min = 0, support_max = Inf, supp_max_depends_on = c(prob = FALSE), 
+        supp_min_depends_on = c(prob = FALSE))), list(package = "stats", 
+        family = "hyper", family_info = list(lower = c(m = 0, 
+        n = 0, k = 0), upper = c(m = Inf, n = Inf, k = 2), accepts_float = c(m = FALSE, 
+        n = FALSE, k = FALSE), defaults = c(m = 1, n = 1, k = 1
+        ), log = TRUE, discrete = TRUE, support_min = 0, support_max = 2, 
+            supp_max_depends_on = c(m = FALSE, n = FALSE, k = TRUE
+            ), supp_min_depends_on = c(m = FALSE, n = FALSE, 
+            k = FALSE))), list(package = "stats", family = "lnorm", 
         family_info = list(lower = c(meanlog = -Inf, sdlog = 0
         ), upper = c(meanlog = 710.29, sdlog = Inf), accepts_float = c(meanlog = TRUE, 
         sdlog = TRUE), defaults = c(meanlog = 0, sdlog = 1), 
-            log = TRUE, discrete = FALSE, support_min = 0.0100000000000051, 
+            log = TRUE, discrete = FALSE, support_min = 0.01, 
             support_max = Inf, supp_max_depends_on = c(meanlog = FALSE, 
             sdlog = FALSE), supp_min_depends_on = c(meanlog = FALSE, 
             sdlog = FALSE))), list(package = "stats", family = "logis", 
@@ -2747,7 +2712,7 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         defaults = c(n = 0.5), log = TRUE, discrete = TRUE, support_min = 0, 
         support_max = Inf, supp_max_depends_on = c(n = FALSE), 
         supp_min_depends_on = c(n = FALSE))), list(package = "stats", 
-        family = "t", family_info = list(lower = c(df = 0.0100000000000001, 
+        family = "t", family_info = list(lower = c(df = 0.01, 
         ncp = -Inf), upper = c(df = Inf, ncp = Inf), accepts_float = c(df = TRUE, 
         ncp = TRUE), defaults = c(df = 0.5, ncp = 0.5), log = TRUE, 
             discrete = FALSE, support_min = -Inf, support_max = Inf, 
@@ -2760,10 +2725,10 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         support_min = -Inf, support_max = Inf, supp_max_depends_on = c(min = FALSE, 
         max = TRUE), supp_min_depends_on = c(min = TRUE, max = FALSE
         ))), list(package = "stats", family = "weibull", family_info = list(
-        lower = c(scale = 0.01, shape = 0.0100000000000001), 
-        upper = c(scale = Inf, shape = Inf), accepts_float = c(scale = TRUE, 
-        shape = TRUE), defaults = c(scale = 1, shape = 0.5), 
-        log = TRUE, discrete = FALSE, support_min = 0, support_max = Inf, 
+        lower = c(scale = 0.01, shape = 0.01), upper = c(scale = Inf, 
+        shape = Inf), accepts_float = c(scale = TRUE, shape = TRUE
+        ), defaults = c(scale = 1, shape = 0.5), log = TRUE, 
+        discrete = FALSE, support_min = 0, support_max = Inf, 
         supp_max_depends_on = c(scale = FALSE, shape = FALSE), 
         supp_min_depends_on = c(scale = FALSE, shape = FALSE))), 
     list(package = "stats", family = "wilcox", family_info = list(
@@ -2773,8 +2738,7 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         support_max = 10, supp_max_depends_on = c(m = FALSE, 
         n = FALSE), supp_min_depends_on = c(m = FALSE, n = FALSE
         ))), list(package = "SuppDists", family = "ghyper", family_info = list(
-        lower = c(a = 8.32667268468867e-17, k = 8.32667268468867e-17, 
-        N = 8.32667268468867e-17), upper = c(a = 0.99, k = 0.99, 
+        lower = c(a = 0, k = 0, N = 0), upper = c(a = 0.99, k = 0.99, 
         N = Inf), accepts_float = c(a = TRUE, k = TRUE, N = TRUE
         ), defaults = c(a = 0.5, k = 0.5, N = 0.5), log = TRUE, 
         discrete = TRUE, support_min = 0, support_max = Inf, 
@@ -2803,7 +2767,7 @@ list(list(package = "ACDm", family = "burr", family_info = list(
         family_info = list(lower = c(scale = -Inf, shape = -Inf
         ), upper = c(scale = Inf, shape = Inf), accepts_float = c(scale = TRUE, 
         shape = TRUE), defaults = c(scale = 1, shape = 0.5), 
-            log = FALSE, discrete = FALSE, support_min = 0.0100000000000051, 
+            log = FALSE, discrete = FALSE, support_min = 0.01, 
             support_max = Inf, supp_max_depends_on = c(scale = FALSE, 
             shape = FALSE), supp_min_depends_on = c(scale = FALSE, 
             shape = FALSE))), list(package = "teachingApps", 
@@ -2920,14 +2884,14 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             support_max = Inf, supp_max_depends_on = c(loc = FALSE, 
             scale = FALSE), supp_min_depends_on = c(loc = FALSE, 
             scale = FALSE))), list(package = "ufs", family = "Cohensd", 
-        family_info = list(lower = c(populationD = -Inf, df = 0.0100000000000001
+        family_info = list(lower = c(populationD = -Inf, df = 0.01
         ), upper = c(populationD = Inf, df = Inf), accepts_float = c(populationD = TRUE, 
         df = TRUE), defaults = c(populationD = 0, df = 0.5), 
             log = FALSE, discrete = FALSE, support_min = -Inf, 
             support_max = Inf, supp_max_depends_on = c(populationD = FALSE, 
             df = FALSE), supp_min_depends_on = c(populationD = FALSE, 
             df = FALSE))), list(package = "ufs", family = "d", 
-        family_info = list(lower = c(populationD = -Inf, df = 0.0100000000000001
+        family_info = list(lower = c(populationD = -Inf, df = 0.01
         ), upper = c(populationD = Inf, df = Inf), accepts_float = c(populationD = TRUE, 
         df = TRUE), defaults = c(populationD = 0, df = 0.5), 
             log = FALSE, discrete = FALSE, support_min = -Inf, 
@@ -2935,13 +2899,11 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             df = FALSE), supp_min_depends_on = c(populationD = FALSE, 
             df = FALSE))), list(package = "ufs", family = "omegaSq", 
         family_info = list(lower = c(populationOmegaSq = -0.33, 
-        df1 = 8.32667268468867e-17, df2 = 0.0100000000000001), 
-            upper = c(populationOmegaSq = 1, df1 = Inf, df2 = Inf
-            ), accepts_float = c(populationOmegaSq = TRUE, df1 = TRUE, 
-            df2 = TRUE), defaults = c(populationOmegaSq = 0, 
-            df1 = 0.5, df2 = 0.5), log = FALSE, discrete = FALSE, 
-            support_min = -6.66, support_max = 0.990000000000009, 
-            supp_max_depends_on = c(populationOmegaSq = FALSE, 
+        df1 = 0, df2 = 0.01), upper = c(populationOmegaSq = 1, 
+        df1 = Inf, df2 = Inf), accepts_float = c(populationOmegaSq = TRUE, 
+        df1 = TRUE, df2 = TRUE), defaults = c(populationOmegaSq = 0, 
+        df1 = 0.5, df2 = 0.5), log = FALSE, discrete = FALSE, 
+            support_min = -6.66, support_max = 0.99, supp_max_depends_on = c(populationOmegaSq = FALSE, 
             df1 = FALSE, df2 = FALSE), supp_min_depends_on = c(populationOmegaSq = FALSE, 
             df1 = FALSE, df2 = FALSE))), list(package = "unifed", 
         family = "unifed", family_info = list(lower = c(theta = -Inf), 
@@ -2963,64 +2925,61 @@ list(list(package = "ACDm", family = "burr", family_info = list(
             shape2.p = Inf, shape3.q = Inf), accepts_float = c(scale = TRUE, 
             shape1.a = TRUE, shape2.p = TRUE, shape3.q = TRUE
             ), defaults = c(scale = 1, shape1.a = 1, shape2.p = 1, 
-            shape3.q = 1), log = TRUE, discrete = FALSE, support_min = 0.0100000000000051, 
+            shape3.q = 1), log = TRUE, discrete = FALSE, support_min = 0.01, 
             support_max = Inf, supp_max_depends_on = c(scale = FALSE, 
             shape1.a = FALSE, shape2.p = FALSE, shape3.q = FALSE
             ), supp_min_depends_on = c(scale = FALSE, shape1.a = FALSE, 
             shape2.p = FALSE, shape3.q = FALSE))), list(package = "VGAMextra", 
-        family = "inv.chisq", family_info = list(lower = c(df = 0.0100000000000001), 
+        family = "inv.chisq", family_info = list(lower = c(df = 0.01), 
             upper = c(df = Inf), accepts_float = c(df = TRUE), 
             defaults = c(df = 0.5), log = TRUE, discrete = FALSE, 
-            support_min = 0.0100000000000051, support_max = Inf, 
-            supp_max_depends_on = c(df = FALSE), supp_min_depends_on = c(df = FALSE))), 
-    list(package = "VGAMextra", family = "invgamma", family_info = list(
-        lower = c(rate = 0.01, shape = 0.0100000000000001), upper = c(rate = Inf, 
-        shape = Inf), accepts_float = c(rate = TRUE, shape = TRUE
-        ), defaults = c(rate = 1, shape = 0.5), log = TRUE, discrete = FALSE, 
-        support_min = 0.0100000000000051, support_max = Inf, 
-        supp_max_depends_on = c(rate = FALSE, shape = FALSE), 
-        supp_min_depends_on = c(rate = FALSE, shape = FALSE))), 
-    list(package = "VGAMextra", family = "invweibull", family_info = list(
-        lower = c(scale = 0.01, shape = 8.32667268468867e-17), 
-        upper = c(scale = Inf, shape = Inf), accepts_float = c(scale = TRUE, 
-        shape = TRUE), defaults = c(scale = 1, shape = 0.5), 
-        log = TRUE, discrete = FALSE, support_min = 0.0100000000000051, 
-        support_max = Inf, supp_max_depends_on = c(scale = FALSE, 
-        shape = FALSE), supp_min_depends_on = c(scale = FALSE, 
-        shape = FALSE))), list(package = "vsgoftest", family = "laplace", 
-        family_info = list(lower = c(mu = -Inf, b = 8.32667268468867e-17
-        ), upper = c(mu = Inf, b = Inf), accepts_float = c(mu = TRUE, 
-        b = TRUE), defaults = c(mu = 0.5, b = 0.5), log = TRUE, 
-            discrete = FALSE, support_min = -Inf, support_max = Inf, 
-            supp_max_depends_on = c(mu = FALSE, b = FALSE), supp_min_depends_on = c(mu = FALSE, 
-            b = FALSE))), list(package = "vsgoftest", family = "pareto", 
-        family_info = list(lower = c(mu = 0.0100000000000001, 
-        c = 8.32667268468867e-17), upper = c(mu = Inf, c = Inf
-        ), accepts_float = c(mu = TRUE, c = TRUE), defaults = c(mu = 0.5, 
-        c = 0.5), log = TRUE, discrete = FALSE, support_min = 8.32667268468867e-17, 
+            support_min = 0.01, support_max = Inf, supp_max_depends_on = c(df = FALSE), 
+            supp_min_depends_on = c(df = FALSE))), list(package = "VGAMextra", 
+        family = "invgamma", family_info = list(lower = c(rate = 0.01, 
+        shape = 0.01), upper = c(rate = Inf, shape = Inf), accepts_float = c(rate = TRUE, 
+        shape = TRUE), defaults = c(rate = 1, shape = 0.5), log = TRUE, 
+            discrete = FALSE, support_min = 0.01, support_max = Inf, 
+            supp_max_depends_on = c(rate = FALSE, shape = FALSE
+            ), supp_min_depends_on = c(rate = FALSE, shape = FALSE
+            ))), list(package = "VGAMextra", family = "invweibull", 
+        family_info = list(lower = c(scale = 0.01, shape = 0), 
+            upper = c(scale = Inf, shape = Inf), accepts_float = c(scale = TRUE, 
+            shape = TRUE), defaults = c(scale = 1, shape = 0.5
+            ), log = TRUE, discrete = FALSE, support_min = 0.01, 
+            support_max = Inf, supp_max_depends_on = c(scale = FALSE, 
+            shape = FALSE), supp_min_depends_on = c(scale = FALSE, 
+            shape = FALSE))), list(package = "vsgoftest", family = "laplace", 
+        family_info = list(lower = c(mu = -Inf, b = 0), upper = c(mu = Inf, 
+        b = Inf), accepts_float = c(mu = TRUE, b = TRUE), defaults = c(mu = 0.5, 
+        b = 0.5), log = TRUE, discrete = FALSE, support_min = -Inf, 
+            support_max = Inf, supp_max_depends_on = c(mu = FALSE, 
+            b = FALSE), supp_min_depends_on = c(mu = FALSE, b = FALSE
+            ))), list(package = "vsgoftest", family = "pareto", 
+        family_info = list(lower = c(mu = 0.01, c = 0), upper = c(mu = Inf, 
+        c = Inf), accepts_float = c(mu = TRUE, c = TRUE), defaults = c(mu = 0.5, 
+        c = 0.5), log = TRUE, discrete = FALSE, support_min = 0, 
             support_max = Inf, supp_max_depends_on = c(mu = FALSE, 
             c = FALSE), supp_min_depends_on = c(mu = FALSE, c = TRUE
             ))), list(package = "wiqid", family = "gamma2", family_info = list(
-        lower = c(mean = 8.32667268468867e-17, sd = 8.32667268468867e-17
-        ), upper = c(mean = Inf, sd = Inf), accepts_float = c(mean = TRUE, 
-        sd = TRUE), defaults = c(mean = 0.5, sd = 0.5), log = FALSE, 
-        discrete = FALSE, support_min = 0, support_max = Inf, 
-        supp_max_depends_on = c(mean = FALSE, sd = FALSE), supp_min_depends_on = c(mean = FALSE, 
-        sd = FALSE))), list(package = "wiqid", family = "t2", 
-        family_info = list(lower = c(mean = -Inf, sd = -Inf, 
-        df = 0.0100000000000001), upper = c(mean = Inf, sd = Inf, 
-        df = Inf), accepts_float = c(mean = TRUE, sd = TRUE, 
+        lower = c(mean = 0, sd = 0), upper = c(mean = Inf, sd = Inf
+        ), accepts_float = c(mean = TRUE, sd = TRUE), defaults = c(mean = 0.5, 
+        sd = 0.5), log = FALSE, discrete = FALSE, support_min = 0, 
+        support_max = Inf, supp_max_depends_on = c(mean = FALSE, 
+        sd = FALSE), supp_min_depends_on = c(mean = FALSE, sd = FALSE
+        ))), list(package = "wiqid", family = "t2", family_info = list(
+        lower = c(mean = -Inf, sd = -Inf, df = 0.01), upper = c(mean = Inf, 
+        sd = Inf, df = Inf), accepts_float = c(mean = TRUE, sd = TRUE, 
         df = TRUE), defaults = c(mean = 0.5, sd = 0.5, df = 0.5
         ), log = FALSE, discrete = FALSE, support_min = -Inf, 
-            support_max = Inf, supp_max_depends_on = c(mean = FALSE, 
-            sd = FALSE, df = FALSE), supp_min_depends_on = c(mean = FALSE, 
-            sd = FALSE, df = FALSE))), list(package = "yuima", 
-        family = "const", family_info = list(lower = c(k = -Inf), 
-            upper = c(k = Inf), accepts_float = c(k = TRUE), 
-            defaults = c(k = 1), log = FALSE, discrete = TRUE, 
-            support_min = -Inf, support_max = Inf, supp_max_depends_on = c(k = TRUE), 
+        support_max = Inf, supp_max_depends_on = c(mean = FALSE, 
+        sd = FALSE, df = FALSE), supp_min_depends_on = c(mean = FALSE, 
+        sd = FALSE, df = FALSE))), list(package = "yuima", family = "const", 
+        family_info = list(lower = c(k = -Inf), upper = c(k = Inf), 
+            accepts_float = c(k = TRUE), defaults = c(k = 1), 
+            log = FALSE, discrete = TRUE, support_min = -Inf, 
+            support_max = Inf, supp_max_depends_on = c(k = TRUE), 
             supp_min_depends_on = c(k = TRUE))), list(package = "ZIM", 
-        family = "zinb", family_info = list(lower = c(k = 8.32667268468867e-17, 
+        family = "zinb", family_info = list(lower = c(k = 0, 
         lambda = 0, omega = 0), upper = c(k = Inf, lambda = Inf, 
         omega = 1), accepts_float = c(k = TRUE, lambda = TRUE, 
         omega = TRUE), defaults = c(k = 0.5, lambda = 0.5, omega = 0.5
