@@ -58,12 +58,13 @@ loglik(family, data, fixed, log, lower, upper)
   
 
 \seealso{
- \code{\link{optimParam}}
+ \code{\link{optimParamsContinuous}}
 }
 
 \examples{
 
 # Example 1 for loglik
+\dontrun{
 family <- list(family="norm", package="stats")
 data <- rnorm(10, mean = 7, sd=2)
 fixed <- list(sd=2)
@@ -73,6 +74,7 @@ upper <- c(mean=10)
 
 likelihood <- loglik(family = family, data = data, fixed = fixed,
               log = log, lower = lower, upper = upper)
+}
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

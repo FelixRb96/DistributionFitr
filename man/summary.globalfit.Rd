@@ -1,4 +1,5 @@
 \name{summary}
+\alias{summary}
 \alias{print}
   
   \title{Summarizing Results of global Distribution Fit}
@@ -20,13 +21,17 @@
   \item{which}{vector indicating of which (best) results the parameters should be printed}
   \item{count}{integer, determines how many results are turned back as best fits}
   \item{ic}{which information criteria used for the ranking, requires one of the following \code{AIC}, \code{BIC}, \code{AICc}}
+  \item{...}{Further named arguments}
 }
 
-\details{ % tbd
+\details{
+  %TBD: currently only placeholder
+  Returns a summary of the optimisation results stored in globalfit.
     
-  } 
+} 
   
 \value{
+  An object of class \code{summary.globalfit} which contains the optimisation results and can be printed in a nice form.
   % description of output%
   % needs to be coded
   % afterwards docu added

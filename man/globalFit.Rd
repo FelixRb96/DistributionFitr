@@ -9,8 +9,7 @@
   returns a list of the best fitted parameters and information criteria.
 }
 \usage{
-  globalfit(data, continuity = NULL, method = "MLE", progress = TRUE, cores = NULL, 
-            preload_families = 'data/all_families.rds', ...)
+  globalfit(data, continuity = NULL, method = "MLE", progress = TRUE, cores = NULL, ...)
 }
 
 %- maybe also 'usage' for other objects documented here.
@@ -30,6 +29,9 @@
   }
   \item{cores}{
    integer; Number of CPU cores to be used in the calculations of best fitted parameters and information criteria
+  }
+  \item{...}{
+  Further named arguments that can are passed on to optimParamsDiscrete
   }
 }
 
@@ -77,11 +79,13 @@
   ##--	or do  help(data=index)  for the standard data sets.
   
   # Example 1
+  \dontrun{
   data <- rnorm(n=100, mean=70, sd= 4)
   estimation <- globalfit(data)
   
   # Alternatively, it is possible to input whether the data is continuous or discrete
   estimation <- globalfit(data, continuity = TRUE)
+  }
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

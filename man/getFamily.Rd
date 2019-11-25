@@ -45,14 +45,16 @@ getFamily(pkg)
  **objects to See Also as \code{\link{help}}, **~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-# Example 1 for optimParam
-## library(stats)
-## getFamily('stats')
+   ##---- Should be DIRECTLY executable !! ----
+   ##-- ==>  Define data, use random,
+   ##--	or do  help(data=index)  for the standard data sets.
+   
+   # Example 1 for optimParam
+   \dontrun{
+   getFamily("stats")
+   }
 }
+
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{distribution }
+\keyword{distribution}

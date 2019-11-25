@@ -18,6 +18,9 @@ getFamilies(all.packages, file="private/all_families.R")
       vector of package names to scan for distribution families or
      \code{TRUE} to scan all packages  or \code{FALSE} to scan base packages only or \code{MISSING} to return families saved in file
   }
+  \item{file}{
+      The path to the file, where the infos to the loaded distribution families is stored
+  }
 }
 
 \details{
@@ -44,7 +47,9 @@ getFamilies(all.packages, file="private/all_families.R")
 ##-- ==>  Define data, use random,
 ##--	or do  help(data=index)  for the standard data sets.
 
-## getFamilies()
+\dontrun{
+getFamilies()
+}
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
