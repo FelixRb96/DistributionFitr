@@ -1,0 +1,19 @@
+echo "Current Package:" "CircularDDM"; cat bashout/output_CircularDDM.txt | grep "Current Family" | tail -n 1
+echo "Current Package:" "actuar"; cat bashout/output_actuar.txt | grep "Current Family" | tail -n 1
+echo "Current Package:" "COMPoissonReg"; cat bashout/output_COMPoissonReg.txt | grep "Current Family" | tail -n 1
+echo "Current Package:" "LaplacesDemon"; cat bashout/output_LaplacesDemon.txt | grep "Current Family" | tail -n 1
+echo "Current Package:" "SinIW"; cat bashout/output_SinIW.txt | grep "Current Family" | tail -n 1
+echo "Current Package:" "VGAM"; cat bashout/output_VGAM.txt | grep "Current Family" | tail -n 1
+echo "Current Package:" "ggdmc"; cat bashout/output_ggdmc.txt | grep "Current Family" | tail -n 1
+echo "Current Package:" "smoothmest"; cat bashout/output_smoothmest.txt | grep "Current Family" | tail -n 1
+echo "Current Package:" "LindleyR"; cat bashout/output_LindleyR.txt | grep "Current Family" | tail -n 1
+echo "Current Package:" "CosW"; cat bashout/output_CosW.txt | grep "Current Family" | tail -n 1
+echo "Current Package:" "cpd"; cat bashout/output_cpd.txt | grep "Current Family" | tail -n 1
+echo "Current Package:" "gk"; cat bashout/output_gk.txt | grep "Current Family" | tail -n 1
+echo "Current Package:" "FatTailsR"; cat bashout/output_FatTailsR.txt | grep "Current Family" | tail -n 1
+echo "Current Package:" "heavy"; cat bashout/output_heavy.txt | grep "Current Family" | tail -n 1
+echo "Current Package:" "HMMpa"; cat bashout/output_HMMpa.txt | grep "Current Family" | tail -n 1
+echo "Current Package:" "TanB"; cat bashout/output_TanB.txt | grep "Current Family" | tail -n 1
+echo "Current Package:" "DiscreteWeibull"; cat bashout/output_DiscreteWeibull.txt | grep "Current Family" | tail -n 1
+echo "Current Package:" "SecKW"; cat bashout/output_SecKW.txt | grep "Current Family" | tail -n 1
+
