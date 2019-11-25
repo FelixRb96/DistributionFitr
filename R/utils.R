@@ -71,7 +71,7 @@ eval_with_timeout <- function(expr, envir = parent.frame(), timeout, return_valu
 
 # given a family name (e.g. "beta"), a package name (e.g. "stats") and the type ("r" for "rbeta", "d" for "dbeta") gets the function
 # from the desired package and returns it
-                                        # this is needed as we cant use "stats::rbeta" directly in formals or do.call -> error, that it cannot find the function
+# this is needed as we cant use "stats::rbeta" directly in formals or do.call -> error, that it cannot find the function
 
 ## jede Funktion ruft get_fun_from_package mit
 ##   get_fun_from_package(fam = fam$family, package = fam$package)

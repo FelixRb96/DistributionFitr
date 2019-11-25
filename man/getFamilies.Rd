@@ -8,7 +8,7 @@
    
 }
 \usage{
-getFamilies(all.packages, file="R/all_families.R")
+getFamilies(all.packages, file="private/all_families.R")
 
 }
 
