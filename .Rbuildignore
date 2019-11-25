@@ -2,3 +2,6 @@
 ^\.Rproj\.user$
 private
 ^\.github$
+.git
+.gitignore
+.README.md

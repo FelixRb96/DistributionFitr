@@ -12,7 +12,7 @@
   # S4 method for class 'globalfit'
   summary(object, which=1, count=10, ic = c('AIC'))
   
-  # S4 method for class 'globalfit
+  # S4 method for class 'globalfit'
   print(object, ...)
 }
 

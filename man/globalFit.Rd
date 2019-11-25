@@ -9,7 +9,8 @@
   returns a list of the best fitted parameters and information criteria.
 }
 \usage{
-  globalfit(data, continuity = NULL, method = "MLE", progress = TRUE, cores = NULL, ...)
+  globalfit(data, continuity = NULL, method = "MLE", progress = TRUE,
+	    packages = NULL, append_packages = TRUE, cores = NULL, ...)
 }
 
 %- maybe also 'usage' for other objects documented here.
@@ -19,13 +20,20 @@
     vector of data points.
   }
   \item{continuity}{
-    logical; if TRUE, data is fitted with continious distributions. If no input is given, the data will be tested for continuity.
+    logical; if TRUE, data is fitted with continuous distributions. If no input is given, the data will be tested for continuity.
   }
   \item{method}{
     method for parameter estimation. So far only Maximum-Likelihood is implemented, thus this argument must be \code{"MLE"}.
   }
   \item{progress}{
    logical; if TRUE, always show progress
+  }
+  \item{packages}{
+   either a character vector with names of packages; \\
+   or a list such as those returned by \code{getFamilies} (recommended)
+  } 
+  \item{append_packages}{
+   logical; if TRUE (default) appends packages specified in the equally-named argument above to the standard search list, if FALSE \code{globalfit} will use only those packages.
   }
   \item{cores}{
    integer; Number of CPU cores to be used in the calculations of best fitted parameters and information criteria

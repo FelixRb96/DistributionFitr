@@ -45,8 +45,8 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
                                 optim_method = 'L-BFGS-B', n_starting_points=1,
                                 debug_error=FALSE, show_optim_progress=FALSE,
                                 on_error_use_best_result=TRUE, 
-                                max_discrete_steps = 100, max_zoom_level = 4, plot=FALSE,
-                                discrete_fast = TRUE, ...) {
+                                max_discrete_steps = 100, discrete_fast = TRUE,
+				plot=FALSE, max_zoom_level = 4, ...) {
   
   # update defaults with priors
   if(length(prior) > 0) {

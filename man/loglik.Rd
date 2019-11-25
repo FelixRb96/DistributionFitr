@@ -47,13 +47,15 @@ loglik(family, data, fixed, log, lower, upper)
 }
 
 
-\section{Warning }{
+\section{Warnings}{
+\itemize{
   \item{loglik does not depend on parameters} {The returned log-likelihood function is a constant function.}
   
   \item{Parameter x with value y outside the boundaries} {At least one parameter value passed on to the log-likelihood function exceeds the distribution's parameter boundaries of upper or lower bound.}
   
   \item{Could be numerically instable} {The respective distribution function lacks the argument \code{log} and was hence called without \code{log = TRUE}. Logging the summands afterwards renders the result numerically instable.}
-}  
+}
+}
   
 
 \seealso{

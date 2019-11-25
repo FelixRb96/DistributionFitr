@@ -143,9 +143,43 @@ disc_trafo <- function(data){
 
 ### 2) Main Function --------------------------------------------------------------------------
 
-globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE, cores = NULL, ...){
+globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
+		      packages = NULL, append_packages = TRUE, cores = NULL,...){
+
+# WIP:
+# packages: either (1) character vector with package names, i.e.: packages = c("bla", "bundesbank", "secret")
+# 	    		if NULL (default): use packages in FamilyList as given
+# 	    or     (2) list analogously to FamilyList
+# append_packages: required if length(extra_packages) > 0, else ignored
+#            	   if TRUE (default), scan over existing packages in FamilyList AND the ones specified in extra_packages,
+# 	     	   else FALSE: only scan in packages provided in extra_packages
+  # TODO: this is the highest level function: input validation!
 
   families <- getFamilies()
+
+  missing_pkgs <- NULL
+  if(length(packages) > 0) {
+    if(is.vector(packages) == TRUE && typeof(packages) == "character") {
+      missing_pkgs <- setdiff(packages, rownames(installed.packages())) # ignore not installed packages
+      packages <- intersect(packages, rownames(installed.packages()))
+      known_packages <- unique(sapply(families, function(x) x$package))
+      additionals <- setdiff(packages, known_packages)
+      additionals <- iterate_packages(additionals)
+      if(append_packages) { # add the manual ones to FamilyList as used in default
+        families <- c(families, additionals)
+      } else { # ignore whatever else is in FamilyList.
+        known <- packages[! packages %in% additionals]  
+        known <- lapply(families, function(x) if(any(x$package %in% known)) x)
+        families <- c(additionals, known)
+      }
+    } else if(is.list(packages) == TRUE) {
+      if(append_packages) {
+	families <- c(families, additionals)
+      } else {
+	families <- packages
+      }
+    }
+  }
 
   discrete_families <- sapply(families, function(x) x$family_info$discrete)
   discrete_families <- which(discrete_families) # Indizes zu diskreten Verteilungen
@@ -175,11 +209,10 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE, 
   ## relevant_families <- families[if (continuity) -discrete_families else discrete_families]
   
   
-  # TODO: How do we handle not yet installed packages? Force install or warn and ignore?
   
   all_pkgs <- sapply(relevant_families, function(x) x$package)
   all_pkgs_unique <- unique(all_pkgs)
-  missing_pkgs <- setdiff(all_pkgs_unique, rownames(installed.packages()))
+  missing_pkgs <- c(missing_pkgs, setdiff(all_pkgs_unique, rownames(installed.packages())) )
   if (length(missing_pkgs) > 0) {
     message("The following packages are not installed, and are thus ignored during optimisation. ",
             "If you want to use them please install manually:", paste(missing_pkgs, collapse=", "))
