@@ -130,9 +130,12 @@ setMethod(f = "hist", signature = c("globalfit"),
             ## geht nachfolgendes nicht einfacher ueber direkte Aufrufe
             ## und/oder do.call ?
             
-            fun <- get_fun_from_package(type="d", family = object)
+            fun <- get_fun_from_package(type="d", family = selected_fit)
             param_list <- split(selected_fit@estimatedValues, names(selected_fit@estimatedValues))
-            param_list$x <- x
+		  print(param_list)
+            # param_list$x <- x ## BNZ: what was the purpose?
+	    ## BNZ: made a tentative fix, please review if it fulfills the intention
+	    param_list$x <- supporting_point
             density <- do.call(fun, param_list)
             
             ## for evalation of fitting_sanity_check

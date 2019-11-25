@@ -116,9 +116,6 @@ optimParamsDiscrete(data, family, family_info)
  **objects to See Also as \code{\link{help}}, **~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
 
 \dontrun{
 # Example 1 for optimParam
@@ -127,8 +124,10 @@ family <- list(family='norm', package="stats")
 lower <- c('mean' = - Inf)
 upper <- c('mean' = Inf)
 fixed <- c('sd'=2)
-start_parameters <- c('mean' = 0)
-optimParamsDiscrete(data = data, family=family, lower=lower, upper=upper, start_parameters = start_parameters, fixed=fixed, log = T, show_optim_progress = TRUE)
+defaults <- c('mean' = 0)
+family_info <- list(lower, upper, fixed, defaults)
+optimParamsDiscrete(data = data, family=family, family_info = family_info,
+		    fixed=fixed, log = T, show_optim_progress = TRUE)
 
 # Example 2 for optimParam
 data <- rbeta(n=100, shape=10, shape2=2)
@@ -137,7 +136,9 @@ lower <- c('shape1' = 0, 'shape2' = 0)
 upper <- c('shape1' = Inf, 'shape2' = Inf)
 start_parameters <- c('shape1' = 1, 'shape2' = 1)
 fixed <- list()
-optimParamsDiscrete(data =data, family = family, lower = lower, upper = upper, start_parameters = start_parameters, log = T, show_optim_progress = TRUE)
+family_info <- list(lower, upper, fixed, defaults)
+optimParamsDiscrete(data =data, family = family, family_info = family_infom
+		    log = T, show_optim_progress = TRUE)
 }
 
 }

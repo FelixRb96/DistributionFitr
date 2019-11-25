@@ -131,7 +131,8 @@ disc_trafo <- function(data){
 ### 2) Main Function --------------------------------------------------------------------------
 
 globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
-		      packages = NULL, append_packages = TRUE, cores = NULL,...){
+		      packages = NULL, append_packages = TRUE,
+		      perform_check = TRUE, cores = NULL,...){
 
 # WIP:
 # packages: either (1) character vector with package names, i.e.: packages = c("bla", "bundesbank", "secret")
@@ -204,6 +205,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
   cl <- makeCluster(cores, outfile='log.txt')
   registerDoParallel(cl)
   
+  i <- NULL ## BNZ: to prevent an issue, seems to be related to parallel. Don't ask me why o.O
   output_liste <- foreach(i=1:length(relevant_families), .packages = c(), .errorhandling = 'remove') %dopar% {
   #for (fam in relevant_families) {
     source(file)
@@ -228,11 +230,11 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
                    AICc = output_liste$AICc) 
       # aim: check whether solution has good loglik but does not fit
       # experimental feature - please watch out!
-      sanity_check <- fitting_sanity_check(output, data, continuity = continuity)
+      if(perform_check) sanity_check <- fitting_sanity_check(output, data, continuity = continuity)
     } else {
-      sanity_check <- list(good=FALSE, meanquot=NA)
+      if(perform_check) sanity_check <- list(good=FALSE, meanquot=NA)
     }
-    if(!sanity_check$good)
+    if(perform_check && !sanity_check$good)
       output <- new('optimParams', 
                     family = fam$family,
                     package = fam$package,

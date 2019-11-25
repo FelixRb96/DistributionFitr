@@ -10,7 +10,8 @@
 }
 \usage{
   globalfit(data, continuity = NULL, method = "MLE", progress = TRUE,
-	    packages = NULL, append_packages = TRUE, cores = NULL, ...)
+	    packages = NULL, append_packages = TRUE,
+	    perform_check = TRUE, cores = NULL, ...)
 }
 
 %- maybe also 'usage' for other objects documented here.
@@ -34,6 +35,9 @@
   } 
   \item{append_packages}{
    logical; if TRUE (default) appends packages specified in the equally-named argument above to the standard search list, if FALSE \code{globalfit} will use only those packages.
+  }
+  \item{perform_check}{
+   logical; if TRUE (default) obviously bad fits will be filtered out (DistributionFitr generally depends on other packages to supply reasonable distribution functions).
   }
   \item{cores}{
    integer; Number of CPU cores to be used in the calculations of best fitted parameters and information criteria
