@@ -87,7 +87,7 @@ construct_package_list <- function(all.packages) {
 
 write_file <- function(family_list, file="data/all_families.rds") {
   saveRDS(family_list, file=file)
-  #when bottleneck solves:
+  #when bottleneck is solved:
   #con <- file("all_families.R")
   #open(con, "w")
   #write("FamilyList<-", con)
