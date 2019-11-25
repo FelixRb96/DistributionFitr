@@ -43,12 +43,13 @@ Maintainer: Borui Niklas Zhu, \email{bzhu@mail.uni-mannheim.de}
 
 \examples{
 #example for getFamily
+\dontrun{
 library(stats)
 getFamily('stats')
 
 #example for getParams
 parameter_characteristics <- getParams("beta")
-
+}
 }
 
 
