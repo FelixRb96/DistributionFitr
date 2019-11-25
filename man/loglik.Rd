@@ -47,7 +47,6 @@ loglik(family, data, fixed, log, lower, upper)
 }
 
 
-
 \section{Warning }{
   \item{loglik does not depend on parameters} {The returned log-likelihood function is a constant function.}
   
@@ -80,5 +79,6 @@ likelihood <- loglik(family = family, data = data, fixed = fixed,
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{distribution}
+\keyword{models}
 \keyword{Maximum-Likelihood}
 \keyword{Log-Likelihood}
