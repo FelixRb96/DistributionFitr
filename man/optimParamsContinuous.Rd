@@ -83,6 +83,7 @@ optimParamsContinuous(data, family, lower, upper, start_parameters, fixed)
 ##-- ==>  Define data, use random,
 ##--	or do  help(data=index)  for the standard data sets.
 
+\dontrun{
 # Example 1 for optimParam
 data <- rnorm(n=100, mean=70, sd= 4)
 family <- list(family='norm', package="stats")
@@ -104,6 +105,7 @@ fixed <- list()
 optimParamsContinuous(data =data, family = family, lower = lower, 
 upper = upper, start_parameters = start_parameters, 
 log = T, show_optim_progress = TRUE)
+}
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

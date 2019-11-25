@@ -1,7 +1,7 @@
 ## Authors 
 ## Niclas Lietzow, niclas.lietzow@gmx.de
-## Till Freihaut
-## Leonardo Vela
+## Till Freihaut, tfreihau@mail.uni-mannheim.de
+## Leonardo Vela, lvela@mail.uni-mannheim.de
 ##
 ## Calculate the log-likelihood function
 ##

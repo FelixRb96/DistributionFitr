@@ -43,6 +43,7 @@ Maintainer: Borui Niklas Zhu, \email{bzhu@mail.uni-mannheim.de}
 
 \examples{
 #example for getFamily
+\dontrun{
 library(stats)
 getFamily('stats')
 
