@@ -86,7 +86,7 @@ construct_package_list <- function(all.packages) {
 
 
 write_file <- function(FamilyList, file = "R/all_families.R") {
-  dump(FamilyList, file = file)
+  dump("FamilyList", file = file)
   #when bottleneck is solved:
   #con <- file("all_families.R")
   #open(con, "w")
