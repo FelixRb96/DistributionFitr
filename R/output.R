@@ -19,11 +19,6 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA. 
 
-
-#setGeneric(name = "summary",		
-#           def = function(object, ...) standardGeneric("summary"))		
-
-
 ## sind die is.null() wirklich notwendig?? (i) sind defaults gesetzte
 ## (ii) wirft R eh Fehler
 
@@ -71,9 +66,9 @@ setMethod(f = "summary", signature = c("globalfit"),
 
 setMethod(f = "show", signature = c("globalfitSummary"),
           def = function(object) {
-            cat(length(object@data), 'data points entered. \n', 'Fitted with', 
-                object@method, 'assuming continuity ', object@continuity, '\n
-                \nBest fits:\n \n')
+            cat(length(object@data), 'data points entered.\nFitted with', 
+                object@method, 'assuming continuity:', object@continuity, '
+                \n\nBest fits:\n \n')
             print(object@fits, right=FALSE)
           }
 )
@@ -83,6 +78,12 @@ setMethod(f = "print", signature = c("globalfitSummary"),
             show(x)
           }
           )
+
+setMethod(f = "print", signature = c("globalfit"),
+	  def = function(x) {
+	    print(summary(x))
+	  }
+	  )
 
 setGeneric(name = "IC",		
            def = function(object, ...) standardGeneric("IC"))		
@@ -120,7 +121,7 @@ setMethod(f = "BIC", signature = c("globalfit"),
 
 
 setMethod(f = "hist", signature = c("globalfit"),
-          def = function(x, ic='AIC', which=1, ...) {
+          def = function(x, count = 10, ic='AIC') {
             if(is.null(ic) || !(ic %in% c('AIC', 'BIC', 'AICc')))
               stop("Argument 'ic' must be 'AIC', 'BIC' or 'AICc'")
             if(is.null(which) || !is.natural(which))

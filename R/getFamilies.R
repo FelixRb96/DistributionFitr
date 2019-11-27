@@ -85,8 +85,8 @@ construct_package_list <- function(all.packages) {
 }
 
 
-write_file <- function(family_list, file="data/all_families.rds") {
-  saveRDS(family_list, file=file)
+write_file <- function(FamilyList, file = "R/all_families.R") {
+  dump(FamilyList, file = file)
   #when bottleneck is solved:
   #con <- file("all_families.R")
   #open(con, "w")
@@ -104,25 +104,24 @@ write_file <- function(family_list, file="data/all_families.rds") {
 ### Case 2 all.packages missing: Take families saved in the file
 
 ## MS: all_families.rds darf nicht in R sein. Habe es nach privat verschoben
-getFamilies <- function(all.packages, file="private/all_families.rds") {
+getFamilies <- function(all.packages, file="R/all_families.R") {
   ## CASE 2:
   if (missing(all.packages)) {
     if (!file.exists(file))
       return(getFamilies(all.packages = FALSE, file=file))
     ##read file and return list of lists
-    family_list <- readRDS(file=file)
-    return(family_list)
+    return(FamilyList)
   }
 
   ## CASE 1.2 & 1.3
   if (is.logical(all.packages)) {
-    family_list <- iterate_packages(construct_package_list(all.packages = all.packages))
-    write_file(family_list=family_list,file=file)
-    return(family_list)
+    FamilyList <- iterate_packages(construct_package_list(all.packages = all.packages))
+    write_file(FamilyList=FamilyList,file=file)
+    return(FamilyList)
   }
   
   ## CASE 1.1
-  family_list <- iterate_packages(all.packages)
-  write_file(family_list=family_list,file = file)
-  return(family_list)
+  FamilyList <- iterate_packages(all.packages)
+  write_file(FamilyList=FamilyList,file = file)
+  return(FamilyList)
 }

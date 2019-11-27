@@ -8,7 +8,7 @@
    
 }
 \usage{
-getFamilies(all.packages, file="all_families.R")
+getFamilies(all.packages, file="R/all_families.R")
 
 }
 

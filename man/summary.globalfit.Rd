@@ -10,10 +10,10 @@
 
 \usage{
   # S4 method for class 'globalfit'
-  summary(object, which=1, count=10, ic = c('AIC'))
+  summary(object, count=10, ic = 'AIC')
   
   # S4 method for class 'globalfit'
-  print(object, ...)
+  print(object)
 }
 
 \arguments{

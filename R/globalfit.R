@@ -3,6 +3,7 @@
 ## Kiril Dik, kdik@mail.uni-mannheim.de
 ## Moritz Kern, mkern@mail.uni-mannheim.de
 ## Nadine Tampe
+## Borui Niklas Zhu, bzhu@mail.uni-mannheim.de
 ##
 ## Fit multiple distribution families to a given univariate dataset
 ##
@@ -131,8 +132,9 @@ disc_trafo <- function(data){
 ### 2) Main Function --------------------------------------------------------------------------
 
 globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
+		      stats_only = TRUE,
 		      packages = NULL, append_packages = TRUE,
-		      perform_check = TRUE, cores = NULL,...){
+		      perform_check = TRUE, cores = NULL, max_dim_discrete = Inf, ...){
 
 # WIP:
 # packages: either (1) character vector with package names, i.e.: packages = c("bla", "bundesbank", "secret")
@@ -143,12 +145,12 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
 # 	     	   else FALSE: only scan in packages provided in extra_packages
   # TODO: this is the highest level function: input validation!
 
-  file <- 'private/source_all.R'
-  
-  families <- getFamilies()
-
+  families <- FamilyList
   missing_pkgs <- NULL
-  if(length(packages) > 0) {
+
+  if(stats_only) {
+      families <- families[ which(sapply(families, function(x) x$package == "stats")) ]
+  } else if(length(packages) > 0) {
     if(is.vector(packages) == TRUE && typeof(packages) == "character") {
       missing_pkgs <- setdiff(packages, rownames(installed.packages())) # ignore not installed packages
       packages <- intersect(packages, rownames(installed.packages()))
@@ -158,8 +160,8 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
       if(append_packages) { # add the manual ones to FamilyList as used in default
         families <- c(families, additionals)
       } else { # ignore whatever else is in FamilyList.
-        known <- packages[! packages %in% additionals]  
-        known <- lapply(families, function(x) if(any(x$package %in% known)) x)
+        known <- packages[! packages %in% additionals] # these are specified by the user, but params are known
+        known <- families[ which(sapply(families, function(x) x$package %in% known)) ]
         families <- c(additionals, known)
       }
     } else if(is.list(packages) == TRUE) {
@@ -169,6 +171,10 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
 	families <- packages
       }
     }
+  }
+
+  if(max_dim_discrete < Inf) { # filter out those distributions that have too many discrete parameters.
+    families <- families[which(sapply(families, function(x) sum(x$family_info$discrete) <= max_dim_discrete )) ]
   }
 
   discrete_families <- sapply(families, function(x) x$family_info$discrete)
@@ -193,12 +199,12 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
   missing_pkgs <- c(missing_pkgs, setdiff(all_pkgs_unique, rownames(installed.packages())) )
   if (length(missing_pkgs) > 0) {
     message("The following packages are not installed, and are thus ignored during optimisation. ",
-            "If you want to use them please install manually:", paste(missing_pkgs, collapse=", "))
+            "If you want to use them please install manually: ", paste(missing_pkgs, collapse=", "))
     relevant_families <- relevant_families[!(all_pkgs %in% missing_pkgs)]
   }
   
   if(progress)
-      message("Comparing the following distribution families:", paste(sapply(relevant_families, function(x) x$family), collapse = ", "))
+      message("Comparing the following distribution families: ", paste(sapply(relevant_families, function(x) x$family), collapse = ", "))
 
   if(is.null(cores))
     cores <- detectCores()
@@ -207,8 +213,8 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
   
   i <- NULL ## BNZ: to prevent an issue, seems to be related to parallel. Don't ask me why o.O
   output_liste <- foreach(i=1:length(relevant_families), .packages = c(), .errorhandling = 'remove') %dopar% {
-  #for (fam in relevant_families) {
-    source(file)
+  # for (fam in relevant_families) { # dropped in favour of parallel
+    
     fam <- relevant_families[[i]]
     if(progress)
       message("Current Family: ",  fam$family)
@@ -228,7 +234,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
                    AIC = output_liste$AIC,
                    BIC = output_liste$BIC,
                    AICc = output_liste$AICc) 
-      # aim: check whether solution has good loglik but does not fit
+      # aim: check whether solution has good loglik but does not fit nonetheless
       # experimental feature - please watch out!
       if(perform_check) sanity_check <- fitting_sanity_check(output, data, continuity = continuity)
     } else {
