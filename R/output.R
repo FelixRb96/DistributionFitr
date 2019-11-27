@@ -40,37 +40,49 @@ setMethod(f = "sort", signature = c('globalfit'),
           })
 
 
+
 setMethod(f = "summary", signature = c("globalfit"),
-          def = function(object, which=1, count=10, ic = 'AIC') {
+          def = function(object, count=10, ic = 'AIC') {
             if(is.null(ic) || !(ic %in% c('AIC', 'BIC', 'AICc')))
               stop("Argument 'ic' must be 'AIC', 'BIC' or 'AICc'")
-            if(is.null(which) || !is.natural(which))
-              stop("Argument 'which' must vector of positive integers.")
             if(is.null(count) || !is.natural(count) )
               stop("Argument 'count'  must be positive integer.")
             
             object <- sort(object, ic=ic)
-            df <- data.frame(family = sapply(object@fits, function(object) object@family),
-                             package = sapply(object@fits, function(object) object@package),
-                             ic = sapply(object@fits, function(object)  eval(parse(text = paste0('object@', ic)))))
+            df <- data.frame(family = sapply(object@fits, 
+                                      function(object) object@family),
+                             package = sapply(object@fits, 
+                                       function(object) object@package),
+                             ic = sapply(object@fits, function(object)
+                                  eval(parse(text = paste0('object@', ic)))),
+                             params = sapply(object@fits, function(object) 
+                                      paste(names(object@estimatedValues),
+                                             signif(object@estimatedValues, digits = 3),
+                                             sep= "=", collapse='; ')))
             
-            count <- min(nrow(df), count)
-            which <- which[which <= nrow(df)]
-            colnames(df)[3] <- ic
-            
-            for(i in 1:length(which)) {
-              selected_fit <- object@fits[[as.numeric(rownames(df)[which[i]])]]
-              if(which[i]==1) {
-                cat('Best fit: \n', selected_fit@family, 'distribution of', selected_fit@package, 'package. \n')
-              } else {
-                cat('\nFitted parameters for', selected_fit@family, 'distribution of', selected_fit@package, 'package. \n')
-              }
-              print(selected_fit@estimatedValues)
-            }
-            rownames(df) <- 1:nrow(df)
-            cat('\n\nBest fitted distributions: \n')
-            print(df[1:count,])
+            sum <- new("globalfitSummary",
+                       data = object@data,
+                       continuity = object@continuity,
+                       method = object@method,
+                       fits = df[1:min(count, nrow(df)),]
+                )
+            return(sum)
           })
+
+setMethod(f = "show", signature = c("globalfitSummary"),
+          def = function(object) {
+            cat(length(object@data), 'data points entered. \n', 'Fitted with', 
+                object@method, 'assuming continuity ', object@continuity, '\n
+                \nBest fits:\n \n')
+            print(object@fits, right=FALSE)
+          }
+)
+
+setMethod(f = "print", signature = c("globalfitSummary"),
+          def = function(x) {
+            show(x)
+          }
+          )
 
 setGeneric(name = "IC",		
            def = function(object, ...) standardGeneric("IC"))		
@@ -132,17 +144,9 @@ setMethod(f = "hist", signature = c("globalfit"),
             
             fun <- get_fun_from_package(type="d", family = selected_fit)
             param_list <- split(selected_fit@estimatedValues, names(selected_fit@estimatedValues))
-		  print(param_list)
-            # param_list$x <- x ## BNZ: what was the purpose?
-	    ## BNZ: made a tentative fix, please review if it fulfills the intention
-	    param_list$x <- supporting_point
+            param_list$x <- supporting_point
             density <- do.call(fun, param_list)
             
-            ## for evalation of fitting_sanity_check
-            ## need to be deleted finally
-            ## print(density)
-            ## plot(supporting_point, density, col='green', lwd=2)
-            ## Sys.sleep(2)
             h <- hist(x = x@data, xlim=range(lower,upper), freq = FALSE,
                  xlab = 'x', ylab = 'density', breaks=breaks,
                  main=paste0('Histogramm with density of \n',
@@ -154,4 +158,3 @@ setMethod(f = "hist", signature = c("globalfit"),
             invisible(h)
           }
         )
-

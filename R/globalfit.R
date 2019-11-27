@@ -246,9 +246,11 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
   }
   stopCluster(cl)
   
-  return(new('globalfit', data = data, 
-             continuity = continuity,
-             method = method,
-             fits = output_liste))
+  r <- new('globalfit', data = data, 
+          continuity = continuity,
+          method = method,
+          fits = output_liste)
+  
+  return(sort(r))
 }
 

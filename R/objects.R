@@ -37,6 +37,15 @@ setClass(Class = "optimParams",
          )
 )
 
+setClass(Class = "globalfitSummary",
+         slots = c(
+           data = "numeric",
+           continuity = "logical",
+           method = "character",
+           fits = "data.frame"
+         )
+)
+
 
 ## verstehe ich nicht wozu diese gebraucht wird
 ## gehoert dies in zzz.R, als
