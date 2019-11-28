@@ -213,7 +213,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
   
   i <- NULL ## BNZ: to prevent an issue, seems to be related to parallel. Don't ask me why o.O
   output_liste <- foreach(i=1:length(relevant_families), .packages = c(), .errorhandling = 'remove',
-                          .verbose = progress, .export = c()) %dopar% {
+                          .verbose = progress, .export = c('fitting_sanity_check')) %dopar% {
   # for (fam in relevant_families) { # dropped in favour of parallel
     
     fam <- relevant_families[[i]]
