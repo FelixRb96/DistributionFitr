@@ -121,7 +121,7 @@ setMethod(f = "BIC", signature = c("globalfit"),
 
 
 setMethod(f = "hist", signature = c("globalfit"),
-          def = function(x, count = 10, ic='AIC') {
+          def = function(x, which = 1, ic='AIC') {
             if(is.null(ic) || !(ic %in% c('AIC', 'BIC', 'AICc')))
               stop("Argument 'ic' must be 'AIC', 'BIC' or 'AICc'")
             if(is.null(which) || !is.natural(which))
