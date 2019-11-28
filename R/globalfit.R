@@ -212,8 +212,8 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
   registerDoParallel(cl)
   
   i <- NULL ## BNZ: to prevent an issue, seems to be related to parallel. Don't ask me why o.O
-  output_liste <- foreach(i=1:length(relevant_families), .packages = c('DistributionFitr'), .errorhandling = 'remove',
-                          .verbose = TRUE, .export = ('fitting_sanity_check')) %dopar% {
+  output_liste <- foreach(i=1:length(relevant_families), .packages = c(), .errorhandling = 'remove',
+                          .verbose = progress, .export = c()) %dopar% {
   # for (fam in relevant_families) { # dropped in favour of parallel
     
     fam <- relevant_families[[i]]
@@ -237,20 +237,14 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
                    AICc = output_liste$AICc) 
       # aim: check whether solution has good loglik but does not fit nonetheless
       # experimental feature - please watch out!
-      message('before sanity')
       if(perform_check) {
-        message('in sanity.')
         sanity_check <- fitting_sanity_check(output, data, continuity = continuity)
-        message('in sanity part 2.')
         output@sanity <- sanity_check
       }
-      message('After sanity')
     } else {
-      message('in else case')
       if(perform_check) sanity_check <- list(good=FALSE, meanquot=NA)
     }
     if(perform_check && !sanity_check$good) {
-      message('in output.')
       output <- new('optimParams', 
                     family = fam$family,
                     package = fam$package,
@@ -260,7 +254,6 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
                     AICc = NA_integer_,
                     sanity = sanity_check)
     }
-    message('finally  done.')
     return(output)
   }
   stopCluster(cl)
@@ -269,6 +262,5 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
           continuity = continuity,
           method = method,
           fits = output_liste)
-  
   return(sort(r))
 }

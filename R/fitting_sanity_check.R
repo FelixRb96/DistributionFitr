@@ -29,12 +29,9 @@
 ### but returned with good logliks (due to unkown reasons)
 
 
-fsc <- function() print("HALLO")
-
-fitting_sanity_check <- function(object, data, continuity, plot=FALSE) {
-    if (!is(object, 'optimParams'))
+fitting_sanity_check <- function(object, data, continuity, plot=FALSE, sensitivity = 1) {
+   if (!is(object, 'optimParams'))
       stop('Wrong input.')
-
 
   ## der nachfolgende Code ist zu 80% der gleiche wie in output.R
   ## lohnt sich Hilfsfunktion Funktion mit Argumen, dass zwischen x<-h$mids
@@ -67,9 +64,10 @@ fitting_sanity_check <- function(object, data, continuity, plot=FALSE) {
                           return(list(value=Inf))
                         } 
       )
+
   hist_check <- sum(diff(h$breaks) * density(x))
   good <- (int_check$value > (1 - 0.05) * sensitivity) & (hist_check > (1-0.3)*sensitivity) & 
           (int_check$value < (1 + 0.05) * sensitivity) & (hist_check < (1+0.3)*sensitivity)
-  
+
   return(list(hist_check=hist_check, int_check=int_check$value, good=good))
 }
