@@ -212,7 +212,8 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
   registerDoParallel(cl)
   
   i <- NULL ## BNZ: to prevent an issue, seems to be related to parallel. Don't ask me why o.O
-  output_liste <- foreach(i=1:length(relevant_families), .packages = c(), .errorhandling = 'remove') %dopar% {
+  output_liste <- foreach(i=1:length(relevant_families), .packages = c('DistributionFitr'), .errorhandling = 'remove',
+                          .verbose = TRUE, .export = ('fitting_sanity_check')) %dopar% {
   # for (fam in relevant_families) { # dropped in favour of parallel
     
     fam <- relevant_families[[i]]
@@ -236,16 +237,20 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
                    AICc = output_liste$AICc) 
       # aim: check whether solution has good loglik but does not fit nonetheless
       # experimental feature - please watch out!
+      message('before sanity')
       if(perform_check) {
+        message('in sanity.')
         sanity_check <- fitting_sanity_check(output, data, continuity = continuity)
-        output@sanity <-sanity_check
+        message('in sanity part 2.')
+        output@sanity <- sanity_check
       }
+      message('After sanity')
     } else {
-      print('Case2.')
+      message('in else case')
       if(perform_check) sanity_check <- list(good=FALSE, meanquot=NA)
     }
-    print(sanity_check)
-    if(perform_check && !sanity_check$good)
+    if(perform_check && !sanity_check$good) {
+      message('in output.')
       output <- new('optimParams', 
                     family = fam$family,
                     package = fam$package,
@@ -254,6 +259,8 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
                     BIC = NA_integer_,
                     AICc = NA_integer_,
                     sanity = sanity_check)
+    }
+    message('finally  done.')
     return(output)
   }
   stopCluster(cl)
