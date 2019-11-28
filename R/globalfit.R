@@ -7,7 +7,7 @@
 ##
 ## Fit multiple distribution families to a given univariate dataset
 ##
-## Copyright (C) 2019 -- 2020 Moritz Lauff, Kiril Dik, Moritz Kern, Nadine Tampe
+## Copyright (C) 2019 -- 2020 Moritz Lauff, Kiril Dik, Moritz Kern, Nadine Tampe, Borui Niklas Zhu
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -214,7 +214,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
   i <- NULL ## BNZ: to prevent an issue, seems to be related to parallel. Don't ask me why o.O
   output_liste <- foreach(i=1:length(relevant_families), .packages = c(), .errorhandling = 'remove') %dopar% {
   # for (fam in relevant_families) { # dropped in favour of parallel
-    #source('R/fitting_sanity_check.R')
+    
     fam <- relevant_families[[i]]
     if(progress)
       message("Current Family: ",  fam$family)
@@ -226,7 +226,6 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
                         optim_method = 'L-BFGS-B', n_starting_points = 1,
                         debug_error = FALSE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, 
                         max_discrete_steps=100, plot=FALSE, discrete_fast = TRUE)
-    
     if(!is.null(output_liste) && !is.na(output_liste$value) && !is.infinite(output_liste$value)) {
       output <- new('optimParams', family = fam$family,
                    package = fam$package,
@@ -235,7 +234,6 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
                    AIC = output_liste$AIC,
                    BIC = output_liste$BIC,
                    AICc = output_liste$AICc) 
-
       # aim: check whether solution has good loglik but does not fit nonetheless
       # experimental feature - please watch out!
       if(perform_check) {
@@ -267,4 +265,3 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
   
   return(sort(r))
 }
-
