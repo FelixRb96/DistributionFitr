@@ -53,7 +53,7 @@ setMethod(f = "summary", signature = c("globalfit"),
                              params = sapply(object@fits, function(object) 
                                       paste(names(object@estimatedValues),
                                              signif(object@estimatedValues, digits = 3),
-                                             sep= "=", collapse='; ')))
+                                             sep= " = ", collapse='; ')))
             
             sum <- new("globalfitSummary",
                        data = object@data,

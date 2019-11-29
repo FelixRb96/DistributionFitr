@@ -48,6 +48,9 @@
   \item{cores}{
    integer; Number of CPU cores to be used in the calculations of best fitted parameters and information criteria
   }
+  \item{sanity_level}{
+	positive number; default set to 1; the smaller the number, the stricter the check will be executed and more potential distributions will be rejected}
+  }
   \item{...}{
   Further named arguments that can are passed on to optimParamsDiscrete
   }

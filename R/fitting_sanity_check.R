@@ -66,8 +66,8 @@ fitting_sanity_check <- function(object, data, continuity, plot=FALSE, sensitivi
       )
 
   hist_check <- sum(diff(h$breaks) * density(x))
-  good <- (int_check$value > (1 - 0.05) * sensitivity) & (hist_check > (1-0.3)*sensitivity) & 
-          (int_check$value < (1 + 0.05) * sensitivity) & (hist_check < (1+0.3)*sensitivity)
+  good <- (int_check$value > (1 - 0.05 * sensitivity)) & (hist_check > (1-0.3*sensitivity)) & 
+          (int_check$value < (1 + 0.05 * sensitivity)) & (hist_check < (1+0.3*sensitivity))
 
   return(list(hist_check=hist_check, int_check=int_check$value, good=good))
 }

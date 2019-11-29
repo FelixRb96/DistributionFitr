@@ -134,7 +134,7 @@ disc_trafo <- function(data){
 globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
 		      stats_only = TRUE,
 		      packages = NULL, append_packages = TRUE,
-		      perform_check = TRUE, cores = NULL, max_dim_discrete = Inf, ...){
+		      perform_check = TRUE, cores = NULL, max_dim_discrete = Inf, sanity_level = 1, ...){
 
 # WIP:
 # packages: either (1) character vector with package names, i.e.: packages = c("bla", "bundesbank", "secret")
@@ -208,12 +208,14 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
 
   if(is.null(cores))
     cores <- detectCores()
+  if(progress)
+    message('Parallized over ', cores, 'cores.\n')
   cl <- makeCluster(cores, outfile='log.txt')
   registerDoParallel(cl)
   
   i <- NULL ## BNZ: to prevent an issue, seems to be related to parallel. Don't ask me why o.O
   output_liste <- foreach(i=1:length(relevant_families), .packages = c(), .errorhandling = 'remove',
-                          .verbose = progress, .export = c('fitting_sanity_check')) %dopar% {
+                          .verbose = progress, .export = c('fitting_sanity_check'), .inorder = FALSE) %dopar% {
   # for (fam in relevant_families) { # dropped in favour of parallel
     
     fam <- relevant_families[[i]]
@@ -238,11 +240,11 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
       # aim: check whether solution has good loglik but does not fit nonetheless
       # experimental feature - please watch out!
       if(perform_check) {
-        sanity_check <- fitting_sanity_check(output, data, continuity = continuity)
+        sanity_check <- fitting_sanity_check(output, data, continuity = continuity, sensitivity = sanity_level)
         output@sanity <- sanity_check
       }
     } else {
-      if(perform_check) sanity_check <- list(good=FALSE, meanquot=NA)
+      if(perform_check) sanity_check <- list(hist_check=NA, int_check=NA, good=FALSE)
     }
     if(perform_check && !sanity_check$good) {
       output <- new('optimParams', 
