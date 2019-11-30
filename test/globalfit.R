@@ -23,5 +23,5 @@ s <- lapply(r, summary)
 if(!(file.exists(previous))) {
   saveRDS(object=s, file=previous)
 } else {
-  if(identical(compare,s)) print("Sucessfull") else print("Failed")
+  if(identical(compare,s)) print("Sucessful") else print("Failed")
 }

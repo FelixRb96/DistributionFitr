@@ -7,11 +7,9 @@ for(i in 1:20) {
   Sys.sleep(1)
 }
 
-r <-globalfit(rgamma(n = 10000, shape=3, rate = 4))
+r <-globalfit(rgamma(n = 1000, shape=3, rate = 4))
 summary(r, ic='BIC')
 summary(r, ic='AICc')
-summary(r, which=1:3)
-summary(r, which=2, count=5)
 summary(r, ic='BIC', count=7)
 hist(r, ic='BIC')
 hist(r, ic='BIC', which=7)

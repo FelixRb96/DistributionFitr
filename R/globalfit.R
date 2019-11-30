@@ -77,7 +77,8 @@ is.discrete <- function(data, border = 0.35, percent = 0.8){
   }
 
   
-  if (n_unique_dec / obs <= border && any(numbers >= 4) && some_percent(decs, numbers, percent)){
+  # if (n_unique_dec / obs <= border && any(numbers >= 4) && some_percent(decs, numbers, percent)){
+  if (n_unique_dec / obs <= border && !any(numbers >= 4)) {
     return(TRUE)
   }else{
     return(FALSE)
@@ -132,9 +133,9 @@ disc_trafo <- function(data){
 ### 2) Main Function --------------------------------------------------------------------------
 
 globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
-		      stats_only = TRUE,
-		      packages = NULL, append_packages = TRUE,
-		      perform_check = TRUE, cores = NULL, max_dim_discrete = Inf, sanity_level = 1, ...){
+                      stats_only = TRUE,
+                      packages = NULL, append_packages = TRUE,
+                      perform_check = TRUE, cores = NULL, max_dim_discrete = Inf, sanity_level = 1, ...){
 
 # WIP:
 # packages: either (1) character vector with package names, i.e.: packages = c("bla", "bundesbank", "secret")
@@ -144,42 +145,75 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
 #            	   if TRUE (default), scan over existing packages in FamilyList AND the ones specified in extra_packages,
 # 	     	   else FALSE: only scan in packages provided in extra_packages
   # TODO: this is the highest level function: input validation!
+  
+  if (stats_only && length(packages) > 0) {
+    message("As 'stats_only' is set to TRUE the additional packages provided in argument 'packages' will be ignored.")
+  }
 
   families <- FamilyList
-  missing_pkgs <- NULL
 
   if(stats_only) {
       families <- families[ which(sapply(families, function(x) x$package == "stats")) ]
+      
   } else if(length(packages) > 0) {
-    if(is.vector(packages) == TRUE && typeof(packages) == "character") {
-      missing_pkgs <- setdiff(packages, rownames(installed.packages())) # ignore not installed packages
+    
+    if(is.vector(packages) && typeof(packages) == "character") {
+      
+      if (length(missing_pkgs) > 0) {
+        message("The following packages were provided to argument 'packages' but are not installed, so they will be ignored. ",
+                "Please install manually: ",
+                paste(missing_pkgs, collapse = ", "))
+      }
+      
       packages <- intersect(packages, rownames(installed.packages()))
+      
       known_packages <- unique(sapply(families, function(x) x$package))
+      
       additionals <- setdiff(packages, known_packages)
-      additionals <- iterate_packages(additionals)
-      if(append_packages) { # add the manual ones to FamilyList as used in default
-        families <- c(families, additionals)
-      } else { # ignore whatever else is in FamilyList.
+      if (length(additionals) > 0) {
+        message("The following packages were provided in argument 'packages' but are not part of the default set of packages: ",
+                paste(additionals, collapse=", "),
+                "\nThus the distribution families in those packages need to be extracted now, which might take some time. ",
+                "When executed multiple times, consider extracting those families once with 'getFamilies(packages)' ",
+                "and provide the result of that to argument 'packages.'")
+        additionals_info <- iterate_packages(additionals)
+        if (length(additionals_info) == 0) {
+          message("No distribution families found in the additionally provided packages.")
+        }
+      } else {
+        additionals_info <- list()
+      }
+      
+      # add the manual ones to FamilyList as used in default
+      if(append_packages) {
+        families <- c(families, additionals_info)
+        
+      # ignore whatever else is in FamilyList
+      } else {
         known <- packages[! packages %in% additionals] # these are specified by the user, but params are known
         known <- families[ which(sapply(families, function(x) x$package %in% known)) ]
-        families <- c(additionals, known)
+        families <- c(known, additionals_info)
       }
-    } else if(is.list(packages) == TRUE) {
+      
+    } else if(is.list(packages)) {
       if(append_packages) {
-	families <- c(families, additionals)
+	      families <- c(families, additionals)
       } else {
-	families <- packages
+	      families <- packages
       }
     }
+  }
+  
+  if (length(families) == 0) {
+    stop("The provided input to argument 'packages' didn't contain any distribution family. Can't optimize.")
   }
 
   if(max_dim_discrete < Inf) { # filter out those distributions that have too many discrete parameters.
     families <- families[which(sapply(families, function(x) sum(x$family_info$discrete) <= max_dim_discrete )) ]
   }
-
-  discrete_families <- sapply(families, function(x) x$family_info$discrete)
-  discrete_families <- which(discrete_families) # Indizes zu diskreten Verteilungen
   
+  # Indizes zu diskreten Verteilungen
+  discrete_families <- which(sapply(families, function(x) x$family_info$discrete))
   
   if (is.null(continuity)){
     
@@ -192,11 +226,10 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
     relevant_families <-  families[if (continuity) -discrete_families else discrete_families]
   }
 
-  
-  
+  # Again check that all of the families that should be compared are also installed
   all_pkgs <- sapply(relevant_families, function(x) x$package)
   all_pkgs_unique <- unique(all_pkgs)
-  missing_pkgs <- c(missing_pkgs, setdiff(all_pkgs_unique, rownames(installed.packages())) )
+  missing_pkgs <- setdiff(all_pkgs_unique, rownames(installed.packages()))
   if (length(missing_pkgs) > 0) {
     message("The following packages are not installed, and are thus ignored during optimisation. ",
             "If you want to use them please install manually: ", paste(missing_pkgs, collapse=", "))
@@ -209,15 +242,17 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
   if(is.null(cores))
     cores <- detectCores()
   if(progress)
-    message('Parallized over ', cores, 'cores.\n')
+    message('Parallized over ', cores, ' cores.\n')
   cl <- makeCluster(cores, outfile='log.txt')
   registerDoParallel(cl)
   
   i <- NULL ## BNZ: to prevent an issue, seems to be related to parallel. Don't ask me why o.O
   output_liste <- foreach(i=1:length(relevant_families), .packages = c(), .errorhandling = 'remove',
-                          .verbose = progress, .export = c('fitting_sanity_check'), .inorder = FALSE) %dopar% {
-  # for (fam in relevant_families) { # dropped in favour of parallel
+                          .verbose = FALSE, .export = c('fitting_sanity_check'), .inorder = FALSE) %dopar% {
     
+    # TODO: for me this is not working without this line, although we need to drop the line                      
+    source("private/source_all.R")
+                            
     fam <- relevant_families[[i]]
     if(progress)
       message("Current Family: ",  fam$family)
@@ -229,6 +264,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
                         optim_method = 'L-BFGS-B', n_starting_points = 1,
                         debug_error = FALSE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, 
                         max_discrete_steps=100, plot=FALSE, discrete_fast = TRUE)
+    
     if(!is.null(output_liste) && !is.na(output_liste$value) && !is.infinite(output_liste$value)) {
       output <- new('optimParams', family = fam$family,
                    package = fam$package,
@@ -265,4 +301,4 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
           method = method,
           fits = output_liste)
   return(sort(r))
-}
+                          }
