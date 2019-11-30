@@ -34,8 +34,16 @@ setClass(Class = "optimParams",
            AIC = "numeric",
            BIC = "numeric",
            AICc = "numeric",
-           continuousParams = "logical",
-           range = 'character'
+           sanity = "list"
+         )
+)
+
+setClass(Class = "globalfitSummary",
+         slots = c(
+           data = "numeric",
+           continuity = "logical",
+           method = "character",
+           fits = "data.frame"
          )
 )
 

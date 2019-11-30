@@ -8,7 +8,11 @@
   Given data and a distribution family, this function optimises over the given continuous parameters of the function and returns the best fitted parameters and information criteria.
 }
 \usage{
-optimParamsContinuous(data, family, lower, upper, start_parameters, fixed)
+optimParamsContinuous(data, family, lower, upper, defaults, method = "MLE",
+		      fixed = list(), prior = NULL, log = TRUE,
+		      optim_method = "L-BFGS-B", n_starting_points = 1,
+		      debug_error = TRUE, show_optim_progress = FALSE,
+		      on_error_use_best_result = TRUE, no_second = FALSE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -39,8 +43,15 @@ optimParamsContinuous(data, family, lower, upper, start_parameters, fixed)
   \item{log}{
      logical; if TRUE (default) optimization is run over log-likelihood, requires log-likelihood as parameter in selected distribution family
   }
+  \item{optim_method}{
+     character string; specifies which optimisation algorithm R is to use internally. Generally recommended: \code{"L-BFGS-B"} (default). See \code{optim} for details.
+  }
+  \item{n_starting_points}{
+     integer; number of different starting values. Choosing more starting values might be helpful to avoid local but not global maxima.
+  }  
   \item{on_error_use_best_result}{
-     logical; if TRUE (default) if an error occurs/convergence is not established after the max. number of iterations, the best intermediate result achieved during optimisation process is returned as ooptimal parameter fit.}
+     logical; if TRUE (default) if an error occurs/convergence is not established after the max. number of iterations, the best intermediate result achieved during optimisation process is returned as optimal parameter fit.
+  }
   \item{debug_error}{
      logical; if TRUE (default) shows optimization progress in case an error occured during optimization
   }
@@ -48,7 +59,11 @@ optimParamsContinuous(data, family, lower, upper, start_parameters, fixed)
     logical; if TRUE always show the optimisation progress: last two iterations.
   }
   \item{no_second}{
-    logical; if TRUE the second run is ommitted. optimParams internally uses two optimisation runs: The first one is coarse and supplies us with intermediate parameters, which are in turn used during the second, more rigorous run.}
+    logical; if TRUE the second run is ommitted. optimParams internally uses two optimisation runs: The first one is coarse and supplies us with intermediate parameters, which are in turn used during the second, more rigorous run.
+  }
+  \item{...}{
+    other arguments passed down to lower level functions such as \code{optimParamsContinuous} or d[family].
+  }
 }
 
 \details{
@@ -76,12 +91,9 @@ optimParamsContinuous(data, family, lower, upper, start_parameters, fixed)
 % ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
- **objects to See Also as \code{\link{help}}, **~
+ \code{\link{optim}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
 
 \dontrun{
 # Example 1 for optimParam
@@ -92,7 +104,7 @@ upper <- c('mean' = Inf)
 fixed <- c('sd'=2)
 start_parameters <- c('mean' = 0)
 optimParamsContinuous(data = data, family=family, lower=lower, upper=upper, 
-start_parameters = start_parameters, 
+defaults = start_parameters, 
 fixed=fixed, log = T, show_optim_progress = TRUE)
 
 # Example 2 for optimParam
@@ -103,7 +115,7 @@ upper <- c('shape1' = Inf, 'shape2' = Inf)
 start_parameters <- c('shape1' = 1, 'shape2' = 1)
 fixed <- list()
 optimParamsContinuous(data =data, family = family, lower = lower, 
-upper = upper, start_parameters = start_parameters, 
+upper = upper, defaults = start_parameters, 
 log = T, show_optim_progress = TRUE)
 }
 

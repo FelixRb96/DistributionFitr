@@ -29,12 +29,9 @@
 ### but returned with good logliks (due to unkown reasons)
 
 
-fitting_sanity_check <- function(object, data, continuity, plot=FALSE) {
-  if(class(object)!='optimParams')
-    ## besser
-    ## if (!is(object, 'optimParams'))
-    stop('Wrong input.')
-
+fitting_sanity_check <- function(object, data, continuity, plot=FALSE, sensitivity = 1) {
+   if (!is(object, 'optimParams'))
+      stop('Wrong input.')
 
   ## der nachfolgende Code ist zu 80% der gleiche wie in output.R
   ## lohnt sich Hilfsfunktion Funktion mit Argumen, dass zwischen x<-h$mids
@@ -54,21 +51,23 @@ fitting_sanity_check <- function(object, data, continuity, plot=FALSE) {
   
   fun <- get_fun_from_package(type="d", family = object)
   param_list <- split(object@estimatedValues, names(object@estimatedValues))
-  param_list$x <- x
-  z <- do.call(fun, param_list)
-  
-  if(plot)
-    lines(x, z, col='red')
+  #return(list(fun, param_list))
+  density <- function(x) {
+    param_list$x <- x
+    y <- do.call(fun, param_list)
+    y <- ifelse(is.na(y), 0, y)
+    return(y)
+  }
+  int_check <- tryCatch(integrate(density, lower = -Inf, upper = Inf),
+                error = function(e) {
+                          message('Sanity Check. Calculate integral of density failed: ',e,'\n')
+                          return(list(value=Inf))
+                        } 
+      )
 
-  # meanquot <- sum(x)/sum(y)
-  # good <- meanquot > 0.01 & meanquot<100
-  
-  meanquot <- sum(diff(h$breaks) * z)
-  good <- meanquot > 0.5 & meanquot < 2
-  
-  return(list(meanquot=meanquot, good=good))
+  hist_check <- sum(diff(h$breaks) * density(x))
+  good <- (int_check$value > (1 - 0.05 * sensitivity)) & (hist_check > (1-0.3*sensitivity)) & 
+          (int_check$value < (1 + 0.05 * sensitivity)) & (hist_check < (1+0.3*sensitivity))
+
+  return(list(hist_check=hist_check, int_check=int_check$value, good=good))
 }
-
-
-#fitting_sanity_check(r@fits[[10]], rnorm(n = 1000, mean=10, sd=10), continuity = T, plot = T)
-

@@ -8,12 +8,19 @@
   Given data and a distribution family, this function optimises over the given continuous parameters of the function and returns the best fitted parameters and information criteria.
 }
 \usage{
-optimParamsDiscrete(data, family, lower, upper, start_parameters, fixed)
+optimParamsDiscrete(data, family, family_info, method = "MLE", prior = NULL, log = TRUE,
+		    optim_method = "L-BFGS-B", n_starting_points = 1, debug_error = FALSE,
+		    show_optim_progress = FALSE, on_error_use_best_result = TRUE,
+		    max_discrete_steps = 100, discrete_fast = TRUE, plot = FALSE,
+		    max_zoom_level = 4, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{data}{
      vector of data points
+  }
+  \item{family}{
+     list with two elements (character strngs): "family" (name of distribution family) and "package"
   }
   \item{family_info}{
      named list, as returned by get_params. See below for more details.
@@ -31,11 +38,35 @@ optimParamsDiscrete(data, family, lower, upper, start_parameters, fixed)
   \item{log}{
      logical; if TRUE (default) optimization is run over log-likelihood, requires log-likelihood as parameter in selected distribution family
   }
+  \item{optim_method}{
+     character string; specifies which optimisation method R is to use internally. Generally recommended: \code{"L-BFGS-B"} (default). See \code{optim} for details.
+  }
+  \item{n_starting_points}{
+     integer; number of different starting values. Choosing more starting values might be helpful to avoid local but not global maxima.
+  }
   \item{debug_error}{
      logical; if TRUE (default) shows optimization progress in case an error occures during optimization
   }
   \item{show_optim_progress}{
     logical; if TRUE, always show optimization progress
+  }
+  \item{on_error_use_best_result}{
+    logical; if TRUE (default) if an error occurs/convergence is not established after the max. number of iterations, the best intermediate result achieved during optimisation process is returned as optimal aprameter fit.
+  }
+  \item{max_discrete_steps}{
+    integer; if distribution has one integer-only parameter, this argument controls how many steps are allowed in our internal algorithm.
+  }
+  \item{discrete_fast}{
+    integer; if distribution has one integer-only parameter, this argument controls how rigorous convergence is identifies as such by our internal algorithm.
+  }
+  \item{plot}{
+    logical; if distribution has one integer-only parameter and TRUE, a plot of the convergence process will be provided. If FALSE (default) no such output.
+  }
+  \item{max_zoom_level}{
+    integer; if distribution has two or more integer-only parameters, this argument controls how many steps are allowed in our internal algorithm.
+  }
+  \item{...}{
+    other arguments passed down to the lower level functions, such as d[family].
   }
 }
 
@@ -44,16 +75,28 @@ optimParamsDiscrete(data, family, lower, upper, start_parameters, fixed)
   In the near future direct usage of \code{optim_params} will be deprecated in the DistributionFitR-package internally and will be replaced with always using this wrapper function. \\
 
   family_info is expected to be a named list as returned by get_params, with the entries:
-  \code{family} \\
-    family name of the distribution, e.g. for \code{runif(...)} -> "unif", or \code{dnorm(...)} -> "norm"
-  \code{lower} \\
-    named vector. names: parameter names. values: lower bounds of validity for each parameter.
-  \code{upper} \\
-    named vector. names: parameter names. values: upper bounds of validity for each parameter.
-  \code{defaults} \\
-    named vector. names: parameter names. values: some valid parameter values such that \code{d[...]} produces a valid result with the whole 'defaults' vector.
-  optional: \\
-    the other values returned by \code{get_params}, such as information on the support.
+  \itemize{
+    \item{
+      \code{family}
+      family name of the distribution, e.g. for \code{runif(...)} -> "unif", or \code{dnorm(...)} -> "norm"
+    }
+    \item{
+      \code{lower}
+      named vector. names: parameter names. values: lower bounds of validity for each parameter.
+    }
+    \item{
+      \code{upper}
+      named vector. names: parameter names. values: upper bounds of validity for each parameter.
+    }
+    \item{
+      \code{defaults}
+      named vector. names: parameter names. values: some valid parameter values such that \code{d[...]} produces a valid result with the whole 'defaults' vector.
+    }
+    \item{
+      optional: \\
+      the other values returned by \code{get_params}, such as information on the support.
+    }
+  }
 }
 \value{
   For \code{optim_params_wrapper} a list with components:
@@ -77,12 +120,9 @@ optimParamsDiscrete(data, family, lower, upper, start_parameters, fixed)
 % ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
- **objects to See Also as \code{\link{help}}, **~
+ \code{\link{optim}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
 
 \dontrun{
 # Example 1 for optimParam
@@ -91,8 +131,10 @@ family <- list(family='norm', package="stats")
 lower <- c('mean' = - Inf)
 upper <- c('mean' = Inf)
 fixed <- c('sd'=2)
-start_parameters <- c('mean' = 0)
-optimParamsDiscrete(data = data, family=family, lower=lower, upper=upper, start_parameters = start_parameters, fixed=fixed, log = T, show_optim_progress = TRUE)
+defaults <- c('mean' = 0)
+family_info <- list(lower, upper, fixed, defaults)
+optimParamsDiscrete(data = data, family=family, family_info = family_info,
+		    fixed=fixed, log = T, show_optim_progress = TRUE)
 
 # Example 2 for optimParam
 data <- rbeta(n=100, shape=10, shape2=2)
@@ -101,7 +143,9 @@ lower <- c('shape1' = 0, 'shape2' = 0)
 upper <- c('shape1' = Inf, 'shape2' = Inf)
 start_parameters <- c('shape1' = 1, 'shape2' = 1)
 fixed <- list()
-optimParamsDiscrete(data =data, family = family, lower = lower, upper = upper, start_parameters = start_parameters, log = T, show_optim_progress = TRUE)
+family_info <- list(lower, upper, fixed, defaults)
+optimParamsDiscrete(data =data, family = family, family_info = family_infom
+		    log = T, show_optim_progress = TRUE)
 }
 
 }

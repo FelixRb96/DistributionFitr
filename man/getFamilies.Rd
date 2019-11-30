@@ -8,7 +8,7 @@
    
 }
 \usage{
-getFamilies(all.packages, file="all_families.R")
+getFamilies(all.packages, file="R/all_families.R")
 
 }
 
@@ -17,7 +17,6 @@ getFamilies(all.packages, file="all_families.R")
   \item{all.packages}{
       vector of package names to scan for distribution families or
      \code{TRUE} to scan all packages  or \code{FALSE} to scan base packages only or \code{MISSING} to return families saved in file
-  \item Character string. Path of where to create file.
   }
   \item{file}{
       The path to the file, where the infos to the loaded distribution families is stored
@@ -25,11 +24,18 @@ getFamilies(all.packages, file="all_families.R")
 }
 
 \details{
-  This function stores all distribution families in a list of lists with following items
-  \item{package} name of package
-  \item{family} name of distribution family
-  \item{family_info} parameters and various characteristics as given by \code{getParams}
-  
+  This function stores all distribution families in a list of lists with following the items:
+  \itemize{
+    \item{
+      \code{package} name of package
+    }
+    \item{
+      \code{family} name of distribution family
+    }
+    \item{
+      \code{family_info} parameters and various characteristics as given by \code{getParams}
+    }
+  }
 }
 \value{
   this function always returns the list of lists as specified. 
