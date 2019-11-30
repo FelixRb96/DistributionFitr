@@ -82,7 +82,7 @@ get_all_params <- function(fam) {
 # ------------------------------------------------------------------------------------------
 
 ## MS namen startend mit . sind tabu
-.validate_values <- function(fam, n_or_nn, params, x_test) {
+validate_values <- function(fam, n_or_nn, params, x_test) {
   # try to generate a random number from the distribution
   rfun <- get_fun_from_package(type="r", family=fam)
   dfun <- get_fun_from_package(type="d", family=fam)
@@ -141,7 +141,7 @@ get_default_values <- function(all_params, fam) {
     # so we need to handle both
     curr_params <- c(with_defaults, combs_list[[i]])
     res <- suppressWarnings(tryCatch({
-      .validate_values(fam, n_or_nn, curr_params, x_test)
+      validate_values(fam, n_or_nn, curr_params, x_test)
     },
     error = function(e) {
       errors <<- union(errors, strsplit(as.character(e), ":", fixed = TRUE)[[1]][2])
@@ -193,7 +193,7 @@ check_values_for_param <- function(param, all_params, fam, values) {
       # overwrite the value of "param" to each of the "values" that should be tested
       all_params[[param]] <- x;
       tryCatch(
-        .validate_values(fam, n_or_nn, all_params, x_test),
+        validate_values(fam, n_or_nn, all_params, x_test),
       error=function(e) return(FALSE))
     })
   )
@@ -421,7 +421,7 @@ get_support <- function(fam, params) {
   for (param in names(low)) {
     # define n_test equally distributed values for the current param dependend on its adapted range from above
     param_choices <- seq(low[param], upp[param], length.out = n_test)
-    ## MS warum trunc und nicht round?
+    
     if (!params$accepts_float[param]) param_choices <- trunc(param_choices)
     
     # copy base choices to args_ so that we can change the value for the current param below
@@ -476,7 +476,7 @@ get_support <- function(fam, params) {
     
     # cat("After param", param, "--> \tsupport_min:", support_min, "\tsupport_max", support_max, "\n")
   }
-                                        # if minimum / maximum support is small / high enough we assume that the support is the whole real line
+  # if minimum / maximum support is small / high enough we assume that the support is the whole real line
   ## MS dito -50
   if (support_min <= -50) support_min <- -Inf
   if (support_max >= 50) support_max <- Inf
