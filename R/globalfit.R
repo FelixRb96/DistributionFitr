@@ -78,13 +78,12 @@ is.discrete <- function(data, border = 0.35, percent = 0.8){
     border <- 1 / obs
   }
 
-  
-  # if (n_unique_dec / obs <= border && any(numbers >= 4) && 
-  # some_percent(decs, numbers, percent)){
-  if (n_unique_dec / obs <= border && !any(numbers >= 4)) {
-    return(TRUE)
-  }else{
-    return(FALSE)
+  if (n_unique_dec / obs <= border && 
+      !any(numbers >= 4) && 
+      !some_percent(percent_df, percent)){
+    return(T)
+  } else {
+    return(F)
   }
 }
 

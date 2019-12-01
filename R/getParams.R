@@ -458,7 +458,7 @@ get_support <- function(fam, params) {
     
     # copy base choices to args_ so that we can change 
     # the value for the current param below
-    args_ <- base_choices
+    args <- base_choices
     
     get_result_mat <- function(param_choices){
       
@@ -587,6 +587,7 @@ getParams <- function(fam, package){
   
   return(result)
 }
+
 
 
 ### Open problems & TODO:
