@@ -43,7 +43,7 @@ Maintainer: Borui Niklas Zhu, \email{bzhu@mail.uni-mannheim.de}
  \code{\link{globalfit}},
  \code{\link{getFamilies}},
  \code{\link{getFamily}},
- \code{\link{loglik}},
+% \code{\link{loglik}},
 % \code{\link{optimParamsDiscrete}}, %MS
  \code{\link{getParams}}
 }
