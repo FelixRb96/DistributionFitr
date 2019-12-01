@@ -29,7 +29,8 @@ setMethod(f = "sort", signature = c('globalfit'),
           def = function(x, decreasing = TRUE, ic='AIC') {
             if(is.null(ic) || !(ic %in% c('AIC', 'BIC', 'AICc')))
               stop("Argument 'ic' must be 'AIC', 'BIC' or 'AICc'")
-            ic <- sapply(x@fits, function(x)  eval(parse(text = paste0('x@', ic))))
+            ic <- sapply(x@fits, function(x)  
+              eval(parse(text = paste0('x@', ic))))
             x@fits <- x@fits[order(ic)]
             return(x)
           })
@@ -52,24 +53,33 @@ setMethod(f = "summary", signature = c("globalfit"),
                                   eval(parse(text = paste0('object@', ic)))),
                              params = sapply(object@fits, function(object) 
                                       paste(names(object@estimatedValues),
-                                             signif(object@estimatedValues, digits = 3),
+                                             signif(object@estimatedValues, 
+                                                    digits = 3),
                                              sep= " = ", collapse='; ')))
             
             sum <- new("globalfitSummary",
                        data = object@data,
                        continuity = object@continuity,
                        method = object@method,
-                       fits = df[1:min(count, nrow(df)),]
+                       fits = df[1:min(count, nrow(df)),],
+                       ic = ic
                 )
             return(sum)
           })
 
 setMethod(f = "show", signature = c("globalfitSummary"),
           def = function(object) {
-            cat(length(object@data), 'data points entered.\nFitted with', 
-                object@method, 'assuming continuity:', # MS continuity of what?
-                object@continuity, '
-                \n\nBest fits:\n \n')
+            if(is.null(object@continuity)) {
+              cont <- ''
+            } else if(object@continuity) {
+              cont <- '\nAssumption: Data was generated from a continuous distribution.'
+            } else if(!object@continuity) {
+              cont <- '\nAssumption: Data was generated from a continuous distribution.'
+            }
+            cat(length(object@data), 'data points entered. Distributions where fitted via', 
+                object@method, 'estimation.',
+                cont, '
+                \nBest fits sorted by', object@ic, ':\n\n')
             print(object@fits, right=FALSE)
           }
 )
@@ -86,6 +96,8 @@ setMethod(f = "print", signature = c("globalfit"),
 	  }
 	  )
 
+## MK@MS: Du moechtest keine S4-Methode verwenden, 
+## oder warum hast du das umgeschrieben?
 if (FALSE) { ## MS
 setGeneric(name = "IC",		
            def = function(object, ...) standardGeneric("IC"))
@@ -101,9 +113,12 @@ setMethod(f = "IC", signature = c('globalfit'),
             count <- min(length(object@fits), count)
             object <- sort(object, ic=ic)
             object@fits <- object@fits[1:count]
-            x <- sapply(object@fits, function(object) eval(parse(text = paste0('object@', ic))))
-            names(x) <- paste(sapply(object@fits, function(object) object@package), 
-                              sapply(object@fits, function(object) object@family), sep = "::")
+            x <- sapply(object@fits, function(object) 
+                            eval(parse(text = paste0('object@', ic))))
+            names(x) <- paste(sapply(object@fits, function(object) 
+                                     object@package), 
+                              sapply(object@fits, function(object) 
+                                     object@family), sep = "::")
             return(x)            
           })
 }
@@ -162,12 +177,14 @@ setMethod(f = "hist", signature = c("globalfit"),
             } else {
               supporting_point <- seq(floor(lower)+0.5, ceiling(upper)+0.5)
             }
-            breaks <- if(x@continuity) sqrt(length(x@data)) else min(nclass.Sturges(x@data), length(unique(x@data)))
+            breaks <- if(x@continuity) sqrt(length(x@data)) else 
+                      min(nclass.Sturges(x@data), length(unique(x@data)))
             ## geht nachfolgendes nicht einfacher ueber direkte Aufrufe
             ## und/oder do.call ?
             
             fun <- get_fun_from_package(type="d", family = selected_fit)
-            param_list <- split(selected_fit@estimatedValues, names(selected_fit@estimatedValues))
+            param_list <- split(selected_fit@estimatedValues, 
+                                names(selected_fit@estimatedValues))
             param_list$x <- supporting_point
             density <- do.call(fun, param_list)
             
