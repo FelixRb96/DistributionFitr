@@ -26,7 +26,7 @@ The package contains the following functions:
 
 
 
-Borui Niklas Zhu, Benedikt Geier, Moritz Kern, Kiril Dik, Moritz Lauff, Manuel J. Hentschel, Adrian Heppeler, Niclas Lietzow, Till Freihaut, Tim Glockner, Nadine Tampe, Valentin V. Trotha, Leonardo Vela, André Ferdinand, Hélène Peter, Martin Schlather, Yiqi Li, Henrik Bengtsson
+Borui Niklas Zhu, Benedikt Geier, Moritz Kern, Kiril Dik, Moritz Lauff, Manuel J. Hentschel, Adrian Heppeler, Niclas Lietzow, Till Freihaut, Tim Glockner, Nadine Tampe, Valentin V. Trotha, Leonardo Vela, André Ferdinand, Hélène Peter, Yiqi Li, Martin Schlather.
   
 Maintainer: Borui Niklas Zhu, \email{bzhu@mail.uni-mannheim.de}   
 }
