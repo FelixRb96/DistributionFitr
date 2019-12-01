@@ -24,5 +24,6 @@ bibentry(bibtype = "Manual",
                     person("Henrik", "Bengtsson", role="ctb")),
         year = year,          
         note = note,          
-        url = "https://CRAN.R-project.org/package=DistributionFitR"
+        url = "https://github.com/YCartes/DistributionFitr/tree/develop"
+#        url = "https://CRAN.R-project.org/package=DistributionFitR"
         )
