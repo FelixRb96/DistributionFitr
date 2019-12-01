@@ -1,4 +1,4 @@
-r <- globalfit(rnorm(n = 1000, mean=10, sd=1))
+r <- globalfit(rnorm(n = 1000, mean=10, sd=1), stats_only = FALSE, packages = c("bundesbank"))
 
 summary(r, count=10)
 hist(r)
@@ -7,7 +7,7 @@ for(i in 1:20) {
   Sys.sleep(1)
 }
 
-r <-globalfit(rgamma(n = 1000, shape=3, rate = 4))
+r <- globalfit(rgamma(n = 1000, shape=3, rate = 4))
 summary(r, ic='BIC')
 summary(r, ic='AICc')
 summary(r, ic='BIC', count=7)

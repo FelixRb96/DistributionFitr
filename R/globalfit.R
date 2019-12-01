@@ -147,7 +147,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
   # TODO: this is the highest level function: input validation!
   
   if (stats_only && length(packages) > 0) {
-    message("As 'stats_only' is set to TRUE the additional packages provided in argument 'packages' will be ignored.")
+    message("As 'stats_only' is set to TRUE, argument 'packages' will be ignored.")
   }
 
   families <- FamilyList
@@ -159,8 +159,9 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
     
     if(is.vector(packages) && typeof(packages) == "character") {
       
+      missing_pkgs <- setdiff(packages, rownames(installed.packages()))
       if (length(missing_pkgs) > 0) {
-        message("The following packages were provided to argument 'packages' but are not installed, so they will be ignored. ",
+        message("The following packages were provided to argument 'packages' but are not installed, so they will be ignored.\n",
                 "Please install manually: ",
                 paste(missing_pkgs, collapse = ", "))
       }
@@ -173,12 +174,12 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
       if (length(additionals) > 0) {
         message("The following packages were provided in argument 'packages' but are not part of the default set of packages: ",
                 paste(additionals, collapse=", "),
-                "\nThus the distribution families in those packages need to be extracted now, which might take some time. ",
+                "\nThus the distribution families in those packages need to be extracted now, which might take some time.\n",
                 "When executed multiple times, consider extracting those families once with 'getFamilies(packages)' ",
                 "and provide the result of that to argument 'packages.'")
         additionals_info <- iterate_packages(additionals)
         if (length(additionals_info) == 0) {
-          message("No distribution families found in the additionally provided packages.")
+          message("No distribution families found in the packages provided manually.")
         }
       } else {
         additionals_info <- list()
@@ -205,7 +206,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
   }
 
   if (length(families) == 0) {
-    stop("The provided input to argument 'packages' didn't contain any distribution family. Can't optimize.")
+    stop("The provided input to argument 'packages' didn't contain any distribution family. Can not optimize.")
   }
 
   if(max_dim_discrete < Inf) { # filter out those distributions that have too many discrete parameters.
@@ -242,7 +243,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
   if(is.null(cores))
     cores <- detectCores()
   if(progress)
-    message('Parallized over ', cores, ' cores.\n')
+    message('Parallelizing over ', cores, ' cores.\n')
   cl <- makeCluster(cores, outfile='log.txt')
   registerDoParallel(cl)
 
