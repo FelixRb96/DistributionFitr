@@ -1,4 +1,4 @@
-r <- globalfit(rnorm(n = 1000, mean=10, sd=1), stats_only = FALSE, packages = c("bundesbank"))
+r <- globalfit(rnorm(n = 1000, mean=10, sd=1), stats_only = TRUE)
 
 summary(r, count=10)
 hist(r)
