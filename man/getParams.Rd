@@ -8,12 +8,18 @@
   Given a distribution family, this function attempts to retrieve the distribution parameters and various characteristics, such as: valid parameter ranges, whether they accept non-integer values and the support of the distribution.
 }
 \usage{
-getParams(fam)
+getParams(fam, package)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{fam}{
-     List with two entries: "package" and "family", e.g. list(package="stats", family="beta")  }
+    character or list.
+    If \code{fam} is a list or a named vector,
+    then it has the two entries "package" and
+    "family", e.g. list(package="stats", family="beta")  }
+  \item{package}{character. Optional argument if \code{fam} is given.
+    In most cases the package can be determined by \command{getParams} itself.
+  }
 }
 
 \details{

@@ -102,6 +102,8 @@ setMethod(f="get_fun_from_package",
             return(get_fun_from_package_internal(type, family, package))
           })
 
+
+
 # fam <- list(package="stats", family="norm")
 # 
 # # with optimParams object

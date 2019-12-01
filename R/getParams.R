@@ -44,7 +44,7 @@
 # ----------------------------------------------------------------------
 
 get_all_params <- function(fam) {
-  # idea: all params need to be present in the r... method for generating random samples from the distribution
+                                        # idea: all params need to be present in the r... method for generating random samples from the distribution
   
   fun <- get_fun_from_package(type="r", family=fam)
   all_params <- formals(fun)
@@ -491,10 +491,35 @@ get_support <- function(fam, params) {
 # --------------------------------------------------------------------------------
 
 # Input:
-  # fam: list-> package: package_name, family: name of distribution family inside package
-getParams <- function(fam){
+                                        # fam: list-> package: package_name, family: name of distribution family inside package
+
+
+## MS
+standardizeFam <- function(fam, package){ 
+  if (missing(package) || length(package) == 0) {
+    if (!is(fam, "optimParams") && !is.list(fam)) {
+      if (!is.character(fam)) stop("the family must be a character string")
+      if (length(fam) == 2) {
+        fam <- list(fam["family"], package=fam["package"])
+      }
+      if (length(fam) == 1) {
+        names <- sapply(FamilyList, function(x) x$family)
+        idx <- pmatch(fam, names)
+        if (is.na(idx))
+          stop("the family cannot be identified without the explicitely given argument 'package'")
+        fam <- list(family=fam, package=FamilyList[[idx]]$package)
+      } else stop("length of the family must be one")
+    }
+  } else {
+    fam <- list(family=fam, package=package)
+  }
+  return(fam)
+}
+
+getParams <- function(fam, package){
+  fam <- standardizeFam(fam, package) ## MS
   # fam <- family$family
-  
+
   # 1) Get list of all parameters:
   all_params <- get_all_params(fam)
   
