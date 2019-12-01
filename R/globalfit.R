@@ -2,7 +2,7 @@
 ## Moritz Lauff, mlauff@mail.uni-mannheim.de
 ## Kiril Dik, kdik@mail.uni-mannheim.de
 ## Moritz Kern, mkern@mail.uni-mannheim.de
-## Nadine Tampe
+## Nadine Tampe, ntampe@mail.uni-mannheim.de
 ## Borui Niklas Zhu, bzhu@mail.uni-mannheim.de
 ## Benedikt Geier, bgeier@mail.uni-mannheim.de
 ##
@@ -265,7 +265,10 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
                     collapse = ", "))
 
   if(is.null(cores))
-    cores <- detectCores()
+    CRAN_check_limit <- Sys.getenv("_R_CHECK_LIMIT_CORES_", "")
+    if(length(CRAN_check_limit) > 0 && CRAN_check_limit == TRUE) cores <- 2
+    # CRAN_check_limit == TRUE because it might not be a boolean
+    else cores <- detectCores()
   if(progress)
     message('Parallelizing over ', cores, ' cores.\n')
   cl <- makeCluster(cores, outfile='log.txt')
