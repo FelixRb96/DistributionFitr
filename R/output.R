@@ -74,7 +74,7 @@ setMethod(f = "show", signature = c("globalfitSummary"),
             } else if(object@continuity) {
               cont <- '\nAssumption: Data was generated from a continuous distribution.'
             } else if(!object@continuity) {
-              cont <- '\nAssumption: Data was generated from a continuous distribution.'
+              cont <- '\nAssumption: Data was generated from a discrete distribution.'
             }
             cat(length(object@data), 'data points entered. Distributions where fitted via', 
                 object@method, 'estimation.',

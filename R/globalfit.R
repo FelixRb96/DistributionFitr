@@ -78,13 +78,12 @@ is.discrete <- function(data, border = 0.35, percent = 0.8){
     border <- 1 / obs
   }
 
-  
-  # if (n_unique_dec / obs <= border && any(numbers >= 4) && 
-  # some_percent(decs, numbers, percent)){
-  if (n_unique_dec / obs <= border && !any(numbers >= 4)) {
-    return(TRUE)
-  }else{
-    return(FALSE)
+  if (n_unique_dec / obs <= border && 
+      !any(numbers >= 4) && 
+      !some_percent(percent_df, percent)){
+    return(T)
+  } else {
+    return(F)
   }
 }
 
@@ -159,8 +158,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
   # TODO: this is the highest level function: input validation!
   
   if (stats_only && length(packages) > 0) {
-    message("As 'stats_only' is set to TRUE the additional packages 
-            provided in argument 'packages' will be ignored.")
+    message("As 'stats_only' is set to TRUE, argument 'packages' will be ignored.")
   }
 
   families <- FamilyList
@@ -173,6 +171,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
     
     if(is.vector(packages) && typeof(packages) == "character") {
       
+      missing_pkgs <- setdiff(packages, rownames(installed.packages()))
       if (length(missing_pkgs) > 0) {
         message("The following packages were provided to argument 'packages' 
                 but are not installed, so they will be ignored. ",
@@ -275,7 +274,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
   if(is.null(cores))
     cores <- detectCores()
   if(progress)
-    message('Parallized over ', cores, ' cores.\n')
+    message('Parallelizing over ', cores, ' cores.\n')
   cl <- makeCluster(cores, outfile='log.txt')
   registerDoParallel(cl)
 

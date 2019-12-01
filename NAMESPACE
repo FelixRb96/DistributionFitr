@@ -1,5 +1,3 @@
-export(globalfit, getFamilies, getFamily, getParams)
-
 import(utils)
 import(stats)
 import(stringr)
@@ -10,3 +8,6 @@ import(methods)
 import(parallel)
 import(doParallel)
 import(foreach)
+
+export(globalfit, getFamilies, getFamily, getParams)
+exportMethods(summary, hist)
