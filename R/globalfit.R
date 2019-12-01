@@ -159,12 +159,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
   # TODO: this is the highest level function: input validation!
   
   if (stats_only && length(packages) > 0) {
-<<<<<<< HEAD
     message("As 'stats_only' is set to TRUE, argument 'packages' will be ignored.")
-=======
-    message("As 'stats_only' is set to TRUE the additional packages 
-            provided in argument 'packages' will be ignored.")
->>>>>>> 9e2be3ad7c9b94fa6e7a5d686f3fed6ff9e9c53c
   }
 
   families <- FamilyList
