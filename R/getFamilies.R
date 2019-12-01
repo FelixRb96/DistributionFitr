@@ -88,13 +88,18 @@ construct_package_list <- function(all.packages) {
 
 
 write_file <- function(FamilyList, file = "R/all_families.R") {
-  dump("FamilyList", file = file)
-  #when bottleneck is solved:
-  #con <- file("all_families.R")
-  #open(con, "w")
-  #write("FamilyList<-", con)
-  #dput(x=FamilyList, file=con)
-  #close(con)
+  for (i in 1:length(FamilyList)) {
+    for (j in 1:length(FamilyList[[i]]$family_info)){
+      ij = FamilyList[[i]]$family_info[[j]]
+      if (is.double(ij)) {
+        FamilyList[[i]]$family_info[[j]] <- round(ij, 5)
+      }
+      
+    }
+  }
+  
+  dump(list="FamilyList", file=file)
+
   
 }
 
