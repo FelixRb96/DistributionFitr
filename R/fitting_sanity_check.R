@@ -42,8 +42,8 @@ fitting_sanity_check <- function(object, data, continuity, plot=FALSE,
   
   fun <- get_fun_from_package(type="d", family = object)
   param_list <- split(object@estimatedValues, names(object@estimatedValues))
-  #return(list(fun, param_list))
-  density <- function(x) {
+
+    density <- function(x) {
     param_list$x <- x
     y <- do.call(fun, param_list)
     y <- ifelse(is.na(y), 0, y)
@@ -64,7 +64,6 @@ fitting_sanity_check <- function(object, data, continuity, plot=FALSE,
     # apart from the first one
     hist_check <- sum(diff(h$breaks) * density(h$breaks[2:length(h$breaks)]))
     
-    ## BG: Do we need an int check in discrete case???
     int_check <- list(value=1)
   }
 
