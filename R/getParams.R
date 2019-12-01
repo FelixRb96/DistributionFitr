@@ -44,9 +44,9 @@
 # ----------------------------------------------------------------------
 
 get_all_params <- function(fam) {
-  # idea: all params need to be present in the r... method for generating random samples from the distribution
+                                        # idea: all params need to be present in the r... method for generating random samples from the distribution
   
-  fun <- get_fun_from_package(fam = fam$family, package = fam$package, type="r")
+  fun <- get_fun_from_package(type="r", family=fam)
   all_params <- formals(fun)
   
   # if "nn" is contained then "n" is probably a real param , c.f. rhyper
@@ -82,10 +82,10 @@ get_all_params <- function(fam) {
 # ------------------------------------------------------------------------------------------
 
 ## MS namen startend mit . sind tabu
-.validate_values <- function(fam, n_or_nn, params, x_test) {
+validate_values <- function(fam, n_or_nn, params, x_test) {
   # try to generate a random number from the distribution
-  rfun <- get_fun_from_package(fam = fam$family, package = fam$package, type="r")
-  dfun <- get_fun_from_package(fam = fam$family, package = fam$package, type="d")
+  rfun <- get_fun_from_package(type="r", family=fam)
+  dfun <- get_fun_from_package(type="d", family=fam)
   
   r <- do.call(rfun, c(n_or_nn, params))
   # additionally check whether values are valid for density function
@@ -129,7 +129,7 @@ get_default_values <- function(all_params, fam) {
   valid_params <- NULL
   
   # parameter that describes the number of random numbers to take, usually "n", but in cases like hyper "nn"
-  rfun <- get_fun_from_package(fam = fam$family, package = fam$package, type="r")
+  rfun <- get_fun_from_package(type="r", family=fam)
   n_or_nn <- if (! "nn" %in% names(formals(rfun))) list(n=1) else list(nn=1)
   x_test <- list(x=seq(-10, 10, 1))
   
@@ -141,7 +141,7 @@ get_default_values <- function(all_params, fam) {
     # so we need to handle both
     curr_params <- c(with_defaults, combs_list[[i]])
     res <- suppressWarnings(tryCatch({
-      .validate_values(fam, n_or_nn, curr_params, x_test)
+      validate_values(fam, n_or_nn, curr_params, x_test)
     },
     error = function(e) {
       errors <<- union(errors, strsplit(as.character(e), ":", fixed = TRUE)[[1]][2])
@@ -184,7 +184,7 @@ get_default_values <- function(all_params, fam) {
 check_values_for_param <- function(param, all_params, fam, values) {
   
   # parameter that describes the number of random numbers to take, usually "n", but in cases like hyper "nn"
-  rfun <- get_fun_from_package(fam = fam$family, package = fam$package, type="r")
+  rfun <- get_fun_from_package(type="r", family=fam)
   n_or_nn <- if (! "nn" %in% names(formals(rfun))) list(n=1) else list(nn=1)
   x_test <- list(x=seq(-10, 10, 1))
   
@@ -193,7 +193,7 @@ check_values_for_param <- function(param, all_params, fam, values) {
       # overwrite the value of "param" to each of the "values" that should be tested
       all_params[[param]] <- x;
       tryCatch(
-        .validate_values(fam, n_or_nn, all_params, x_test),
+        validate_values(fam, n_or_nn, all_params, x_test),
       error=function(e) return(FALSE))
     })
   )
@@ -353,19 +353,15 @@ get_param_ranges <- function(all_params, fam) {
 
 ### Function that checks if log is working ---------------------------------------------------------------------------
 check_log <- function(fam) {
-  dfun <- get_fun_from_package(fam = fam$family, package = fam$package, type="d")
+  dfun <- get_fun_from_package(type="d", family=fam)
   ## MS 'log' %in% names(formals(dfun))  ## mehr nicht !!!
-  if('log' %in% names(formals(dfun))) {
-    return(T)
-  } else {
-    return(F)
-  }
+  return('log' %in% names(formals(dfun)))
 }
 
 
 ### Function that checks whether a family is a discrete distribution, that is it only takes integers as values ----------
 check_integer <- function(fam, all_params) {
-  rfun <- get_fun_from_package(fam = fam$family, package = fam$package, type="r")
+  rfun <- get_fun_from_package(type="r", family=fam)
   n_test <- 10
   n_or_nn <- if (! "nn" %in% names(formals(rfun))) list(n=n_test) else list(nn=n_test)
   args_ <- c(all_params, n_or_nn)
@@ -420,12 +416,12 @@ get_support <- function(fam, params) {
   support_min <- Inf
   support_max <- -Inf
   
-  dfun <- get_fun_from_package(fam = fam$family, package = fam$package, type="d")
+  dfun <- get_fun_from_package(type="d", family=fam)
   
   for (param in names(low)) {
     # define n_test equally distributed values for the current param dependend on its adapted range from above
     param_choices <- seq(low[param], upp[param], length.out = n_test)
-    ## MS warum trunc und nicht round?
+    
     if (!params$accepts_float[param]) param_choices <- trunc(param_choices)
     
     # copy base choices to args_ so that we can change the value for the current param below
@@ -480,7 +476,7 @@ get_support <- function(fam, params) {
     
     # cat("After param", param, "--> \tsupport_min:", support_min, "\tsupport_max", support_max, "\n")
   }
-                                        # if minimum / maximum support is small / high enough we assume that the support is the whole real line
+  # if minimum / maximum support is small / high enough we assume that the support is the whole real line
   ## MS dito -50
   if (support_min <= -50) support_min <- -Inf
   if (support_max >= 50) support_max <- Inf
@@ -495,10 +491,35 @@ get_support <- function(fam, params) {
 # --------------------------------------------------------------------------------
 
 # Input:
-  # fam: list-> package: package_name, family: name of distribution family inside package
-getParams <- function(fam){
+                                        # fam: list-> package: package_name, family: name of distribution family inside package
+
+
+## MS
+standardizeFam <- function(fam, package){ 
+  if (missing(package) || length(package) == 0) {
+    if (!is(fam, "optimParams") && !is.list(fam)) {
+      if (!is.character(fam)) stop("the family must be a character string")
+      if (length(fam) == 2) {
+        fam <- list(fam["family"], package=fam["package"])
+      }
+      if (length(fam) == 1) {
+        names <- sapply(FamilyList, function(x) x$family)
+        idx <- pmatch(fam, names)
+        if (is.na(idx))
+          stop("the family cannot be identified without the explicitely given argument 'package'")
+        fam <- list(family=fam, package=FamilyList[[idx]]$package)
+      } else stop("length of the family must be one")
+    }
+  } else {
+    fam <- list(family=fam, package=package)
+  }
+  return(fam)
+}
+
+getParams <- function(fam, package){
+  fam <- standardizeFam(fam, package) ## MS
   # fam <- family$family
-  
+
   # 1) Get list of all parameters:
   all_params <- get_all_params(fam)
   

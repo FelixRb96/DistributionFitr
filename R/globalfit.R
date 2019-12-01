@@ -3,10 +3,11 @@
 ## Kiril Dik, kdik@mail.uni-mannheim.de
 ## Moritz Kern, mkern@mail.uni-mannheim.de
 ## Nadine Tampe
+## Borui Niklas Zhu, bzhu@mail.uni-mannheim.de
 ##
 ## Fit multiple distribution families to a given univariate dataset
 ##
-## Copyright (C) 2019 -- 2020 Moritz Lauff
+## Copyright (C) 2019 -- 2020 Moritz Lauff, Kiril Dik, Moritz Kern, Nadine Tampe, Borui Niklas Zhu
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -21,7 +22,6 @@
 ## You should have received a copy of the GNU General Public License
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-
 
 
 
@@ -42,17 +42,18 @@ getDecimals <- function(x){
   
 }
 
-#' some_percent: wenn fuer eine gegebene Anzahl an Dezimalstellen mindestens der Ante?l percent
+#' some_percent: wenn fuer eine gegebene Anzahl an Dezimalstellen mindestens der Anteil percent
 #'               an moeglichen Dezimalen (von 10) auftreten, wird TRUE zurueckgegeben 
-some_percent <- function(df, percent){
-  for (i in min(df$numbers):max(df$numbers)){
-    if (length(unique(df$decimals[df$numbers == i])) >= percent * 10){
-      return(T) ## TRUE
+
+some_percent <- function(decs, numbers, percent){
+  for (i in min(numbers):max(numbers)){
+    if (length(unique(decs[numbers == i])) >= percent * 10){
+      return(TRUE) 
     }
   }
-  
-  return(F) ## dito
+  return(FALSE)
 }
+
 
 # Testen, ob Daten diskret sind
 is.discrete <- function(data, border = 0.35, percent = 0.8){
@@ -75,27 +76,15 @@ is.discrete <- function(data, border = 0.35, percent = 0.8){
     border <- 1 / obs
   }
 
-  ## bitte nichts zu einem data.frame zusammenfassen, was
-  ## intern einfach anders handhabbar ist
-  percent_df <- data.frame(decimals = decs,
-                           numbers = numbers)
   
-  ## das sollte man alles (oder weitgehend) mit &&, || zu 1 Return
-  ## zusammenfassen koennen
-  if (n_unique_dec / obs <= border){
-    if (any(numbers >= 4)){
-      return(F)
-    } else {
-       if (some_percent(percent_df, percent)){
-        return(F) 
-      } else {
-        return(T)
-      }
-    }
-  } else {
-    return(F)
+  # if (n_unique_dec / obs <= border && any(numbers >= 4) && some_percent(decs, numbers, percent)){
+  if (n_unique_dec / obs <= border && !any(numbers >= 4)) {
+    return(TRUE)
+  }else{
+    return(FALSE)
   }
 }
+
 
 # Behandlung diskreter nicht-ganzzahliger Daten
 disc_trafo <- function(data){
@@ -121,7 +110,7 @@ disc_trafo <- function(data){
     
     return(list(data = data_new,
                 trafo_df = decimals,
-                discrete = T,
+                discrete = TRUE,
                 trafo_decription = paste0("Divide the simulated data by ",
                                           m,
                                           " and replace the decimals c(", 
@@ -133,7 +122,7 @@ disc_trafo <- function(data){
   } else {
     return(list(data = data,
                 trafo_df = NULL,
-                discrete = F,
+                discrete = FALSE,
                 trafo_decription = NULL))
   }
   
@@ -143,60 +132,127 @@ disc_trafo <- function(data){
 
 ### 2) Main Function --------------------------------------------------------------------------
 
-globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE, cores = NULL, ...){
+globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
+                      stats_only = TRUE,
+                      packages = NULL, append_packages = TRUE,
+                      perform_check = TRUE, cores = NULL, max_dim_discrete = Inf, sanity_level = 1, ...){
 
-  families <- getFamilies()
+# WIP:
+# packages: either (1) character vector with package names, i.e.: packages = c("bla", "bundesbank", "secret")
+# 	    		if NULL (default): use packages in FamilyList as given
+# 	    or     (2) list analogously to FamilyList
+# append_packages: required if length(extra_packages) > 0, else ignored
+#            	   if TRUE (default), scan over existing packages in FamilyList AND the ones specified in extra_packages,
+# 	     	   else FALSE: only scan in packages provided in extra_packages
+  # TODO: this is the highest level function: input validation!
+  
+  if (stats_only && length(packages) > 0) {
+    message("As 'stats_only' is set to TRUE the additional packages provided in argument 'packages' will be ignored.")
+  }
 
-  discrete_families <- sapply(families, function(x) x$family_info$discrete)
-  discrete_families <- which(discrete_families) # Indizes zu diskreten Verteilungen
+  families <- FamilyList
+
+  if(stats_only) {
+      families <- families[ which(sapply(families, function(x) x$package == "stats")) ]
+      
+  } else if(length(packages) > 0) {
+    
+    if(is.vector(packages) && typeof(packages) == "character") {
+      
+      if (length(missing_pkgs) > 0) {
+        message("The following packages were provided to argument 'packages' but are not installed, so they will be ignored. ",
+                "Please install manually: ",
+                paste(missing_pkgs, collapse = ", "))
+      }
+      
+      packages <- intersect(packages, rownames(installed.packages()))
+      
+      known_packages <- unique(sapply(families, function(x) x$package))
+      
+      additionals <- setdiff(packages, known_packages)
+      if (length(additionals) > 0) {
+        message("The following packages were provided in argument 'packages' but are not part of the default set of packages: ",
+                paste(additionals, collapse=", "),
+                "\nThus the distribution families in those packages need to be extracted now, which might take some time. ",
+                "When executed multiple times, consider extracting those families once with 'getFamilies(packages)' ",
+                "and provide the result of that to argument 'packages.'")
+        additionals_info <- iterate_packages(additionals)
+        if (length(additionals_info) == 0) {
+          message("No distribution families found in the additionally provided packages.")
+        }
+      } else {
+        additionals_info <- list()
+      }
+      
+      # add the manual ones to FamilyList as used in default
+      if(append_packages) {
+        families <- c(families, additionals_info)
+        
+      # ignore whatever else is in FamilyList
+      } else {
+        known <- packages[! packages %in% additionals] # these are specified by the user, but params are known
+        known <- families[ which(sapply(families, function(x) x$package %in% known)) ]
+        families <- c(known, additionals_info)
+      }
+      
+    } else if(is.list(packages)) {
+      if(append_packages) {
+	      families <- c(families, additionals)
+      } else {
+	      families <- packages
+      }
+    }
+  }
+  
+  if (length(families) == 0) {
+    stop("The provided input to argument 'packages' didn't contain any distribution family. Can't optimize.")
+  }
+
+  if(max_dim_discrete < Inf) { # filter out those distributions that have too many discrete parameters.
+    families <- families[which(sapply(families, function(x) sum(x$family_info$discrete) <= max_dim_discrete )) ]
+  }
+  
+  # Indizes zu diskreten Verteilungen
+  discrete_families <- which(sapply(families, function(x) x$family_info$discrete))
   
   if (is.null(continuity)){
     
     trafo_list <- disc_trafo(data)
     data <- trafo_list$data
     relevant_families <- if(trafo_list$discrete) families[discrete_families] else families[-discrete_families]
-    continuity <- ifelse(trafo_list$discrete, F, T)
+    continuity <- ifelse(trafo_list$discrete, FALSE, TRUE)
     
-  } else if (continuity ){
-    
-    relevant_families <- families[-discrete_families]
-    
-  } else if(!continuity) { ## gibt es noch andere moeglichkeiten ?
-    
-    relevant_families <- families[discrete_families]
-    
-  } else { ## sicher dass das else jemals erreiht wird ?
-    
-    stop("The argument 'continuity' has to be either NULL, TRUE or FALSE.")
-    
+  } else {
+    relevant_families <-  families[if (continuity) -discrete_families else discrete_families]
   }
-  
-  ## bitte obige Kommentare durcharbeiten, dann ersetzen durch
-  ## relevant_families <- families[if (continuity) -discrete_families else discrete_families]
-  
-  
-  # TODO: How do we handle not yet installed packages? Force install or warn and ignore?
-  
+
+  # Again check that all of the families that should be compared are also installed
   all_pkgs <- sapply(relevant_families, function(x) x$package)
   all_pkgs_unique <- unique(all_pkgs)
   missing_pkgs <- setdiff(all_pkgs_unique, rownames(installed.packages()))
   if (length(missing_pkgs) > 0) {
     message("The following packages are not installed, and are thus ignored during optimisation. ",
-            "If you want to use them please install manually:", paste(missing_pkgs, collapse=", "))
+            "If you want to use them please install manually: ", paste(missing_pkgs, collapse=", "))
     relevant_families <- relevant_families[!(all_pkgs %in% missing_pkgs)]
   }
   
   if(progress)
-      message("Comparing the following distribution families:", paste(sapply(relevant_families, function(x) x$family), collapse = ", "))
+      message("Comparing the following distribution families: ", paste(sapply(relevant_families, function(x) x$family), collapse = ", "))
 
   if(is.null(cores))
     cores <- detectCores()
+  if(progress)
+    message('Parallized over ', cores, ' cores.\n')
   cl <- makeCluster(cores, outfile='log.txt')
   registerDoParallel(cl)
   
-  output_liste <- foreach(i=1:length(relevant_families), .packages = c(), .errorhandling = 'remove') %dopar% {
-  #for (fam in relevant_families) {
-    source('private/source_all.R') ## keine Konstanten im Code
+  i <- NULL ## BNZ: to prevent an issue, seems to be related to parallel. Don't ask me why o.O
+  output_liste <- foreach(i=1:length(relevant_families), .packages = c(), .errorhandling = 'remove',
+                          .verbose = FALSE, .export = c('fitting_sanity_check'), .inorder = FALSE) %dopar% {
+    
+    # TODO: for me this is not working without this line, although we need to drop the line                      
+    source("private/source_all.R")
+                            
     fam <- relevant_families[[i]]
     if(progress)
       message("Current Family: ",  fam$family)
@@ -208,6 +264,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE, 
                         optim_method = 'L-BFGS-B', n_starting_points = 1,
                         debug_error = FALSE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, 
                         max_discrete_steps=100, plot=FALSE, discrete_fast = TRUE)
+    
     if(!is.null(output_liste) && !is.na(output_liste$value) && !is.infinite(output_liste$value)) {
       output <- new('optimParams', family = fam$family,
                    package = fam$package,
@@ -215,16 +272,17 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE, 
                    log_lik = output_liste$value,
                    AIC = output_liste$AIC,
                    BIC = output_liste$BIC,
-                   AICc = output_liste$AICc,
-                   continuousParams = NA, # hier muss noch was passieren
-                   range = 'not_implemented') # hier muss noch was passieren
-      # aim: check whether solution has good loglik but does not fit
+                   AICc = output_liste$AICc) 
+      # aim: check whether solution has good loglik but does not fit nonetheless
       # experimental feature - please watch out!
-      sanity_check <- fitting_sanity_check(output, data, continuity = continuity)
+      if(perform_check) {
+        sanity_check <- fitting_sanity_check(output, data, continuity = continuity, sensitivity = sanity_level)
+        output@sanity <- sanity_check
+      }
     } else {
-      sanity_check <- list(good=FALSE, meanquot=NA)## FALSE
+      if(perform_check) sanity_check <- list(hist_check=NA, int_check=NA, good=FALSE)
     }
-    if(!sanity_check$good)
+    if(perform_check && !sanity_check$good) {
       output <- new('optimParams', 
                     family = fam$family,
                     package = fam$package,
@@ -232,15 +290,15 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE, 
                     AIC = NA_integer_,
                     BIC = NA_integer_,
                     AICc = NA_integer_,
-                    continuousParams = NA, # hier muss noch was passieren
-                    range = 'not_implemented') # hier muss noch was passieren
+                    sanity = sanity_check)
+    }
     return(output)
   }
   stopCluster(cl)
   
-  return(new('globalfit', data = data, 
-             continuity = continuity,
-             method = method,
-             fits = output_liste))
-}
-
+  r <- new('globalfit', data = data, 
+          continuity = continuity,
+          method = method,
+          fits = output_liste)
+  return(sort(r))
+                          }

@@ -43,16 +43,17 @@ Maintainer: Borui Niklas Zhu, \email{bzhu@mail.uni-mannheim.de}
 
 \examples{
 #example for getFamily
+\dontrun{
 library(stats)
 getFamily('stats')
 
 #example for getParams
-parameter_characteristics <- getParams("beta")
-
+parameter_characteristics <- getParams(list(package = "stats", family = "beta"))
+}
 }
 
 
-\keyword{distributionfitr, distribution, parameters }
+\keyword{distributionfitr, distribution, parameters}
 \references{
 Zucchini, W. (2000). An introduction to model selection. Journal of mathematical psychology, 44(1), 41-61.
 

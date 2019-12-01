@@ -1,19 +1,16 @@
-
 r <- globalfit(rnorm(n = 1000, mean=10, sd=1))
 
-summary(r, count=10, which=2)  
+summary(r, count=10)
 hist(r)
 for(i in 1:20) {
   tryCatch(hist(r, which=i), error=function(x) return(NA))
   Sys.sleep(1)
 }
 
-r <-globalfit(rgamma(n = 10000, shape=3, rate = 4))
+r <-globalfit(rgamma(n = 1000, shape=3, rate = 4))
 summary(r, ic='BIC')
 summary(r, ic='AICc')
-summary(r, which=1:3)
-summary(r, which=2, count=5)
-summary(r, ic='BIC', which=7, count=7)
+summary(r, ic='BIC', count=7)
 hist(r, ic='BIC')
 hist(r, ic='BIC', which=7)
 hist(r, ic='BIC', which=18)

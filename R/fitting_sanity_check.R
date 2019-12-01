@@ -29,13 +29,9 @@
 ### but returned with good logliks (due to unkown reasons)
 
 
-fitting_sanity_check <- function(object, data, continuity, plot=F##ALSE
-                                 ) {
-  if(class(object)!='optimParams')
-    ## besser
-    ## if (!is(object, 'optimParams'))
-    stop('Wrong input.')
-
+fitting_sanity_check <- function(object, data, continuity, plot=FALSE, sensitivity = 1) {
+   if (!is(object, 'optimParams'))
+      stop('Wrong input.')
 
   ## der nachfolgende Code ist zu 80% der gleiche wie in output.R
   ## lohnt sich Hilfsfunktion Funktion mit Argumen, dass zwischen x<-h$mids
@@ -45,31 +41,41 @@ fitting_sanity_check <- function(object, data, continuity, plot=F##ALSE
   upper <- max(data) + 0.2 * (max(data) - min(data))
 
   ## semantisch falsch. if (continuity)  sqrt(length(data)) else 
-  breaks <- ifelse(continuity, sqrt(length(data)), min(nclass.Sturges(data),
-                                                       length(unique(data))))
+  # breaks <- if (continuity) sqrt(length(data)) else min(nclass.Sturges(data), length(unique(data)) + 1)
+  breaks <- if (continuity) sqrt(length(data)) else (min(data) -1) : max(data)
   h <- suppressWarnings(hist(x = data, xlim=range(lower,upper), freq = FALSE,
-                             xlab = 'x', ylab = 'density', breaks=breaks,
+                             xlab = 'x', ylab = 'density', breaks=breaks, include.lowest = FALSE,
                              plot=plot))
-
-  x <- h$mids
-  y <- h$density ## wo wird y verwendet?
-  ## s. Kommentar output.R
-  command <- paste0("get_fun_from_package(fam = '", object@family, "', '",
-                    object@package, "', 'd')(x, ",
-                    paste(names(object@estimatedValues),  object@estimatedValues, sep=" = ", collapse =", "), ')')
-  z <- eval(parse(text = command))
-  if(plot)
-    lines(x,z, col='red')
-
-  # meanquot <- sum(x)/sum(y)
-  # good <- meanquot > 0.01 & meanquot<100
   
-  meanquot <- sum(diff(h$breaks) * z)
-  good <- meanquot > 0.5 & meanquot < 2
+  fun <- get_fun_from_package(type="d", family = object)
+  param_list <- split(object@estimatedValues, names(object@estimatedValues))
+  #return(list(fun, param_list))
+  density <- function(x) {
+    param_list$x <- x
+    y <- do.call(fun, param_list)
+    y <- ifelse(is.na(y), 0, y)
+    return(y)
+  }
   
-  return(list(meanquot=meanquot, good=good))
+  if (continuity) {
+    int_check <- tryCatch(integrate(density, lower = -Inf, upper = Inf),
+                  error = function(e) {
+                            message('Sanity Check. Calculate integral of density failed: ',e,'\n')
+                            return(list(value=Inf))
+                  }
+        )
+    hist_check <- sum(diff(h$breaks) * density(h$mids))
+  } else {
+    # in the discrete case the values represented in data will be all breaks apart from the first one
+    hist_check <- sum(diff(h$breaks) * density(h$breaks[2:length(h$breaks)]))
+    
+    ## BG: Do we need an int check in discrete case???
+    int_check <- list(value=1)
+  }
+
+  
+  good <- (int_check$value > (1 - 0.05 * sensitivity)) & (hist_check > (1-0.5*sensitivity)) & 
+          (int_check$value < (1 + 0.05 * sensitivity)) & (hist_check < (1+0.5*sensitivity))
+
+  return(list(hist_check=hist_check, int_check=int_check$value, good=good))
 }
-
-
-#fitting_sanity_check(r@fits[[10]], rnorm(n = 1000, mean=10, sd=10), continuity = T, plot = T)
-

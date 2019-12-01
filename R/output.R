@@ -19,11 +19,6 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA. 
 
-
-#setGeneric(name = "summary",		
-#           def = function(object, ...) standardGeneric("summary"))		
-
-
 ## sind die is.null() wirklich notwendig?? (i) sind defaults gesetzte
 ## (ii) wirft R eh Fehler
 
@@ -40,40 +35,59 @@ setMethod(f = "sort", signature = c('globalfit'),
           })
 
 
+
 setMethod(f = "summary", signature = c("globalfit"),
-          def = function(object, which=1, count=10, ic = 'AIC') {
+          def = function(object, count=10, ic = 'AIC') {
             if(is.null(ic) || !(ic %in% c('AIC', 'BIC', 'AICc')))
               stop("Argument 'ic' must be 'AIC', 'BIC' or 'AICc'")
-            if(is.null(which) || !is.natural(which))
-              stop("Argument 'which' must vector of positive integers.")
             if(is.null(count) || !is.natural(count) )
               stop("Argument 'count'  must be positive integer.")
             
             object <- sort(object, ic=ic)
-            df <- data.frame(family = sapply(object@fits, function(object) object@family),
-                             package = sapply(object@fits, function(object) object@package),
-                             ic = sapply(object@fits, function(object)  eval(parse(text = paste0('object@', ic)))))
+            df <- data.frame(family = sapply(object@fits, 
+                                      function(object) object@family),
+                             package = sapply(object@fits, 
+                                       function(object) object@package),
+                             ic = sapply(object@fits, function(object)
+                                  eval(parse(text = paste0('object@', ic)))),
+                             params = sapply(object@fits, function(object) 
+                                      paste(names(object@estimatedValues),
+                                             signif(object@estimatedValues, digits = 3),
+                                             sep= " = ", collapse='; ')))
             
-            count <- min(nrow(df), count)
-            which <- which[which <= nrow(df)]
-            colnames(df)[3] <- ic
-            
-            for(i in 1:length(which)) {
-              selected_fit <- object@fits[[as.numeric(rownames(df)[which[i]])]]
-              if(which[i]==1) {
-                cat('Best fit: \n', selected_fit@family, 'distribution of', selected_fit@package, 'package. \n')
-              } else {
-                cat('\nFitted parameters for', selected_fit@family, 'distribution of', selected_fit@package, 'package. \n')
-              }
-              print(selected_fit@estimatedValues)
-            }
-            rownames(df) <- 1:nrow(df)
-            cat('\n\nBest fitted distributions: \n')
-            print(df[1:count,])
+            sum <- new("globalfitSummary",
+                       data = object@data,
+                       continuity = object@continuity,
+                       method = object@method,
+                       fits = df[1:min(count, nrow(df)),]
+                )
+            return(sum)
           })
 
+setMethod(f = "show", signature = c("globalfitSummary"),
+          def = function(object) {
+            cat(length(object@data), 'data points entered.\nFitted with', 
+                object@method, 'assuming continuity:', object@continuity, '
+                \n\nBest fits:\n \n')
+            print(object@fits, right=FALSE)
+          }
+)
+
+setMethod(f = "print", signature = c("globalfitSummary"),
+          def = function(x) {
+            show(x)
+          }
+          )
+
+setMethod(f = "print", signature = c("globalfit"),
+	  def = function(x) {
+	    print(summary(x))
+	  }
+	  )
+
+if (FALSE) { ## MS
 setGeneric(name = "IC",		
-           def = function(object, ...) standardGeneric("IC"))		
+           def = function(object, ...) standardGeneric("IC"))
 
 setMethod(f = "IC", signature = c('globalfit'),
           def = function(object, ic='AIC', count = NULL) {
@@ -91,6 +105,27 @@ setMethod(f = "IC", signature = c('globalfit'),
                               sapply(object@fits, function(object) object@family), sep = "::")
             return(x)            
           })
+}
+
+
+IC <- function(object, ic='AIC', count = NULL) { ## MS
+  ## falls obiges uebernommen, dann naechste Zeilen loeschen
+  ## ansonsten: count <- if(is.null(ls$count)) Inf else ls$count
+  if(is.null(count))
+    count <- Inf
+  if(!is.natural(count))
+    stop("Argument 'count'  must be positive integer.")
+  count <- min(length(object@fits), count)
+  object <- sort(object, ic=ic)
+  object@fits <- object@fits[1:count]
+  x <- sapply(object@fits,
+              function(object) eval(parse(text = paste0('object@', ic))))
+  names(x) <- paste(sapply(object@fits, function(object) object@package), 
+                    sapply(object@fits, function(object) object@family),
+                    sep = "::")
+  return(x)            
+}
+
 
 
 setMethod(f = "AIC", signature = c("globalfit"),
@@ -108,7 +143,7 @@ setMethod(f = "BIC", signature = c("globalfit"),
 
 
 setMethod(f = "hist", signature = c("globalfit"),
-          def = function(x, ic='AIC', which=1, ...) {
+          def = function(x, which = 1, ic='AIC') {
             if(is.null(ic) || !(ic %in% c('AIC', 'BIC', 'AICc')))
               stop("Argument 'ic' must be 'AIC', 'BIC' or 'AICc'")
             if(is.null(which) || !is.natural(which))
@@ -129,13 +164,12 @@ setMethod(f = "hist", signature = c("globalfit"),
             breaks <- if(x@continuity) sqrt(length(x@data)) else min(nclass.Sturges(x@data), length(unique(x@data)))
             ## geht nachfolgendes nicht einfacher ueber direkte Aufrufe
             ## und/oder do.call ?
-            density <- eval(parse(text = paste0("get_fun_from_package(fam = '", selected_fit@family, "', '", selected_fit@package, "', 'd')(supporting_point, ",
-                                     paste(names(selected_fit@estimatedValues),  selected_fit@estimatedValues, sep=" = ", collapse =", "), ')')))
-            ## for evalation of fitting_sanity_check
-            ## need to be deleted finally
-            ## print(density)
-            ## plot(supporting_point, density, col='green', lwd=2)
-            ## Sys.sleep(2)
+            
+            fun <- get_fun_from_package(type="d", family = selected_fit)
+            param_list <- split(selected_fit@estimatedValues, names(selected_fit@estimatedValues))
+            param_list$x <- supporting_point
+            density <- do.call(fun, param_list)
+            
             h <- hist(x = x@data, xlim=range(lower,upper), freq = FALSE,
                  xlab = 'x', ylab = 'density', breaks=breaks,
                  main=paste0('Histogramm with density of \n',
@@ -147,4 +181,3 @@ setMethod(f = "hist", signature = c("globalfit"),
             invisible(h)
           }
         )
-

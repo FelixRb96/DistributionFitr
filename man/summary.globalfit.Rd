@@ -1,35 +1,42 @@
 \name{summary}
-\alias{print}
-  
+\alias{summary,globalfit-method}% MS
+\alias{sort,globalfit-method}% MS
+\alias{print,globalfit-method}% MS
+\alias{hist,globalfit-method}% MS
+\alias{print,globalfitSummary-method}% MS
+\alias{show,globalfitSummary-method}% MS
+ 
   \title{Summarizing Results of global Distribution Fit}
 \description{
   \code{summary} method for class "globalfit"; it returns the best results of fitting the given data to several distributions together with 
   the optimized parameters.
 }
 
-\usage{
-  # S4 method for class 'globalfit'
-  summary(object, which=1, count=10, ic = c('AIC'))
-  
-  # S4 method for class 'globalfit
-  print(object, ...)
+\usage{% MS komplett neu
+  \S4method{summary}{globalfit}(object, count=10, ic = 'AIC')
+  \S4method{print}{globalfit}(x)
+  \S4method{sort}{globalfit}(x, decreasing=FALSE, ic='AIC') 
+  \S4method{show}{globalfitSummary}(object)
+
 }
 
 \arguments{
-  \item{object}{an object of class "globalfit", usually as a result of call to \link{globalfit}}
-  \item{which}{vector indicating of which (best) results the parameters should be printed}
+ 
+  \item{object,x}{an object of class "globalfit", usually as a result of
+    call to \link{globalfit}}
+  \item{decreasing}{always \code{TRUE}} % MS
   \item{count}{integer, determines how many results are turned back as best fits}
-  \item{ic}{which information criteria used for the ranking, requires one of the following \code{AIC}, \code{BIC}, \code{AICc}}
+  \item{ic}{character. It indicates which information criteria used for the ranking, requires one of the following \code{AIC}, \code{BIC}, \code{AICc}}
 }
 
-\details{ % tbd
+\details{
+  %TBD: currently only placeholder
+  Returns a summary of the optimisation results stored in globalfit.
     
-  } 
+} 
   
 \value{
-  % description of output%
-  % needs to be coded
-  % afterwards docu added
+  An object of class \code{globalfitSummary} which contains the optimisation results and can be printed in a nice form.
 }
 
 \author{
@@ -51,7 +58,7 @@
 \dontrun{
   r <- globalfit(rnorm(n = 1000, mean=10, sd=1))
   summary(r)  
-  summary(r, count=5, which=2)
+  summary(r, count=5, ic='BIC')
   }
 }
 \keyword{distribution}
