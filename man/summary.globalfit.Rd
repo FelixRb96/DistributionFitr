@@ -54,7 +54,7 @@
 \examples{ %  library(DistributionFitr)  ## MS bitte lassen 
 ##--	or do  help(data=index)  for the standard data sets.
 
-r <- globalfit(rnorm(n = 100, mean=10, sd=1))
+r <- globalfit(rnorm(n = 100, mean=10, sd=1), package="stats") % MS, neu
 summary(r)  
 summary(r, count=5, ic='BIC')
 }

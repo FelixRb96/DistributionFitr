@@ -22,9 +22,8 @@ getParams(fam, package)
   }
 }
 
-\details{
-	The family name is defined as the part of the function name that follows "d", "p", "q" and "r". Example: uniform distribution. function call: "runif(...)" --> family name: "unif". \\
-	The values returned by getParams are included in the DistributionFitr-package and updated regularly. Users may use it to update the library of parameter characteristics themselves or find the function useful to use the parameter characteristics retrieved for other purposes.
+\details{ % MS : immer \cr statt \\
+	The family name is defined as the part of the function name that follows "d", "p", "q" and "r". Example: uniform distribution. function call: "runif(...)" --> family name: "unif". \cr	The values returned by getParams are included in the DistributionFitr-package and updated regularly. Users may use it to update the library of parameter characteristics themselves or find the function useful to use the parameter characteristics retrieved for other purposes.
 }
 \value{
   For \code{getParams} a list with components, each of them a named vector: The name is the arg name as specified in the original "d", "p", ...-function, the value is described below:
@@ -59,9 +58,9 @@ getParams(fam, package)
 ##-- ==>  Define data, use random,
 ##--	or do  help(data=index)  for the standard data sets.
 
-% MS
-getParams("beta")
-getParams("unif")
+% MS, neu
+getParams("beta", package="stats")
+getParams("unif", package="stats" )
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

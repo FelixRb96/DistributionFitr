@@ -55,7 +55,8 @@ setMethod(f = "summary", signature = c("globalfit"),
                                       paste(names(object@estimatedValues),
                                              signif(object@estimatedValues, 
                                                     digits = 3),
-                                             sep= " = ", collapse='; ')))
+                                            sep= " = ", collapse='; ')))
+            colnames(df) <- c("family", "package", ic, "params") # MS, Vorschlag
             
             sum <- new("globalfitSummary",
                        data = object@data,
