@@ -253,7 +253,8 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
     # TODO: for me this is not working without this line, although we need to drop the line                      
     source("private/source_all.R")
                             
-    fam <- relevant_families[[i]]
+                            fam <- relevant_families[[i]]
+ #                           print(fam)
     if(progress)
       message("Current Family: ",  fam$family)
     

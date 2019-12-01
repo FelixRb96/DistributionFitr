@@ -59,11 +59,9 @@ getParams(fam, package)
 ##-- ==>  Define data, use random,
 ##--	or do  help(data=index)  for the standard data sets.
 
-# Example 1 for getParams
-# parameter_characteristics <- getParams("beta")
-
-# Example 2 for getParams % MS
-# this_should_also_work <- getParams("unif")
+% MS
+getParams("beta")
+getParams("unif")
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

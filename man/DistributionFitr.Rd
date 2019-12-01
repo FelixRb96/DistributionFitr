@@ -54,7 +54,6 @@ str(getFamily("stats")) % MS
 
 #example for getParams
 getParams("beta") % MS
-getParams("unif") % MS
 
 }
 

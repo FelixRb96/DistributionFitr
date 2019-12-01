@@ -55,10 +55,8 @@
 ##--	or do  help(data=index)  for the standard data sets.
 
 % TODO:  to slow so far, maybe just stats package?
-\dontrun{
-  r <- globalfit(rnorm(n = 1000, mean=10, sd=1))
-  summary(r)  
-  summary(r, count=5, ic='BIC')
-  }
+r <- globalfit(rnorm(n = 1000, mean=10, sd=1))
+summary(r)  
+summary(r, count=5, ic='BIC')
 }
 \keyword{distribution}
