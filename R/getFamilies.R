@@ -53,7 +53,7 @@ iterate_packages <- function(packages) {
                            ## message(e, "\n")
                            NULL
                          })
-      if (!is.null(params)) # length(params) != 0 ## semantisch das richtige?
+      if (length(params)!=0)
         res[[length(res) + 1]] <- c(package_content[[j]],
                                     list(family_info = params))
     }
@@ -109,7 +109,7 @@ write_file <- function(FamilyList, file = "R/all_families.R") {
 getFamilies <- function(all.packages, file="R/all_families.R") {
   ## CASE 2:
   if (missing(all.packages)) {
-    if (file.exists(file)) ## MS : hier war !file.exists 
+    if (file.exists(file))
       return(getFamilies(all.packages = FALSE, file=file))
     ##read file and return list of lists
     return(FamilyList)
