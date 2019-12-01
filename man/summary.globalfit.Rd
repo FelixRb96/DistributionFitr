@@ -1,23 +1,29 @@
 \name{summary}
-\alias{summary}
-\alias{print}
-  
+\alias{summary,globalfit-method}% MS
+\alias{sort,globalfit-method}% MS
+\alias{print,globalfit-method}% MS
+\alias{hist,globalfit-method}% MS
+\alias{print,globalfitSummary-method}% MS
+\alias{show,globalfitSummary-method}% MS
+ 
   \title{Summarizing Results of global Distribution Fit}
 \description{
   \code{summary} method for class "globalfit"; it returns the best results of fitting the given data to several distributions together with 
   the optimized parameters.
 }
 
-\usage{
-  # S4 method for class 'globalfit'
-  summary(object, count=10, ic = 'AIC')
-  
-  # S4 method for class 'globalfit'
-  print(object)
+\usage{% MS komplett neu
+  \S4method{summary}{globalfit}(object, count=10, ic = 'AIC')
+  \S4method{print}{globalfit}(x)
+  \S4method{sort}{globalfit}(x, decreasing=FALSE, ic='AIC') 
+  \S4method{show}{globalfitSummary}(object)
+
 }
 
 \arguments{
-  \item{object}{an object of class "globalfit", usually as a result of call to \link{globalfit}}
+  \item{object}{an object of class "globalfit", usually as a result of
+    call to \link{globalfit}}
+  \item{...}{unused}
   \item{count}{integer, determines how many results are turned back as best fits}
   \item{ic}{which information criteria used for the ranking, requires one of the following \code{AIC}, \code{BIC}, \code{AICc}}
 }

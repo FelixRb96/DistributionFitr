@@ -85,8 +85,9 @@ setMethod(f = "print", signature = c("globalfit"),
 	  }
 	  )
 
+if (FALSE) { ## MS
 setGeneric(name = "IC",		
-           def = function(object, ...) standardGeneric("IC"))		
+           def = function(object, ...) standardGeneric("IC"))
 
 setMethod(f = "IC", signature = c('globalfit'),
           def = function(object, ic='AIC', count = NULL) {
@@ -104,6 +105,27 @@ setMethod(f = "IC", signature = c('globalfit'),
                               sapply(object@fits, function(object) object@family), sep = "::")
             return(x)            
           })
+}
+
+
+IC <- function(object, ic='AIC', count = NULL) { ## MS
+  ## falls obiges uebernommen, dann naechste Zeilen loeschen
+  ## ansonsten: count <- if(is.null(ls$count)) Inf else ls$count
+  if(is.null(count))
+    count <- Inf
+  if(!is.natural(count))
+    stop("Argument 'count'  must be positive integer.")
+  count <- min(length(object@fits), count)
+  object <- sort(object, ic=ic)
+  object@fits <- object@fits[1:count]
+  x <- sapply(object@fits,
+              function(object) eval(parse(text = paste0('object@', ic))))
+  names(x) <- paste(sapply(object@fits, function(object) object@package), 
+                    sapply(object@fits, function(object) object@family),
+                    sep = "::")
+  return(x)            
+}
+
 
 
 setMethod(f = "AIC", signature = c("globalfit"),
