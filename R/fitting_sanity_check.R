@@ -29,7 +29,8 @@
 ### but returned with good logliks (due to unkown reasons)
 
 
-fitting_sanity_check <- function(object, data, continuity, plot=FALSE, sensitivity = 1) {
+fitting_sanity_check <- function(object, data, continuity, plot=FALSE, 
+                                 sensitivity = 1) {
    if (!is(object, 'optimParams'))
       stop('Wrong input.')
 
@@ -41,11 +42,12 @@ fitting_sanity_check <- function(object, data, continuity, plot=FALSE, sensitivi
   upper <- max(data) + 0.2 * (max(data) - min(data))
 
   ## semantisch falsch. if (continuity)  sqrt(length(data)) else 
-  # breaks <- if (continuity) sqrt(length(data)) else min(nclass.Sturges(data), length(unique(data)) + 1)
+  # breaks <- if (continuity) sqrt(length(data)) 
+  #           else min(nclass.Sturges(data), length(unique(data)) + 1)
   breaks <- if (continuity) sqrt(length(data)) else (min(data) -1) : max(data)
   h <- suppressWarnings(hist(x = data, xlim=range(lower,upper), freq = FALSE,
-                             xlab = 'x', ylab = 'density', breaks=breaks, include.lowest = FALSE,
-                             plot=plot))
+                             xlab = 'x', ylab = 'density', breaks=breaks, 
+                             include.lowest = FALSE, plot=plot))
   
   fun <- get_fun_from_package(type="d", family = object)
   param_list <- split(object@estimatedValues, names(object@estimatedValues))
@@ -60,13 +62,15 @@ fitting_sanity_check <- function(object, data, continuity, plot=FALSE, sensitivi
   if (continuity) {
     int_check <- tryCatch(integrate(density, lower = -Inf, upper = Inf),
                   error = function(e) {
-                            message('Sanity Check. Calculate integral of density failed: ',e,'\n')
+                            message('Sanity Check. Calculate integral of
+                                    density failed: ',e,'\n')
                             return(list(value=Inf))
                   }
         )
     hist_check <- sum(diff(h$breaks) * density(h$mids))
   } else {
-    # in the discrete case the values represented in data will be all breaks apart from the first one
+    # in the discrete case the values represented in data will be all breaks 
+    # apart from the first one
     hist_check <- sum(diff(h$breaks) * density(h$breaks[2:length(h$breaks)]))
     
     ## BG: Do we need an int check in discrete case???
@@ -74,8 +78,10 @@ fitting_sanity_check <- function(object, data, continuity, plot=FALSE, sensitivi
   }
 
   
-  good <- (int_check$value > (1 - 0.05 * sensitivity)) & (hist_check > (1-0.5*sensitivity)) & 
-          (int_check$value < (1 + 0.05 * sensitivity)) & (hist_check < (1+0.5*sensitivity))
+  good <- (int_check$value > (1 - 0.05 * sensitivity)) & 
+                                      (hist_check > (1-0.5*sensitivity)) & 
+          (int_check$value < (1 + 0.05 * sensitivity)) & 
+                                      (hist_check < (1+0.5*sensitivity))
 
   return(list(hist_check=hist_check, int_check=int_check$value, good=good))
 }
