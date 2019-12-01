@@ -92,7 +92,7 @@ write_file <- function(FamilyList, file = "R/all_families.R") {
     for (j in 1:length(FamilyList[[i]]$family_info)){
       ij = FamilyList[[i]]$family_info[[j]]
       if (is.double(ij)) {
-        FamilyList[[i]]$family_info[[j]] <- round(ij, 5)
+        FamilyList[[i]]$family_info[[j]] <- signif(ij, 5)
       }
       
     }
