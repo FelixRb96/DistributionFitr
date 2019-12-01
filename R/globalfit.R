@@ -81,9 +81,9 @@ is.discrete <- function(data, border = 0.35, percent = 0.8){
   if (n_unique_dec / obs <= border && 
       !any(numbers >= 4) && 
       !some_percent(percent_df, percent)){
-    return(T)
+    return(TRUE)
   } else {
-    return(F)
+    return(FALSE)
   }
 }
 
@@ -272,7 +272,10 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
                     collapse = ", "))
 
   if(is.null(cores))
-    cores <- detectCores()
+    CRAN_check_limit <- Sys.getenv("_R_CHECK_LIMIT_CORES_", "")
+    if(length(CRAN_check_limit) > 0 && CRAN_check_limit == TRUE) cores <- 2
+    # CRAN_check_limit == TRUE because it might not be a boolean
+    else cores <- detectCores()
   if(progress)
     message('Parallelizing over ', cores, ' cores.\n')
   cl <- makeCluster(cores, outfile='log.txt')
