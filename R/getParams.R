@@ -490,7 +490,7 @@ get_support <- function(fam, params) {
     
 
     # check if the lower or upper bound is always the same as the current 
-    #vparameter value (up to the chosen precision + some small machine error)
+    # parameter value (up to the chosen precision + some small machine error)
     # then the support depends on the current parameter and the support is at 
     # least as big as the possible ranges of this parameter
     # notice that we need to ignore rows where the min or max support value 
@@ -531,10 +531,6 @@ get_support <- function(fam, params) {
 # -----------------------------------------------------------------------------
 # (3) Final function
 # -----------------------------------------------------------------------------
-
-# Input:
-# fam: list-> package: package_name, 
-# family: name of distribution family inside package
 
 
 ## MS
@@ -587,7 +583,6 @@ getParams <- function(fam, package){
   
   return(result)
 }
-
 
 
 ### Open problems & TODO:
