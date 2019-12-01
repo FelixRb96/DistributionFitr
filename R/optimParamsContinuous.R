@@ -37,12 +37,16 @@ get_best_result_from_progress <- function(optim_progress, param_names) {
 
 ## Parameters of optimParamsContinous:
 # family: list with two elements "family" and "package"
-# lower, upper and start_parameters must only contain the continuous parameters that should be optimized
-# prior: user-given prior information on parameters, updates default values from get_param
+# lower, upper and start_parameters must only contain 
+# the continuous parameters that should be optimized
+# prior: user-given prior information on parameters, 
+# updates default values from get_param
 # debug_error: show optimization progress when an error occured
 # show_optim_progress: always show optimization progress
-# on_error_use_best_result: if TRUE and an error occured during optimization the best result achieved prior to the error will be taken
-# n_starting_points: how many different starting points should be used for optimisation. The best result will be taken.
+# on_error_use_best_result: if TRUE and an error occured during 
+# optimization the best result achieved prior to the error will be taken
+# n_starting_points: how many different starting points should 
+# be used for optimisation. The best result will be taken.
 optimParamsContinuous <- function(data, family, lower, upper, defaults,
                                   method = 'MLE', fixed=list(), prior = NULL,
                                   log=TRUE,
@@ -54,10 +58,13 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
   # Input parameter validation
 
   # TODO:
-	# currently it seems customary to allowing the provision of boundaries for non-fixed parameters only.
-	# below I added input validation that checks if the param names given in fixed are present in lower,
+	# currently it seems customary to allowing the provision of boundaries 
+  # for non-fixed parameters only.
+	# below I added input validation that checks if the param names given 
+  # in fixed are present in lower,
 	# throwing an error
-	# It is probably safer to require provision of boundaries for all parameters, regardless of whether fixed or not
+	# It is probably safer to require provision of boundaries for all parameters, 
+  # regardless of whether fixed or not
 
   if(method!='MLE')
     stop('Not implemented.')
@@ -66,11 +73,14 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
   if(length(lower)==0) {
     stop('No parameters to optimize as no bounds delivered.')
   }
-  if(any(names(lower) != names(upper)) || any(names(lower) != names(defaults)) ) {
-    stop('Parameter names of lower and upper bounds and start parameters must coincide. ')
+  if(any(names(lower) != names(upper)) || 
+     any(names(lower) != names(defaults)) ) {
+    stop('Parameter names of lower and upper bounds and 
+         start parameters must coincide. ')
   }
   
-  # if(any(!(names(fixed) %in% names(lower))) || any(!(names(prior) %in% names(lower)))) {
+  # if(any(!(names(fixed) %in% names(lower))) || 
+  #    any(!(names(prior) %in% names(lower)))) {
   #   stop('Parameter names given as fixed/prior unknown.')
   # }
   # if(anyDuplicated(names(fixed)) || anyDuplicated(names(prior))) {
@@ -80,14 +90,16 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
   # replace default values from get_params with user-given priors
   if(length(prior) > 0) {
     prior_positions <- match(names(prior), names(lower), nomatch = NULL)
-    # nomatch should not occur due to the check above: "Parameter names given as prior unknown"
+    # nomatch should not occur due to the check above: 
+    # "Parameter names given as prior unknown"
     defaults[prior_positions] <- prior
   }
   
   # create dataframe where to save the optimization progress
   # 1 column for each parameter and a column for the associated log likelihood
   ## keine unnoetiger data.frame im Code. data.frames sind fuer user
-  optim_progress <- data.frame(matrix(nrow=0, ncol=length(lower) + length(fixed) + 1))
+  optim_progress <- data.frame(matrix(nrow=0, 
+                                      ncol=length(lower) + length(fixed) + 1))
   colnames(optim_progress) <- c(names(lower), names(fixed), "log_lik")
   
   on.exit({
@@ -98,26 +110,33 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
     }
   })
   
-  # try multiple starting points hoping for a better result in case of multiple local minima
+  # try multiple starting points hoping for a better result 
+  # in case of multiple local minima
   optim_results <- list() ## optim_results <- vector("list", n_starting_points)
   ## was passiert bei n_starting_points == 0 ?
   for (i in 1:n_starting_points) {
     
-      start_params <- if(i>1) sample_params(family, list(lower=lower, upper=upper, accepts_float=!is.na(lower)), params=lower) else defaults
+      start_params <- if(i>1) sample_params(family, list(lower=lower, 
+                                  upper=upper, accepts_float=!is.na(lower)), 
+                                  params=lower) else defaults
       # cat("Sampling start parameters, Iteration:", i, "\n")
       # print(start_params)
     
       # Optimize first time
-      # TODO: in second optimization set fnscale and parscale accordingly (check if it is set correctly below)
+      # TODO: in second optimization set fnscale and parscale accordingly 
+      # (check if it is set correctly below)
       if(show_optim_progress)
         cat("First Optimisation\n")
       
       # construct loglikelihood function, that only depends on the parameters
-      loglik_fun <- loglik(family=family, data=data, fixed=fixed, log=log, upper=upper, lower=lower)
+      loglik_fun <- loglik(family=family, data=data, fixed=fixed, log=log, 
+                           upper=upper, lower=lower)
       safety_bound <- 1e-10
 
-      optim_result <- try(optim(start_params, loglik_fun, control = list(fnscale=-1, trace=0), 
-                                lower=lower+safety_bound, upper=upper-safety_bound, method=optim_method),
+      optim_result <- try(optim(start_params, loglik_fun, 
+                                control = list(fnscale=-1, trace=0), 
+                                lower=lower+safety_bound, 
+                                upper=upper-safety_bound, method=optim_method),
                           silent = TRUE)
       
       if (is(optim_result, "try-error")) {
@@ -125,9 +144,11 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
         if(!on_error_use_best_result || nrow(optim_progress) == 0) {
           stop(optim_result, " occured during (first) opimisation, fatal.\n")	
         } else {
-          message(optim_result, " occured during (first) optimization, trying to take best result achieved up to now\n")
+          message(optim_result, " occured during (first) optimization, 
+                  trying to take best result achieved up to now\n")
           # getting best result from optimization progress up to now
-          optim_result <- get_best_result_from_progress(optim_progress, param_names = names(lower))
+          optim_result <- get_best_result_from_progress(optim_progress, 
+                                                param_names = names(lower))
         }
       } else {
         optim_successful <- TRUE
@@ -141,42 +162,55 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
       }
 
       # TODO: 
-      # Problems with convergence can occur, if parscale and fscale not well selected
+      # Problems with convergence can occur, 
+      # if parscale and fscale not well selected
       # therefore 2 steps with right selection need to be implemented
-      # optim_result <- optim(optim_result$par, loglik, family = family, data = data, fixed=fixed, lower=lower, upper=upper,
-      #                      log=log, control = list(fnscale=-1 / abs(optim_result$value), trace=0, parscale = 1/optim_result$par), method='L-BFGS-B')
+      # optim_result <- optim(optim_result$par, loglik, family = family, 
+      # data = data, fixed=fixed, lower=lower, upper=upper,
+      # log=log, control = list(fnscale=-1 / abs(optim_result$value), 
+      # trace=0, parscale = 1/optim_result$par), method='L-BFGS-B')
       if (!no_second && optim_successful) { 
         ## bitte hier nicht mit ... arbeiten. Hier geht es um zwei
         ## (bekannte) Argumente, die oben als Argumente aufgefuehrt
         ## werden koennnen. Abfrage mit "missing(...)" vermutlich notwendig
         args <- list(...)
-        fnscale <- if (hasArg("fnscale") && args$fnscale) -1/abs(optim_result$value) else -1
-        parscale <- if (hasArg("parscale") && args$parscale) 1/optim_result$par else rep(1, length(lower))
+        fnscale <- if (hasArg("fnscale") && args$fnscale)
+                          - 1/abs(optim_result$value) else -1
+        parscale <- if (hasArg("parscale") && args$parscale) 
+                          1/optim_result$par else rep(1, length(lower))
       
-        # if a parameter is optimised as zero, parscale will be Infinity, causing trouble.
+        # if a parameter is optimised as zero, parscale will be Infinity, 
+        # causing trouble.
         # setting might not be optimal, but never fatal.
         adjust <- !is.finite(parscale)
         ## mean(parscale[-adjust]) ??
-        parscale[adjust] <- mean(parscale[!(parscale == Inf | parscale == -Inf)], na.rm = TRUE)
+        parscale[adjust] <- mean(parscale[!(parscale == Inf | 
+                                            parscale == -Inf)], na.rm = TRUE)
       
         # adjust precision to number of parameters
-        # note that with many parameters even though likelihood may have converged, parameters are still changing
+        # note that with many parameters even though likelihood may have 
+        # converged, parameters are still changing
         precision <- max(0, length(lower) - 2)
         # floating numbers are not equally spaced, only about 1e-16 is reliable
         precision <- max(1e-8/(10^(precision*2)), 1e-16)
       
         optim_result <- try(optim(optim_result$par, loglik_fun, 
-                                  control = list(fnscale=fnscale, trace=0, parscale = parscale, factr = precision), 
-                                  lower=lower+safety_bound, upper=upper-safety_bound, method=optim_method),
+                                  control = list(fnscale=fnscale, trace=0, 
+                                  parscale = parscale, factr = precision), 
+                                  lower=lower+safety_bound, 
+                                  upper=upper-safety_bound, 
+                                  method=optim_method),
                             silent = TRUE)
         
         if (is(optim_result, "try-error")) {
     	    if(!on_error_use_best_result || nrow(optim_progress) == 0) {
-    	      stop(optim_result, "occured during (second) optimisation, fatal.\n")	
+    	      stop(optim_result, "occured during (second) optimisation, fatal.\n")
     	    } else {
-            message(optim_result, " occured during optimization, trying to take best result achieved up to now\n")
+            message(optim_result, " occured during optimization, 
+                    trying to take best result achieved up to now\n")
             # getting best result from optimization progress up to now
-            optim_result <- get_best_result_from_progress(optim_progress, param_names = names(lower))
+            optim_result <- get_best_result_from_progress(optim_progress, 
+                                                   param_names = names(lower))
     	    }
         }
         
@@ -197,7 +231,8 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
   
   if (nrow(optim_progress) > 0 &&
       optim_result$value < max(optim_progress$log_lik, na.rm = TRUE) - 1e-8) {
-    message("Final Optimization result is worse than the best result achieved during optimization")
+    message("Final Optimization result is worse than the best result 
+            achieved during optimization")
     cat("Diff to best:", abs(optim_result$value - max(optim_progress$log_lik)),
         "\n")
   }
@@ -213,13 +248,17 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
 
 # TODO: set fnscale and parscale appropriately
 
-# TODO: on error try to return best value from optimization progress up to now -> DONE
+# TODO: on error try to return best value from optimization progress up to now 
+#       -> DONE
 
-# TODO: globalfit needs to remove the fixed parameters from upper, lower and start_parameter
+# TODO: globalfit needs to remove the fixed parameters 
+#       from upper, lower and start_parameter
 
-# TODO: agree on whether lower and upper should only contain entries for the continuous parameters or also for the fixed ones
+# TODO: agree on whether lower and upper should only contain entries 
+#       for the continuous parameters or also for the fixed ones
 
-# TODO: optim_progress contains all calls to log_lik-function, that is also the calls for estimating the gradient, thats why usually
-# always 5 rows refer to the same optimization step
+# TODO: optim_progress contains all calls to log_lik-function, 
+#       that is also the calls for estimating the gradient, thats why usually
+#       always 5 rows refer to the same optimization step
 
 
