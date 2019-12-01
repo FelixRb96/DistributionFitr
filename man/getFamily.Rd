@@ -34,10 +34,8 @@ getFamily(pkg)
    Manuel Hentschel, Valentin von Trotha
 }
 
-\examples{
-   \dontrun{
-   getFamily("stats")
-   }
+\examples{ %  library(DistributionFitr)  ## MS bitte lassen 
+   str(getFamily("stats"))
 }
 
 \keyword{distribution}

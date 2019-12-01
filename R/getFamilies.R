@@ -108,7 +108,7 @@ write_file <- function(FamilyList, file = "R/all_families.R") {
 getFamilies <- function(all.packages, file="R/all_families.R") {
   ## CASE 2:
   if (missing(all.packages)) {
-    if (!file.exists(file))
+    if (file.exists(file)) ## MS : hier war !file.exists 
       return(getFamilies(all.packages = FALSE, file=file))
     ##read file and return list of lists
     return(FamilyList)

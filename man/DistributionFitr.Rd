@@ -48,13 +48,13 @@ Maintainer: Borui Niklas Zhu, \email{bzhu@mail.uni-mannheim.de}
  \code{\link{getParams}}
 }
 
-\examples{
+\examples{ %  library(DistributionFitr)  ## MS bitte lassen 
 #example for getFamily
-library(stats)
-getFamily('stats')
+str(getFamily("stats")) % MS
 
 #example for getParams
-parameter_characteristics <- getParams("beta")
+getParams("beta") % MS
+getParams("unif") % MS
 
 }
 
