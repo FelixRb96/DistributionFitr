@@ -22,7 +22,8 @@ getFamily(pkg)
 
 \value{
    A list of of lists of two named elements:
-  For \code{optimParam} a list with components:
+  For \code{optimParam} a list with components: % MS optimParam ist hier
+					% fehl am Platze
   \item{package}{The name of the package provided to the function}
   \item{family}{The name of the function that belongs to a distribution family}
 }

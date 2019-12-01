@@ -44,7 +44,7 @@ Maintainer: Borui Niklas Zhu, \email{bzhu@mail.uni-mannheim.de}
  \code{\link{getFamilies}},
  \code{\link{getFamily}},
  \code{\link{loglik}},
- \code{\link{optimParamsDiscrete}},
+% \code{\link{optimParamsDiscrete}}, %MS
  \code{\link{getParams}}
 }
 
