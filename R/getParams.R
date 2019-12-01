@@ -1,7 +1,7 @@
 ## Authors 
 ## Benedikt Geier, bgeier@mail.uni-mannheim.de
 ##
-## Get properties of a singel distribution family and its parameters
+## Get properties of a single distribution family and its parameters
 ##
 ## Copyright (C) 2019 -- 2020 Benedikt Geier
 ##
@@ -416,9 +416,14 @@ get_support <- function(fam, params) {
   low_capped <- pmax(params$lower, -cap_at)
   upp_capped <- pmin(params$upper, cap_at)
   
-  # we additionally ignore the 10% highest and lowest parameter values (e.g. for "binom" we only consider prop in [0.1, 0.9])
-  low <- ifelse(params$lower == low_capped, low_capped + ignore_extreme_vals_perc * (upp_capped-low_capped), low_capped)
-  upp <- ifelse(params$upper == upp_capped, upp_capped - ignore_extreme_vals_perc * (upp_capped-low_capped), upp_capped)
+  # we additionally ignore the 10% highest and lowest parameter values 
+  # (e.g. for "binom" we only consider prop in [0.1, 0.9])
+  low <- ifelse(params$lower == low_capped, 
+                low_capped + ignore_extreme_vals_perc * (upp_capped-low_capped), 
+                low_capped)
+  upp <- ifelse(params$upper == upp_capped, 
+                upp_capped - ignore_extreme_vals_perc * (upp_capped-low_capped), 
+                upp_capped)
   
   # initialize named vector that stores whether each parameter 
   # determines the bounds of a distribution
@@ -556,8 +561,8 @@ standardizeFam <- function(fam, package){
 }
 
 getParams <- function(fam, package){
-  fam <- standardizeFam(fam, package) ## MS
-  # fam <- family$family
+  
+  fam <- standardizeFam(fam, package)
 
   # 1) Get list of all parameters:
   all_params <- get_all_params(fam)
@@ -565,7 +570,7 @@ getParams <- function(fam, package){
   # 2) Add default values to all params that don't have any
   all_params <- get_default_values(all_params, fam)
   
-  if (is.null(all_params)) return(NULL) ## oder length() == 0 ?
+  if (is.null(all_params)) return(NULL)
   
   # 3) Get valid parameter ranges:
   result <- get_param_ranges(all_params, fam)
