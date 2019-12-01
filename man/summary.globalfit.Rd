@@ -24,7 +24,7 @@
  
   \item{object,x}{an object of class "globalfit", usually as a result of
     call to \link{globalfit}}
-  \item{decreasing}{always \ocde{TRUE}} % MS
+  \item{decreasing}{always \code{TRUE}} % MS
   \item{count}{integer, determines how many results are turned back as best fits}
   \item{ic}{character. It indicates which information criteria used for the ranking, requires one of the following \code{AIC}, \code{BIC}, \code{AICc}}
 }
