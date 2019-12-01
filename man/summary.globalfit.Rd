@@ -51,7 +51,7 @@
 \seealso{
  **objects to See Also as \code{\link{help}}, **~
 }
-\examples{
+\examples{ %  library(DistributionFitr)  ## MS bitte lassen 
 ##--	or do  help(data=index)  for the standard data sets.
 
 % TODO:  to slow so far, maybe just stats package?

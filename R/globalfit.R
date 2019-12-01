@@ -203,7 +203,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
       }
     }
   }
-  
+
   if (length(families) == 0) {
     stop("The provided input to argument 'packages' didn't contain any distribution family. Can't optimize.")
   }
@@ -245,16 +245,17 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
     message('Parallized over ', cores, ' cores.\n')
   cl <- makeCluster(cores, outfile='log.txt')
   registerDoParallel(cl)
+
   
   i <- NULL ## BNZ: to prevent an issue, seems to be related to parallel. Don't ask me why o.O
   output_liste <- foreach(i=1:length(relevant_families), .packages = c(), .errorhandling = 'remove',
                           .verbose = FALSE, .export = c('fitting_sanity_check'), .inorder = FALSE) %dopar% {
     
     # TODO: for me this is not working without this line, although we need to drop the line                      
-    source("private/source_all.R")
+ ##   source("private/source_all.R") ## MS !!! kein source !!
                             
                             fam <- relevant_families[[i]]
- #                           print(fam)
+                  
     if(progress)
       message("Current Family: ",  fam$family)
     
@@ -263,8 +264,10 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
                         family_info = fam$family_info,
                         method = 'MLE', prior = NULL, log = fam$family_info$log,
                         optim_method = 'L-BFGS-B', n_starting_points = 1,
-                        debug_error = FALSE, show_optim_progress=FALSE, on_error_use_best_result=TRUE, 
-                        max_discrete_steps=100, plot=FALSE, discrete_fast = TRUE)
+                        debug_error = FALSE, show_optim_progress=FALSE,
+                        on_error_use_best_result=TRUE, 
+                        max_discrete_steps=100, plot=FALSE,
+                        discrete_fast = TRUE)
     
     if(!is.null(output_liste) && !is.na(output_liste$value) && !is.infinite(output_liste$value)) {
       output <- new('optimParams', family = fam$family,
@@ -294,12 +297,13 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
                     sanity = sanity_check)
     }
     return(output)
-  }
+  } # %dopar% ## MS bitte immer weitentferntes "{" kommentieren
   stopCluster(cl)
-  
+
   r <- new('globalfit', data = data, 
           continuity = continuity,
           method = method,
           fits = output_liste)
+  
   return(sort(r))
-                          }
+}

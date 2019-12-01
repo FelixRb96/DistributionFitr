@@ -67,7 +67,8 @@ setMethod(f = "summary", signature = c("globalfit"),
 setMethod(f = "show", signature = c("globalfitSummary"),
           def = function(object) {
             cat(length(object@data), 'data points entered.\nFitted with', 
-                object@method, 'assuming continuity:', object@continuity, '
+                object@method, 'assuming continuity:', # MS continuity of what?
+                object@continuity, '
                 \n\nBest fits:\n \n')
             print(object@fits, right=FALSE)
           }

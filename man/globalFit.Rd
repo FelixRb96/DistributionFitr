@@ -106,16 +106,16 @@
   \seealso{
     **objects to See Also as \code{\link{help}}, **~
   }
-\examples{
+\examples{ %  library(DistributionFitr)  ## MS bitte lassen 
   # Example 1
   \dontrun{
   data <- rnorm(n=100, mean=70, sd= 4)
-  estimation <- globalfit(data)
+  globalfit(data) % MS
   
-  # Alternatively, it is possible to input whether the data is continuous or discrete
-  estimation <- globalfit(data, continuity = TRUE)
+  # Alternatively, it is possible to input whether the data is
+  # continuous or discrete
+  globalfit(data, continuity = TRUE) % MS
   }
-
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
