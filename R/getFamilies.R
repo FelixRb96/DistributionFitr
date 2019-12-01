@@ -1,8 +1,8 @@
 ## Authors 
 ## Tim Glockner, tim.glockner@outlook.com
 ##
-## Extract distribution families along with infos regarding their parameters from
-## multiple R packages
+## Extract distribution families along with infos regarding 
+## their parameters from multiple R packages
 ##
 ## Copyright (C) 2019 -- 2020 Tim Glockner
 ##
@@ -100,7 +100,8 @@ write_file <- function(FamilyList, file = "R/all_families.R") {
 
 
 ### Case 1: all.packages gegeben: Suche nach Verteilungsfamilien
-### Case 1.1 vector of strings (Liste von Paketnamen) -> take families from those packages
+### Case 1.1 vector of strings (Liste von Paketnamen) 
+###           -> take families from those packages
 ### Case 1.2 FALSE -> only take recommended / base packages
 ### Case 1.3 TRUE -> take all installed packages
 ### Case 2 all.packages missing: Take families saved in the file
@@ -116,7 +117,8 @@ getFamilies <- function(all.packages, file="R/all_families.R") {
 
   ## CASE 1.2 & 1.3
   if (is.logical(all.packages)) {
-    FamilyList <- iterate_packages(construct_package_list(all.packages = all.packages))
+    FamilyList <- 
+      iterate_packages(construct_package_list(all.packages = all.packages))
     write_file(FamilyList=FamilyList, file=file)
     return(FamilyList)
   }

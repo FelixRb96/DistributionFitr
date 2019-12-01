@@ -22,8 +22,11 @@
 
 getFamily <- function(pkg){
   
-  # load package pkg (can potentially lead to errors if some requirements are not fulfilled)
-  load_successful <- !is(try( suppressPackageStartupMessages(library(pkg, character.only=TRUE)), silent=TRUE), "try-error")
+  # load package pkg (can potentially lead to errors 
+  # if some requirements are not fulfilled)
+  load_successful <- !is(try( suppressPackageStartupMessages(
+                              library(pkg, character.only=TRUE)), silent=TRUE),
+                              "try-error")
   
   if (!load_successful) {
     warning("Error loading package ", pkg, ". Skipping package.")
@@ -31,10 +34,13 @@ getFamily <- function(pkg){
   }
   
   start_chars <- c("d", "p", "q", "r")
-  first_args <- c("x", "q", "p", "n")    # first parameters of the d, p, q, r functions
+  # first parameters of the d, p, q, r functions
+  first_args <- c("x", "q", "p", "n")   
   
   ## all functions starting with r, d, p or q
-  possible_dists <- lsf.str(paste0("package:", pkg), pattern=paste0("^[", paste(start_chars, collapse = ""), "]"))
+  possible_dists <- lsf.str(paste0("package:", pkg), 
+                            pattern=paste0("^[", 
+                                    paste(start_chars, collapse = ""), "]"))
   
   if (length(possible_dists) == 0) return(list())
   
@@ -43,7 +49,8 @@ getFamily <- function(pkg){
   ## l <- vector("list", length(start_chars))
   ## names(l) <- start_chars
   
-  # function for checking whether the first argument of fun in first_arg (used with first_arg = "x", "n",...)
+  # function for checking whether the first argument of fun in first_arg 
+  # (used with first_arg = "x", "n",...)
   check_first_param <- function(fun, first_arg) {
     f_arg <- names(formals(fun))[1]
     !(length(f_arg) == 0) && f_arg == first_arg
@@ -51,14 +58,16 @@ getFamily <- function(pkg){
   
   for (i in 1:length(start_chars)) {
     char <- start_chars[i]
-    subset <- grep(paste0("^", char), possible_dists, value=TRUE)           # all functions starting with char
+    # all functions starting with char
+    subset <- grep(paste0("^", char), possible_dists, value=TRUE)           
 
     ## mit obigen nur noch
     ##   if (length(subset) != 0) ...
     if (length(subset) == 0) {
       l[[char]] <- c()
     } else {
-      valid_idx <- sapply(subset, check_first_param, first_arg = first_args[i])   # check if all functions have the correct first arg
+      # check if all functions have the correct first arg
+      valid_idx <- sapply(subset, check_first_param, first_arg = first_args[i])
       # print(valid_idx)
       l[[char]] <- subset[valid_idx]
     }
@@ -68,18 +77,22 @@ getFamily <- function(pkg){
   
   l_endings <- lapply(l, get_endings)    # remove the d, p, q, r suffixes
   
-  # we definitely need a function for the density starting with d, as otherwise we cannot evaluate likelihood function
+  # we definitely need a function for the density starting with d, 
+  # as otherwise we cannot evaluate likelihood function
   # so we only take the endings from p, q and r that also appear in d
   for (char in start_chars[-1]) {
     l_endings[[char]] <- intersect(l_endings[[char]], l_endings$d)
   }
   
-  freq <- table(unlist(l_endings))     # get a frequency table of the endings
-  freq <- freq[freq>=2]                # only take those distributions that have at least 2 functions implemented
+  # get a frequency table of the endings
+  freq <- table(unlist(l_endings))    
+  # only take those distributions that have at least 2 functions implemented
+  freq <- freq[freq>=2]                
   
   families <- names(freq)
   
-  # list of lists, where each sublist has the form list(package=some_pkg, family=some_family)
+  # list of lists, where each sublist has the form 
+  # list(package=some_pkg, family=some_family)
   families <- lapply(families, function(x) list(package=pkg, family=x))
   
   return(families)
