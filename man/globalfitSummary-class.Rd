@@ -1,11 +1,29 @@
 \name{globalfitSummary-class}
 \alias{globalfitSummary-class}
+\alias{sort,globalfit-method}% MS
+\alias{summary,globalfit-method}% MS
+\alias{show,globalfitSummary-method}% MS
+\alias{print,globalfitSummary-method}% MS
+\alias{print,globalfit-method}% MS
+\alias{AIC,globalfit-method}% MS
+\alias{BIC,globalfit-method}% MS
+\alias{show,globalfitSummary-method}% MS
+\alias{hist,globalfitSummary-method}% MS
 %- Also NEED an '\alias' for EACH other topic documented here.
+
 
 \title{Class "globalfitSummary"}
 \description{The \code{globalfitSummary}-class is the class to handle the 
   entries of the \code{\link{globalfit-class}} and assemble them together
   for summary.}
+  
+\usage{% MS komplett neu
+  \S4method{summary}{globalfit}(object, count=10, ic = 'AIC')
+  \S4method{print}{globalfit}(x)
+  \S4method{sort}{globalfit}(x, decreasing=FALSE, ic='AIC') 
+  \S4method{show}{globalfitSummary}(object)
+
+}
 
 \section{Objects from the Class}{
   Objects can be created by calls of the form 
