@@ -341,10 +341,9 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
            continuity = continuity,
            method = method,
            fits = output_liste)
-  r <- sort(r, ic=ic)   ## MS: 2.12., Vorschlag
+  r <- sort(r, ic=ic)
   
-  r@fits <- r@fits[!is.na(sapply(r@fits, function(x) x %@% ic))]  
-  ## MS: 2.12., Vorschlag
+  r@fits <- r@fits[!is.na(sapply(r@fits, function(x) x %@% ic))]
   
   return(r)
 }
