@@ -1,12 +1,13 @@
 \name{globalfitSummary-class}
 \alias{globalfitSummary-class}
-%- Also NEED an '\alias' for EACH other topic documented here.
+\alias{show,globalfitSummary-method}
+\alias{print,globalfitSummary-method}
 
 \title{Class "globalfitSummary"}
 \description{The \code{globalfitSummary}-class is the class to handle the 
   entries of the \code{\link{globalfit-class}} and assemble them together
   for summary.}
-
+  
 \section{Objects from the Class}{
   Objects can be created by calls of the form 
   \code{new("globalfitSummary", data, continuity, method, fits, ic)}.
@@ -46,7 +47,7 @@
 }
 
 \examples{
-    r <- summary(globalfit(rnorm(n = 1000, mean=10, sd=1)))
+    r <- summary(globalfit(rnorm(n = 100, mean=10, sd=1)))
     
     show(r)
     print(r)

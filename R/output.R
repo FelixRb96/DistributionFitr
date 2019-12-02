@@ -25,10 +25,10 @@
 ## braucht ihr wirklich (ueberall) die Abfrage is.natural?
 ## warum reicht nicht if (x != as.integer(x)) ?
 
-"%@%" <- function(x, ic) eval(parse(text = paste0('x@', ic)))## MS: 2.12.,Vorschlag
+"%@%" <- function(x, ic) eval(parse(text = paste0('x@', ic)))
   
 setMethod(f = "sort", signature = c('globalfit'),
-          def = function(x, decreasing = TRUE, ic='AIC') {
+          def = function(x, decreasing = FALSE, ic='AIC') {
             if(is.null(ic) || !(ic %in% c('AIC', 'BIC', 'AICc')))
               stop("Argument 'ic' must be 'AIC', 'BIC' or 'AICc'")
             ic <- sapply(x@fits, function(x) x %@% ic) 
@@ -47,7 +47,6 @@ setMethod(f = "summary", signature = c("globalfit"),
             
             object <- sort(object, ic=ic)
             df <- data.frame(family = sapply(object@fits,
-                                             ## MS: 2.12, function(object) ist irritierend
                                              function(f) f@family),
                              package = sapply(object@fits, function(f) f@package),
                              ic = sapply(object@fits, function(f) f %@% ic),
@@ -57,7 +56,7 @@ setMethod(f = "summary", signature = c("globalfit"),
                                             signif(f@estimatedValues,
                                                    digits = 3),
                                             sep= " = ", collapse='; ')))
-            colnames(df) <- c("family", "package", ic, "params") # MS, Vorschlag
+            colnames(df) <- c("family", "package", ic, "params")
             
             sum <- new("globalfitSummary",
                        data = object@data,
@@ -104,7 +103,7 @@ IC <- function(object, ic='AIC', count = NULL) {
     count <- Inf
   if(!is.natural(count))
     stop("Argument 'count'  must be positive integer.")
-  object <- sort(object, ic=ic) ## MS : 2.12., musste mit nachfolg. Zeile getauscht werden
+  object <- sort(object, ic=ic)
   count <- min(length(object@fits), count)
   object@fits <- object@fits[1:count]
   x <- sapply(object@fits, function(object) object %@% ic)
@@ -139,14 +138,12 @@ setMethod(f = "hist", signature = c("globalfit"),
               stop("Argument 'which'  must be positive integer.")
             
             x <- sort(x, ic=ic)
-            which <- which[which <= length(x)] ## MS: 2.12.
-            if (length(which) == 0) stop("value(s) of 'which' larger than the number of available results") ## MS 2.12.
+            if (which > length(x@fits)) stop("value of 'which' larger than the number of available results")
              
             lower <- min(x@data) - 0.2 * (max(x@data)-min(x@data))
             upper <- max(x@data) + 0.2 * (max(x@data)-min(x@data))
 
             selected_fit <- x@fits[[which]]
-            selected_fit@estimatedValues## MS: 2.12 kann doch geloescht werden? 
             if(x@continuity) {
               supporting_point <-seq(lower, upper, length.out = 300)
             } else {
@@ -154,8 +151,6 @@ setMethod(f = "hist", signature = c("globalfit"),
             }
             breaks <- if (x@continuity) sqrt(length(x@data)) else 
                       min(nclass.Sturges(x@data), length(unique(x@data)))
-            ## geht nachfolgendes nicht einfacher ueber direkte Aufrufe
-            ## und/oder do.call ?
             
             fun <- get_fun_from_package(type="d", family = selected_fit)
             param_list <- split(selected_fit@estimatedValues, 
