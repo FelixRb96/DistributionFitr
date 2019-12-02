@@ -1,10 +1,11 @@
 ## Authors 
 ## Tim Glockner, tim.glockner@outlook.com
+## Adrian Heppeler, aheppele@mail.uni-mannheim.de
 ##
 ## Extract distribution families along with infos regarding 
 ## their parameters from multiple R packages
 ##
-## Copyright (C) 2019 -- 2020 Tim Glockner
+## Copyright (C) 2019 -- 2020 Tim Glockner, Adrian Heppeler
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
