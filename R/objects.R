@@ -1,6 +1,6 @@
 ## Authors 
 ## Moritz Kern, mkern@mail.uni-mannheim.de
-##
+## 
 ## Define S4 Classes
 ##
 ## Copyright (C) 2019 -- 2020 Moritz Kern

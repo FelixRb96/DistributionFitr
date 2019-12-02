@@ -1,5 +1,6 @@
 ## Authors 
 ## Moritz Kern, mkern@mail.uni-mannheim.de
+## Benedikt Geier, bgeier@mail.uni-mannheim.de
 ##
 ## Filter distributions where density obiviously does not fit
 ##
