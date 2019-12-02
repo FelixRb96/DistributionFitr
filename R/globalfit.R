@@ -140,6 +140,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
                       packages = NULL, append_packages = TRUE,
                       perform_check = TRUE, cores = NULL, 
                       max_dim_discrete = Inf, sanity_level = 1, ...){
+  ic <- "AIC"
 
 # packages: either (1) character vector with package names, 
 # i.e.: packages = c("bla", "bundesbank", "secret")
@@ -340,6 +341,9 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
           continuity = continuity,
           method = method,
           fits = output_liste)
-  
-  return(sort(r))
+  r <- sort(r, ic=ic)   ## MS: 2.12., Vorschlag
+
+  r@fits <- r@fits[!is.na(sapply(r@fits, function(x) x %@% ic))]  ## MS: 2.12., Vorschlag
+ 
+  return(r)
 }

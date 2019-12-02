@@ -25,12 +25,13 @@
 ## braucht ihr wirklich (ueberall) die Abfrage is.natural?
 ## warum reicht nicht if (x != as.integer(x)) ?
 
+"%@%" <- function(x, ic) eval(parse(text = paste0('x@', ic)))## MS: 2.12.,Vorschlag
+  
 setMethod(f = "sort", signature = c('globalfit'),
           def = function(x, decreasing = TRUE, ic='AIC') {
             if(is.null(ic) || !(ic %in% c('AIC', 'BIC', 'AICc')))
               stop("Argument 'ic' must be 'AIC', 'BIC' or 'AICc'")
-            ic <- sapply(x@fits, function(x)  
-              eval(parse(text = paste0('x@', ic))))
+            ic <- sapply(x@fits, function(x) x %@% ic) 
             x@fits <- x@fits[order(ic)]
             return(x)
           })
@@ -45,16 +46,16 @@ setMethod(f = "summary", signature = c("globalfit"),
               stop("Argument 'count'  must be positive integer.")
             
             object <- sort(object, ic=ic)
-            df <- data.frame(family = sapply(object@fits, 
-                                      function(object) object@family),
-                             package = sapply(object@fits, 
-                                       function(object) object@package),
-                             ic = sapply(object@fits, function(object)
-                                  eval(parse(text = paste0('object@', ic)))),
-                             params = sapply(object@fits, function(object) 
-                                      paste(names(object@estimatedValues),
-                                             signif(object@estimatedValues, 
-                                                    digits = 3),
+            df <- data.frame(family = sapply(object@fits,
+                                             ## MS: 2.12, function(object) ist irritierend
+                                             function(f) f@family),
+                             package = sapply(object@fits, function(f) f@package),
+                             ic = sapply(object@fits, function(f) f %@% ic),
+##                                  eval(parse(text = paste0('object@', ic)))),
+                             params = sapply(object@fits, function(f) 
+                                      paste(names(f@estimatedValues),
+                                            signif(f@estimatedValues,
+                                                   digits = 3),
                                             sep= " = ", collapse='; ')))
             colnames(df) <- c("family", "package", ic, "params") # MS, Vorschlag
             
@@ -103,11 +104,11 @@ IC <- function(object, ic='AIC', count = NULL) {
     count <- Inf
   if(!is.natural(count))
     stop("Argument 'count'  must be positive integer.")
+  object <- sort(object, ic=ic) ## MS : 2.12., musste mit nachfolg. Zeile getauscht werden
   count <- min(length(object@fits), count)
-  object <- sort(object, ic=ic)
   object@fits <- object@fits[1:count]
-  x <- sapply(object@fits,
-              function(object) eval(parse(text = paste0('object@', ic))))
+  x <- sapply(object@fits, function(object) object %@% ic)
+  ##eval(parse(text = paste0('object@', ic))))
   names(x) <- paste(sapply(object@fits, function(object) object@package), 
                     sapply(object@fits, function(object) object@family),
                     sep = "::")
@@ -138,18 +139,20 @@ setMethod(f = "hist", signature = c("globalfit"),
               stop("Argument 'which'  must be positive integer.")
             
             x <- sort(x, ic=ic)
-            
+            which <- which[which <= length(x)] ## MS: 2.12.
+            if (length(which) == 0) stop("value(s) of 'which' larger than the number of available results") ## MS 2.12.
+             
             lower <- min(x@data) - 0.2 * (max(x@data)-min(x@data))
             upper <- max(x@data) + 0.2 * (max(x@data)-min(x@data))
-            
+
             selected_fit <- x@fits[[which]]
-            selected_fit@estimatedValues
+            selected_fit@estimatedValues## MS: 2.12 kann doch geloescht werden? 
             if(x@continuity) {
               supporting_point <-seq(lower, upper, length.out = 300)
             } else {
               supporting_point <- seq(floor(lower)+0.5, ceiling(upper)+0.5)
             }
-            breaks <- if(x@continuity) sqrt(length(x@data)) else 
+            breaks <- if (x@continuity) sqrt(length(x@data)) else 
                       min(nclass.Sturges(x@data), length(unique(x@data)))
             ## geht nachfolgendes nicht einfacher ueber direkte Aufrufe
             ## und/oder do.call ?
