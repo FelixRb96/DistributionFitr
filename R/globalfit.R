@@ -2,13 +2,15 @@
 ## Moritz Lauff, mlauff@mail.uni-mannheim.de
 ## Kiril Dik, kdik@mail.uni-mannheim.de
 ## Moritz Kern, mkern@mail.uni-mannheim.de
-## Nadine Tampe
+## Nadine Tampe, ntampe@mail.uni-mannheim.de
 ## Borui Niklas Zhu, bzhu@mail.uni-mannheim.de
+## Benedikt Geier, bgeier@mail.uni-mannheim.de
 ##
 ## Fit multiple distribution families to a given univariate dataset
 ##
 ## Copyright (C) 2019 -- 2020 
-## Moritz Lauff, Kiril Dik, Moritz Kern, Nadine Tampe, Borui Niklas Zhu
+## Moritz Lauff, Kiril Dik, Moritz Kern, Nadine Tampe, Borui Niklas Zhu, 
+## Benedikt Geier
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -29,13 +31,6 @@
 
 ### 1)  benoetigte Hilfsfunktionen --------------------------------------------
 
-# Rundungsproblem mit .5 beheben
-new_round <- function(x) {
-  
-  as.integer(x + 0.5)
-  
-}
-
 # Dezimalstellen bestimmen
 getDecimals <- function(x){
   
@@ -43,11 +38,12 @@ getDecimals <- function(x){
   
 }
 
-#' some_percent: wenn fuer eine gegebene Anzahl an Dezimalstellen mindestens 
-#'               der Anteil percent an moeglichen Dezimalen (von 10) 
-#'               auftreten, wird TRUE zurueckgegeben 
 
 some_percent <- function(decs, numbers, percent){
+  # some_percent: wenn fuer eine gegebene Anzahl an Dezimalstellen mindestens 
+  #               der Anteil percent an moeglichen Dezimalen (von 10) 
+  #               auftreten, wird TRUE zurueckgegeben 
+  
   for (i in min(numbers):max(numbers)){
     if (length(unique(decs[numbers == i])) >= percent * 10){
       return(TRUE) 
@@ -80,10 +76,10 @@ is.discrete <- function(data, border = 0.35, percent = 0.8){
 
   if (n_unique_dec / obs <= border && 
       !any(numbers >= 4) && 
-      !some_percent(percent_df, percent)){
-    return(T)
+      !some_percent(decs, numbers, percent)){
+    return(TRUE)
   } else {
-    return(F)
+    return(FALSE)
   }
 }
 
@@ -92,7 +88,6 @@ is.discrete <- function(data, border = 0.35, percent = 0.8){
 disc_trafo <- function(data){
   
   if (is.discrete(data)){ # Trafo nur, wenn Daten diskret
-
 
     data_new <- sort(data) # Daten sortieren
     ## Keine data.frames! Die sind i.W. nur fuer user
@@ -146,7 +141,6 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
                       perform_check = TRUE, cores = NULL, 
                       max_dim_discrete = Inf, sanity_level = 1, ...){
 
-# WIP:
 # packages: either (1) character vector with package names, 
 # i.e.: packages = c("bla", "bundesbank", "secret")
 # 	    		if NULL (default): use packages in FamilyList as given
@@ -155,7 +149,6 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
 #            	   if TRUE (default), scan over existing packages in FamilyList 
 #  AND the ones specified in extra_packages,
 # 	     	   else FALSE: only scan in packages provided in extra_packages
-  # TODO: this is the highest level function: input validation!
   
   if (stats_only && length(packages) > 0) {
     message("As 'stats_only' is set to TRUE, argument 'packages' will be ignored.")
@@ -272,7 +265,10 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
                     collapse = ", "))
 
   if(is.null(cores))
-    cores <- detectCores()
+    CRAN_check_limit <- Sys.getenv("_R_CHECK_LIMIT_CORES_", "")
+    if(length(CRAN_check_limit) > 0 && CRAN_check_limit == TRUE) cores <- 2
+    # CRAN_check_limit == TRUE because it might not be a boolean
+    else cores <- detectCores()
   if(progress)
     message('Parallelizing over ', cores, ' cores.\n')
   cl <- makeCluster(cores, outfile='log.txt')
@@ -288,9 +284,9 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
     
     # TODO: for me this is not working without this line, although we need to 
     #       drop the line                      
- ##   source("private/source_all.R") ## MS !!! kein source !!
+    # source("private/source_all.R") ## MS !!! kein source !!
                             
-                            fam <- relevant_families[[i]]
+    fam <- relevant_families[[i]]
                   
     if(progress)
       message("Current Family: ",  fam$family)
@@ -316,7 +312,6 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
                    AICc = output_liste$AICc) 
       # aim: check whether solution has good loglik 
       # but does not fit nonetheless
-      # experimental feature - please watch out!
       if(perform_check) {
         sanity_check <- fitting_sanity_check(output, data, 
                                              continuity = continuity, 
@@ -338,7 +333,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
                     sanity = sanity_check)
     }
     return(output)
-  } # %dopar% ## MS bitte immer weitentferntes "{" kommentieren
+  } # end %dopar%
   stopCluster(cl)
 
   r <- new('globalfit', data = data, 

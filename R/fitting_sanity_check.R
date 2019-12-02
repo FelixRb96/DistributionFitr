@@ -20,10 +20,6 @@
 ## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.  
 
 
-
-# AIM: Filter distributions where density obiviously does not fit
-# but returned with good logliks (due to unkown reasons)
-
 ## bitte deshalb auf mich zukommen.
 ### AIM: Filter distributions where density obiviously does not fit
 ### but returned with good logliks (due to unkown reasons)
@@ -34,14 +30,9 @@ fitting_sanity_check <- function(object, data, continuity, plot=FALSE,
    if (!is(object, 'optimParams'))
       stop('Wrong input.')
 
-  ## der nachfolgende Code ist zu 80% der gleiche wie in output.R
-  ## lohnt sich Hilfsfunktion Funktion mit Argumen, dass zwischen x<-h$mids
-  ## or supporting_points (z.B. TRUE/FALSE fuer x@continuity und NA fuer
-  ## h$mids) unterscheidet?
   lower <- min(data) - 0.2 * (max(data) - min(data))
   upper <- max(data) + 0.2 * (max(data) - min(data))
 
-  ## semantisch falsch. if (continuity)  sqrt(length(data)) else 
   # breaks <- if (continuity) sqrt(length(data)) 
   #           else min(nclass.Sturges(data), length(unique(data)) + 1)
   breaks <- if (continuity) sqrt(length(data)) else (min(data) -1) : max(data)
@@ -51,8 +42,8 @@ fitting_sanity_check <- function(object, data, continuity, plot=FALSE,
   
   fun <- get_fun_from_package(type="d", family = object)
   param_list <- split(object@estimatedValues, names(object@estimatedValues))
-  #return(list(fun, param_list))
-  density <- function(x) {
+
+    density <- function(x) {
     param_list$x <- x
     y <- do.call(fun, param_list)
     y <- ifelse(is.na(y), 0, y)
@@ -63,7 +54,7 @@ fitting_sanity_check <- function(object, data, continuity, plot=FALSE,
     int_check <- tryCatch(integrate(density, lower = -Inf, upper = Inf),
                   error = function(e) {
                             message('Sanity Check. Calculate integral of
-                                    density failed: ',e,'\n')
+                                     density failed: ',e,'\n')
                             return(list(value=Inf))
                   }
         )
@@ -73,7 +64,6 @@ fitting_sanity_check <- function(object, data, continuity, plot=FALSE,
     # apart from the first one
     hist_check <- sum(diff(h$breaks) * density(h$breaks[2:length(h$breaks)]))
     
-    ## BG: Do we need an int check in discrete case???
     int_check <- list(value=1)
   }
 

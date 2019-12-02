@@ -53,7 +53,7 @@ Maintainer: Borui Niklas Zhu, \email{bzhu@mail.uni-mannheim.de}
 str(getFamily("stats")) % MS
 
 #example for getParams
-getParams("beta") % MS
+getParams("beta", package="stats") % MS, neu
 
 }
 

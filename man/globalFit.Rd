@@ -37,8 +37,10 @@
    following arguments below are specified otherwise.
   }
   \item{packages}{
-   either a character vector with names of packages; \\
-   or a list such as those returned by \code{getFamilies} (recommended)
+    % MS immer \cr statt \\
+    either a character vector with names of packages; \cr
+    or a list such as those returned by \command{getFamilies}\cr
+    or \code{NULL}, i.e. all families recognized by the package (recommended)   
   } 
   \item{append_packages}{
    logical; if \code{TRUE} (default) appends packages specified in the equally-named argument above to the
@@ -108,14 +110,14 @@
   }
 \examples{ %  library(DistributionFitr)  ## MS bitte lassen 
   # Example 1
-  \dontrun{
   data <- rnorm(n=100, mean=70, sd= 4)
-  globalfit(data) % MS
+  str(globalfit(data, packages="stats", append_packages=FALSE)) % MS, s. Email
+  % bitte entweder eine ordentliche print-Funktion schreiben oder 'str' lassen
   
   # Alternatively, it is possible to input whether the data is
   # continuous or discrete
-  globalfit(data, continuity = TRUE) % MS
-  }
+  globalfit(data, continuity = TRUE,
+            packages="stats", append_packages=FALSE)) % MS, dito
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

@@ -55,7 +55,8 @@ setMethod(f = "summary", signature = c("globalfit"),
                                       paste(names(object@estimatedValues),
                                              signif(object@estimatedValues, 
                                                     digits = 3),
-                                             sep= " = ", collapse='; ')))
+                                            sep= " = ", collapse='; ')))
+            colnames(df) <- c("family", "package", ic, "params") # MS, Vorschlag
             
             sum <- new("globalfitSummary",
                        data = object@data,
@@ -96,37 +97,8 @@ setMethod(f = "print", signature = c("globalfit"),
 	  }
 	  )
 
-## MK@MS: Du moechtest keine S4-Methode verwenden, 
-## oder warum hast du das umgeschrieben?
-if (FALSE) { ## MS
-setGeneric(name = "IC",		
-           def = function(object, ...) standardGeneric("IC"))
 
-setMethod(f = "IC", signature = c('globalfit'),
-          def = function(object, ic='AIC', count = NULL) {
-            ## falls obiges uebernommen, dann naechste Zeilen loeschen
-            ## ansonsten: count <- if(is.null(ls$count)) Inf else ls$count
-            if(is.null(count))
-              count <- Inf
-            if(!is.natural(count))
-              stop("Argument 'count'  must be positive integer.")
-            count <- min(length(object@fits), count)
-            object <- sort(object, ic=ic)
-            object@fits <- object@fits[1:count]
-            x <- sapply(object@fits, function(object) 
-                            eval(parse(text = paste0('object@', ic))))
-            names(x) <- paste(sapply(object@fits, function(object) 
-                                     object@package), 
-                              sapply(object@fits, function(object) 
-                                     object@family), sep = "::")
-            return(x)            
-          })
-}
-
-
-IC <- function(object, ic='AIC', count = NULL) { ## MS
-  ## falls obiges uebernommen, dann naechste Zeilen loeschen
-  ## ansonsten: count <- if(is.null(ls$count)) Inf else ls$count
+IC <- function(object, ic='AIC', count = NULL) {
   if(is.null(count))
     count <- Inf
   if(!is.natural(count))
