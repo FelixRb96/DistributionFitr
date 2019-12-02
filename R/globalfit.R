@@ -267,11 +267,12 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
             paste(sapply(relevant_families, function(x) x$family), 
                   collapse = ", "))
   
-  if(is.null(cores))
+  if(is.null(cores)) {
     CRAN_check_limit <- Sys.getenv("_R_CHECK_LIMIT_CORES_", "")
-  if(length(CRAN_check_limit) > 0 && CRAN_check_limit == TRUE) cores <- 2
-  # CRAN_check_limit == TRUE because it might not be a boolean
-  else cores <- detectCores()
+    if (length(CRAN_check_limit) > 0 && CRAN_check_limit == TRUE) cores <- 2
+    ## CRAN_check_limit == TRUE because it might not be a boolean
+    else cores <- detectCores()
+  }
   if(progress)
     message('Parallelizing over ', cores, ' cores.\n')
   cl <- makeCluster(cores, outfile='log.txt')

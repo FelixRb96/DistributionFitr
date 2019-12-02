@@ -47,10 +47,10 @@
 }
 
 \examples{
-    r <- summary(globalfit(rnorm(n = 100, mean=10, sd=1)))
-    
-    show(r)
-    print(r)
+  data <- rnorm(n=100, mean=10, sd= 1)
+  r <- globalfit(data, cores= if (interactive()) NULL else 1,
+                 packages="stats", append_packages=FALSE)
+  summary(r)
 }
 
 \keyword{distribution}

@@ -42,10 +42,12 @@
 }
 
 \examples{
-    r <- globalfit(rnorm(n = 100, mean=10, sd=1))
+  data <- rnorm(n=100, mean=10, sd= 1)
+  r <- globalfit(data, cores= if (interactive()) NULL else 1,
+                 packages="stats", append_packages=FALSE)
   
-    # optimParams of best fit
-    r@fits[[1]]
+  # optimParams of best fit
+  r@fits[[1]]
     
 }
 

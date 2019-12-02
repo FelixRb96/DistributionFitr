@@ -90,14 +90,15 @@ globalfit(data, continuity = NULL, method = "MLE", progress = TRUE,
 \examples{ %  library(DistributionFitr)  ## bitte lassen 
   # Example 1
   data <- rnorm(n=100, mean=70, sd= 4)
-  r <- globalfit(data, packages="stats", append_packages=FALSE) 
+  r <- globalfit(data, cores= if (interactive()) NULL else 1,
+                 packages="stats", append_packages=FALSE) 
   summary(r)
   % bitte entweder eine ordentliche print-Funktion schreiben oder 'str' lassen
   
   # Alternatively, it is possible to input whether the data is
   # continuous or discrete
   \dontrun{
-  globalfit(data, continuity = TRUE,
+  globalfit(data, continuity = TRUE, cores= if (interactive()) NULL else 1,
             packages="stats", append_packages=FALSE) 
   }
 }

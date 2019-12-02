@@ -50,7 +50,8 @@ Maintainer: Borui Niklas Zhu, \email{bzhu@mail.uni-mannheim.de}
 
 # example for globalfit
 data <- rnorm(n = 100, mean = 70, sd = 4)
-r <- globalfit(data, packages = "stats", append_packages = FALSE)
+r <- globalfit(data,  cores= if (interactive()) NULL else 1,
+               packages = "stats", append_packages = FALSE)
 summary(r)
 
 # example for getFamily
