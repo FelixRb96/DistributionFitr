@@ -28,7 +28,7 @@
 "%@%" <- function(x, ic) eval(parse(text = paste0('x@', ic)))## MS: 2.12.,Vorschlag
   
 setMethod(f = "sort", signature = c('globalfit'),
-          def = function(x, decreasing = TRUE, ic='AIC') {
+          def = function(x, decreasing = FALSE, ic='AIC') {
             if(is.null(ic) || !(ic %in% c('AIC', 'BIC', 'AICc')))
               stop("Argument 'ic' must be 'AIC', 'BIC' or 'AICc'")
             ic <- sapply(x@fits, function(x) x %@% ic) 
