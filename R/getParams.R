@@ -38,7 +38,7 @@
 #    not in [0,1]) while keeping the others at their defaults
 
 ## optional TODO:
-# check whether param name contains prob or sth like that -> range should be [0,1]
+# check whether param name contains prob or sth like that ->range should be[0,1]
 
 
 # fam <- list(package="stats", family="beta")   # gamma
@@ -48,7 +48,8 @@
 # ----------------------------------------------------------------------
 
 get_all_params <- function(fam) {
-  # idea: all params need to be present in the r... method for generating random samples from the distribution
+  # idea: all params need to be present in the r... method for generating random
+  #samples from the distribution
   
   fun <- get_fun_from_package(type="r", family=fam)
   all_params <- formals(fun)
@@ -329,16 +330,19 @@ get_param_ranges <- function(all_params, fam) {
     # cat("current step size:", step_sizes[1], "\n")
     check_res <- check_values_for_param(param, all_params, fam, vals)
     
-    # if lowest or highest value was valid in the first check we already have an min_val or max_val
+    # if lowest or highest value was valid in the first check we already have a
+    #min_val or max_val
     # otherwise we iterate with the above method
-    min_val <- if (check_res[1]) -Inf else iterate_min_max_vals(param=param, all_params = all_params, fam=fam,
-                                                                cur_val = min(vals[check_res]), 
-                                                                step_sizes = step_sizes, is_min = TRUE)
+    min_val <- if (check_res[1]) -Inf else 
+      {iterate_min_max_vals(param=param, all_params = all_params, fam=fam,
+                            cur_val = min(vals[check_res]), 
+                            step_sizes = step_sizes, is_min = TRUE)}
 
 
-    max_val <- if (check_res[length(check_res)]) Inf else iterate_min_max_vals(param=param, all_params = all_params, 
-                                                                               fam=fam, cur_val = max(vals[check_res]), 
-                                                                               step_sizes = step_sizes, is_min = FALSE)
+    max_val <- if (check_res[length(check_res)]) Inf else 
+      {iterate_min_max_vals(param=param, all_params = all_params,fam=fam,
+                            cur_val = max(vals[check_res]),
+                            step_sizes = step_sizes, is_min = FALSE)}
     # set the estimated values in the named vactor that will be returned
     lower[param] <- min_val
     upper[param] <- max_val
@@ -358,8 +362,9 @@ get_param_ranges <- function(all_params, fam) {
     accepted_float_rate <- accepted_float/(num_tests - num_integer)
 
     accepts_float[param] <- accepted_float_rate > 1/(num_tests - num_integer)
-    if (!accepts_float[param] && accepted_int_rate == 0) stop("distribution does not seem to accept any values")
-    
+    if (!accepts_float[param] && accepted_int_rate == 0) {
+      stop("distribution does not seem to accept any values")
+    }
   }
   return(list(lower=lower,
               upper=upper,
@@ -386,7 +391,8 @@ check_log <- function(fam) {
 check_integer <- function(fam, all_params) {
   rfun <- get_fun_from_package(type="r", family=fam)
   n_test <- 10
-  n_or_nn <- if (! "nn" %in% names(formals(rfun))) list(n=n_test) else list(nn=n_test)
+  n_or_nn <- if (! "nn" %in% names(formals(rfun))) list(n=n_test) else {
+    list(nn=n_test)}
   args_ <- c(all_params, n_or_nn)
   res <- do.call(rfun, args = args_)
   return(all(abs(res %% 1) < sqrt(.Machine$double.eps)))
@@ -519,7 +525,8 @@ get_support <- function(fam, params) {
     # "\tsupport_max", support_max, "\n")
   }
 
-  # if minimum / maximum support is small / high enough we assume that the support is the whole real line
+  # if minimum / maximum support is small / high enough we assume that the
+  #support is the whole real line
   if (support_min <= -support_to_inf_limit) support_min <- -Inf
   if (support_max >= support_to_inf_limit) support_max <- Inf
   
