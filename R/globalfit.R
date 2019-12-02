@@ -136,8 +136,7 @@ disc_trafo <- function(data){
 ### 2) Main Function ----------------------------------------------------------
 
 globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
-                      stats_only = TRUE,
-                      packages = NULL, append_packages = TRUE,
+                      packages = "stats", append_packages = FALSE,
                       perform_check = TRUE, cores = NULL, 
                       max_dim_discrete = Inf, sanity_level = 1, ...){
   ic <- "AIC"
@@ -152,17 +151,9 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
 #  AND the ones specified in extra_packages,
 # 	     	   else FALSE: only scan in packages provided in extra_packages
   
-  if (stats_only && length(packages) > 0) {
-    message("As 'stats_only' is set to TRUE, argument 'packages' will be ignored.")
-  }
-
   families <- FamilyList
 
-  if(stats_only) {
-      families <- families[ which(sapply(families, 
-                                         function(x) x$package == "stats")) ]
-      
-  } else if(length(packages) > 0) {
+  if(length(packages) > 0) {
     
     if(is.vector(packages) && typeof(packages) == "character") {
       
@@ -211,17 +202,21 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
       }
       
     } else if(is.list(packages)) {
+      # in the future this should be deprecated in favour of an S4 object
+      # with better validity check 
       if(append_packages) {
 	      families <- c(families, additionals)
       } else {
 	      families <- packages
       }
+    } else {
+      stop("Invalid argument 'packages'.")
     }
   }
 
   if (length(families) == 0) {
-    stop("The provided input to argument 'packages' didn't 
-         contain any distribution family. Can't optimize.")
+    stop("The provided input to argument 'packages' did not 
+         contain any distribution family. Can not optimize.")
   }
   
   #filter out those distributions that have too many discrete parameters.

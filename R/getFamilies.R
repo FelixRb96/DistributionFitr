@@ -1,5 +1,5 @@
 ## Authors 
-## Tim Glockner, tim.glockner@outlook.com
+## Tim Glockner, tiglockn@mail.uni-mannheim.com
 ## Adrian Heppeler, aheppele@mail.uni-mannheim.de
 ##
 ## Extract distribution families along with infos regarding 
@@ -22,9 +22,9 @@
 ## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.  
 
 
-## iterate over packages and extract families and params
+
 iterate_packages <- function(packages) {
-  
+## iterate over packages and extract families and params  
   if (length(packages) == 0) return(list())
   
   res <- list()
@@ -64,7 +64,6 @@ iterate_packages <- function(packages) {
 }
 
 
-### internal
 construct_package_list <- function(all.packages) {
   
   if (all.packages) {
