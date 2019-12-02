@@ -10,4 +10,4 @@ import(doParallel)
 import(foreach)
 
 export(globalfit, getFamilies, getFamily, getParams)
-exportMethods(summary, hist)
+exportMethods(summary, hist, AIC, BIC)

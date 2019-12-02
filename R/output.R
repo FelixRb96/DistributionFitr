@@ -139,8 +139,7 @@ setMethod(f = "hist", signature = c("globalfit"),
               stop("Argument 'which'  must be positive integer.")
             
             x <- sort(x, ic=ic)
-            which <- which[which <= length(x)] ## MS: 2.12.
-            if (length(which) == 0) stop("value(s) of 'which' larger than the number of available results") ## MS 2.12.
+            if (which > length(x@fits)) stop("value of 'which' larger than the number of available results")
              
             lower <- min(x@data) - 0.2 * (max(x@data)-min(x@data))
             upper <- max(x@data) + 0.2 * (max(x@data)-min(x@data))
@@ -154,8 +153,6 @@ setMethod(f = "hist", signature = c("globalfit"),
             }
             breaks <- if (x@continuity) sqrt(length(x@data)) else 
                       min(nclass.Sturges(x@data), length(unique(x@data)))
-            ## geht nachfolgendes nicht einfacher ueber direkte Aufrufe
-            ## und/oder do.call ?
             
             fun <- get_fun_from_package(type="d", family = selected_fit)
             param_list <- split(selected_fit@estimatedValues, 

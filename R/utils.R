@@ -73,10 +73,6 @@ eval_with_timeout <- function(expr, envir = parent.frame(), timeout, return_valu
 # from the desired package and returns it
 # this is needed as we cant use "stats::rbeta" directly in formals or do.call -> error, that it cannot find the function
 
-## jede Funktion ruft get_fun_from_package mit
-## get_fun_from_package(fam = fam$family, package = fam$package)
-## auf.  Zumindest als Option waere gut, dass package nicht angegeben
-## wird und get_fun_from_package(fam = fam, type="r") aufgerufen werden kann
 get_fun_from_package_internal <- function(type, fam, package) {
   return( get(paste0(type, fam), envir = asNamespace(package)) )
 }
