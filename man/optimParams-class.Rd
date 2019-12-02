@@ -9,7 +9,8 @@
 
 \section{Objects from the Class}{
   Objects can be created by calls of the form 
-  \code{new("optimParams", family, package, estimatedValues, AIC, BIC, AICc, sanity)}.
+  \code{new("optimParams", family, package, estimatedValues, AIC, BIC, AICc, 
+             sanity)}.
   More comfortably, you may use the  function \code{\link{globalfit}}.
   The list elements in the fits-slot of the result is an optimParams object.
 }

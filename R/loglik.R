@@ -29,53 +29,62 @@ loglik <- function(family, data, fixed=list(), log, lower, upper) {
   arguments <- list(x=data) 
   
   # check wheter log-distribution function is directly available for distribution
-  if(log) 
-    arguments$log <- TRUE 
+  if(log)
+    arguments$log <- TRUE
   # add fixed parameter values of distribution to list
   if(length(fixed)>0) {
     arguments <- c(arguments, fixed)
   }
   
   
-  # define loglikelihood function 
-  likelihood <- function(params = NULL) { # BNZ: allow for empty params for distributions with all-integer parameters
+  # define loglikelihood function
+  # BNZ: allow for empty params for distributions with all-integer parameters
+  likelihood <- function(params = NULL) { 
 
     for(param_name in names(params)) {
       if(lower[param_name]>params[[param_name]] ||
          upper[param_name] < params[[param_name]])
-        stop('Parameter ', param_name, ' with value ', params[[param_name]],
-             ' outside the boundaries.')
+         stop('Parameter ', param_name, ' with value ', params[[param_name]],
+              ' outside the boundaries.')
     }
     
     # Add params with names of parameters to arguments list
     arguments <- c(arguments, params)
 
-    summands <- do.call(get_fun_from_package(type = "d", family=family), args=arguments)
+    summands <- do.call(get_fun_from_package(type = "d", family=family),
+                        args=arguments)
     
     if(any(is.na(summands))) stop('In Log-Likelihood-Function NA occured.')
     
     # log values if not log so far
     if(!log) {
       summands <- log(summands)
+      ## warning('Could be numerically instable.')
     } 
     loglik_value <- sum(summands)
     
-    ## The following is only for tracking the optimisation progress (might be deactivated sometime)
-    # recursively go through parent frames and check whether there is a variable that tracks the optimisation process
+    ## The following is only for tracking the optimisation progress 
+    ##(might be deactivated sometime)
+    # recursively go through parent frames and check whether there is a variable 
+    #tracks the optimisation process
+
+    # if yes then add a new row to the progress dataframe in the closest parent 
+    #frame
     for (i in 1:length(sys.parents())) {
        
       if (exists("optim_progress", envir = parent.frame(i))) {
-      
-      progress <- get("optim_progress", envir = parent.frame(i))
-      progress[nrow(progress)+1, ] <- c(params, fixed, log_lik = loglik_value)
-      assign("optim_progress", envir = parent.frame(i), progress)
-      break
-
-        
-        # cat("Env in loglik:\n")
-        # print(parent.frame(i))
+        # cat("Found optimization progress in parent frame", i, "\n")
+        progress <- get("optim_progress", envir = parent.frame(i))
+        #print(progress)
+        #print(c(param_values, fixed, log_lik = ll))
+        progress[nrow(progress)+1, ] <- c(params, fixed, log_lik = loglik_value)
+        assign("optim_progress", envir = parent.frame(i), progress)
+        # print(tail(progress,2))
+        break
       }
     }
+    
+    # message(loglik_value)
     
     return(loglik_value)
   }
