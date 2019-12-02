@@ -8,3 +8,5 @@ private
 ^.*\.optimParamsContinuous.Rd
 ^.*\.optimParamsDiscrete.Rd
 log.txt
+search.txt
+DistributionFitr.Rproj

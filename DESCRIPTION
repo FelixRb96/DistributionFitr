@@ -1,7 +1,7 @@
 Package: DistributionFitr
 Type: Package
 Title: Fitting Multiple Parametric Distributions
-Version: 1.0.0
+Version: 0.1
 Date: 2019-11-25
 Author: Benedikt Geier [aut], Moritz Kern [aut], Borui Niklas Zhu [cre aut], Kiril Dik [aut], Andre Ferdinand [aut], Till Freihaut [aut], Tim Glockner [aut], Manuel J. Hentschel [aut], Adrian Heppeler [aut], Moritz Lauff [aut], Niclas Lietzow [aut], Helene Peter [aut], Nadine Tampe [aut], Valentin von Trotha [aut], Leonardo Vela [aut], Martin Schlather [aut], Yiqi Li [ctb], Henrik Bengtsson [ctb]
 Maintainer: Borui Niklas Zhu <bzhu@mail.uni-mannheim.de>
