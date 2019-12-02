@@ -22,7 +22,7 @@ getParams(fam, package)
   }
 }
 
-\details{ % MS : immer \cr statt \\
+\details{
 	The family name is defined as the part of the function name that follows "d", "p", "q" and "r". Example: uniform distribution. function call: "runif(...)" --> family name: "unif". \cr	The values returned by getParams are included in the DistributionFitr-package and updated regularly. Users may use it to update the library of parameter characteristics themselves or find the function useful to use the parameter characteristics retrieved for other purposes.
 }
 \value{
@@ -38,31 +38,23 @@ getParams(fam, package)
   \item{supp_max_depends_on}{a named vector. Value: booleans, \code{TRUE} if right support bound depends on the repective parameter, \code{FALSE} if not. Note that dependency is currently implemented as equality between bound and parameter, linear relationships may be implemented in the future. Length and names must coincide with entry \code{lower}.}
   \item{supp_max_depends_on}{a named vector. Value: booleans, \code{TRUE} if right support bound depends on the repective parameter, \code{FALSE} if not. See note in entry \code{supp_max_depends_on}. Length and names must coincide with entry \code{lower}.} 
 }
-\references{
- ~put references to the literature/web site here ~
-}
+%\references{
+% ~put references to the literature/web site here ~
+%}
 \author{
   Benedikt Geier, Borui Niklas Zhu
 }
-\note{
-  **further notes**
-}
+%\note{
+%  **further notes**
+%}
 
 % ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
- **objects to See Also as \code{\link{help}}, **~
+  See also \code{\link{getFamilies}} for a convenient wrapper available to the user where distributions are extracted from whole packages.
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-% MS, neu
-getParams("beta", package="stats")
-getParams("unif", package="stats" )
-
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
+getParams("beta", package = "stats")
+getParams("unif", package = "stats" )
 }
 \keyword{distribution, parameters}
