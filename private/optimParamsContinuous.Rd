@@ -12,7 +12,7 @@ optimParamsContinuous(data, family, lower, upper, defaults, method = "MLE",
 		      fixed = list(), prior = NULL, log = TRUE,
 		      optim_method = "L-BFGS-B", n_starting_points = 1,
 		      debug_error = TRUE, show_optim_progress = FALSE,
-		      on_error_use_best_result = TRUE, no_second = FALSE, ...)
+		      on_error_use_best_result = TRUE, no_second = TRUE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
