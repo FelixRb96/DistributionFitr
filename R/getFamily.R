@@ -1,5 +1,5 @@
 ## Authors 
-## Manuel Hentschel, mhentsch@mail.uni-mannheim.de
+## Manuel Hentschel, mahentsc@mail.uni-mannheim.de
 ##
 ## Extract distribution families from a single R package
 ##
@@ -43,7 +43,6 @@ getFamily <- function(pkg){
                                     paste(start_chars, collapse = ""), "]"))
   
   if (length(possible_dists) == 0) return(list())
-  
   
   l <- vector("list", length(start_chars))
   names(l) <- start_chars

@@ -1,11 +1,11 @@
 ## Authors 
-## Niclas Lietzow, niclas.lietzow@gmx.de
+## Niclas Lietzow, nlietzow@mail.uni-mannheim.de
 ## Till Freihaut, tfreihau@mail.uni-mannheim.de
 ## Leonardo Vela, lvela@mail.uni-mannheim.de
 ##
 ## Calculate the log-likelihood function
 ##
-## Copyright (C) 2019 -- 2020 Niclas Lietzow
+## Copyright (C) 2019 -- 2020 Niclas Lietzow, Till Freihaut and Leonardo Vela
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -24,7 +24,9 @@
 
 loglik <- function(family, data, fixed=list(), log, lower, upper) {
   
-  arguments <- list(x=data) # NEW: arg_opt wird erst in likelihood in die Liste eingefuegt
+  stopifnot(length(upper)>0)
+  
+  arguments <- list(x=data) 
   
   # check wheter log-distribution function is directly available for distribution
   if(log)
@@ -38,12 +40,7 @@ loglik <- function(family, data, fixed=list(), log, lower, upper) {
   # define loglikelihood function
   # BNZ: allow for empty params for distributions with all-integer parameters
   likelihood <- function(params = NULL) { 
-    
 
-    ## ist warning adaequat? stop(...) ?? Gegebenenfalls ruecksprache
-    if(length(params)==0) warning('loglik does not depend on parameters.')
-      
-    
     for(param_name in names(params)) {
       if(lower[param_name]>params[[param_name]] ||
          upper[param_name] < params[[param_name]])
@@ -51,7 +48,7 @@ loglik <- function(family, data, fixed=list(), log, lower, upper) {
               ' outside the boundaries.')
     }
     
-    #Add params with names of parameters to arguments list
+    # Add params with names of parameters to arguments list
     arguments <- c(arguments, params)
 
     summands <- do.call(get_fun_from_package(type = "d", family=family), args=arguments)
@@ -67,6 +64,7 @@ loglik <- function(family, data, fixed=list(), log, lower, upper) {
     
     ## The following is only for tracking the optimisation progress (might be deactivated sometime)
     # recursively go through parent frames and check whether there is a variable that tracks the optimisation process
+
     # if yes then add a new row to the progress dataframe in the closest parent frame
     for (i in 1:length(sys.parents())) {
        
