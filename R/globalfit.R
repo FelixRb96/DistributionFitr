@@ -29,9 +29,9 @@
 
 
 
-### 1)  benoetigte Hilfsfunktionen --------------------------------------------
+### 1)  necessary helper functions --------------------------------------------
 
-# Dezimalstellen bestimmen
+# determine decimals
 getDecimals <- function(x){
   
   return(round(x %% 1, 10))
@@ -40,9 +40,9 @@ getDecimals <- function(x){
 
 
 some_percent <- function(decs, numbers, percent){
-  # some_percent: wenn fuer eine gegebene Anzahl an Dezimalstellen mindestens 
-  #               der Anteil percent an moeglichen Dezimalen (von 10) 
-  #               auftreten, wird TRUE zurueckgegeben 
+  # some_percent: TRUE, if for a given number of decimals
+  #               at least a proportion of 'percent' out of
+  #               all possible decimals occurs 
   
   for (i in min(numbers):max(numbers)){
     if (length(unique(decs[numbers == i])) >= percent * 10){
@@ -53,15 +53,15 @@ some_percent <- function(decs, numbers, percent){
 }
 
 
-# Testen, ob Daten diskret sind
+# test, if data is discrete
 is.discrete <- function(data, border = 0.35, percent = 0.8){
   
-  # # Umwandeln zu vector
+  # # convert data, if not a vector
   if(is.data.frame(data)){
     data <- as.vector(data[,1])
   }
   
-  # Entfernen der NA's
+  # remove NA's
   data <- data[!is.na(data)]
   
   obs <- length(data)
@@ -84,31 +84,32 @@ is.discrete <- function(data, border = 0.35, percent = 0.8){
 }
 
 
-# Behandlung diskreter nicht-ganzzahliger Daten
+# treatment of discrete non-integral numbers
 disc_trafo <- function(data){
   
-  if (is.discrete(data)){ # Trafo nur, wenn Daten diskret
+  # transformation only if data is discrete
+  if (is.discrete(data)){ 
 
-    data_new <- sort(data) # Daten sortieren
+    data_new <- sort(data) # sort the data
     ## Keine data.frames! Die sind i.W. nur fuer user
     # Daten mit zugehoerigen Dezimalen
     data_new <- data.frame(data_new = data_new,
                            decimals = getDecimals(data_new)) 
     
-    # auftretende verschiedene Dezimalen
+    # occuring distinct decimals
     unique_decimals <- sort(unique(data_new$decimals))
     m <- length(unique_decimals) # Anzahl auftretender verschiedener Dezimalen
     
-    # Dezimalen und transformierte Dezimalen
+    # decimals and transformed decimals
     decimals <- data.frame(original_decimals = unique_decimals,
                            new_decimals = round(seq(0, (m-1)/m, 1/m), 10))
     
-    # zusammenfuegen
+    # put together
     data_new <- merge(data_new, decimals,  
                       by.x = "decimals", by.y = "original_decimals") 
     
     data_new <- (data_new$data_new - data_new$decimals 
-                 + data_new$new_decimals) * m # neue Daten
+                 + data_new$new_decimals) * m # new data
     
     return(list(data = data_new,
                 trafo_df = decimals,
@@ -225,7 +226,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
                 function(x) sum(x$family_info$discrete) <= max_dim_discrete )) ]
   }
   
-  # Indizes zu diskreten Verteilungen
+  # indices for the discrete distributions
   discrete_families <- which(sapply(families, 
                                     function(x) x$family_info$discrete))
   
