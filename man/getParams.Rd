@@ -23,8 +23,7 @@ getParams(fam, package)
 }
 
 \details{
-	The family name is defined as the part of the function name that follows "d", "p", "q" and "r". Example: uniform distribution. function call: "runif(...)" --> family name: "unif". \\
-	The values returned by getParams are included in the DistributionFitr-package and updated regularly. Users may use it to update the library of parameter characteristics themselves or find the function useful to use the parameter characteristics retrieved for other purposes.
+	The family name is defined as the part of the function name that follows "d", "p", "q" and "r". Example: uniform distribution. function call: "runif(...)" --> family name: "unif". \cr	The values returned by getParams are included in the DistributionFitr-package and updated regularly. Users may use it to update the library of parameter characteristics themselves or find the function useful to use the parameter characteristics retrieved for other purposes.
 }
 \value{
   For \code{getParams} a list with components, each of them a named vector: The name is the arg name as specified in the original "d", "p", ...-function, the value is described below:
@@ -39,33 +38,23 @@ getParams(fam, package)
   \item{supp_max_depends_on}{a named vector. Value: booleans, \code{TRUE} if right support bound depends on the repective parameter, \code{FALSE} if not. Note that dependency is currently implemented as equality between bound and parameter, linear relationships may be implemented in the future. Length and names must coincide with entry \code{lower}.}
   \item{supp_max_depends_on}{a named vector. Value: booleans, \code{TRUE} if right support bound depends on the repective parameter, \code{FALSE} if not. See note in entry \code{supp_max_depends_on}. Length and names must coincide with entry \code{lower}.} 
 }
-\references{
- ~put references to the literature/web site here ~
-}
+%\references{
+% ~put references to the literature/web site here ~
+%}
 \author{
   Benedikt Geier, Borui Niklas Zhu
 }
-\note{
-  **further notes**
-}
+%\note{
+%  **further notes**
+%}
 
 % ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
- **objects to See Also as \code{\link{help}}, **~
+  See also \code{\link{getFamilies}} for a convenient wrapper available to the user where distributions are extracted from whole packages.
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-# Example 1 for getParams
-# parameter_characteristics <- getParams("beta")
-
-# Example 2 for getParams % MS
-# this_should_also_work <- getParams("unif")
-
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
+getParams("beta", package = "stats")
+getParams("unif", package = "stats" )
 }
 \keyword{distribution, parameters}

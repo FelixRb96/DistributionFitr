@@ -1,6 +1,6 @@
 ## Authors 
 ## Moritz Kern, mkern@mail.uni-mannheim.de
-##
+## 
 ## Define S4 Classes
 ##
 ## Copyright (C) 2019 -- 2020 Moritz Kern
@@ -43,16 +43,7 @@ setClass(Class = "globalfitSummary",
            data = "numeric",
            continuity = "logical",
            method = "character",
-           fits = "data.frame"
+           fits = "data.frame",
+           ic = 'character'
          )
 )
-
-
-## verstehe ich nicht wozu diese gebraucht wird
-## gehoert dies in zzz.R, als
-## .onLoad <- function(lib, pkg) {
-##   ...
-## }
-## if (sys.nframe() == 0) {
-##   new('globalfit', data = 1, continuity = T, method = 'MLE', fits = list(1,2,3))
-## }

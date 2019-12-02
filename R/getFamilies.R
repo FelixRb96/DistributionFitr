@@ -1,10 +1,11 @@
 ## Authors 
 ## Tim Glockner, tim.glockner@outlook.com
+## Adrian Heppeler, aheppele@mail.uni-mannheim.de
 ##
-## Extract distribution families along with infos regarding their parameters from
-## multiple R packages
+## Extract distribution families along with infos regarding 
+## their parameters from multiple R packages
 ##
-## Copyright (C) 2019 -- 2020 Tim Glockner
+## Copyright (C) 2019 -- 2020 Tim Glockner, Adrian Heppeler
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -21,14 +22,14 @@
 ## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.  
 
 
-##iterate over packages and extract families and params
+## iterate over packages and extract families and params
 iterate_packages <- function(packages) {
   
   if (length(packages) == 0) return(list())
   
   res <- list()
   
-  ##iterate over packages
+  ## iterate over packages
   for (i in 1:length(packages)) {
     ## package <- packages[i]
     message("Current Package:", packages[i])
@@ -38,22 +39,21 @@ iterate_packages <- function(packages) {
     ## no distribution family contained in package
     if (length(package_content) == 0) next
     
-    ##iterate over all families withing package
+    ## iterate over all families withing package
     for (j in 1:length(package_content)) {
       
       stopifnot(package_content[[j]]$package == packages[i])
       
       message("Current Family:", package_content[[j]]$family, "\n")
-      #fetch params for each family and add to 
+      ## fetch params for each family and add to 
       params <- tryCatch(getParams(package_content[[j]]),
                          error = function(e) {
                            message("Error occured for family ",
                                    package_content[[j]]$family,
                                    "\n", e)
-                           ## message(e, "\n")
                            NULL
                          })
-      if (!is.null(params)) # length(params) != 0 ## semantisch das richtige?
+      if (length(params)!=0)
         res[[length(res) + 1]] <- c(package_content[[j]],
                                     list(family_info = params))
     }
@@ -64,14 +64,14 @@ iterate_packages <- function(packages) {
 }
 
 
-## internal
+### internal
 construct_package_list <- function(all.packages) {
   
   if (all.packages) {
     all.packages <- as.vector(installed.packages()[,"Package"])
     
   } else {
-    ##only select "base" and "recommended" packages
+    ## only select "base" and "recommended" packages
     ins_pck <- installed.packages()
     
     package_filter <- ((ins_pck[,"Priority"] == "base" |
@@ -88,19 +88,25 @@ construct_package_list <- function(all.packages) {
 
 
 write_file <- function(FamilyList, file = "R/all_families.R") {
-  dump("FamilyList", file = file)
-  #when bottleneck is solved:
-  #con <- file("all_families.R")
-  #open(con, "w")
-  #write("FamilyList<-", con)
-  #dput(x=FamilyList, file=con)
-  #close(con)
+  for (i in 1:length(FamilyList)) {
+    for (j in 1:length(FamilyList[[i]]$family_info)){
+      ij = FamilyList[[i]]$family_info[[j]]
+      if (is.double(ij)) {
+        FamilyList[[i]]$family_info[[j]] <- signif(ij, 5)
+      }
+      
+    }
+  }
+  
+  dump(list="FamilyList", file=file)
+
   
 }
 
 
 ### Case 1: all.packages gegeben: Suche nach Verteilungsfamilien
-### Case 1.1 vector of strings (Liste von Paketnamen) -> take families from those packages
+### Case 1.1 vector of strings (Liste von Paketnamen) 
+###           -> take families from those packages
 ### Case 1.2 FALSE -> only take recommended / base packages
 ### Case 1.3 TRUE -> take all installed packages
 ### Case 2 all.packages missing: Take families saved in the file
@@ -108,15 +114,16 @@ write_file <- function(FamilyList, file = "R/all_families.R") {
 getFamilies <- function(all.packages, file="R/all_families.R") {
   ## CASE 2:
   if (missing(all.packages)) {
-    if (!file.exists(file))
+    if (file.exists(file))
       return(getFamilies(all.packages = FALSE, file=file))
-    ##read file and return list of lists
+    ## read file and return list of lists
     return(FamilyList)
   }
 
   ## CASE 1.2 & 1.3
   if (is.logical(all.packages)) {
-    FamilyList <- iterate_packages(construct_package_list(all.packages = all.packages))
+    FamilyList <- 
+      iterate_packages(construct_package_list(all.packages = all.packages))
     write_file(FamilyList=FamilyList, file=file)
     return(FamilyList)
   }

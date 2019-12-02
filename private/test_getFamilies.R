@@ -1,3 +1,10 @@
+setwd("C:/Users/Adrian/Desktop/RTest")
+source("getParams.R")
+source("globalfit.R")
+source("loglik.R")
+source("optimParamscontinuous.R")
+source("optimParamsDiscrete.R")
+source("getFamily.R")
 res <- iterate_packages(c("stats"))
 res
 
