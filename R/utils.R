@@ -63,15 +63,18 @@ eval_with_timeout <- function(expr, envir = parent.frame(), timeout, return_valu
 }
 
 # t <- Sys.time()
-# res <- eval_with_timeout(dsignrank(1, 2000), timeout=0.01, return_value_on_timeout = "TIMEOUT")
+# res <- eval_with_timeout(dsignrank(1, 2000), timeout=0.01, 
+#                          return_value_on_timeout = "TIMEOUT")
 # print(res)
 # print(Sys.time() -t)
 
 
 
-# given a family name (e.g. "beta"), a package name (e.g. "stats") and the type ("r" for "rbeta", "d" for "dbeta") gets the function
+# given a family name (e.g. "beta"), a package name (e.g. "stats") 
+# and the type ("r" for "rbeta", "d" for "dbeta") gets the function
 # from the desired package and returns it
-# this is needed as we cant use "stats::rbeta" directly in formals or do.call -> error, that it cannot find the function
+# this is needed as we cant use "stats::rbeta" directly in formals or 
+# do.call -> error, that it cannot find the function
 
 get_fun_from_package_internal <- function(type, fam, package) {
   return( get(paste0(type, fam), envir = asNamespace(package)) )
@@ -136,12 +139,13 @@ sample_params <- function(family, family_info, params=NULL, max = 100) {
   
   if (length(int) > 0) {
     impossible_ranges <- floor(family_info$upper[int]) - ceiling(family_info$lower[int]) < 0
-    if (any(impossible_ranges)) stop("Param(s)", paste(names(int)[which(impossible_ranges)], collapse=", "), "do not accept floats and
-                                     their range does not include any integer")
-    pars[int] <- sapply(1:length(int), function(i) sample(ceiling(lower[int[i]]): floor(upper[int[i]]), 1))
+    if (any(impossible_ranges)) 
+      stop("Param(s)", paste(names(int)[which(impossible_ranges)], collapse=", "), 
+           "do not accept floats andtheir range does not include any integer")
+    pars[int] <- sapply(1:length(int), 
+                        function(i) sample(ceiling(lower[int[i]]): floor(upper[int[i]]), 1))
   }
 
-  ## taucht das Problem nur bei unif auf??
   # make sure that sampled values make sense for uniform distribution
   if (family$family == "unif") {
     h <- pars
