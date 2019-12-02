@@ -100,19 +100,19 @@ globalfit(data, continuity = NULL, method = "MLE", progress = TRUE,
 \author{
   Moritz Lauff, Kiril Dik, Nadine Tampe, Borui Niklas Zhu
 }
-\note{
-  **further notes**
-}
+%\note{
+%  **further notes**
+%}
 
 % ~Make other sections like Warning with \section{Warning }{....} ~
   
-  \seealso{
-    **objects to See Also as \code{\link{help}}, **~
-  }
+%  \seealso{
+%    **objects to See Also as \code{\link{help}}, **~
+%  }
 \examples{ %  library(DistributionFitr)  ## MS bitte lassen 
   # Example 1
   data <- rnorm(n=100, mean=70, sd= 4)
-  str(globalfit(data, packages="stats", append_packages=FALSE)) % MS, s. Email
+  summary(globalfit(data, packages="stats", append_packages=FALSE)) % MS, s. Email
   % bitte entweder eine ordentliche print-Funktion schreiben oder 'str' lassen
   
   # Alternatively, it is possible to input whether the data is
