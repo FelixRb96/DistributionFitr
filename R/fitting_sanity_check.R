@@ -21,7 +21,6 @@
 ## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.  
 
 
-## bitte deshalb auf mich zukommen.
 ### AIM: Filter distributions where density obiviously does not fit
 ### but returned with good logliks (due to unkown reasons)
 

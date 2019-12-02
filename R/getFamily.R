@@ -1,5 +1,5 @@
 ## Authors 
-## Manuel Hentschel, mhentsch@mail.uni-mannheim.de
+## Manuel Hentschel, mahentsc@mail.uni-mannheim.de
 ##
 ## Extract distribution families from a single R package
 ##
@@ -44,10 +44,8 @@ getFamily <- function(pkg){
   
   if (length(possible_dists) == 0) return(list())
   
-  
-  l <- list()
-  ## l <- vector("list", length(start_chars))
-  ## names(l) <- start_chars
+  l <- vector("list", length(start_chars))
+  names(l) <- start_chars
   
   # function for checking whether the first argument of fun in first_arg 
   # (used with first_arg = "x", "n",...)
@@ -61,11 +59,7 @@ getFamily <- function(pkg){
     # all functions starting with char
     subset <- grep(paste0("^", char), possible_dists, value=TRUE)           
 
-    ## mit obigen nur noch
-    ##   if (length(subset) != 0) ...
-    if (length(subset) == 0) {
-      l[[char]] <- c()
-    } else {
+    if (length(subset) != 0) {
       # check if all functions have the correct first arg
       valid_idx <- sapply(subset, check_first_param, first_arg = first_args[i])
       # print(valid_idx)

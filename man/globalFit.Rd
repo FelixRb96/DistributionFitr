@@ -11,7 +11,7 @@
 }
 \usage{
 globalfit(data, continuity = NULL, method = "MLE", progress = TRUE,
-  stats_only = TRUE, packages = NULL, append_packages = TRUE,
+  packages = "stats", append_packages = FALSE,
   perform_check = TRUE, cores = NULL, max_dim_discrete, sanity_level=1, ...)
 }
 
@@ -32,13 +32,8 @@ globalfit(data, continuity = NULL, method = "MLE", progress = TRUE,
   \item{progress}{
    logical; if \code{TRUE}, always show progress
   }
-  \item{stats_only}{
-   logical; if \code{TRUE} (default) only distributions from the \code{\link{stats}}-package will be
-   considered. If \code{FALSE} all distributions in our standard package will be fitted over, unless
-   following arguments below are specified otherwise.
-  }
   \item{packages}{
-    % MS immer \cr statt \\
+    default: \dQuote{stats} \cr
     either a character vector with names of packages; \cr
     or a list such as those returned by \command{getFamilies}\cr
     or \code{NULL}, i.e. all families recognized by the package (recommended)   
@@ -88,13 +83,16 @@ globalfit(data, continuity = NULL, method = "MLE", progress = TRUE,
 \examples{ %  library(DistributionFitr)  ## MS bitte lassen 
   # Example 1
   data <- rnorm(n=100, mean=70, sd= 4)
-  summary(globalfit(data, packages="stats", append_packages=FALSE)) % MS, s. Email
+  r <- globalfit(data, packages="stats", append_packages=FALSE) % MS, s. Email
+  summary(r)
   % bitte entweder eine ordentliche print-Funktion schreiben oder 'str' lassen
   
   # Alternatively, it is possible to input whether the data is
   # continuous or discrete
+  \dontrun{
   globalfit(data, continuity = TRUE,
             packages="stats", append_packages=FALSE) % MS, dito
+  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

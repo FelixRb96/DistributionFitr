@@ -64,7 +64,7 @@
 }
 
 \examples{
-    r <- summary(globalfit(rnorm(n = 1000, mean=10, sd=1)))
+    r <- summary(globalfit(rnorm(n = 100, mean=10, sd=1)))
     
     show(r)
     print(r)
