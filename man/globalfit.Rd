@@ -22,11 +22,12 @@ globalfit(data, continuity = NULL, method = "MLE", progress = TRUE,
     vector of data points.
   }
   \item{continuity}{
-    logical; if \code{TRUE}, data is fitted with continuous distributions. If no input is given,
-    the data will be tested for continuity.
+    logical; if \code{TRUE}, data is fitted with continuous distributions.
+    If no input is given, the data will be tested for continuity.
   }
   \item{method}{
-    method for parameter estimation. So far only Maximum-Likelihood is implemented, thus this argument must
+    method for parameter estimation. So far only Maximum-Likelihood is 
+    implemented, thus this argument must
     be \code{"MLE"}.
   }
   \item{progress}{
@@ -39,25 +40,28 @@ globalfit(data, continuity = NULL, method = "MLE", progress = TRUE,
     or \code{NULL}, i.e. all families recognized by the package (recommended)   
   } 
   \item{append_packages}{
-   logical; if \code{TRUE} (default) appends packages specified in the equally-named argument above to the
-   standard search list, if \code{FALSE} \code{globalfit} will use only those packages.
+   logical; if \code{TRUE} (default) appends packages specified in the 
+   equally-named argument above to the standard search list, if \code{FALSE} 
+   \code{globalfit} will use only those packages.
   }
   \item{perform_check}{
-   logical; if \code{TRUE} (default) obviously bad fits will be filtered out (DistributionFitr generally
-   depends on other packages to supply reasonable distribution functions).
+   logical; if \code{TRUE} (default) obviously bad fits will be filtered out 
+   (DistributionFitr generally depends on other packages to supply reasonable 
+   distribution functions).
   }
   \item{max_dim_discrete}{
-   non-negative integer; as a final step, all distributions with more non-continuous parameters than
-   \code{max_dim_discrete} will not be considered. Manual setting is recommended if calculation speed has to
+   non-negative integer; as a final step, all distributions with more 
+   non-continuous parameters than \code{max_dim_discrete} will not be 
+   considered. Manual setting is recommended if calculation speed has to
    be cut down.
   }
   \item{cores}{
-   integer; Number of CPU cores to be used in the calculations of best fitted parameters and information
-   criteria
+   integer; Number of CPU cores to be used in the calculations of best fitted 
+   parameters and information criteria
   }
   \item{sanity_level}{
-	positive number; default set to 1; the smaller the number, the stricter the check will be executed and
-	more potential distributions will be rejected
+	positive number; default set to 1; the smaller the number, the stricter 
+	the check will be executed and more potential distributions will be rejected
   }
   \item{...}{
   Further named arguments that can are passed on to optimParamsDiscrete
@@ -65,11 +69,13 @@ globalfit(data, continuity = NULL, method = "MLE", progress = TRUE,
 }
 
 \details{
-  If there is no continuity input given, this function first tests via multiple criteria whether the data is
-  continuously or discretely distributed. Given that information, the related distributions from
-  \code{getFamilies()} are fitted to the data with the maximum likelihood method and information criteria
-  are calculated. For discrete data that is not in the form of integers only, an appropriate linear
-  transformation is applied to guarantee stable optimization.
+  If there is no continuity input given, this function first tests via multiple 
+  criteria whether the data is   continuously or discretely distributed. 
+  Given that information, the related distributions from \code{getFamilies()} 
+  are fitted to the data with the maximum likelihood method and information 
+  criteria are calculated. For discrete data that is not in the form of 
+  integers only, an appropriate linear transformation is applied to guarantee 
+  stable optimization.
 }
 
 \value{
@@ -77,13 +83,14 @@ globalfit(data, continuity = NULL, method = "MLE", progress = TRUE,
 }
 
 \author{
-  Moritz Lauff, Kiril Dik, Nadine Tampe, Borui Niklas Zhu, Benedikt Geier, Moritz Kern
+  Moritz Lauff, Kiril Dik, Nadine Tampe, Borui Niklas Zhu, 
+  Benedikt Geier, Moritz Kern
 }
 
-\examples{ %  library(DistributionFitr)  ## MS bitte lassen 
+\examples{ %  library(DistributionFitr)  ## bitte lassen 
   # Example 1
   data <- rnorm(n=100, mean=70, sd= 4)
-  r <- globalfit(data, packages="stats", append_packages=FALSE) % MS, s. Email
+  r <- globalfit(data, packages="stats", append_packages=FALSE) 
   summary(r)
   % bitte entweder eine ordentliche print-Funktion schreiben oder 'str' lassen
   
@@ -91,7 +98,7 @@ globalfit(data, continuity = NULL, method = "MLE", progress = TRUE,
   # continuous or discrete
   \dontrun{
   globalfit(data, continuity = TRUE,
-            packages="stats", append_packages=FALSE) % MS, dito
+            packages="stats", append_packages=FALSE) 
   }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
