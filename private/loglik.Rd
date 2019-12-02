@@ -1,7 +1,6 @@
 \name{loglik}
 \alias{loglik}
 
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{
   Loglikelihood Function 
 }
@@ -11,7 +10,7 @@
 \usage{
 loglik(family, data, fixed, log, lower, upper)
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
   \item{family}{
      list of two elements. family: distribution family callable in the \code{package}, e.g. 'norm'; package: name of the R package, which contains the distribution family.
@@ -40,21 +39,10 @@ loglik(family, data, fixed, log, lower, upper)
 
 }
 \references{
- ~ put references to the literature/web site here ~
+ ~ Log-Likelihood function - Introduction to mathematical statistics. ~
 }
 \author{
   Niclas Lietzow, Till Freihaut, Leonardo Vela
-}
-
-
-\section{Warnings}{
-\itemize{
-  \item{loglik does not depend on parameters} {The returned log-likelihood function is a constant function.}
-  
-  \item{Parameter x with value y outside the boundaries} {At least one parameter value passed on to the log-likelihood function exceeds the distribution's parameter boundaries of upper or lower bound.}
-  
-  \item{Could be numerically instable} {The respective distribution function lacks the argument \code{log} and was hence called without \code{log = TRUE}. Logging the summands afterwards renders the result numerically instable.}
-}
 }
   
 
@@ -78,9 +66,7 @@ likelihood <- loglik(family = family, data = data, fixed = fixed,
 }
 
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
+
+
 \keyword{distribution}
 \keyword{models}
-\keyword{Maximum-Likelihood}
-\keyword{Log-Likelihood}
