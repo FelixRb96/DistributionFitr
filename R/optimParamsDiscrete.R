@@ -60,7 +60,8 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
   i <- 1
   stop_discrete <- FALSE
   
-  # CASE 1: No discrete params -> we can directly redirect to optimParamsContinuous
+  # CASE 1: No discrete params -> we can directly redirect to 
+  #optimParamsContinuous
   if (all(family_info$accepts_float)) {
     optim_res <- tryCatch({
       optimParamsContinuous(data=data, family=family, lower=family_info$lower,
