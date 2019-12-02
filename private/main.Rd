@@ -57,6 +57,6 @@ parameter_characteristics <- getParams(list(package = "stats", family = "beta"))
 \references{
 Zucchini, W. (2000). An introduction to model selection. Journal of mathematical psychology, 44(1), 41-61.
 
-Shao, J. (2003). Mathematical Statistics.
+Shao, J. (2003). Mathematical Statistics. Springer.
 
 }
