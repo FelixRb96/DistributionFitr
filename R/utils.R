@@ -23,7 +23,8 @@
 
 # Function for stopping an expression if it takes too long
 # Simplified version of https://github.com/HenrikBengtsson/R.utils/issues/74
-eval_with_timeout <- function(expr, envir = parent.frame(), timeout, return_value_on_timeout=NULL) {
+eval_with_timeout <- function(expr, envir = parent.frame(), timeout,
+                              return_value_on_timeout=NULL) {
   # substitute expression so it is not executed as soon it is used
   expr <- substitute(expr)
   
@@ -81,18 +82,22 @@ get_fun_from_package_internal <- function(type, fam, package) {
 }
 
 setGeneric(name="get_fun_from_package",
-           def = function(type, family, package) standardGeneric("get_fun_from_package"))
-
+           def = function(type, family, package) {
+             standardGeneric("get_fun_from_package"))
+           }
 setMethod(f="get_fun_from_package",
           signature=c("character", "optimParams", "missing"),
           definition = function(type, family, package) {
-            return(get_fun_from_package_internal(type, family@family, family@package))
+            return(
+              get_fun_from_package_internal(type, family@family, 
+                                            family@package))
           })
 
 setMethod(f="get_fun_from_package",
           signature=c("character", "list", "missing"),
           definition = function(type, family, package) {
-            return(get_fun_from_package_internal(type, family$family, family$package))
+            return(get_fun_from_package_internal(type, family$family, 
+                                                 family$package))
           })
 
 setMethod(f="get_fun_from_package",
@@ -118,7 +123,8 @@ setMethod(f="get_fun_from_package",
 
 # get_fun_from_package("r", "beta", "stats")
 
-# # show an example where a function exists in two packages and it loads the right one
+# # show an example where a function exists in two packages and it loads the 
+#right one
 # get_fun_from_package("filter", "stats", "")
 # get_fun_from_package("filter", "dplyr", "")
 
@@ -138,12 +144,16 @@ sample_params <- function(family, family_info, params=NULL, max = 100) {
   int <- names(pars)[!family_info$accepts_float]
   
   if (length(int) > 0) {
-    impossible_ranges <- floor(family_info$upper[int]) - ceiling(family_info$lower[int]) < 0
+    impossible_ranges <- 
+      (floor(family_info$upper[int]) - ceiling(family_info$lower[int]) < 0)
     if (any(impossible_ranges)) 
-      stop("Param(s)", paste(names(int)[which(impossible_ranges)], collapse=", "), 
+      stop("Param(s)",paste(names(int)[which(impossible_ranges)],collapse=", "), 
            "do not accept floats andtheir range does not include any integer")
     pars[int] <- sapply(1:length(int), 
-                        function(i) sample(ceiling(lower[int[i]]): floor(upper[int[i]]), 1))
+                        function(i) 
+                        {
+                        sample(ceiling(lower[int[i]]): floor(upper[int[i]]), 1))
+                        }
   }
 
   # make sure that sampled values make sense for uniform distribution
@@ -159,7 +169,8 @@ sample_params <- function(family, family_info, params=NULL, max = 100) {
 # sample_params(family, get_params(family), c(shape1=1, shape2=2))
 
 sample_data <- function(n, family, params) {
-  rfun <- get_fun_from_package(family = family$family, package=family$package, type="r")
+  rfun <- get_fun_from_package(family = family$family, package=family$package, 
+                               type="r")
   n_or_nn <- if (! "nn" %in% names(formals(rfun))) list(n=n) else list(nn=n)
   args <- c(n_or_nn, params)
   testing_data <- do.call(rfun, args)
