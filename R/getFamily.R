@@ -46,8 +46,6 @@ getFamily <- function(pkg){
   
   
   l <- list()
-  ## l <- vector("list", length(start_chars))
-  ## names(l) <- start_chars
   
   # function for checking whether the first argument of fun in first_arg 
   # (used with first_arg = "x", "n",...)
@@ -61,8 +59,6 @@ getFamily <- function(pkg){
     # all functions starting with char
     subset <- grep(paste0("^", char), possible_dists, value=TRUE)           
 
-    ## mit obigen nur noch
-    ##   if (length(subset) != 0) ...
     if (length(subset) == 0) {
       l[[char]] <- c()
     } else {
