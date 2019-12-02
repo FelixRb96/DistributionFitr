@@ -32,13 +32,8 @@ globalfit(data, continuity = NULL, method = "MLE", progress = TRUE,
   \item{progress}{
    logical; if \code{TRUE}, always show progress
   }
-  \item{stats_only}{
-   logical; if \code{TRUE} (default) only distributions from the \code{\link{stats}}-package will be
-   considered. If \code{FALSE} all distributions in our standard package will be fitted over, unless
-   following arguments below are specified otherwise.
-  }
   \item{packages}{
-    % MS immer \cr statt \\
+    default: \dQuote{stats} \cr
     either a character vector with names of packages; \cr
     or a list such as those returned by \command{getFamilies}\cr
     or \code{NULL}, i.e. all families recognized by the package (recommended)   
