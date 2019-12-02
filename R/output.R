@@ -48,7 +48,7 @@ setMethod(f = "summary", signature = c("globalfit"),
             object <- sort(object, ic=ic)
             df <- data.frame(family = sapply(object@fits,
                                              function(f) f@family),
-                             package = sapply(object@fits, function(f) f@package),
+                           package = sapply(object@fits, function(f) f@package),
                              ic = sapply(object@fits, function(f) f %@% ic),
 ##                                  eval(parse(text = paste0('object@', ic)))),
                              params = sapply(object@fits, function(f) 
@@ -73,11 +73,14 @@ setMethod(f = "show", signature = c("globalfitSummary"),
             if(is.null(object@continuity)) {
               cont <- ''
             } else if(object@continuity) {
-              cont <- '\nAssumption: Data was generated from a continuous distribution.'
+              cont <-
+              '\nAssumption: Data was generated from a continuous distribution.'
             } else if(!object@continuity) {
-              cont <- '\nAssumption: Data was generated from a discrete distribution.'
+              cont <- 
+                '\nAssumption: Data was generated from a discrete distribution.'
             }
-            cat(length(object@data), 'data points entered. Distributions where fitted via', 
+            cat(length(object@data), 
+                'data points entered. Distributions where fitted via', 
                 object@method, 'estimation.',
                 cont, '
                 \nBest fits sorted by', object@ic, ':\n\n')
@@ -138,7 +141,8 @@ setMethod(f = "hist", signature = c("globalfit"),
               stop("Argument 'which'  must be positive integer.")
             
             x <- sort(x, ic=ic)
-            if (which > length(x@fits)) stop("value of 'which' larger than the number of available results")
+            if (which > length(x@fits)) stop(
+              "value of 'which' larger than the number of available results")
              
             lower <- min(x@data) - 0.2 * (max(x@data)-min(x@data))
             upper <- max(x@data) + 0.2 * (max(x@data)-min(x@data))
