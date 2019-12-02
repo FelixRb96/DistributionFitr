@@ -28,7 +28,8 @@ loglik <- function(family, data, fixed=list(), log, lower, upper) {
   
   arguments <- list(x=data) 
   
-  # check wheter log-distribution function is directly available for distribution
+  # check wheter log-distribution function is directly available for 
+  #distribution
   if(log)
     arguments$log <- TRUE
   # add fixed parameter values of distribution to list
