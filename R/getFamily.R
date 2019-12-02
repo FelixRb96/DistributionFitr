@@ -1,5 +1,5 @@
 ## Authors 
-## Manuel Hentschel, mhentsch@mail.uni-mannheim.de
+## Manuel Hentschel, mahentsc@mail.uni-mannheim.de
 ##
 ## Extract distribution families from a single R package
 ##
