@@ -73,7 +73,7 @@ is.discrete <- function(data, border = 0.35, percent = 0.8){
   if (1 / border > obs){
     border <- 1 / obs
   }
-
+  
   if (n_unique_dec / obs <= border && 
       !any(numbers >= 4) && 
       !some_percent(decs, numbers, percent)){
@@ -89,7 +89,7 @@ disc_trafo <- function(data){
   
   # transformation only if data is discrete
   if (is.discrete(data)){ 
-
+    
     data_new <- sort(data) # sort the data
     ## Keine data.frames! Die sind i.W. nur fuer user
     # Daten mit zugehoerigen Dezimalen
@@ -116,12 +116,12 @@ disc_trafo <- function(data){
                 discrete = TRUE,
                 trafo_decription = 
                   paste0("Divide the simulated data by ",
-                          m,
-                          " and replace the decimals c(", 
-                          paste(decimals$original_decimals, collapse=", "),
-                          ") of the simulated data by c(",
-                          paste(decimals$new_decimals, collapse=", "),
-                          ").")))
+                         m,
+                         " and replace the decimals c(", 
+                         paste(decimals$original_decimals, collapse=", "),
+                         ") of the simulated data by c(",
+                         paste(decimals$new_decimals, collapse=", "),
+                         ").")))
     
   } else {
     return(list(data = data,
@@ -141,19 +141,55 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
                       perform_check = TRUE, cores = NULL, 
                       max_dim_discrete = Inf, sanity_level = 1, ...){
   ic <- "AIC"
-  all_funs <- c('%@%', 'check_integer', 'check_log', 'check_values_for_param', 'construct_package_list', 'disc_trafo', 'eval_with_timeout', 'fitting_sanity_check', 'get_all_params', 'get_best_result_from_progress', 'get_default_values', 'get_fun_from_package', 'get_fun_from_package_internal', 'get_param_ranges', 'get_support', 'getDecimals', 'getFamilies', 'getFamily', 'getParams', 'globalfit', 'IC', 'informationCriteria', 'is.discrete', 'is.natural', 'iterate_min_max_vals', 'iterate_packages', 'loglik', 'optimParamsContinuous', 'optimParamsDiscrete', 'print', 'sample_data', 'sample_params', 'some_percent', 'sort', 'standardizeFam', 'validate_values', 'write_file')
-
-# packages: either (1) character vector with package names, 
-# i.e.: packages = c("bla", "bundesbank", "secret")
-# 	    		if NULL (default): use packages in FamilyList as given
-# 	    or     (2) list analogously to FamilyList
-# append_packages: required if length(extra_packages) > 0, else ignored
-#            	   if TRUE (default), scan over existing packages in FamilyList 
-#  AND the ones specified in extra_packages,
-# 	     	   else FALSE: only scan in packages provided in extra_packages
+  all_funs <- c('%@%',
+                'check_integer',
+                'check_log',
+                'check_values_for_param',
+                'construct_package_list',
+                'disc_trafo',
+                'eval_with_timeout',
+                'fitting_sanity_check',
+                'get_all_params',
+                'get_best_result_from_progress',
+                'get_default_values',
+                'get_fun_from_package',
+                'get_fun_from_package_internal',
+                'get_param_ranges',
+                'get_support',
+                'getDecimals',
+                'getFamilies',
+                'getFamily',
+                'getParams',
+                'globalfit',
+                'IC',
+                'informationCriteria',
+                'is.discrete',
+                'is.natural',
+                'iterate_min_max_vals',
+                'iterate_packages',
+                'loglik',
+                'optimParamsContinuous',
+                'optimParamsDiscrete',
+                'print',
+                'sample_data',
+                'sample_params',
+                'some_percent',
+                'sort',
+                'standardizeFam',
+                'validate_values',
+                'write_file')
+  
+  # packages: either (1) character vector with package names, 
+  # i.e.: packages = c("bla", "bundesbank", "secret")
+  # 	    		if NULL (default): use packages in FamilyList as given
+  # 	    or     (2) list analogously to FamilyList
+  # append_packages: required if length(extra_packages) > 0, else ignored
+  #            	   if TRUE (default), scan over existing packages in FamilyList 
+  #  AND the ones specified in extra_packages,
+  # 	     	   else FALSE: only scan in packages provided in extra_packages
   
   families <- FamilyList
-
+  
   if(length(packages) > 0) {
     
     if(is.vector(packages) && typeof(packages) == "character") {
@@ -193,7 +229,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
       if(append_packages) {
         families <- c(families, additionals_info)
         
-      # ignore whatever else is in FamilyList
+        # ignore whatever else is in FamilyList
       } else {
         # these are specified by the user, but params are known
         known <- packages[! packages %in% additionals] 
@@ -206,15 +242,15 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
       # in the future this should be deprecated in favour of an S4 object
       # with better validity check 
       if(append_packages) {
-	      families <- c(families, additionals)
+        families <- c(families, additionals)
       } else {
-	      families <- packages
+        families <- packages
       }
     } else {
       stop("Invalid argument 'packages'.")
     }
   }
-
+  
   if (length(families) == 0) {
     stop("The provided input to argument 'packages' did not 
          contain any distribution family. Can not optimize.")
@@ -223,7 +259,9 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
   #filter out those distributions that have too many discrete parameters.
   if(max_dim_discrete < Inf) {
     families <- families[which(sapply(families, 
-                function(x) sum(x$family_info$discrete) <= max_dim_discrete )) ]
+                              function(x) {
+                                sum(x$family_info$discrete) <= max_dim_discrete
+                                } )) ]
   }
   
   # indices for the discrete distributions
@@ -235,15 +273,15 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
     trafo_list <- disc_trafo(data)
     data <- trafo_list$data
     relevant_families <- if (trafo_list$discrete) 
-                          families[discrete_families] else 
-                          families[-discrete_families]
+      families[discrete_families] else 
+        families[-discrete_families]
     continuity <- ifelse(trafo_list$discrete, FALSE, TRUE)
     
   } else {
     relevant_families <-  families[if (continuity) -discrete_families else 
-                                   discrete_families]
+      discrete_families]
   }
-
+  
   # Again check that all of the families that should 
   # be compared are also installed
   all_pkgs <- sapply(relevant_families, function(x) x$package)
@@ -258,57 +296,60 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
   }
   
   if(progress)
-      message("Comparing the following distribution families: ", 
-              paste(sapply(relevant_families, function(x) x$family), 
-                    collapse = ", "))
-
+    message("Comparing the following distribution families: ", 
+            paste(sapply(relevant_families, function(x) x$family), 
+                  collapse = ", "))
+  
   if(is.null(cores))
     CRAN_check_limit <- Sys.getenv("_R_CHECK_LIMIT_CORES_", "")
-    if(length(CRAN_check_limit) > 0 && CRAN_check_limit == TRUE) cores <- 2
-    # CRAN_check_limit == TRUE because it might not be a boolean
-    else cores <- detectCores()
+  if(length(CRAN_check_limit) > 0 && CRAN_check_limit == TRUE) cores <- 2
+  # CRAN_check_limit == TRUE because it might not be a boolean
+  else cores <- detectCores()
   if(progress)
     message('Parallelizing over ', cores, ' cores.\n')
   cl <- makeCluster(cores, outfile='log.txt')
   registerDoParallel(cl)
   
   i <- NULL ## BNZ: to prevent an issue, seems to be related to parallel. 
-            ##      Don't ask me why o.O
-
+  ##      Don't ask me why o.O
+  
   
   output_liste <- foreach(i=1:length(relevant_families), .packages = c(), 
                           .errorhandling = 'remove', .verbose = FALSE, 
                           .export = all_funs, 
                           .inorder = FALSE) %dopar% {
-    
-    # TODO: for me this is not working without this line, although we need to 
-    #       drop the line                      
-    # source("private/source_all.R") ## MS !!! kein source !!
+                            
+  # TODO: for me this is not working without this line, although we need to 
+  #       drop the line                      
+  # source("private/source_all.R") ## MS !!! kein source !!
                             
     fam <- relevant_families[[i]]
-                  
+    
     if(progress)
       message("Current Family: ",  fam$family)
     
     output_liste <- optimParamsDiscrete(data = data,
-                        family = fam[c('package', 'family')],
-                        family_info = fam$family_info,
-                        method = 'MLE', prior = NULL, log = fam$family_info$log,
-                        optim_method = 'L-BFGS-B', n_starting_points = 1,
-                        debug_error = FALSE, show_optim_progress=FALSE,
-                        on_error_use_best_result=TRUE, 
-                        max_discrete_steps=100, plot=FALSE,
-                        discrete_fast = TRUE)
+                                        family = fam[c('package', 'family')],
+                                        family_info = fam$family_info,
+                                        method = 'MLE', prior = NULL, 
+                                        log = fam$family_info$log,
+                                        optim_method = 'L-BFGS-B', 
+                                        n_starting_points = 1,
+                                        debug_error = FALSE, 
+                                        show_optim_progress=FALSE,
+                                        on_error_use_best_result=TRUE, 
+                                        max_discrete_steps=100, plot=FALSE,
+                                        discrete_fast = TRUE)
     
     if(!is.null(output_liste) && !is.na(output_liste$value) && 
        !is.infinite(output_liste$value)) {
       output <- new('optimParams', family = fam$family,
-                   package = fam$package,
-                   estimatedValues = output_liste$par,
-                   log_lik = output_liste$value,
-                   AIC = output_liste$AIC,
-                   BIC = output_liste$BIC,
-                   AICc = output_liste$AICc) 
+                    package = fam$package,
+                    estimatedValues = output_liste$par,
+                    log_lik = output_liste$value,
+                    AIC = output_liste$AIC,
+                    BIC = output_liste$BIC,
+                    AICc = output_liste$AICc) 
       # aim: check whether solution has good loglik 
       # but does not fit nonetheless
       if(perform_check) {
@@ -336,12 +377,13 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
   stopCluster(cl)
   
   r <- new('globalfit', data = data, 
-          continuity = continuity,
-          method = method,
-          fits = output_liste)
+           continuity = continuity,
+           method = method,
+           fits = output_liste)
   r <- sort(r, ic=ic)   ## MS: 2.12., Vorschlag
-
-  r@fits <- r@fits[!is.na(sapply(r@fits, function(x) x %@% ic))]  ## MS: 2.12., Vorschlag
- 
+  
+  r@fits <- r@fits[!is.na(sapply(r@fits, function(x) x %@% ic))]  
+  ## MS: 2.12., Vorschlag
+  
   return(r)
 }
