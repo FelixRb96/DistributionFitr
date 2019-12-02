@@ -98,7 +98,7 @@ disc_trafo <- function(data){
     
     # occuring distinct decimals
     unique_decimals <- sort(unique(data_new$decimals))
-    m <- length(unique_decimals) # Anzahl auftretender verschiedener Dezimalen
+    m <- length(unique_decimals) # number of occuring distinct decimals
     
     # decimals and transformed decimals
     decimals <- data.frame(original_decimals = unique_decimals,
