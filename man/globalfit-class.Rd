@@ -39,7 +39,8 @@
                         \code{\link{globalfitSummary-class}}}
     \item{print}{\code{signature(x = "globalfit")}: applies 
                  \code{summary}-method and prints the result.}
-%    \item{IC}{\code{signature(x = "globalfit")}: returns the selected information
+%    \item{IC}{\code{signature(x = "globalfit")}: returns the selected 
+%                                                 information
 %              criteria of the items in \code{fits} slot}
     \item{AIC}{\code{signature(x = "globalfit")}: applies \code{IC}-method 
                for the Akaike Information Criterium.}
