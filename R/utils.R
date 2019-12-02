@@ -83,7 +83,7 @@ get_fun_from_package_internal <- function(type, fam, package) {
 
 setGeneric(name="get_fun_from_package",
            def = function(type, family, package) {
-             standardGeneric("get_fun_from_package"))
+             standardGeneric("get_fun_from_package")
            }
 setMethod(f="get_fun_from_package",
           signature=c("character", "optimParams", "missing"),
