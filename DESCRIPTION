@@ -27,7 +27,7 @@ Author: c(person("Benedikt", "Geier", role="aut"),
 Author: Benedikt Geier [aut], Moritz Kern [aut], Borui Niklas Zhu [cre aut], Kiril Dik [aut], Andre Ferdinand [aut], Till Freihaut [aut], Tim Glockner [aut], Manuel J. Hentschel [aut], Adrian Heppeler [aut], Moritz Lauff [aut], Niclas Lietzow [aut], Helene Peter [aut], Nadine Tampe [aut], Valentin von Trotha [aut], Leonardo Vela [aut], Martin Schlather [aut], Yiqi Li [ctb], Henrik Bengtsson [ctb]
 >>>>>>> f01a1cf6d42eb398760c6a0f4ab5f1218c46cb3b
 Maintainer: Borui Niklas Zhu <bzhu@mail.uni-mannheim.de>
-Description: Given an univariate dataset, returns the best parameter families including fitted parameter for modeling the distribution of the data.
+Description: Given an univariate dataset, returns the best fitting parameter families, as defined in Shao (2003) <doi:10.1007/B97553>, including their parameter estimates via MLE.
 License: GPL (>= 3)
 Imports: utils, stats, stringr, datasets, graphics, grDevices, methods, parallel, doParallel, foreach
 Depends: R (>= 3.5)
