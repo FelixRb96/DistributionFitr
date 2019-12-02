@@ -255,8 +255,8 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
       if(num_discrete < length(family_info$lower)) { # case 3
         grid_results <- matrix(NA, nrow = nrow(grid), ncol = 2 )
         colnames(grid_results) <- c("loglik", "convergence")
-        pb <- txtProgressBar(min = 0, max = nrow(grid))
-        print("Please stand by shortly...")
+        ## pb <- txtProgressBar(min = 0, max = nrow(grid))
+        ## print("Please stand by shortly...")
         for(i in 1:nrow(grid)) {
 	  optim_res <- tryCatch(
 	  {
@@ -284,14 +284,14 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
 	  } # end error handler
 	  ) # end tryCatch
 	  grid_results[i, ] <- c(optim_res$val, optim_res$convergence)
-	  setTxtProgressBar(pb, i)
+	 ## setTxtProgressBar(pb, i)
   } # end for-loop in grid
         # drop all weird cases
         discrete_results <- grid_results[grid_results[,'convergence'] == 0, ]
       } else { # case 4
 	grid_results <- matrix(NA, nrow = nrow(grid), ncol = 1)
         colnames(grid_results) <- c("loglik")
-	pb <- txtProgressBar(min = 0, max = nrow(grid))
+	##pb <- txtProgressBar(min = 0, max = nrow(grid))
 	# print("Please stand by shortly...")
 	for(i in 1:nrow(grid)) {
 	  loglik_fun <- loglik(family = family, data = data, fixed = grid[i, ],
@@ -305,7 +305,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
 	      NA
 	    }
 	  )
-	  setTxtProgressBar(pb, i)
+	 ## setTxtProgressBar(pb, i)
 	}
       }
       optimum_index <- which.max(grid_results[,'loglik'])
