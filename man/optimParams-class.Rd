@@ -41,7 +41,7 @@
 }
 
 \examples{
-    r <- globalfit(rnorm(n = 1000, mean=10, sd=1))
+    r <- globalfit(rnorm(n = 100, mean=10, sd=1))
   
     # optimParams of best fit
     r@fits[[1]]

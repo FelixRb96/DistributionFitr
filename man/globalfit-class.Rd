@@ -64,7 +64,7 @@
 }
 
 \examples{
-  r <- globalfit(rnorm(n = 1000, mean=10, sd=1))
+  r <- globalfit(rnorm(n = 100, mean=10, sd=1))
   
   r2 <- sort(r, ic='BIC')
     

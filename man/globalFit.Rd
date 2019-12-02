@@ -83,13 +83,16 @@ globalfit(data, continuity = NULL, method = "MLE", progress = TRUE,
 \examples{ %  library(DistributionFitr)  ## MS bitte lassen 
   # Example 1
   data <- rnorm(n=100, mean=70, sd= 4)
-  summary(globalfit(data, packages="stats", append_packages=FALSE)) % MS, s. Email
+  r <- globalfit(data, packages="stats", append_packages=FALSE) % MS, s. Email
+  summary(r)
   % bitte entweder eine ordentliche print-Funktion schreiben oder 'str' lassen
   
   # Alternatively, it is possible to input whether the data is
   # continuous or discrete
+  \dontrun{
   globalfit(data, continuity = TRUE,
             packages="stats", append_packages=FALSE) % MS, dito
+  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
