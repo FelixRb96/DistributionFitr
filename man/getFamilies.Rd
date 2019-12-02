@@ -54,15 +54,16 @@ getFamilies(all.packages, file="R/all_families.R")
 \seealso{
  **objects to See Also as \code{\link{help}}, **~
 }
-\examples{ %  library(DistributionFitr)  ## MS bitte lassen 
+\examples{ 
+  library(DistributionFitr) 
 
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+  ##---- Should be DIRECTLY executable !! ----
+  ##-- ==>  Define data, use random,
+  ##--	or do  help(data=index)  for the standard data sets.
 
-str(getFamilies())
+  str(getFamilies())
 
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
+  % Add one or more standard keywords, see file 'KEYWORDS' in the
+  % R documentation directory.
 }
 \keyword{distribution}
