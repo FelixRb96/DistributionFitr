@@ -106,6 +106,11 @@ validate_values <- function(fam, n_or_nn, params, x_test) {
   if (is.finite(r)) {
     r_ <- eval_with_timeout(do.call(dfun, c(x_test, params)), timeout = 1, 
                             return_value_on_timeout = "TIMEOUT")
+    print(fam)
+    print(n_or_nn)
+    print(params)
+    print(x_test)
+    print(r_)
     if (r_ == "TIMEOUT") message(fam, " produced timeout for params ", 
                                  paste(names(params), params, sep=": ", 
                                  collapse=","), " on ", x_test)
