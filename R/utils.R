@@ -84,7 +84,7 @@ get_fun_from_package_internal <- function(type, fam, package) {
 setGeneric(name="get_fun_from_package",
            def = function(type, family, package) {
              standardGeneric("get_fun_from_package")
-           }
+           })
 setMethod(f="get_fun_from_package",
           signature=c("character", "optimParams", "missing"),
           definition = function(type, family, package) {
@@ -150,10 +150,9 @@ sample_params <- function(family, family_info, params=NULL, max = 100) {
       stop("Param(s)",paste(names(int)[which(impossible_ranges)],collapse=", "), 
            "do not accept floats andtheir range does not include any integer")
     pars[int] <- sapply(1:length(int), 
-                        function(i) 
-                        {
-                        sample(ceiling(lower[int[i]]): floor(upper[int[i]]), 1))
-                        }
+                        function(i) {
+                          sample(ceiling(lower[int[i]]): floor(upper[int[i]]), 1)
+                        })
   }
 
   # make sure that sampled values make sense for uniform distribution
