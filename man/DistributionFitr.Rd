@@ -49,7 +49,7 @@ Maintainer: Borui Niklas Zhu, \email{bzhu@mail.uni-mannheim.de}
 \examples{ %  library(DistributionFitr)  ## MS bitte lassen 
 
 # example for globalfit
-data <- rnrom(n = 100, mean = 70, sd = 4)
+data <- rnorm(n = 100, mean = 70, sd = 4)
 r <- globalfit(data, packages = "stats", append_packages = FALSE)
 summary(r)
 
@@ -57,7 +57,7 @@ summary(r)
 str(getFamily("stats"))
 
 # example for getParams
-getParams("beta", packages = "stats")
+getParams("beta", package = "stats")
 
 }
 

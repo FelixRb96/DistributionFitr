@@ -140,6 +140,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
                       perform_check = TRUE, cores = NULL, 
                       max_dim_discrete = Inf, sanity_level = 1, ...){
   ic <- "AIC"
+  all_funs <- c('%@%', 'check_integer', 'check_log', 'check_values_for_param', 'construct_package_list', 'disc_trafo', 'eval_with_timeout', 'fitting_sanity_check', 'get_all_params', 'get_best_result_from_progress', 'get_default_values', 'get_fun_from_package', 'get_fun_from_package_internal', 'get_param_ranges', 'get_support', 'getDecimals', 'getFamilies', 'getFamily', 'getParams', 'globalfit', 'IC', 'informationCriteria', 'is.discrete', 'is.natural', 'iterate_min_max_vals', 'iterate_packages', 'loglik', 'optimParamsContinuous', 'optimParamsDiscrete', 'print', 'sample_data', 'sample_params', 'some_percent', 'sort', 'standardizeFam', 'validate_values', 'write_file')
 
 # packages: either (1) character vector with package names, 
 # i.e.: packages = c("bla", "bundesbank", "secret")
@@ -272,9 +273,11 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
   
   i <- NULL ## BNZ: to prevent an issue, seems to be related to parallel. 
             ##      Don't ask me why o.O
+
+  
   output_liste <- foreach(i=1:length(relevant_families), .packages = c(), 
                           .errorhandling = 'remove', .verbose = FALSE, 
-                          .export = c(), 
+                          .export = all_funs, 
                           .inorder = FALSE) %dopar% {
     
     # TODO: for me this is not working without this line, although we need to 
