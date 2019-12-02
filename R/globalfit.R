@@ -92,7 +92,7 @@ disc_trafo <- function(data){
     
     data_new <- sort(data) # sort the data
     ## Keine data.frames! Die sind i.W. nur fuer user
-    # Daten mit zugehoerigen Dezimalen
+    # data with corresponding decimals
     data_new <- data.frame(data_new = data_new,
                            decimals = getDecimals(data_new)) 
     
