@@ -39,7 +39,7 @@ loglik(family, data, fixed, log, lower, upper)
 
 }
 \references{
- ~ Log-Likelihood function - Introduction to mathematical statistics. ~
+ Log-Likelihood function - Introduction to mathematical statistics.
 }
 \author{
   Niclas Lietzow, Till Freihaut, Leonardo Vela
@@ -53,7 +53,7 @@ loglik(family, data, fixed, log, lower, upper)
 \examples{
 
 # Example 1 for loglik
-\dontrun{
+
 family <- list(family="norm", package="stats")
 data <- rnorm(10, mean = 7, sd=2)
 fixed <- list(sd=2)
@@ -63,7 +63,6 @@ upper <- c(mean=10)
 
 likelihood <- loglik(family = family, data = data, fixed = fixed,
               log = log, lower = lower, upper = upper)
-}
 
 }
 
