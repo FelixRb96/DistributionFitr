@@ -5,13 +5,14 @@
   Detect continuity and fit multiple distributions to given data
 }
 \description{
-  Given a numerical data vector, this function fits multiple distributions with the maximum likelihood method and
-  returns a list of the best fitted parameters and information criteria.
+  Given a numerical data vector, this function fits multiple distributions 
+  with the maximum likelihood method and returns a list of the best 
+  fitted parameters and information criteria.
 }
 \usage{
-  globalfit(data, continuity = NULL, method = "MLE", progress = TRUE,
-	    stats_only = TRUE, packages = NULL, append_packages = TRUE,
-	    perform_check = TRUE, cores = NULL, max_dim_discrete, sanity_level=1, ...)
+globalfit(data, continuity = NULL, method = "MLE", progress = TRUE,
+  stats_only = TRUE, packages = NULL, append_packages = TRUE,
+  perform_check = TRUE, cores = NULL, max_dim_discrete, sanity_level=1, ...)
 }
 
 %- maybe also 'usage' for other objects documented here.
@@ -117,7 +118,7 @@
   # Alternatively, it is possible to input whether the data is
   # continuous or discrete
   globalfit(data, continuity = TRUE,
-            packages="stats", append_packages=FALSE)) % MS, dito
+            packages="stats", append_packages=FALSE) % MS, dito
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
