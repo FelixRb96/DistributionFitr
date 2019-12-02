@@ -532,8 +532,6 @@ get_support <- function(fam, params) {
 # (3) Final function
 # -----------------------------------------------------------------------------
 
-
-## MS
 standardizeFam <- function(fam, package){ 
   if (missing(package) || length(package) == 0) {
     if (!is(fam, "optimParams") && !is.list(fam)) {
@@ -589,6 +587,7 @@ getParams <- function(fam, package){
 # 1) Distributions like nbinom where 2 params ("prob" and "mu") describe 
 #    the same but only one may be set and 
 #    none of them has a default value derived from the other
+# -> IGNORED at the moment -> will be filtered out
 # 2) Distributions like "unif" where the parameters interact 
 #    -> ranges can be represented as [lower, upper] but rather as min <= max
 #  -> SOLVED
@@ -601,5 +600,5 @@ getParams <- function(fam, package){
 #   depends on certain parameters, then it needs to adapt the upper and
 #   lower bounds of those parameters using the data, 
 #   i.e. for unif set upper["min"] <- min(data) before giving to optim_param
-#   -> not our problem
-# 5) extend to and test with other packages
+#   -> NOT DONE at the moment
+# 5) extend to and test with other packages -> partly done

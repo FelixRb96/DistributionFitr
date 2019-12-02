@@ -34,8 +34,6 @@
 # (b) one integer parameter: use greedy solution. Questions to: Moritz Kern
 # (c) multiple integer parameters: use naive solution. Question to: Borui N. Zhu
 
-# TODO: make sure input validation is implemented on the uppermost level!
-
 # TODO: in general, we often restrict parameters to be in a reasonable bound: 
 #       [-100,100] (refer to case (b) )
 # this might not hold. Maybe we can let the user specify something 
@@ -85,18 +83,15 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
   else if( sum(!family_info$accepts_float)==1 ) {
 
     # get the discrete parameter
-    dispar_id <- family_info$accepts_float==FALSE ## !family_info$accepts_float
+    dispar_id <- !family_info$accepts_float
     dispar_default <- family_info$defaults[dispar_id]
     
     # vector of the single optimisation results
     cont_optim_results <- vector('list',length=max_discrete_steps)       
 
-    ## kein Unterstrich am Ende
-    ## keine unnoetigen data.frames innerhalb des Codes
-    ## lieber 3 einzelne Vektoren
     # history dataframe where the optim progress is stored
-    history_ <- data.frame(matrix(NA, nrow=max_discrete_steps, ncol=3))  
-    colnames(history_) <- c("param_value", "direction", "log_lik")
+    history <- data.frame(matrix(NA, nrow=max_discrete_steps, ncol=3))  
+    colnames(history) <- c("param_value", "direction", "log_lik")
     
     # as we iterate both left and rightwards staring from the default value we 
     # need to save the current values
@@ -105,7 +100,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
     cur_right_val <- dispar_default + 1
     # whether our left or right iteration has reached the border
     touched_lower <- touched_upper <- FALSE
-    ## besser repeat
+
     while(!stop_discrete) { 
       if (!touched_lower && ! touched_upper) {
         # make sure that first one is left!, 
@@ -122,12 +117,9 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
       
       # optimise with the current fixed value
       curr_res <- tryCatch(optimParamsContinuous(
-          ## Verwendung (integer) von dispar_id entspricht nicht seiner
-          ## Definition (logical); also !dispar_id
-          ## warum ueberhaupt neuer Name? besser "accepts_float" oder "float"
-          data=data, family=family, lower=family_info$lower[-dispar_id],
-          upper=family_info$upper[-dispar_id],
-          defaults = family_info$defaults[-dispar_id], method = method,
+          data=data, family=family, lower=family_info$lower[!dispar_id],
+          upper=family_info$upper[!dispar_id],
+          defaults = family_info$defaults[!dispar_id], method = method,
           fixed=dispar, log = log, optim_method = optim_method,
           n_starting_points = n_starting_points, debug_error = debug_error,
           show_optim_progress = show_optim_progress,
@@ -140,10 +132,10 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
       if(!is.null(curr_res)) {
         cont_optim_results[[i]] <- curr_res
         cont_optim_results[[i]]$par[names(dispar_default)] <- dispar[1]
-        history_[i, ] <- list(dispar[1], 
+        history[i, ] <- list(dispar[1], 
                               direction, cont_optim_results[[i]]$value) 
       } else {
-        history_[i, ] <- list(dispar[1], direction, NA)
+        history[i, ] <- list(dispar[1], direction, NA)
       }
       
       # update current iteration values and check whether bound is reached 
@@ -163,7 +155,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
         # get all the results for "right" achieved up to now
         # we stop when the current result is worse than 
         # the best one achieved in this direction
-        relevant_hist <- history_[history_$direction == "right", "log_lik"]
+        relevant_hist <- history[history$direction == "right", "log_lik"]
         relevant_hist <- relevant_hist[!is.na(relevant_hist)]
         
         if (discrete_fast && length(relevant_hist) > 2 &&
@@ -177,7 +169,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
         if (cur_left_val < family_info$lower[dispar_id]) 
           touched_lower <- TRUE
         
-        relevant_hist <- history_[history_$direction == "left", "log_lik"]
+        relevant_hist <- history[history$direction == "left", "log_lik"]
         relevant_hist <- relevant_hist[!is.na(relevant_hist)]
         if (discrete_fast && length(relevant_hist) > 2 && 
             relevant_hist[length(relevant_hist)] < max(relevant_hist)) 
@@ -195,18 +187,18 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
       }
     }
     
-    if(show_optim_progress) print(history_)
+    if(show_optim_progress) print(history)
     if(plot) {
       ## braucht man wirklich dieses ifelse ? plot ist doch eigentlich robust
       ## Man sollte eher ylim setzen
-      plot(history_$param_value, ifelse(is.finite(history_$log_lik),
-                                        history_$log_lik, NA), 
+      plot(history$param_value, ifelse(is.finite(history$log_lik),
+                                        history$log_lik, NA), 
            ylab="log_lik", xlab=names(family_info$lower)[dispar_id])
     }
     
     # take the best result
-    if (sum(!is.na(history_$log_lik)) > 0) {
-      optim_res <- cont_optim_results[[which.max(history_$log_lik)]]
+    if (sum(!is.na(history$log_lik)) > 0) {
+      optim_res <- cont_optim_results[[which.max(history$log_lik)]]
     } else {
       message("No valid discrete optimization result achieved")
       return(NULL)
@@ -236,7 +228,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
       grid_high <- centre+(25*(10^zoom_level))
       stepsize <- rep(1, times = num_discrete)*(10^zoom_level)
       if(show_optim_progress) {
-	cat('current zoom level:', zoom_level, '\n')
+	      cat('current zoom level:', zoom_level, '\n')
         cat('current focal point:\n')
         print(centre)
         cat('stepsizes:', stepsize, '\n')
@@ -289,17 +281,17 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
 	      convergence = 99
 	    )
 	  } # end error handler
-          ) # end tryCatch
-          grid_results[i, ] <- c(optim_res$val, optim_res$convergence)
+	  ) # end tryCatch
+	  grid_results[i, ] <- c(optim_res$val, optim_res$convergence)
 	  setTxtProgressBar(pb, i)
-        } # end for-loop in grid
+  } # end for-loop in grid
         # drop all weird cases
         discrete_results <- grid_results[grid_results[,'convergence'] == 0, ]
       } else { # case 4
 	grid_results <- matrix(NA, nrow = nrow(grid), ncol = 1)
         colnames(grid_results) <- c("loglik")
 	pb <- txtProgressBar(min = 0, max = nrow(grid))
-	print("Please stand by shortly...")
+	# print("Please stand by shortly...")
 	for(i in 1:nrow(grid)) {
 	  loglik_fun <- loglik(family = family, data = data, fixed = grid[i, ],
                                log = log, lower = family_info$lower,

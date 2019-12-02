@@ -142,15 +142,6 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
                       max_dim_discrete = Inf, sanity_level = 1, ...){
   ic <- "AIC"
   all_funs <- c('%@%', 'check_integer', 'check_log', 'check_values_for_param', 'construct_package_list', 'disc_trafo', 'eval_with_timeout', 'fitting_sanity_check', 'get_all_params', 'get_best_result_from_progress', 'get_default_values', 'get_fun_from_package', 'get_fun_from_package_internal', 'get_param_ranges', 'get_support', 'getDecimals', 'getFamilies', 'getFamily', 'getParams', 'globalfit', 'IC', 'informationCriteria', 'is.discrete', 'is.natural', 'iterate_min_max_vals', 'iterate_packages', 'loglik', 'optimParamsContinuous', 'optimParamsDiscrete', 'print', 'sample_data', 'sample_params', 'some_percent', 'sort', 'standardizeFam', 'validate_values', 'write_file')
-
-# packages: either (1) character vector with package names, 
-# i.e.: packages = c("bla", "bundesbank", "secret")
-# 	    		if NULL (default): use packages in FamilyList as given
-# 	    or     (2) list analogously to FamilyList
-# append_packages: required if length(extra_packages) > 0, else ignored
-#            	   if TRUE (default), scan over existing packages in FamilyList 
-#  AND the ones specified in extra_packages,
-# 	     	   else FALSE: only scan in packages provided in extra_packages
   
   if (stats_only && length(packages) > 0) {
     message("As 'stats_only' is set to TRUE, argument 'packages' will be ignored.")
@@ -277,17 +268,12 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
   registerDoParallel(cl)
   
   i <- NULL ## BNZ: to prevent an issue, seems to be related to parallel. 
-            ##      Don't ask me why o.O
-
+            ##      Do not delete!
   
   output_liste <- foreach(i=1:length(relevant_families), .packages = c(), 
                           .errorhandling = 'remove', .verbose = FALSE, 
                           .export = all_funs, 
                           .inorder = FALSE) %dopar% {
-    
-    # TODO: for me this is not working without this line, although we need to 
-    #       drop the line                      
-    # source("private/source_all.R") ## MS !!! kein source !!
                             
     fam <- relevant_families[[i]]
                   

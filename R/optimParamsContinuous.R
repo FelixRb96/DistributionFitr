@@ -54,17 +54,7 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
                                   n_starting_points=1,
                                   debug_error=TRUE, show_optim_progress=FALSE,
                                   on_error_use_best_result=TRUE,
-                                  no_second = FALSE, ...) {
-  # Input parameter validation
-
-  # TODO:
-	# currently it seems customary to allowing the provision of boundaries 
-  # for non-fixed parameters only.
-	# below I added input validation that checks if the param names given 
-  # in fixed are present in lower,
-	# throwing an error
-	# It is probably safer to require provision of boundaries for all parameters, 
-  # regardless of whether fixed or not
+                                  no_second = TRUE, ...) {
 
   if(method!='MLE')
     stop('Not implemented.')
@@ -79,13 +69,7 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
          start parameters must coincide. ')
   }
   
-  # if(any(!(names(fixed) %in% names(lower))) || 
-  #    any(!(names(prior) %in% names(lower)))) {
-  #   stop('Parameter names given as fixed/prior unknown.')
-  # }
-  # if(anyDuplicated(names(fixed)) || anyDuplicated(names(prior))) {
-  #   stop('Duplicate entries in fixed/prior.')
-  # }
+  stopifnot(n_starting_points >= 1)
   
   # replace default values from get_params with user-given priors
   if(length(prior) > 0) {
@@ -112,8 +96,8 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
   
   # try multiple starting points hoping for a better result 
   # in case of multiple local minima
-  optim_results <- list() ## optim_results <- vector("list", n_starting_points)
-  ## was passiert bei n_starting_points == 0 ?
+  optim_results <- vector("list", n_starting_points)
+
   for (i in 1:n_starting_points) {
     
       start_params <- if(i>1) sample_params(family, list(lower=lower, 
@@ -160,7 +144,10 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
           print(tail(optim_progress, 2))
         }
       }
-
+      
+      ## NOTE: Second optimization is currently deactivated per default
+      # as parscale and fnscale don't seem to have an effect
+      
       # TODO: 
       # Problems with convergence can occur, 
       # if parscale and fscale not well selected
@@ -246,16 +233,10 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
 }
 
 
-# TODO: set fnscale and parscale appropriately
+# TODO: set fnscale and parscale appropriately -> DEACTIVATED right now
 
 # TODO: on error try to return best value from optimization progress up to now 
 #       -> DONE
-
-# TODO: globalfit needs to remove the fixed parameters 
-#       from upper, lower and start_parameter
-
-# TODO: agree on whether lower and upper should only contain entries 
-#       for the continuous parameters or also for the fixed ones
 
 # TODO: optim_progress contains all calls to log_lik-function, 
 #       that is also the calls for estimating the gradient, thats why usually
