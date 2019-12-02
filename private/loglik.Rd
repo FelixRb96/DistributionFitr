@@ -39,7 +39,7 @@ loglik(family, data, fixed, log, lower, upper)
 
 }
 \references{
- Log-Likelihood function - Introduction to mathematical statistics.
+ Shao, J. (2003). Mathematical statistics.
 }
 \author{
   Niclas Lietzow, Till Freihaut, Leonardo Vela
