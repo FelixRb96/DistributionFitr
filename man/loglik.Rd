@@ -46,9 +46,9 @@ loglik(family, data, fixed, log, lower, upper)
 }
   
 
-\seealso{
- \code{\link{optimParamsContinuous}}
-}
+%\seealso{
+% \code{\link{optimParamsContinuous}}
+%}
 
 \examples{
 

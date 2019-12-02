@@ -11,7 +11,7 @@
 }
 \usage{
 globalfit(data, continuity = NULL, method = "MLE", progress = TRUE,
-  stats_only = TRUE, packages = NULL, append_packages = TRUE,
+  packages = "stats", append_packages = FALSE,
   perform_check = TRUE, cores = NULL, max_dim_discrete, sanity_level=1, ...)
 }
 
