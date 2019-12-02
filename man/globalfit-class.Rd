@@ -3,7 +3,6 @@
 \alias{sort,globalfit-method}
 \alias{summary,globalfit-method}
 \alias{print,globalfit-method}
-\alias{IC,globalfit-method}
 \alias{AIC,globalfit-method}
 \alias{BIC,globalfit-method}
 \alias{hist,globalfit-method}

@@ -5,7 +5,8 @@
   Loglikelihood Function 
 }
 \description{
-  Returns the Loglikelihood Function for a given distribution that depends on the distribution's parameters.
+  Returns the Loglikelihood Function for a given distribution that depends on 
+  the distribution's parameters.
 }
 \usage{
 loglik(family, data, fixed, log, lower, upper)
@@ -13,7 +14,9 @@ loglik(family, data, fixed, log, lower, upper)
 
 \arguments{
   \item{family}{
-     list of two elements. family: distribution family callable in the \code{package}, e.g. 'norm'; package: name of the R package, which contains the distribution family.
+     list of two elements. family: distribution family callable in the 
+     \code{package}, e.g. 'norm'; package: name of the R package, which 
+     contains the distribution family.
   }
   \item{data}{
      numerical vector.
@@ -22,13 +25,16 @@ loglik(family, data, fixed, log, lower, upper)
      named vector of fixed parameters, which are not taken into account while optimization process 
   }
   \item{log}{
-     logical; if TRUE (default) optimization is run over log-likelihood, requires log-likelihood as parameter in selected distribution family
+     logical; if TRUE (default) optimization is run over log-likelihood, 
+     requires log-likelihood as parameter in selected distribution family
   }
   \item{lower}{
-     named vector of lower bounds of free parameters, if no lower bound \code{-Inf} 
+     named vector of lower bounds of free parameters, if no lower bound 
+     \code{-Inf} 
   }
   \item{upper}{
-     named vector of upper bounds of free parameters, if no upper bound \code{Inf}, names must coincide with \code{lower}
+     named vector of upper bounds of free parameters, if no upper bound 
+     \code{Inf}, names must coincide with \code{lower}
   }
 }
 
