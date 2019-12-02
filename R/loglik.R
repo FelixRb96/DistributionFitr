@@ -51,7 +51,8 @@ loglik <- function(family, data, fixed=list(), log, lower, upper) {
     # Add params with names of parameters to arguments list
     arguments <- c(arguments, params)
 
-    summands <- do.call(get_fun_from_package(type = "d", family=family), args=arguments)
+    summands <- do.call(get_fun_from_package(type = "d", family=family),
+                        args=arguments)
     
     if(any(is.na(summands))) stop('In Log-Likelihood-Function NA occured.')
     
@@ -62,10 +63,13 @@ loglik <- function(family, data, fixed=list(), log, lower, upper) {
     } 
     loglik_value <- sum(summands)
     
-    ## The following is only for tracking the optimisation progress (might be deactivated sometime)
-    # recursively go through parent frames and check whether there is a variable that tracks the optimisation process
+    ## The following is only for tracking the optimisation progress 
+    ##(might be deactivated sometime)
+    # recursively go through parent frames and check whether there is a variable 
+    #tracks the optimisation process
 
-    # if yes then add a new row to the progress dataframe in the closest parent frame
+    # if yes then add a new row to the progress dataframe in the closest parent 
+    #frame
     for (i in 1:length(sys.parents())) {
        
       if (exists("optim_progress", envir = parent.frame(i))) {
