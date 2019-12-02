@@ -78,37 +78,13 @@ globalfit(data, continuity = NULL, method = "MLE", progress = TRUE,
 }
 
 \value{
-  For \code{globalfit} a list of following components is returned:
-  
-  \item{package}{name of the R package, which contains the distribution family.}
-  \item{family}{distribution family callable in the \code{package}}
-  \item{estimatedVaues}{Optimal parameters as named vector, over which it was optimized.}  
-  
-  \item{value}{(Log-)Likelihood of optimal parameters}
-  \item{convergence}{An integer code. 0 indicates sucessful completion. Refer to \code{optim} in
-  \code{stats} for further details}
-  \item{AIC}{Akaike Information Criterion of optimal parameters}
-  \item{BIC}{Bayes Information Criterion of optimal parameters}
-  \item{AIC}{Akaike Information Criterion of optimal parameters, corrected for small sample sizes}
-  
-  \item{continuousParams}{Not yet implemented}
-  \item{range}{Not yet implemented}
-}
-\references{
-  ** references to the literature/web site here **
-}
-\author{
-  Moritz Lauff, Kiril Dik, Nadine Tampe, Borui Niklas Zhu
-}
-\note{
-  **further notes**
+  \code{globalfit} returns an object of \code{\link{globalfit-class}}.
 }
 
-% ~Make other sections like Warning with \section{Warning }{....} ~
-  
-  \seealso{
-    **objects to See Also as \code{\link{help}}, **~
-  }
+\author{
+  Moritz Lauff, Kiril Dik, Nadine Tampe, Borui Niklas Zhu, Benedikt Geier, Moritz Kern
+}
+
 \examples{ %  library(DistributionFitr)  ## MS bitte lassen 
   # Example 1
   data <- rnorm(n=100, mean=70, sd= 4)

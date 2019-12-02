@@ -274,13 +274,12 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
     message('Parallelizing over ', cores, ' cores.\n')
   cl <- makeCluster(cores, outfile='log.txt')
   registerDoParallel(cl)
-
   
   i <- NULL ## BNZ: to prevent an issue, seems to be related to parallel. 
             ##      Don't ask me why o.O
   output_liste <- foreach(i=1:length(relevant_families), .packages = c(), 
                           .errorhandling = 'remove', .verbose = FALSE, 
-                          .export = c('fitting_sanity_check'), 
+                          .export = c(), 
                           .inorder = FALSE) %dopar% {
     
     # TODO: for me this is not working without this line, although we need to 
@@ -336,7 +335,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
     return(output)
   } # end %dopar%
   stopCluster(cl)
-
+  
   r <- new('globalfit', data = data, 
           continuity = continuity,
           method = method,
