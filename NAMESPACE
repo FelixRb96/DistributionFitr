@@ -8,6 +8,7 @@ import(methods)
 import(parallel)
 import(doParallel)
 import(foreach)
+import(doSNOW)
 
 export(globalfit, getFamilies, getFamily, getParams)
 exportMethods(summary, hist, sort, AIC, BIC)

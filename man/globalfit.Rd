@@ -10,7 +10,7 @@
   fitted parameters and information criteria.
 }
 \usage{
-globalfit(data, continuity = NULL, method = "MLE", progress = TRUE,
+globalfit(data, continuity = NULL, method = "MLE", verbose = TRUE,
   packages = "stats", append_packages = FALSE,
   perform_check = TRUE, cores = NULL, max_dim_discrete, sanity_level=1, ...)
 }
@@ -30,7 +30,7 @@ globalfit(data, continuity = NULL, method = "MLE", progress = TRUE,
     implemented, thus this argument must
     be \code{"MLE"}.
   }
-  \item{progress}{
+  \item{verbose}{
    logical; if \code{TRUE}, always show progress
   }
   \item{packages}{

@@ -136,7 +136,7 @@ disc_trafo <- function(data){
 
 ### 2) Main Function ----------------------------------------------------------
 
-globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
+globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
                       packages = "stats", append_packages = FALSE,
                       perform_check = TRUE, cores = NULL, 
                       max_dim_discrete = Inf, sanity_level = 1, ...){
@@ -262,7 +262,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
     relevant_families <- relevant_families[!(all_pkgs %in% missing_pkgs)]
   }
   
-  if(progress)
+  if(verbose)
     message("Comparing the following distribution families: ", 
             paste(sapply(relevant_families, function(x) x$family), 
                   collapse = ", "))
@@ -273,21 +273,33 @@ globalfit <- function(data, continuity = NULL, method = "MLE", progress = TRUE,
     ## CRAN_check_limit == TRUE because it might not be a boolean
     else cores <- detectCores()
   }
-  if(progress)
+  if(verbose)
     message('Parallelizing over ', cores, ' cores.\n')
   cl <- makeCluster(cores, outfile='log.txt')
-  registerDoParallel(cl)
+  
+  # for showing a progressbar we apparently need to use a SNOW cluster
+  # registerDoParallel(cl)
+  registerDoSNOW(cl)
+  if (verbose) {
+    message("Optimization Progress")
+    pb <- txtProgressBar(max=length(relevant_families), style=3)
+    progress_fn <- function(n) setTxtProgressBar(pb, n)
+    opts <- list(progress=progress_fn)
+  } else {
+    opts <- c()
+  }
   
   i <- NULL ## BNZ: to prevent an issue, seems to be related to parallel. 
             ##      Do not delete!
   output_liste <- foreach(i=1:length(relevant_families), .packages = c(), 
                           .errorhandling = 'remove', .verbose = FALSE, 
                           .export = all_funs, 
-                          .inorder = FALSE) %dopar% {
+                          .inorder = FALSE,
+                          .options.snow = opts) %dopar% {
                             
     fam <- relevant_families[[i]]
     
-    if(progress)
+    if(verbose)
       message("Current Family: ",  fam$family)
     
     output_liste <- optimParamsDiscrete(data = data,
