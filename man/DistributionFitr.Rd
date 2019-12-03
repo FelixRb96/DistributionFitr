@@ -63,7 +63,8 @@ getParams("beta", package = "stats")
 }
 
 
-\keyword{distributionfitr, distribution, parameters }
+\keyword{distribution}
+\keyword{parameters}
 \references{
 Zucchini, W. (2000). An introduction to model selection. Journal of mathematical psychology, 44(1), 41-61.
 

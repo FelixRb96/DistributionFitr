@@ -79,4 +79,5 @@ respective parameter (needed for optimisation to work). Length and names must co
 getParams("beta", package = "stats")
 getParams("unif", package = "stats" )
 }
-\keyword{distribution, parameters}
+\keyword{distribution}
+\keyword{parameters}
