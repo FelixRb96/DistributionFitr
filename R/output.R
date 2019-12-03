@@ -80,7 +80,7 @@ setMethod(f = "show", signature = c("globalfitSummary"),
                 '\nAssumption: Data was generated from a discrete distribution.'
             }
             cat(length(object@data), 
-                'data points entered. Distributions where fitted via', 
+                'data points entered. Distributions were fitted via', 
                 object@method, 'estimation.',
                 cont, '
                 \nBest fits sorted by', object@ic, ':\n\n')

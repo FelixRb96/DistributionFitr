@@ -102,7 +102,7 @@ validate_values <- function(fam, n_or_nn, params, x_test) {
   # as this sometimes takes a while we use a timeout to stop the execution 
   # after a while
   # however we consider a timeout as a valid parameter value as no error 
-  # occurs (it just takes to lang)
+  # occurs (it just takes too long)
   if (is.finite(r)) {
     r_ <- eval_with_timeout(do.call(dfun, c(x_test, params)), timeout = 1, 
                             return_value_on_timeout = "TIMEOUT")
