@@ -64,7 +64,7 @@ eval_with_timeout <- function(expr, envir = parent.frame(), timeout,
 }
 
 # t <- Sys.time()
-# res <- eval_with_timeout(dsignrank(1, 2000), timeout=0.01, 
+# res <- eval_with_timeout(dsignrank(1:10, 2000), timeout=1, 
 #                          return_value_on_timeout = "TIMEOUT")
 # print(res)
 # print(Sys.time() -t)
