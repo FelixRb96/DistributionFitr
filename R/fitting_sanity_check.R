@@ -25,7 +25,7 @@
 ### but returned with good logliks (due to unkown reasons)
 
 
-fitting_sanity_check <- function(object, data, continuity, plot=FALSE, 
+fitting_sanity_check <- function(object, data, continuity, 
                                  sensitivity = 1) {
    if (!is(object, 'optimParams'))
       stop('Wrong input.')
@@ -38,7 +38,7 @@ fitting_sanity_check <- function(object, data, continuity, plot=FALSE,
   breaks <- if (continuity) sqrt(length(data)) else (min(data) -1) : max(data)
   h <- suppressWarnings(hist(x = data, xlim=range(lower,upper), freq = FALSE,
                              xlab = 'x', ylab = 'density', breaks=breaks, 
-                             include.lowest = FALSE, plot=plot))
+                             include.lowest = FALSE, plot = FALSE))
   
   fun <- get_fun_from_package(type="d", family = object)
   param_list <- split(object@estimatedValues, names(object@estimatedValues))
@@ -73,5 +73,5 @@ fitting_sanity_check <- function(object, data, continuity, plot=FALSE,
           (int_check$value < (1 + 0.05 * sensitivity)) & 
                                       (hist_check < (1+0.5*sensitivity))
 
-  return(list(hist_check=hist_check, int_check=int_check$value, good=good))
+  return(list(hist_check = hist_check, int_check = int_check$value, good = good))
 }

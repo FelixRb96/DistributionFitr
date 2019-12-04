@@ -223,7 +223,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
          contain any distribution family. Can not optimize.")
   }
   
-  #filter out those distributions that have too many discrete parameters.
+  # filter out those distributions that have too many discrete parameters.
   if(max_dim_discrete < Inf) {
     families <- families[which(sapply(families, 
                               function(x) {
@@ -287,9 +287,9 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
     } else {
       doSNOW::registerDoSNOW(cl)
       message("Optimization Progress")
-      pb <- txtProgressBar(max=length(relevant_families), style=3)
+      pb <- txtProgressBar(max = length(relevant_families), style = 3)
       progress_fn <- function(n) setTxtProgressBar(pb, n)
-      opts <- list(progress=progress_fn)
+      opts <- list(progress = progress_fn)
     }
   } else {
     registerDoParallel(cl)
