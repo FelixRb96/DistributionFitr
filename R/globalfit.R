@@ -279,13 +279,20 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
   
   # for showing a progressbar we apparently need to use a SNOW cluster
   # registerDoParallel(cl)
-  registerDoSNOW(cl)
   if (verbose) {
-    message("Optimization Progress")
-    pb <- txtProgressBar(max=length(relevant_families), style=3)
-    progress_fn <- function(n) setTxtProgressBar(pb, n)
-    opts <- list(progress=progress_fn)
+    if ( !"doSNOW" %in% rownames(installed.packages()) ) {
+      message("(Install the package 'doSNOW' to show a progress bar.)")
+      registerDoParallel(cl)
+      opts <- c()
+    } else {
+      doSNOW::registerDoSNOW(cl)
+      message("Optimization Progress")
+      pb <- txtProgressBar(max=length(relevant_families), style=3)
+      progress_fn <- function(n) setTxtProgressBar(pb, n)
+      opts <- list(progress=progress_fn)
+    }
   } else {
+    registerDoParallel(cl)
     opts <- c()
   }
   

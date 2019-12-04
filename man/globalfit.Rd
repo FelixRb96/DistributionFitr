@@ -6,13 +6,15 @@
 }
 \description{
   Given a numerical data vector, this function fits multiple distributions 
-  with the maximum likelihood method and returns a list of the best 
-  fitted parameters and information criteria.
+  with the maximum likelihood method and returns an object containing the best 
+  fitted parameters and information criteria. Refer to \dQuote{Examples} or
+  \code{\link{globalfit-class}} on how to format the results.
 }
 \usage{
-globalfit(data, continuity = NULL, method = "MLE", verbose = TRUE,
-  packages = "stats", append_packages = FALSE,
-  perform_check = TRUE, cores = NULL, max_dim_discrete, sanity_level=1, ...)
+globalfit(data, continuity = NULL, method = "MLE",
+  verbose = TRUE, packages = "stats",
+  append_packages = FALSE, perform_check = TRUE,
+  cores = NULL, max_dim_discrete = Inf, sanity_level = 1, ...)
 }
 
 %- maybe also 'usage' for other objects documented here.
@@ -22,7 +24,7 @@ globalfit(data, continuity = NULL, method = "MLE", verbose = TRUE,
     vector of data points.
   }
   \item{continuity}{
-    logical; if \code{TRUE}, data is fitted with continuous distributions.
+    logical; if \code{TRUE}, the data is fitted with continuous distributions.
     If no input is given, the data will be tested for continuity.
   }
   \item{method}{
@@ -31,17 +33,17 @@ globalfit(data, continuity = NULL, method = "MLE", verbose = TRUE,
     be \code{"MLE"}.
   }
   \item{verbose}{
-   logical; if \code{TRUE}, always show progress
+   logical; if \code{TRUE}, always show progress and packages from where to fit distributions.
   }
   \item{packages}{
-    default: \dQuote{stats} \cr
+    default: \dQuote{stats}. \cr
     either a character vector with names of packages; \cr
     or a list such as those returned by \command{getFamilies}\cr
-    or \code{NULL}, i.e. all families recognized by the package (recommended)   
+    or \code{NULL}, i.e. all families known by this package (recommended)   
   } 
   \item{append_packages}{
    logical; if \code{TRUE} (default) appends packages specified in the 
-   equally-named argument above to the standard search list, if \code{FALSE} 
+   argument \code{packages} to the standard search list, if \code{FALSE} 
    \code{globalfit} will use only those packages.
   }
   \item{perform_check}{
@@ -90,10 +92,10 @@ globalfit(data, continuity = NULL, method = "MLE", verbose = TRUE,
 \examples{ %  library(DistributionFitr)  ## bitte lassen 
   # Example 1
   data <- rnorm(n=100, mean=70, sd= 4)
-  r <- globalfit(data, cores= if (interactive()) NULL else 1,
-                 packages="stats", append_packages=FALSE) 
+  r <- globalfit(data, cores= if (interactive()) NULL else 1) 
   summary(r)
-  % bitte entweder eine ordentliche print-Funktion schreiben oder 'str' lassen
+
+  # Example 2
   
   # Alternatively, it is possible to input whether the data is
   # continuous or discrete
