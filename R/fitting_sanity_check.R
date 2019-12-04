@@ -25,7 +25,7 @@
 ### but returned with good logliks (due to unkown reasons)
 
 
-fitting_sanity_check <- function(object, data, continuity, plot=FALSE, 
+fitting_sanity_check <- function(object, data, continuity, plot = FALSE, 
                                  sensitivity = 1) {
    if (!is(object, 'optimParams'))
       stop('Wrong input.')
@@ -36,8 +36,8 @@ fitting_sanity_check <- function(object, data, continuity, plot=FALSE,
   # breaks <- if (continuity) sqrt(length(data)) 
   #           else min(nclass.Sturges(data), length(unique(data)) + 1)
   breaks <- if (continuity) sqrt(length(data)) else (min(data) -1) : max(data)
-  h <- suppressWarnings(hist(x = data, xlim=range(lower,upper), freq = FALSE,
-                             xlab = 'x', ylab = 'density', breaks=breaks, 
+  h <- suppressWarnings(hist(x = data, xlim = range(lower,upper), freq = FALSE,
+                             xlab = 'x', ylab = 'density', breaks = breaks, 
                              include.lowest = FALSE, plot=plot))
   
   fun <- get_fun_from_package(type="d", family = object)
@@ -53,9 +53,9 @@ fitting_sanity_check <- function(object, data, continuity, plot=FALSE,
   if (continuity) {
     int_check <- tryCatch(integrate(density, lower = -Inf, upper = Inf),
                   error = function(e) {
-                            message('Sanity Check. Calculate integral of
-                                     density failed: ',e,'\n')
-                            return(list(value=Inf))
+                            message('Sanity Check. Calculating integral of
+                                     the density failed: ',e,'\n')
+                            return(list(value = Inf))
                   }
         )
     hist_check <- sum(diff(h$breaks) * density(h$mids))
@@ -66,12 +66,11 @@ fitting_sanity_check <- function(object, data, continuity, plot=FALSE,
     
     int_check <- list(value=1)
   }
-
   
   good <- (int_check$value > (1 - 0.05 * sensitivity)) & 
                                       (hist_check > (1-0.5*sensitivity)) & 
           (int_check$value < (1 + 0.05 * sensitivity)) & 
                                       (hist_check < (1+0.5*sensitivity))
 
-  return(list(hist_check=hist_check, int_check=int_check$value, good=good))
+  return(list(hist_check = hist_check, int_check = int_check$value, good = good))
 }

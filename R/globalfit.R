@@ -138,8 +138,8 @@ disc_trafo <- function(data){
 
 globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
                       packages = "stats", append_packages = FALSE,
-                      perform_check = TRUE, cores = NULL, 
-                      max_dim_discrete = Inf, sanity_level = 1, ...){
+                      cores = NULL, max_dim_discrete = Inf,
+		      sanity = 1, ...) {
   ic <- "AIC"
 
   all_funs <- c('%@%', 'check_integer', 'check_log', 'check_values_for_param', 
@@ -155,6 +155,12 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
                 'sample_data', 'sample_params', 'some_percent', 'sort', 
                 'standardizeFam', 'validate_values', 'write_file')
   
+  ## Input Validation
+
+  if ( !( (is.numeric(sanity) && sanity >= 0) || sanity == FALSE) ) {
+    stop("Invalid input for argument 'sanity'.")
+  }
+
   families <- FamilyList
   
   if(length(packages) > 0) {
@@ -333,17 +339,18 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
                     AICc = output_liste$AICc) 
       # aim: check whether solution has good loglik 
       # but does not fit nonetheless
-      if(perform_check) {
+      if(sanity != FALSE) { # input validation ensures:
+	                           # either FALSE or valid numeric
         sanity_check <- fitting_sanity_check(output, data, 
                                              continuity = continuity, 
-                                             sensitivity = sanity_level)
+                                             sensitivity = sanity)
         output@sanity <- sanity_check
       }
     } else {
-      if(perform_check)
+      if(sanity != FALSE)
         sanity_check <- list(hist_check=NA, int_check=NA, good=FALSE)
     }
-    if(perform_check && !sanity_check$good) {
+    if(sanity != FALSE && !sanity_check$good) {
       output <- new('optimParams', 
                     family = fam$family,
                     package = fam$package,
