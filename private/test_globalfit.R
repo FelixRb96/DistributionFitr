@@ -1,4 +1,4 @@
-r <- globalfit(rnorm(n = 1000, mean=10, sd=1), packages = NULL)
+r <- globalfit(rnorm(n = 1000, mean=10, sd=1), packages = "stats", verbose = TRUE)
 
 summary(r, count=10)
 hist(r)

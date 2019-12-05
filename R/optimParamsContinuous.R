@@ -87,8 +87,7 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
   colnames(optim_progress) <- c(names(lower), names(fixed), "log_lik")
   
   on.exit({
-    if (exists("optim_progress") ## diese Abfrage schein mir unnoetig
-        && (show_optim_progress || (debug_error && !optim_successful))) {
+    if ((show_optim_progress || (debug_error && !optim_successful))) {
       cat("Optimization progress:\n")
       print(tail(optim_progress, 2))
     }
@@ -107,8 +106,6 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
       # print(start_params)
     
       # Optimize first time
-      # TODO: in second optimization set fnscale and parscale accordingly 
-      # (check if it is set correctly below)
       if(show_optim_progress)
         cat("First Optimisation\n")
       
@@ -118,7 +115,7 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
       safety_bound <- 1e-10
 
       optim_result <- try(optim(start_params, loglik_fun, 
-                                control = list(fnscale=-1, trace=0), 
+                                control = list(fnscale=-1, trace=0),
                                 lower=lower+safety_bound, 
                                 upper=upper-safety_bound, method=optim_method),
                           silent = TRUE)
@@ -126,10 +123,11 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
       if (is(optim_result, "try-error")) {
         optim_successful <- FALSE
         if(!on_error_use_best_result || nrow(optim_progress) == 0) {
-          stop(optim_result, " occured during (first) opimisation, fatal.\n")	
+          stop(optim_result, " occured during (first) optimisation for family ", 
+               family$family,", fatal.\n")	
         } else {
-          message(optim_result, " occured during (first) optimization, 
-                  trying to take best result achieved up to now\n")
+          message(optim_result, " occured during (first) optimization for family ",
+                  fam$family, " trying to take best result achieved up to now\n")
           # getting best result from optimization progress up to now
           optim_result <- get_best_result_from_progress(optim_progress, 
                                                 param_names = names(lower))
@@ -139,7 +137,7 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
       }
       
       if(optim_result$convergence!=0) {
-        warning('No convergence in first optimization!')
+        warning('No convergence in first optimization for family ', family$family)
         if(debug_error) {
           print(tail(optim_progress, 2))
         }
@@ -218,8 +216,8 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
   
   if (nrow(optim_progress) > 0 &&
       optim_result$value < max(optim_progress$log_lik, na.rm = TRUE) - 1e-8) {
-    message("Final Optimization result is worse than the best result 
-            achieved during optimization")
+    message("Final Optimization result for family ", family$family, 
+            " is worse than the best result achieved during optimization")
     cat("Diff to best:", abs(optim_result$value - max(optim_progress$log_lik)),
         "\n")
   }

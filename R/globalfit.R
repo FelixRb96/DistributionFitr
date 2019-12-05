@@ -139,7 +139,7 @@ disc_trafo <- function(data){
 globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
                       packages = "stats", append_packages = FALSE,
                       cores = NULL, max_dim_discrete = Inf,
-		      sanity = 1, ...) {
+                      sanity = 1, ...) {
   ic <- "AIC"
 
   all_funs <- c('%@%', 'check_integer', 'check_log', 'check_values_for_param', 
@@ -241,18 +241,24 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
   discrete_families <- which(sapply(families, 
                                     function(x) x$family_info$discrete))
   
+  # if not specified, find out whether data is continuous or not
   if (is.null(continuity)){
-    
     trafo_list <- disc_trafo(data)
     data <- trafo_list$data
-    relevant_families <- if (trafo_list$discrete) 
-      families[discrete_families] else 
-        families[-discrete_families]
-    continuity <- ifelse(trafo_list$discrete, FALSE, TRUE)
-    
+    continuity <- !trafo_list$discrete
+  } 
+  
+  # the following simpler version is not working as vector[-integer(0)] = empty
+  # relevant_families <-  families[if (continuity) -discrete_families else discrete_families]
+  if (continuity) {
+    relevant_families <- 
+      if (length(discrete_families) > 0) families[-discrete_families] else families
   } else {
-    relevant_families <-  families[if (continuity) -discrete_families else 
-      discrete_families]
+    if (length(discrete_families) > 0)
+      relevant_families <- families[discrete_families]
+    else
+      stop("Data is assumed to be discrete but there are no discrete distributions", 
+           "contained in the set of distributions to be compared")
   }
   
   # Again check that all of the families that should 
@@ -310,22 +316,32 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
                           .options.snow = opts) %dopar% {
                             
     fam <- relevant_families[[i]]
+    t <- Sys.time()
     
     if(verbose)
-      message("Current Family: ",  fam$package, fam$family)
+      message("Current Family: ", fam$family , " from Package: ",
+              fam$package)
     
-    output_liste <- optimParamsDiscrete(data = data,
-                                        family = fam[c('package', 'family')],
-                                        family_info = fam$family_info,
-                                        method = 'MLE', prior = NULL, 
-                                        log = fam$family_info$log,
-                                        optim_method = 'L-BFGS-B', 
-                                        n_starting_points = 1,
-                                        debug_error = FALSE, 
-                                        show_optim_progress=FALSE,
-                                        on_error_use_best_result=TRUE, 
-                                        max_discrete_steps=100, plot=FALSE,
-                                        discrete_fast = TRUE)
+    output_liste <- eval_with_timeout(
+      optimParamsDiscrete(data = data,
+                          family = fam[c('package', 'family')],
+                          family_info = fam$family_info,
+                          method = 'MLE', prior = NULL, 
+                          log = fam$family_info$log,
+                          optim_method = 'L-BFGS-B', 
+                          n_starting_points = 1,
+                          debug_error = FALSE, 
+                          show_optim_progress=FALSE,
+                          on_error_use_best_result=TRUE, 
+                          max_discrete_steps=100, plot=FALSE,
+                          discrete_fast = TRUE),
+      return_value_on_timeout = "TIMEOUT",
+      timeout = 10)
+    
+    if (length(output_liste) == 1 && output_liste == "TIMEOUT") {
+      message("Timeout occured for Family ", fam$family)
+      output_liste <- NULL
+    }
     
     if(!is.null(output_liste) && !is.na(output_liste$value) && 
        !is.infinite(output_liste$value)) {
@@ -359,6 +375,12 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
                     AICc = NA_integer_,
                     sanity = sanity_check)
     }
+    
+    if (verbose) {
+      cat("Elapsed time for family", fam$family, "from package", fam$package, ":",
+          difftime(Sys.time(), t, units="secs"), "secs\n")
+    }
+    
     return(output)
   } # end %dopar%
   stopCluster(cl)

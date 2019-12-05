@@ -50,13 +50,14 @@ fitting_sanity_check <- function(object, data, continuity, sensitivity = 1) {
   }
   
   if (continuity) {
-    int_check <- tryCatch(integrate(density, lower = -Inf, upper = Inf),
-                  error = function(e) {
-                            message('Sanity Check. Calculating integral of
-                                     the density failed: ',e,'\n')
-                            return(list(value = Inf))
-                  }
-        )
+    int_check <- tryCatch(
+      integrate(density, lower = -Inf, upper = Inf),
+      error = function(e) {
+        message('Sanity Check. Calculating integral of ',
+                'the density of family ', object@family,' failed: ',e,'\n')
+        return(list(value = Inf))
+        }
+      )
     hist_check <- sum(diff(h$breaks) * density(h$mids))
   } else {
     # in the discrete case the values represented in data will be all breaks 
