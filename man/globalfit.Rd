@@ -46,13 +46,8 @@ globalfit(data, continuity = NULL, method = "MLE",
    argument \code{packages} to the standard search list, if \code{FALSE} 
    \code{globalfit} will use only those packages.
   }
-  \item{perform_check}{
-   logical; if \code{TRUE} (default) obviously bad fits will be filtered out 
-   (DistributionFitr generally depends on other packages to supply reasonable 
-   distribution functions).
-  }
   \item{max_dim_discrete}{
-   non-negative integer; as a final step, all distributions with more 
+   non-negative integer; distributions with more 
    non-continuous parameters than \code{max_dim_discrete} will not be 
    considered. Manual setting is recommended if calculation speed has to
    be cut down.
@@ -61,12 +56,18 @@ globalfit(data, continuity = NULL, method = "MLE",
    integer; Number of CPU cores to be used in the calculations of best fitted 
    parameters and information criteria
   }
-  \item{sanity_level}{
-	positive number; default set to 1; the smaller the number, the stricter 
-	the check will be executed and more potential distributions will be rejected
+  \item{sanity}{
+   either a positive numeric; controls a sanity check where obviously bad fits
+   are filtered out. The smaller the number, the stricter the check will be
+   executed and the more potential distributions will be rejected.
+   Default is 1. \cr
+   or \code{FALSE}; sanity check is not carried out. \cr
+   (DistributionFitr generally depends on other packages to supply reasonable 
+   distribution functions)
   }
   \item{...}{
-  Further named arguments that can are passed on to optimParamsDiscrete
+  Further named arguments that may be passed on to the underlying optimiser \code{\link{optim}},
+  such as \code{parscale} or \code{fnscale}.
   }
 }
 
@@ -91,8 +92,8 @@ globalfit(data, continuity = NULL, method = "MLE",
 
 \examples{ %  library(DistributionFitr)  ## bitte lassen 
   # Example 1
-  data <- rnorm(n=100, mean=70, sd= 4)
-  r <- globalfit(data, cores= if (interactive()) NULL else 1) 
+  data <- rnorm(n = 100, mean = 70, sd = 4)
+  r <- globalfit(data, cores = if (interactive()) NULL else 1) 
   summary(r)
 
   # Example 2
@@ -100,8 +101,8 @@ globalfit(data, continuity = NULL, method = "MLE",
   # Alternatively, it is possible to input whether the data is
   # continuous or discrete
   \dontrun{
-  globalfit(data, continuity = TRUE, cores= if (interactive()) NULL else 1,
-            packages="stats", append_packages=FALSE) 
+  globalfit(data, continuity = TRUE, cores = if (interactive()) NULL else 1,
+            packages="stats", append_packages = FALSE) 
   }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
