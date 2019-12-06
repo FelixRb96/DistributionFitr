@@ -45,6 +45,15 @@ setMethod(f = "summary", signature = c("globalfit"),
             if(is.null(count) || !is.natural(count) )
               stop("Argument 'count'  must be positive integer.")
             
+	    if(length(object@fits) < 1) {
+	      message("No family fitted. Either packages provided in argument
+              'packages' do not supply reasonable parametric distributions or
+	      some fatal error occured.\nTo troubleshoot try:
+	      (1) changing argument input for 'packages'
+	      (2) adjusting rigorosity of 'sanity'")
+	      return(invisible())
+	    }
+
             object <- sort(object, ic=ic)
             df <- data.frame(family = sapply(object@fits,
                                              function(f) f@family),
