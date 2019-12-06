@@ -274,7 +274,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
     relevant_families <- relevant_families[!(all_pkgs %in% missing_pkgs)]
   }
   
-  if(length(relevant_families < 1))
+  if(length(relevant_families) < 1)
     stop("No relevant distribution families to fit or compare.")
 
   if(verbose)
