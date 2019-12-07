@@ -14,14 +14,15 @@
 globalfit(data, continuity = NULL, method = "MLE",
   verbose = TRUE, packages = "stats",
   append_packages = FALSE, perform_check = TRUE,
-  cores = NULL, max_dim_discrete = Inf, sanity_level = 1, ...)
+  cores = NULL, max_dim_discrete = Inf, sanity_level = 1,
+  ...)
 }
 
 %- maybe also 'usage' for other objects documented here.
 
 \arguments{
   \item{data}{
-    vector of data points.
+    numeric vector of data points.
   }
   \item{continuity}{
     logical; if \code{TRUE}, the data is fitted with continuous distributions.
@@ -33,7 +34,7 @@ globalfit(data, continuity = NULL, method = "MLE",
     be \code{"MLE"}.
   }
   \item{verbose}{
-   logical; if \code{TRUE}, always show progress and packages from where to fit distributions.
+   logical; if \code{TRUE}, show progress and packages from where to fit distributions.
   }
   \item{packages}{
     default: \dQuote{stats}. \cr
@@ -44,7 +45,8 @@ globalfit(data, continuity = NULL, method = "MLE",
   \item{append_packages}{
    logical; if \code{TRUE} (default) appends packages specified in the 
    argument \code{packages} to the standard search list, if \code{FALSE} 
-   \code{globalfit} will use only those packages.
+   \code{globalfit} will use only those packages and ignore the standard
+   search list.
   }
   \item{max_dim_discrete}{
    non-negative integer; distributions with more 
@@ -54,7 +56,7 @@ globalfit(data, continuity = NULL, method = "MLE",
   }
   \item{cores}{
    integer; Number of CPU cores to be used in the calculations of best fitted 
-   parameters and information criteria
+   parameters and information criteria.
   }
   \item{sanity}{
    either a positive numeric; controls a sanity check where obviously bad fits
@@ -73,16 +75,16 @@ globalfit(data, continuity = NULL, method = "MLE",
 
 \details{
   If there is no continuity input given, this function first tests via multiple 
-  criteria whether the data is   continuously or discretely distributed. 
+  criteria whether the data is continuously or discretely distributed. 
   Given that information, the related distributions from \code{getFamilies()} 
-  are fitted to the data with the maximum likelihood method and information 
-  criteria are calculated. For discrete data that is not in the form of 
-  integers only, an appropriate linear transformation is applied to guarantee 
+  are fitted to the data via maximum likelihood method and information 
+  criteria are calculated. For discrete data not in the form of 
+  integers only, an appropriate linear transformation is applied to ensure
   stable optimization.
 }
 
 \value{
-  \code{globalfit} returns an object of \code{\link{globalfit-class}}.
+  \code{globalfit} returns an object of class \code{\link{globalfit-class}}.
 }
 
 \author{
@@ -90,7 +92,7 @@ globalfit(data, continuity = NULL, method = "MLE",
   Benedikt Geier, Moritz Kern
 }
 
-\examples{ %  library(DistributionFitr)  ## bitte lassen 
+\examples{ %  library(DistributionFitr)
   # Example 1
   data <- rnorm(n = 100, mean = 70, sd = 4)
   r <- globalfit(data, cores = if (interactive()) NULL else 1) 
@@ -105,6 +107,4 @@ globalfit(data, continuity = NULL, method = "MLE",
             packages="stats", append_packages = FALSE) 
   }
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
 \keyword{distribution}

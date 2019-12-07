@@ -19,14 +19,15 @@ getFamily(pkg)
 
 \arguments{
   \item{pkg}{
-     Name of the package as string
+    character string; name of the package
   }
 }
 
 \value{
-   A list of of lists of two named elements:
-  \item{package}{The name of the package provided to the function}
-  \item{family}{The name of the function that belongs to a distribution family}
+  A list of of lists, the latter with two named elements:
+  \item{package}{The name of the package as provided to the function}
+  \item{family}{The name of the function that belongs to a distribution family,
+  referred to as *** above.}
 }
 \author{
    Manuel Hentschel, Valentin von Trotha

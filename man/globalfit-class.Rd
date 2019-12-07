@@ -8,47 +8,46 @@
 \alias{hist,globalfit-method}
 
 \title{Class "globalfit"}
-\description{The \code{globalfit}-class is the class to handle return object 
-  of \link{globalfit}. It contains for some given data a list of fitted 
-  distributions and their characteristics.}
+\description{The \code{globalfit}-class is the class to handle return objects 
+  from \link{globalfit}. It contains for some given data a list of fitted 
+  distributions, their estimated parameters and supplementary information.}
 \section{Objects from the Class}{
   Objects can be created by calls of the form 
   \code{new("globalfit", data, continuity, method, fits)}.
   More comfortably, you may use the  function \code{\link{globalfit}}.
-  The result of these calls is an globalfit object.
+  The result of these calls is a globalfit object.
 }
 
 \section{Slots}{
   \describe{
     \item{data}{vector of data points}
     \item{continuity}{logical; if \code{TRUE}, indicating that the data 
-          points come from a continuous distribution;
-      if \code{FALSE}, indicating thate these come from a discrite distribtion}
+          points come from a continuous distribution; 
+	  if \code{FALSE}, indicating that they come from a discrete distribution}
     \item{method}{character; the method used for the fit.}
-    \item{fits}{A list of objects of \code{\link{optimParams-class}}
+    \item{fits}{list; of S4-objects of class \code{\link{optimParams-class}}
   }}
 }
 
 \section{Methods}{
   \describe{
     \item{sort}{\code{signature(x = "globalfit")}: sorts the results in slot 
-                \code{fits} by selected information critera.}
+                \code{fits} by the information criterium selected.}
     \item{summary}{\code{signature(object = "globalfit")}: 
                         summarizes the object and creates an object of 
                         \code{\link{globalfitSummary-class}}}
-    \item{print}{\code{signature(x = "globalfit")}: applies 
+    \item{print}{\code{signature(x = "globalfit")}: applies the
                  \code{summary}-method and prints the result.}
 %    \item{IC}{\code{signature(x = "globalfit")}: returns the selected 
 %                                                 information
 %              criteria of the items in \code{fits} slot}
-    \item{AIC}{\code{signature(x = "globalfit")}: applies \code{IC}-method 
+    \item{AIC}{\code{signature(x = "globalfit")}: applies the \code{IC}-method 
                for the Akaike Information Criterium.}
-    \item{BIC}{\code{signature(x = "globalfit")}: applies \code{IC}-method 
+    \item{BIC}{\code{signature(x = "globalfit")}: applies the \code{IC}-method 
                for the Bayes Information Criterium.}
     \item{hist}{\code{signature(x = "globalfit")}: 
-                computes the histogram of the
-                given data points and plots it together with the density
-                of the selected fit}
+                computes a histogram of the given data points and plots it
+		together with the density of the estimated best fit}
     }
 }
   

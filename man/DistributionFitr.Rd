@@ -6,27 +6,28 @@
   Fitting Multiple Parametric Distributions
 }
 \description{
-A density (or count density) will be fitted parametrically to a
-univariate data set via maximum likelihood. The user only enters the
-data. The program automatically searches for the parametric family
-and its parameters within that best describe the data. The program then returns 
+Parametric densities (or count densities) will be fitted to user-given
+univariate data via maximum likelihood. The user more or less only enters the
+data. The program automatically searches for parametric distributions and
+parameters thereof that best describe the data. It then returns 
 the ten best parameter families including the fitted parameters. 
-
-Examine how several theoretical distibutions describe given univariate data.
 
 The package contains the following functions:
 \itemize{
- \item \code{getFamilies} Browsing for distribution families
-\item \code{getFamily} Find all distributions in a package
-\item \code{getParams} For a single distribution family, parameters are
+  \item \code{\link{globalfit}} Given some univariate data, determines the best 
+  fitting parametric distributions from R-packages
+  \item \code{\link{getFamilies}} Browsing for distribution families
+  \item \code{\link{getFamily}} Find all distributions within a package
+  \item \code{\link{getParams}} For a single distribution family, parameters are 
 determined; upper/lower limits and other chraracteristics are extracted
 %\item \code{optimParamsDiscrete}: Fits the parameters for a given
 %distribution family with known names for the parameters and known value
 %range of each parameter item 
-\item \code{globalfit} Determines the best parameters for a list of
-distribution families
 %\item \code{loglik} Returns the loglikelihood function to be optimized item
 }
+Comments: \cr
+The most relevant function is \code{\link{globalfit}}, with an S4 object as return value. See the examples on how to display the results, such as using \code{summary} or \code{hist}. Read more on the return value in \code{\link{globalfit-class}} and \code{\link{globalfitSummary-class}}. \cr
+For exotic packages used frequently or where parameter extraction is time-consuming, users may be interested to do the latter once with \code{\link{getFamilies}} and save the results for subsequent usage as argument in \code{globalfit}. The functions \code{\link{getFamily}} and \code{\link{getParams}} are lower-level functions invoked by \code{getFamilies}, and may be of usage for other purposes.
 }
 
 \author{
@@ -47,7 +48,6 @@ Maintainer: Borui Niklas Zhu, \email{bzhu@mail.uni-mannheim.de}
 }
 
 \examples{ %  library(DistributionFitr) 
-
 # example for globalfit
 data <- rnorm(n = 100, mean = 70, sd = 4)
 r <- globalfit(data,  cores= if (interactive()) NULL else 1,

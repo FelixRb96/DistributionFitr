@@ -17,7 +17,8 @@ getFamilies(all.packages, file="R/all_families.R")
   \item{all.packages}{
       character vector; package names in which to scan for distribution families 
       or \cr
-      \code{TRUE} to scan all packages  or \code{FALSE} to scan base packages 
+      \code{TRUE} to scan all packages \cr
+      or \code{FALSE} to scan base packages 
       only or \code{MISSING} to return families saved in file
   }
   \item{file}{
@@ -46,45 +47,45 @@ getFamilies(all.packages, file="R/all_families.R")
   }
   \item{family_info}{
     \itemize{
-      \item{lower}{
+      \item{\code{lower}:}{
 	named numeric vector; lower bounds for distribution parameters
       }
-      \item{upper}{
+      \item{\code{upper}:}{
 	named numeric vector; upper bounds for distribution parameters
       }
-      \item{accepts_float}{
+      \item{\code{accepts_float}:}{
 	named logical vector; whether each parameter can be any real 
 	number (\code{TRUE}) or only integers are valid inputs (\code{FALSE})
       }
-      \item{defaults}{
+      \item{\code{defaults}:}{
 	names numeric vector; set of default parameters that jointly constitute valid 
 	input. Used for optimisation.
       }
-      \item{log}{
+      \item{\code{log}:}{
 	logical; whether log values are provided by the density function
       }
-      \item{discrete}{
+      \item{\code{discrete}:}{
 	logical; whether the distribution itself (not the parameters) takes on 
 	discrete values only
       }
-      \item{support_min}{
+      \item{\code{support_min}:}{
 	numeric; lower bound of the support, i.e. lowest value of \eqn{x} 
-	where \eqn{f(x) > 0} for any valid parameter set, \eqn{f} the density function
+	where \eqn{f(x) > 0} numerically for any valid parameter set, \eqn{f} the density function
       }
-      \item{support_max}{
+      \item{\code{support_max}:}{
 	numeric; upper bound of the support
       }
-      \item{support_max_depends_on}{
+      \item{\code{support_max_depends_on}:}{
 	named logical vector; whether \code{support_max} depends on the value of each 
 	parameter
       }
-      \item{support_min_depends_on}{
+      \item{\code{support_min_depends_on}:}{
 	named logical vector; whether \code{support_min} depends on the value of each 
 	parameter
       }
     }
   }
-  Additionally, if \code{all.packages} is not missing, it is saved in an R file 
+  Additionally, if \code{all.packages} is not missing, it is saved in a .R-file 
   as \code{FamilyList <- list(list(...))}
 }
 
