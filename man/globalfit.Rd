@@ -13,8 +13,9 @@
 \usage{
 globalfit(data, continuity = NULL, method = "MLE",
   verbose = TRUE, packages = "stats",
-  append_packages = FALSE, perform_check = TRUE,
-  cores = NULL, max_dim_discrete = Inf, sanity_level = 1,
+  append_packages = FALSE, cores = NULL,
+  max_dim_discrete = Inf, sanity = 1,
+  timeout = 15,
   ...)
 }
 
@@ -67,9 +68,14 @@ globalfit(data, continuity = NULL, method = "MLE",
    (DistributionFitr generally depends on other packages to supply reasonable 
    distribution functions)
   }
+  \item{timeout}{
+    either \code{FALSE}; no timeout \cr
+    or positive numeric; seconds until timeout for the underlying optimiser
+    \code{\link{optim}}.
+  }
   \item{...}{
-  Further named arguments that may be passed on to the underlying optimiser \code{\link{optim}},
-  such as \code{parscale} or \code{fnscale}.
+    Further named arguments that may be passed on to the underlying optimiser
+    \code{\link{optim}}, such as \code{parscale} or \code{fnscale}.
   }
 }
 
@@ -81,6 +87,24 @@ globalfit(data, continuity = NULL, method = "MLE",
   criteria are calculated. For discrete data not in the form of 
   integers only, an appropriate linear transformation is applied to ensure
   stable optimization.
+
+  Since DistributionFitr technically allows for comparing over all distributions
+  in any R-package, computation speed is likely to be an issue. The following may
+  help:
+  \itemize{
+    \item{using argument \code{packages} with \code{append_packages = FALSE}
+	    to restrict the search to certain packages
+    }
+    \item{discarding distributions with too many discrete parameters using
+	    argument \code{max_dim_discrete}
+    }
+    \item{specifying \code{timeout}, which affects the maximum time spent on
+	    each distribution (not overall!). The value in \code{timeout}
+	    will not be translated directly to the actual maximum time
+	    due to differing number of times  \code{optim} is run
+	    under different algorithms.
+    }
+  }
 }
 
 \value{

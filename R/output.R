@@ -50,7 +50,8 @@ setMethod(f = "summary", signature = c("globalfit"),
               'packages' do not supply reasonable parametric distributions or
 	      some fatal error occured.\nTo troubleshoot try:
 	      (1) changing argument input for 'packages'
-	      (2) adjusting rigorosity of 'sanity'")
+	      (2) adjusting rigorosity of 'sanity'
+	      (3) adjusting 'timeout'")
 	      return(invisible())
 	    }
 

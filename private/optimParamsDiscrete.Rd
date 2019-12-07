@@ -65,6 +65,10 @@ optimParamsDiscrete(data, family, family_info, method = "MLE", prior = NULL, log
   \item{max_zoom_level}{
     integer; if distribution has two or more integer-only parameters, this argument controls how many steps are allowed in our internal algorithm.
   }
+  \item{timeout}{
+    either \code{FALSE}; no timeout \cr
+    or positive numeric; seconds until timeout for underlying optimiser \code{\link{optim}}.
+  }
   \item{...}{
     other arguments passed down to the lower level functions, such as d[family].
   }

@@ -61,6 +61,10 @@ optimParamsContinuous(data, family, lower, upper, defaults, method = "MLE",
   \item{no_second}{
     logical; if TRUE the second run is ommitted. optimParams internally uses two optimisation runs: The first one is coarse and supplies us with intermediate parameters, which are in turn used during the second, more rigorous run.
   }
+  \item{timeout}{
+    either \code{FALSE}; no timeout \cr
+    or positive numeric; seconds until timeout for underlying optimiser \code{\link{optim}}.
+  }
   \item{...}{
     other arguments passed down to lower level functions such as \code{optimParamsContinuous} or d[family].
   }

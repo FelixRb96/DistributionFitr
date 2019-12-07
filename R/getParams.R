@@ -73,7 +73,8 @@ get_all_params <- function(fam) {
      # check if one function part is the name of one of the earlier parameters,
      # and remove if thats true
      if (i > 1 && any(function_parts %in% names(all_params)[1:(i-1)]))
-       cat(param, "depends on another earlier parameter and is thus removed\n")
+       cat(param, "is realated to a parameter listed before and
+	   thus will be removed.\n")
        all_params[[param]] <- NULL
     }
   }
@@ -543,7 +544,8 @@ get_support <- function(fam, params) {
 standardizeFam <- function(fam, package){ 
   if (missing(package) || length(package) == 0) {
     if (!is(fam, "optimParams") && !is.list(fam)) {
-      if (!is.character(fam)) stop("the family must be a character string")
+      if (!is.character(fam))
+        stop("'fam' must be a character string or a list.")
       if (length(fam) == 2) {
         fam <- list(fam["family"], package=fam["package"])
       }
@@ -551,10 +553,10 @@ standardizeFam <- function(fam, package){
         names <- sapply(FamilyList, function(x) x$family)
         idx <- pmatch(fam, names)
         if (is.na(idx))
-          stop("the family cannot be identified without the explicitely 
+          stop("The family can not be identified without the explicitly 
                given argument 'package'")
         fam <- list(family=fam, package=FamilyList[[idx]]$package)
-      } else stop("length of the family must be one")
+      } else stop("The length of 'fam' must be one")
     }
   } else {
     fam <- list(family=fam, package=package)

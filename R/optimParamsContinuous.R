@@ -51,10 +51,11 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
                                   method = 'MLE', fixed=list(), prior = NULL,
                                   log=TRUE,
                                   optim_method = 'L-BFGS-B',
-                                  n_starting_points=1,
-                                  debug_error=TRUE, show_optim_progress=FALSE,
-                                  on_error_use_best_result=TRUE,
-                                  no_second = TRUE, ...) {
+                                  n_starting_points = 1,
+                                  debug_error = TRUE,
+				  show_optim_progress = FALSE,
+                                  on_error_use_best_result = TRUE,
+                                  no_second = TRUE, timeout = 15, ...) {
 
   if(method!='MLE')
     stop('Not implemented.')
@@ -110,15 +111,22 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
         cat("First Optimisation\n")
       
       # construct loglikelihood function, that only depends on the parameters
-      loglik_fun <- loglik(family=family, data=data, fixed=fixed, log=log, 
-                           upper=upper, lower=lower)
+      loglik_fun <- loglik(family = family, data = data, fixed = fixed, log = log, 
+                           upper = upper, lower = lower)
       safety_bound <- 1e-10
+      
+      if(is.numeric(timeout)) setTimeLimit(cpu = timeout, elapsed = timeout, transient = TRUE)
 
-      optim_result <- try(optim(start_params, loglik_fun, 
-                                control = list(fnscale=-1, trace=0),
-                                lower=lower+safety_bound, 
-                                upper=upper-safety_bound, method=optim_method),
-                          silent = TRUE)
+      optim_result <- try(
+        {
+	  optim(start_params, loglik_fun, 
+          control = list(fnscale = -1, trace = 0),
+          lower = lower + safety_bound, 
+          upper = upper-safety_bound, method = optim_method)
+        },
+        silent = TRUE)
+
+      setTimeLimit(cpu = Inf, elapsed = Inf)
       
       if (is(optim_result, "try-error")) {
         optim_successful <- FALSE
@@ -127,7 +135,7 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
                family$family,", fatal.\n")	
         } else {
           message(optim_result, " occured during (first) optimization for family ",
-                  fam$family, " trying to take best result achieved up to now\n")
+                  family$family, " trying to take best result achieved up to now\n")
           # getting best result from optimization progress up to now
           optim_result <- get_best_result_from_progress(optim_progress, 
                                                 param_names = names(lower))
@@ -178,15 +186,18 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
         precision <- max(0, length(lower) - 2)
         # floating numbers are not equally spaced, only about 1e-16 is reliable
         precision <- max(1e-8/(10^(precision*2)), 1e-16)
+
+        if(is.numeric(timeout)) setTimeLimit(cpu = timeout, elapsed = timeout, transient = TRUE)
       
         optim_result <- try(optim(optim_result$par, loglik_fun, 
-                                  control = list(fnscale=fnscale, trace=0, 
+                                  control = list(fnscale = fnscale, trace = 0, 
                                   parscale = parscale, factr = precision), 
-                                  lower=lower+safety_bound, 
-                                  upper=upper-safety_bound, 
-                                  method=optim_method),
+                                  lower = lower + safety_bound, 
+                                  upper = upper - safety_bound, 
+                                  method = optim_method),
                             silent = TRUE)
-        
+        setTimeLimit(cpu = Inf, elapsed = Inf)
+
         if (is(optim_result, "try-error")) {
     	    if(!on_error_use_best_result || nrow(optim_progress) == 0) {
     	      stop(optim_result, "occured during (second) optimisation, fatal.\n")

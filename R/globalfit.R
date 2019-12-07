@@ -139,7 +139,7 @@ disc_trafo <- function(data){
 globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
                       packages = "stats", append_packages = FALSE,
                       cores = NULL, max_dim_discrete = Inf,
-                      sanity = 1, ...) {
+                      sanity = 1, timeout = 15, ...) {
   ic <- "AIC"
 
   all_funs <- c('%@%', 'check_integer', 'check_log', 'check_values_for_param', 
@@ -157,9 +157,14 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
   
   ## Input Validation
 
-  if ( !( (is.numeric(sanity) && sanity >= 0) || sanity == FALSE) ) {
+  if ( length(sanity) != 1 || !( (is.numeric(sanity) && sanity >= 0) ||
+			 sanity == FALSE) ) {
     stop("Invalid input for argument 'sanity'.")
   }
+  if( length(timeout) != 1 || !(is.logical(timeout) || is.numeric(timeout) ) ||
+     (is.numeric(timeout) && timeout < 0) ||
+     (is.logical(timeout) && timeout == TRUE))
+    stop("Invalid input for argument 'timeout'")
 
   families <- FamilyList
   
@@ -337,9 +342,9 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
                           show_optim_progress=FALSE,
                           on_error_use_best_result=TRUE, 
                           max_discrete_steps=100, plot=FALSE,
-                          discrete_fast = TRUE),
+                          discrete_fast = TRUE, timeout = timeout),
       return_value_on_timeout = "TIMEOUT",
-      timeout = 10)
+      timeout = 1.5*timeout)
     
     if (length(output_liste) == 1 && output_liste == "TIMEOUT") {
       message("Timeout occured for Family ", fam$family)
