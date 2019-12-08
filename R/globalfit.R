@@ -299,7 +299,11 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
   
   # for showing a progressbar we apparently need to use a SNOW cluster
   # registerDoParallel(cl)
-  if (verbose) {
+
+  # since SNOW is superceded by doParallel without progress option
+  # we will wait for Henrik Bengtsson to finish progressr
+
+  if (FALSE) {
     if ( !"doSNOW" %in% rownames(installed.packages()) ) {
       message("(Install the package 'doSNOW' to show a progress bar.)")
       registerDoParallel(cl)
