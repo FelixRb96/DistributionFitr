@@ -10,8 +10,6 @@
    Distributions are identified by scanning all function names in a package
    for the pattern r***, p***, q***, d***,
    (*** representing at least one character)
-   where at least two functions with the same remainder of the function
-   name (the ***) must be found.
 }
 \usage{
 getFamily(pkg)
@@ -21,6 +19,12 @@ getFamily(pkg)
   \item{pkg}{
     character string; name of the package
   }
+}
+
+\note{
+  The function make do with
+  at least two functions that have the same remainder of the function
+  name.
 }
 
 \value{

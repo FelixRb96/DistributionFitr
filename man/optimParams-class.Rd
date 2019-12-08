@@ -3,8 +3,8 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 
 \title{Class "optimParams"}
-\description{The \code{optimParams}-class is the class to handle the slot
-	\code{fits} of the class \code{\link{globalfit-class}}.
+\description{The class \code{optimParams} handles the slot % MS kleine Aenderung
+	\code{fits} of the class \code{\link[=globalfit-class]{globalfit}}.
 	It contains for some given data the optimization results
 	and their characteristics.}
 
@@ -39,7 +39,7 @@
 }
 
 \seealso{
-  \code{\link{globalfitSummary-class}} \cr
+  \code{\link[=globalfitSummary-class]{globalfitSummary}},
   \code{\link{globalfit}}
 }
 

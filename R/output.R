@@ -19,6 +19,10 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA. 
 
+
+## MS 8.12: bitte Datei von Muell befreien bzw. abarbeiten:
+## ("MS" zu loeschen ist zwar raffiniert, hat aber kurze Beine ;) )
+
 ## sind die is.null() wirklich notwendig?? (i) sind defaults gesetzte
 ## (ii) wirft R eh Fehler
 
@@ -126,7 +130,6 @@ IC <- function(object, ic='AIC', count = NULL) {
                     sep = "::")
   return(x)            
 }
-
 
 
 setMethod(f = "AIC", signature = c("globalfit"),

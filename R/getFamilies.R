@@ -97,12 +97,8 @@ write_file <- function(FamilyList, file = "R/all_families.R") {
       
     }
   }
-  
   dump(list="FamilyList", file=file)
-
-  
 }
-
 
 ### Case 1: all.packages gegeben: Suche nach Verteilungsfamilien
 ### Case 1.1 vector of strings (Liste von Paketnamen) 
@@ -111,25 +107,24 @@ write_file <- function(FamilyList, file = "R/all_families.R") {
 ### Case 1.3 TRUE -> take all installed packages
 ### Case 2 all.packages missing: Take families saved in the file
 
-getFamilies <- function(all.packages, file="R/all_families.R") {
+getFamilies <- function(all.packages) {
+  ## MS 8.12.: file hat hier nichts (mehr) zu suchen! Muss
+  ## zukuenftig anders geloest werden, im einem separaten (test) code
+  
   ## CASE 2:
   if (missing(all.packages)) {
-    if (file.exists(file))
-      return(getFamilies(all.packages = FALSE, file=file))
+    #if (file.exists(file))
+    #  return(getFamilies(all.packages = FALSE, file=file))
     ## read file and return list of lists
     return(FamilyList)
   }
 
   ## CASE 1.2 & 1.3
-  if (is.logical(all.packages)) {
-    FamilyList <- 
-      iterate_packages(construct_package_list(all.packages = all.packages))
-    write_file(FamilyList=FamilyList, file=file)
-    return(FamilyList)
+  if (is.logical(all.packages)) { ## MS 8.12 : klarer Code
+    all.packages <- construct_package_list(all.packages = all.packages)
   }
   
-  ## CASE 1.1
   FamilyList <- iterate_packages(all.packages)
-  write_file(FamilyList=FamilyList,file = file)
+  ##  write_file(FamilyList=FamilyList,file = file)
   return(FamilyList)
 }

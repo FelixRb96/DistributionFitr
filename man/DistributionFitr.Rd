@@ -30,15 +30,34 @@ determined; upper/lower limits and other chraracteristics are extracted
 %range of each parameter item 
 %\item \code{loglik} Returns the loglikelihood function to be optimized item
 }
-Comments: \cr
-The most relevant function is \code{\link{globalfit}}, with an S4 object as return value. See the examples on how to display the results, such as using \code{summary} or \code{hist}. Read more on the return value in \code{\link{globalfit-class}} and \code{\link{globalfitSummary-class}}. \cr
-For exotic packages used frequently or where parameter extraction is time-consuming, users may be interested to do the latter once with \code{\link{getFamilies}} and save the results for subsequent usage as argument in \code{globalfit}. The functions \code{\link{getFamily}} and \code{\link{getParams}} are lower-level functions invoked by \code{getFamilies}, and may be of usage for other purposes.
 }
 
-\author{
+\note{
+The most relevant function is \code{\link{globalfit}}, with an S4 object
+as return value. See the examples on how to display the results, such as
+%using \code{summary} or % MS bitte beachten:
+using \code{\link[base]{summary}} or
+\code{\link[graphics]{hist}}.
+Read more on the return value in
+\code{\link[=globalfit-class]{globalfit}} and
+\code{\link[=globalfitSummary-class]{globalfitSummary}}. % MS: bitte
+% aenderung beachten!
+
+For exotic packages used frequently or where parameter extraction is
+time-consuming, users may be interested to do the latter once with
+\code{\link{getFamilies}} and save the results for subsequent usage as
+argument in \code{\link{globalfit}}. The functions
+\code{\link{getFamily}} and \code{\link{getParams}} are lower-level
+functions invoked by \code{\link{getFamilies}}, and may be of usage for
+other purposes. 
+}
+
+\author{ % MS: bitte hier keine Sonderzeichen!!
+  % MS \author sind hier genau die, die Rd-Datei geschrieben haben, + maintainer
 Borui Niklas Zhu, Benedikt Geier, Moritz Kern, Kiril Dik, Moritz Lauff, 
 Manuel J. Hentschel, Adrian Heppeler, Niclas Lietzow, Till Freihaut, 
-Tim Glockner, Nadine Tampe, Valentin V. Trotha, Leonardo Vela, André Ferdinand, Hélène Peter, Martin Schlather, Yiqi Li
+Tim Glockner, Nadine Tampe, Valentin V. Trotha, Leonardo Vela, Andre
+Ferdinand, Helene Peter, Martin Schlather, Yiqi Li
   
 Maintainer: Borui Niklas Zhu, \email{bzhu@mail.uni-mannheim.de}   
 }
@@ -72,8 +91,8 @@ getParams("beta", package = "stats")
 \keyword{distribution}
 \keyword{parameters}
 \references{
-Zucchini, W. (2000). An introduction to model selection. Journal of mathematical psychology, 44(1), 41-61.
-
-Shao, J. (2003). Mathematical Statistics.
-
+  \itemize{
+    \item \litZucchini
+    \item \litShao
+  }
 }

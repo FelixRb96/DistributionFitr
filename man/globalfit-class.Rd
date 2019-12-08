@@ -8,7 +8,7 @@
 \alias{hist,globalfit-method}
 
 \title{Class "globalfit"}
-\description{The \code{globalfit}-class is the class to handle return objects 
+\description{The class \code{globalfit} handles return objects 
   from \link{globalfit}. It contains for some given data a list of fitted 
   distributions, their estimated parameters and supplementary information.}
 \section{Objects from the Class}{
@@ -23,9 +23,11 @@
     \item{data}{vector of data points}
     \item{continuity}{logical; if \code{TRUE}, indicating that the data 
           points come from a continuous distribution; 
-	  if \code{FALSE}, indicating that they come from a discrete distribution}
+	  if \code{FALSE}, indicating that they come from a discrete
+	  distribution}
     \item{method}{character; the method used for the fit.}
-    \item{fits}{list; of S4-objects of class \code{\link{optimParams-class}}
+    \item{fits}{list of S4-objects of class
+      \code{\link[=optimParams-class]{optimParams}} 
   }}
 }
 
@@ -35,9 +37,12 @@
                 \code{fits} by the information criterium selected.}
     \item{summary}{\code{signature(object = "globalfit")}: 
                         summarizes the object and creates an object of 
-                        \code{\link{globalfitSummary-class}}}
+                        \code{\link[=globalfitSummary-class]{globalfitSummary}}}
     \item{print}{\code{signature(x = "globalfit")}: applies the
-                 \code{summary}-method and prints the result.}
+ %     \code{summary}-method
+ method
+  \code{\link[base]{summary}} % MS: bitte beachten!
+      and prints the result.}
 %    \item{IC}{\code{signature(x = "globalfit")}: returns the selected 
 %                                                 information
 %              criteria of the items in \code{fits} slot}
@@ -57,8 +62,8 @@
 }
 
 \seealso{
-  \code{\link{globalfitSummary-class}} \cr
-  \code{\link{optimParams-class}} \cr
+  \code{\link[=globalfitSummary-class]{globalfitSummary}} \cr
+  \code{\link[=optimParams-class]{optimParams}} \cr
   \code{\link{globalfit}}
 }
 
@@ -66,7 +71,7 @@
   data <- rnorm(n=100, mean=10, sd= 1)
   r <- globalfit(data, cores= if (interactive()) NULL else 1,
                  packages="stats", append_packages=FALSE)
-  
+  % MS: warum ist auskommentiertes drin, was der Nutzer noch lesen kann?
   # r2 <- sort(r, ic='BIC')
     
   #print(r)

@@ -167,12 +167,13 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
     stop("Invalid input for argument 'timeout'")
 
   families <- FamilyList
-  
+  installed <- rownames(installed.packages()) ## MS: 8.12. never double code
+
   if(length(packages) > 0) {
     
     if(is.vector(packages) && typeof(packages) == "character") {
       
-      missing_pkgs <- setdiff(packages, rownames(installed.packages()))
+      missing_pkgs <- setdiff(packages, installed)
       if (length(missing_pkgs) > 0) {
         message("The following packages were provided to argument 'packages' 
                 but are not installed, so they will be ignored. ",
@@ -180,7 +181,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
                 paste(missing_pkgs, collapse = ", "))
       }
       
-      packages <- intersect(packages, rownames(installed.packages()))
+      packages <- intersect(packages, installed)
       
       known_packages <- unique(sapply(families, function(x) x$package))
       
@@ -270,7 +271,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
   # be compared are also installed
   all_pkgs <- sapply(relevant_families, function(x) x$package)
   all_pkgs_unique <- unique(all_pkgs)
-  missing_pkgs <- setdiff(all_pkgs_unique, rownames(installed.packages()))
+  missing_pkgs <- setdiff(all_pkgs_unique, installed)
   if (length(missing_pkgs) > 0) {
     message("The following packages are not installed, and are thus ignored 
             during optimisation. ",
@@ -297,13 +298,33 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
     message('Parallelizing over ', cores, ' cores.\n')
   cl <- makeCluster(cores, outfile = 'log.txt')
   
-  # for showing a progressbar we apparently need to use a SNOW cluster
-
+  ## for showing a progressbar we apparently need to use a SNOW cluster
+  hasSNOW <- "doSNOW" %in% installed ## MS : kleine Aenderungen auch nachfolgend
+  if (verbose) {
+    if (hasSNOW) {
+      ## doSNOW::registerDoSNOW(cl)## MS: 8.12. check merkt dass doSNOW nicht importiert wird
+      ## Fuer die nachfolgenden 2 Zeilen kann es boese Kopfwaesche geben. Probieren kann
+      ## man es aber.
+      do.call("require", list("doSNOW"))
+      do.call("registerDoSNOW", list(cl))
+      message("Optimization Progress")
+      pb <- txtProgressBar(max = length(relevant_families), style = 3)
+      progress_fn <- function(n) setTxtProgressBar(pb, n)
+      opts <- list(progress = progress_fn)
+    } else {
+      message(length(relevant_families), " families are searched through.",
+              if (length(relevant_families) > cores * 3)
+                " This can last several minutes.\nInstall the package 'doSNOW' to get a progress bar shown.")
+      registerDoParallel(cl)
+      opts <- c()
+    } 
+  } else {
+  
   # since SNOW is superceded by doParallel without progress option
   # we will wait for Henrik Bengtsson to finish progressr
 
   # if (verbose) {
-  #   if ( !"doSNOW" %in% rownames(installed.packages()) ) {
+  #   if ( !"doSNOW" %in% installed ) {
   #     message("(Install the package 'doSNOW' to show a progress bar.)")
   #     registerDoParallel(cl)
   #     opts <- c()
@@ -317,7 +338,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
   # } else {
     registerDoParallel(cl)
     opts <- c()
-  # }
+  }
   
   i <- NULL ## BNZ: to prevent an issue, seems to be related to parallel. 
             ##      Do not delete!
@@ -330,9 +351,10 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
     fam <- relevant_families[[i]]
     t <- Sys.time()
     
-    if(verbose)
-      message("Current Family: ", fam$family , " from Package: ",
-              fam$package)
+ #   if(verbose) { ## MS: 8.12. hat keine Wirkung
+ #     message("Current Family: ", fam$family , " from Package: ",
+ #             fam$package)   
+ #   }
     
     output_liste <- eval_with_timeout(
       optimParamsDiscrete(data = data,
@@ -351,7 +373,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
       timeout = 1.5*timeout)
     
     if (length(output_liste) == 1 && output_liste == "TIMEOUT") {
-      message("Timeout occured for Family ", fam$family)
+     ## message("Timeout occured for Family ", fam$family)## MS: 8.12. hat keine Wirkung
       output_liste <- NULL
     }
     
@@ -388,11 +410,11 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
                     sanity = sanity_check)
     }
     
-    if (verbose) {
-      cat("Elapsed time for family", fam$family, "from package", fam$package, ":",
-          difftime(Sys.time(), t, units="secs"), "secs\n")
-    }
-    
+   ##  if (verbose) {## MS: 8.12. hat keine Wirkung
+  ##    cat("Elapsed time for family", fam$family, "from package", fam$package, ":",
+   ##       difftime(Sys.time(), t, units="secs"), "secs\n")
+  ##  }
+   
     return(output)
   } # end %dopar%
   stopCluster(cl)

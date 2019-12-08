@@ -4,27 +4,27 @@
    Lists (all) distribution families with their parameters
 }
 \description{
-   This function extracts distribution families from R-packages along with their 
+   This function extracts distribution families from R-packages along
+   with their  
    parameters and characteristics, and scans specific packages if desired.
-   
 }
 \usage{
-getFamilies(all.packages, file="R/all_families.R")
-
+getFamilies(all.packages)
 }
 
 \arguments{
   \item{all.packages}{
-      character vector; package names in which to scan for distribution families 
-      or \cr
-      \code{TRUE} to scan all packages \cr
-      or \code{FALSE} to scan base packages 
-      only or \code{MISSING} to return families saved in file
+    character vector or missing or logical; package names in which to scan:
+    \describe{
+      \item{character}{
+	 the distribution families given
+      }
+      \item{\code{TRUE}}{all packages}
+      \item{\code{FALSE}}{base packages of R}
+    }
+    If missing, a list of recognized families is returned.
   }
-  \item{file}{
-      character; path to the file, where the information regarding the loaded 
-      distribution families shall be stored
-  }
+  % MS 8.12. file geloescht
 }
 
 \details{
@@ -85,13 +85,16 @@ getFamilies(all.packages, file="R/all_families.R")
       }
     }
   }
-  Additionally, if \code{all.packages} is not missing, it is saved in a .R-file 
-  as \code{FamilyList <- list(list(...))}
+%  Additionally, if \code{all.packages} is not missing, it is saved in a
+%  .R-file  as \code{FamilyList <- list(list(...))}
 }
 
 \author{
    Tim Glockner, Adrian Heppeler, Borui Niklas Zhu
-}
+ }
+
+% MS: bitte hier sauber machen!! 
+ 
 % ~Make other sections like Warning with \section{Warning }{....} ~
 
 %\seealso{

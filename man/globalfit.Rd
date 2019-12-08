@@ -1,5 +1,6 @@
 \name{globalfit}
 \alias{globalfit}
+% MS: Datei bitte von Muell bereinigen
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
   Detect continuity and fit multiple distributions to given data
@@ -7,8 +8,10 @@
 \description{
   Given a numerical data vector, this function fits multiple distributions 
   with the maximum likelihood method and returns an object containing the best 
-  fitted parameters and information criteria. Refer to \dQuote{Examples} or
-  \code{\link{globalfit-class}} on how to format the results.
+  fitted parameters and information criteria.
+  % MS: den nachfolgenden Satz verstehe ich nicht
+  Refer to \dQuote{Examples} or
+  \code{\link[=globalfit-class]{globalfit}} on how to format the results.
 }
 \usage{
 globalfit(data, continuity = NULL, method = "MLE",
@@ -30,19 +33,22 @@ globalfit(data, continuity = NULL, method = "MLE",
     If no input is given, the data will be tested for continuity.
   }
   \item{method}{
+    character;% MS: bitte beachten
     method for parameter estimation. So far only Maximum-Likelihood is 
     implemented, thus this argument must
     be \code{"MLE"}.
   }
   \item{verbose}{
-   logical; if \code{TRUE}, show progress and packages from where to fit distributions.
+    logical;
+    if \code{TRUE}, show progress and packages from where to fit distributions.
   }
   \item{packages}{
-    default: \dQuote{stats}. \cr
-    either a character vector with names of packages; \cr
+     either a character vector with names of packages; \cr
     or a list such as those returned by \command{getFamilies}\cr
-    or \code{NULL}, i.e. all families known by this package (recommended)   
-  } 
+    or \code{NULL}, i.e. all families known by this package (recommended).  
+
+    default: \dQuote{stats}. \cr
+ } 
   \item{append_packages}{
    logical; if \code{TRUE} (default) appends packages specified in the 
    argument \code{packages} to the standard search list, if \code{FALSE} 
@@ -56,26 +62,35 @@ globalfit(data, continuity = NULL, method = "MLE",
    be cut down.
   }
   \item{cores}{
-   integer; Number of CPU cores to be used in the calculations of best fitted 
+   integer; number of CPU cores to be used in the calculations of best fitted 
    parameters and information criteria.
   }
-  \item{sanity}{
-   either a positive numeric; controls a sanity check where obviously bad fits
+  \item{sanity}{% MS: bitte beachten
+    either a positive numeric or logical;
+    if it is a positive numeric, it
+    controls a sanity check where obviously bad fits
    are filtered out. The smaller the number, the stricter the check will be
    executed and the more potential distributions will be rejected.
-   Default is 1. \cr
-   or \code{FALSE}; sanity check is not carried out. \cr
+
+   If \code{sanity=FALSE} a sanity check is not carried out. \cr
    (DistributionFitr generally depends on other packages to supply reasonable 
-   distribution functions)
-  }
-  \item{timeout}{
-    either \code{FALSE}; no timeout \cr
-    or positive numeric; seconds until timeout for the underlying optimiser
-    \code{\link{optim}}.
-  }
+   distribution functions.)
+
+   Default is 1. 
+ }
+ \item{timeout}{% MS: bitte beachten
+   logical or numeric.
+   if it is a
+   positive numeric, it gives the
+   seconds until timeout for the underlying optimiser
+    \code{\link[stats]{optim}}.
+
+    If \code{timeout=FALSE} no timeout is performed.
+   }
   \item{...}{
     Further named arguments that may be passed on to the underlying optimiser
-    \code{\link{optim}}, such as \code{parscale} or \code{fnscale}.
+    \code{\link[stats]{optim}}, % MS: bitte beachten
+    such as \code{parscale} or \code{fnscale}.
   }
 }
 
@@ -89,7 +104,8 @@ globalfit(data, continuity = NULL, method = "MLE",
   stable optimization.
 
   Since DistributionFitr technically allows for comparing over all distributions
-  in any R-package, computation speed is likely to be an issue. The following may
+  in any R-package, computation speed is likely to be an issue. The
+  following may 
   help:
   \itemize{
     \item{using argument \code{packages} with \code{append_packages = FALSE}
@@ -108,7 +124,8 @@ globalfit(data, continuity = NULL, method = "MLE",
 }
 
 \value{
-  \code{globalfit} returns an object of class \code{\link{globalfit-class}}.
+  \code{globalfit} returns an object of class
+  \code{\link[=globalfit-class]{globalfit}}. % MS: bitte beachten
 }
 
 \author{
@@ -123,7 +140,6 @@ globalfit(data, continuity = NULL, method = "MLE",
   summary(r)
 
   # Example 2
-  
   # Alternatively, it is possible to input whether the data is
   # continuous or discrete
   \dontrun{

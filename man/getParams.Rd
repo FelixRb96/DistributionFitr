@@ -1,5 +1,6 @@
 \name{getParams}
 \alias{getParams}
+% MS: Bitte Datei von Muell bereinigen
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
   Get parameters and their properties for a Distribution Family
@@ -14,6 +15,10 @@
 getParams(fam, package)
 }
 %- maybe also 'usage' for other objects documented here.
+
+% MS: KEINE Anfuehrungszeichen ausserhalb von \example{}, \usage{},
+% \code{} ! Wenn \code nicht passt, bitte \sQuote und \dQuote{}
+% verwenden !
 \arguments{
   \item{fam}{
     character or list.
@@ -28,14 +33,18 @@ getParams(fam, package)
 \details{
   The family name is defined as the part of the function name that follows "d", 
   "p", "q" and "r". Example: uniform distribution. function call: "runif(...)"
-  --> family name: "unif". \cr	The values returned by getParams are included
+  --> % illegal. Bitte durch Text ersetzen
+  family name: "unif". \cr	The values returned by
+  getParams % ist ein \command
+  are included
   in the DistributionFitr-package and updated regularly. Users may use it to
   update the library of parameter characteristics themselves or find the
   function useful to use the parameter characteristics retrieved for other
   purposes.
 }
 \value{
-  For \code{getParams} a list with components, each of them a named vector: The 
+  For \code{getParams} % MS: genauer: \command{}
+  a list with components, each of them a named vector: The 
   name is the arg name as specified in the original "d", "p", ...-function, the 
   value is described below:
   \item{lower}{named vector; values: numeric, lower bound of the respective

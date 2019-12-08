@@ -20,48 +20,7 @@
 ## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 
-
-# Function for stopping an expression if it takes too long
-# Simplified version of https://github.com/HenrikBengtsson/R.utils/issues/74
-eval_with_timeout <- function(expr, envir = parent.frame(), timeout,
-                              return_value_on_timeout=NULL) {
-  # substitute expression so it is not executed as soon it is used
-  expr <- substitute(expr)
-  
-  # for Borui
-  if (.Platform$OS.type != "unix") {
-    return(eval(expr, envir = envir))
-  }
-  
-  # execute expr in separate fork
-  myfork <- parallel::mcparallel({
-    eval(expr, envir = envir)
-  }, silent = FALSE)
-  
-  # wait max n seconds for a result.
-  myresult <- parallel::mccollect(myfork, wait = FALSE, timeout = timeout)
-  # kill fork after collect has returned
-  tools::pskill(myfork$pid, tools::SIGKILL)
-  tools::pskill(-1 * myfork$pid, tools::SIGKILL)
-  
-  # clean up:
-  parallel::mccollect(myfork, wait = FALSE)
-  
-  # timeout?
-  if (is.null(myresult)) {
-    myresult <- return_value_on_timeout
-  }
-  
-  # move this to distinguish between timeout and NULL returns
-  myresult <- myresult[[1]]
-  
-  if ("try-error" %in% class(myresult)) {
-    stop(attr(myresult, "condition"))
-  }
-  
-  # send the buffered response
-  return(myresult)
-}
+## MS : bitte Datei von Muell befreien
 
 # t <- Sys.time()
 # res <- eval_with_timeout(dsignrank(1:10, 2000), timeout=1, 
