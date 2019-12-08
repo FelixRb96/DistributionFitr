@@ -8,7 +8,6 @@ Maintainer: Borui Niklas Zhu <bzhu@mail.uni-mannheim.de>
 Description: Given an univariate dataset, returns the best fitting parameter families, as defined in Shao (2003) <doi:10.1007/B97553>, including their parameter estimates via MLE.
 License: GPL (>= 3)
 Imports: utils, stats, stringr, datasets, graphics, grDevices, methods, parallel, doParallel, foreach
-Suggests: doSNOW
 Depends: R (>= 3.5)
 Encoding: UTF-8
 LazyData: true

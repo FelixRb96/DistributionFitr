@@ -298,31 +298,31 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
   cl <- makeCluster(cores, outfile = 'log.txt')
   
   # for showing a progressbar we apparently need to use a SNOW cluster
-  # registerDoParallel(cl)
 
   # since SNOW is superceded by doParallel without progress option
   # we will wait for Henrik Bengtsson to finish progressr
 
-  if (FALSE) {
-    if ( !"doSNOW" %in% rownames(installed.packages()) ) {
-      message("(Install the package 'doSNOW' to show a progress bar.)")
-      registerDoParallel(cl)
-      opts <- c()
-    } else {
-      doSNOW::registerDoSNOW(cl)
-      message("Optimization Progress")
-      pb <- txtProgressBar(max = length(relevant_families), style = 3)
-      progress_fn <- function(n) setTxtProgressBar(pb, n)
-      opts <- list(progress = progress_fn)
-    }
-  } else {
+  # if (verbose) {
+  #   if ( !"doSNOW" %in% rownames(installed.packages()) ) {
+  #     message("(Install the package 'doSNOW' to show a progress bar.)")
+  #     registerDoParallel(cl)
+  #     opts <- c()
+  #   } else {
+  #     doSNOW::registerDoSNOW(cl)
+  #     message("Optimization Progress")
+  #     pb <- txtProgressBar(max = length(relevant_families), style = 3)
+  #     progress_fn <- function(n) setTxtProgressBar(pb, n)
+  #     opts <- list(progress = progress_fn)
+  #   }
+  # } else {
     registerDoParallel(cl)
     opts <- c()
-  }
+  # }
   
   i <- NULL ## BNZ: to prevent an issue, seems to be related to parallel. 
             ##      Do not delete!
-  output_liste <- foreach(i=1:length(relevant_families), .packages = c(), 
+
+  output_liste <- foreach(i = 1:length(relevant_families), .packages = c(), 
                           .errorhandling = 'remove', .verbose = FALSE, 
                           .export = all_funs, .inorder = FALSE,
                           .options.snow = opts) %dopar% {
