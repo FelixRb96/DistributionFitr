@@ -394,9 +394,9 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
   } # end %dopar%
   stopCluster(cl)
   
-  if(sanity != FALSE) {
+  if(FALSE) {
     # compare gini-coefficients with each other, drop if negative outlier
-      # gini <- sapply(output_liste, function(x) x@sanity$gini_check)
+    gini <- sapply(output_liste, function(x) x@sanity$gini_check)
       # names(gini) <- sapply(output_liste, function(x) x@family)
       # print(gini)
     boxplot <- boxplot(gini, plot = FALSE)

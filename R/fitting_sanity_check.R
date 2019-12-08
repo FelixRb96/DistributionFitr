@@ -76,7 +76,7 @@ fitting_sanity_check <- function(object, data, continuity, sensitivity = 1,
         }
       )
     gini_check <- tryCatch(
-      integrate( abs_dev, lower = Inf, upper = Inf, subdivisions = 2000),
+      integrate( abs_dev, lower = -Inf, upper = Inf, subdivisions = 2000),
       error = function(e) {
 	message('Sanity Check. Calculating integral of ',
 		'|density - histogram| of family ', object@family, ' failed: ',
