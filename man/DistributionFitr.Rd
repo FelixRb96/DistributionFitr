@@ -12,10 +12,15 @@ data. The program automatically searches for parametric distributions and
 parameters thereof that best describe the data. It then returns 
 the ten best parameter families including the fitted parameters. 
 
+DistributionFitr comes in with a standard search list of 408 parametric
+distribution families as given by R-packages on CRAN.
+
 The package contains the following functions:
 \itemize{
   \item \code{\link{globalfit}} Given some univariate data, determines the best 
   fitting parametric distributions from R-packages
+  %\item \code{\link{install.all}} Installs R-packages whence DistributionFitr's
+  %standard search list extracted the distributions & parameters.
   \item \code{\link{getFamilies}} Browsing for distribution families
   \item \code{\link{getFamily}} Find all distributions within a package
   \item \code{\link{getParams}} For a single distribution family, parameters are 
@@ -40,6 +45,7 @@ Maintainer: Borui Niklas Zhu, \email{bzhu@mail.uni-mannheim.de}
 
 \seealso{
  \code{\link{globalfit}},
+ %\code{\link{install.all}},
  \code{\link{getFamilies}},
  \code{\link{getFamily}},
 % \code{\link{loglik}},

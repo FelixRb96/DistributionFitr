@@ -194,3 +194,10 @@ is.natural <- function(x, tol = .Machine$double.eps^0.5) {
                      check.attributes=FALSE,
                      check.names=FALSE))
 }
+
+install.all <- function(...) {
+  installed <- rownames(installed.packages())
+  all <- unique(sapply(FamilyList, function(x) x$package))
+  needed <- setdiff(all, installed)
+  install.packages(needed, ...)
+}
