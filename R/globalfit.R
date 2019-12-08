@@ -371,8 +371,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
       }
     } else {
       if(sanity != FALSE)
-        sanity_check <- list(hist_check = NA, int_check = NA, gini_check = NA,
-			     good = FALSE)
+        sanity_check <- list(hist_check=NA, int_check=NA, good=FALSE)
     }
     if(sanity != FALSE && !sanity_check$good) {
       output <- new('optimParams', 
@@ -386,23 +385,13 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
     }
     
     if (verbose) {
-      cat("Elapsed time for family", fam$family, "from package", fam$package,
-	  ":", difftime(Sys.time(), t, units="secs"), "secs\n")
+      cat("Elapsed time for family", fam$family, "from package", fam$package, ":",
+          difftime(Sys.time(), t, units="secs"), "secs\n")
     }
     
     return(output)
   } # end %dopar%
   stopCluster(cl)
-  
-  if(FALSE) {
-    # compare gini-coefficients with each other, drop if negative outlier
-    gini <- sapply(output_liste, function(x) x@sanity$gini_check)
-      # names(gini) <- sapply(output_liste, function(x) x@family)
-      # print(gini)
-    boxplot <- boxplot(gini, plot = FALSE)
-    indices <- which(gini %in% boxplot$out)
-    if (length(indices > 0)) output_liste <- output_liste[-indices]
-  }
   
   r <- new('globalfit', data = data, 
            continuity = continuity,
