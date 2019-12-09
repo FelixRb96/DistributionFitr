@@ -351,10 +351,10 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
     fam <- relevant_families[[i]]
     t <- Sys.time()
     
- #   if(verbose) { ## MS: 8.12. hat keine Wirkung
- #     message("Current Family: ", fam$family , " from Package: ",
- #             fam$package)   
- #   }
+    if(verbose) { ## MS: 8.12. hat keine Wirkung
+      message("Current Family: ", fam$family , " from Package: ",
+              fam$package)   
+    }
     
     output_liste <- eval_with_timeout(
       optimParamsDiscrete(data = data,
