@@ -17,6 +17,7 @@ hist(r, ic='BIC', which=length(r@fits))
 hist(r, ic='BIC', which=4)
 
 r <- globalfit(rbinom(n = 1000, size=10, prob=0.7))
+hist(r, ic='BIC')
 summary(r)
 
 AIC(r, count=2)
