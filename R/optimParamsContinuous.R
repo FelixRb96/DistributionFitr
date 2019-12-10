@@ -29,7 +29,7 @@ get_best_result_from_progress <- function(optim_progress, param_names) {
   optim_result <- list()
   optim_result$value <- best_row$log_lik
   optim_result$par <- unlist(best_row[param_names])
-  optim_result$convergence <- 51  # 51 indicates teh warning code from optim
+  optim_result$convergence <- 51  # 51 indicates the warning code from optim
   
   return(optim_result)
 }
@@ -53,7 +53,7 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
                                   optim_method = 'L-BFGS-B',
                                   n_starting_points = 1,
                                   debug_error = TRUE,
-				  show_optim_progress = FALSE,
+				                          show_optim_progress = FALSE,
                                   on_error_use_best_result = TRUE,
                                   no_second = TRUE, timeout = 15, ...) {
 
@@ -118,13 +118,11 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
       if(is.numeric(timeout)) setTimeLimit(cpu = timeout, elapsed = timeout, transient = TRUE)
 
       optim_result <- try(
-        {
-	  optim(start_params, loglik_fun, 
-          control = list(fnscale = -1, trace = 0),
-          lower = lower + safety_bound, 
-          upper = upper-safety_bound, method = optim_method)
-        },
-        silent = TRUE)
+        optim(start_params, loglik_fun, 
+              control = list(fnscale = -1, trace = 0),
+              lower = lower + safety_bound, 
+              upper = upper-safety_bound, method = optim_method)
+        , silent = TRUE)
 
       setTimeLimit(cpu = Inf, elapsed = Inf)
       
@@ -176,9 +174,7 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
         # causing trouble.
         # setting might not be optimal, but never fatal.
         adjust <- !is.finite(parscale)
-        ## mean(parscale[-adjust]) ??
-        parscale[adjust] <- mean(parscale[!(parscale == Inf | 
-                                            parscale == -Inf)], na.rm = TRUE)
+        parscale[adjust] <- mean(parscale[-adjust])
       
         # adjust precision to number of parameters
         # note that with many parameters even though likelihood may have 

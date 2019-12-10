@@ -49,7 +49,7 @@
 
 get_all_params <- function(fam) {
   # idea: all params need to be present in the r... method for generating random
-  #samples from the distribution
+  # samples from the distribution
   
   fun <- get_fun_from_package(type="r", family=fam)
   all_params <- formals(fun)
@@ -73,15 +73,13 @@ get_all_params <- function(fam) {
      # check if one function part is the name of one of the earlier parameters,
      # and remove if thats true
      if (i > 1 && any(function_parts %in% names(all_params)[1:(i-1)]))
-       cat(param, "is realated to a parameter listed before and
-	   thus will be removed.\n")
+       cat(param, "is realated to a parameter listed before and 
+           thus will be removed.\n")
        all_params[[param]] <- NULL
     }
   }
   return(all_params)
 }
-
-# all_params <- get_all_params(fam)
 
 # data structure "all_params"
 # list, for given distribution family;
@@ -192,8 +190,6 @@ get_default_values <- function(all_params, fam) {
 # return value: list with names corresponding to the parameter names and 
 # values to their default values
 
-# all_params_defaulted <- get_default_values(all_params, fam)
-
 
 #------------------------------------------------------------------------------ 
 # (1.4) Get parameter ranges
@@ -230,10 +226,6 @@ check_values_for_param <- function(param, all_params, fam, values) {
   return(res)
 }
 # return value: TRUE if value was valid, FALSE if not
-
-#  example (for beta family)
-# check_values_for_param("shape1", all_params_defaulted, fam, 
-#                         values=c(-100, -10, -1, 1))
 
 # --------------------------------------------------------------------------- 
 # function that iterates over descending step sizes to find the minimal and 
@@ -289,9 +281,6 @@ iterate_min_max_vals <- function(param, all_params, fam, cur_val,
   return(cur_val)
 }
 
-# example (for beta family)
-# iterate_min_max_vals("shape1", all_params, fam, cur_val=0, 
-#                      step_sizes = c(1, 0.5, 0.1, 0.05))
 
 # --------------------------------------------------------------------------- 
 # (1.5) Main function for generating the info for each of the params
@@ -378,8 +367,6 @@ get_param_ranges <- function(all_params, fam) {
 # each list entry: vector with length = number of parameters
 #                  each list entry saves either lower, upper, or etc.
 
-# example:
-# get_param_ranges(all_params_defaulted, fam)
 
 ### Function that checks if log is working ------------------------------------
 check_log <- function(fam) {
@@ -487,7 +474,7 @@ get_support <- function(fam, params) {
     
     result_mat <- get_result_mat(param_choices)
     
-    ## for each row calculate the minimum and maximum evaluation point 
+    # for each row calculate the minimum and maximum evaluation point 
     # with positive density
     row_support_min <- apply(result_mat, 1, 
       function(row) {if (length(which(row>0)) > 0) 
@@ -496,7 +483,6 @@ get_support <- function(fam, params) {
       function(row) {if (length(which(row>0)) > 0) 
                           x[max(which(row>0))] else -Inf})
     
-
     # check if the lower or upper bound is always the same as the current 
     # parameter value (up to the chosen precision + some small machine error)
     # then the support depends on the current parameter and the support is at 
@@ -528,7 +514,7 @@ get_support <- function(fam, params) {
   }
 
   # if minimum / maximum support is small / high enough we assume that the
-  #support is the whole real line
+  # support is the whole real line
   if (support_min <= -support_to_inf_limit) support_min <- -Inf
   if (support_max >= support_to_inf_limit) support_max <- Inf
   

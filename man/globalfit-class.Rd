@@ -71,13 +71,12 @@
   data <- rnorm(n=100, mean=10, sd= 1)
   r <- globalfit(data, cores= if (interactive()) NULL else 1,
                  packages="stats", append_packages=FALSE)
-  % MS: warum ist auskommentiertes drin, was der Nutzer noch lesen kann?
-  # r2 <- sort(r, ic='BIC')
+                 
+  sort(r, ic='BIC')
     
-  #print(r)
+  print(r)
   
   summary(r)
-  # summary(r2)
   summary(r, ic='AICc', count=7)
       
   hist(r, ic='BIC', which=4)

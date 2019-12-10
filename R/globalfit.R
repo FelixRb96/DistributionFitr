@@ -174,7 +174,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
     stop("Invalid input for argument 'timeout'")
 
   families <- FamilyList
-  installed <- rownames(installed.packages()) ## MS: 8.12. never double code
+  installed <- rownames(installed.packages())
 
   if(length(packages) > 0) {
     
@@ -201,7 +201,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
                 extracted now, which might take some time. ",
                 "When executed multiple times, consider extracting those 
                 families once with 'getFamilies(packages)' ",
-                "and provide the result of that to argument 'packages.'")
+                "and provide the result of that to argument 'packages'.")
         additionals_info <- iterate_packages(additionals)
         if (length(additionals_info) == 0) {
           message("No distribution families found in the additionally 
