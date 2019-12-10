@@ -5,7 +5,7 @@
 ##
 ## Optimise the discrete and continuous parameters of a distribution
 ##
-## Copyright (C) 2019 -- 2020 Moritz Kern
+## Copyright (C) 2019 -- 2020 Moritz Kern, Benedikt Geier, Borui N. Zhu
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -48,8 +48,8 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
                                 debug_error=FALSE, show_optim_progress=FALSE,
                                 on_error_use_best_result=TRUE, 
                                 max_discrete_steps = 100, discrete_fast = TRUE,
-				plot = FALSE, max_zoom_level = 4, 
-				timeout = 15, ...) {
+                        				plot = FALSE, max_zoom_level = 4,
+                        				timeout = 15, ...) {
   
   # update defaults with priors
   if(length(prior) > 0) {
@@ -59,7 +59,6 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
 
   #: define loop variables
   i <- 1
-  stop_discrete <- FALSE
   
   # CASE 1: No discrete params -> we can directly redirect to 
   #optimParamsContinuous
@@ -103,7 +102,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
     # whether our left or right iteration has reached the border
     touched_lower <- touched_upper <- FALSE
 
-    while(!stop_discrete) { 
+    repeat {
       if (!touched_lower && ! touched_upper) {
         # make sure that first one is left!, 
         # apart from that always alternate if possible
@@ -126,7 +125,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
           n_starting_points = n_starting_points, debug_error = debug_error,
           show_optim_progress = show_optim_progress,
           on_error_use_best_result = on_error_use_best_result,
-	  timeout = timeout),
+	        timeout = timeout),
         error = function(e) {
           # message(e);
           NULL})
@@ -145,15 +144,6 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
       # or score has not improved
       if (direction == "right") {
         cur_right_val <- cur_right_val + 1
-        ## kann es jemals passieren, dass touched_upper von TRUE auf FALSE
-        ## springt. Wenn ich's richtig verstanden habe, nein.
-        ## Dann:
-        ## touched_upper <- cur_right_val > family_info$upper[dispar_id]
-        ## oder
-        ## touched_upper <- cur_right_val > family_info$upper[dispar_id] ||
-        ##  (discrete_fast && length(relevant_hist) > 2 &&
-        ##   relevant_hist[length(relevant_hist)] < max(relevant_hist))
-        if (cur_right_val > family_info$upper[dispar_id]) touched_upper <- TRUE
         
         # get all the results for "right" achieved up to now
         # we stop when the current result is worse than 
@@ -161,32 +151,33 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
         relevant_hist <- history[history$direction == "right", "log_lik"]
         relevant_hist <- relevant_hist[!is.na(relevant_hist)]
         
-        if (discrete_fast && length(relevant_hist) > 2 &&
-            relevant_hist[length(relevant_hist)] < max(relevant_hist))
-          touched_upper <- TRUE
+        # stop when greater than upper limit or worse than best result in the
+        # same direction
+        touched_upper <- cur_right_val > family_info$upper[dispar_id] || (
+          discrete_fast && length(relevant_hist) > 2 &&
+            relevant_hist[length(relevant_hist)] < max(relevant_hist)
+        )
       }
-      
+        
+      # same for left direction  
       if (direction == "left") {
         cur_left_val <- cur_left_val - 1
-        ## dito
-        if (cur_left_val < family_info$lower[dispar_id]) 
-          touched_lower <- TRUE
         
         relevant_hist <- history[history$direction == "left", "log_lik"]
         relevant_hist <- relevant_hist[!is.na(relevant_hist)]
-        if (discrete_fast && length(relevant_hist) > 2 && 
-            relevant_hist[length(relevant_hist)] < max(relevant_hist)) 
-          touched_lower <- TRUE
+        
+        touched_lower <- cur_left_val < family_info$lower[dispar_id] || (
+          discrete_fast && length(relevant_hist) > 2 && 
+            relevant_hist[length(relevant_hist)] < max(relevant_hist)
+        )
       }
       
       i <- i+1
       
       # stop if not converged so far
       if(i>max_discrete_steps) {
-        ## repeat + break : stop_discrete wird nicht benoetigt
-        stop_discrete <- TRUE 
         warning('Discrete Optimization aborted, did not converge.')
-        ## besser repeat + break 
+        break 
       }
     }
     
@@ -376,7 +367,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
                                 show_optim_progress = show_optim_progress, 
                                 on_error_use_best_result = 
                                 on_error_use_best_result,
-			        timeout = timeout, ...)
+			                          timeout = timeout, ...)
         },
         # error should not occur because the combination 
         # had passed the first time!
