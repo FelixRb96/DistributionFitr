@@ -20,16 +20,6 @@
 ## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 
-## MS : bitte Datei von Muell befreien
-
-# t <- Sys.time()
-# res <- eval_with_timeout(dsignrank(1:10, 2000), timeout=1, 
-#                          return_value_on_timeout = "TIMEOUT")
-# print(res)
-# print(Sys.time() -t)
-
-
-
 # given a family name (e.g. "beta"), a package name (e.g. "stats") 
 # and the type ("r" for "rbeta", "d" for "dbeta") gets the function
 # from the desired package and returns it
@@ -65,28 +55,6 @@ setMethod(f="get_fun_from_package",
             return(get_fun_from_package_internal(type, family, package))
           })
 
-
-
-# fam <- list(package="stats", family="norm")
-# 
-# # with optimParams object
-# case1 <- globalfit(rnorm(1000))
-# get_fun_from_package("d", case1@fits[[1]])
-# 
-# # with list object
-# get_fun_from_package(type="d", fam)
-# 
-# # with all 3 arguments
-# get_fun_from_package("norm", "stats", type="d")
-
-
-# get_fun_from_package("r", "beta", "stats")
-
-# # show an example where a function exists in two packages and it loads the 
-#right one
-# get_fun_from_package("filter", "stats", "")
-# get_fun_from_package("filter", "dplyr", "")
-
 sample_params <- function(family, family_info, params=NULL, max = 100) {
   pars <- if (is.null(params)) family_info$lower else params
   
@@ -96,7 +64,6 @@ sample_params <- function(family, family_info, params=NULL, max = 100) {
   
   # simulate some "true" parameter values
   # cat("Sampling some 'true' parameter values and simulating sample data\n")
-
 
   float <- names(pars)[family_info$accepts_float]
   pars[float] <- runif(length(float), lower[float], upper[float])
@@ -122,9 +89,6 @@ sample_params <- function(family, family_info, params=NULL, max = 100) {
   }
   return(pars)
 }
-
-# family <- list(package="stats", family="beta")
-# sample_params(family, get_params(family), c(shape1=1, shape2=2))
 
 sample_data <- function(n, family, params) {
   rfun <- get_fun_from_package(family = family$family, package=family$package, 

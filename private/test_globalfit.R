@@ -1,4 +1,4 @@
-r <- globalfit(rnorm(n = 1000, mean=10, sd=1), packages = "stats", verbose = TRUE)
+r <- globalfit(rnorm(n = 1000, mean=10, sd=1), packages = NULL, verbose = TRUE)
 
 summary(r, count=10)
 hist(r)
@@ -13,9 +13,8 @@ summary(r, ic='AICc')
 summary(r, ic='BIC', count=7)
 hist(r, ic='BIC')
 hist(r, ic='BIC', which=7)
-hist(r, ic='BIC', which=18)
+hist(r, ic='BIC', which=length(r@fits))
 hist(r, ic='BIC', which=4)
-hist(r, ic='BIC', which=30)
 
 r <- globalfit(rbinom(n = 1000, size=10, prob=0.7))
 summary(r)
