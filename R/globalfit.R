@@ -56,7 +56,7 @@ some_percent <- function(decs, numbers, percent){
 # test, if data is discrete
 is.discrete <- function(data, border = 0.35, percent = 0.8){
   
-  # # convert data, if not a vector
+  # convert data, if not a vector
   if(is.data.frame(data)){
     data <- as.vector(data[,1])
   }
@@ -91,7 +91,6 @@ disc_trafo <- function(data){
   if (is.discrete(data)){ 
     
     data_new <- sort(data) # sort the data
-    ## Keine data.frames! Die sind i.W. nur fuer user
     # data with corresponding decimals
     data_new <- data.frame(data_new = data_new,
                            decimals = getDecimals(data_new)) 
