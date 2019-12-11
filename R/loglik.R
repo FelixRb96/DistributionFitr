@@ -29,7 +29,7 @@ loglik <- function(family, data, fixed=list(), log, lower, upper) {
   arguments <- list(x=data) 
   
   # check wheter log-distribution function is directly available for 
-  #distribution
+  # distribution
   if(log)
     arguments$log <- TRUE
   # add fixed parameter values of distribution to list
@@ -65,12 +65,12 @@ loglik <- function(family, data, fixed=list(), log, lower, upper) {
     loglik_value <- sum(summands)
     
     ## The following is only for tracking the optimisation progress 
-    ##(might be deactivated sometime)
+    ## (might be deactivated sometime)
     # recursively go through parent frames and check whether there is a variable 
-    #tracks the optimisation process
+    # tracks the optimisation process
 
     # if yes then add a new row to the progress dataframe in the closest parent 
-    #frame
+    # frame
     for (i in 1:length(sys.parents())) {
        
       if (exists("optim_progress", envir = parent.frame(i))) {

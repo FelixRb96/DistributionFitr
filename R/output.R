@@ -49,27 +49,27 @@ setMethod(f = "summary", signature = c("globalfit"),
             if(is.null(count) || !is.natural(count) )
               stop("Argument 'count'  must be positive integer.")
             
-	    if(length(object@fits) < 1) {
-	      message("No family fitted. Either packages provided in argument
-              'packages' do not supply reasonable parametric distributions or
-	      some fatal error occured.\nTo troubleshoot try:
-	      (1) changing argument input for 'packages'
-	      (2) adjusting rigorosity of 'sanity'
-	      (3) adjusting 'timeout'")
-	      return(invisible())
-	    }
-
+      	    if(length(object@fits) < 1) {
+      	      message("No family fitted. Either packages provided in argument
+                    'packages' do not supply reasonable parametric distributions or
+      	      some fatal error occured.\nTo troubleshoot try:
+      	      (1) changing argument input for 'packages'
+      	      (2) adjusting rigorosity of 'sanity'
+      	      (3) adjusting 'timeout'")
+      	      return(invisible())
+      	    }
+      
             object <- sort(object, ic=ic)
             df <- data.frame(family = sapply(object@fits,
                                              function(f) f@family),
-                           package = sapply(object@fits, function(f) f@package),
+                             package = sapply(object@fits, function(f) f@package),
                              ic = sapply(object@fits, function(f) f %@% ic),
-##                                  eval(parse(text = paste0('object@', ic)))),
+                             ##                                  eval(parse(text = paste0('object@', ic)))),
                              params = sapply(object@fits, function(f) 
-                                      paste(names(f@estimatedValues),
-                                            signif(f@estimatedValues,
-                                                   digits = 3),
-                                            sep= " = ", collapse='; ')))
+                               paste(names(f@estimatedValues),
+                                     signif(f@estimatedValues,
+                                            digits = 3),
+                                     sep= " = ", collapse='; ')))
             colnames(df) <- c("family", "package", ic, "params")
             
             sum <- new("globalfitSummary",
@@ -78,9 +78,10 @@ setMethod(f = "summary", signature = c("globalfit"),
                        method = object@method,
                        fits = df[1:min(count, nrow(df)),],
                        ic = ic
-                )
+            )
             return(sum)
-          })
+          }
+)
 
 setMethod(f = "show", signature = c("globalfitSummary"),
           def = function(object) {
@@ -162,12 +163,12 @@ setMethod(f = "hist", signature = c("globalfit"),
 
             selected_fit <- x@fits[[which]]
             if(x@continuity) {
-              supporting_point <-seq(lower, upper, length.out = 300)
+              supporting_point <- seq(lower, upper, length.out = 300)
             } else {
-              supporting_point <- seq(floor(lower)+0.5, ceiling(upper)+0.5)
+              supporting_point <- seq(floor(lower), ceiling(upper))
             }
             breaks <- if (x@continuity) sqrt(length(x@data)) else 
-                      min(nclass.Sturges(x@data), length(unique(x@data)))
+                      0.5 + (min(x@data) - 1) : max(x@data)
             
             fun <- get_fun_from_package(type="d", family = selected_fit)
             param_list <- split(selected_fit@estimatedValues, 
@@ -175,11 +176,19 @@ setMethod(f = "hist", signature = c("globalfit"),
             param_list$x <- supporting_point
             density <- do.call(fun, param_list)
             
-            h <- hist(x = x@data, xlim=range(lower,upper), freq = FALSE,
-                 xlab = 'x', ylab = 'density', breaks=breaks,
+            # first create the histogram without plotting, because we need its 
+            # maximum density for setting ylim
+            h <- hist(x = x@data, breaks=breaks, plot = FALSE)
+            
+            plot(h, xlim=range(lower, upper), xlab = 'x', freq = FALSE,
+                 ylim = range(0, max(h$density), max(density)), ylab = 'density',
                  main=paste0('Histogramm with density of \n',
-                             selected_fit@package, '::', selected_fit@family))
+                             selected_fit@package, '::', selected_fit@family)
+            )
+            
+            # add true density (in discrete case add points at the possible x values)
             lines(supporting_point, density, col='green', lwd=2)
+            if (!x@continuity) points(supporting_point, density, col='green', lwd=2)
             
             h$estimation_points <- supporting_point
             h$estimated_density <- density

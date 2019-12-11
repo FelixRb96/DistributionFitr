@@ -32,8 +32,6 @@ fitting_sanity_check <- function(object, data, continuity, sensitivity = 1) {
   lower <- min(data) - 0.2 * (max(data) - min(data))
   upper <- max(data) + 0.2 * (max(data) - min(data))
 
-  # breaks <- if (continuity) sqrt(length(data)) 
-  #           else min(nclass.Sturges(data), length(unique(data)) + 1)
   breaks <- if (continuity) sqrt(length(data)) else (min(data) - 1) : max(data)
   h <- suppressWarnings(hist(x = data, xlim = range(lower, upper), freq = FALSE,
                              xlab = 'x', ylab = 'density', breaks = breaks, 
@@ -68,9 +66,9 @@ fitting_sanity_check <- function(object, data, continuity, sensitivity = 1) {
   }
   
   good <- (int_check$value > (1 - 0.05 * sensitivity)) & 
-                                      (hist_check > (1 - 0.5 * sensitivity)) & 
-          (int_check$value < (1 + 0.05 * sensitivity)) & 
-                                      (hist_check < (1 + 0.5 * sensitivity))
+    (hist_check > (1 - 0.5 * sensitivity)) & 
+    (int_check$value < (1 + 0.05 * sensitivity)) & 
+    (hist_check < (1 + 0.5 * sensitivity))
 
   return(list(hist_check = hist_check, int_check = int_check$value, good = good))
 }

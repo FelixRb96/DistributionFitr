@@ -56,7 +56,7 @@ some_percent <- function(decs, numbers, percent){
 # test, if data is discrete
 is.discrete <- function(data, border = 0.35, percent = 0.8){
   
-  # # convert data, if not a vector
+  # convert data, if not a vector
   if(is.data.frame(data)){
     data <- as.vector(data[,1])
   }
@@ -91,7 +91,6 @@ disc_trafo <- function(data){
   if (is.discrete(data)){ 
     
     data_new <- sort(data) # sort the data
-    ## Keine data.frames! Die sind i.W. nur fuer user
     # data with corresponding decimals
     data_new <- data.frame(data_new = data_new,
                            decimals = getDecimals(data_new)) 
@@ -140,6 +139,11 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
                       packages = "stats", append_packages = FALSE,
                       cores = NULL, max_dim_discrete = Inf,
                       sanity = 1, timeout = 15, ...) {
+  
+  # set debug to TRUE to get a log file containing the messages emitted during 
+  # optimization
+  debug <- FALSE
+  
   ic <- "AIC"
 
   all_funs <- c('%@%', 'check_integer', 'check_log', 'check_values_for_param', 
@@ -158,16 +162,18 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
   ## Input Validation
 
   if ( length(sanity) != 1 || !( (is.numeric(sanity) && sanity >= 0) ||
-			 sanity == FALSE) ) {
+			 isFALSE(sanity)) ) {
     stop("Invalid input for argument 'sanity'.")
   }
+  do_sanity <- !isFALSE(sanity)
+  
   if( length(timeout) != 1 || !(is.logical(timeout) || is.numeric(timeout) ) ||
      (is.numeric(timeout) && timeout < 0) ||
      (is.logical(timeout) && timeout == TRUE))
     stop("Invalid input for argument 'timeout'")
 
   families <- FamilyList
-  installed <- rownames(installed.packages()) ## MS: 8.12. never double code
+  installed <- rownames(installed.packages())
 
   if(length(packages) > 0) {
     
@@ -194,7 +200,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
                 extracted now, which might take some time. ",
                 "When executed multiple times, consider extracting those 
                 families once with 'getFamilies(packages)' ",
-                "and provide the result of that to argument 'packages.'")
+                "and provide the result of that to argument 'packages'.")
         additionals_info <- iterate_packages(additionals)
         if (length(additionals_info) == 0) {
           message("No distribution families found in the additionally 
@@ -296,7 +302,9 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
   }
   if(verbose)
     message('Parallelizing over ', cores, ' cores.\n')
-  cl <- makeCluster(cores, outfile = 'log.txt')
+  
+  # We may only create a log-file in debug mode, not for the user
+  cl <- if (debug) makeCluster(cores, outfile = 'log.txt') else makeCluster(cores)
   
   ## for showing a progressbar we apparently need to use a SNOW cluster
   hasSNOW <- "doSNOW" %in% installed ## MS : kleine Aenderungen auch nachfolgend
@@ -319,23 +327,6 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
       opts <- c()
     } 
   } else {
-  
-  # since SNOW is superceded by doParallel without progress option
-  # we will wait for Henrik Bengtsson to finish progressr
-
-  # if (verbose) {
-  #   if ( !"doSNOW" %in% installed ) {
-  #     message("(Install the package 'doSNOW' to show a progress bar.)")
-  #     registerDoParallel(cl)
-  #     opts <- c()
-  #   } else {
-  #     doSNOW::registerDoSNOW(cl)
-  #     message("Optimization Progress")
-  #     pb <- txtProgressBar(max = length(relevant_families), style = 3)
-  #     progress_fn <- function(n) setTxtProgressBar(pb, n)
-  #     opts <- list(progress = progress_fn)
-  #   }
-  # } else {
     registerDoParallel(cl)
     opts <- c()
   }
@@ -351,10 +342,10 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
     fam <- relevant_families[[i]]
     t <- Sys.time()
     
-    if(verbose) { ## MS: 8.12. hat keine Wirkung
-      message("Current Family: ", fam$family , " from Package: ",
-              fam$package)   
-    }
+   if(debug) {
+     message("Current Family: ", fam$family , " from Package: ",
+             fam$package)
+   }
     
     output_liste <- eval_with_timeout(
       optimParamsDiscrete(data = data,
@@ -373,7 +364,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
       timeout = 1.5*timeout)
     
     if (length(output_liste) == 1 && output_liste == "TIMEOUT") {
-     ## message("Timeout occured for Family ", fam$family)## MS: 8.12. hat keine Wirkung
+      if (debug) message("Timeout occured for Family ", fam$family)
       output_liste <- NULL
     }
     
@@ -388,18 +379,17 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
                     AICc = output_liste$AICc) 
       # aim: check whether solution has good loglik 
       # but does not fit nonetheless
-      if(sanity != FALSE) { # input validation ensures:
-	                           # either FALSE or valid numeric
+      if(do_sanity) {
         sanity_check <- fitting_sanity_check(output, data, 
                                              continuity = continuity, 
                                              sensitivity = sanity)
         output@sanity <- sanity_check
       }
     } else {
-      if(sanity != FALSE)
+      if(do_sanity) 
         sanity_check <- list(hist_check=NA, int_check=NA, good=FALSE)
     }
-    if(sanity != FALSE && !sanity_check$good) {
+    if(do_sanity && !sanity_check$good) {
       output <- new('optimParams', 
                     family = fam$family,
                     package = fam$package,
@@ -410,10 +400,10 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
                     sanity = sanity_check)
     }
     
-   ##  if (verbose) {## MS: 8.12. hat keine Wirkung
-  ##    cat("Elapsed time for family", fam$family, "from package", fam$package, ":",
-   ##       difftime(Sys.time(), t, units="secs"), "secs\n")
-  ##  }
+   if (debug) {
+     cat("Elapsed time for family", fam$family, "from package", fam$package, ":",
+        difftime(Sys.time(), t, units="secs"), "secs\n")
+   }
    
     return(output)
   } # end %dopar%
