@@ -39,10 +39,7 @@
                         summarizes the object and creates an object of 
                         \code{\link[=globalfitSummary-class]{globalfitSummary}}}
     \item{print}{\code{signature(x = "globalfit")}: applies the
- %     \code{summary}-method
- method
-  \code{\link[base]{summary}} % MS: bitte beachten!
-      and prints the result.}
+ method \code{\link[base]{summary}} and prints the result.}
 %    \item{IC}{\code{signature(x = "globalfit")}: returns the selected 
 %                                                 information
 %              criteria of the items in \code{fits} slot}
@@ -52,7 +49,12 @@
                for the Bayes Information Criterium.}
     \item{hist}{\code{signature(x = "globalfit")}: 
                 computes a histogram of the given data points and plots it
-		together with the density of the estimated best fit}
+		together with the density of the estimated best fit.
+		Specify argument \code{which} to choose which fitted density
+    		to overlay: the number of the fit as returned by
+    		\code{summary}; i.e. \code{which = 1} for the best fit,
+		\code{which = 2} for the second-best etc. \cr
+    		Default is \code{1}.}
     }
 }
   
