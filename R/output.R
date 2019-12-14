@@ -31,7 +31,7 @@
 "%@%" <- function(x, ic) eval(parse(text = paste0('x@', ic)))
   
 setMethod(f = "sort", signature = c('globalfit'),
-          def = function(x, decreasing = FALSE, ic='AIC') {
+          def = function(x, decreasing = FALSE, ic = 'BIC') {
             if(is.null(ic) || !(ic %in% c('AIC', 'BIC', 'AICc')))
               stop("Argument 'ic' must be 'AIC', 'BIC' or 'AICc'")
             ic <- sapply(x@fits, function(x) x %@% ic) 
@@ -42,7 +42,7 @@ setMethod(f = "sort", signature = c('globalfit'),
 
 
 setMethod(f = "summary", signature = c("globalfit"),
-          def = function(object, count=10, ic = 'AIC') {
+          def = function(object, count=10, ic = 'BIC') {
             if(is.null(ic) || !(ic %in% c('AIC', 'BIC', 'AICc')))
               stop("Argument 'ic' must be 'AIC', 'BIC' or 'AICc'")
             if(is.null(count) || !is.natural(count) )

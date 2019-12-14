@@ -145,7 +145,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
   # optimization
   debug <- FALSE
   
-  ic <- "AIC"
+  ic <- "BIC"
 
   all_funs <- c('%@%', 'check_integer', 'check_log', 'check_values_for_param', 
                 'construct_package_list', 'disc_trafo', 'eval_with_timeout', 
@@ -308,12 +308,14 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
   cl <- if (debug) makeCluster(cores, outfile = 'log.txt') else makeCluster(cores)
   
   ## for showing a progressbar we apparently need to use a SNOW cluster
-  hasSNOW <- "doSNOW" %in% installed ## MS : kleine Aenderungen auch nachfolgend
+  hasSNOW <- "doSNOW" %in% installed
   if (verbose) {
     if (hasSNOW) {
-      ## doSNOW::registerDoSNOW(cl)## MS: 8.12. check merkt dass doSNOW nicht importiert wird
-      ## Fuer die nachfolgenden 2 Zeilen kann es boese Kopfwaesche geben. Probieren kann
-      ## man es aber.
+      # Remark: SNOW is flagged as superceded by CRAN, but there is no
+      # current viable alternative to make a progress bar.
+      # The following is thus completely optional in case the user
+      # happens to have "doSNOW" installed.
+      # We wait for Henrik Bengtsson's work on the "progressr"-API
       do.call("require", list("doSNOW"))
       do.call("registerDoSNOW", list(cl))
       message("Optimization Progress")
@@ -323,7 +325,8 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
     } else {
       message(length(relevant_families), " families are searched through.",
               if (length(relevant_families) > cores * 3)
-                " This can last several minutes.\nInstall the package 'doSNOW' to get a progress bar shown.")
+                " This can potentially last several minutes.\n
+	      Install the package 'doSNOW' for a progress bar.")
       registerDoParallel(cl)
       opts <- c()
     } 

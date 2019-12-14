@@ -6,7 +6,6 @@
 \title{Class "globalfitSummary"}
 \description{The \code{globalfitSummary}-class is the class to handle the 
   entries of the class
-%  \code{\link{globalfit-class}} % MS: bitte beachten
   \code{\link[=globalfit-class]{globalfit}}
   and assemble them together
   for summary.}
@@ -15,10 +14,9 @@
   Objects can be created by calls of the form 
   \code{new("globalfitSummary", data, continuity, method, fits, ic)}.
   More comfortably, you may use the method
-  \code{\link[base]{summary}} % MS: bitte beachten!
-  on an object 
-  of class \code{\link[=globalfit-class]{globalfit}} - its result is a
-  \code{globalfitSummary}-object.
+  \code{\link[base]{summary}}
+  on an object of class \code{\link[=globalfit-class]{globalfit}} -
+  its result is a \code{globalfitSummary}-object.
 }
 
 \section{Slots}{
@@ -47,7 +45,7 @@
   Moritz Kern
 }
 
-\seealso{ % MS: bitte aenderungen beachten
+\seealso{
   \code{\link[=globalfitSummary-class]{globalfitSummary}} \cr
   \code{\link{globalfit}} \cr
   \code{\link[=optimParams-class]{optimParams}}
