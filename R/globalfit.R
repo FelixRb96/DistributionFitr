@@ -5,6 +5,7 @@
 ## Nadine Tampe, ntampe@mail.uni-mannheim.de
 ## Borui Niklas Zhu, bzhu@mail.uni-mannheim.de
 ## Benedikt Geier, bgeier@mail.uni-mannheim.de
+## Helene Peter, hpeter@mail.uni-mannheim.de
 ##
 ## Fit multiple distribution families to a given univariate dataset
 ##
@@ -417,5 +418,5 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
   
   r@fits <- r@fits[!is.na(sapply(r@fits, function(x) x %@% ic))]
   
-  return(r)
+  invisible(r)
 }

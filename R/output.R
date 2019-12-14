@@ -20,14 +20,13 @@
 ## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA. 
 
 
-## MS 8.12: bitte Datei von Muell befreien bzw. abarbeiten:
-## ("MS" zu loeschen ist zwar raffiniert, hat aber kurze Beine ;) )
+## MS 8.12: bitte Datei von Muell befreien bzw. abarbeiten
 
-## sind die is.null() wirklich notwendig?? (i) sind defaults gesetzte
-## (ii) wirft R eh Fehler
+## MS: sind die is.null() wirklich notwendig?? (i) sind defaults gesetzte
+## MS: (ii) wirft R eh Fehler
 
-## braucht ihr wirklich (ueberall) die Abfrage is.natural?
-## warum reicht nicht if (x != as.integer(x)) ?
+## MS: braucht ihr wirklich (ueberall) die Abfrage is.natural?
+## MS: warum reicht nicht if (x != as.integer(x)) ?
 
 "%@%" <- function(x, ic) eval(parse(text = paste0('x@', ic)))
   
