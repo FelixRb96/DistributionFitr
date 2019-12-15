@@ -21,6 +21,8 @@
 
 \section{Slots}{
   \describe{
+    \item{call}{the call, which created the 
+    \code{\link[=globalfit-class]{globalfit}}, where this object originated.}
     \item{data}{vector of data points}
     \item{continuity}{logical; if \code{TRUE}, indicates that the data 
           points come from a continuous distribution;

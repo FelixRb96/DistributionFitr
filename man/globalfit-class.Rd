@@ -20,6 +20,7 @@
 
 \section{Slots}{
   \describe{
+    \item{call}{the call, which created this object}
     \item{data}{vector of data points}
     \item{continuity}{logical; if \code{TRUE}, indicating that the data 
           points come from a continuous distribution; 

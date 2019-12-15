@@ -413,7 +413,9 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
   } # end %dopar%
   stopCluster(cl)
   
-  r <- new('globalfit', data = data, 
+  r <- new('globalfit', 
+           call = deparse(match.call()),
+           data = data, 
            continuity = continuity,
            method = method,
            fits = output_liste)
@@ -421,5 +423,5 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
   
   r@fits <- r@fits[!is.na(sapply(r@fits, function(x) x %@% ic))]
   
-  invisible(r)
+  return(r)
 }

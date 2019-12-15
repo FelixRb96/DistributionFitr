@@ -48,6 +48,8 @@ setMethod(f = "summary", signature = c("globalfit"),
             if(is.null(count) || !is.natural(count) )
               stop("Argument 'count'  must be positive integer.")
             
+            
+            
       	    if(length(object@fits) < 1) {
       	      message("No family fitted. Either packages provided in argument
                     'packages' do not supply reasonable parametric distributions or
@@ -57,7 +59,6 @@ setMethod(f = "summary", signature = c("globalfit"),
       	      (3) adjusting 'timeout'")
       	      return(invisible())
       	    }
-      
             object <- sort(object, ic=ic)
             df <- data.frame(family = sapply(object@fits,
                                              function(f) f@family),
@@ -72,6 +73,7 @@ setMethod(f = "summary", signature = c("globalfit"),
             colnames(df) <- c("family", "package", ic, "params")
             
             sum <- new("globalfitSummary",
+                       call = object@call,
                        data = object@data,
                        continuity = object@continuity,
                        method = object@method,
@@ -84,6 +86,7 @@ setMethod(f = "summary", signature = c("globalfit"),
 
 setMethod(f = "show", signature = c("globalfitSummary"),
           def = function(object) {
+            cat('\nCall: \n', object@call, '\n\n')
             if(is.null(object@continuity)) {
               cont <- ''
             } else if(object@continuity) {
@@ -108,9 +111,9 @@ setMethod(f = "print", signature = c("globalfitSummary"),
           }
           )
 
-setMethod(f = "print", signature = c("globalfit"),
-	  def = function(x) {
-	    print(summary(x))
+setMethod(f = "show", signature = c("globalfit"),
+	  def = function(object) {
+	    show(summary(object))
 	  }
 	  )
 

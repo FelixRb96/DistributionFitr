@@ -20,7 +20,8 @@
 ## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA. 
 
 setClass(Class = "globalfit",
-         slots = c(data = "numeric",
+         slots = c(call ='character',
+                   data = "numeric",
                    continuity = 'logical',
                    method = 'character',
                    fits = 'list'))
@@ -40,6 +41,7 @@ setClass(Class = "optimParams",
 
 setClass(Class = "globalfitSummary",
          slots = c(
+           call = "character",
            data = "numeric",
            continuity = "logical",
            method = "character",
