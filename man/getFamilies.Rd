@@ -93,13 +93,6 @@ getFamilies(all.packages)
    Tim Glockner, Adrian Heppeler, Borui Niklas Zhu
  }
 
-% MS: bitte hier sauber machen!! 
- 
-% ~Make other sections like Warning with \section{Warning }{....} ~
-
-%\seealso{
-%  See Also as \code{\link{help}}, **~
-%}
 \examples{ 
   % library(DistributionFitr)
   str(getFamilies())

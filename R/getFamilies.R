@@ -108,9 +108,7 @@ write_file <- function(FamilyList, file = "R/all_families.R") {
 ### Case 2 all.packages missing: Take families saved in the file
 
 getFamilies <- function(all.packages) {
-  ## MS 8.12.: file hat hier nichts (mehr) zu suchen! Muss
-  ## zukuenftig anders geloest werden, im einem separaten (test) code
-  
+
   ## CASE 2:
   if (missing(all.packages)) {
     #if (file.exists(file))
@@ -120,7 +118,7 @@ getFamilies <- function(all.packages) {
   }
 
   ## CASE 1.2 & 1.3
-  if (is.logical(all.packages)) { ## MS 8.12 : klarer Code
+  if (is.logical(all.packages)) {
     all.packages <- construct_package_list(all.packages = all.packages)
   }
   
