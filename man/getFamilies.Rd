@@ -24,7 +24,6 @@ getFamilies(all.packages)
     }
     If missing, a list of recognized families is returned.
   }
-  % MS 8.12. file geloescht
 }
 
 \details{
