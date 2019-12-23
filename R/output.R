@@ -20,20 +20,11 @@
 ## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA. 
 
 
-## MS 8.12: bitte Datei von Muell befreien bzw. abarbeiten
-
-## MS: sind die is.null() wirklich notwendig?? (i) sind defaults gesetzte
-## MS: (ii) wirft R eh Fehler
-
-## MS: braucht ihr wirklich (ueberall) die Abfrage is.natural?
-## MS: warum reicht nicht if (x != as.integer(x)) ?
-
 "%@%" <- function(x, ic) eval(parse(text = paste0('x@', ic)))
   
 setMethod(f = "sort", signature = c('globalfit'),
-          def = function(x, decreasing = FALSE, ic = 'BIC') {
-            if(is.null(ic) || !(ic %in% c('AIC', 'BIC', 'AICc')))
-              stop("Argument 'ic' must be 'AIC', 'BIC' or 'AICc'")
+          def = function(x, decreasing = FALSE, ic = c('BIC', 'AIC', 'AICc')) {
+            ic <- match.arg(ic)
             ic <- sapply(x@fits, function(x) x %@% ic) 
             x@fits <- x@fits[order(ic)]
             return(x)
@@ -42,45 +33,41 @@ setMethod(f = "sort", signature = c('globalfit'),
 
 
 setMethod(f = "summary", signature = c("globalfit"),
-          def = function(object, count=10, ic = 'BIC') {
-            if(is.null(ic) || !(ic %in% c('AIC', 'BIC', 'AICc')))
-              stop("Argument 'ic' must be 'AIC', 'BIC' or 'AICc'")
-            if(is.null(count) || !is.natural(count) )
-              stop("Argument 'count'  must be positive integer.")
-            
-            
+          def = function(object, count=10,  ic = c('BIC', 'AIC', 'AICc')) {
+            ic <- match.arg(ic)
             
       	    if(length(object@fits) < 1) {
-      	      message("No family fitted. Either packages provided in argument
-                    'packages' do not supply reasonable parametric distributions or
-      	      some fatal error occured.\nTo troubleshoot try:
-      	      (1) changing argument input for 'packages'
-      	      (2) adjusting rigorosity of 'sanity'
-      	      (3) adjusting 'timeout'")
-      	      return(invisible())
-      	    }
-            object <- sort(object, ic=ic)
-            df <- data.frame(family = sapply(object@fits,
+      	      warning("No family fitted. Either packages provided in ", 
+      	              "argument 'packages' do not supply reasonable parametric", 
+                      " distributions or some fatal error occured.\n",
+              "To troubleshoot try:\n",
+      	      "(1) changing argument input for 'packages'\n",
+      	      "(2) adjusting rigorosity of 'sanity'\n",
+      	      "(3) adjusting 'timeout'\n")
+      	      df <- data.frame()
+      	    } else {
+              object <- sort(object, ic=ic)
+              df <- data.frame(family = sapply(object@fits,
                                              function(f) f@family),
-                             package = sapply(object@fits, function(f) f@package),
+                             package = sapply(object@fits, function(f) 
+                                                                  f@package),
                              ic = sapply(object@fits, function(f) f %@% ic),
-                             ##                                  eval(parse(text = paste0('object@', ic)))),
                              params = sapply(object@fits, function(f) 
                                paste(names(f@estimatedValues),
                                      signif(f@estimatedValues,
                                             digits = 3),
                                      sep= " = ", collapse='; ')))
-            colnames(df) <- c("family", "package", ic, "params")
-            
-            sum <- new("globalfitSummary",
+              colnames(df) <- c("family", "package", ic, "params")
+              df <- df[1:max(1,min(count, nrow(df))),]
+      	    }
+            return(new("globalfitSummary",
                        call = object@call,
                        data = object@data,
                        continuity = object@continuity,
                        method = object@method,
-                       fits = df[1:min(count, nrow(df)),],
+                       fits = df,
                        ic = ic
-            )
-            return(sum)
+            ))
           }
 )
 
@@ -109,13 +96,13 @@ setMethod(f = "print", signature = c("globalfitSummary"),
           def = function(x) {
             show(x)
           }
-          )
+)
 
 setMethod(f = "show", signature = c("globalfit"),
 	  def = function(object) {
 	    show(summary(object))
 	  }
-	  )
+)
 
 
 IC <- function(object, ic='AIC', count = NULL) {
@@ -127,7 +114,6 @@ IC <- function(object, ic='AIC', count = NULL) {
   count <- min(length(object@fits), count)
   object@fits <- object@fits[1:count]
   x <- sapply(object@fits, function(object) object %@% ic)
-  ##eval(parse(text = paste0('object@', ic))))
   names(x) <- paste(sapply(object@fits, function(object) object@package), 
                     sapply(object@fits, function(object) object@family),
                     sep = "::")
@@ -150,10 +136,10 @@ setMethod(f = "BIC", signature = c("globalfit"),
 
 
 setMethod(f = "hist", signature = c("globalfit"),
-          def = function(x, which = 1, ic='AIC') {
-            if(is.null(ic) || !(ic %in% c('AIC', 'BIC', 'AICc')))
-              stop("Argument 'ic' must be 'AIC', 'BIC' or 'AICc'")
-            if(is.null(which) || !is.natural(which))
+          def = function(x, which = 1,  ic = c('BIC', 'AIC', 'AICc')) {
+            ic <- match.arg(ic)
+            if(is.null(which) || !is.numeric(which) ||
+               abs(as.integer(which)) != which)
               stop("Argument 'which'  must be positive integer.")
             
             x <- sort(x, ic=ic)
@@ -183,14 +169,17 @@ setMethod(f = "hist", signature = c("globalfit"),
             h <- hist(x = x@data, breaks=breaks, plot = FALSE)
             
             plot(h, xlim=range(lower, upper), xlab = 'x', freq = FALSE,
-                 ylim = range(0, max(h$density), max(density)), ylab = 'density',
+                 ylim = range(0, max(h$density), max(density)), 
+                 ylab = 'density',
                  main=paste0('Histogramm with density of \n',
                              selected_fit@package, '::', selected_fit@family)
             )
             
-            # add true density (in discrete case add points at the possible x values)
+            # add true density (in discrete case add points 
+            # at the possible x values)
             lines(supporting_point, density, col='green', lwd=2)
-            if (!x@continuity) points(supporting_point, density, col='green', lwd=2)
+            if (!x@continuity) points(supporting_point, density, 
+                                      col='green', lwd=2)
             
             h$estimation_points <- supporting_point
             h$estimated_density <- density
