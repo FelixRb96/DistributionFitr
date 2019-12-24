@@ -37,7 +37,7 @@ getFamily(pkg)
    Manuel Hentschel, Valentin von Trotha
 }
 
-\examples{ %  library(DistributionFitr)
+\examples{
    str(getFamily("stats"))
 }
 

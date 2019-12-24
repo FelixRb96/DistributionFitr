@@ -49,7 +49,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
                                 on_error_use_best_result=TRUE, 
                                 max_discrete_steps = 100, discrete_fast = TRUE,
                         				plot = FALSE, max_zoom_level = 4,
-                        				timeout = 15, ...) {
+                        				timeout = 15) {
   
   # update defaults with priors
   if(length(prior) > 0) {
@@ -68,11 +68,11 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
                             upper=family_info$upper,
                             defaults = family_info$defaults, method = method,
                             fixed=c(), log = log, optim_method = optim_method,
-                            nn_starting_points=n_starting_points,
+                            n_starting_points=n_starting_points,
                             debug_error = debug_error,
                             show_optim_progress = show_optim_progress,
                             on_error_use_best_result= on_error_use_best_result,
-                            timeout = timeout, ...) 
+                            timeout = timeout) 
       }, error=function(e) {
         message(e)
         return(NULL)
@@ -183,8 +183,6 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
     
     if(show_optim_progress) print(history)
     if(plot) {
-      ## braucht man wirklich dieses ifelse ? plot ist doch eigentlich robust
-      ## Man sollte eher ylim setzen
       plot(history$param_value, ifelse(is.finite(history$log_lik),
                                         history$log_lik, NA), 
            ylab="log_lik", xlab=names(family_info$lower)[dispar_id])
@@ -265,7 +263,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
                                   show_optim_progress = show_optim_progress,
                                   on_error_use_best_result =
                                   on_error_use_best_result,
-                                  no_second = TRUE, timeout = timeout, ...)
+                                  no_second = TRUE, timeout = timeout)
 	  },
 	  error = function(e) {
 	    message(e);
@@ -367,7 +365,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
                                 show_optim_progress = show_optim_progress, 
                                 on_error_use_best_result = 
                                 on_error_use_best_result,
-			                          timeout = timeout, ...)
+			                          timeout = timeout)
         },
         # error should not occur because the combination 
         # had passed the first time!

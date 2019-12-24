@@ -86,7 +86,6 @@ loglik <- function(family, data, fixed=list(), log, lower, upper) {
     }
     
     # message(loglik_value)
-    
     return(loglik_value)
   }
   return(likelihood)

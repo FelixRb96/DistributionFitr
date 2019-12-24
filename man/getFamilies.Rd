@@ -19,7 +19,7 @@ getFamilies(all.packages)
       \item{character}{
 	 the distribution families given
       }
-      \item{\code{TRUE}}{all packages}
+      \item{\code{TRUE}}{all installed packages}
       \item{\code{FALSE}}{base packages of R}
     }
     If missing, a list of recognized families is returned.
@@ -84,8 +84,6 @@ getFamilies(all.packages)
       }
     }
   }
-%  Additionally, if \code{all.packages} is not missing, it is saved in a
-%  .R-file  as \code{FamilyList <- list(list(...))}
 }
 
 \author{
@@ -93,7 +91,6 @@ getFamilies(all.packages)
  }
 
 \examples{ 
-  % library(DistributionFitr)
   str(getFamilies())
 }
 \keyword{distribution}

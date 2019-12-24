@@ -7,7 +7,7 @@
 \alias{BIC,globalfit-method}
 \alias{hist,globalfit-method}
 
-\title{Class "globalfit"}
+\title{Class \dQuote{globalfit}}
 \description{The class \code{globalfit} handles return objects 
   from \link{globalfit}. It contains for some given data a list of fitted 
   distributions, their estimated parameters and supplementary information.}

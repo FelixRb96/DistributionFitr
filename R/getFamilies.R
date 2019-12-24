@@ -40,7 +40,7 @@ iterate_packages <- function(packages) {
     ## no distribution family contained in package
     if (length(package_content) == 0) next
     
-    ## iterate over all families withing package
+    ## iterate over all families within package
     for (j in 1:length(package_content)) {
       
       stopifnot(package_content[[j]]$package == packages[i])
@@ -61,7 +61,6 @@ iterate_packages <- function(packages) {
   }
   
   return(res) 
-  
 }
 
 
@@ -109,11 +108,8 @@ write_file <- function(FamilyList, file = "R/all_families.R") {
 
 getFamilies <- function(all.packages) {
 
-  ## CASE 2:
+  ## CASE 2: -> Take families as saved in internal variable FamilyList
   if (missing(all.packages)) {
-    #if (file.exists(file))
-    #  return(getFamilies(all.packages = FALSE, file=file))
-    ## read file and return list of lists
     return(FamilyList)
   }
 
@@ -122,7 +118,8 @@ getFamilies <- function(all.packages) {
     all.packages <- construct_package_list(all.packages = all.packages)
   }
   
+  ## CASE 1.1 & 1.2 & 1.3
   FamilyList <- iterate_packages(all.packages)
-  ##  write_file(FamilyList=FamilyList,file = file)
+  ##  write_file(FamilyList=FamilyList, file = file)
   return(FamilyList)
 }

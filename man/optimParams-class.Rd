@@ -1,9 +1,8 @@
 \name{optimParams-class}
 \alias{optimParams-class}
-%- Also NEED an '\alias' for EACH other topic documented here.
 
-\title{Class "optimParams"}
-\description{The class \code{optimParams} handles the slot % MS kleine Aenderung
+\title{Class \dQuote{optimParams}}
+\description{The class \code{optimParams} handles the slot
 	\code{fits} of the class \code{\link[=globalfit-class]{globalfit}}.
 	It contains for some given data the optimization results
 	and their characteristics.}
@@ -20,9 +19,9 @@
 \section{Slots}{
   \describe{
     \item{family}{character string; indicating the family name in the package,
-                  e.g. norm.}
+                  e.g. \dQuote{norm}.}
     \item{package}{character string; indicating the package where the family 
-                   was found, e.g. stats.}
+                   was found, e.g. \dQuote{stats}.}
     \item{estimatedValues}{named numeric vector; the estimated 
                            parameters of the family.}
     \item{AIC}{numeric; Akaike Information Criterion.}

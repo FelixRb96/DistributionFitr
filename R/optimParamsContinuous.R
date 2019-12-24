@@ -22,7 +22,7 @@
 
 
 
-# helper function
+# helper function, extracts the best result from all optimisation tries
 get_best_result_from_progress <- function(optim_progress, param_names) {
   best_idx <- which.max(optim_progress$log_lik)
   best_row <- optim_progress[best_idx,]
@@ -55,7 +55,7 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
                                   debug_error = TRUE,
 				                          show_optim_progress = FALSE,
                                   on_error_use_best_result = TRUE,
-                                  no_second = TRUE, timeout = 15, ...) {
+                                  no_second = TRUE, timeout = 15) {
 
   if(method!='MLE')
     stop('Not implemented.')
@@ -82,7 +82,6 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
   
   # create dataframe where to save the optimization progress
   # 1 column for each parameter and a column for the associated log likelihood
-  ## keine unnoetiger data.frame im Code. data.frames sind fuer user
   optim_progress <- data.frame(matrix(nrow=0, 
                                       ncol=length(lower) + length(fixed) + 1))
   colnames(optim_progress) <- c(names(lower), names(fixed), "log_lik")
@@ -121,7 +120,7 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
         optim(start_params, loglik_fun, 
               control = list(fnscale = -1, trace = 0),
               lower = lower + safety_bound, 
-              upper = upper-safety_bound, method = optim_method)
+              upper = upper - safety_bound, method = optim_method)
         , silent = TRUE)
 
       setTimeLimit(cpu = Inf, elapsed = Inf)
@@ -149,71 +148,11 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
         }
       }
       
-      ## NOTE: Second optimization is currently deactivated per default
+      
+      ## NOTE: Second optimization has been removed for now
       # as parscale and fnscale don't seem to have an effect
       
-      # TODO: 
-      # Problems with convergence can occur, 
-      # if parscale and fscale not well selected
-      # therefore 2 steps with right selection need to be implemented
-      # optim_result <- optim(optim_result$par, loglik, family = family, 
-      # data = data, fixed=fixed, lower=lower, upper=upper,
-      # log=log, control = list(fnscale=-1 / abs(optim_result$value), 
-      # trace=0, parscale = 1/optim_result$par), method='L-BFGS-B')
-      if (!no_second && optim_successful) { 
-        ## bitte hier nicht mit ... arbeiten. Hier geht es um zwei
-        ## (bekannte) Argumente, die oben als Argumente aufgefuehrt
-        ## werden koennnen. Abfrage mit "missing(...)" vermutlich notwendig
-        args <- list(...)
-        fnscale <- if (hasArg("fnscale") && args$fnscale)
-                          - 1/abs(optim_result$value) else -1
-        parscale <- if (hasArg("parscale") && args$parscale) 
-                          1/optim_result$par else rep(1, length(lower))
       
-        # if a parameter is optimised as zero, parscale will be Infinity, 
-        # causing trouble.
-        # setting might not be optimal, but never fatal.
-        adjust <- !is.finite(parscale)
-        parscale[adjust] <- mean(parscale[-adjust])
-      
-        # adjust precision to number of parameters
-        # note that with many parameters even though likelihood may have 
-        # converged, parameters are still changing
-        precision <- max(0, length(lower) - 2)
-        # floating numbers are not equally spaced, only about 1e-16 is reliable
-        precision <- max(1e-8/(10^(precision*2)), 1e-16)
-
-        if(is.numeric(timeout)) setTimeLimit(cpu = timeout, elapsed = timeout, transient = TRUE)
-      
-        optim_result <- try(optim(optim_result$par, loglik_fun, 
-                                  control = list(fnscale = fnscale, trace = 0, 
-                                  parscale = parscale, factr = precision), 
-                                  lower = lower + safety_bound, 
-                                  upper = upper - safety_bound, 
-                                  method = optim_method),
-                            silent = TRUE)
-        setTimeLimit(cpu = Inf, elapsed = Inf)
-
-        if (is(optim_result, "try-error")) {
-    	    if(!on_error_use_best_result || nrow(optim_progress) == 0) {
-    	      stop(optim_result, "occured during (second) optimisation, fatal.\n")
-    	    } else {
-            message(optim_result, " occured during optimization, 
-                    trying to take best result achieved up to now\n")
-            # getting best result from optimization progress up to now
-            optim_result <- get_best_result_from_progress(optim_progress, 
-                                                   param_names = names(lower))
-    	    }
-        }
-        
-        if(optim_result$convergence!=0) {
-          warning('No convergence in second optimization!')
-          if(debug_error) {
-            print(tail(optim_progress, 2))
-          }
-        }
-        
-    } # end if-statement "no_second"
       optim_results[[i]] <- optim_result
   } # end for-loop over starting values
   

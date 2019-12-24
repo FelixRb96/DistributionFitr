@@ -26,24 +26,27 @@
 
 
 fitting_sanity_check <- function(object, data, continuity, sensitivity = 1) {
-   if (!is(object, 'optimParams'))
-      stop('Wrong input.')
+  if (!is(object, 'optimParams'))
+    stop('Wrong input.')
 
   lower <- min(data) - 0.2 * (max(data) - min(data))
   upper <- max(data) + 0.2 * (max(data) - min(data))
-
+  
+  # in discrete case 
   breaks <- if (continuity) sqrt(length(data)) else (min(data) - 1) : max(data)
   h <- suppressWarnings(hist(x = data, xlim = range(lower, upper), freq = FALSE,
                              xlab = 'x', ylab = 'density', breaks = breaks, 
                              include.lowest = FALSE, plot = FALSE))
   
   fun <- get_fun_from_package(type="d", family = object)
+  
+  # convert named vector to list as needed for do.call when we add the x values
   param_list <- split(object@estimatedValues, names(object@estimatedValues))
-
-    density <- function(x) {
+  
+  density <- function(x) {
     param_list$x <- x
     y <- do.call(fun, param_list)
-    y <- ifelse(is.na(y), 0, y)
+    y <- ifelse(!is.finite(y), 0, y)
     return(y)
   }
   
@@ -59,9 +62,10 @@ fitting_sanity_check <- function(object, data, continuity, sensitivity = 1) {
     hist_check <- sum(diff(h$breaks) * density(h$mids))
   } else {
     # in the discrete case the values represented in data will be all breaks 
-    # apart from the first one
+    # apart from the first one (and diff should always be 1 if set as above)
     hist_check <- sum(diff(h$breaks) * density(h$breaks[2:length(h$breaks)]))
     
+    # no integral check in discrete case
     int_check <- list(value=1)
   }
   

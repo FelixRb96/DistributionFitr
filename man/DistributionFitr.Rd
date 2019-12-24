@@ -35,13 +35,11 @@ determined; upper/lower limits and other chraracteristics are extracted
 \note{
 The most relevant function is \code{\link{globalfit}}, with an S4 object
 as return value. See the examples on how to display the results, such as
-%using \code{summary} or % MS bitte beachten:
 using \code{\link[base]{summary}} or
 \code{\link[graphics]{hist}}.
 Read more on the return value in
 \code{\link[=globalfit-class]{globalfit}} and
-\code{\link[=globalfitSummary-class]{globalfitSummary}}. % MS: bitte
-% aenderung beachten!
+\code{\link[=globalfitSummary-class]{globalfitSummary}}.
 
 For exotic packages used frequently or where parameter extraction is
 time-consuming, users may be interested to do the latter once with
@@ -56,8 +54,8 @@ other purposes.
   % MS \author sind hier genau die, die Rd-Datei geschrieben haben, + maintainer
 Borui Niklas Zhu, Benedikt Geier, Moritz Kern, Kiril Dik, Moritz Lauff, 
 Manuel J. Hentschel, Adrian Heppeler, Niclas Lietzow, Till Freihaut, 
-Tim Glockner, Nadine Tampe, Valentin V. Trotha, Leonardo Vela, Andre
-Ferdinand, Helene Peter, Martin Schlather, Yiqi Li
+Tim Glockner, Nadine Tampe, Leonardo Vela, Helene Peter, 
+Martin Schlather, Yiqi Li
   
 Maintainer: Borui Niklas Zhu, \email{bzhu@mail.uni-mannheim.de}   
 }
@@ -72,7 +70,7 @@ Maintainer: Borui Niklas Zhu, \email{bzhu@mail.uni-mannheim.de}
  \code{\link{getParams}}
 }
 
-\examples{ %  library(DistributionFitr) 
+\examples{ 
 # example for globalfit
 data <- rnorm(n = 100, mean = 70, sd = 4)
 r <- globalfit(data,  cores= if (interactive()) NULL else 1,

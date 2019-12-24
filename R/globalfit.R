@@ -93,16 +93,15 @@ disc_trafo <- function(data){
     
     data_new <- sort(data) # sort the data
     # data with corresponding decimals
-    data_new <- data.frame(data_new = data_new,
-                           decimals = getDecimals(data_new)) 
+    data_new <- list(data_new = data_new, decimals = getDecimals(data_new))
     
     # occuring distinct decimals
     unique_decimals <- sort(unique(data_new$decimals))
     m <- length(unique_decimals) # number of occuring distinct decimals
     
     # decimals and transformed decimals
-    decimals <- data.frame(original_decimals = unique_decimals,
-                           new_decimals = round(seq(0, (m-1)/m, 1/m), 10))
+    decimals <- list(original_decimals = unique_decimals,
+                     new_decimals = round(seq(0, (m-1)/m, 1/m), 10))
     
     # put together
     data_new <- merge(data_new, decimals,  
@@ -133,13 +132,12 @@ disc_trafo <- function(data){
 }
 
 
-
 ### 2) Main Function ----------------------------------------------------------
 
 globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
                       packages = "stats", append_packages = FALSE,
                       cores = NULL, max_dim_discrete = Inf,
-                      sanity = 1, timeout = 15, ...) {
+                      sanity = 1, timeout = 15) {
   
   # set debug to TRUE to get a log file containing the messages emitted during 
   # optimization

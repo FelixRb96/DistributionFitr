@@ -322,7 +322,7 @@ get_param_ranges <- function(all_params, fam) {
     check_res <- check_values_for_param(param, all_params, fam, vals)
     
     # if lowest or highest value was valid in the first check we already have a
-    #min_val or max_val
+    # min_val or max_val
     # otherwise we iterate with the above method
     min_val <- if (check_res[1]) -Inf else 
       {iterate_min_max_vals(param=param, all_params = all_params, fam=fam,
@@ -588,7 +588,7 @@ getParams <- function(fam, package){
 #    -> ranges can be represented as [lower, upper] but rather as min <= max
 #  -> SOLVED
 # 3) Distribution hyper: here rhyper also works with floats for m,n,k 
-#    but hyper not, maybe also check d function in check_values_for_param
+#    but dhyper not, maybe also check d function in check_values_for_param
 #    Current errors have to be catched in get_support but it would be better 
 #    if they didn't occur at all
 #    -> SOLVED
