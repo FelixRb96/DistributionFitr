@@ -110,11 +110,12 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
         cat("First Optimisation\n")
       
       # construct loglikelihood function, that only depends on the parameters
-      loglik_fun <- loglik(family = family, data = data, fixed = fixed, log = log, 
-                           upper = upper, lower = lower)
+      loglik_fun <- loglik(family = family, data = data, fixed = fixed, 
+                           log = log, upper = upper, lower = lower)
       safety_bound <- 1e-10
       
-      if(is.numeric(timeout)) setTimeLimit(cpu = timeout, elapsed = timeout, transient = TRUE)
+      if(is.numeric(timeout)) setTimeLimit(cpu = timeout, elapsed = timeout, 
+                                           transient = TRUE)
 
       optim_result <- try(
         optim(start_params, loglik_fun, 
@@ -131,8 +132,10 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
           stop(optim_result, " occured during (first) optimisation for family ", 
                family$family,", fatal.\n")	
         } else {
-          message(optim_result, " occured during (first) optimization for family ",
-                  family$family, " trying to take best result achieved up to now\n")
+          message(optim_result, 
+                  " occured during (first) optimization for family ",
+                  family$family, 
+                  " trying to take best result achieved up to now\n")
           # getting best result from optimization progress up to now
           optim_result <- get_best_result_from_progress(optim_progress, 
                                                 param_names = names(lower))
@@ -142,7 +145,8 @@ optimParamsContinuous <- function(data, family, lower, upper, defaults,
       }
       
       if(optim_result$convergence!=0) {
-        warning('No convergence in first optimization for family ', family$family)
+        warning('No convergence in first optimization for family ', 
+                family$family)
         if(debug_error) {
           print(tail(optim_progress, 2))
         }
