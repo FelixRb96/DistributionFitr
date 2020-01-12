@@ -118,7 +118,7 @@ is.natural <- function(x, tol = .Machine$double.eps^0.5) {
                      check.names=FALSE))
 }
 
-install.all <- function(...) {
+install.packages_DistributionFitr <- function(...) {
   installed <- rownames(installed.packages())
   all <- unique(sapply(FamilyList, function(x) x$package))
   needed <- setdiff(all, installed)

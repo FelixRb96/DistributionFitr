@@ -128,15 +128,17 @@ globalfit(data, continuity = NULL, method = "MLE",
 \examples{
   # Example 1
   data <- rnorm(n = 100, mean = 70, sd = 4)
-  r <- globalfit(data, cores = if (interactive()) NULL else 1) 
+  r <- globalfit(data) 
   summary(r)
 
   # Example 2
   # Alternatively, it is possible to input whether the data is
   # continuous or discrete
   \dontrun{
-  globalfit(data, continuity = TRUE, cores = if (interactive()) NULL else 1,
-            packages="stats", append_packages = FALSE) 
+  globalfit(data, continuity)
+
+  # fit over all distribution in the standard search list
+  globalfit(data, packages = NULL)
   }
 }
 \keyword{distribution}

@@ -22,7 +22,7 @@
 ## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 
-loglik <- function(family, data, fixed=list(), log, lower, upper) {
+loglik <- function(family, data, fixed = list(), log, lower, upper) {
   
   stopifnot(length(upper)>0)
   
@@ -43,7 +43,7 @@ loglik <- function(family, data, fixed=list(), log, lower, upper) {
   likelihood <- function(params = NULL) { 
 
     for(param_name in names(params)) {
-      if(lower[param_name]>params[[param_name]] ||
+      if(lower[param_name] > params[[param_name]] ||
          upper[param_name] < params[[param_name]])
          stop('Parameter ', param_name, ' with value ', params[[param_name]],
               ' outside the boundaries.')
@@ -52,8 +52,8 @@ loglik <- function(family, data, fixed=list(), log, lower, upper) {
     # Add params with names of parameters to arguments list
     arguments <- c(arguments, params)
 
-    summands <- do.call(get_fun_from_package(type = "d", family=family),
-                        args=arguments)
+    summands <- do.call(get_fun_from_package(type = "d", family = family),
+                        args = arguments)
     
     if(any(is.na(summands))) stop('In Log-Likelihood-Function NA occured.')
     
