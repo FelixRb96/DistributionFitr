@@ -9,5 +9,5 @@ import(parallel)
 import(doParallel)
 import(foreach)
 
-export(globalfit, getFamilies, getFamily, getParams)
+export(globalfit, getFamilies, getFamily, getParams, install.packages_DistributionFitr)
 exportMethods(summary, hist, sort, AIC, BIC)

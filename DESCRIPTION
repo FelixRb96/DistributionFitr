@@ -2,7 +2,7 @@ Package: DistributionFitr
 Type: Package
 Title: Fitting Multiple Parametric Distributions
 Version: 0.1
-Date: 2019-11-25
+Date: 2020-01-10
 Author: Benedikt Geier [aut], Borui Niklas Zhu [cre, aut], Moritz Kern [aut], Manuel J. Hentschel [aut], Kiril Dik [aut], Moritz Lauff [aut], Tim Glockner [aut], Adrian Heppeler [aut], Nadine Tampe [aut], Leonardo Vela [aut], Till Freihaut [aut], Niclas Lietzow [aut], Helene Peter [aut], Martin Schlather [aut, cre], Yiqi Li [ctb], Henrik Bengtsson [ctb]
 Maintainer: Borui Niklas Zhu <bzhu@mail.uni-mannheim.de>
 Description: Given an univariate dataset, returns the best fitting parameter families, as defined in Shao (2003) <doi:10.1007/B97553>, including their parameter estimates via MLE.
