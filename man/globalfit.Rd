@@ -135,7 +135,7 @@ globalfit(data, continuity = NULL, method = "MLE",
   # Alternatively, it is possible to input whether the data is
   # continuous or discrete
   \dontrun{
-  globalfit(data, continuity)
+  globalfit(data)
 
   # fit over all distribution in the standard search list
   globalfit(data, packages = NULL)

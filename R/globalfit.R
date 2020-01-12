@@ -416,9 +416,9 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
     # compare L1-distances with each other, drop if outlier
     L1 <- sapply(output_liste, function(x) x@sanity$L1_check)
     boxplot <- boxplot(L1, plot = FALSE)
-    drops_L1 <- which(L1 %in% boxplot$out && L1 > median(L1))
+    drops_L1 <- which(L1 %in% boxplot$out & L1 > median(L1))
     # median condition to ensure only exceptionally bad fits are filtered out
-    if(verbose && length(drops_L1 > 0)) {
+    if(verbose && length(drops_L1) > 0) {
       message("Sanity Check: Comparatively bad fit. Dropping families: ",
       paste(families[drops_L1], collapse = ", "))
     }

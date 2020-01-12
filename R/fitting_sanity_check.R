@@ -53,8 +53,9 @@ fitting_sanity_check <- function(object, data, continuity, sensitivity = 1) {
 
   hist_KDE <- function(x) {
     sapply(x, function(t) {
-      if (length(which(h$breaks < t)) == 0) return(0) # left of histogram
-      break_index <- max(which(h$breaks < t))
+      urbild <- h$breaks < t
+      if (length(which(urbild)) == 0) return(0) # left of histogram
+      break_index <- max(which(urbild))
       if (break_index == length(h$breaks)) return(0) # right of histogram
       return(h$density[break_index])
     })
