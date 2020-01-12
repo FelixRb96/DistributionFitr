@@ -137,7 +137,7 @@ disc_trafo <- function(data){
 globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
                       packages = "stats", append_packages = FALSE,
                       cores = NULL, max_dim_discrete = Inf,
-                      sanity = 1, timeout = 15) {
+                      sanity = 1, timeout = 5) {
   
   # set debug to TRUE to get a log file containing the messages emitted during 
   # optimization
@@ -321,7 +321,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
       progress_fn <- function(n) setTxtProgressBar(pb, n)
       opts <- list(progress = progress_fn)
     } else {
-      message(length(relevant_families), " families are searched through.",
+      message(length(relevant_families), " families are being searched through.",
               if (length(relevant_families) > cores * 3)
                 " This can potentially last several minutes.\n
 	      Install the package 'doSNOW' for a progress bar.")
@@ -389,27 +389,43 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
       }
     } else {
       if(do_sanity) 
-        sanity_check <- list(hist_check=NA, int_check=NA, good=FALSE)
-    }
-    if(do_sanity && !sanity_check$good) {
-      output <- new('optimParams', 
-                    family = fam$family,
-                    package = fam$package,
-                    log_lik = NA_integer_,
-                    AIC = NA_integer_,
-                    BIC = NA_integer_,
-                    AICc = NA_integer_,
-                    sanity = sanity_check)
+        sanity_check <- list(hist_check = NA, int_check = NA, L1_check = NA,
+			     good = FALSE)
     }
     
    if (debug) {
-     cat("Elapsed time for family", fam$family, "from package", fam$package, ":",
-        difftime(Sys.time(), t, units="secs"), "secs\n")
+     cat("Elapsed time for family", fam$family, "from package", fam$package,
+	 ":", difftime(Sys.time(), t, units="secs"), "secs\n")
    }
    
     return(output)
   } # end %dopar%
   stopCluster(cl)
+
+  if(do_sanity) {
+
+    if(verbose) message("\nChecking plausibility of results...")
+    # drop if within-sanity-check yields fail
+    families <- sapply(output_liste, function(x) x@family)
+    drops <- which(!sapply(output_liste, function(x) x@sanity$good))
+    if(verbose && length(drops) > 0) {
+      message("Sanity Check: Unplausible distributions. Dropping families: ",
+      paste(families[drops], collapse = ", "))
+    }
+
+    # compare L1-distances with each other, drop if outlier
+    L1 <- sapply(output_liste, function(x) x@sanity$L1_check)
+    boxplot <- boxplot(L1, plot = FALSE)
+    drops_L1 <- which(L1 %in% boxplot$out && L1 > median(L1))
+    # median condition to ensure only exceptionally bad fits are filtered out
+    if(verbose && length(drops_L1 > 0)) {
+      message("Sanity Check: Comparatively bad fit. Dropping families: ",
+      paste(families[drops_L1], collapse = ", "))
+    }
+
+    # drops <- as.logical(drops * drops_L1)
+    output_liste <- output_liste[-drops]
+  }
   
   r <- new('globalfit', 
            call = deparse(match.call()),
@@ -417,7 +433,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
            continuity = continuity,
            method = method,
            fits = output_liste)
-  r <- sort(r, ic=ic)
+  r <- sort(r, ic = ic)
   
   r@fits <- r@fits[!is.na(sapply(r@fits, function(x) x %@% ic))]
   

@@ -1,6 +1,7 @@
 ## Authors 
 ## Moritz Kern, mkern@mail.uni-mannheim.de
 ## Benedikt Geier, bgeier@mail.uni-mannheim.de
+## Borui Niklas Zhu, bzhu@mail.uni-mannheim.de
 ##
 ## Filter distributions where density obiviously does not fit
 ##
@@ -38,7 +39,7 @@ fitting_sanity_check <- function(object, data, continuity, sensitivity = 1) {
                              xlab = 'x', ylab = 'density', breaks = breaks, 
                              include.lowest = FALSE, plot = FALSE))
   
-  fun <- get_fun_from_package(type="d", family = object)
+  fun <- get_fun_from_package(type = "d", family = object)
   
   # convert named vector to list as needed for do.call when we add the x values
   param_list <- split(object@estimatedValues, names(object@estimatedValues))
@@ -49,24 +50,48 @@ fitting_sanity_check <- function(object, data, continuity, sensitivity = 1) {
     y <- ifelse(!is.finite(y), 0, y)
     return(y)
   }
+
+  hist_KDE <- function(x) {
+    sapply(x, function(t) {
+      if (length(which(h$breaks < t)) == 0) return(0) # left of histogram
+      break_index <- max(which(h$breaks < t))
+      if (break_index == length(h$breaks)) return(0) # right of histogram
+      return(h$density[break_index])
+    })
+  }
+
+  L1 <- function(x) {
+    return(abs(density(x) - hist_KDE(x)))
+  }
   
   if (continuity) {
+    hist_check <- sum(diff(h$breaks) * density(h$mids))
     int_check <- tryCatch(
       integrate(density, lower = -Inf, upper = Inf),
       error = function(e) {
         message('Sanity Check. Calculating integral of ',
-                'the density of family ', object@family,' failed: ',e,'\n')
+                'the density of family ', object@family,' failed: ', e, '\n')
         return(list(value = Inf))
         }
       )
-    hist_check <- sum(diff(h$breaks) * density(h$mids))
+    L1_check <- tryCatch(
+      integrate(L1, lower = -Inf, upper = Inf, subdivisions = 2000),
+      error = function(e) {
+        message('Sanity Check. Calculating integral of ',
+		'|density - histogram| of family ', object@family, ' failed: ',
+		e, '\n')
+        return(list(value = Inf))
+      }
+    )
   } else {
     # in the discrete case the values represented in data will be all breaks 
     # apart from the first one (and diff should always be 1 if set as above)
     hist_check <- sum(diff(h$breaks) * density(h$breaks[2:length(h$breaks)]))
     
     # no integral check in discrete case
-    int_check <- list(value=1)
+    int_check <- list(value = 1)
+
+    L1_check <- list(value = 0)
   }
   
   good <- (int_check$value > (1 - 0.05 * sensitivity)) & 
@@ -74,5 +99,5 @@ fitting_sanity_check <- function(object, data, continuity, sensitivity = 1) {
     (int_check$value < (1 + 0.05 * sensitivity)) & 
     (hist_check < (1 + 0.5 * sensitivity))
 
-  return(list(hist_check = hist_check, int_check = int_check$value, good = good))
+  return(list(hist_check = hist_check, int_check = int_check$value, L1_check = L1_check$value, good = good))
 }
