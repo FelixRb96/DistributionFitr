@@ -39,14 +39,14 @@
 # this might not hold. Maybe we can let the user specify something 
 # like parscale, that lets us space out everything,
 # and some kind of accuracy so we optimise rigorously locally 
-# after a roguh "global" view
+# after a rough "global" view
 
 # Function for doing the optimisation of discrete parameters
 optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
-                                prior = NULL, log=TRUE,
-                                optim_method = 'L-BFGS-B', n_starting_points=1,
-                                debug_error=FALSE, show_optim_progress=FALSE,
-                                on_error_use_best_result=TRUE, 
+                                prior = NULL, log = TRUE,
+                                optim_method = 'L-BFGS-B', n_starting_points = 1,
+                                debug_error = FALSE, show_optim_progress = FALSE,
+                                on_error_use_best_result = TRUE, 
                                 max_discrete_steps = 100, discrete_fast = TRUE,
                         				plot = FALSE, max_zoom_level = 4,
                         				timeout = 15) {
@@ -64,16 +64,16 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
   #optimParamsContinuous
   if (all(family_info$accepts_float)) {
     optim_res <- tryCatch({
-      optimParamsContinuous(data=data, family=family, lower=family_info$lower,
-                            upper=family_info$upper,
+      optimParamsContinuous(data = data, family = family, lower = family_info$lower,
+                            upper = family_info$upper,
                             defaults = family_info$defaults, method = method,
-                            fixed=c(), log = log, optim_method = optim_method,
-                            n_starting_points=n_starting_points,
+                            fixed = c(), log = log, optim_method = optim_method,
+                            n_starting_points = n_starting_points,
                             debug_error = debug_error,
                             show_optim_progress = show_optim_progress,
                             on_error_use_best_result= on_error_use_best_result,
                             timeout = timeout) 
-      }, error=function(e) {
+      }, error = function(e) {
         message(e)
         return(NULL)
       }
@@ -81,17 +81,17 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
     if (is.null(optim_res)) return(NULL)
     
   } # CASE 2: exactly one discrete parameter 
-  else if( sum(!family_info$accepts_float)==1 ) {
+  else if( sum(!family_info$accepts_float) == 1 ) {
 
     # get the discrete parameter
     dispar_id <- !family_info$accepts_float
     dispar_default <- family_info$defaults[dispar_id]
     
     # vector of the single optimisation results
-    cont_optim_results <- vector('list',length=max_discrete_steps)       
+    cont_optim_results <- vector('list',length = max_discrete_steps)       
 
     # history dataframe where the optim progress is stored
-    history <- data.frame(matrix(NA, nrow=max_discrete_steps, ncol=3))  
+    history <- data.frame(matrix(NA, nrow = max_discrete_steps, ncol = 3))  
     colnames(history) <- c("param_value", "direction", "log_lik")
     
     # as we iterate both left and rightwards staring from the default value we 
@@ -118,17 +118,18 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
       
       # optimise with the current fixed value
       curr_res <- tryCatch(optimParamsContinuous(
-          data=data, family=family, lower=family_info$lower[!dispar_id],
-          upper=family_info$upper[!dispar_id],
+          data = data, family = family, lower = family_info$lower[!dispar_id],
+          upper = family_info$upper[!dispar_id],
           defaults = family_info$defaults[!dispar_id], method = method,
-          fixed=dispar, log = log, optim_method = optim_method,
+          fixed = dispar, log = log, optim_method = optim_method,
           n_starting_points = n_starting_points, debug_error = debug_error,
           show_optim_progress = show_optim_progress,
           on_error_use_best_result = on_error_use_best_result,
-	        timeout = timeout),
+	  timeout = timeout),
         error = function(e) {
-          # message(e);
-          NULL})
+          if(debug_error) message(e);
+          NULL}
+	)
       
       # if successful add results to dataframe
       if(!is.null(curr_res)) {
@@ -175,7 +176,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
       i <- i+1
       
       # stop if not converged so far
-      if(i>max_discrete_steps) {
+      if(i > max_discrete_steps) {
         warning('Discrete Optimization aborted, did not converge.')
         break 
       }
@@ -185,7 +186,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
     if(plot) {
       plot(history$param_value, ifelse(is.finite(history$log_lik),
                                         history$log_lik, NA), 
-           ylab="log_lik", xlab=names(family_info$lower)[dispar_id])
+           ylab = "log_lik", xlab = names(family_info$lower)[dispar_id])
     }
     
     # take the best result
@@ -209,9 +210,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
     # later: centre over maximum and zoom in/out
     centre <- family_info$defaults[non_floats]
     while_counter <- 0
-    repeat { ## besser !found; noch besser repeat {
-      ## noch besser for (while_counter in 1:5) {
-      ## noch besser 5 als Konstante oben definieren
+    repeat {
       while_counter <- while_counter + 1
       zoom_level <- zoom_level + zoom
       # centre is always an integer
@@ -220,7 +219,7 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
       grid_high <- centre+(25*(10^zoom_level))
       stepsize <- rep(1, times = num_discrete)*(10^zoom_level)
       if(show_optim_progress) {
-	      cat('current zoom level:', zoom_level, '\n')
+	cat('current zoom level:', zoom_level, '\n')
         cat('current focal point:\n')
         print(centre)
         cat('stepsizes:', stepsize, '\n')
@@ -363,9 +362,9 @@ optimParamsDiscrete <- function(data, family, family_info, method = 'MLE',
                                 n_starting_points = n_starting_points, 
                                 debug_error = debug_error, 
                                 show_optim_progress = show_optim_progress, 
-                                on_error_use_best_result = 
-                                on_error_use_best_result,
-			                          timeout = timeout)
+                                on_error_use_best_result =
+			        on_error_use_best_result,
+			        timeout = timeout)
         },
         # error should not occur because the combination 
         # had passed the first time!

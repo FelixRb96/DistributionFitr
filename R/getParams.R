@@ -38,10 +38,9 @@
 #    not in [0,1]) while keeping the others at their defaults
 
 ## optional TODO:
-# check whether param name contains prob or sth like that ->range should be[0,1]
+# check whether param name contains prob or sth like that -> range should be[0,1]
 
-
-# fam <- list(package="stats", family="beta")   # gamma
+# fam <- list(package = "stats", family = "beta") # gamma
 
 # ----------------------------------------------------------------------
 # (1.1) Given distribution family, return list of parameters
@@ -51,7 +50,7 @@ get_all_params <- function(fam) {
   # idea: all params need to be present in the r... method for generating random
   # samples from the distribution
   
-  fun <- get_fun_from_package(type="r", family=fam)
+  fun <- get_fun_from_package(type = "r", family = fam)
   all_params <- formals(fun)
   
   # if "nn" is contained then "n" is probably a real param , c.f. rhyper
@@ -93,8 +92,8 @@ get_all_params <- function(fam) {
 
 validate_values <- function(fam, n_or_nn, params, x_test) {
   # try to generate a random number from the distribution
-  rfun <- get_fun_from_package(type="r", family=fam)
-  dfun <- get_fun_from_package(type="d", family=fam)
+  rfun <- get_fun_from_package(type = "r", family = fam)
+  dfun <- get_fun_from_package(type = "d", family = fam)
   
   r <- do.call(rfun, c(n_or_nn, params))
   # additionally check whether values are valid for density function
@@ -107,8 +106,8 @@ validate_values <- function(fam, n_or_nn, params, x_test) {
                             return_value_on_timeout = "TIMEOUT")
     
     if (any(r_ == "TIMEOUT")) message(fam, " produced timeout for params ", 
-                                 paste(names(params), params, sep=": ", 
-                                 collapse=","), " on ", x_test)
+                                 paste(names(params), params, sep = ": ", 
+                                 collapse = ","), " on ", x_test)
     return(any(!is.na(r_)))
   } else {
     return(FALSE)
@@ -148,9 +147,9 @@ get_default_values <- function(all_params, fam) {
   
   # parameter that describes the number of random numbers to take, 
   # usually "n", but in cases like hyper "nn"
-  rfun <- get_fun_from_package(type="r", family=fam)
-  n_or_nn <- if (! "nn" %in% names(formals(rfun))) list(n=1) else list(nn=1)
-  x_test <- list(x=seq(-10, 10, 1))
+  rfun <- get_fun_from_package(type = "r", family = fam)
+  n_or_nn <- if (! "nn" %in% names(formals(rfun))) list(n = 1) else list(nn = 1)
+  x_test <- list(x = seq(-10, 10, 1))
   
   errors <- c()
   for (i in 1:length(combs_list)) {
@@ -209,9 +208,9 @@ check_values_for_param <- function(param, all_params, fam, values) {
   
   # parameter that describes the number of random numbers to take, 
   # usually "n", but in cases like hyper "nn"
-  rfun <- get_fun_from_package(type="r", family=fam)
-  n_or_nn <- if (! "nn" %in% names(formals(rfun))) list(n=1) else list(nn=1)
-  x_test <- list(x=seq(-10, 10, 1))
+  rfun <- get_fun_from_package(type = "r", family = fam)
+  n_or_nn <- if (! "nn" %in% names(formals(rfun))) list(n = 1) else list(nn = 1)
+  x_test <- list(x = seq(-10, 10, 1))
   
   res <- suppressWarnings(
     sapply(values, function(x) {
@@ -220,7 +219,7 @@ check_values_for_param <- function(param, all_params, fam, values) {
       all_params[[param]] <- x;
       tryCatch(
         validate_values(fam, n_or_nn, all_params, x_test),
-      error=function(e) return(FALSE))
+      error = function(e) return(FALSE))
     })
   )
   return(res)
@@ -244,7 +243,7 @@ check_values_for_param <- function(param, all_params, fam, values) {
   # valid values in the range higher than the current upper limit
 
 iterate_min_max_vals <- function(param, all_params, fam, cur_val, 
-                                 step_sizes, is_min=TRUE) {
+                                 step_sizes, is_min = TRUE) {
   for (i in 1:(length(step_sizes)-1)) {
     
     # first get the interval that should be tested (lower than cur_val when 
@@ -295,10 +294,10 @@ get_param_ranges <- function(all_params, fam) {
     accepts_float <- rep(TRUE, length(all_params))
     names(lower) <- names(upper) <- names(accepts_float) <- names(all_params)
     
-    return(list(lower=lower,
-                upper=upper,
-                accepts_float=accepts_float, 
-                defaults=unlist(all_params)))
+    return(list(lower = lower,
+                upper = upper,
+                accepts_float = accepts_float, 
+                defaults = unlist(all_params)))
   }
   
   # create empty result vectors
@@ -325,13 +324,13 @@ get_param_ranges <- function(all_params, fam) {
     # min_val or max_val
     # otherwise we iterate with the above method
     min_val <- if (check_res[1]) -Inf else 
-      {iterate_min_max_vals(param=param, all_params = all_params, fam=fam,
+      {iterate_min_max_vals(param = param, all_params = all_params, fam = fam,
                             cur_val = min(vals[check_res]), 
                             step_sizes = step_sizes, is_min = TRUE)}
 
 
     max_val <- if (check_res[length(check_res)]) Inf else 
-      {iterate_min_max_vals(param=param, all_params = all_params,fam=fam,
+      {iterate_min_max_vals(param = param, all_params = all_params, fam = fam,
                             cur_val = max(vals[check_res]),
                             step_sizes = step_sizes, is_min = FALSE)}
     # set the estimated values in the named vactor that will be returned
@@ -357,10 +356,10 @@ get_param_ranges <- function(all_params, fam) {
       stop("distribution does not seem to accept any values")
     }
   }
-  return(list(lower=lower,
-              upper=upper,
-              accepts_float=accepts_float, 
-              defaults=unlist(all_params)))
+  return(list(lower = lower,
+              upper = upper,
+              accepts_float = accepts_float, 
+              defaults = unlist(all_params)))
 }
 
 # return value: 4 component list
@@ -370,7 +369,7 @@ get_param_ranges <- function(all_params, fam) {
 
 ### Function that checks if log is working ------------------------------------
 check_log <- function(fam) {
-  dfun <- get_fun_from_package(type="d", family=fam)
+  dfun <- get_fun_from_package(type = "d", family = fam)
   return('log' %in% names(formals(dfun)))
 }
 
@@ -378,10 +377,11 @@ check_log <- function(fam) {
 ### Function that checks whether a family is a discrete distribution, 
 ### that is it only takes integers as values ----------
 check_integer <- function(fam, all_params) {
-  rfun <- get_fun_from_package(type="r", family=fam)
+  rfun <- get_fun_from_package(type = "r", family = fam)
   n_test <- 10
-  n_or_nn <- if (! "nn" %in% names(formals(rfun))) list(n=n_test) else {
-    list(nn=n_test)}
+  n_or_nn <-
+    if (! "nn" %in% names(formals(rfun))) list(n = n_test)
+    else list(nn = n_test)
   args_ <- c(all_params, n_or_nn)
   res <- do.call(rfun, args = args_)
   return(all(abs(res %% 1) < sqrt(.Machine$double.eps)))
@@ -442,7 +442,7 @@ get_support <- function(fam, params) {
   support_min <- Inf
   support_max <- -Inf
   
-  dfun <- get_fun_from_package(type="d", family=fam)
+  dfun <- get_fun_from_package(type = "d", family = fam)
   
   for (param in names(low)) {
     # define n_test equally distributed values for the current param 
@@ -459,7 +459,7 @@ get_support <- function(fam, params) {
       
       # row i of the result matrix will be the density values at x 
       # when taking the i-th choice for the current param
-      result_mat <- matrix(NA, nrow=length(param_choices), ncol=length(x))
+      result_mat <- matrix(NA, nrow = length(param_choices), ncol = length(x))
       for (i in 1:length(param_choices)) { 
         choice <- param_choices[i]
         
@@ -477,11 +477,11 @@ get_support <- function(fam, params) {
     # for each row calculate the minimum and maximum evaluation point 
     # with positive density
     row_support_min <- apply(result_mat, 1, 
-      function(row) {if (length(which(row>0)) > 0) 
-                        x[min(which(row>0))] else Inf})
+      function(row) {if (length(which(row > 0)) > 0) 
+                        x[min(which(row > 0))] else Inf})
     row_support_max <- apply(result_mat, 1, 
-      function(row) {if (length(which(row>0)) > 0) 
-                          x[max(which(row>0))] else -Inf})
+      function(row) {if (length(which(row > 0)) > 0) 
+                          x[max(which(row > 0))] else -Inf})
     
     # check if the lower or upper bound is always the same as the current 
     # parameter value (up to the chosen precision + some small machine error)
@@ -489,8 +489,8 @@ get_support <- function(fam, params) {
     # least as big as the possible ranges of this parameter
     # notice that we need to ignore rows where the min or max support value 
     # was +/- Inf
-    min_criterium <- abs( param_choices-row_support_min )
-    max_criterium <- abs( param_choices-row_support_max )
+    min_criterium <- abs( param_choices - row_support_min )
+    max_criterium <- abs( param_choices - row_support_max )
     if(max(min_criterium[is.finite(row_support_min)]) <= precision + 1e-10) {
       supp_min_depends_on[param] <- TRUE
       support_min <- min(params$lower[param], support_min)
@@ -519,8 +519,8 @@ get_support <- function(fam, params) {
   if (support_max >= support_to_inf_limit) support_max <- Inf
   
   return(list(support_min = support_min, support_max = support_max, 
-              supp_max_depends_on=supp_max_depends_on,
-              supp_min_depends_on=supp_min_depends_on))
+              supp_max_depends_on = supp_max_depends_on,
+              supp_min_depends_on = supp_min_depends_on))
 }
 
 # -----------------------------------------------------------------------------
@@ -533,7 +533,7 @@ standardizeFam <- function(fam, package){
       if (!is.character(fam))
         stop("'fam' must be a character string or a list.")
       if (length(fam) == 2) {
-        fam <- list(fam["family"], package=fam["package"])
+        fam <- list(fam["family"], package = fam["package"])
       }
       if (length(fam) == 1) {
         names <- sapply(FamilyList, function(x) x$family)
@@ -541,11 +541,11 @@ standardizeFam <- function(fam, package){
         if (is.na(idx))
           stop("The family can not be identified without the explicitly 
                given argument 'package'")
-        fam <- list(family=fam, package=FamilyList[[idx]]$package)
+        fam <- list(family = fam, package = FamilyList[[idx]]$package)
       } else stop("The length of 'fam' must be one")
     }
   } else {
-    fam <- list(family=fam, package=package)
+    fam <- list(family = fam, package = package)
   }
   return(fam)
 }
@@ -597,4 +597,5 @@ getParams <- function(fam, package){
 #   lower bounds of those parameters using the data, 
 #   i.e. for unif set upper["min"] <- min(data) before giving to optim_param
 #   -> NOT DONE at the moment
-# 5) extend to and test with other packages -> partly done
+# 5) extend to and test with other packages
+#    -> DONE

@@ -24,7 +24,7 @@
 # Function for stopping an expression if it takes too long
 # Simplified version of https://github.com/HenrikBengtsson/R.utils/issues/74
 eval_with_timeout <- function(expr, envir = parent.frame(), timeout,
-                              return_value_on_timeout=NULL) {
+                              return_value_on_timeout = NULL) {
   # substitute expression so it is not executed as soon it is used
   expr <- substitute(expr)
   

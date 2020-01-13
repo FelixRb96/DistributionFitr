@@ -33,7 +33,7 @@ setMethod(f = "sort", signature = c('globalfit'),
 
 
 setMethod(f = "summary", signature = c("globalfit"),
-          def = function(object, count=10,  ic = c('BIC', 'AIC', 'AICc')) {
+          def = function(object, count = 10,  ic = c('BIC', 'AIC', 'AICc')) {
             ic <- match.arg(ic)
             
       	    if(length(object@fits) < 1) {
@@ -46,7 +46,7 @@ setMethod(f = "summary", signature = c("globalfit"),
       	      "(3) adjusting 'timeout'\n")
       	      df <- data.frame()
       	    } else {
-              object <- sort(object, ic=ic)
+              object <- sort(object, ic = ic)
               df <- data.frame(family = sapply(object@fits,
                                              function(f) f@family),
                              package = sapply(object@fits, function(f) 
@@ -56,7 +56,7 @@ setMethod(f = "summary", signature = c("globalfit"),
                                paste(names(f@estimatedValues),
                                      signif(f@estimatedValues,
                                             digits = 3),
-                                     sep= " = ", collapse='; ')))
+                                     sep = " = ", collapse = '; ')))
               colnames(df) <- c("family", "package", ic, "params")
               df <- df[1:max(1,min(count, nrow(df))),]
       	    }
@@ -78,7 +78,7 @@ setMethod(f = "show", signature = c("globalfitSummary"),
               cont <- ''
             } else if(object@continuity) {
               cont <-
-              '\nAssumption: Data was generated from a continuous distribution.'
+                '\nAssumption: Data was generated from a continuous distribution.'
             } else if(!object@continuity) {
               cont <- 
                 '\nAssumption: Data was generated from a discrete distribution.'
@@ -105,12 +105,12 @@ setMethod(f = "show", signature = c("globalfit"),
 )
 
 
-IC <- function(object, ic='AIC', count = NULL) {
+IC <- function(object, ic = 'AIC', count = NULL) {
   if(is.null(count))
     count <- Inf
   if(!is.natural(count))
     stop("Argument 'count'  must be positive integer.")
-  object <- sort(object, ic=ic)
+  object <- sort(object, ic = ic)
   count <- min(length(object@fits), count)
   object@fits <- object@fits[1:count]
   x <- sapply(object@fits, function(object) object %@% ic)
@@ -122,16 +122,16 @@ IC <- function(object, ic='AIC', count = NULL) {
 
 
 setMethod(f = "AIC", signature = c("globalfit"),
-          def = function(object, count=Inf, k = 2) {
-            if(is.null(k) || k!=2)
+          def = function(object, count = Inf, k = 2) {
+            if(is.null(k) || k != 2)
               stop("Not implemented. Argument 'k' must be set to 2.  ")
-            IC(object, ic='AIC')
+            IC(object, ic = 'AIC')
           })
 
 
 setMethod(f = "BIC", signature = c("globalfit"),
-          def = function(object, count=Inf) {
-            IC(object, ic='BIC')
+          def = function(object, count = Inf) {
+            IC(object, ic = 'BIC')
           })
 
 
@@ -140,14 +140,14 @@ setMethod(f = "hist", signature = c("globalfit"),
             ic <- match.arg(ic)
             if(is.null(which) || !is.numeric(which) ||
                abs(as.integer(which)) != which)
-              stop("Argument 'which'  must be positive integer.")
+              stop("Argument 'which' must be a positive integer.")
             
-            x <- sort(x, ic=ic)
+            x <- sort(x, ic = ic)
             if (which > length(x@fits)) stop(
               "value of 'which' larger than the number of available results")
              
-            lower <- min(x@data) - 0.2 * (max(x@data)-min(x@data))
-            upper <- max(x@data) + 0.2 * (max(x@data)-min(x@data))
+            lower <- min(x@data) - 0.2 * (max(x@data) - min(x@data))
+            upper <- max(x@data) + 0.2 * (max(x@data) - min(x@data))
 
             selected_fit <- x@fits[[which]]
             if(x@continuity) {
@@ -158,7 +158,7 @@ setMethod(f = "hist", signature = c("globalfit"),
             breaks <- if (x@continuity) sqrt(length(x@data)) else 
                       0.5 + (min(x@data) - 1) : max(x@data)
             
-            fun <- get_fun_from_package(type="d", family = selected_fit)
+            fun <- get_fun_from_package(type = "d", family = selected_fit)
             param_list <- split(selected_fit@estimatedValues, 
                                 names(selected_fit@estimatedValues))
             param_list$x <- supporting_point
@@ -166,20 +166,20 @@ setMethod(f = "hist", signature = c("globalfit"),
             
             # first create the histogram without plotting, because we need its 
             # maximum density for setting ylim
-            h <- hist(x = x@data, breaks=breaks, plot = FALSE)
+            h <- hist(x = x@data, breaks = breaks, plot = FALSE)
             
-            plot(h, xlim=range(lower, upper), xlab = 'x', freq = FALSE,
+            plot(h, xlim = range(lower, upper), xlab = 'x', freq = FALSE,
                  ylim = range(0, max(h$density), max(density)), 
                  ylab = 'density',
-                 main=paste0('Histogramm with density of \n',
+                 main = paste0('Histogramm with density of \n',
                              selected_fit@package, '::', selected_fit@family)
             )
             
             # add true density (in discrete case add points 
             # at the possible x values)
-            lines(supporting_point, density, col='green', lwd=2)
+            lines(supporting_point, density, col = 'green', lwd = 2)
             if (!x@continuity) points(supporting_point, density, 
-                                      col='green', lwd=2)
+                                      col = 'green', lwd = 2)
             
             h$estimation_points <- supporting_point
             h$estimated_density <- density

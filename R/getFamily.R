@@ -25,7 +25,7 @@ getFamily <- function(pkg){
   # load package pkg (can potentially lead to errors 
   # if some requirements are not fulfilled)
   load_successful <- !is(try( suppressPackageStartupMessages(
-                              library(pkg, character.only=TRUE)), silent=TRUE),
+                              library(pkg, character.only = TRUE)), silent = TRUE),
                               "try-error")
   
   if (!load_successful) {
@@ -39,7 +39,7 @@ getFamily <- function(pkg){
   
   ## all functions starting with r, d, p or q
   possible_dists <- lsf.str(paste0("package:", pkg), 
-                            pattern=paste0("^[", 
+                            pattern = paste0("^[", 
                                     paste(start_chars, collapse = ""), "]"))
   
   if (length(possible_dists) == 0) return(list())
@@ -67,7 +67,7 @@ getFamily <- function(pkg){
     }
   }
   
-  get_endings <- function(vec) str_sub(vec, start=2)
+  get_endings <- function(vec) str_sub(vec, start = 2)
   
   l_endings <- lapply(l, get_endings)    # remove the d, p, q, r suffixes
   
@@ -81,13 +81,13 @@ getFamily <- function(pkg){
   # get a frequency table of the endings
   freq <- table(unlist(l_endings))    
   # only take those distributions that have at least 2 functions implemented
-  freq <- freq[freq>=2]                
+  freq <- freq[freq >= 2]                
   
   families <- names(freq)
   
   # list of lists, where each sublist has the form 
   # list(package=some_pkg, family=some_family)
-  families <- lapply(families, function(x) list(package=pkg, family=x))
+  families <- lapply(families, function(x) list(package = pkg, family = x))
   
   return(families)
 }

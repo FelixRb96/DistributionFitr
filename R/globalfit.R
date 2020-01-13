@@ -117,9 +117,9 @@ disc_trafo <- function(data){
                   paste0("Divide the simulated data by ",
                          m,
                          " and replace the decimals c(", 
-                         paste(decimals$original_decimals, collapse=", "),
+                         paste(decimals$original_decimals, collapse = ", "),
                          ") of the simulated data by c(",
-                         paste(decimals$new_decimals, collapse=", "),
+                         paste(decimals$new_decimals, collapse = ", "),
                          ").")))
     
   } else {
