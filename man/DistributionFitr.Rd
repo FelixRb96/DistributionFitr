@@ -62,7 +62,7 @@ Maintainer: Borui Niklas Zhu, \email{bzhu@mail.uni-mannheim.de}
 
 \seealso{
  \code{\link{globalfit}},
- %\code{\link{install.all}},
+ \code{\link{install.packages_DistributionFitr}},
  \code{\link{getFamilies}},
  \code{\link{getFamily}},
 % \code{\link{loglik}},
@@ -73,8 +73,7 @@ Maintainer: Borui Niklas Zhu, \email{bzhu@mail.uni-mannheim.de}
 \examples{ 
 # example for globalfit
 data <- rnorm(n = 100, mean = 70, sd = 4)
-r <- globalfit(data,  cores= if (interactive()) NULL else 1,
-               packages = "stats", append_packages = FALSE)
+r <- globalfit(data, cores = if(interactive()) NULL else 2)
 summary(r)
 
 # example for getFamily

@@ -295,7 +295,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
   if(is.null(cores)) {
     CRAN_check_limit <- Sys.getenv("_R_CHECK_LIMIT_CORES_", "")
     if (length(CRAN_check_limit) > 0 && CRAN_check_limit == TRUE) cores <- 2
-    ## CRAN_check_limit == TRUE because it might not be a boolean
+    ## CRAN_check_limit == TRUE because it is not be a boolean sometimes
     else cores <- detectCores()
   }
   if(verbose)

@@ -119,7 +119,7 @@ is.natural <- function(x, tol = .Machine$double.eps^0.5) {
 }
 
 install.packages_DistributionFitr <- function(...) {
-  if(hasArg("pkgs")) error("Do not specify argument 'pgks'")
+  if(hasArg("pkgs")) stop("Do not specify argument 'pgks'")
   installed <- rownames(installed.packages())
   all <- unique(sapply(FamilyList, function(x) x$package))
   needed <- setdiff(all, installed)

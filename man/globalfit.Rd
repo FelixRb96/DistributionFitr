@@ -17,7 +17,7 @@ globalfit(data, continuity = NULL, method = "MLE",
   verbose = TRUE, packages = "stats",
   append_packages = FALSE, cores = NULL,
   max_dim_discrete = Inf, sanity = 1,
-  timeout = 15
+  timeout = 5
   )
 }
 
@@ -69,7 +69,7 @@ globalfit(data, continuity = NULL, method = "MLE",
    are filtered out. The smaller the number, the stricter the check will be
    executed and the more potential distributions will be rejected.
 
-   If \code{sanity=FALSE} a sanity check is not carried out. \cr
+   If \code{sanity = FALSE} a sanity check is not carried out. \cr
    (DistributionFitr generally depends on other packages to supply reasonable 
    distribution functions.)
 
@@ -82,7 +82,7 @@ globalfit(data, continuity = NULL, method = "MLE",
    seconds until timeout for the underlying optimiser
     \code{\link[stats]{optim}}.
 
-    If \code{timeout=FALSE} no timeout is performed.
+    If \code{timeout = FALSE} no timeout is performed.
    }
 }
 
@@ -128,15 +128,16 @@ globalfit(data, continuity = NULL, method = "MLE",
 \examples{
   # Example 1
   data <- rnorm(n = 100, mean = 70, sd = 4)
-  r <- globalfit(data) 
+  r <- globalfit(data, cores = if(interactive()) NULL else 2)
   summary(r)
 
-  # Example 2
-  # Alternatively, it is possible to input whether the data is
   # continuous or discrete
   \dontrun{
+  # Example 2
+  # Alternatively, it is possible to input whether the data is
   globalfit(data, continuity = TRUE)
 
+  # Example 3
   # fit over all distribution in the standard search list
   globalfit(data, packages = NULL)
   }

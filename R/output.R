@@ -33,7 +33,7 @@ setMethod(f = "sort", signature = c('globalfit'),
 
 
 setMethod(f = "summary", signature = c("globalfit"),
-          def = function(object, count = 10,  ic = c('BIC', 'AIC', 'AICc')) {
+          def = function(object, n = 10,  ic = c('BIC', 'AIC', 'AICc')) {
             ic <- match.arg(ic)
             
       	    if(length(object@fits) < 1) {
@@ -58,7 +58,7 @@ setMethod(f = "summary", signature = c("globalfit"),
                                             digits = 3),
                                      sep = " = ", collapse = '; ')))
               colnames(df) <- c("family", "package", ic, "params")
-              df <- df[1:max(1,min(count, nrow(df))),]
+              df <- df[1:max(1,min(n, nrow(df))),]
       	    }
             return(new("globalfitSummary",
                        call = object@call,
@@ -88,7 +88,7 @@ setMethod(f = "show", signature = c("globalfitSummary"),
                 object@method, 'estimation.',
                 cont, '
                 \nBest fits sorted by', object@ic, ':\n\n')
-            print(object@fits, right=FALSE)
+            print(object@fits, right = FALSE)
           }
 )
 
@@ -105,14 +105,14 @@ setMethod(f = "show", signature = c("globalfit"),
 )
 
 
-IC <- function(object, ic = 'AIC', count = NULL) {
-  if(is.null(count))
-    count <- Inf
-  if(!is.natural(count))
+IC <- function(object, ic = "AIC", n = NULL) {
+  if(is.null(n))
+    n <- Inf
+  if(!is.natural(n))
     stop("Argument 'count'  must be positive integer.")
   object <- sort(object, ic = ic)
-  count <- min(length(object@fits), count)
-  object@fits <- object@fits[1:count]
+  n <- min(length(object@fits), n)
+  object@fits <- object@fits[1:n]
   x <- sapply(object@fits, function(object) object %@% ic)
   names(x) <- paste(sapply(object@fits, function(object) object@package), 
                     sapply(object@fits, function(object) object@family),
@@ -120,23 +120,23 @@ IC <- function(object, ic = 'AIC', count = NULL) {
   return(x)            
 }
 
-
 setMethod(f = "AIC", signature = c("globalfit"),
-          def = function(object, count = Inf, k = 2) {
-            if(is.null(k) || k != 2)
-              stop("Not implemented. Argument 'k' must be set to 2.  ")
-            IC(object, ic = 'AIC')
+          def = function(object, n = Inf) {
+            IC(object, ic = "AIC", n = n)
           })
-
 
 setMethod(f = "BIC", signature = c("globalfit"),
-          def = function(object, count = Inf) {
-            IC(object, ic = 'BIC')
+          def = function(object, n = Inf) {
+            IC(object, ic = "BIC", n = n)
           })
 
+# setMethod(f = "AICc", signature = c("globalfit"),
+#	  def = function(object, n = Inf) {
+#	    IC(object, ic = "AICc", n = n)
+#	  })
 
 setMethod(f = "hist", signature = c("globalfit"),
-          def = function(x, which = 1,  ic = c('BIC', 'AIC', 'AICc')) {
+          def = function(x, which = 1,  ic = c('BIC', 'AIC')) {
             ic <- match.arg(ic)
             if(is.null(which) || !is.numeric(which) ||
                abs(as.integer(which)) != which)
