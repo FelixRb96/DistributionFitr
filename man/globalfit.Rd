@@ -70,7 +70,7 @@ globalfit(data, continuity = NULL, method = "MLE",
    executed and the more potential distributions will be rejected.
 
    If \code{sanity = FALSE} a sanity check is not carried out. \cr
-   (DistributionFitr generally depends on other packages to supply reasonable 
+   (DistributionFitR generally depends on other packages to supply reasonable 
    distribution functions.)
 
    Default is 1. 
@@ -95,7 +95,7 @@ globalfit(data, continuity = NULL, method = "MLE",
   integers only, an appropriate linear transformation is applied to ensure
   stable optimization.
 
-  Since DistributionFitr technically allows for comparing over all distributions
+  Since DistributionFitR technically allows for comparing over all distributions
   in any R-package, computation speed is likely to be an issue. The
   following may 
   help:

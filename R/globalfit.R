@@ -322,7 +322,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
     } else {
       message(length(relevant_families), " families are being searched through.",
               if (length(relevant_families) > cores * 3)
-                " This can potentially last several minutes.\n
+              " This can potentially last several minutes.\n
 	      Install the package 'doSNOW' for a progress bar.")
       registerDoParallel(cl)
       opts <- c()

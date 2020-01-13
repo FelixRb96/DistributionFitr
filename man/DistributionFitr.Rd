@@ -1,6 +1,6 @@
-\name{DistributionFitr-package}
-\alias{DistributionFitr}
-\alias{DistributionFitr-package}
+\name{DistributionFitR-package}
+\alias{DistributionFitR}
+\alias{DistributionFitR-package}
 \docType{package}
 \title{
   Fitting Multiple Parametric Distributions
@@ -12,15 +12,15 @@ data. The program automatically searches for parametric distributions and
 parameters thereof that best describe the data. It then returns 
 the ten best parameter families including the fitted parameters. 
 
-DistributionFitr comes in with a standard search list of 408 parametric
+DistributionFitR comes in with a standard search list of 408 parametric
 distribution families as given by R-packages on CRAN.
 
 The package contains the following functions:
 \itemize{
   \item \code{\link{globalfit}} Given some univariate data, determines the best 
   fitting parametric distributions from R-packages
-  %\item \code{\link{install.all}} Installs R-packages whence DistributionFitr's
-  %standard search list extracted the distributions & parameters.
+  \item \code{\link{install.packages_DistributionFitR}} Installs R-packages
+  that contribute to DistributionFitR's standard search list
   \item \code{\link{getFamilies}} Browsing for distribution families
   \item \code{\link{getFamily}} Find all distributions within a package
   \item \code{\link{getParams}} For a single distribution family, parameters are 
@@ -50,8 +50,7 @@ functions invoked by \code{\link{getFamilies}}, and may be of usage for
 other purposes. 
 }
 
-\author{ % MS: bitte hier keine Sonderzeichen!!
-  % MS \author sind hier genau die, die Rd-Datei geschrieben haben, + maintainer
+\author{
 Borui Niklas Zhu, Benedikt Geier, Moritz Kern, Kiril Dik, Moritz Lauff, 
 Manuel J. Hentschel, Adrian Heppeler, Niclas Lietzow, Till Freihaut, 
 Tim Glockner, Nadine Tampe, Leonardo Vela, Helene Peter, 
@@ -62,7 +61,7 @@ Maintainer: Borui Niklas Zhu, \email{bzhu@mail.uni-mannheim.de}
 
 \seealso{
  \code{\link{globalfit}},
- \code{\link{install.packages_DistributionFitr}},
+ \code{\link{install.packages_DistributionFitR}},
  \code{\link{getFamilies}},
  \code{\link{getFamily}},
 % \code{\link{loglik}},

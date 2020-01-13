@@ -96,7 +96,7 @@ write_file <- function(FamilyList, file = "R/all_families.R") {
       
     }
   }
-  dump(list="FamilyList", file=file)
+  dump(list = "FamilyList", file = file)
 }
 
 ### Case 1: all.packages gegeben: Suche nach Verteilungsfamilien

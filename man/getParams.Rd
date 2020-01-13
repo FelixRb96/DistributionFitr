@@ -30,10 +30,10 @@ getParams(fam, package)
   \dQuote{p}, \dQuote{q} and \dQuote{r}. So in case of the continuous uniform 
   the family name is \dQuote{unif}.\cr	
   The values returned by \command{getParams} are included
-  in the DistributionFitr-package and updated regularly. Users may use it to
-  update the library of parameter characteristics themselves or find the
-  function useful to use the parameter characteristics retrieved for other
-  purposes.
+  in the DistributionFitR-package and updated with each package update.
+  Users may use it to update the library of parameter characteristics
+  themselves or find the function useful to use the parameter
+  characteristics retrieved for other purposes.
 }
 \value{
   For \command{getParams}

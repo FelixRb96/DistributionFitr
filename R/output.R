@@ -1,7 +1,7 @@
 ## Authors 
 ## Moritz Kern, mkern@mail.uni-mannheim.de
 ##
-## S4-Methods for objects
+## output methods for globalfit-objects
 ##
 ## Copyright (C) 2019 -- 2020 Moritz Kern
 ##

@@ -1,11 +1,11 @@
-\name{install.packages_DistributionFitr}
-\alias{install.packages_DistributionFitr}
+\name{install.packages_DistributionFitR}
+\alias{install.packages_DistributionFitR}
 
 \title{
-  Installs all packages from DistributionFitr's standard search list.
+  Installs all packages from DistributionFitR's standard search list.
 }
 \description{
-  DistributionFitr comes with an extensive list of distribution families
+  DistributionFitR comes with an extensive list of distribution families
   on CRAN together with their characteristics, referred to in our manuals
   as \dQuote{standard search list}. This function is a helper to install all
   the packages which contribute to this list. Usage is exactly like
@@ -14,7 +14,7 @@
   will not be affected (except dependencies).
 }
 \usage{
-  install.packages_DistributionFitr(...)
+  install.packages_DistributionFitR(...)
 }
 
 \arguments{
@@ -35,7 +35,7 @@
   \dontrun{
    # running the next command will run several minutes
    # and install many packages
-   install.packages_DistributionFitr()
+   install.packages_DistributionFitR()
   }
 }
 

@@ -3,7 +3,7 @@
 ## Till Freihaut, tfreihau@mail.uni-mannheim.de
 ## Leonardo Vela, lvela@mail.uni-mannheim.de
 ##
-## Calculate the log-likelihood function
+## Define the log-likelihood function for given parameters
 ##
 ## Copyright (C) 2019 -- 2020 Niclas Lietzow, Till Freihaut and Leonardo Vela
 ##

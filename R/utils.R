@@ -1,5 +1,6 @@
 ## Authors 
 ## Benedikt Geier, bgeier@mail.uni-mannheim.de
+## Borui Niklas Zhu, bzhu@mail.uni-mannheim.de
 ##
 ## Various help functions
 ##
@@ -118,7 +119,7 @@ is.natural <- function(x, tol = .Machine$double.eps^0.5) {
                    check.names = FALSE))
 }
 
-install.packages_DistributionFitr <- function(...) {
+install.packages_DistributionFitR <- function(...) {
   if(hasArg("pkgs")) stop("Do not specify argument 'pgks'")
   installed <- rownames(installed.packages())
   all <- unique(sapply(FamilyList, function(x) x$package))
