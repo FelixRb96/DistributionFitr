@@ -278,10 +278,9 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
   all_pkgs_unique <- unique(all_pkgs)
   missing_pkgs <- setdiff(all_pkgs_unique, installed)
   if (length(missing_pkgs) > 0) {
-    message("The following packages are not installed, and are thus ignored 
-            during optimisation. ",
-            "If you want to use them please install manually: ", 
-            paste(missing_pkgs, collapse=", "))
+    message("The following packages are not installed, and are thus ignored",  
+            "during optimisation. If you want to use them please install",
+	    "manually: ", paste(missing_pkgs, collapse=", "))
     relevant_families <- relevant_families[!(all_pkgs %in% missing_pkgs)]
   }
   
@@ -303,7 +302,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
     message('Parallelizing over ', cores, ' cores.\n')
   
   # We may only create a log-file in debug mode, not for the user
-  cl <- if (debug) makeCluster(cores, outfile = 'log.txt') else makeCluster(cores)
+  cl <- if (TRUE) makeCluster(cores, outfile = 'log.txt') else makeCluster(cores) ####
   
   ## for showing a progressbar we apparently need to use a SNOW cluster
   hasSNOW <- "doSNOW" %in% installed
@@ -344,12 +343,12 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
     fam <- relevant_families[[i]]
     t <- Sys.time()
     
-   if(debug) {
+   if(TRUE) { ####
      message("Current Family: ", fam$family , " from Package: ",
              fam$package)
    }
     
-    output_liste <- eval_with_timeout(
+    result_optim <- eval_with_timeout(
       optimParamsDiscrete(data = data,
                           family = fam[c('package', 'family')],
                           family_info = fam$family_info,
@@ -357,28 +356,28 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
                           log = fam$family_info$log,
                           optim_method = 'L-BFGS-B', 
                           n_starting_points = 1,
-                          debug_error = FALSE, 
-                          show_optim_progress=FALSE,
-                          on_error_use_best_result=TRUE, 
-                          max_discrete_steps=100, plot=FALSE,
+                          debug_error = debug, 
+                          show_optim_progress = FALSE,
+                          on_error_use_best_result = TRUE, 
+                          max_discrete_steps = 100, plot = FALSE,
                           discrete_fast = TRUE, timeout = timeout),
       return_value_on_timeout = "TIMEOUT",
       timeout = 1.5*timeout)
     
-    if (length(output_liste) == 1 && output_liste == "TIMEOUT") {
+    if (length(result_optim) == 1 && result_optim == "TIMEOUT") {
       if (debug) message("Timeout occured for Family ", fam$family)
-      output_liste <- NULL
+      result_optim <- NULL
     }
     
-    if(!is.null(output_liste) && !is.na(output_liste$value) && 
-       !is.infinite(output_liste$value)) {
+    if(!is.null(result_optim) && !is.na(result_optim$value) && 
+       !is.infinite(result_optim$value)) {
       output <- new('optimParams', family = fam$family,
                     package = fam$package,
-                    estimatedValues = output_liste$par,
-                    log_lik = output_liste$value,
-                    AIC = output_liste$AIC,
-                    BIC = output_liste$BIC,
-                    AICc = output_liste$AICc) 
+                    estimatedValues = result_optim$par,
+                    log_lik = result_optim$value,
+                    AIC = result_optim$AIC,
+                    BIC = result_optim$BIC,
+                    AICc = result_optim$AICc) 
       # aim: check whether solution has good loglik 
       # but does not fit nonetheless
       if(do_sanity) {
@@ -388,14 +387,24 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
         output@sanity <- sanity_check
       }
     } else {
-      if(do_sanity) 
+      # a bit redundant, but to keep code modular
+      output <- new('optimParams', family = fam$family,
+		    package = fam$package,
+		    estimatedValues = NA_integer_,
+		    log_lik = NA_integer_,
+		    AIC = NA_integer_,
+		    BIC = NA_integer_,
+		    AICc = NA_integer_)
+      if(do_sanity) {
         sanity_check <- list(hist_check = NA, int_check = NA, L1_check = NA,
 			     good = FALSE)
+        output@sanity <- sanity_check
+      }
     }
     
    if (debug) {
      cat("Elapsed time for family", fam$family, "from package", fam$package,
-	 ":", difftime(Sys.time(), t, units="secs"), "secs\n")
+	 ":", difftime(Sys.time(), t, units = "secs"), "secs\n")
    }
    
     return(output)
@@ -403,28 +412,26 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
   stopCluster(cl)
 
   if(do_sanity) {
-
-    if(verbose) message("\nChecking plausibility of results...")
     # drop if within-sanity-check yields fail
     families <- sapply(output_liste, function(x) x@family)
-    drops <- which(!sapply(output_liste, function(x) x@sanity$good))
-    if(verbose && length(drops) > 0) {
-      message("Sanity Check: Unplausible distributions. Dropping families: ",
-      paste(families[drops], collapse = ", "))
+    keep_within <- sapply(output_liste, function(x) x@sanity$good)
+    if(verbose && sum(keep_within) < length(output_liste)) {
+      message("\nSanity Check: Unplausible distribution/fit. Dropping families: ",
+      paste(families[!keep_within], collapse = ", "))
     }
+    output_liste <- output_liste[keep_within]
 
     # compare L1-distances with each other, drop if outlier
+    families <- sapply(output_liste, function(x) x@family)
     L1 <- sapply(output_liste, function(x) x@sanity$L1_check)
     boxplot <- boxplot(L1, plot = FALSE)
-    drops_L1 <- which(L1 %in% boxplot$out & L1 > median(L1))
+    keep_L1 <- !(L1 %in% boxplot$out & L1 > median(L1))
     # median condition to ensure only exceptionally bad fits are filtered out
-    if(verbose && length(drops_L1) > 0) {
+    if(verbose && sum(keep_L1) < length(output_liste)) {
       message("Sanity Check: Comparatively bad fit. Dropping families: ",
-      paste(families[drops_L1], collapse = ", "))
+      paste(families[!keep_L1], collapse = ", "))
     }
-
-    # drops <- as.logical(drops * drops_L1)
-    output_liste <- output_liste[-drops]
+    output_liste <- output_liste[keep_L1]
   }
   
   r <- new('globalfit', 

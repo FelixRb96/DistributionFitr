@@ -10,7 +10,8 @@
   as \dQuote{standard search list}. This function is a helper to install all
   the packages which contribute to this list. Usage is exactly like
   \code{install.packages} in base R, but without the need to specify
-  which packages to install.
+  which packages to install. If some packages fail to install, the others
+  will not be affected (except dependencies).
 }
 \usage{
   install.packages_DistributionFitr(...)
@@ -31,7 +32,11 @@
 }
 
 \examples{
+  \dontrun{
+   # running the next command will run several minutes
+   # and install many packages
    install.packages_DistributionFitr()
+  }
 }
 
 \keyword{install}
