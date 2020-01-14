@@ -302,7 +302,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
     message('Parallelizing over ', cores, ' cores.\n')
   
   # We may only create a log-file in debug mode, not for the user
-  cl <- if (TRUE) makeCluster(cores, outfile = 'log.txt') else makeCluster(cores) ####
+  cl <- if(debug) makeCluster(cores, outfile = 'log.txt') else makeCluster(cores)
   
   ## for showing a progressbar we apparently need to use a SNOW cluster
   hasSNOW <- "doSNOW" %in% installed
@@ -343,7 +343,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE,
     fam <- relevant_families[[i]]
     t <- Sys.time()
     
-   if(TRUE) { ####
+   if(debug) {
      message("Current Family: ", fam$family , " from Package: ",
              fam$package)
    }
