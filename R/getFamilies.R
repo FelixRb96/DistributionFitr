@@ -99,8 +99,8 @@ write_file <- function(FamilyList, file = "R/all_families.R") {
   dump(list = "FamilyList", file = file)
 }
 
-### Case 1: all.packages gegeben: Suche nach Verteilungsfamilien
-### Case 1.1 vector of strings (Liste von Paketnamen) 
+### Case 1: all.packages given: search for distribution families
+### Case 1.1 vector of strings (package names) 
 ###           -> take families from those packages
 ### Case 1.2 FALSE -> only take recommended / base packages
 ### Case 1.3 TRUE -> take all installed packages

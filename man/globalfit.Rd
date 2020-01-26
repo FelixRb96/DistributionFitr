@@ -132,7 +132,7 @@ globalfit(data, continuity = NULL, method = "MLE",
   summary(r)
 
   # continuous or discrete
-  \dontrun{
+  \donttest{
   # Example 2
   # Alternatively, it is possible to input whether the data is
   globalfit(data, continuity = TRUE)
