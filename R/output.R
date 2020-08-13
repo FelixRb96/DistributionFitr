@@ -181,8 +181,8 @@ setMethod(f = "hist", signature = c("globalfit"),
             if (!x@continuity) points(supporting_point, density, 
                                       col = 'green', lwd = 2)
             
-            h$estimation_points <- supporting_point
-            h$estimated_density <- density
-            invisible(h)
+            estimation_points <- supporting_point
+            estimated_density <- density
+            invisible(list(histogram = h, estimation_points = estimation_points, estimated_density = estimated_density))
           }
         )
