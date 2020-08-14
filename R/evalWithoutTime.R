@@ -1,30 +1,20 @@
-## Authors
-## Benedikt Geier, bgeier@mail.uni-mannheim.de
-##
-## Various help functions
-##
-## Copyright (C) 2019 -- 2020 Benedikt Geier, Henrik Bengtsson
-##
-## This program is free software; you can redistribute it and/or
-## modify it under the terms of the GNU General Public License
-## as published by the Free Software Foundation; either version 3
-## of the License, or (at your option) any later version.
-##
-## This program is distributed in the hope that it will be useful,
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
-##
-## You should have received a copy of the GNU General Public License
-## along with this program; if not, write to the Free Software
-## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+## Authors Benedikt Geier, bgeier@mail.uni-mannheim.de Various help functions
+## Copyright (C) 2019 -- 2020 Benedikt Geier, Henrik Bengtsson This program is
+## free software; you can redistribute it and/or modify it under the terms of the
+## GNU General Public License as published by the Free Software Foundation; either
+## version 3 of the License, or (at your option) any later version.  This program
+## is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+## without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+## PARTICULAR PURPOSE.  See the GNU General Public License for more details.  You
+## should have received a copy of the GNU General Public License along with this
+## program; if not, write to the Free Software Foundation, Inc., 59 Temple Place -
+## Suite 330, Boston, MA 02111-1307, USA.
 
 
 
-# Function for stopping an expression if it takes too long
-# Simplified version of https://github.com/HenrikBengtsson/R.utils/issues/74
-eval_with_timeout <- function(expr, envir = parent.frame(), timeout,
-                              return_value_on_timeout = NULL) {
+# Function for stopping an expression if it takes too long Simplified version of
+# https://github.com/HenrikBengtsson/R.utils/issues/74
+eval_with_timeout <- function(expr, envir = parent.frame(), timeout, return_value_on_timeout = NULL) {
   # substitute expression so it is not executed as soon it is used
   expr <- substitute(expr)
 

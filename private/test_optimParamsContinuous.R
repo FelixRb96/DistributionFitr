@@ -1,46 +1,50 @@
-# -------------------------------------------------------------------------------- 
+# --------------------------------------------------------------------------------
 #  Testing function
-# -------------------------------------------------------------------------------- 
+# --------------------------------------------------------------------------------
 
-rm(list=ls())
+rm(list = ls())
 source("optimParamsContinuous.R")
 source("getParams.R")
 source("utils.R")
 
 
 # Example 1 for optimParamsContinuous
-data <- rnorm(n=100, mean=70, sd= 4)
-family <- list(family='norm', package="stats")
-lower <- c('mean' = - Inf)
-upper <- c('mean' = Inf)
-fixed <- c('sd'=2)
-defaults <- c('mean' = 0)
-optimParamsContinuous(data = data, family=family, lower=lower, upper=upper, defaults = defaults, fixed=fixed, log = T, 
-                      parscale=TRUE, fnscale=TRUE, show_optim_progress = TRUE, n_starting_points = 5)
+data <- rnorm(n = 100, mean = 70, sd = 4)
+family <- list(family = "norm", package = "stats")
+lower <- c("mean" = -Inf)
+upper <- c("mean" = Inf)
+fixed <- c("sd" = 2)
+defaults <- c("mean" = 0)
+optimParamsContinuous(
+  data = data, family = family, lower = lower, upper = upper, defaults = defaults, fixed = fixed, log = T,
+  parscale = TRUE, fnscale = TRUE, show_optim_progress = TRUE, n_starting_points = 5
+)
 
 
 # Example 2 for optimParamsContinuous
-data <- rbeta(n=100, shape1=10, shape2=2)
-family <- list(family='beta', package="stats")
-lower <- c('shape1' = 0, 'shape2' = 0)
-upper <- c('shape1' = Inf, 'shape2' = Inf)
-defaults <- c('shape1' = 0.5, 'shape2' = 0.5)
-fixed <- list("ncp"=0)
+data <- rbeta(n = 100, shape1 = 10, shape2 = 2)
+family <- list(family = "beta", package = "stats")
+lower <- c("shape1" = 0, "shape2" = 0)
+upper <- c("shape1" = Inf, "shape2" = Inf)
+defaults <- c("shape1" = 0.5, "shape2" = 0.5)
+fixed <- list("ncp" = 0)
 optimParamsContinuous(data = data, family = family, lower = lower, upper = upper, defaults = defaults, log = T, show_optim_progress = TRUE, n_starting_points = 5)
 
-data <- rbeta(n=100, shape1=50, shape2=70)
-family <- list(family='beta', package="stats")
-lower <- c('shape1' = 0, 'shape2' = 0, "ncp"=0)
-upper <- c('shape1' = Inf, 'shape2' = Inf, "ncp"=Inf)
-defaults <- c('shape1' = 0.5, 'shape2' = 0.5, "ncp"=0)
+data <- rbeta(n = 100, shape1 = 50, shape2 = 70)
+family <- list(family = "beta", package = "stats")
+lower <- c("shape1" = 0, "shape2" = 0, "ncp" = 0)
+upper <- c("shape1" = Inf, "shape2" = Inf, "ncp" = Inf)
+defaults <- c("shape1" = 0.5, "shape2" = 0.5, "ncp" = 0)
 fixed <- list()
-optimParamsContinuous(data = data, family = family, lower = lower, upper = upper, defaults = defaults, log = T, 
-                      fnscale=TRUE, parscale=TRUE,
-                      show_optim_progress = TRUE)
+optimParamsContinuous(
+  data = data, family = family, lower = lower, upper = upper, defaults = defaults, log = T,
+  fnscale = TRUE, parscale = TRUE,
+  show_optim_progress = TRUE
+)
 
-loglik_fun <- loglik(family=family, data=data, fixed=fixed, log=T, upper=upper, lower=lower)
-optim(defaults, loglik_fun, control=list(fnscale=-1), lower=lower, upper=upper, method="L-BFGS-B")
-optim(c('shape1' = 40, 'shape2' = 10, "ncp"=0), loglik_fun, control=list(fnscale=-1), lower=lower, upper=upper, method="L-BFGS-B")
+loglik_fun <- loglik(family = family, data = data, fixed = fixed, log = T, upper = upper, lower = lower)
+optim(defaults, loglik_fun, control = list(fnscale = -1), lower = lower, upper = upper, method = "L-BFGS-B")
+optim(c("shape1" = 40, "shape2" = 10, "ncp" = 0), loglik_fun, control = list(fnscale = -1), lower = lower, upper = upper, method = "L-BFGS-B")
 
 
 
@@ -49,7 +53,7 @@ optim(c('shape1' = 40, 'shape2' = 10, "ncp"=0), loglik_fun, control=list(fnscale
 
 evaluate_optimization <- function(true_pars, optim_result) {
   error_percent <- 100 * (true_pars - optim_result$par) / true_pars
-  
+
   return(list(
     # optim_result = optim_result,
     error_percent = error_percent,
@@ -59,33 +63,36 @@ evaluate_optimization <- function(true_pars, optim_result) {
 
 
 test_single_family <- function(n, family) {
-    
+
   # cat("Getting infos about the distribution\n")
   family_info <- getParams(family)
-  
+
   # if we couldn't find infos on the distribution
   if (is.null(family_info)) {
     message("Couldn't get infos about the distribution ", family$family)
     return(NULL)
   }
-  
+
   # sample parameters for the family and generate sample data
   true_pars <- sample_params(family, family_info)
-  cat("Sampled params:", paste(names(true_pars), true_pars, sep=": ", collapse=", "), "\n")
-  
+  cat("Sampled params:", paste(names(true_pars), true_pars, sep = ": ", collapse = ", "), "\n")
+
   testing_data <- sample_data(n, family, true_pars)
-  
-  
+
+
   # we do it this way for now since we want to evaluate optim_param
-  optim_result <- tryCatch(optimParamsContinuous(data = testing_data, family = family, lower = family_info$lower, upper = family_info$upper, 
-                                 defaults = family_info$default, log = family_info$log, debug_error = TRUE, show_optim_progress = FALSE),
-                      error = function(e) {
-                        message(e);
-                        NULL}
+  optim_result <- tryCatch(optimParamsContinuous(
+    data = testing_data, family = family, lower = family_info$lower, upper = family_info$upper,
+    defaults = family_info$default, log = family_info$log, debug_error = TRUE, show_optim_progress = FALSE
+  ),
+  error = function(e) {
+    message(e)
+    NULL
+  }
   )
-  if (! is.null(optim_result)) {
+  if (!is.null(optim_result)) {
     eval <- evaluate_optimization(true_pars, optim_result)
-    cat("Optimized params:", paste(names(true_pars), optim_result$par, sep=": ", collapse=", "), "\n")
+    cat("Optimized params:", paste(names(true_pars), optim_result$par, sep = ": ", collapse = ", "), "\n")
     cat("Deviation true - estimated params in %\n")
     print(eval$error_percent)
     cat("(Log-)Likelihood for optimal parameters: ", eval$log_lik, "\n")
@@ -93,10 +100,10 @@ test_single_family <- function(n, family) {
 }
 
 # Example:
-test_single_family(1000, list(package="stats", family="beta"))
+test_single_family(1000, list(package = "stats", family = "beta"))
 
 test_families <- function(n, families) {
-  for(fam in families) {
+  for (fam in families) {
     cat("\n\nCurrent Family:", fam$family, "\n")
     test_single_family(1000, fam)
   }
@@ -105,62 +112,70 @@ test_families <- function(n, families) {
 test_families(1000, families)
 
 # Function to compare different optimization techniques
-compare_optimizers <- function(n, families, repetitions_per_family=5) {
-  
+compare_optimizers <- function(n, families, repetitions_per_family = 5) {
+
   # result dataframe: columns will be the different approaches / methods, rows will be the distribution families
   # change column names to whatever you are comparing
   cols <- c("noscale5", "fnscale5", "parscale", "bothscale")
   rows <- sapply(families, function(fam) fam$family)
-  res <- data.frame(matrix(NA, nrow=length(rows), ncol=length(cols)))
+  res <- data.frame(matrix(NA, nrow = length(rows), ncol = length(cols)))
   rownames(res) <- rows
   colnames(res) <- cols
-  
+
   for (fam in families) {
     cat("\nCurrent Family", fam$family, "\n")
     family_info <- getParams(fam)
     print(family_info)
     # if we couldn't find infos on the distribution
     if (is.null(family_info)) next
-    
-    optim_results <- matrix(NA, nrow=repetitions_per_family, ncol=length(cols))
-    
+
+    optim_results <- matrix(NA, nrow = repetitions_per_family, ncol = length(cols))
+
     for (i in 1:repetitions_per_family) {
       # sample parameters for the family and generate sample data
       true_pars <- sample_params(fam, family_info)
-      cat("Try Nr.", i, "\nSampled params:", paste(names(true_pars), round(true_pars, 4), sep=": ", collapse=", "), "\n")
-      
+      cat("Try Nr.", i, "\nSampled params:", paste(names(true_pars), round(true_pars, 4), sep = ": ", collapse = ", "), "\n")
+
       testing_data <- sample_data(n, fam, true_pars)
-      
+
       ##  CHANGE OPTIMZATION SETTINGS HERE to compare different ones!!!
-      
+
       cat("fnscale = FALSE, parscale = FALSE\n")
-      optim_results[i, 1] <- tryCatch(optimParamsContinuous(data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
-                                                fnscale=FALSE, parscale=FALSE, optim_method = "L-BFGS-B",
-                                                defaults = family_info$default, log = family_info$log, 
-                                                debug_error = TRUE, show_optim_progress = FALSE, n_starting_points = 5)$value,
-                                     error = function(e) NA
-                                     )
+      optim_results[i, 1] <- tryCatch(optimParamsContinuous(
+        data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
+        fnscale = FALSE, parscale = FALSE, optim_method = "L-BFGS-B",
+        defaults = family_info$default, log = family_info$log,
+        debug_error = TRUE, show_optim_progress = FALSE, n_starting_points = 5
+      )$value,
+      error = function(e) NA
+      )
 
       cat("fnscale = TRUE, parscale = FALSE\n")
-      optim_results[i, 2] <- tryCatch(optimParamsContinuous(data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
-                                                fnscale=TRUE, parscale=FALSE, optim_method = "L-BFGS-B",
-                                                defaults = family_info$default, log = family_info$log, 
-                                                debug_error = TRUE, show_optim_progress = FALSE, n_starting_points = 5)$value,
-                                     error = function(e) NA
+      optim_results[i, 2] <- tryCatch(optimParamsContinuous(
+        data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
+        fnscale = TRUE, parscale = FALSE, optim_method = "L-BFGS-B",
+        defaults = family_info$default, log = family_info$log,
+        debug_error = TRUE, show_optim_progress = FALSE, n_starting_points = 5
+      )$value,
+      error = function(e) NA
       )
       cat("fnscale = FALSE, parscale = TRUE\n")
-      optim_results[i, 3] <- tryCatch(optimParamsContinuous(data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
-                                                fnscale=FALSE, parscale=TRUE, optim_method = "L-BFGS-B",
-                                                defaults = family_info$default, log = family_info$log, 
-                                                debug_error = TRUE, show_optim_progress = FALSE)$value,
-                                     error = function(e) NA
+      optim_results[i, 3] <- tryCatch(optimParamsContinuous(
+        data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
+        fnscale = FALSE, parscale = TRUE, optim_method = "L-BFGS-B",
+        defaults = family_info$default, log = family_info$log,
+        debug_error = TRUE, show_optim_progress = FALSE
+      )$value,
+      error = function(e) NA
       )
       cat("fnscale = TRUE, parscale = TRUE\n")
-      optim_results[i, 4] <- tryCatch(optimParamsContinuous(data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
-                                                fnscale=TRUE, parscale=TRUE, optim_method = "L-BFGS-B",
-                                                defaults = family_info$default, log = family_info$log, 
-                                                debug_error = TRUE, show_optim_progress = FALSE)$value,
-                                     error = function(e) NA
+      optim_results[i, 4] <- tryCatch(optimParamsContinuous(
+        data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
+        fnscale = TRUE, parscale = TRUE, optim_method = "L-BFGS-B",
+        defaults = family_info$default, log = family_info$log,
+        debug_error = TRUE, show_optim_progress = FALSE
+      )$value,
+      error = function(e) NA
       )
     }
     cat("\nOptimResults:\n")
@@ -176,7 +191,7 @@ compare_optimizers(1000, families, repetitions_per_family = 5)
 
 
 # TODOs:
-# optimisation with L-BFGS-B still sometimes a bit unstable, to often "L-BFGS-B benötigt endliche Werte von 'fn'", that is loglik seems to 
+# optimisation with L-BFGS-B still sometimes a bit unstable, to often "L-BFGS-B benötigt endliche Werte von 'fn'", that is loglik seems to
 # return Inf to often
 
 # maybe try different optimisation procedures
@@ -184,18 +199,18 @@ compare_optimizers(1000, families, repetitions_per_family = 5)
 
 # maybe try to find the best optimisation procedure for each family independently already in getParams with sampled data
 
-# -------------------------------------------------------------------------------- 
+# --------------------------------------------------------------------------------
 #  Testing function
-# -------------------------------------------------------------------------------- 
+# --------------------------------------------------------------------------------
 
-rm(list=ls())
+rm(list = ls())
 source("optimParamsContinuous.R")
 source("getParams.R")
 source("utils.R")
 
 evaluate_optimization <- function(true_pars, optim_result) {
   error_percent <- 100 * (true_pars - optim_result$par) / true_pars
-  
+
   return(list(
     # optim_result = optim_result,
     error_percent = error_percent,
@@ -205,33 +220,36 @@ evaluate_optimization <- function(true_pars, optim_result) {
 
 
 test_single_family <- function(n, family) {
-    
+
   # cat("Getting infos about the distribution\n")
   family_info <- getParams(family)
-  
+
   # if we couldn't find infos on the distribution
   if (is.null(family_info)) {
     message("Couldn't get infos about the distribution ", family$family)
     return(NULL)
   }
-  
+
   # sample parameters for the family and generate sample data
   true_pars <- sample_params(family, family_info)
-  cat("Sampled params:", paste(names(true_pars), true_pars, sep=": ", collapse=", "), "\n")
-  
+  cat("Sampled params:", paste(names(true_pars), true_pars, sep = ": ", collapse = ", "), "\n")
+
   testing_data <- sample_data(n, family, true_pars)
-  
-  
+
+
   # we do it this way for now since we want to evaluate optim_param
-  optim_result <- tryCatch(optimParamsContinuous(data = testing_data, family = family, lower = family_info$lower, upper = family_info$upper, 
-                                 defaults = family_info$default, log = family_info$log, debug_error = TRUE, show_optim_progress = FALSE),
-                      error = function(e) {
-                        message(e);
-                        NULL}
+  optim_result <- tryCatch(optimParamsContinuous(
+    data = testing_data, family = family, lower = family_info$lower, upper = family_info$upper,
+    defaults = family_info$default, log = family_info$log, debug_error = TRUE, show_optim_progress = FALSE
+  ),
+  error = function(e) {
+    message(e)
+    NULL
+  }
   )
-  if (! is.null(optim_result)) {
+  if (!is.null(optim_result)) {
     eval <- evaluate_optimization(true_pars, optim_result)
-    cat("Optimized params:", paste(names(true_pars), optim_result$par, sep=": ", collapse=", "), "\n")
+    cat("Optimized params:", paste(names(true_pars), optim_result$par, sep = ": ", collapse = ", "), "\n")
     cat("Deviation true - estimated params in %\n")
     print(eval$error_percent)
     cat("(Log-)Likelihood for optimal parameters: ", eval$log_lik, "\n")
@@ -239,10 +257,10 @@ test_single_family <- function(n, family) {
 }
 
 # Example:
-test_single_family(1000, list(package="stats", family="beta"))
+test_single_family(1000, list(package = "stats", family = "beta"))
 
 test_families <- function(n, families) {
-  for(fam in families) {
+  for (fam in families) {
     cat("\n\nCurrent Family:", fam$family, "\n")
     test_single_family(1000, fam)
   }
@@ -251,62 +269,70 @@ test_families <- function(n, families) {
 test_families(1000, families)
 
 # Function to compare different optimization techniques
-compare_optimizers <- function(n, families, repetitions_per_family=5) {
-  
+compare_optimizers <- function(n, families, repetitions_per_family = 5) {
+
   # result dataframe: columns will be the different approaches / methods, rows will be the distribution families
   # change column names to whatever you are comparing
   cols <- c("noscale5", "fnscale5", "parscale", "bothscale")
   rows <- sapply(families, function(fam) fam$family)
-  res <- data.frame(matrix(NA, nrow=length(rows), ncol=length(cols)))
+  res <- data.frame(matrix(NA, nrow = length(rows), ncol = length(cols)))
   rownames(res) <- rows
   colnames(res) <- cols
-  
+
   for (fam in families) {
     cat("\nCurrent Family", fam$family, "\n")
     family_info <- get_params(fam)
     print(family_info)
     # if we couldn't find infos on the distribution
     if (is.null(family_info)) next
-    
-    optim_results <- matrix(NA, nrow=repetitions_per_family, ncol=length(cols))
-    
+
+    optim_results <- matrix(NA, nrow = repetitions_per_family, ncol = length(cols))
+
     for (i in 1:repetitions_per_family) {
       # sample parameters for the family and generate sample data
       true_pars <- sample_params(fam, family_info)
-      cat("Try Nr.", i, "\nSampled params:", paste(names(true_pars), round(true_pars, 4), sep=": ", collapse=", "), "\n")
-      
+      cat("Try Nr.", i, "\nSampled params:", paste(names(true_pars), round(true_pars, 4), sep = ": ", collapse = ", "), "\n")
+
       testing_data <- sample_data(n, fam, true_pars)
-      
+
       ##  CHANGE OPTIMZATION SETTINGS HERE to compare different ones!!!
-      
+
       cat("fnscale = FALSE, parscale = FALSE\n")
-      optim_results[i, 1] <- tryCatch(optimParamsContinuous(data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
-                                                fnscale=FALSE, parscale=FALSE, optim_method = "L-BFGS-B",
-                                                defaults = family_info$default, log = family_info$log, 
-                                                debug_error = TRUE, show_optim_progress = FALSE, n_starting_points = 5)$value,
-                                     error = function(e) NA
-                                     )
+      optim_results[i, 1] <- tryCatch(optimParamsContinuous(
+        data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
+        fnscale = FALSE, parscale = FALSE, optim_method = "L-BFGS-B",
+        defaults = family_info$default, log = family_info$log,
+        debug_error = TRUE, show_optim_progress = FALSE, n_starting_points = 5
+      )$value,
+      error = function(e) NA
+      )
 
       cat("fnscale = TRUE, parscale = FALSE\n")
-      optim_results[i, 2] <- tryCatch(optimParamsContinuous(data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
-                                                fnscale=TRUE, parscale=FALSE, optim_method = "L-BFGS-B",
-                                                defaults = family_info$default, log = family_info$log, 
-                                                debug_error = TRUE, show_optim_progress = FALSE, n_starting_points = 5)$value,
-                                     error = function(e) NA
+      optim_results[i, 2] <- tryCatch(optimParamsContinuous(
+        data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
+        fnscale = TRUE, parscale = FALSE, optim_method = "L-BFGS-B",
+        defaults = family_info$default, log = family_info$log,
+        debug_error = TRUE, show_optim_progress = FALSE, n_starting_points = 5
+      )$value,
+      error = function(e) NA
       )
       cat("fnscale = FALSE, parscale = TRUE\n")
-      optim_results[i, 3] <- tryCatch(optimParamsContinuous(data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
-                                                fnscale=FALSE, parscale=TRUE, optim_method = "L-BFGS-B",
-                                                defaults = family_info$default, log = family_info$log, 
-                                                debug_error = TRUE, show_optim_progress = FALSE)$value,
-                                     error = function(e) NA
+      optim_results[i, 3] <- tryCatch(optimParamsContinuous(
+        data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
+        fnscale = FALSE, parscale = TRUE, optim_method = "L-BFGS-B",
+        defaults = family_info$default, log = family_info$log,
+        debug_error = TRUE, show_optim_progress = FALSE
+      )$value,
+      error = function(e) NA
       )
       cat("fnscale = TRUE, parscale = TRUE\n")
-      optim_results[i, 4] <- tryCatch(optimParamsContinuous(data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
-                                                fnscale=TRUE, parscale=TRUE, optim_method = "L-BFGS-B",
-                                                defaults = family_info$default, log = family_info$log, 
-                                                debug_error = TRUE, show_optim_progress = FALSE)$value,
-                                     error = function(e) NA
+      optim_results[i, 4] <- tryCatch(optimParamsContinuous(
+        data = testing_data, family = fam, lower = family_info$lower, upper = family_info$upper,
+        fnscale = TRUE, parscale = TRUE, optim_method = "L-BFGS-B",
+        defaults = family_info$default, log = family_info$log,
+        debug_error = TRUE, show_optim_progress = FALSE
+      )$value,
+      error = function(e) NA
       )
     }
     cat("\nOptimResults:\n")
@@ -322,7 +348,7 @@ compare_optimizers(1000, families, repetitions_per_family = 5)
 
 
 # TODOs:
-# optimisation with L-BFGS-B still sometimes a bit unstable, to often "L-BFGS-B benötigt endliche Werte von 'fn'", that is loglik seems to 
+# optimisation with L-BFGS-B still sometimes a bit unstable, to often "L-BFGS-B benötigt endliche Werte von 'fn'", that is loglik seems to
 # return Inf to often
 
 # maybe try different optimisation procedures
