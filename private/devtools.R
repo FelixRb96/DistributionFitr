@@ -1,0 +1,6 @@
+require(lintr)
+require(styler)
+require(formatR)
+require(rmarkdown)
+require(devtools)
+require(precommit)

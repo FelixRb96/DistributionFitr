@@ -1,3 +1,5 @@
+^renv$
+^renv\.lock$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 private
@@ -10,3 +12,11 @@ private
 log.txt
 search.txt
 DistributionFitr.Rproj
+^\.pre-commit-config\.yaml$
+renv.lock
+pyproject.toml
+poetry.lock
+.pre-commit-config.yaml
+.Rprofile
+.vscode
+ReadMe_files

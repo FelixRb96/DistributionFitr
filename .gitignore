@@ -5,3 +5,8 @@
 .Ruserdata
 .DS_Store
 log.txt
+*.code-workspace
+renv/*
+.venv
+.vscode/*
+.renviron
