@@ -1,0 +1,49 @@
+# DistributionFitR
+
+
+<!-- badges: start -->
+[![CRAN status](https://www.r-pkg.org/badges/version/DistributionFitR)](https://cran.r-project.org/package=dplyr)
+<!-- badges: end -->
+## Overview
+
+DistributionFitR is an **autopilote**, which fits the **best distribution** in a set of distributions by maximizing the likelihood (MLE).
+
+Parametric densities (or count densities) will be fitted to user-given **univariate** data via **maximum likelihood**. The user more or less only enters the data. The program automatically searches for **parametric distributions** and **parameters** thereof that best describe the data. It then returns the ten **best parameter families including the fitted parameters**. 
+
+DistributionFitR comes in with a standard search list of **408 parametric distribution families** as given by R-packages on CRAN. The families can be adapted and increased to own packackages for special purposes.
+
+## Installation
+The **easiest way** to get DistribtionFitR is to install via CRAN
+```{r, eval = FALSE}
+install.packages("DistributionFitR")
+```
+To get a bug fix or to use a feature from the development version, you can install 
+the development version of DistributionFitR from GitHub.
+
+```{r, eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("YCartes/DistributionFitR")
+```
+
+## Usage
+```{r, message = FALSE}
+library(DistributionFitR)
+x <- rnorm(n = 1000, mean = 10, sd = 1)
+r <- globalfit(x, packages = NULL, verbose = TRUE)
+
+summary(r, n = 10)
+hist(r)
+
+
+r <- globalfit(rgamma(n = 1000, shape = 3, rate = 4))
+summary(r, ic = "BIC")
+summary(r, ic = "AICc")
+summary(r, ic = "BIC", n = 7)
+hist(r, ic = "BIC")
+hist(r, ic = "BIC", which = 7)
+
+AIC(r, n = 2)
+BIC(r)
+```
+
+## Contribute
