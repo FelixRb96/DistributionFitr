@@ -9,3 +9,4 @@ log.txt
 renv/*
 .venv
 .vscode/*
+.renviron
