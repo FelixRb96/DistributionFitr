@@ -4,6 +4,7 @@
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/DistributionFitR)](https://cran.r-project.org/package=dplyr)
 <!-- badges: end -->
+
 ## Overview
 
 DistributionFitR is an **autopilot**, which fits the **best distribution** in a set of distributions by maximizing the likelihood (MLE).
