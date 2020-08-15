@@ -26,5 +26,7 @@ Imports:
     stats,
     stringr,
     utils
+Suggests: 
+    testthat
 Encoding: UTF-8
 LazyData: true
