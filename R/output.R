@@ -32,8 +32,6 @@ setMethod(
   }
 )
 
-
-
 setMethod(
   f = "summary", signature = c("globalfit"),
   def = function(object, n = 10, ic = c("BIC", "AIC", "AICc")) {
@@ -60,7 +58,9 @@ setMethod(
         package = sapply(object@fits, function(f) {
           f@package
         }),
-        ic = sapply(object@fits, function(f) f %@% ic),
+        bic = sapply(object@fits, function(f) f %@% "BIC"),
+	aic = sapply(object@fits, function(f) f %@% "AIC"),
+	aicc = sapply(object@fits, function(f) f %@% "AICc"),
         params = sapply(object@fits, function(f) {
           paste(names(f@estimatedValues),
             signif(f@estimatedValues,
@@ -81,6 +81,25 @@ setMethod(
       fits = df,
       ic = ic
     ))
+  }
+)
+
+setMethod( # redoes the summary with new ordering
+  f = "summary", signature = c("globalfitSummary"),
+  def = function(object, ic = c("BIC", "AIC")) {
+    ic <- match.arg(ic)
+    
+    if (ic == object@ic) return(object)
+    
+    df_sorted <- object@fits[order(object@fits[, ic]), ]
+    return(new("globalfitSummary",
+      call = object@call,
+      data = object@data,
+      continuity = object@continuity,
+      method = object@method,
+      fits = df_sorted,
+      ic = ic
+    ))    
   }
 )
 
@@ -162,24 +181,24 @@ setMethod(
 
 setMethod(
   f = "hist", signature = c("globalfit"),
-  def = function(x, which = 1, ic = c("BIC", "AIC")) {
+  def = function(x, fitnr = 1, ic = c("BIC", "AIC")) {
     ic <- match.arg(ic)
-    if (is.null(which) || !is.numeric(which) ||
-      abs(as.integer(which)) != which) {
-      stop("Argument 'which' must be a positive integer.")
+    if (is.null(fitnr) || !is.numeric(fitnr) ||
+      abs(as.integer(fitnr)) != fitnr) {
+      stop("Argument 'fitnr' must be a positive integer.")
     }
 
     x <- sort(x, ic = ic)
-    if (which > length(x@fits)) {
+    if (fitnr > length(x@fits)) {
       stop(
-        "value of 'which' larger than the number of available results"
+        "value of 'fitnr' larger than the number of available results"
       )
     }
 
     lower <- min(x@data) - 0.2 * (max(x@data) - min(x@data))
     upper <- max(x@data) + 0.2 * (max(x@data) - min(x@data))
 
-    selected_fit <- x@fits[[which]]
+    selected_fit <- x@fits[[fitnr]]
     if (x@continuity) {
       supporting_point <- seq(lower, upper, length.out = 300)
     } else {
@@ -222,8 +241,75 @@ setMethod(
       )
     }
 
-    estimation_points <- supporting_point
-    estimated_density <- density
-    invisible(list(histogram = h, estimation_points = estimation_points, estimated_density = estimated_density))
+    invisible(h)
   }
 )
+
+do.call_fit <- function(type = type, globalfit_obj = globalfit_obj,
+                        fitnr = fitnr, ic = c("BIC", "AIC"),
+			funcval_list = funcval_list) {
+    ic <- match.arg(ic)
+    if (!is(globalfit_obj, "globalfit")) {
+      stop("Argument 'globalfit_obj' must be an object of class 'globalfit'",
+	    ", as returned by the eponymous function")
+    }
+    if (is.null(fitnr) || !is.numeric(fitnr) ||
+      abs(as.integer(fitnr)) != fitnr) {
+      stop("Argument 'fitnr' must be a positive integer.")
+    }
+    if (fitnr > length(globalfit_obj@fits)) {
+      stop(
+        "value of 'fitnr' larger than the number of available results"
+      )
+    }
+
+    globalfit_obj <- sort(globalfit_obj, ic = ic)
+
+    selected_fit <- globalfit_obj@fits[[fitnr]]
+    fitted_params <- selected_fit@estimatedValues # named numeric vector
+    fitted_params <- split(unname(fitted_params), names(fitted_params))
+    param_list <- c(funcval_list, fitted_params)
+    fun <- get_fun_from_package(type = type, family = selected_fit@family,
+                                package = selected_fit@package)
+    out <- do.call(fun, param_list)
+}
+
+dfit <- function(x, globalfit_obj, fitnr = 1, ic = c("BIC", "AIC"), log = FALSE) {
+    if (! log %in% c(TRUE, FALSE)) {
+      stop("Argument 'log' must be TRUE or FALSE.")
+    }
+    funcval_list <- list(x = x, log = FALSE)
+    out <- do.call_fit(type = "d", globalfit_obj = globalfit_obj, fitnr = fitnr, ic = ic,
+                funcval_list = funcval_list)
+    return(out)
+}
+
+rfit <- function(n, globalfit_obj, fitnr = 1, ic = c("BIC", "AIC")) {
+    funcval_list = list(n = n)
+    out <- do.call_fit(type = "r", globalfit_obj = globalfit_obj, fitnr = fitnr, ic = ic,
+                funcval_list = funcval_list)
+    return(out)
+}
+
+
+pfit <- function(q, globalfit_obj, fitnr = 1, ic = c("BIC", "AIC"),
+    lower.tail = TRUE, log.p = FALSE) {
+    if (any(! c(lower.tail, log.p) %in% c(TRUE, FALSE))) {
+      stop(paste0("Both arguments 'lower.tail' and 'log.p' must be TRUE or FALSE."))
+    }
+    funcval_list = list(q = q, lower.tail = lower.tail, log.p = log.p)
+    out <- do.call_fit(type = "p", globalfit_obj = globalfit_obj, fitnr = fitnr, ic = ic,
+                funcval_list = funcval_list)
+    return(out)
+}
+
+qfit <- function(p, globalfit_obj, fitnr = 1, ic = c("BIC", "AIC"),
+    lower.tail = TRUE, log.p = FALSE) {
+    if (any(! c(lower.tail, log.p) %in% c(TRUE, FALSE))) {
+      stop(paste0("Both arguments 'lower.tail' and 'log.p' must be TRUE or FALSE."))
+    }
+    funcval_list = list(p = p, lower.tail = lower.tail, log.p = log.p)
+    out <- do.call_fit(type = "q", globalfit_obj = globalfit_obj, fitnr = fitnr, ic = ic,
+                funcval_list = funcval_list)
+    return(out)
+}
