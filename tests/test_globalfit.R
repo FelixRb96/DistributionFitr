@@ -32,15 +32,15 @@ hist(r)
 # examples, tests,
 x <- seq(6, 20, 0.01)
 y <- seq(0, 10, 0.1)
-plot(x, CoSMoS::dggamma(x = x, scale = 3.59, shape1 = 19.09, shape2 = 5.46))
-plot(x, CoSMoS::dggamma(x = x, scale = 4, shape1 = 20, shape2 = 5.46))
-plot(y, CoSMoS::dggamma(x = y, scale = 1, shape1 = 1, shape2 = 1))
+# plot(x, CoSMoS::dggamma(x = x, scale = 3.59, shape1 = 19.09, shape2 = 5.46))
+# plot(x, CoSMoS::dggamma(x = x, scale = 4, shape1 = 20, shape2 = 5.46))
+# plot(y, CoSMoS::dggamma(x = y, scale = 1, shape1 = 1, shape2 = 1))
 
 
-x <- 0:10
-plot(ForestFit::dgsm(x, omega = 549187000, beta = 0.06732193))
+# x <- 0:10
+# plot(ForestFit::dgsm(x, omega = 549187000, beta = 0.06732193))
 
-plot(ForestFit::dgsm(x, omega = 1, beta = 1))
+# plot(ForestFit::dgsm(x, omega = 1, beta = 1))
 
 
 
