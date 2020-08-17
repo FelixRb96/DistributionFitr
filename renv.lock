@@ -4,7 +4,7 @@
     "Repositories": [
       {
         "Name": "CRAN",
-        "URL": "http://ftp.ussg.iu.edu/CRAN"
+        "URL": "https://ftp.ussg.iu.edu/CRAN"
       }
     ]
   },

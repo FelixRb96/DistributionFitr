@@ -122,14 +122,13 @@ setMethod(
   }
 )
 
-setMethod(f = "print", signature = c("globalfitSummary"), def = function(x) {
-  show(x)
-})
-
 setMethod(f = "show", signature = c("globalfit"), def = function(object) {
   show(summary(object))
 })
 
+setMethod(f = "print", signature = c("globalfitSummary"), def = function(x) {
+  show(x)
+})
 
 IC <- function(object, ic = "AIC", n = NULL) {
   if (is.null(n)) {
@@ -159,26 +158,6 @@ setMethod(f = "BIC", signature = c("globalfit"), def = function(object, n = Inf)
 
 # setMethod(f = 'AICc', signature = c('globalfit'), def = function(object, n =
 # Inf) { IC(object, ic = 'AICc', n = n) })
-
-setMethod(f = "hist", signature = c("globalfit"), def = function(x, which = 1, ic = c(
-                                                                   "BIC",
-                                                                   "AIC"
-                                                                 )) {
-  ic <- match.arg(ic)
-  if (is.null(which) || !is.numeric(which) || abs(as.integer(which)) != which) {
-    stop("Argument 'which' must be a positive integer.")
-  }
-
-  x <- sort(x, ic = ic)
-  if (which > length(x@fits)) {
-    stop("value of 'which' larger than the number of available results")
-  }
-})
-
-# setMethod(f = "AICc", signature = c("globalfit"),
-# 	  def = function(object, n = Inf) {
-# 	    IC(object, ic = "AICc", n = n)
-# 	  })
 
 setMethod(
   f = "hist", signature = c("globalfit"),
@@ -249,6 +228,7 @@ setMethod(
 do.call_fit <- function(type = type, globalfit_obj = globalfit_obj,
                         fitnr = fitnr, ic = c("BIC", "AIC"),
                         funcval_list = funcval_list) {
+  if (!hasArg(ic)) ic <- "BIC"
   ic <- match.arg(ic)
   if (!is(globalfit_obj, "globalfit")) {
     stop(

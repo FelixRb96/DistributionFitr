@@ -117,7 +117,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE, p
 
   # set debug to TRUE to get a log file containing the messages emitted during
   # optimization
-  debug <- FALSE
+  debug <- TRUE
 
   ic <- "BIC"
 
@@ -401,7 +401,7 @@ globalfit <- function(data, continuity = NULL, method = "MLE", verbose = TRUE, p
   } # end %dopar%
   stopCluster(cl)
 
-  if (do_sanity) {
+  if (do_sanity && length(output_liste) > 0) {
     # drop if within-sanity-check yields fail
     families <- sapply(output_liste, function(x) x@family)
     keep_within <- sapply(output_liste, function(x) x@sanity$good)
